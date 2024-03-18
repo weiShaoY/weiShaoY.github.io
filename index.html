@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 设置文档字符集为 UTF-8 -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 设置视口宽度和初始缩放比例 -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- 设置网站图标 -->
+    <title>WeiShaoY</title>
+
+    <!-- 设置页面标题 -->
+    <meta name="description" content="Opinionated Vite Starter Template" />
+
+    <!-- 设置页面描述 -->
+  </head>
+  <body class="font-sans">
+    <!-- <body class="font-sans dark:text-#D1D3D7 dark:bg-hex-222325"> -->
+    <div id="app" :data-theme="isDark?'dark':'light'"></div>
+    <!-- Vue 应用的挂载点 -->
+
+    <noscript>
+      <div>Please enable JavaScript to use this application.</div>
+      <!-- 在浏览器不支持 JavaScript 时显示的提示信息 -->
+    </noscript>
+
+    <script>
+      ;(function () {
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches // 检测浏览器是否偏好暗色主题
+        const setting = localStorage.getItem('color-schema') || 'auto' // 从本地存储中获取用户设置的主题模式
+        if (setting === 'dark' || (prefersDark && setting !== 'light'))
+          // 如果用户设置为暗色模式或浏览器偏好暗色模式且用户没有设置为明亮模式
+          document.documentElement.classList.toggle('dark', true) // 给根元素添加 dark 类，用于切换暗色主题
+      })()
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+    <!-- 引入 Vue 应用的入口文件 -->
+  </body>
+</html>
