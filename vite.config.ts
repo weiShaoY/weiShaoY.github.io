@@ -96,8 +96,4 @@ export default defineConfig({
 
   ],
 
-  // https://github.com/vitest-dev/vitest
-  test: {
-    environment: 'jsdom', // 指定测试环境为 JSDOM
-  },
 })
