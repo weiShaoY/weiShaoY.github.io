@@ -20,8 +20,6 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-# ----分割线：上面的内容与静态网址是一样的，一般不用改-----
-
 jobs:
   # 单次部署的工作描述
   deploy:
@@ -32,11 +30,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build
