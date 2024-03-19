@@ -3,7 +3,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <Nav class="h-20 w-full flex justify-between px-5 py-5 hover:cursor-pointer">
+  <nav class="h-20 w-full flex justify-between px-5 py-5 hover:cursor-pointer">
     <a
       @click="router.push('/')"
     >
@@ -26,7 +26,8 @@ const router = useRouter()
         </a>
 
         <div
-          class="bg-primary h-0.5 w-full"
+          v-if="router.currentRoute.value.path === '/about'"
+          class="h-0.5 w-full bg-primary"
           :style="{
             transform: 'none',
             transformOrigin: '50% 50% 0px',
@@ -43,7 +44,8 @@ const router = useRouter()
         </a>
 
         <div
-          class="bg-primary h-0.5 w-full"
+          v-if="router.currentRoute.value.path === '/resume'"
+          class="h-0.5 w-full bg-primary"
           :style="{
             transform: 'none',
             transformOrigin: '50% 50% 0px',
@@ -66,7 +68,7 @@ const router = useRouter()
         />
       </template>
     </a-button>
-  </Nav>
+  </nav>
 </template>
 
 <style lang="less" scoped>
