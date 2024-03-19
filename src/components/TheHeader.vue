@@ -80,11 +80,11 @@ const dropdownVisible = ref(false)
         v-if="isMobile"
         position="bl"
         :popup-translate="[-30, 0]"
+        @popup-visible-change="dropdownVisible = $event"
       >
         <a-button
           class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
           type="text"
-          @click="dropdownVisible = !dropdownVisible"
         >
           <template #icon>
             <SvgIcon
