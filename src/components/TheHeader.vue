@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 const router = useRouter()
+
+const dropdownVisible = ref(false)
 </script>
 
 <template>
-  <nav class="h-20 w-full flex justify-between px-5 py-5 hover:cursor-pointer">
+  <nav class="h-20 w-full flex justify-between px-5 py-5">
     <a
       class="group"
       @click="router.push('/')"
@@ -17,7 +19,10 @@ const router = useRouter()
       />
     </a>
 
-    <div class="flex">
+    <div
+      v-if="!isMobile"
+      class="flex"
+    >
       <div class="m-r-10">
         <a
           class="text-6 hover:cursor-pointer"
@@ -55,20 +60,55 @@ const router = useRouter()
       </div>
     </div>
 
-    <a-button
-      class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
-      type="text"
-      @click="toggleDark() "
-    >
-      <template #icon>
-        <SvgIcon
-          icon="icon-baitian"
-          :size="32"
-          :class="isDark ? '!fill-white' : '!fill-#333'"
-          class="!group-hover:fill-primary"
-        />
-      </template>
-    </a-button>
+    <div class="flex items-center gap-2">
+      <a-button
+        class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
+        type="text"
+        @click="toggleDark() "
+      >
+        <template #icon>
+          <SvgIcon
+            icon="icon-baitian"
+            :size="32"
+            :class="isDark ? '!fill-white' : '!fill-#333'"
+            class="!group-hover:fill-primary"
+          />
+        </template>
+      </a-button>
+
+      <a-dropdown
+        v-if="isMobile"
+        position="bl"
+        :popup-translate="[-30, 0]"
+      >
+        <a-button
+          class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
+          type="text"
+          @click="dropdownVisible = !dropdownVisible"
+        >
+          <template #icon>
+            <SvgIcon
+              :icon="dropdownVisible ? 'icon-guanbi' : 'icon-zhankai'"
+              :size="32"
+              :class="isDark ? '!fill-white' : '!fill-#333'"
+              class="!group-hover:fill-primary"
+            />
+          </template>
+        </a-button>
+        <template #content>
+          <a-doption
+            @click="router.push('/about')"
+          >
+            About
+          </a-doption>
+          <a-doption
+            @click="router.push('/resume')"
+          >
+            Resume
+          </a-doption>
+        </template>
+      </a-dropdown>
+    </div>
   </nav>
 </template>
 

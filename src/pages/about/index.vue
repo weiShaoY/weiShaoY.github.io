@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="h-full p-x-10">
+  <div class="px-10 container">
     <h1 class="flex items-center justify-center text-5xl font-bold md:text-7xl">
       ABOUT ME
     </h1>

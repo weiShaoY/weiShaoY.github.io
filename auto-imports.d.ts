@@ -42,6 +42,7 @@ declare global {
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const isDark: typeof import('./src/composables/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isMobile: typeof import('./src/composables/mobile')['isMobile']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
@@ -150,6 +151,7 @@ declare global {
   const useDebounce: typeof import('@vueuse/core')['useDebounce']
   const useDebounceFn: typeof import('@vueuse/core')['useDebounceFn']
   const useDebouncedRefHistory: typeof import('@vueuse/core')['useDebouncedRefHistory']
+  const useDevice: typeof import('./src/composables/mobile')['useDevice']
   const useDeviceMotion: typeof import('@vueuse/core')['useDeviceMotion']
   const useDeviceOrientation: typeof import('@vueuse/core')['useDeviceOrientation']
   const useDevicePixelRatio: typeof import('@vueuse/core')['useDevicePixelRatio']
@@ -335,6 +337,7 @@ declare module 'vue' {
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
@@ -621,6 +624,7 @@ declare module '@vue/runtime-core' {
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
