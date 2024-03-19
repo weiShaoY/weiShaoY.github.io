@@ -5,15 +5,16 @@ const router = useRouter()
 <template>
   <nav class="h-20 w-full flex justify-between px-5 py-5 hover:cursor-pointer">
     <a
+      class="group"
       @click="router.push('/')"
     >
-      <img
-        class="h-full w-30"
-        src="https://cdn.jsdelivr.net/gh/weiShaoY/imgCloud/githubPage/WeiShaoY.svg"
-
-        alt=""
-      >
-
+      <SvgIcon
+        icon="icon-WeiShaoY" :style="{
+          height: '100%',
+          width: '150px',
+        }"
+        class="group-hover:color-primary"
+      />
     </a>
 
     <div class="flex">
