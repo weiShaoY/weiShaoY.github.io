@@ -11,7 +11,7 @@ const router = useRouter()
     <div class="grid gap-5 px-5 lg:grid-cols-4 md:grid-cols-3">
       <!-- About -->
       <div
-        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 lg:col-span-2 hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 lg:col-span-2 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between gap-10"
@@ -48,7 +48,7 @@ const router = useRouter()
 
       <!-- Resume -->
       <div
-        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-row items-center justify-start gap-10 md:flex-col md:items-start md:justify-between"
@@ -65,7 +65,7 @@ const router = useRouter()
 
       <!-- Github -->
       <div
-        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-row items-center justify-start gap-10 md:flex-col md:items-start md:justify-between"
@@ -81,10 +81,11 @@ const router = useRouter()
         </a>
       </div>
 
-      <div class="group indexGridBackgroundColor col-span-5 rounded-3xl p-8 hover:drop-shadow-2xl hover:transition hover:duration-500">
+      <!-- Stuff I like -->
+      <div class="group indexGridBackgroundColor col-span-5 rounded-3xl p-8 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500">
         <div class="h-full flex flex-col justify-between gap-10">
           <h1 class="text-3xl font-semibold">
-            My Projects
+            Stuff I like
           </h1>
 
           <div class="flex flex-wrap content-center gap-7">
