@@ -44,5 +44,22 @@
     "json",
     "jsonc",
     "yaml"
+  ],
+  "cSpell.ignoreWords": [
+    "WeiShaoY",
+    "a-doption",
+    "antfu",
+    "baitian",
+    "composables",
+    "iconify",
+    "nporgress",
+    "nprogress",
+    "pinia",
+    "presetAttributify",
+    "taze",
+    "typecheck",
+    "unocss",
+    "unplugin",
+    "vueuse"
   ]
 }

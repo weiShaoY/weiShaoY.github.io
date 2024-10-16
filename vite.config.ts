@@ -1,5 +1,3 @@
-/// <reference types="vitest" /> // 引用 vitest 类型声明文件，用于类型检查
-
 import path from 'node:path'
 
 // 导入 Node.js 的 path 模块
@@ -26,25 +24,27 @@ import UnoCSS from 'unocss/vite'
 
 import VueMacros from 'unplugin-vue-macros/vite'
 
-// 导入 Vue 宏插件
-
-import VueRouter from 'unplugin-vue-router/vite'
-
-// 导入 Vue 路由插件
-
-import { VueRouterAutoImports } from 'unplugin-vue-router'
-
 // 导入 Vue 路由自动导入插件
 
 import { vitePluginForArco } from '@arco-plugins/vite-vue'
+
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`, // 设置路径别名
+      '@/': `${path.resolve(__dirname, 'src')}/`, // 设置路径别名
     },
   },
   plugins: [
+
+    vueJsx(),
+
+    vueDevTools(),
+
     VueMacros({
       defineOptions: false, // 禁用宏选项定义
       defineModels: false, // 禁用宏模型定义
@@ -58,20 +58,11 @@ export default defineConfig({
       },
     }),
 
-    // https://github.com/posva/unplugin-vue-router
-    VueRouter(), // 使用 VueRouter 插件
-
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: [
         'vue',
         '@vueuse/core',
-        VueRouterAutoImports,
-        {
-          // 添加其他依赖的自动导入
-          'vue-router/auto': ['useLink'],
-        },
-
       ],
       dts: true, // 生成类型定义文件
       dirs: [

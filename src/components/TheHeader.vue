@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
+
 const router = useRouter()
 
 const dropdownVisible = ref(false)
@@ -8,7 +10,7 @@ const dropdownVisible = ref(false)
   <nav class="h-20 w-full flex justify-between px-5 py-5">
     <a
       class="group"
-      @click="router.push('/')"
+      @click="router.push('/index')"
     >
       <SvgIcon
         icon="icon-WeiShaoY" :style="{
@@ -26,13 +28,13 @@ const dropdownVisible = ref(false)
       <div class="m-r-10">
         <a
           class="text-6 hover:cursor-pointer"
-          @click="router.push('/about')"
+          @click="router.push('/index/about')"
         >
           About
         </a>
 
         <div
-          v-if="router.currentRoute.value.path === '/about'"
+          v-if="router.currentRoute.value.path === '/index/about'"
           class="h-0.5 w-full bg-primary"
           :style="{
             transform: 'none',
@@ -44,13 +46,13 @@ const dropdownVisible = ref(false)
       <div>
         <a
           class="text-6 hover:cursor-pointer"
-          @click="router.push('/resume')"
+          @click="router.push('/index/resume')"
         >
           Resume
         </a>
 
         <div
-          v-if="router.currentRoute.value.path === '/resume'"
+          v-if="router.currentRoute.value.path === '/index/resume'"
           class="h-0.5 w-full bg-primary"
           :style="{
             transform: 'none',
@@ -95,14 +97,15 @@ const dropdownVisible = ref(false)
             />
           </template>
         </a-button>
+
         <template #content>
           <a-doption
-            @click="router.push('/about')"
+            @click="router.push('/index/about')"
           >
             About
           </a-doption>
           <a-doption
-            @click="router.push('/resume')"
+            @click="router.push('/index/resume')"
           >
             Resume
           </a-doption>

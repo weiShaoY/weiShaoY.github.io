@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col justify-between">
+  <!-- <div class="min-h-screen flex flex-col justify-between">
     <div class="mx-auto container">
       <TheHeader />
 
@@ -9,7 +9,8 @@
     </div>
 
     <TheFooter />
+  </div> -->
+  <div class="h-full min-h-screen">
+    <RouterView />
   </div>
-
-  <!-- lg:max-w-[1024px] md:max-w-[768px] sm:max-w-[640px] xl:max-w-[1280px] -->
 </template>
