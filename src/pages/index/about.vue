@@ -1,9 +1,5 @@
 <script setup lang="ts" generic="T extends any, O extends any">
-import { useRouter } from 'vue-router'
-
 import Map from './components/map.vue'
-
-const router = useRouter()
 </script>
 
 <template>
@@ -17,17 +13,19 @@ const router = useRouter()
           class="h-full flex flex-col justify-between"
           @click="router.push('/index/about')"
         >
-          <div class="h-28 w-28 flex items-center overflow-hidden rounded-full">
+          <div class="m-b-2 flex items-center">
+            <div class="h-24 w-24 flex items-center overflow-hidden rounded-full">
 
-            <img src="@/assets/images/avatar.jpg" alt="">
+              <img src="@/assets/images/avatar.jpg" alt="">
+            </div>
+
+            <div class="flex flex-1 items-center justify-center text-3xl font-bold">
+              Hey, 我是 WeiShaoY 👋
+            </div>
+
           </div>
 
           <div>
-            <h1 class="mb-3 flex items-center gap-2 text-3xl font-bold">Hey, 我是 WeiShaoY
-              <div class="w-fit" style="transform: rotateZ(30deg) translateZ(0px);">
-                👋
-              </div>
-            </h1>
 
             <p class="text-4 lh-7">
               一个热爱编程的前端开发  💻
@@ -157,11 +155,11 @@ const router = useRouter()
         </div>
       </div>
     </div>
+
+    <Map />
   </div>
 
   <div
     class=""
-  >
-    <Map />
-  </div>
+  />
 </template>

@@ -14,32 +14,37 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'index',
+      redirect: {
+        name: 'Index',
+      },
     },
 
     // 首页
     {
       path: '/index',
-      redirect: 'about',
+      name: 'Index',
+      redirect: {
+        name: 'About',
+      },
       component: () => import('@/pages/index/index.vue'),
       children: [
         {
           path: 'about',
-          name: 'about',
+          name: 'About',
           component: () => import('@/pages/index/about.vue'),
         },
         {
           path: 'resume',
-          name: 'resume',
+          name: 'Resume',
           component: () => import('@/pages/index/resume.vue'),
         },
       ],
-
     },
 
+    // 代码
     {
       path: '/coding',
-      name: 'coding',
+      name: 'Coding',
       component: () => import('@/pages/coding/index.vue'),
     },
 

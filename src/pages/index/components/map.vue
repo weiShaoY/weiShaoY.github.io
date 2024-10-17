@@ -4,9 +4,6 @@ import chinaMap from '@/assets/json/china.json'
 import { registerMap } from 'echarts/core'
 import { ref } from 'vue'
 
-// 注册地图与主题
-// provide(THEME_KEY, 'macarons')
-
 /**
  *  定义数据和地理坐标
  */
@@ -44,110 +41,245 @@ function convertData(data: { name: string, value: number }[]): { name: string, v
  *  定义 ECharts 配置项并添加类型注释
  */
 const option = ref<EChartsOption>({
-  // 全局字体样式
-  textStyle: {
-    fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', // 字体系列
-    fontWeight: 300, // 字体粗细
-  },
-  // 背景颜色（已注释）
-  // backgroundColor: '#404a59',
 
-  // 标题设置
+  /**
+   *  标题设置
+   */
   title: {
-    text: '风里雨里,长沙等你', // 标题文本
-    // subtext: 'data from PM25.in', // 副标题文本（已注释）
-    top: '5%', // 标题距离顶部的距离
-    left: 'center', // 标题水平居中
+    /**
+     *  标题文本
+     */
+    text: '风里雨里,长沙等你',
+
+    /**
+     *  标题距离顶部的距离
+     */
+    top: '10%',
+
+    /**
+     *  标题水平居中
+     */
+    left: 'center',
+
     textStyle: {
-      color: '#fff', // 标题文字颜色
+      color: '#fff',
     },
   },
+  backgroundColor: 'transparent', // 透明
 
-  // 提示框配置
-  tooltip: {
-    trigger: 'item', // 触发类型为数据项
-  },
-
-  // 图例配置
-  // legend: {
-  //   orient: 'vertical', // 图例布局方向为垂直
-  //   right: '5%', // 图例距右边的距离
-  //   bottom: '5%', // 图例距底部的距离
-  //   data: ['PM2.5'], // 图例项
-  //   textStyle: {
-  //     color: '#fff', // 图例文字颜色
-  //   },
-  // },
-
-  // 地理区域配置
+  /**
+   *  地理区域配置
+   */
   geo: {
-    map: 'china', // 地图类型为中国地图
+    /**
+     *  注册地图
+     */
+    map: 'china',
+
+    /**
+     *  地图缩放级别
+     */
+    zoom: 1,
+
+    /**
+     *  地图距顶部的距离
+     */
+    top: '0%',
+
+    /**
+     *  地图距底部的距离
+     */
+    bottom: '5%',
+
+    /**
+     *  地图区域的多边形 图形样式
+     */
+    itemStyle: {
+      /**
+       *  地图区域的颜色
+       */
+      areaColor: '#D8D5CA',
+
+      /**
+       *  描边颜色
+       */
+      borderColor: '#111',
+
+    },
+
+    /**
+     *   鼠标悬停时的区域颜色
+     */
     emphasis: {
+
       label: {
-        show: true, // 鼠标悬停时不显示标签
+        show: false,
       },
       itemStyle: {
-        areaColor: '#2a333d', // 鼠标悬停时的区域颜色
+        /**
+         *  鼠标悬停时的区域颜色
+         */
+        areaColor: '#323639',
+
+        /**
+         *  高亮状态下的描边颜色
+         */
+        borderColor: '#fff',
+
+        /**
+         *  高亮状态下的描边宽度
+         */
+        borderWidth: 1,
+
+        /**
+         *  高亮状态下的阴影模糊大小
+         */
+        shadowBlur: 2,
       },
     },
-    itemStyle: {
-      // 普通状态下的区域颜色
-      // areaColor: '#323c48',
-      areaColor: '#D8D5CA', // 替换后的区域颜色
-      borderColor: '#111', // 区域边界颜色
+
+  },
+
+  /**
+   *  鼠标移到图里面的浮动提示框
+   */
+  tooltip: {
+    /**
+     *  提示框背景色
+     */
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    /**
+     *  边框颜色
+     */
+    borderColor: 'rgba(0,0,0,0)',
+
+    textStyle: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: 700,
     },
-    top: '20%', // 地图距顶部的距离
-    bottom: '7%', // 地图距底部的距离
   },
 
   // 数据系列
   series: [
     {
-      name: 'PM2.5', // 系列名称
-      type: 'scatter', // 散点图类型
-      coordinateSystem: 'geo', // 使用地理坐标系
-      data: convertData(data), // 转换后的数据
-      symbolSize: (val: number[]) => val[2] / 10, // 根据数值动态设置散点大小
-      tooltip: {
-        triggerOn: false,
-
-        // 鼠标悬停时的提示框内容格式
-        // formatter: (val: { name: string, value: number[] }) => `${val.name}: ${val.value[2]}`,
-      },
-      itemStyle: {
-        color: '#ddb926', // 散点颜色
-      },
-    },
-    {
       name: 'Top 5', // 前5名系列名称
-      type: 'effectScatter', // 带有涟漪特效的散点图
-      coordinateSystem: 'geo', // 使用地理坐标系
-      data: convertData(data.sort((a, b) => b.value - a.value).slice(0, 6)), // 排序后取前5名的数据
-      symbolSize: (val: number[]) => val[2] / 10, // 动态设置散点大小
-      showEffectOn: 'render', // 渲染时显示特效
+
+      /**
+       *  带有涟漪特效的散点图
+       */
+      type: 'effectScatter',
+      /**
+       *  使用地理坐标系
+       */
+      coordinateSystem: 'geo',
+
+      /**
+       *  排序后取前5名的数据s
+       */
+      data: convertData(data.sort((a, b) => b.value - a.value).slice(0, 6)),
+
+      /**
+       *  动态设置散点大小
+       */
+      symbolSize: (val: number[]) => val[2] / 8,
+      /**
+       *  渲染时显示特效
+       */
+      showEffectOn: 'render',
+
+      /**
+       *  涟漪特效相关配置
+       */
       rippleEffect: {
-        brushType: 'stroke', // 涟漪特效的类型为描边
+
+        /**
+         *  波纹的数量
+         */
+        number: 5,
+
+        /**
+         *  动画中波纹的最大缩放比例
+         */
+        scale: 20,
+
+        /**
+         *  动画的周期，秒数
+         */
+        period: 5,
+
+        /**
+         *  波纹的绘制方式
+         */
+        brushType: 'stroke',
       },
+
       emphasis: {
-        scale: true, // 鼠标悬停时放大效果
+        /**
+         *  鼠标悬停时放大效果
+         */
+        scale: true,
       },
+
       tooltip: {
-        show: false,
+        formatter() {
+          return `惟楚有材，于斯为盛`
+          // return `风里雨里,长沙等你`
+        },
+        textStyle: {
+          color: '#fff',
+          fontSize: 16,
+          fontWeight: 700,
+        },
+
       },
+
       label: {
-        formatter: '{b}', // 显示标注的名称
-        position: 'right', // 标注位置在右侧
-        show: true, // 显示标注
+        /**
+         *  标注的名称   长沙
+         */
+        formatter: (params) => {
+          // return `${params.name}`
+          return `${params.name}`
+        },
+        /**
+         *  标注位置
+         */
+        position: 'top',
+        /**
+         *  显示标注
+         */
+        show: true,
+
+        color: '#E43961',
+
+        fontWeight: 700,
+
+        fontSize: 18,
       },
+
       itemStyle: {
-        color: '#f4e925', // 散点颜色
-        shadowBlur: 10, // 阴影模糊程度
-        shadowColor: '#333', // 阴影颜色
+
+        /**
+         *  散点颜色
+         */
+        color: '#E43961',
+
+        /**
+         *  阴影模糊程度
+         */
+        shadowBlur: 10,
+        /**
+         *  阴影颜色
+         */
+        shadowColor: '#333',
+
       },
+
       zlevel: 1, // 图层级别
     },
-  ] as EChartsOption['series'],
-}) as any
+  ],
+})
 
 registerMap('china', chinaMap as any)
 </script>
@@ -155,7 +287,7 @@ registerMap('china', chinaMap as any)
 <template>
   <Chart
     :option="option"
-    height="500px"
+    height="400px"
   />
 </template>
 

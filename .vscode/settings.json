@@ -60,10 +60,12 @@
     "pinia",
     "presetAttributify",
     "sublink",
+    "tailwindcss",
     "taze",
     "typecheck",
     "unocss",
     "unplugin",
-    "vueuse"
+    "vueuse",
+    "zlevel"
   ]
 }
