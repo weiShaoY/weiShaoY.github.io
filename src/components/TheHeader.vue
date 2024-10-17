@@ -8,8 +8,9 @@ const dropdownVisible = ref(false)
 
 <template>
   <nav class="h-20 w-full flex justify-between px-5 py-5">
+    <!-- logo -->
     <a
-      class="group"
+      class="group hover:cursor-pointer"
       @click="router.push('/index')"
     >
       <SvgIcon
@@ -21,6 +22,7 @@ const dropdownVisible = ref(false)
       />
     </a>
 
+    <!-- pc -->
     <div
       v-if="!isMobile"
       class="flex"
@@ -63,6 +65,7 @@ const dropdownVisible = ref(false)
     </div>
 
     <div class="flex items-center gap-2">
+      <!-- 切换主题按钮 -->
       <a-button
         class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
         type="text"
@@ -78,6 +81,7 @@ const dropdownVisible = ref(false)
         </template>
       </a-button>
 
+      <!-- 如果是移动端 显示下拉按钮 -->
       <a-dropdown
         v-if="isMobile"
         position="bl"

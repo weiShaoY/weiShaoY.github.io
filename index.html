@@ -30,13 +30,23 @@
 
     <script>
       ;(function () {
-        const prefersDark =
-          window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches // 检测浏览器是否偏好暗色主题
-        const setting = localStorage.getItem('color-schema') || 'auto' // 从本地存储中获取用户设置的主题模式
+        /**
+         *  检测浏览器是否偏好暗色主题
+         */
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
+        /**
+         *  从本地存储中获取用户设置的主题模式
+         */
+        const setting = localStorage.getItem('color-schema') || 'auto'
+
         if (setting === 'dark' || (prefersDark && setting !== 'light'))
           // 如果用户设置为暗色模式或浏览器偏好暗色模式且用户没有设置为明亮模式
-          document.documentElement.classList.toggle('dark', true) // 给根元素添加 dark 类，用于切换暗色主题
+
+          /**
+           *  给根元素添加 dark 类，用于切换暗色主题
+           */
+          document.documentElement.classList.toggle('dark', true)
       })()
     </script>
     <script type="module" src="/src/main.ts"></script>

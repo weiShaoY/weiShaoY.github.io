@@ -1,25 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router' // 导入 vue-router 的创建路由器和历史模式函数
+import NProgressPlugin from '@/utils/nporgress'
 
-/**
- * 导入进度条插件 nprogress
- */
-// import NProgress from 'nprogress'
-
-// import createRouteGuard from './guard'
-
-// import { appRoutes } from './routes'
-
-// import { NOT_FOUND_ROUTE, REDIRECT_MAIN } from './routes/base'
-
+import { createRouter, createWebHistory } from 'vue-router'
 /**
  * 导入进度条样式
  */
 import 'nprogress/nprogress.css'
-
-/**
- * 配置进度条插件的显示方式
- */
-// NProgress.configure({ showSpinner: false }) // 配置进度条不显示旋转图标
 
 /**
  * 创建并配置路由器
@@ -31,14 +16,13 @@ const router = createRouter({
       path: '/',
       redirect: 'index',
     },
+
+    // 首页
     {
       path: '/index',
+      redirect: 'about',
       component: () => import('@/pages/index/index.vue'),
       children: [
-        {
-          path: '',
-          component: () => import('@/pages/index/main.vue'),
-        },
         {
           path: 'about',
           name: 'about',
@@ -52,14 +36,19 @@ const router = createRouter({
       ],
 
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: () => import('@/pages/login/index.vue'), // 动态导入登录页面组件
-    //   meta: {
-    //     requiresAuth: false, // 不需要登录认证
-    //   },
-    // },
+
+    {
+      path: '/coding',
+      name: 'coding',
+      component: () => import('@/pages/coding/index.vue'),
+    },
+
+    // 404
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: () => import('@/pages/404/index.vue'),
+    },
 
     // ...appRoutes,
 
@@ -76,9 +65,14 @@ const router = createRouter({
   },
 })
 
-/**
- * 创建并使用路由守卫
- */
-// createRouteGuard(router)
+// beforeEach路由切换之前触发
+router.beforeEach(() => {
+  NProgressPlugin.start() // 开始进度条
+})
+
+// afterEach路由切换之后触发
+router.afterEach(() => {
+  NProgressPlugin.close() // 结束进度条
+})
 
 export default router // 导出路由器实例

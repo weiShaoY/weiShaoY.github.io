@@ -1,7 +1,5 @@
 <script setup lang="ts" generic="T extends any, O extends any">
-// import { useRouter } from 'vue-router'
 
-// const router = useRouter()
 </script>
 
 <template>
@@ -13,7 +11,6 @@
         <RouterView />
       </div>
     </div>
-
     <TheFooter />
   </div>
 </template>

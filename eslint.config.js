@@ -8,6 +8,7 @@ export default antfu(
       '**/components.d.ts',
       '**/dist/**',
       '**/iconFont.js',
+      '**/assets/**',
     ],
   },
 )
