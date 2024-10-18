@@ -156,8 +156,9 @@ import Map from './components/map.vue'
       </div>
 
       <!-- 地图 -->
+      <!-- :class="isMobile ? 'h-90' : 'h-120'" -->
       <div
-        class="col-span-4 h-80 max-xl:col-span-4"
+        class="*: col-span-4 h-120 max-xl:col-span-4 max-md:h-90"
       >
         <Map />
       </div>
