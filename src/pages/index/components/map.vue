@@ -54,7 +54,7 @@ const option = ref<EChartsOption>({
     /**
      *  标题距离顶部的距离
      */
-    top: '10%',
+    top: '5%',
 
     /**
      *  标题水平居中
@@ -62,7 +62,7 @@ const option = ref<EChartsOption>({
     left: 'center',
 
     textStyle: {
-      color: '#fff',
+      color: '#d1d3d7',
     },
   },
   backgroundColor: 'transparent', // 透明
@@ -79,7 +79,7 @@ const option = ref<EChartsOption>({
     /**
      *  地图缩放级别
      */
-    zoom: 1,
+    zoom: 0.8,
 
     /**
      *  地图距顶部的距离
@@ -287,7 +287,6 @@ registerMap('china', chinaMap as any)
 <template>
   <Chart
     :option="option"
-    height="400px"
   />
 </template>
 

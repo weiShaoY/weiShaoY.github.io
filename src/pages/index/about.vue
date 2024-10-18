@@ -4,10 +4,10 @@ import Map from './components/map.vue'
 
 <template>
   <div class="m-x-auto h-full flex flex-col justify-between container">
-    <div class="grid gap-5 px-5 lg:grid-cols-4 md:grid-cols-3">
+    <div class="grid grid-cols-4 gap-5 px-5">
       <!-- About -->
       <div
-        class="group indexGridBackgroundColor col-span-3 rounded-3xl p-8 lg:col-span-2 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group indexGridBackgroundColor col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between"
@@ -49,10 +49,10 @@ import Map from './components/map.vue'
 
       <!-- Coding -->
       <div
-        class="indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="indexGridBackgroundColor col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
-          class="h-full flex flex-row items-center justify-start md:flex-col md:items-start md:justify-between"
+          class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
           @click="router.push('/coding')"
         >
           <SvgIcon
@@ -65,10 +65,10 @@ import Map from './components/map.vue'
 
       <!-- Github -->
       <div
-        class="indexGridBackgroundColor col-span-3 rounded-3xl p-8 md:col-auto hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="indexGridBackgroundColor col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
-          class="h-full flex flex-row items-center justify-start md:flex-col md:items-start md:justify-between"
+          class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
           target="_blank"
           href="https://github.com/weiShaoY"
         >
@@ -81,10 +81,10 @@ import Map from './components/map.vue'
       </div>
 
       <!-- 技术栈 -->
-      <div class="group indexGridBackgroundColor col-span-4 rounded-3xl p-8 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500">
+      <div class="group indexGridBackgroundColor col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500">
         <div class="h-full flex flex-col justify-between">
           <h1 class="text-3xl font-semibold group-hover:color-primary">
-            My Technology Stack
+            我的技术栈
           </h1>
 
           <div class="flex flex-wrap content-center gap-7">
@@ -154,12 +154,13 @@ import Map from './components/map.vue'
           </div>
         </div>
       </div>
+
+      <!-- 地图 -->
+      <div
+        class="col-span-4 h-80 max-xl:col-span-4"
+      >
+        <Map />
+      </div>
     </div>
-
-    <Map />
   </div>
-
-  <div
-    class=""
-  />
 </template>

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { EChartsOption } from 'echarts'
+
 import { nextTick, ref } from 'vue'
 
 import VCharts from 'vue-echarts'
@@ -11,7 +13,7 @@ defineProps({
    *  配置
    */
   options: {
-    type: Object,
+    type: Object as () => EChartsOption,
     default() {
       return {}
     },
