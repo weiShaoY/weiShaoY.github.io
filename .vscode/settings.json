@@ -54,6 +54,7 @@
     "composables",
     "daima",
     "echarts",
+    "guanbi",
     "iconify",
     "nporgress",
     "nprogress",
@@ -66,6 +67,7 @@
     "unocss",
     "unplugin",
     "vueuse",
+    "zhankai",
     "zlevel"
   ]
 }

@@ -1,3 +1,4 @@
+<!------------------------------------  图标组件  ------------------------------------------------->
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
 

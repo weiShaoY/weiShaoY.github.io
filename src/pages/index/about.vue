@@ -13,14 +13,15 @@ import Map from './components/map.vue'
           class="h-full flex flex-col justify-between"
           @click="router.push('/index/about')"
         >
-          <div class="m-b-2 flex items-center">
+          <div class="m-b-2 flex items-center text-3xl max-xl:flex-col max-xl:text-2xl">
+
             <div class="h-24 w-24 flex items-center overflow-hidden rounded-full">
 
               <img src="@/assets/images/avatar.jpg" alt="">
             </div>
 
-            <div class="flex flex-1 items-center justify-center text-3xl font-bold">
-              Hey, 我是 WeiShaoY 👋
+            <div class="flex flex-1 items-center justify-center font-bold">
+              Hey, 我是 WeiShaoY
             </div>
 
           </div>
@@ -84,7 +85,7 @@ import Map from './components/map.vue'
       <div class="group indexGridBackgroundColor col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500">
         <div class="h-full flex flex-col justify-between">
           <h1 class="text-3xl font-semibold group-hover:color-primary">
-            我的技术栈
+            My technology stack
           </h1>
 
           <div class="flex flex-wrap content-center gap-7">
