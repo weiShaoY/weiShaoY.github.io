@@ -7,7 +7,7 @@ import Map from './components/map.vue'
     <div class="grid grid-cols-4 gap-5 px-5">
       <!-- About -->
       <div
-        class="group indexGridBackgroundColor col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
       >
         <a
           class="h-full flex flex-col justify-between"
@@ -46,7 +46,7 @@ import Map from './components/map.vue'
 
       <!-- Coding -->
       <div
-        class="indexGridBackgroundColor col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -62,7 +62,7 @@ import Map from './components/map.vue'
 
       <!-- Github -->
       <div
-        class="indexGridBackgroundColor col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -78,7 +78,7 @@ import Map from './components/map.vue'
       </div>
 
       <!-- 技术栈 -->
-      <div class="group indexGridBackgroundColor col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500">
+      <div class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item">
         <div class="h-full flex flex-col justify-between">
           <h1 class="text-3xl font-semibold group-hover:color-primary">
             My technology stack

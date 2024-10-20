@@ -44,7 +44,7 @@ const option = ref<EChartsOption>({
 
   textStyle: {
 
-    fontFamily: 'ziHunShouJinTi',
+    fontFamily: 'gaiLiangShouJinTi',
 
   },
   backgroundColor: 'transparent', // 透明
@@ -73,6 +73,8 @@ const option = ref<EChartsOption>({
       color: '#d1d3d7',
 
       fontSize: 24,
+
+      fontWeight: 700,
     },
   },
 
@@ -236,10 +238,12 @@ const option = ref<EChartsOption>({
           // return `风里雨里,长沙等你`
         },
         textStyle: {
-          color: '#fff',
+          color: '#E43961',
           fontSize: 16,
           fontWeight: 700,
         },
+
+        backgroundColor: 'rgba(255,255,255,0.9)',
 
       },
 

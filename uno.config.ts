@@ -37,24 +37,16 @@ export default defineConfig({
     },
 
     /**
+     *  twind写法的字体配置
      *  @description 字体相关的配置
      */
-    fontFamily: {
-      /**
-       *  @description 改良瘦金体
-       */
-      gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
+    // fontFamily: {
+    //   /**
+    //    *  @description 改良瘦金体
+    //    */
+    //   gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
 
-      /**
-       *  @description 字魂白鸽天行体
-       */
-      ziHunBaiGeTianXingTi: ['ziHunBaiGeTianXingTi', 'sans-serif'],
-
-      /**
-       *  @description 字魂瘦金体
-       */
-      ziHunShouJinTi: ['ziHunShouJinTi', 'sans-serif'],
-    },
+    // },
 
   },
 
@@ -73,6 +65,12 @@ export default defineConfig({
 
     // 文本溢出显示省略号
     ['text-ellipsis', 'truncate'],
+
+    //  主题色
+    ['theme', 'light:text-#000000  dark:text-#d1d3d7 light:bg-#ffffff  dark:bg-#222325 light:item-'],
+
+    ['theme-item', 'light:!bg-#d9d5c9 dark:bg-#323639'],
+
   ],
 
   /**
@@ -131,7 +129,6 @@ export default defineConfig({
        */
       warn: true,
     }),
-
     /**
      *  @description 排版预设，提供优化的排版样式
      *  @see https://github.com/unocss/unocss#preset-typography
@@ -148,11 +145,24 @@ export default defineConfig({
          *  @description 定义字体家族
          */
         fonts: {
+
+          /**
+           *  @description 中文字体
+           *  @default '改良瘦金体'
+           */
+          chinese: 'Fira Code VF,gaiLiangShouJinTi',
+
+          // /**
+          //  *  @description 英文字体
+          //  *  @default 'Fira Code VF'
+          //  */
+          // english: 'Fira Code VF',
+
           /**
            *  @description 无衬线字体
            */
           // sans: 'DM Sans',
-          sans: 'ziHunShouJinTi',
+          sans: 'gaiLiangShouJinTi',
 
           /**
            *  @description 衬线字体
@@ -166,6 +176,7 @@ export default defineConfig({
         },
       },
     ),
+
   ],
 
 })
