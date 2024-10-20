@@ -10,108 +10,162 @@ import {
 } from 'unocss'
 
 /**
- * UnoCSS 配置文件
+ *  @description UnoCSS 配置文件
  */
 export default defineConfig({
-/**
- * @description 定义全局主题设置，供规则或组件之间共享
- * @property {object} colors 配置颜色变量
- * @property {string} colors.primary 定义主色调为 #FEC451
- */
+
+  /**
+   *  @description 定义全局主题设置，供规则或组件之间共享
+   */
   theme: {
+
+    /**
+     *  @description 主题颜色
+     */
     colors: {
+
+      /**
+       *  @description 主题色
+       */
       primary: '#FEC451',
+
+      /**
+       *  @description 文字颜色
+       */
+      text: '#d1d3d7',
+
     },
+
+    /**
+     *  @description 字体相关的配置
+     */
+    fontFamily: {
+      /**
+       *  @description 改良瘦金体
+       */
+      gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
+
+      /**
+       *  @description 字魂白鸽天行体
+       */
+      ziHunBaiGeTianXingTi: ['ziHunBaiGeTianXingTi', 'sans-serif'],
+
+      /**
+       *  @description 字魂瘦金体
+       */
+      ziHunShouJinTi: ['ziHunShouJinTi', 'sans-serif'],
+    },
+
   },
 
   /**
-   * @description 预定义的样式快捷方式，可直接在模板中通过类名使用
+   *  @description 预定义的样式快捷方式，可直接在模板中通过类名使用
    */
   shortcuts: [
+    // 宽高 100%
     ['wh-full', 'w-full h-full'],
+
+    // Flex 布局居中
     ['flex-center', 'flex justify-center items-center'],
+
+    // Flex 列布局
     ['flex-col', 'flex flex-col'],
+
+    // 文本溢出显示省略号
     ['text-ellipsis', 'truncate'],
   ],
 
   /**
-   * @description 自定义生成 CSS 工具的规则，后定义的规则优先级更高
-   * @example /^bc-(.+)$/ 将 `bc-颜色值` 转换为对应的 border-color 样式
+   *  @description 自定义生成 CSS 工具的规则，后定义的规则优先级更高
+   *  @example /^bc-(.+)$/ 将 `bc-颜色值` 转换为对应的 border-color 样式
    */
   rules: [
+    //  将 `bc-颜色值` 转换为对应的 border-color 样式
     [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `#${color}` })],
   ],
 
   /**
-   * @description UnoCSS 使用的转换器，处理高级指令与变体组合
+   *  @description UnoCSS 使用的转换器，处理高级指令与变体组合
    */
   transformers: [
     /**
-     * 支持 `@apply` 等指令的转换器
-     * @see https://github.com/unocss/unocss#transformer-directives
+     *  @description 支持 `@apply` 等指令的转换器
+     *  @see https://github.com/unocss/unocss#transformer-directives
      */
     transformerDirectives(),
 
     /**
-     * 允许通过逗号分隔的语法同时应用多个变体
-     * @see https://github.com/unocss/unocss#transformer-variantgroup
+     *  @description 允许通过逗号分隔的语法同时应用多个变体
+     *  @see https://github.com/unocss/unocss#transformer-variantgroup
      */
     transformerVariantGroup(),
   ],
 
   /**
-   * @description UnoCSS 使用的预设
+   *  @description UnoCSS 使用的预设
    */
   presets: [
     /**
-     * UnoCSS 的核心预设
-     * @see https://github.com/unocss/unocss#preset-uno
+     *  @description UnoCSS 的核心预设
+     *  @see https://github.com/unocss/unocss#preset-uno
      */
     presetUno(),
 
     /**
-     * 属性化预设，允许通过 HTML 属性直接应用样式
-     * @see https://github.com/unocss/unocss#preset-attributify
+     *  @description 属性化预设，允许通过 HTML 属性直接应用样式
+     *  @see https://github.com/unocss/unocss#preset-attributify
      */
     presetAttributify(),
 
     /**
-     * 图标预设，支持通过类名插入 SVG 图标
-     * @param {object} options - 预设选项
-     * @param {number} options.scale - 图标的缩放比例
-     * @see https://github.com/unocss/unocss#preset-icons
+     *  @description 图标预设，支持通过类名插入 SVG 图标
+     *  @see https://github.com/unocss/unocss#preset-icons
      */
     presetIcons({
-      scale: 1.2,
+      // /**
+      //  *  @description 设置图标的缩放比例
+      //  */
+      // scale: 1.2,
+      /**
+       *   @description 开启警告提示
+       */
+      warn: true,
     }),
 
     /**
-     * 排版预设，提供优化的排版样式
-     * @see https://github.com/unocss/unocss#preset-typography
+     *  @description 排版预设，提供优化的排版样式
+     *  @see https://github.com/unocss/unocss#preset-typography
      */
     presetTypography(),
 
     /**
-     * Google Web Fonts 预设，自动生成 Web 字体相关的 CSS
-     * @param {object} options - 预设字体配置
-     * @param {object} options.fonts - 定义字体家族
-     * @param {string} options.fonts.sans - 无衬线字体
-     * @param {string} options.fonts.serif - 衬线字体
-     * @param {string} options.fonts.mono - 等宽字体
-     * @see https://github.com/unocss/unocss#preset-webfonts
+     *  @description Google Web Fonts 预设，自动生成 Web 字体相关的 CSS
+     *  @see https://github.com/unocss/unocss#preset-webfonts
      */
-    presetWebFonts({
-      fonts: {
-        sans: 'DM Sans',
-        serif: 'DM Serif Display',
-        mono: 'DM Mono',
+    presetWebFonts(
+      {
+        /**
+         *  @description 定义字体家族
+         */
+        fonts: {
+          /**
+           *  @description 无衬线字体
+           */
+          // sans: 'DM Sans',
+          sans: 'ziHunShouJinTi',
+
+          /**
+           *  @description 衬线字体
+           */
+          serif: 'DM Serif Display',
+
+          /**
+           *  @description 等宽字体
+           */
+          mono: 'DM Mono',
+        },
       },
-    }),
+    ),
   ],
 
-  /**
-   * @description 确保特定的类名始终包含在生成的 CSS 中，即使未在模板中明确使用
-   * @example 使用这些类名来应用默认的排版样式
-   */
-  // safelist: 'prose prose-sm m-auto text-left'.split(' '),
 })

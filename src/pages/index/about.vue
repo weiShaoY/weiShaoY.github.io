@@ -26,22 +26,18 @@ import Map from './components/map.vue'
 
           </div>
 
-          <div>
+          <div class="text-5 font-600">
 
-            <p class="text-4 lh-7">
+            <p class="lh-7">
               一个热爱编程的前端开发  💻
             </p>
 
-            <p class="text-4 lh-7">
+            <p class="lh-7">
               热爱计算机科学和 IT 互联网事业  🚀
             </p>
 
-            <p class="text-4 lh-7">
+            <p class="lh-7">
               热爱编程、软路由、手工、房间改造  🔨
-            </p>
-
-            <p class="text-4 lh-7">
-              希望能成为一名为开源做出贡献的优秀开发者  🙌
             </p>
 
           </div>

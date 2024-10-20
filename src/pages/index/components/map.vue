@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
-import chinaMap from '@/assets/json/china.json'
+import chinaMap from '@/assets/jsons/china.json'
 import { registerMap } from 'echarts/core'
 import { ref } from 'vue'
 
@@ -42,6 +42,13 @@ function convertData(data: { name: string, value: number }[]): { name: string, v
  */
 const option = ref<EChartsOption>({
 
+  textStyle: {
+
+    fontFamily: 'ziHunShouJinTi',
+
+  },
+  backgroundColor: 'transparent', // 透明
+
   /**
    *  标题设置
    */
@@ -62,10 +69,12 @@ const option = ref<EChartsOption>({
     left: 'center',
 
     textStyle: {
+
       color: '#d1d3d7',
+
+      fontSize: 24,
     },
   },
-  backgroundColor: 'transparent', // 透明
 
   /**
    *  地理区域配置
@@ -255,7 +264,7 @@ const option = ref<EChartsOption>({
 
         fontWeight: 700,
 
-        fontSize: 18,
+        fontSize: 24,
       },
 
       itemStyle: {

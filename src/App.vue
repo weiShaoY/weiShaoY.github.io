@@ -1,15 +1,5 @@
 <template>
-  <!-- <div class="min-h-screen flex flex-col justify-between">
-    <div class="mx-auto container">
-      <TheHeader />
-
-      <div class="h-full">
-        <RouterView />
-      </div>
-    </div>
-
-    <TheFooter />
-  </div> -->
+  <!-- <div class="i-skill-icons:linux-light h-256px w-256px hover:color-red" /> -->
 
   <div class="h-full min-h-screen">
     <RouterView />

@@ -1,31 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
     <!-- 设置文档字符集为 UTF-8 -->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
 
     <!-- 设置视口宽度和初始缩放比例 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 设置网站图标 -->
     <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml" /> -->
     <link rel="icon" href="/favicon.ico" type="image/svg+xml" />
 
-    <!-- 设置网站图标 -->
+    <!-- 设置页面标题 -->
     <title>WeiShaoY</title>
 
-    <!-- 设置页面标题 -->
-    <meta name="description" content="Opinionated Vite Starter Template" />
-
     <!-- 设置页面描述 -->
+    <meta name="description" content="代码改变世界" />
   </head>
-  <body class="font-sans">
-    <!-- <body class="font-sans dark:text-#D1D3D7 dark:bg-hex-222325"> -->
-    <div id="app" :data-theme="isDark?'dark':'light'"></div>
+
+  <body class="">
     <!-- Vue 应用的挂载点 -->
+    <div id="app" :data-theme="isDark?'dark':'light'"></div>
 
     <noscript>
-      <div>Please enable JavaScript to use this application.</div>
       <!-- 在浏览器不支持 JavaScript 时显示的提示信息 -->
+      <div>Please enable JavaScript to use this application.</div>
     </noscript>
 
     <script>
@@ -49,7 +48,8 @@
           document.documentElement.classList.toggle('dark', true)
       })()
     </script>
-    <script type="module" src="/src/main.ts"></script>
+
     <!-- 引入 Vue 应用的入口文件 -->
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -13,12 +13,18 @@ NProgress.configure({
 })
 
 class NProgressPlugin {
+  /**
+   *  开始进度条
+   */
   public static start() {
-    NProgress.start() // 开始进度条
+    NProgress.start()
   }
 
+  /**
+   *   结束进度条
+   */
   public static close() {
-    NProgress.done() // 结束进度条
+    NProgress.done()
   }
 }
 
