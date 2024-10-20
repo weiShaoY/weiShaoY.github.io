@@ -30,9 +30,9 @@ export default defineConfig({
       primary: '#FEC451',
 
       /**
-       *  @description 文字颜色
+       *  @description 红色
        */
-      text: '#d1d3d7',
+      red: '#E43961',
 
     },
 
@@ -69,7 +69,7 @@ export default defineConfig({
     //  主题色
     ['theme', 'light:text-#000000  dark:text-#d1d3d7 light:bg-#ffffff  dark:bg-#222325 light:item-'],
 
-    ['theme-item', 'light:!bg-#d9d5c9 dark:bg-#323639'],
+    ['theme-item', 'bg-#D8D5CA dark:bg-#323639'],
 
   ],
 

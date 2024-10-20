@@ -61,7 +61,7 @@ const option = ref<EChartsOption>({
     /**
      *  标题距离顶部的距离
      */
-    top: '5%',
+    top: '12%',
 
     /**
      *  标题水平居中
@@ -70,9 +70,9 @@ const option = ref<EChartsOption>({
 
     textStyle: {
 
-      color: '#d1d3d7',
+      color: isDark.value ? '#d1d3d7' : '#000',
 
-      fontSize: 24,
+      fontSize: isMobile.value ? 16 : 24,
 
       fontWeight: 700,
     },
@@ -90,7 +90,7 @@ const option = ref<EChartsOption>({
     /**
      *  地图缩放级别
      */
-    zoom: 0.8,
+    zoom: isMobile.value ? 0.8 : 1,
 
     /**
      *  地图距顶部的距离
@@ -233,13 +233,14 @@ const option = ref<EChartsOption>({
       },
 
       tooltip: {
+
         formatter() {
           return `惟楚有材，于斯为盛`
           // return `风里雨里,长沙等你`
         },
         textStyle: {
           color: '#E43961',
-          fontSize: 16,
+          fontSize: 20,
           fontWeight: 700,
         },
 
@@ -268,7 +269,7 @@ const option = ref<EChartsOption>({
 
         fontWeight: 700,
 
-        fontSize: 24,
+        fontSize: 26,
       },
 
       itemStyle: {

@@ -7,37 +7,37 @@ import Map from './components/map.vue'
     <div class="grid grid-cols-4 gap-5 px-5">
       <!-- About -->
       <div
-        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
+        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between"
           @click="router.push('/index/about')"
         >
-          <div class="m-b-2 flex items-center text-3xl max-xl:flex-col max-xl:text-2xl">
+          <div class="m-b-2 flex items-center max-xl:flex-col">
 
-            <div class="h-24 w-24 flex items-center overflow-hidden rounded-full">
+            <div class="h-24 w-24 flex items-center overflow-hidden rounded-full max-xl:m-b-4">
 
               <img src="@/assets/images/avatar.jpg" alt="">
             </div>
 
-            <div class="flex flex-1 items-center justify-center font-bold">
+            <div class="flex flex-1 items-center justify-center text-8 font-bold max-xl:text-6">
               Hey, 我是 WeiShaoY
             </div>
 
           </div>
 
-          <div class="text-5 font-600">
+          <div class="text-5 font-600 max-xl:text-4">
 
             <p class="lh-7">
               一个热爱编程的前端开发  💻
             </p>
 
             <p class="lh-7">
-              热爱计算机科学和 IT 互联网事业  🚀
+              热爱计算机科学和IT互联网事业  🚀
             </p>
 
             <p class="lh-7">
-              热爱编程、软路由、手工、房间改造  🔨
+              热爱编程、软路由、硬件、Diy等  🔨
             </p>
 
           </div>
@@ -46,7 +46,7 @@ import Map from './components/map.vue'
 
       <!-- Coding -->
       <div
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -62,7 +62,7 @@ import Map from './components/map.vue'
 
       <!-- Github -->
       <div
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -78,9 +78,9 @@ import Map from './components/map.vue'
       </div>
 
       <!-- 技术栈 -->
-      <div class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item">
+      <div class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition hover:duration-500">
         <div class="h-full flex flex-col justify-between">
-          <h1 class="text-3xl font-semibold group-hover:color-primary">
+          <h1 class="text-8 font-semibold max-xl:text-6 group-hover:color-primary">
             My Technology Stack
           </h1>
 
