@@ -150,29 +150,24 @@ export default defineConfig({
            *  @description 中文字体
            *  @default '改良瘦金体'
            */
-          chinese: 'Fira Code VF,gaiLiangShouJinTi',
+          theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
+
+          /**
+          //  *  @description 无衬线字体
+          //
+           */
+          // // sans: 'DM Sans',
+          // sans: 'gaiLiangShouJinTi',
 
           // /**
-          //  *  @description 英文字体
-          //  *  @default 'Fira Code VF'
+          //  *  @description 衬线字体
           //  */
-          // english: 'Fira Code VF',
+          // serif: 'DM Serif Display',
 
-          /**
-           *  @description 无衬线字体
-           */
-          // sans: 'DM Sans',
-          sans: 'gaiLiangShouJinTi',
-
-          /**
-           *  @description 衬线字体
-           */
-          serif: 'DM Serif Display',
-
-          /**
-           *  @description 等宽字体
-           */
-          mono: 'DM Mono',
+          // /**
+          //  *  @description 等宽字体
+          //  */
+          // mono: 'DM Mono',
         },
       },
     ),

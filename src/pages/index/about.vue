@@ -81,7 +81,7 @@ import Map from './components/map.vue'
       <div class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer hover:drop-shadow-2xl hover:transition hover:duration-500 theme-item">
         <div class="h-full flex flex-col justify-between">
           <h1 class="text-3xl font-semibold group-hover:color-primary">
-            My technology stack
+            My Technology Stack
           </h1>
 
           <div class="flex flex-wrap content-center gap-7">
