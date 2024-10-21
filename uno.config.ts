@@ -129,6 +129,7 @@ export default defineConfig({
        */
       warn: true,
     }),
+
     /**
      *  @description 排版预设，提供优化的排版样式
      *  @see https://github.com/unocss/unocss#preset-typography

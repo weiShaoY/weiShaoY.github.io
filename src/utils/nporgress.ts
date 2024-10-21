@@ -4,12 +4,35 @@ import 'nprogress/nprogress.css'
 
 // 全局进度条的配置
 NProgress.configure({
-  easing: 'ease', // 动画方式
-  speed: 500, // 递增进度条的速度
-  showSpinner: false, // 进度环显示隐藏
-  trickleSpeed: 200, // 自动递增间隔
-  minimum: 0.3, // 更改启动时使用的最小百分比
-  parent: 'body', // 指定进度条的父容器
+  /**
+   *  动画方式
+   */
+  easing: 'ease',
+
+  /**
+   *  递增进度条的速度
+   */
+  speed: 500,
+
+  /**
+   *  进度环显示隐藏
+   */
+  showSpinner: false,
+
+  /**
+   *  自动递增间隔
+   */
+  trickleSpeed: 200,
+
+  /**
+   *  更改启动时使用的最小百分比
+   */
+  minimum: 0.3,
+
+  /**
+   *  指定进度条的父容器
+   */
+  parent: 'body',
 })
 
 class NProgressPlugin {

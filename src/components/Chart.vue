@@ -44,18 +44,22 @@ import 'echarts'
 // })
 
 withDefaults(defineProps<{
+
   /**
    *  配置
    */
   option: EChartsOption
+
   /**
    *  自适应
    */
   autoResize?: boolean
+
   /**
    *  宽
    */
   width?: string
+
   /**
    *  高
    */

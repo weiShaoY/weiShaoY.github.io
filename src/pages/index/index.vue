@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <div class="h-full min-h-screen flex flex-col justify-between">
+  <div
+    class="h-full min-h-screen flex flex-col justify-between"
+  >
     <TheHeader />
 
     <RouterView />

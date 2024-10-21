@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
 const dropdownVisible = ref(false)
 </script>
 
 <template>
-  <nav class="h-20 w-full flex justify-between px-5 py-5">
+  <nav
+    class="fixed left-0 top-0 z-100 h-20 w-full flex justify-between px-5 py-5"
+  >
     <!-- logo -->
     <a
       class="group hover:cursor-pointer"
-      @click="router.push('/index')"
+      @click="$router.push('/index')"
     >
       <SvgIcon
-        icon="icon-WeiShaoY" :style="{
+        icon="icon-WeiShaoY"
+        :style="{
           height: '100%',
           width: '150px',
         }"
@@ -27,16 +26,18 @@ const dropdownVisible = ref(false)
       v-if="!isMobile"
       class="flex text-3xl font-600"
     >
-      <div class="m-r-10">
+      <div
+        class="m-r-10"
+      >
         <a
           class="hover:cursor-pointer"
-          @click="router.push('/index/about')"
+          @click="$router.push('/index/about')"
         >
           About
         </a>
 
         <div
-          v-if="router.currentRoute.value.path === '/index/about'"
+          v-if="$router.currentRoute.value.path === '/index/about'"
           class="h-0.5 w-full bg-primary"
           :style="{
             transform: 'none',
@@ -48,7 +49,7 @@ const dropdownVisible = ref(false)
       <div>
         <a
           class="hover:cursor-pointer"
-          @click="router.push('/index/resume')"
+          @click="$router.push('/index/resume')"
         >
           Resume
         </a>
@@ -64,14 +65,18 @@ const dropdownVisible = ref(false)
       </div>
     </div>
 
-    <div class="flex items-center gap-2">
+    <div
+      class="flex items-center gap-2"
+    >
       <!-- 切换主题按钮 -->
       <a-button
         class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
         type="text"
         @click="toggleDark() "
       >
-        <template #icon>
+        <template
+          #icon
+        >
           <SvgIcon
             icon="icon-baitian"
             :size="32"
@@ -92,7 +97,9 @@ const dropdownVisible = ref(false)
           class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
           type="text"
         >
-          <template #icon>
+          <template
+            #icon
+          >
             <SvgIcon
               :icon="dropdownVisible ? 'icon-guanbi' : 'icon-zhankai'"
               :size="32"
@@ -102,9 +109,11 @@ const dropdownVisible = ref(false)
           </template>
         </a-button>
 
-        <template #content>
+        <template
+          #content
+        >
           <a-doption
-            @click="router.push('/index/about')"
+            @click="$router.push('/index/about')"
           >
             <span
               class="text-5 font-600"
@@ -112,8 +121,9 @@ const dropdownVisible = ref(false)
               About
             </span>
           </a-doption>
+
           <a-doption
-            @click="router.push('/index/resume')"
+            @click="$router.push('/index/resume')"
           >
             <span
               class="text-5 font-600"

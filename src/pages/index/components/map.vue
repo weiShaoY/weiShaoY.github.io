@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
+
 import chinaMap from '@/assets/jsons/china.json'
+
 import { registerMap } from 'echarts/core'
 
 /**
@@ -24,8 +26,10 @@ const geoCoordMap: Record<string, [number, number]> = {
  */
 function convertData(data: { name: string, value: number }[]): { name: string, value: [number, number, number] }[] {
   const res = []
+
   for (let i = 0; i < data.length; i++) {
     const geoCoord = geoCoordMap[data[i].name]
+
     if (geoCoord) {
       res.push({
         name: data[i].name,
@@ -33,6 +37,7 @@ function convertData(data: { name: string, value: number }[]): { name: string, v
       })
     }
   }
+
   return res as { name: string, value: [number, number, number] }[]
 }
 
@@ -47,7 +52,11 @@ const option = computed<EChartsOption>(() => ({
     fontFamily: 'gaiLiangShouJinTi',
 
   },
-  backgroundColor: 'transparent', // 透明
+
+  /**
+   *  背景颜色
+   */
+  backgroundColor: 'transparent',
 
   /**
    *  标题设置
@@ -159,6 +168,7 @@ const option = computed<EChartsOption>(() => ({
      *  提示框背景色
      */
     backgroundColor: 'rgba(0,0,0,0.5)',
+
     /**
      *  边框颜色
      */
@@ -193,10 +203,12 @@ const option = computed<EChartsOption>(() => ({
        *  排序后取前5名的数据s
        */
       data: convertData([...data].sort((a, b) => b.value - a.value).slice(0, 6)),
+
       /**
        *  动态设置散点大小
        */
       symbolSize: (val: number[]) => val[2] / 8,
+
       /**
        *  渲染时显示特效
        */
@@ -239,6 +251,7 @@ const option = computed<EChartsOption>(() => ({
 
         formatter() {
           return `惟楚有材，于斯为盛`
+
           // return `风里雨里,长沙等你`
         },
         textStyle: {
@@ -259,10 +272,12 @@ const option = computed<EChartsOption>(() => ({
           // return `${params.name}`
           return `${params.name}`
         },
+
         /**
          *  标注位置
          */
         position: 'top',
+
         /**
          *  显示标注
          */
@@ -286,6 +301,7 @@ const option = computed<EChartsOption>(() => ({
          *  阴影模糊程度
          */
         shadowBlur: 10,
+
         /**
          *  阴影颜色
          */
@@ -293,7 +309,8 @@ const option = computed<EChartsOption>(() => ({
 
       },
 
-      zlevel: 1, // 图层级别
+      // 图层级别
+      zlevel: 1,
     },
   ],
 }))

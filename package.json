@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@9.9.0",
   "scripts": {
     "dev": "vite --port 3333 ",
     "lint": "eslint .",
@@ -17,9 +17,11 @@
     "echarts": "^5.5.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.4",
+    "pinia-plugin-persistedstate": "^4.1.1",
     "vue": "^3.5.3",
     "vue-echarts": "^7.0.3",
     "vue-router": "^4.4.5"
+
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.4.0",

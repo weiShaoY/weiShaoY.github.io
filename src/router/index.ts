@@ -1,6 +1,7 @@
 import NProgressPlugin from '@/utils/nporgress'
 
 import { createRouter, createWebHistory } from 'vue-router'
+
 /**
  * 导入进度条样式
  */
@@ -10,7 +11,11 @@ import 'nprogress/nprogress.css'
  * 创建并配置路由器
  */
 const router = createRouter({
-  history: createWebHistory(), // 使用 HTML5 历史模式
+
+  /**
+   *    路由模式
+   */
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -72,12 +77,14 @@ const router = createRouter({
 
 // beforeEach路由切换之前触发
 router.beforeEach(() => {
-  NProgressPlugin.start() // 开始进度条
+  // 开始进度条
+  NProgressPlugin.start()
 })
 
 // afterEach路由切换之后触发
 router.afterEach(() => {
-  NProgressPlugin.close() // 结束进度条
+  // 结束进度条
+  NProgressPlugin.close()
 })
 
-export default router // 导出路由器实例
+export default router

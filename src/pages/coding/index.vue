@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <div class="">
+  <div
+    class=""
+  >
     coding
   </div>
 </template>

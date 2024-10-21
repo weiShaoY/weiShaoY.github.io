@@ -13,7 +13,9 @@ export const isMobile = ref<boolean>(/iPhone|iPad|iPod|Android/i.test(navigator.
  */
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null = null
-  return function (this: unknown, ...args: Parameters<T>): void { // 显式声明 this 的类型
+
+  // 显式声明 this 的类型
+  return function (this: unknown, ...args: Parameters<T>): void {
     if (timeout)
       clearTimeout(timeout)
     timeout = setTimeout(() => func.apply(this, args), wait)
@@ -25,6 +27,7 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (.
  */
 function updateIsMobile(): void {
   const isCurrentlyMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
   if (isMobile.value !== isCurrentlyMobile) {
     isMobile.value = isCurrentlyMobile
   }

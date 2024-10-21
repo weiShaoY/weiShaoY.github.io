@@ -34,9 +34,12 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   resolve: {
+    /**
+     *  设置路径别名
+     */
     alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`, // 设置路径别名
-      '@/': `${path.resolve(__dirname, 'src')}/`, // 设置路径别名
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
   plugins: [
@@ -46,13 +49,27 @@ export default defineConfig({
     vueDevTools(),
 
     VueMacros({
-      defineOptions: false, // 禁用宏选项定义
-      defineModels: false, // 禁用宏模型定义
+      /**
+       *  禁用宏选项定义
+       */
+      defineOptions: false,
+
+      /**
+       *  禁用宏模型定义
+       */
+      defineModels: false,
       plugins: {
         vue: Vue({
           script: {
-            propsDestructure: true, // 启用属性解构
-            defineModel: true, // 启用模型定义
+            /**
+             *  启用属性解构
+             */
+            propsDestructure: true,
+
+            /**
+             *  启用模型定义
+             */
+            defineModel: true,
           },
         }),
       },
@@ -64,16 +81,32 @@ export default defineConfig({
         'vue',
         '@vueuse/core',
       ],
-      dts: true, // 生成类型定义文件
+
+      /**
+       *  生成类型定义文件
+       */
+      dts: true,
+
+      /**
+       *  自动导入的目录
+       */
       dirs: [
-        './src/composables', // 自动导入的目录
+
+        './src/composables',
       ],
-      vueTemplate: true, // 启用 Vue 模板
+
+      /**
+       *  启用 Vue 模板
+       */
+      vueTemplate: true,
     }),
 
     // https://github.com/antfu/vite-plugin-components
     Components({
-      dts: true, // 生成类型定义文件
+      /**
+       *  生成类型定义文件
+       */
+      dts: true,
     }),
 
     // https://github.com/antfu/unocss
