@@ -1,7 +1,13 @@
 <template>
-  <div
+  <!-- <div
     class="h-full min-h-screen"
   >
+  </div> -->
+
+  <a-layout
+    class="h-full w-full"
+  >
     <RouterView />
-  </div>
+
+  </a-layout>
 </template>

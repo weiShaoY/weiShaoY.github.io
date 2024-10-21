@@ -3,11 +3,14 @@
 </script>
 
 <template>
-  <div
-    class="h-full min-h-screen flex flex-col justify-between"
-  >
-    <TheHeader />
+  <TheHeader />
 
+  <div
+    class="w-ful h-full flex flex-col justify-between overflow-auto"
+    :style="{
+      paddingTop: `${appStore.app.indexPage.headerHeight}px`,
+    }"
+  >
     <RouterView />
 
     <TheFooter />

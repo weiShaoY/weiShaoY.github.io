@@ -1,13 +1,15 @@
 <script setup lang="ts" generic="T extends any, O extends any">
 import Map from './components/map.vue'
+
+const router = useRouter()
 </script>
 
 <template>
   <div
-    class="m-x-auto flex-col flex-1 container"
+    class="m-x-auto flex-col flex-1 p-t-10 container"
   >
     <div
-      class="grid grid-cols-4 flex-grow-0 gap-5 px-5"
+      class="grid grid-cols-4 flex-grow-0 gap-5 p-x-5"
     >
       <!-- About -->
       <div
@@ -15,14 +17,14 @@ import Map from './components/map.vue'
       >
         <a
           class="h-full flex flex-col justify-between"
-          @click="$router.push('/index/about')"
+          @click="router.push('/index/about')"
         >
           <div
             class="m-b-2 flex items-center max-xl:flex-col"
           >
 
             <div
-              class="h-24 w-24 flex items-center overflow-hidden rounded-full max-xl:m-b-4"
+              class="h-20 w-20 flex items-center overflow-hidden rounded-full max-xl:m-b-4"
             >
 
               <img
@@ -35,7 +37,7 @@ import Map from './components/map.vue'
             <div
               class="flex flex-1 items-center justify-center text-8 font-bold max-xl:text-6"
             >
-              Hey, 我是 WeiShaoY
+              Hey, Here is WeiShaoY !
             </div>
 
           </div>
@@ -72,7 +74,7 @@ import Map from './components/map.vue'
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
-          @click="$router.push('/coding')"
+          @click="router.push('/coding')"
         >
           <SvgIcon
             icon="icon-daima"
@@ -81,7 +83,9 @@ import Map from './components/map.vue'
 
           <h1
             class="text-3xl font-600"
-          >Coding</h1>
+          >
+            Coding
+          </h1>
         </a>
       </div>
 
@@ -101,7 +105,9 @@ import Map from './components/map.vue'
 
           <h1
             class="text-3xl font-600"
-          >Github</h1>
+          >
+            Github
+          </h1>
         </a>
       </div>
 
@@ -113,7 +119,7 @@ import Map from './components/map.vue'
           class="h-full flex flex-col justify-between"
         >
           <h1
-            class="text-8 font-600 max-xl:text-6 group-hover:color-primary"
+            class="m-b-4 text-3xl font-600 max-xl:text-6 group-hover:color-primary"
           >
             My Technology Stack
           </h1>
@@ -215,7 +221,7 @@ import Map from './components/map.vue'
 
     <!-- 地图 -->
     <div
-      class="m-t-10 flex-1 max-md:flex-auto max-md:!h-90"
+      class="m-t-10 flex-1 max-xl:flex-auto max-xl:!h-90"
     >
       <Map />
     </div>

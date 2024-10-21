@@ -142,6 +142,8 @@ export default defineConfig({
      */
     presetWebFonts(
       {
+        provider: 'none',
+
         /**
          *  @description 定义字体家族
          */

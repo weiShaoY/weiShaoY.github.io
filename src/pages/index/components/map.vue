@@ -70,7 +70,7 @@ const option = computed<EChartsOption>(() => ({
     /**
      *  标题距离顶部的距离
      */
-    top: '12%',
+    // top: isMobile.value ? '12%' : '0%',
 
     /**
      *  标题水平居中
@@ -81,7 +81,8 @@ const option = computed<EChartsOption>(() => ({
 
       color: isDark.value ? '#d1d3d7' : '#000',
 
-      fontSize: isMobile.value ? 16 : 24,
+      // fontSize: isMobile.value ? 16 : 24,
+      fontSize: 24,
 
       fontWeight: 700,
     },
@@ -104,7 +105,7 @@ const option = computed<EChartsOption>(() => ({
     /**
      *  地图距顶部的距离
      */
-    top: '0%',
+    top: isMobile.value ? '0%' : '10%',
 
     /**
      *  地图距底部的距离

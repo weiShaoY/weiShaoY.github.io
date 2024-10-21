@@ -79,6 +79,7 @@ export default defineConfig({
     AutoImport({
       imports: [
         'vue',
+        'vue-router',
         '@vueuse/core',
       ],
 
@@ -95,11 +96,14 @@ export default defineConfig({
         './src/composables',
       ],
 
+      // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
+
       /**
        *  启用 Vue 模板
        */
       vueTemplate: true,
     }),
+
 
     // https://github.com/antfu/vite-plugin-components
     Components({

@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="mx-auto my-10 text-center text-3xl"
+    class="p-y-5 text-center text-3xl font-700"
   >
     代码改变世界
   </footer>

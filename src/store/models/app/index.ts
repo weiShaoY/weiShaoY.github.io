@@ -8,7 +8,7 @@ const useAppStore = defineStore(
     const app = ref({
 
       indexPage: {
-        headerHeight: 0,
+        headerHeight: 80,
       },
 
       theme: 'light',
