@@ -106,12 +106,20 @@ const dropdownVisible = ref(false)
           <a-doption
             @click="router.push('/index/about')"
           >
-            About
+            <span
+              class="text-5 font-600"
+            >
+              About
+            </span>
           </a-doption>
           <a-doption
             @click="router.push('/index/resume')"
           >
-            Resume
+            <span
+              class="text-5 font-600"
+            >
+              Resume
+            </span>
           </a-doption>
         </template>
       </a-dropdown>

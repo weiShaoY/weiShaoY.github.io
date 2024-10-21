@@ -2,6 +2,8 @@
 
 @import './nprogress.less';
 
+@import './arco.less';
+
 html,
 body,
 #app {
@@ -14,45 +16,3 @@ body,
   overflow: auto;
 }
 
-// 白色模式
-html {
-
-
-  // 首页Grid背景色
-  // .indexGridBackgroundColor {
-  //   background-color: #d9d5c9;
-  // }
-
-  // 弹出菜单
-  .arco-dropdown {
-    background-color: white;
-  }
-
-}
-
-// 黑暗模式
-html.dark {
-  // color: #d1d3d7;
-  // background: #222325;
-
-  // 首页Grid背景色
-  // .indexGridBackgroundColor {
-  //   background-color: #323639;
-  // }
-
-  // 弹出菜单
-  .arco-dropdown {
-    background-color: #323639;
-
-    border-color: #d1d3d7;
-
-    .arco-dropdown-option {
-      color: #d1d3d7;
-
-      &:hover {
-        background-color: #505253;
-      }
-    }
-  }
-
-}
