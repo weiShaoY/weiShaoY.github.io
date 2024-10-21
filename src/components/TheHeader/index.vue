@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import ThemeSwitch from './components/theme-switch.vue'
+
 const router = useRouter()
 
 const dropdownVisible = ref(false)
@@ -12,7 +14,7 @@ const dropdownVisible = ref(false)
     }"
   >
     <div
-      class="flex justify-between p-x-5 container"
+      class="flex items-center justify-between p-x-5 container"
     >
 
       <!-- logo -->
@@ -31,7 +33,11 @@ const dropdownVisible = ref(false)
       </a>
 
       <!-- 中间 -->
-      <div
+      <PageSwitch
+        v-if="!isMobile"
+      />
+
+      <!-- <div
         v-if="!isMobile"
         class="flex items-center text-3xl font-600"
       >
@@ -45,7 +51,6 @@ const dropdownVisible = ref(false)
             About
           </a>
 
-          <!-- v-show="router.currentRoute.value.path === '/index/about'" -->
           <div
             class="h-1 w-full bg-primary"
             :style="{
@@ -62,7 +67,6 @@ const dropdownVisible = ref(false)
           >
             Resume
           </a>
-          <!-- v-show="router.currentRoute.value.path === '/index/resume'" -->
 
           <div
             class="h-1 w-full bg-primary"
@@ -72,7 +76,7 @@ const dropdownVisible = ref(false)
             }"
           />
         </div>
-      </div>
+      </div> -->
 
       <!-- 右边 -->
       <div
@@ -80,7 +84,7 @@ const dropdownVisible = ref(false)
       >
 
         <!-- 切换主题按钮 -->
-        <Checkbox />
+        <ThemeSwitch />
 
         <!-- 如果是移动端 显示下拉按钮 -->
         <a-dropdown
