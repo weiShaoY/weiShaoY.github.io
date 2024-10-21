@@ -18,9 +18,9 @@
     <meta name="description" content="代码改变世界" />
   </head>
 
-  <body class="">
+  <body :data-theme="isDark?'dark':'light'" class="theme font-theme">
     <!-- Vue 应用的挂载点 -->
-    <div id="app" :data-theme="isDark?'dark':'light'" class="theme font-theme"></div>
+    <div id="app"></div>
     <noscript>
       <!-- 在浏览器不支持 JavaScript 时显示的提示信息 -->
       <div>Please enable JavaScript to use this application.</div>
