@@ -3,8 +3,10 @@ import Map from './components/map.vue'
 </script>
 
 <template>
-  <div class="m-x-auto h-full flex flex-col justify-between container">
-    <div class="grid grid-cols-4 gap-5 px-5">
+  <div
+    class="m-x-auto flex-col flex-1 container"
+  >
+    <div class="grid grid-cols-4 flex-grow-0 gap-5 px-5">
       <!-- About -->
       <div
         class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
@@ -18,6 +20,7 @@ import Map from './components/map.vue'
             <div class="h-24 w-24 flex items-center overflow-hidden rounded-full max-xl:m-b-4">
 
               <img src="@/assets/images/avatar.jpg" alt="">
+
             </div>
 
             <div class="flex flex-1 items-center justify-center text-8 font-bold max-xl:text-6">
@@ -151,14 +154,13 @@ import Map from './components/map.vue'
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- 地图 -->
-      <!-- :class="isMobile ? 'h-90' : 'h-120'" -->
-      <div
-        class="col-span-4 h-90 max-xl:col-span-4 max-md:h-90"
-      >
-        <Map />
-      </div>
+    <!-- 地图 -->
+    <div
+      class="m-t-10 flex-1 max-md:flex-auto max-md:!h-90"
+    >
+      <Map />
     </div>
   </div>
 </template>

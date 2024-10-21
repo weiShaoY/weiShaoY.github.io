@@ -65,19 +65,19 @@ withDefaults(defineProps<{
   width: '100%',
   height: '100%',
 })
-const renderChart = ref(false)
+const renderChart = ref(true)
 
 nextTick(() => {
-  renderChart.value = true
+  renderChart.value = false
 })
 </script>
 
 <template>
   <VCharts
-    v-if="renderChart"
     :option="option"
     :autoresize="autoResize"
     :style="{ width, height }"
+    :loading="renderChart"
   />
 </template>
 
