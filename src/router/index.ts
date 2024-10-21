@@ -2,10 +2,14 @@ import NProgressPlugin from '@/utils/nporgress'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { appRoutes } from './routes/index'
+
 /**
  * 导入进度条样式
  */
 import 'nprogress/nprogress.css'
+
+console.log('%c Line:6 🥤 appRoutes', 'color:#4fff4B', appRoutes)
 
 /**
  * 创建并配置路由器
@@ -46,12 +50,14 @@ const router = createRouter({
       ],
     },
 
+    ...appRoutes,
+
     // 代码
-    {
-      path: '/coding',
-      name: 'Coding',
-      component: () => import('@/pages/coding/index.vue'),
-    },
+    // {
+    //   path: '/coding',
+    //   name: 'Coding',
+    //   component: () => import('@/pages/coding/index.vue'),
+    // },
 
     // 404
     {

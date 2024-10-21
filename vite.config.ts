@@ -86,7 +86,7 @@ export default defineConfig({
       /**
        *  自动导入的目录
        */
-      dirs: ['./src/composables'],
+      dirs: ['./src/composables', './src/utils'],
 
       // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
 
