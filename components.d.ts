@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Chart: typeof import('./src/components/Chart.vue')['default']
+    'Chart_副本': typeof import('./src/components/Chart_副本.vue')['default']
     Echarts: typeof import('./src/components/echarts/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

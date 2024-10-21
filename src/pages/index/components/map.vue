@@ -2,7 +2,6 @@
 import type { EChartsOption } from 'echarts'
 import chinaMap from '@/assets/jsons/china.json'
 import { registerMap } from 'echarts/core'
-import { ref } from 'vue'
 
 /**
  *  定义数据和地理坐标
@@ -40,7 +39,8 @@ function convertData(data: { name: string, value: number }[]): { name: string, v
 /**
  *  定义 ECharts 配置项并添加类型注释
  */
-const option = ref<EChartsOption>({
+
+const option = computed<EChartsOption>(() => ({
 
   textStyle: {
 
@@ -174,12 +174,16 @@ const option = ref<EChartsOption>({
   // 数据系列
   series: [
     {
-      name: 'Top 5', // 前5名系列名称
+      /**
+       *  前5名系列名称
+       */
+      name: 'Top 5',
 
       /**
        *  带有涟漪特效的散点图
        */
       type: 'effectScatter',
+
       /**
        *  使用地理坐标系
        */
@@ -188,8 +192,7 @@ const option = ref<EChartsOption>({
       /**
        *  排序后取前5名的数据s
        */
-      data: convertData(data.sort((a, b) => b.value - a.value).slice(0, 6)),
-
+      data: convertData([...data].sort((a, b) => b.value - a.value).slice(0, 6)),
       /**
        *  动态设置散点大小
        */
@@ -293,7 +296,7 @@ const option = ref<EChartsOption>({
       zlevel: 1, // 图层级别
     },
   ],
-})
+}))
 
 registerMap('china', chinaMap as any)
 </script>

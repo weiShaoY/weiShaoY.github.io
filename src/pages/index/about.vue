@@ -56,7 +56,7 @@ import Map from './components/map.vue'
             icon="icon-daima"
             :size="60"
           />
-          <h1 class="text-3xl font-semibold">Coding</h1>
+          <h1 class="text-3xl font-600">Coding</h1>
         </a>
       </div>
 
@@ -73,14 +73,14 @@ import Map from './components/map.vue'
             icon="icon-github"
             :size="60"
           />
-          <h1 class="text-3xl font-semibold">Github</h1>
+          <h1 class="text-3xl font-600">Github</h1>
         </a>
       </div>
 
       <!-- 技术栈 -->
       <div class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition hover:duration-500">
         <div class="h-full flex flex-col justify-between">
-          <h1 class="text-8 font-semibold max-xl:text-6 group-hover:color-primary">
+          <h1 class="text-8 font-600 max-xl:text-6 group-hover:color-primary">
             My Technology Stack
           </h1>
 
@@ -155,7 +155,7 @@ import Map from './components/map.vue'
       <!-- 地图 -->
       <!-- :class="isMobile ? 'h-90' : 'h-120'" -->
       <div
-        class="*: col-span-4 h-120 max-xl:col-span-4 max-md:h-90"
+        class="col-span-4 h-90 max-xl:col-span-4 max-md:h-90"
       >
         <Map />
       </div>

@@ -25,11 +25,11 @@ const dropdownVisible = ref(false)
     <!-- pc -->
     <div
       v-if="!isMobile"
-      class="flex"
+      class="flex text-3xl font-600"
     >
       <div class="m-r-10">
         <a
-          class="text-6 hover:cursor-pointer"
+          class="hover:cursor-pointer"
           @click="router.push('/index/about')"
         >
           About
@@ -47,7 +47,7 @@ const dropdownVisible = ref(false)
 
       <div>
         <a
-          class="text-6 hover:cursor-pointer"
+          class="hover:cursor-pointer"
           @click="router.push('/index/resume')"
         >
           Resume
