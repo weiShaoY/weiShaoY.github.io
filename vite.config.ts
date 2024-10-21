@@ -43,7 +43,6 @@ export default defineConfig({
     },
   },
   plugins: [
-
     vueJsx(),
 
     vueDevTools(),
@@ -77,11 +76,7 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        '@vueuse/core',
-      ],
+      imports: ['vue', 'vue-router', '@vueuse/core'],
 
       /**
        *  生成类型定义文件
@@ -91,10 +86,7 @@ export default defineConfig({
       /**
        *  自动导入的目录
        */
-      dirs: [
-
-        './src/composables',
-      ],
+      dirs: ['./src/composables'],
 
       // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
 
@@ -103,7 +95,6 @@ export default defineConfig({
        */
       vueTemplate: true,
     }),
-
 
     // https://github.com/antfu/vite-plugin-components
     Components({
@@ -121,7 +112,5 @@ export default defineConfig({
     vitePluginForArco({
       style: 'css',
     }),
-
   ],
-
 })

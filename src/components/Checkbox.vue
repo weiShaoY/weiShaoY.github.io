@@ -1,11 +1,5 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
-/**
- *  主题
- *  @description true -  暗色主题
- *  @description false - 亮色主题
- */
 const visible = isDark.value
 
 /**
