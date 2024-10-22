@@ -81,8 +81,7 @@ const option = computed<EChartsOption>(() => ({
 
       color: isDark.value ? '#d1d3d7' : '#000',
 
-      // fontSize: isMobile.value ? 16 : 24,
-      fontSize: 24,
+      fontSize: isMobile.value ? 24 : 30,
 
       fontWeight: 700,
     },
