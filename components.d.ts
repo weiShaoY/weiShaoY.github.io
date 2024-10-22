@@ -10,6 +10,7 @@ declare module 'vue' {
     Chart: typeof import('./src/components/Chart/index.vue')['default']
     'Chart_副本': typeof import('./src/components/Chart_副本.vue')['default']
     Checkbox: typeof import('./src/components/Checkbox.vue')['default']
+    ContextMenu: typeof import('./src/components/contextMenu/index.vue')['default']
     Echarts: typeof import('./src/components/echarts/index.vue')['default']
     PageSwitch: typeof import('./src/components/TheHeader/components/page-switch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
