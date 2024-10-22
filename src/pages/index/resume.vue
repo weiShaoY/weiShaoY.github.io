@@ -7,6 +7,8 @@ const current = ref(1)
   <div
     class="m-x-auto flex-col flex-1 bg-amber p-t-10 container"
   >
+    <VideoPlay />
+
     <a-steps
       :current="current"
       direction="vertical"

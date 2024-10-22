@@ -20,5 +20,6 @@ declare module 'vue' {
     TheFooter: typeof import('./src/components/TheFooter/index.vue')['default']
     TheHeader: typeof import('./src/components/TheHeader/index.vue')['default']
     ThemeSwitch: typeof import('./src/components/TheHeader/components/theme-switch.vue')['default']
+    VideoPlay: typeof import('./src/components/VideoPlay/index.vue')['default']
   }
 }

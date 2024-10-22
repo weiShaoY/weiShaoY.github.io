@@ -1,18 +1,5 @@
 import antfu from '@antfu/eslint-config'
 
-// export default antfu(
-//   {
-//     unocss: true,
-//     formatters: true,
-//     ignores: [
-//       '**/components.d.ts',
-//       '**/dist/**',
-//       '**/iconFont.js',
-//       '**/assets/**',
-//     ],
-//   },
-// )
-
 export default antfu(
   {
     unocss: true,
@@ -30,7 +17,7 @@ export default antfu(
       'curly': 'off',
 
       // 强制使用一致的类型
-      'ts/consistent-type-definitions': ['error', 'type'],
+      'ts/consistent-type-definitions': ['warn', 'type'],
 
       // 禁止 process
       'node/prefer-global/process': 'off',
@@ -39,11 +26,11 @@ export default antfu(
       'no-console': 'off',
 
       // 每次链式调用换行
-      'newline-per-chained-call': 'error',
+      'newline-per-chained-call': 'warn',
 
       // 语句之间的填充行
       'padding-line-between-statements': [
-        'error',
+        'warn',
         {
           blankLine: 'always',
           prev: [
@@ -64,7 +51,7 @@ export default antfu(
 
       // 强制在注释中 // 或 /* 使用一致的空行  beforeBlockComment  在块注释之前  beforeLineComment  在行注释之前
       'lines-around-comment': [
-        'error',
+        'warn',
         {
           // beforeBlockComment:  在块注释之前
           beforeBlockComment: true,
@@ -89,7 +76,7 @@ export default antfu(
 
       // 在注释中的 // 或 /*后面强制保持一致的间距
       'spaced-comment': [
-        'error',
+        'warn',
         'always',
         {
           //  markers   必须要有空格
@@ -98,7 +85,7 @@ export default antfu(
       ],
 
       // 行注释位置
-      'line-comment-position': ['error', { position: 'above' }],
+      'line-comment-position': ['warn', { position: 'above' }],
 
       //  空行最多不能超过 3行
       // 'no-multiple-empty-lines': ['error', { max: 3 }],
@@ -107,7 +94,7 @@ export default antfu(
 
       // Vue 强制每行的最大属性数
       'vue/max-attributes-per-line': [
-        'error',
+        'warn',
         {
           singleline: {
             max: 1,
@@ -120,7 +107,7 @@ export default antfu(
 
       // vue 强制执行第一个属性的位置
       'vue/first-attribute-linebreak': [
-        'error',
+        'warn',
         {
           singleline: 'below',
           multiline: 'below',
@@ -129,16 +116,16 @@ export default antfu(
 
       // 强制在多行元素的内容之前和之后进行换行。
       'vue/multiline-html-element-content-newline': [
-        'error',
+        'warn',
         {
-          // allowEmptyLines  是否允许空行
+          //  是否允许空行
           allowEmptyLines: true,
         },
       ],
 
       // vue 单行元素内容换行
       'vue/singleline-html-element-content-newline': [
-        'error',
+        'warn',
         {
           // 是否忽略没有属性的元素
           ignoreWhenNoAttributes: false,
@@ -147,7 +134,7 @@ export default antfu(
 
       // 要求或禁止模板中同级标签之间的换行符
       'vue/padding-line-between-tags': [
-        'error',
+        'warn',
         [
           {
             blankLine: 'always',
@@ -159,7 +146,7 @@ export default antfu(
 
       // 强制要求每个 prop 都有一个记录它的注释。
       'vue/require-prop-comment': [
-        'error',
+        'warn',
         {
           type: 'JSDoc',
         },
@@ -167,7 +154,7 @@ export default antfu(
 
       //  要求三元表达式始终使用多行格式，除了在 JSX 中忽略此规则
       'style/multiline-ternary': [
-        'error',
+        'warn',
         'always-multiline',
         { ignoreJSX: true },
       ],

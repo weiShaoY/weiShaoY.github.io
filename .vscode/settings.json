@@ -106,6 +106,7 @@
     "guanbi",
     "iconify",
     "jsons",
+    "linebreak",
     "nporgress",
     "nprogress",
     "persistedstate",
@@ -118,6 +119,7 @@
     "typecheck",
     "unocss",
     "unplugin",
+    "videojs",
     "vueuse",
     "zhankai",
     "zlevel"
