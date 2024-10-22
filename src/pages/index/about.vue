@@ -35,9 +35,9 @@ const router = useRouter()
             </div>
 
             <div
-              class="flex flex-1 items-center justify-center text-8 font-bold max-xl:text-6"
+              class="flex flex-1 items-center justify-center text-8 font-bold max-xl:text-5"
             >
-              Hey, Here is WeiShaoY !
+              Hey, Here Is WeiShaoY !
             </div>
 
           </div>
