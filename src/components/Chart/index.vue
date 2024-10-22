@@ -8,41 +8,6 @@ import VCharts from 'vue-echarts'
 
 import 'echarts'
 
-// const props = defineProps({
-
-//   /**
-//    *  配置
-//    */
-//   option: {
-//     // type: Object as PropType<EChartsOption>,
-//     type: Object as unknown as EChartsOption,
-//   },
-
-//   /**
-//    *  自适应
-//    */
-//   autoResize: {
-//     type: Boolean,
-//     default: true,
-//   },
-
-//   /**
-//    *  宽
-//    */
-//   width: {
-//     type: String,
-//     default: '100%',
-//   },
-
-//   /**
-//    *  高
-//    */
-//   height: {
-//     type: String,
-//     default: '100%',
-//   },
-// })
-
 withDefaults(defineProps<{
 
   /**

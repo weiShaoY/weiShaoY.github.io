@@ -38,3 +38,5 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
  *  导出appRoutes和appExternalRoutes 变量是格式化过的modules模块
  */
 export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
+
+console.log('%c Line:41 🍺 appRoutes', 'color:#f5ce50', appRoutes)
