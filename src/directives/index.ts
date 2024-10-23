@@ -19,3 +19,10 @@ export default {
     })
   },
 }
+
+// 另一种写法
+// export default {
+//   install(Vue: App) {
+//     Vue.directive('lightCard', useLightCard)
+//   },
+// }

@@ -71,10 +71,7 @@ const router = useRouter()
 
       <!-- Coding -->
       <div
-        v-lightCard="{
-          color: '#ffffff',
-          width: 100,
-        }"
+        v-lightCard
         class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-100"
       >
         <a
@@ -228,6 +225,7 @@ const router = useRouter()
 
     <!-- 地图 -->
     <div
+
       class="m-t-10 flex-1 max-xl:flex-auto max-xl:!h-90"
     >
       <Map />
