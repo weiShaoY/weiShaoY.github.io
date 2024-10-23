@@ -13,6 +13,7 @@ const router = useRouter()
     >
       <!-- About -->
       <div
+        v-lightCard
         class="group relative col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
@@ -71,12 +72,10 @@ const router = useRouter()
       <!-- Coding -->
       <div
         v-lightCard="{
-          light: {
-            color: '#ffffff',
-            width: 100,
-          },
+          color: '#ffffff',
+          width: 100,
         }"
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-100"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -97,6 +96,7 @@ const router = useRouter()
 
       <!-- Github -->
       <div
+        v-lightCard
         class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
@@ -119,6 +119,7 @@ const router = useRouter()
 
       <!-- 技术栈 -->
       <div
+        v-lightCard
         class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <div

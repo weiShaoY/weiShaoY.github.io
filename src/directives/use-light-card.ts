@@ -1,111 +1,155 @@
 import type { DirectiveBinding } from 'vue'
 
+type OptionType = {
+
+  /**
+   *  宽
+   */
+  width?: number
+
+  /**
+   *  高
+   */
+  height?: number
+
+  /**
+   *  颜色
+   */
+  color?: string
+
+  /**
+   *   模糊
+   */
+  blur?: number
+}
+
 /**
- * 自定义指令: v-light-card
+ * 光源卡片指令，用于在绑定元素上添加光源效果
+ * @param {HTMLElement} lightDom - 绑定的元素
+ * @param {DirectiveBinding} option - 指令绑定的参数对象
+ */
+function setLightStyle(lightDom: HTMLElement, option: OptionType) {
+  const { width = 60, height = 60, color = '#ffffff', blur = 40 } = option ?? {}
+
+  lightDom.style.position = 'absolute'
+  lightDom.style.width = `${width}px`
+  lightDom.style.height = `${height}px`
+  lightDom.style.background = color
+  lightDom.style.filter = `blur(${blur}px)`
+}
+
+/**
+ * 设置卡片的 overflow 为 hidden
+ * @param {HTMLElement} el - 绑定的元素
+ */
+function setCardOverflowHidden(el: HTMLElement) {
+  el.dataset.overflow = el.style.overflow
+  el.style.overflow = 'hidden'
+}
+
+/**
+ * 还原卡片的 overflow
+ * @param {HTMLElement} el - 绑定的元素
+ */
+function restoreCardOverflow(el: HTMLElement) {
+  if (el.dataset.overflow) {
+    el.style.overflow = el.dataset.overflow
+  }
+}
+
+/**
+ * 光源跟随鼠标移动
+ * @param {MouseEvent} e - 鼠标事件
+ * @param {HTMLElement} el - 绑定的元素
+ * @param {HTMLElement} lightDom - 光源元素
+ */
+function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement) {
+  const { clientX, clientY } = e
+
+  const { x, y } = el.getBoundingClientRect()
+
+  const { width, height } = lightDom.getBoundingClientRect()
+
+  lightDom.style.left = `${clientX - x - width / 2}px`
+
+  lightDom.style.top = `${clientY - y - height / 2}px`
+
+  // 设置旋转效果的参数
+
+  /**
+   *  X 轴最大旋转角度
+   */
+  const maxXRotation = 10
+
+  /**
+   *  Y 轴最大旋转角度
+   */
+  const maxYRotation = 10
+
+  /**
+   *  X 轴移动范围的半径
+   */
+  const rangeX = el.clientWidth / 2
+
+  /**
+   *  Y 轴移动范围的半径
+   */
+  const rangeY = el.clientHeight / 2
+
+  // 计算旋转角度，根据鼠标位置相对于卡片中心的距离来计算
+
+  /**
+   *   X 轴旋转角度
+   */
+  const rotateY = 1 * (((clientX - x - rangeX) / rangeX) * maxXRotation)
+
+  /**
+   *   Y 轴旋转角度
+   */
+  const rotateX = -1 * (((clientY - y - rangeY) / rangeY) * maxYRotation)
+
+  // 设置卡片的旋转中心和 3D 旋转效果
+  el.style.transformOrigin = 'center center'
+  el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+}
+
+/**
+ * 光源卡片指令，用于在绑定元素上添加光源效果
  */
 const useLightCard = {
-  beforeMount(el: any, binding: DirectiveBinding) {
-    const option = binding.value || {}
+  mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<OptionType>) {
+    const lightDom = document.createElement('div')
 
-    // 生成光源元素
-    const lightRef = document.createElement('div')
+    setLightStyle(lightDom, binding.value ?? {})
 
-    lightRef.style.position = 'absolute'
+    // 设置平滑的过渡效果，0.2s 过渡时间和缓动效果
+    el.style.transition = 'transform 0.2s ease-out'
 
-    // 初始状态隐藏光源
-    lightRef.style.display = 'none'
-
-    // 禁止光源的鼠标事件
-
-    lightRef.style.pointerEvents = 'none'
-    const setLightStyle = () => {
-      const { width = 60, height = 60, color = '#ff4132', blur = 40 } = option.light ?? {}
-
-      lightRef.style.width = `${width}px`
-      lightRef.style.height = `${height}px`
-      lightRef.style.background = color
-      lightRef.style.filter = `blur(${blur}px)`
-
-      // 确保光源不会重复添加
-      if (!el.contains(lightRef)) {
-        // 确保父元素的定位
-        el.style.position = 'relative'
-        el.appendChild(lightRef)
-      }
-    }
-
-    const onMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-
-      const { x, y, width: boxWidth, height: boxHeight } = el.getBoundingClientRect()
-
-      const { width: lightWidth, height: lightHeight } = lightRef.getBoundingClientRect()
-
-      // 计算光源的相对位置
-      let left = clientX - x - lightWidth / 2
-
-      let top = clientY - y - lightHeight / 2
-
-      // 限制光源位置，确保不会超出盒子的边界
-      const maxLeft = boxWidth - lightWidth
-
-      const maxTop = boxHeight - lightHeight
-
-      left = Math.max(0, Math.min(left, maxLeft))
-      top = Math.max(0, Math.min(top, maxTop))
-
-      // 设置光源的位置
-      lightRef.style.left = `${left}px`
-      lightRef.style.top = `${top}px`
-
-      // 显示光源
-      lightRef.style.display = 'block'
-    }
-
-    /**
-     *   鼠标进入时显示光源
-     */
     const onMouseEnter = () => {
-      lightRef.style.display = 'block'
+      setCardOverflowHidden(el)
+      el.appendChild(lightDom)
     }
 
-    /**
-     *  鼠标离开时隐藏光源
-     */
     const onMouseLeave = () => {
-      lightRef.style.display = 'none'
+      el.removeChild(lightDom)
+      restoreCardOverflow(el)
+      el.style.transform = ''
     }
 
-    // 设置光源样式
-    setLightStyle()
-
-    // 绑定事件
-    el.addEventListener('mousemove', onMouseMove)
     el.addEventListener('mouseenter', onMouseEnter)
-    el.addEventListener('mouseleave', onMouseLeave)
+    el.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom))
+    el.addEventListener('mouseleave', onMouseLeave);
 
-    // 将事件处理器和光源元素保存到 DOM 元素上，便于在卸载时清理
-    el._lightCardHandlers = { onMouseMove, onMouseLeave, onMouseEnter, lightRef }
-  },
-  unmounted(el: any) {
-    const handlers = el._lightCardHandlers
-
-    if (handlers) {
-      const { onMouseMove, onMouseLeave, onMouseEnter, lightRef } = handlers
-
-      // 移除事件监听器
-      el.removeEventListener('mousemove', onMouseMove)
+    // 类型断言，避免报错
+    (el as any)._lightCardCleanup = () => {
       el.removeEventListener('mouseenter', onMouseEnter)
+      el.removeEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom))
       el.removeEventListener('mouseleave', onMouseLeave)
-
-      // 移除光源元素
-      if (lightRef && el.contains(lightRef)) {
-        el.removeChild(lightRef)
-      }
-
-      // 清理引用
-      delete el._lightCardHandlers
     }
+  },
+
+  unmounted<T extends HTMLElement>(el: T) {
+    (el as any)._lightCardCleanup?.()
   },
 }
 

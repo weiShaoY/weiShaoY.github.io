@@ -12,8 +12,6 @@ import '@unocss/reset/tailwind.css'
 
 import 'uno.css'
 
-import './assets/iconFont'
-
 import './assets/styles/index.less'
 
 // vite-plugin-svg-icons
