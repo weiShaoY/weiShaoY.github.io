@@ -13,7 +13,7 @@ const router = useRouter()
     >
       <!-- About -->
       <div
-        v-lightCard
+        v-light
         class="group relative col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
@@ -71,7 +71,7 @@ const router = useRouter()
 
       <!-- Coding -->
       <div
-        v-lightCard
+        v-light
         class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-100"
       >
         <a
@@ -93,7 +93,7 @@ const router = useRouter()
 
       <!-- Github -->
       <div
-        v-lightCard
+        v-light
         class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
@@ -116,7 +116,7 @@ const router = useRouter()
 
       <!-- 技术栈 -->
       <div
-        v-lightCard
+        v-light
         class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <div

@@ -1,6 +1,6 @@
 import type { DirectiveBinding } from 'vue'
 
-type OptionType = {
+export type OptionType = {
 
   /**
    *  宽
@@ -22,6 +22,8 @@ type OptionType = {
    */
   blur?: number
 }
+
+export type useLightParamsType = OptionType
 
 /**
  * 光源卡片指令，用于在绑定元素上添加光源效果
@@ -116,7 +118,7 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement) {
 /**
  * 光源卡片指令，用于在绑定元素上添加光源效果
  */
-const useLightCard = {
+const useLight = {
   mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<OptionType>) {
     const lightDom = document.createElement('div')
 
@@ -153,4 +155,4 @@ const useLightCard = {
   },
 }
 
-export default useLightCard
+export default useLight
