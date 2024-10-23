@@ -23,12 +23,8 @@ const dropdownVisible = ref(false)
         @click="router.push('/index')"
       >
         <SvgIcon
-          icon="icon-WeiShaoY"
-          :style="{
-            height: '100%',
-            width: '150px',
-          }"
-          class="group-hover:color-primary"
+          name="weiShaoY"
+          class="!h-full !w-35 group-hover:color-primary"
         />
       </a>
 
@@ -36,47 +32,6 @@ const dropdownVisible = ref(false)
       <PageSwitch
         v-if="!isMobile"
       />
-
-      <!-- <div
-        v-if="!isMobile"
-        class="flex items-center text-3xl font-600"
-      >
-        <div
-          class="m-r-10"
-        >
-          <a
-            class="hover:cursor-pointer"
-            @click="router.push('/index/about')"
-          >
-            About
-          </a>
-
-          <div
-            class="h-1 w-full bg-primary"
-            :style="{
-              transform: 'none',
-              transformOrigin: '50% 50% 0px',
-            }"
-          />
-        </div>
-
-        <div>
-          <a
-            class="hover:cursor-pointer"
-            @click="router.push('/index/resume')"
-          >
-            Resume
-          </a>
-
-          <div
-            class="h-1 w-full bg-primary"
-            :style="{
-              transform: 'none',
-              transformOrigin: '50% 50% 0px',
-            }"
-          />
-        </div>
-      </div> -->
 
       <!-- 右边 -->
       <div
@@ -101,10 +56,10 @@ const dropdownVisible = ref(false)
               #icon
             >
               <SvgIcon
-                :icon="dropdownVisible ? 'icon-guanbi' : 'icon-zhankai'"
+                :name="dropdownVisible ? 'guanBi' : 'zhanKai'"
                 :size="36"
-                :class="isDark ? '!fill-white' : '!fill-#333'"
-                class="!group-hover:fill-primary"
+                class="group-hover:color-primary"
+                :class="isDark ? 'color-white' : 'color-#333'"
               />
             </template>
           </a-button>

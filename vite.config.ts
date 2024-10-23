@@ -30,6 +30,8 @@ import { vitePluginForArco } from '@arco-plugins/vite-vue'
 
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
@@ -111,6 +113,12 @@ export default defineConfig({
     //  Arco 按需引入
     vitePluginForArco({
       style: 'css',
+    }),
+
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
+      symbolId: 'icon-[dir]-[name]',
     }),
   ],
 })

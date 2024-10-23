@@ -5,7 +5,10 @@
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+
+    /* Bundler mode */
+    "moduleResolution": "node",
+
     "paths": {
       "~/*": ["src/*"],
       "@/*": ["src/*"]
@@ -13,7 +16,8 @@
     "resolveJsonModule": true,
     "types": [
       "vite/client",
-      "unplugin-vue-macros/macros-global"
+      "unplugin-vue-macros/macros-global",
+      "vite-plugin-svg-icons/client"
     ],
     "allowJs": true,
     "strict": true,

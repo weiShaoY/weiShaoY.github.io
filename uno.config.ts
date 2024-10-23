@@ -155,22 +155,6 @@ export default defineConfig({
            */
           theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
 
-          /**
-          //  *  @description 无衬线字体
-          //
-           */
-          // // sans: 'DM Sans',
-          // sans: 'gaiLiangShouJinTi',
-
-          // /**
-          //  *  @description 衬线字体
-          //  */
-          // serif: 'DM Serif Display',
-
-          // /**
-          //  *  @description 等宽字体
-          //  */
-          // mono: 'DM Mono',
         },
       },
     ),

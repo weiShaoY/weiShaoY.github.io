@@ -13,7 +13,7 @@ const router = useRouter()
     >
       <!-- About -->
       <div
-        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
+        class="group relative col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
           class="h-full flex flex-col justify-between"
@@ -70,6 +70,12 @@ const router = useRouter()
 
       <!-- Coding -->
       <div
+        v-lightCard="{
+          light: {
+            color: '#ffffff',
+            width: 100,
+          },
+        }"
         class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition hover:duration-500"
       >
         <a
@@ -77,7 +83,7 @@ const router = useRouter()
           @click="router.push('/coding')"
         >
           <SvgIcon
-            icon="icon-daima"
+            name="daiMa"
             :size="60"
           />
 
@@ -99,7 +105,7 @@ const router = useRouter()
           href="https://github.com/weiShaoY"
         >
           <SvgIcon
-            icon="icon-github"
+            name="github"
             :size="60"
           />
 
@@ -133,7 +139,7 @@ const router = useRouter()
               target="_blank"
             >
               <SvgIcon
-                icon="icon-html"
+                name="html"
                 :size="50"
               />
             </a>
@@ -144,7 +150,7 @@ const router = useRouter()
               href="https://www.w3schools.com/css/"
             >
               <SvgIcon
-                icon="icon-css"
+                name="css"
                 :size="50"
               />
             </a>
@@ -155,7 +161,7 @@ const router = useRouter()
               href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
             >
               <SvgIcon
-                icon="icon-javaScript"
+                name="javaScript"
                 :size="50"
               />
             </a>
@@ -166,7 +172,7 @@ const router = useRouter()
               href="https://www.typescriptlang.org/"
             >
               <SvgIcon
-                icon="icon-typeScript"
+                name="typeScript"
                 :size="50"
               />
             </a>
@@ -177,7 +183,7 @@ const router = useRouter()
               href="https://cn.vuejs.org/"
             >
               <SvgIcon
-                icon="icon-vue"
+                name="vue"
                 :size="50"
               />
             </a>
@@ -188,7 +194,7 @@ const router = useRouter()
               href="https://reactjs.org/"
             >
               <SvgIcon
-                icon="icon-react"
+                name="react"
                 :size="50"
               />
             </a>
@@ -199,7 +205,7 @@ const router = useRouter()
               href="https://tailwindcss.com/"
             >
               <SvgIcon
-                icon="icon-tailwindcss"
+                name="tailwindCss"
                 :size="50"
               />
             </a>
@@ -210,7 +216,7 @@ const router = useRouter()
               href="https://unocss.dev/"
             >
               <SvgIcon
-                icon="icon-unocss"
+                name="unocss"
                 :size="50"
               />
             </a>

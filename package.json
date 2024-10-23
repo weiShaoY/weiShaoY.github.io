@@ -52,6 +52,7 @@
     "unplugin-vue-macros": "^2.11.8",
     "video.js": "^8.18.1",
     "vite": "^5.4.8",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.4.6",
     "vue-tsc": "^2.1.6"
   },
