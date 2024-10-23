@@ -50,13 +50,31 @@ declare global {
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
+  const is: typeof import('./src/utils/is')['is']
+  const isArray: typeof import('./src/utils/is')['isArray']
+  const isAsyncFunction: typeof import('./src/utils/is')['isAsyncFunction']
+  const isBoolean: typeof import('./src/utils/is')['isBoolean']
+  const isClient: typeof import('./src/utils/is')['isClient']
   const isDark: typeof import('./src/composables/dark')['isDark']
+  const isDate: typeof import('./src/utils/is')['isDate']
+  const isDef: typeof import('./src/utils/is')['isDef']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isElement: typeof import('./src/utils/is')['isElement']
+  const isFunction: typeof import('./src/utils/is')['isFunction']
+  const isHexColor: typeof import('./src/utils/is')['isHexColor']
   const isMobile: typeof import('./src/composables/mobile')['isMobile']
+  const isNull: typeof import('./src/utils/is')['isNull']
+  const isNullOrUnDef: typeof import('./src/utils/is')['isNullOrUnDef']
+  const isNumber: typeof import('./src/utils/is')['isNumber']
+  const isObject: typeof import('./src/utils/is')['isObject']
+  const isPromise: typeof import('./src/utils/is')['isPromise']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isString: typeof import('./src/utils/is')['isString']
+  const isUnDef: typeof import('./src/utils/is')['isUnDef']
+  const isWindow: typeof import('./src/utils/is')['isWindow']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -365,13 +383,30 @@ declare module 'vue' {
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
+    readonly is: UnwrapRef<typeof import('./src/utils/is')['is']>
+    readonly isArray: UnwrapRef<typeof import('./src/utils/is')['isArray']>
+    readonly isAsyncFunction: UnwrapRef<typeof import('./src/utils/is')['isAsyncFunction']>
+    readonly isBoolean: UnwrapRef<typeof import('./src/utils/is')['isBoolean']>
+    readonly isClient: UnwrapRef<typeof import('./src/utils/is')['isClient']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
+    readonly isDate: UnwrapRef<typeof import('./src/utils/is')['isDate']>
+    readonly isDef: UnwrapRef<typeof import('./src/utils/is')['isDef']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isElement: UnwrapRef<typeof import('./src/utils/is')['isElement']>
+    readonly isFunction: UnwrapRef<typeof import('./src/utils/is')['isFunction']>
     readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
+    readonly isNull: UnwrapRef<typeof import('./src/utils/is')['isNull']>
+    readonly isNullOrUnDef: UnwrapRef<typeof import('./src/utils/is')['isNullOrUnDef']>
+    readonly isNumber: UnwrapRef<typeof import('./src/utils/is')['isNumber']>
+    readonly isObject: UnwrapRef<typeof import('./src/utils/is')['isObject']>
+    readonly isPromise: UnwrapRef<typeof import('./src/utils/is')['isPromise']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isString: UnwrapRef<typeof import('./src/utils/is')['isString']>
+    readonly isUnDef: UnwrapRef<typeof import('./src/utils/is')['isUnDef']>
+    readonly isWindow: UnwrapRef<typeof import('./src/utils/is')['isWindow']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>

@@ -20,7 +20,7 @@ const dropdownVisible = ref(false)
       <!-- logo -->
       <a
         class="group hover:cursor-pointer"
-        @click="router.push('/index')"
+        @click="router.push('/home')"
       >
         <SvgIcon
           name="weiShaoY"

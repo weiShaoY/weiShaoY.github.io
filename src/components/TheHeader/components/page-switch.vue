@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 const router = useRouter()
 
-const selectedOption = ref('/index/about')
+const selectedOption = ref('/home/about')
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const selectedOption = ref('/index/about')
     <input
       id="option1"
       v-model="selectedOption"
-      value="/index/about"
+      value="/home/about"
       name="options"
       type="radio"
       @change="router.push(selectedOption)"
@@ -30,7 +30,7 @@ const selectedOption = ref('/index/about')
     <input
       id="option2"
       v-model="selectedOption"
-      value="/index/resume"
+      value="/home/resume"
       name="options"
       type="radio"
       @change="router.push(selectedOption)"

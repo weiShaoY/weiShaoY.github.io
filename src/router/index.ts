@@ -24,28 +24,28 @@ const router = createRouter({
     {
       path: '/',
       redirect: {
-        name: 'Index',
+        name: 'Home',
       },
     },
 
     // 首页
     {
-      path: '/index',
-      name: 'Index',
+      path: '/home',
+      name: 'Home',
       redirect: {
         name: 'About',
       },
-      component: () => import('@/pages/index/index.vue'),
+      component: () => import('@/pages/home/index.vue'),
       children: [
         {
           path: 'about',
           name: 'About',
-          component: () => import('@/pages/index/about.vue'),
+          component: () => import('@/pages/home/about.vue'),
         },
         {
           path: 'resume',
           name: 'Resume',
-          component: () => import('@/pages/index/resume.vue'),
+          component: () => import('@/pages/home/resume.vue'),
         },
       ],
     },
@@ -58,12 +58,35 @@ const router = createRouter({
     //   name: 'Coding',
     //   component: () => import('@/pages/coding/index.vue'),
     // },
+    {
+      path: '/403',
+      name: '403',
+      component: () => import('@/pages/error/403.vue'),
+      meta: {
+        title: '403页面',
+      },
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/pages/error/404.vue'),
+      meta: {
+        title: '404页面',
+      },
+    },
+    {
+      path: '/500',
+      name: '',
+      component: () => import('@/pages/error/500.vue'),
+      meta: {
+        title: '500页面',
+      },
+    },
 
-    // 404
     {
       path: '/:pathMatch(.*)*',
       name: '404',
-      component: () => import('@/pages/404/index.vue'),
+      component: () => import('@/pages/error/404.vue'),
     },
 
     // ...appRoutes,
