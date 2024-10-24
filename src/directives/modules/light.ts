@@ -21,6 +21,11 @@ export type OptionType = {
    *   模糊
    */
   blur?: number
+
+  /**
+   *  是否旋转
+   */
+  rotate?: boolean
 }
 
 export type useLightParamsType = OptionType
@@ -65,7 +70,7 @@ function restoreCardOverflow(el: HTMLElement) {
  * @param {HTMLElement} el - 绑定的元素
  * @param {HTMLElement} lightDom - 光源元素
  */
-function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement) {
+function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement, rotate: boolean) {
   const { clientX, clientY } = e
 
   const { x, y } = el.getBoundingClientRect()
@@ -75,6 +80,10 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement) {
   lightDom.style.left = `${clientX - x - width / 2}px`
 
   lightDom.style.top = `${clientY - y - height / 2}px`
+
+  if (!rotate) {
+    return
+  }
 
   // 设置旋转效果的参数
 
@@ -110,6 +119,9 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement) {
    */
   const rotateX = -1 * (((clientY - y - rangeY) / rangeY) * maxYRotation)
 
+  // 设置平滑的过渡效果，0.2s 过渡时间和缓动效果
+  el.style.transition = 'transform 0.2s ease-out'
+
   // 设置卡片的旋转中心和 3D 旋转效果
   el.style.transformOrigin = 'center center'
   el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
@@ -124,8 +136,14 @@ const useLight = {
 
     setLightStyle(lightDom, binding.value ?? {})
 
-    // 设置平滑的过渡效果，0.2s 过渡时间和缓动效果
-    el.style.transition = 'transform 0.2s ease-out'
+    // 确保光源元素不会阻挡鼠标事件
+    lightDom.style.pointerEvents = 'none'
+
+    /**
+     *   是否旋转
+     *   默认为 true
+     */
+    const rotate = binding.value?.rotate ?? true
 
     const onMouseEnter = () => {
       setCardOverflowHidden(el)
@@ -139,13 +157,13 @@ const useLight = {
     }
 
     el.addEventListener('mouseenter', onMouseEnter)
-    el.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom))
+    el.addEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom, rotate))
     el.addEventListener('mouseleave', onMouseLeave);
 
     // 类型断言，避免报错
     (el as any)._lightCardCleanup = () => {
       el.removeEventListener('mouseenter', onMouseEnter)
-      el.removeEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom))
+      el.removeEventListener('mousemove', (e: MouseEvent) => onMouseMove(e, el, lightDom, rotate))
       el.removeEventListener('mouseleave', onMouseLeave)
     }
   },

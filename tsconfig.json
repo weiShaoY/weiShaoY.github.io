@@ -29,10 +29,7 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": [
-    "*.d.ts",
-    "src"
-  ],
+
   "exclude": [
     "dist",
     "node_modules"
