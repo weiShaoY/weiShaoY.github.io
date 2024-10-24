@@ -39,4 +39,4 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
  */
 export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
 
-console.log('%c Line:41 🍺 appRoutes', 'color:#f5ce50', appRoutes)
+console.log('%c Line:41 🥝 appRoutes', 'color:#f5ce50', appRoutes)

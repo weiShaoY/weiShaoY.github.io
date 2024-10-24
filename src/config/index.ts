@@ -1,12 +1,18 @@
-const config = {
+import NProgress from './nprogress'
 
-  /**
-   *  首页
-   */
-  indexPage: {
-    headerHeight: 20,
-  },
+export { NProgress }
 
-}
+/**
+ *  首页地址（默认）
+ */
+export const HOME_URL: string = '/home/index'
 
-export default config
+/**
+ *  高德地图 key
+ */
+export const AMAP_MAP_KEY: string = ''
+
+/**
+ *  百度地图 key
+ */
+export const BAIDU_MAP_KEY: string = ''

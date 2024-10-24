@@ -46,7 +46,6 @@ function handleMouseLeave() {
       >
         <a
           class="h-full flex flex-col justify-between"
-          @click="router.push('/index/about')"
         >
           <div
             class="m-b-2 flex items-center max-xl:flex-col"
@@ -131,7 +130,7 @@ function handleMouseLeave() {
         v-light="{
           rotate: false,
         }"
-        class="group col-span-4 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition"
+        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition"
       >
         <div
           class="h-full flex flex-col justify-between"
@@ -161,6 +160,28 @@ function handleMouseLeave() {
             </a>
           </div>
         </div>
+      </div>
+
+      <!-- Command -->
+      <div
+        v-light
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+      >
+        <a
+          class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
+          @click="router.push('/command')"
+        >
+          <SvgIcon
+            name="command"
+            :size="60"
+          />
+
+          <h1
+            class="text-3xl font-600"
+          >
+            Command
+          </h1>
+        </a>
       </div>
     </div>
 

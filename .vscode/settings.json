@@ -91,6 +91,7 @@
     "yaml"
   ],
   "cSpell.ignoreWords": [
+    "AMAP_MAP_KEY",
     "Fira",
     "WeiShaoY",
     "ZiHunBaiGeTianXingTi",
@@ -109,9 +110,11 @@
     "linebreak",
     "nporgress",
     "nprogress",
+    "openxmlformats-officedocument",
     "persistedstate",
     "pinia",
     "presetAttributify",
+    "spreadsheetml",
     "sublink",
     "svgs",
     "tailwindcss",

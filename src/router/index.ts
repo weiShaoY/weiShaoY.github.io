@@ -1,119 +1,58 @@
-import NProgressPlugin from '@/utils/nporgress'
+import { NProgress } from '@/config'
 
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
 
-import { appRoutes } from './routes/index'
+import { appRoutes } from './routerUtils'
 
-/**
- * 导入进度条样式
- */
-import 'nprogress/nprogress.css'
+console.log('%c Line:10 🌰 appRoutes', 'color:#f5ce50', appRoutes)
 
-console.log('%c Line:6 🥤 appRoutes', 'color:#4fff4B', appRoutes)
+const routerMode = {
+  hash: () => createWebHashHistory(),
+  history: () => createWebHistory(),
+}
 
 /**
  * 创建并配置路由器
  */
 const router = createRouter({
-
   /**
    *    路由模式
    */
-  history: createWebHistory(),
-  routes: [
-    {
-      path: '/',
-      redirect: {
-        name: 'Home',
-      },
-    },
+  history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
 
-    // 首页
-    {
-      path: '/home',
-      name: 'Home',
-      redirect: {
-        name: 'About',
-      },
-      component: () => import('@/pages/home/index.vue'),
-      children: [
-        {
-          path: 'about',
-          name: 'About',
-          component: () => import('@/pages/home/about.vue'),
-        },
-        {
-          path: 'resume',
-          name: 'Resume',
-          component: () => import('@/pages/home/resume.vue'),
-        },
-      ],
-    },
+  routes: [
 
     ...appRoutes,
 
-    // 代码
-    // {
-    //   path: '/coding',
-    //   name: 'Coding',
-    //   component: () => import('@/pages/coding/index.vue'),
-    // },
-    {
-      path: '/403',
-      name: '403',
-      component: () => import('@/pages/error/403.vue'),
-      meta: {
-        title: '403页面',
-      },
-    },
-    {
-      path: '/404',
-      name: '404',
-      component: () => import('@/pages/error/404.vue'),
-      meta: {
-        title: '404页面',
-      },
-    },
-    {
-      path: '/500',
-      name: '',
-      component: () => import('@/pages/error/500.vue'),
-      meta: {
-        title: '500页面',
-      },
-    },
-
-    {
-      path: '/:pathMatch(.*)*',
-      name: '404',
-      component: () => import('@/pages/error/404.vue'),
-    },
-
-    // ...appRoutes,
-
-    // REDIRECT_MAIN,
-
-    // NOT_FOUND_ROUTE,
   ],
 
-  /**
-   *  每次路由切换时滚动到页面顶部
-   */
-  scrollBehavior() {
-    return { top: 0 }
-  },
 })
 
-// beforeEach路由切换之前触发
+/**
+ *  @description 路由跳转开始
+ *  @description 路由拦截
+ */
 router.beforeEach(() => {
-  // 开始进度条
-  NProgressPlugin.start()
+  NProgress.start()
 })
 
-// afterEach路由切换之后触发
+/**
+ *  @description 路由跳转错误
+ */
+router.onError((error) => {
+  NProgress.done()
+  console.warn('路由错误', error.message)
+})
+
+/**
+ *  @description 路由跳转结束
+ */
 router.afterEach(() => {
-  // 结束进度条
-  NProgressPlugin.close()
+  NProgress.done()
 })
 
 export default router

@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.9.0",
   "scripts": {
     "dev": "vite --port 3333 ",
-    "lint": "eslint .",
+    "lint:eslint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "up": "taze major -I",

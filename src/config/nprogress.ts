@@ -2,7 +2,6 @@ import NProgress from 'nprogress'
 
 import 'nprogress/nprogress.css'
 
-// 全局进度条的配置
 NProgress.configure({
   /**
    *  动画方式
@@ -35,20 +34,4 @@ NProgress.configure({
   parent: 'body',
 })
 
-class NProgressPlugin {
-  /**
-   *  开始进度条
-   */
-  public static start() {
-    NProgress.start()
-  }
-
-  /**
-   *   结束进度条
-   */
-  public static close() {
-    NProgress.done()
-  }
-}
-
-export default NProgressPlugin
+export default NProgress
