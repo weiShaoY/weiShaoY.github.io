@@ -87,6 +87,7 @@ function toggleTheme() {
   --circle-container-diameter: 3.375em;
   --sun-moon-diameter: 2.125em;
   --sun-bg: #ecca2f;
+  // --sun-bg: #fec451;
   --moon-bg: #c4c9d1;
   --spot-color: #959db1;
   --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
