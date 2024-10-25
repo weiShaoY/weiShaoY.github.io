@@ -183,6 +183,28 @@ function handleMouseLeave() {
           </h1>
         </a>
       </div>
+
+      <!-- Test -->
+      <div
+        v-light
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+      >
+        <a
+          class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
+          @click="router.push('/command')"
+        >
+          <SvgIcon
+            name="test"
+            :size="60"
+          />
+
+          <h1
+            class="text-3xl font-600"
+          >
+            Test
+          </h1>
+        </a>
+      </div>
     </div>
 
     <!-- 地图 -->
