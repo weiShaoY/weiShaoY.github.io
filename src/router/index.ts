@@ -23,7 +23,10 @@ const router = createRouter({
   routes: [
 
     ...appRoutes,
-
+    {
+      path: '/test',
+      component: () => import('@/pages/test/index.vue'),
+    },
   ],
 
 })

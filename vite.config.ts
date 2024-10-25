@@ -1,34 +1,20 @@
 import path from 'node:path'
 
-// 导入 Node.js 的 path 模块
-
-import { defineConfig } from 'vite'
-
-// 导入 Vite 中的 defineConfig 函数
+import { vitePluginForArco } from '@arco-plugins/vite-vue'
 
 import Vue from '@vitejs/plugin-vue'
 
-// 导入 Vite Vue 插件
-
-import Components from 'unplugin-vue-components/vite'
-
-// 导入 Vue 组件插件
-
-import AutoImport from 'unplugin-auto-import/vite'
-
-// 导入自动导入插件
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 import UnoCSS from 'unocss/vite'
 
-// 导入 Uno.css 插件
+import AutoImport from 'unplugin-auto-import/vite'
+
+import Components from 'unplugin-vue-components/vite'
 
 import VueMacros from 'unplugin-vue-macros/vite'
 
-// 导入 Vue 路由自动导入插件
-
-import { vitePluginForArco } from '@arco-plugins/vite-vue'
-
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 

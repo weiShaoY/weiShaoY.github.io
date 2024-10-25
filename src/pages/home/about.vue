@@ -191,7 +191,7 @@ function handleMouseLeave() {
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
-          @click="router.push('/command')"
+          @click="router.push('/test')"
         >
           <SvgIcon
             name="test"
