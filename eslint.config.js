@@ -15,7 +15,7 @@ export default antfu({
     overrides: {
       //  强制执行第一个属性的位置
       'vue/first-attribute-linebreak': [
-        'error',
+        'warn',
         {
           singleline: 'below',
           multiline: 'below',
@@ -24,7 +24,7 @@ export default antfu({
 
       //  强制每行的最大属性数
       'vue/max-attributes-per-line': [
-        'error',
+        'warn',
         {
           singleline: {
             max: 1,
@@ -37,7 +37,7 @@ export default antfu({
 
       // 强制在多行元素的内容之前和之后进行换行。
       'vue/multiline-html-element-content-newline': [
-        'error',
+        'warn',
         {
           ignoreWhenEmpty: false,
           allowEmptyLines: false,
@@ -46,7 +46,7 @@ export default antfu({
 
       // vue 单行元素内容换行
       'vue/singleline-html-element-content-newline': [
-        'error',
+        'warn',
         {
           // 是否忽略没有属性的元素
           ignoreWhenNoAttributes: false,
@@ -55,7 +55,7 @@ export default antfu({
 
       // 要求或禁止模板中同级标签之间的换行符
       'vue/padding-line-between-tags': [
-        'error',
+        'warn',
         [
           {
             blankLine: 'always',
@@ -67,7 +67,7 @@ export default antfu({
 
       // 强制要求每个 prop 都有一个记录它的注释。
       'vue/require-prop-comment': [
-        'error',
+        'warn',
         {
           type: 'JSDoc',
         },
@@ -75,7 +75,7 @@ export default antfu({
 
       //  要求三元表达式始终使用多行格式，除了在 JSX 中忽略此规则
       'style/multiline-ternary': [
-        'error',
+        'warn',
         'always-multiline',
         { ignoreJSX: true },
       ],
@@ -87,9 +87,9 @@ export default antfu({
     overrides: {
 
       //  强制所有的对象类型定义使用 type
-      'ts/consistent-type-definitions': ['error', 'type'],
+      'ts/consistent-type-definitions': ['warn', 'type'],
 
-      'curly': 'error',
+      'curly': 'warn',
 
       // 是否禁止使用 console
       'no-console': 'off',
@@ -158,11 +158,11 @@ export default antfu({
       ],
 
       // 强制块的括号样式一致
-      'brace-style': [
-        'error',
-        '1tbs',
-        { allowSingleLine: false },
-      ],
+      // 'brace-style': [
+      //   'warn',
+      //   '1tbs',
+      //   { allowSingleLine: false },
+      // ],
 
       //  是否禁止使用 alert
       'no-alert': 'off',

@@ -32,7 +32,10 @@ const useAppStore = defineStore(
       }
     }
 
-    return { app, toggleTheme }
+    return {
+      app,
+      toggleTheme,
+    }
   },
   {
     persist: true,
