@@ -26,7 +26,6 @@ const current = ref(1)
         Pending
       </a-step>
     </a-steps>
-
   </div>
 </template>
 

@@ -16,8 +16,10 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (.
 
   // 显式声明 this 的类型
   return function (this: unknown, ...args: Parameters<T>): void {
-    if (timeout)
+    if (timeout) {
       clearTimeout(timeout)
+    }
+
     timeout = setTimeout(() => func.apply(this, args), wait)
   }
 }

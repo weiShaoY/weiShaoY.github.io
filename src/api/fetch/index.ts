@@ -78,13 +78,16 @@ class Fetch {
     body?: any,
     mode: 'cors' | 'no-cors' | 'same-origin' | undefined = 'cors',
   ) {
-    if (this.before)
+    if (this.before) {
       this.before(partialUrl, query, body)
+    }
+
     const promise = request(partialUrl, query, body, method, mode, contentType)
 
     promise.finally(() => {
-      if (this.after)
+      if (this.after) {
         this.after(partialUrl, query, body)
+      }
     })
     return promise
   }

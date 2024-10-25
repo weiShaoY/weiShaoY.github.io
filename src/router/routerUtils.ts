@@ -14,8 +14,9 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
     const defaultModule = _modules[key].default
 
     // 如果当前模块不存在，则直接返回
-    if (!defaultModule)
+    if (!defaultModule) {
       return
+    }
 
     /**
      *  将defaultModule转化为数组

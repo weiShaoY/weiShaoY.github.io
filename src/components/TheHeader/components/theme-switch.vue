@@ -134,11 +134,11 @@ function toggleTheme() {
   z-index: 1;
   inset: 0;
   -webkit-box-shadow:
-    0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
-    0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    0 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
+    0 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
   box-shadow:
-    0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
-    0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    0 0.05em 0.187em rgba(0, 0, 0, 0.25) inset,
+    0 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
   border-radius: var(--container-radius);
 }
 
@@ -183,10 +183,10 @@ function toggleTheme() {
   border-radius: var(--container-radius);
   background-color: var(--sun-bg);
   -webkit-box-shadow:
-    0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    0.062em 0.062em 0.062em 0 rgba(254, 255, 239, 0.61) inset,
     0em -0.062em 0.062em 0em #a1872a inset;
   box-shadow:
-    0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    0.062em 0.062em 0.062em 0 rgba(254, 255, 239, 0.61) inset,
     0em -0.062em 0.062em 0em #a1872a inset;
   -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25))
     drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
@@ -206,10 +206,10 @@ function toggleTheme() {
   background-color: var(--moon-bg);
   border-radius: inherit;
   -webkit-box-shadow:
-    0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    0.062em 0.062em 0.062em 0 rgba(254, 255, 239, 0.61) inset,
     0em -0.062em 0.062em 0em #969696 inset;
   box-shadow:
-    0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
+    0.062em 0.062em 0.062em 0 rgba(254, 255, 239, 0.61) inset,
     0em -0.062em 0.062em 0em #969696 inset;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
@@ -225,8 +225,8 @@ function toggleTheme() {
   height: 0.75em;
   border-radius: var(--container-radius);
   background-color: var(--spot-color);
-  -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
-  box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+  -webkit-box-shadow: 0 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 0 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
 }
 
 .theme-switch__spot:nth-of-type(2) {

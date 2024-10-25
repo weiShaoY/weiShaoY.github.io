@@ -16,7 +16,6 @@ const dropdownVisible = ref(false)
     <div
       class="flex items-center justify-between p-x-5 container"
     >
-
       <!-- logo -->
       <a
         class="group hover:cursor-pointer"
@@ -37,7 +36,6 @@ const dropdownVisible = ref(false)
       <div
         class="flex items-center gap-2"
       >
-
         <!-- 切换主题按钮 -->
         <ThemeSwitch />
 
