@@ -6,13 +6,11 @@ const useAppStore = defineStore(
   'app',
   () => {
     const app = ref({
-
       indexPage: {
         headerHeight: 80,
       },
 
       theme: 'light',
-
     })
 
     /**
@@ -21,13 +19,15 @@ const useAppStore = defineStore(
      */
     function toggleTheme(dark: boolean) {
       if (dark) {
-      // 切换到暗色主题
+        // 切换到暗色主题
         app.value.theme = 'dark'
+
         document.body.setAttribute('arco-theme', 'dark')
       }
       else {
-      // 切换到亮色主题
+        // 切换到亮色主题
         app.value.theme = 'light'
+
         document.body.removeAttribute('arco-theme')
       }
     }
