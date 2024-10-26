@@ -2,9 +2,7 @@
 <script lang="ts" setup>
 const router = useRouter()
 
-console.log('%c Line:4 🥪 router', 'color:#f5ce50', router.currentRoute.value.path)
-
-const selectedOption = ref(router.currentRoute.value.path)
+const currentRoutePath = ref(router.currentRoute.value.path)
 </script>
 
 <template>
@@ -15,11 +13,11 @@ const selectedOption = ref(router.currentRoute.value.path)
     <!-- 使用 v-model 绑定到响应式变量 -->
     <input
       id="option1"
-      v-model="selectedOption"
+      v-model="currentRoutePath"
       value="/home/about"
       name="options"
       type="radio"
-      @change="router.push(selectedOption)"
+      @change="router.push(currentRoutePath)"
     >
 
     <label
@@ -31,11 +29,11 @@ const selectedOption = ref(router.currentRoute.value.path)
 
     <input
       id="option2"
-      v-model="selectedOption"
+      v-model="currentRoutePath"
       value="/home/resume"
       name="options"
       type="radio"
-      @change="router.push(selectedOption)"
+      @change="router.push(currentRoutePath)"
     >
 
     <label
@@ -74,8 +72,8 @@ const selectedOption = ref(router.currentRoute.value.path)
   overflow: hidden;
   z-index: 1;
   transition: all 0.5s;
-  font-weight: 500;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 20px;
 }
 .filter-switch .background {
   position: absolute;
@@ -86,6 +84,7 @@ const selectedOption = ref(router.currentRoute.value.path)
   border-radius: 30px;
   transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 #option2:checked ~ .background {
   left: 50%;
 }

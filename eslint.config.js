@@ -39,8 +39,8 @@ export default antfu({
       'vue/multiline-html-element-content-newline': [
         'warn',
         {
-          ignoreWhenEmpty: false,
-          allowEmptyLines: false,
+          ignoreWhenEmpty: true, // 忽略空元素
+          allowEmptyLines: true, // 允许空行
         },
       ],
 
@@ -48,7 +48,7 @@ export default antfu({
       'vue/singleline-html-element-content-newline': [
         'warn',
         {
-          // 是否忽略没有属性的元素
+          // 强制内容换行，即使没有属性
           ignoreWhenNoAttributes: false,
         },
       ],
