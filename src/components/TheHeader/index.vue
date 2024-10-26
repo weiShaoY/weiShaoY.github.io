@@ -1,9 +1,12 @@
 <script lang="ts" setup>
+import DesktopPageSwitch from './components/desktop-page-switch.vue'
+
+import MobilePageSwitch from './components/mobile-page-switch.vue'
+
 import ThemeSwitch from './components/theme-switch.vue'
 
 const router = useRouter()
 
-const dropdownVisible = ref(false)
 </script>
 
 <template>
@@ -27,8 +30,8 @@ const dropdownVisible = ref(false)
         />
       </a>
 
-      <!-- 中间 -->
-      <PageSwitch
+      <!-- 桌面端页面切换 -->
+      <DesktopPageSwitch
         v-if="!isMobile"
       />
 
@@ -39,53 +42,10 @@ const dropdownVisible = ref(false)
         <!-- 切换主题按钮 -->
         <ThemeSwitch />
 
-        <!-- 如果是移动端 显示下拉按钮 -->
-        <a-dropdown
+        <!-- 移动端页面切换 -->
+        <MobilePageSwitch
           v-if="isMobile"
-          position="bl"
-          :popup-translate="[-30, 0]"
-          @popup-visible-change="dropdownVisible = $event"
-        >
-          <a-button
-            class="group rounded-3 !h-12 !w-12 !hover:bg-#45464950"
-            type="text"
-          >
-            <template
-              #icon
-            >
-              <SvgIcon
-                :name="dropdownVisible ? 'guanBi' : 'zhanKai'"
-                :size="36"
-                class="group-hover:color-primary"
-                :class="isDark ? 'color-white' : 'color-#333'"
-              />
-            </template>
-          </a-button>
-
-          <template
-            #content
-          >
-            <a-doption
-              @click="router.push('/index/about')"
-            >
-              <span
-                class="text-5 font-600"
-              >
-                About
-              </span>
-            </a-doption>
-
-            <a-doption
-              @click="router.push('/index/resume')"
-            >
-              <span
-                class="text-5 font-600"
-              >
-                Resume
-              </span>
-            </a-doption>
-          </template>
-        </a-dropdown>
+        />
       </div>
     </div>
   </nav>

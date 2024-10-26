@@ -2,7 +2,9 @@
 <script lang="ts" setup>
 const router = useRouter()
 
-const selectedOption = ref('/home/about')
+console.log('%c Line:4 🥪 router', 'color:#f5ce50', router.currentRoute.value.path)
+
+const selectedOption = ref(router.currentRoute.value.path)
 </script>
 
 <template>
