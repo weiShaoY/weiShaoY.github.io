@@ -30,6 +30,12 @@ const techStack = [
     url: 'https://www.typescriptlang.org/',
   },
   {
+    name: 'node',
+    size: 50,
+    color: '#417E38',
+    url: 'https://nodejs.cn/api/',
+  },
+  {
     name: 'vue',
     size: 50,
     color: '#41B883',

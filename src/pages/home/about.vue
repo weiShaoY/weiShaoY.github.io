@@ -70,7 +70,7 @@ const router = useRouter()
           @click="router.push('/coding')"
         >
           <SvgIcon
-            name="daiMa"
+            name="coding"
             :size="60"
           />
 
