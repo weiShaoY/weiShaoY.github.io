@@ -79,7 +79,9 @@ export default defineConfig({
    */
   rules: [
     //  将 `bc-颜色值` 转换为对应的 border-color 样式
-    [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `#${color}` })],
+    [/^bc-(.+)$/, ([, color]) => ({
+      'border-color': `#${color}`,
+    })],
   ],
 
   /**

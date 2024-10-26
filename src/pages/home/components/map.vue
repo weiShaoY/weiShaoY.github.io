@@ -9,7 +9,10 @@ import { registerMap } from 'echarts/core'
  *  定义数据和地理坐标
  */
 const data = [
-  { name: '长沙', value: 100 },
+  {
+    name: '长沙',
+    value: 100,
+  },
 ]
 
 /**

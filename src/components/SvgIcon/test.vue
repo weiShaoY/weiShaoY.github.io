@@ -12,7 +12,8 @@ async function getPath() {
 
 getPath()
 
-const iconStyle = ref({})
+const iconStyle = ref({
+})
 </script>
 
 <template>

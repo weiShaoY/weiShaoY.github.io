@@ -1,6 +1,8 @@
 import NProgress from './nprogress'
 
-export { NProgress }
+export {
+  NProgress,
+}
 
 /**
  *  首页地址（默认）

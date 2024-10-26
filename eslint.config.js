@@ -73,11 +73,13 @@ export default antfu({
         },
       ],
 
-      //  要求三元表达式始终使用多行格式，除了在 JSX 中忽略此规则
-      'style/multiline-ternary': [
+      'vue/block-tag-newline': [
         'warn',
-        'always-multiline',
-        { ignoreJSX: true },
+        {
+          singleline: 'always', // 单行标签后需要换行
+          multiline: 'always', // 多行标签后也需要换行
+          maxEmptyLines: 1, // 设置空行的最大数量为 1
+        },
       ],
 
     },
@@ -86,20 +88,64 @@ export default antfu({
   typescript: {
     overrides: {
 
-      //  强制所有的对象类型定义使用 type
-      'ts/consistent-type-definitions': ['warn', 'type'],
+      // 强制链式调用（chained calls）在每次调用后换行
+      'newline-per-chained-call': 'warn',
 
-      'curly': 'warn',
+      // 是否禁止使用 alert
+      'no-alert': 'off',
 
       // 是否禁止使用 console
       'no-console': 'off',
 
-      // 强制链式调用（chained calls）在每次调用后换行
-      'newline-per-chained-call': 'warn',
+      // 强制块的括号样式一致
+      // 'brace-style': [
+      //   'warn',
+      //   '1tbs',
+      //   { allowSingleLine: false },
+      // ],
 
-      'padded-blocks': 'off',
+      // 空行最多不能超过 3 行
+      // 'no-multiple-empty-lines': ['error', { max: 3 }],
 
-      // 语句之间的填充行
+      // 是否禁止使用禁止 process
+      'node/prefer-global/process': 'off',
+
+      // 强制将对象属性放在单独的行上
+      'object-property-newline': 'warn',
+
+      // 强制在开括号后和闭括号前使用一致的换行符
+      'object-curly-newline': [
+        'warn',
+        {
+          // 多行导入时保持默认的换行习惯
+          ImportDeclaration: { multiline: true, minProperties: 3 },
+          ExportDeclaration: { multiline: true, minProperties: 1 },
+          ObjectExpression: 'always',
+          ObjectPattern: { multiline: true },
+        },
+
+      ],
+
+      // 强制使用一致的换行风格
+      'curly': 'warn',
+
+      // 行注释位置
+      'line-comment-position': ['warn', { position: 'above' }],
+
+      // 强制在注释中 // 或 /* 使用一致的空行  beforeBlockComment  在块注释之前  beforeLineComment  在行注释之前
+      'lines-around-comment': [
+        'warn',
+        {
+          beforeBlockComment: true, // beforeBlockComment: 在块注释之前
+          beforeLineComment: true, // beforeLineComment: 在行注释之前
+          allowBlockStart: true, // allowBlockStart: 允许块注释开始
+          allowObjectStart: true, // allowObjectStart: 允许对象开始
+          allowArrayStart: true, // allowArrayStart: 允许数组开始
+          ignorePattern: 'eslint|jshint|jslint|istanbul|global|exported|jscs|组件|弹窗', // ignorePattern: 忽略的模式
+        },
+      ],
+
+      // 在特定语句之前和之后添加空行
       'padding-line-between-statements': [
         'warn',
         {
@@ -114,66 +160,38 @@ export default antfu({
             'export',
             'class',
             'try',
+            'return',
           ],
           next: '*',
         },
       ],
 
-      // 行注释位置
-      'line-comment-position': ['warn', { position: 'above' }],
+      // 强制所有的对象类型定义使用 type
+      'ts/consistent-type-definitions': ['warn', 'type'],
 
-      // 强制在注释中 // 或 /* 使用一致的空行  beforeBlockComment  在块注释之前  beforeLineComment  在行注释之前
-      'lines-around-comment': [
-        'warn',
-        {
-          // beforeBlockComment:  在块注释之前
-          beforeBlockComment: true,
-
-          // beforeLineComment:  在行注释之前
-          beforeLineComment: true,
-
-          // allowBlockStart:  允许块注释开始
-          allowBlockStart: true,
-
-          // allowObjectStart:  允许对象开始
-          allowObjectStart: true,
-
-          // allowArrayStart:  允许数组开始
-          allowArrayStart: true,
-
-          // ignorePattern:  忽略的模式
-          ignorePattern:
-            'eslint|jshint|jslint|istanbul|global|exported|jscs|组件|弹窗',
-        },
-      ],
+      // 强制块的填充
+      // 'padded-blocks': [
+      //   'error',
+      //   'always',
+      // ],
 
       // 在注释中的 // 或 /*后面强制保持一致的间距
       'spaced-comment': [
         'warn',
         'always',
         {
-          //  markers   必须要有空格
-          markers: ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'],
+          markers: ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'], // markers: 必须要有空格
         },
       ],
 
-      // 强制块的括号样式一致
-      // 'brace-style': [
-      //   'warn',
-      //   '1tbs',
-      //   { allowSingleLine: false },
-      // ],
-
-      //  是否禁止使用 alert
-      'no-alert': 'off',
-
-      // 是否禁止使用禁止 process
-      'node/prefer-global/process': 'off',
-
-      //  空行最多不能超过 3行
-      // 'no-multiple-empty-lines': ['error', { max: 3 }],
-
+      //  要求三元表达式始终使用多行格式，除了在 JSX 中忽略此规则
+      'style/multiline-ternary': [
+        'warn',
+        'always-multiline',
+        { ignoreJSX: true },
+      ],
     },
+
   },
 
 })

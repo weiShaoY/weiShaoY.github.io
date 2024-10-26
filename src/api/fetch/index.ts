@@ -39,11 +39,17 @@ function request(
       mode: mode as RequestMode,
       body: method !== 'GET' && body ? JSON.stringify(body) : undefined,
       headers: {
-        ...(needContentType ? { 'Content-Type': contentType } : {}),
+        ...(needContentType
+          ? {
+              'Content-Type': contentType,
+            }
+          : {
+            }),
       },
     })
       .then(response => response.json().then(resolve))
       .catch(reject),
+
   )
 }
 
@@ -52,6 +58,7 @@ function request(
  */
 class Fetch {
   before: (partialUrl: string, query?: Record<string, any>, body?: any) => void
+
   after: (partialUrl: string, query?: Record<string, any>, body?: any) => void
 
   constructor(
@@ -59,12 +66,12 @@ class Fetch {
       partialUrl: string,
       query?: Record<string, any>,
       body?: any,
-    ) => void = () => {},
+    ) => void = () => { },
     after: (
       partialUrl: string,
       query?: Record<string, any>,
       body?: any,
-    ) => void = () => {},
+    ) => void = () => { },
   ) {
     this.before = before
     this.after = after
@@ -123,56 +130,4 @@ class Fetch {
   }
 }
 
-/**
- * FetchApi 提供了一系列封装好的 HTTP 请求方法
- */
-const FetchApi = {
-
-  get(
-    partialUrl: string,
-    query?: Record<string, any>,
-  ) {
-    return new Fetch().get(partialUrl, query)
-  },
-
-  delete(partialUrl: string, query?: Record<string, any>) {
-    return new Fetch().delete(partialUrl, query)
-  },
-
-  post(partialUrl: string, body?: any, query?: Record<string, any>) {
-    return new Fetch().post(partialUrl, query, body)
-  },
-
-  put(partialUrl: string, body?: any) {
-    return new Fetch().put(partialUrl, undefined, body)
-  },
-}
-
-// GET 请求示例
-FetchApi.get('/users', { page: 1, size: 10 })
-  .then((response) => {
-    console.log('GET 请求返回的数据:', response)
-  })
-  .catch((error) => {
-    console.error('GET 请求失败:', error)
-  })
-
-// POST 请求示例
-FetchApi.post('/users', { name: 'John', age: 30 })
-  .then((response) => {
-    console.log('POST 请求返回的数据:', response)
-  })
-  .catch((error) => {
-    console.error('POST 请求失败:', error)
-  })
-
-// PUT 请求示例
-FetchApi.put('/users/123', { active: true })
-  .then((response) => {
-    console.log('PUT 请求返回的数据:', response)
-  })
-  .catch((error) => {
-    console.error('PUT 请求失败:', error)
-  })
-
-export default FetchApi
+export default new Fetch()

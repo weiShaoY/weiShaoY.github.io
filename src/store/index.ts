@@ -8,6 +8,8 @@ const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
-export { useAppStore }
+export {
+  useAppStore,
+}
 
 export default pinia

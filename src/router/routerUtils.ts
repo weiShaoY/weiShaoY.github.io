@@ -1,6 +1,8 @@
 import type { RouteRecordNormalized } from 'vue-router'
 
-const modules = import.meta.glob('./modules/*.ts', { eager: true })
+const modules = import.meta.glob('./modules/*.ts', {
+  eager: true,
+})
 
 /**
  *  格式化modules模块(将modules模块转化为数组)

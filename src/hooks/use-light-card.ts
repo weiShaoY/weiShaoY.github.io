@@ -1,6 +1,10 @@
 // use-light-card.ts
 
-import { onMounted, onUnmounted, ref } from 'vue'
+import {
+  onMounted,
+  onUnmounted,
+  ref,
+} from 'vue'
 
 /**
  *  光源的的配置
@@ -34,7 +38,8 @@ type IOptions = {
  *  设置卡片的光源
  * @param option - 光源的配置
  */
-export function useLightCard(option: IOptions = {}) {
+export function useLightCard(option: IOptions = {
+}) {
   /**
    *  获取卡片的dom节点
    */
@@ -54,7 +59,8 @@ export function useLightCard(option: IOptions = {}) {
    *  设置光源的样式
    */
   const setLightStyle = () => {
-    const { width = 60, height = 60, color = '#ff4132', blur = 40 } = option.light ?? {}
+    const { width = 60, height = 60, color = '#ff4132', blur = 40 } = option.light ?? {
+    }
 
     const lightDom = lightRef.value
 

@@ -36,7 +36,8 @@ export type useLightParamsType = OptionType
  * @param {DirectiveBinding} option - 指令绑定的参数对象
  */
 function setLightStyle(lightDom: HTMLElement, option: OptionType) {
-  const { width = 60, height = 60, color = '#ffffff', blur = 40 } = option ?? {}
+  const { width = 60, height = 60, color = '#ffffff', blur = 40 } = option ?? {
+  }
 
   lightDom.style.position = 'absolute'
   lightDom.style.width = `${width}px`
@@ -134,7 +135,8 @@ const useLight = {
   mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<OptionType>) {
     const lightDom = document.createElement('div')
 
-    setLightStyle(lightDom, binding.value ?? {})
+    setLightStyle(lightDom, binding.value ?? {
+    })
 
     // 确保光源元素不会阻挡鼠标事件
     lightDom.style.pointerEvents = 'none'

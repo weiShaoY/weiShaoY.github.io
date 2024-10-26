@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import videojs from 'video.js'
 
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref,
+} from 'vue'
 
 import 'video.js/dist/video-js.css'
 

@@ -1,6 +1,10 @@
 import { NProgress } from '@/config'
 
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
 
 import { appRoutes } from './routerUtils'
 
@@ -21,14 +25,12 @@ const router = createRouter({
   history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
 
   routes: [
-
     ...appRoutes,
     {
       path: '/test',
       component: () => import('@/pages/test/index.vue'),
     },
   ],
-
 })
 
 /**
@@ -44,6 +46,7 @@ router.beforeEach(() => {
  */
 router.onError((error) => {
   NProgress.done()
+
   console.warn('路由错误', error.message)
 })
 
