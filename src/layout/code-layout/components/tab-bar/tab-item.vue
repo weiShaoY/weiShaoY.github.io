@@ -154,7 +154,7 @@ function findCurrentRouteIndex() {
 /**
  * 处理不同的操作类型
  */
-async function actionSelect(value: Eaction) {
+async function actionSelect(value: any) {
   const { itemData, index } = props
 
   /**
@@ -162,12 +162,12 @@ async function actionSelect(value: Eaction) {
    */
   const copyTagList = [...tagList.value]
 
-  // 处理当前标签
+  // 关闭当前标签
   if (value === Eaction.current) {
     tagClose(itemData, index)
   }
 
-  // 处理左侧标签
+  // 关闭左侧标签
   else if (value === Eaction.left) {
     const currentRouteIdx = findCurrentRouteIndex()
 
@@ -180,7 +180,7 @@ async function actionSelect(value: Eaction) {
     }
   }
 
-  // 处理右侧标签
+  // 关闭右侧标签
   else if (value === Eaction.right) {
     const currentRouteIdx = findCurrentRouteIndex()
 
@@ -193,7 +193,7 @@ async function actionSelect(value: Eaction) {
     }
   }
 
-  // 处理其他标签
+  // 关闭其他标签页
   else if (value === Eaction.others) {
     const filterList = tagList.value.filter((el, idx) => {
       return idx === 0 || idx === props.index
@@ -205,7 +205,7 @@ async function actionSelect(value: Eaction) {
     })
   }
 
-  // 处理重新加载
+  // 重新加载
   else if (value === Eaction.reload) {
     tabBarStore.deleteCache(itemData)
     await router.push({
@@ -217,7 +217,7 @@ async function actionSelect(value: Eaction) {
     tabBarStore.addCache(itemData.name)
   }
 
-  // 处理所有标签
+  // 关闭全部标签
   else {
     tabBarStore.resetTabList()
 
@@ -232,7 +232,7 @@ async function actionSelect(value: Eaction) {
   <a-dropdown
     trigger="contextMenu"
     :popup-max-height="false"
-    @select="() => actionSelect"
+    @select="actionSelect"
   >
     <span
       class="arco-tag arco-tag-size-medium arco-tag-checked"
@@ -249,7 +249,10 @@ async function actionSelect(value: Eaction) {
         class="arco-icon-hover arco-tag-icon-hover arco-icon-hover-size-medium arco-tag-close-btn"
         @click.stop="tagClose(itemData, index)"
       >
-        <icon-close />
+        <SvgIcon
+          icon="guanBi"
+          :size="16"
+        />
       </span>
     </span>
 

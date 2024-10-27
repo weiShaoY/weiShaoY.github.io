@@ -129,14 +129,8 @@ listenerRouteChange((newRoute) => {
      *  更新选中的菜单项
      */
     selectedKey.value = [(activeMenu as string) || (menuOpenKeys[menuOpenKeys.length - 1] as string)]
-    console.log('%c Line:121111111 🍣 selectedKey.value', 'color:#3f7cff', selectedKey.value)
-    console.log('%c Line:129 🍢 selectedKey.value', 'color:#6ec1c2', selectedKey.value)
   }
 }, true)
-
-watchEffect (() => {
-  console.log('%c Line:129 🍣 selectedKey.value', 'color:#e41a6a', selectedKey.value)
-})
 
 </script>
 

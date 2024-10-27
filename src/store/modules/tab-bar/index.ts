@@ -111,6 +111,7 @@ const useAppStore = defineStore('tabBar', () => {
   }
 
   /**
+   * 关闭全部标签
    * 重置标签列表
    */
   function resetTabList() {

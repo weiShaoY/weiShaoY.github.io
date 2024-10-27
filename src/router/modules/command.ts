@@ -9,7 +9,7 @@ const commandRouter: RouteRecordRaw[] = [
     name: 'Command',
     component: () => import('@/pages/command/index.vue'),
     meta: {
-      title: '403页面',
+      title: '指挥台',
     },
   },
 

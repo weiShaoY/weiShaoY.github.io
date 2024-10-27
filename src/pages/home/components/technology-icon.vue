@@ -88,7 +88,7 @@ function handleMouseLeave() {
       @mouseleave="handleMouseLeave"
     >
       <SvgIcon
-        :name="`technology-${tech.name}`"
+        :icon="`technology-${tech.name}`"
         :size="tech.size"
         :style="{ color: currentHoverName === tech.name ? tech.color : '' }"
       />

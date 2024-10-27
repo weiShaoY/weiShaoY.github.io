@@ -25,7 +25,7 @@ const router = useRouter()
         @click="router.push('/home')"
       >
         <SvgIcon
-          name="weiShaoY"
+          icon="weiShaoY"
           class="!h-full !w-35 group-hover:color-primary"
         />
       </a>

@@ -4,9 +4,9 @@
 
 <template>
   <div
-    class="h-full bg-emerald"
+    class="h-full bg-amber"
   >
-    vue
+    12111111111111111111111111111111111111111111111111111111111111111
   </div>
 </template>
 

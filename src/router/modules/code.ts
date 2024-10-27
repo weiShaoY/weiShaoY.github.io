@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
+import config from '@/config'
+
 import { codeRoutes } from '../code'
 
 /**
@@ -10,7 +12,7 @@ const codingRouter: RouteRecordRaw[] = [
     path: '/code',
     name: 'Code',
     redirect: {
-      name: 'Blog',
+      name: config.code.defaultRouteName,
     },
     children: [
       ...codeRoutes,

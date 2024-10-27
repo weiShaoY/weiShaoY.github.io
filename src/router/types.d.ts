@@ -28,14 +28,55 @@ export type AppRouteRecordRaw = {
   meta?: RouteMeta & {
 
     /**
+     *  图标
+     */
+    icon?: string
+
+    /**
+     *   在侧边菜单和面包屑中显示的区域名称
+     */
+    locale?: string
+
+    /**
+     *   是否显示在侧边菜单
+     */
+    hideInMenu?: boolean
+
+    /**
+     *  是否菜单在侧边菜单中不显示
+     */
+    hideChildrenInMenu?: boolean
+
+    /**
+     *  设置了名称，菜单将根据你设置的名称高亮显示
+     */
+    activeMenu?: string
+
+    /**
+     *  菜单栏排序
+     */
+    order?: number
+
+    /**
      *   不显示面包屑
      */
     noShowBreadcrumb?: boolean
 
     /**
+     *  页面不会被缓存
+     */
+    ignoreCache?: boolean
+
+    /**
      *   不显示Footer
      */
     noShowFooter?: boolean
+
+    /**
+     *  是否是独立的菜单项(在菜单中单独显示,没有子子菜单)
+     */
+    isStandaloneMenu?: boolean
+
   }
 
   /**
@@ -77,4 +118,5 @@ export type AppRouteRecordRaw = {
    *   菜单中是否显示
    */
   hideInMenu?: boolean
+
 }

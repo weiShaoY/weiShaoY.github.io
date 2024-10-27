@@ -1,4 +1,6 @@
 <script setup lang="ts" generic="T extends any, O extends any">
+import config from '@/config'
+
 import { useRouter } from 'vue-router'
 
 import Map from './components/map.vue'
@@ -67,10 +69,10 @@ const router = useRouter()
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
-          @click="router.push('/code')"
+          @click="router.push(config.code.defaultRoute.fullPath)"
         >
           <SvgIcon
-            name="code"
+            icon="code"
             :size="60"
           />
 
@@ -93,7 +95,7 @@ const router = useRouter()
           href="https://github.com/weiShaoY"
         >
           <SvgIcon
-            name="github"
+            icon="github"
             :size="60"
           />
 
@@ -135,7 +137,7 @@ const router = useRouter()
           @click="router.push('/command')"
         >
           <SvgIcon
-            name="command"
+            icon="command"
             :size="60"
           />
 
@@ -155,7 +157,7 @@ const router = useRouter()
           @click="router.push('/test')"
         >
           <SvgIcon
-            name="test"
+            icon="test"
             :size="60"
           />
 

@@ -3,7 +3,7 @@ const codeConfig = {
   /**
    *  默认路由名称
    */
-  defaultRouteName: 'Vue',
+  defaultRouteName: 'Workplace',
 
   /**
    *  默认路由配置
@@ -17,12 +17,12 @@ const codeConfig = {
     /**
      *  路由名称
      */
-    name: 'Vue',
+    name: 'Workplace',
 
     /**
      *  路由路径
      */
-    fullPath: '/home/index',
+    fullPath: '/code/workplace/index',
 
   },
 

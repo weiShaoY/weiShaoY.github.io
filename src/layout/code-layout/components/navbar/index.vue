@@ -70,7 +70,7 @@ function showGlobalSettings() {
       @click="router.push('/')"
     >
       <SvgIcon
-        name="weiShaoY"
+        icon="weiShaoY"
         class="w-30 !h-10"
       />
     </div>

@@ -23,6 +23,7 @@ const router = useRouter()
 const selectedKey = defineModel('selectedKey')
 
 function handleGoto(item: RouteRecordRaw) {
+  console.log('%c Line:26 🍇 item', 'color:#b03734', item.name)
   try {
     // 打开外部链接
     if (externalLinkRegex.test(item.path)) {
@@ -59,13 +60,17 @@ function handleGoto(item: RouteRecordRaw) {
     :key="item.path"
   >
     <a-sub-menu
-      v-if="item.children?.length"
+      v-if="item.children?.length && !item?.meta?.isStandaloneMenu"
       :key="item.name"
     >
       <template
         #icon
       >
-        <icon-bug />
+        <SvgIcon
+          v-if=" item?.meta?.icon"
+          :icon="`code-${item.meta.icon}`"
+        />
+
       </template>
 
       <template
@@ -91,7 +96,12 @@ function handleGoto(item: RouteRecordRaw) {
         <template
           #icon
         >
-          <icon-apps />
+
+          <SvgIcon
+            v-if=" item?.meta?.icon"
+            :icon="`code-${item.meta.icon}`"
+          />
+
         </template>
 
         {{ item.meta?.locale || '' }}

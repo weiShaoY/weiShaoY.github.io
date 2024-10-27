@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<Props>(), {
-  name: '',
-  size: '20px',
-  class: '',
-  color: '',
-  prefix: '#icon-',
-})
-
 type Props = {
 
   /**
    *  图标名称
    */
-  name: string
+  icon: string
 
   /**
    *  图标大小
@@ -38,6 +30,14 @@ type Props = {
   prefix?: string
 }
 
+const props = withDefaults(defineProps<Props>(), {
+  icon: '',
+  size: '20px',
+  class: '',
+  color: '',
+  prefix: '#icon-',
+})
+
 // 4. 计算图标大小
 const svgSize = computed(() => {
   if (typeof props.size === 'number') {
@@ -54,7 +54,7 @@ const svgSize = computed(() => {
     :font-size="svgSize"
   >
     <use
-      :xlink:href="`${props.prefix}${props.name}`"
+      :xlink:href="`${props.prefix}${props.icon}`"
       :fill="`${props.color}`"
     />
   </svg>
