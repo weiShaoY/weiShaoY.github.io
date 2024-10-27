@@ -67,16 +67,18 @@ const router = useRouter()
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
-          @click="router.push('/coding')"
+          @click="router.push('/code')"
         >
           <SvgIcon
-            name="coding"
+            name="code"
             :size="60"
           />
 
           <h1
             class="text-3xl font-600"
-          >Coding</h1>
+          >
+            Code
+          </h1>
         </a>
       </div>
 
@@ -97,7 +99,9 @@ const router = useRouter()
 
           <h1
             class="text-3xl font-600"
-          >Github</h1>
+          >
+            Github
+          </h1>
         </a>
       </div>
 
@@ -137,9 +141,7 @@ const router = useRouter()
 
           <h1
             class="text-3xl font-600"
-          >
-            Command
-          </h1>
+          >Command</h1>
         </a>
       </div>
 
@@ -159,10 +161,7 @@ const router = useRouter()
 
           <h1
             class="text-3xl font-600"
-          >
-            Test
-          </h1>
-
+          >Test</h1>
         </a>
       </div>
     </div>

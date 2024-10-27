@@ -130,7 +130,7 @@ export default antfu({
       'curly': 'warn',
 
       // 行注释位置
-      'line-comment-position': ['warn', { position: 'above' }],
+      // 'line-comment-position': ['warn', { position: 'above' }],
 
       // 强制在注释中 // 或 /* 使用一致的空行  beforeBlockComment  在块注释之前  beforeLineComment  在行注释之前
       'lines-around-comment': [

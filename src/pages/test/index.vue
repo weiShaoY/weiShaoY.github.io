@@ -4,12 +4,50 @@
 
 <template>
   <div
-    class=""
+    class="relative m-100 h-100 w-100 bg-red"
   >
     1111111111111111111111111111111111
+
+    <div
+      class="blob"
+    />
   </div>
 </template>
 
 <style lang="less" scoped>
+.blob {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: wheat;
+  opacity: 1;
+  filter: blur(12px);
+  animation: blob-bounce 5s infinite ease;
+}
 
+@keyframes blob-bounce {
+  0% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+  }
+
+  50% {
+    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+  }
+
+  75% {
+    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+}
 </style>

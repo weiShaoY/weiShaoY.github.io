@@ -8,7 +8,7 @@
   <div
     class="w-ful h-full flex flex-col justify-between overflow-auto"
     :style="{
-      paddingTop: `${appStore.app.indexPage.headerHeight}px`,
+      paddingTop: `${appStore.app.home.headerHeight}px`,
     }"
   >
     <RouterView />

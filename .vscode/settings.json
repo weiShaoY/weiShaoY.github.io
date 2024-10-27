@@ -92,6 +92,7 @@
   ],
   "cSpell.ignoreWords": [
     "AMAP_MAP_KEY",
+    "Eaction",
     "Fira",
     "WeiShaoY",
     "ZiHunBaiGeTianXingTi",
@@ -114,6 +115,8 @@
     "persistedstate",
     "pinia",
     "presetAttributify",
+    "sider",
+    "sperate-line",
     "spreadsheetml",
     "sublink",
     "svgs",

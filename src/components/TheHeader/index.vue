@@ -13,7 +13,7 @@ const router = useRouter()
   <nav
     class="fixed left-0 top-0 z-100 w-full flex justify-center bg-#B3AFA4 dark:bg-#191919"
     :style="{
-      height: `${appStore.app.indexPage.headerHeight}px`,
+      height: `${appStore.app.home.headerHeight}px`,
     }"
   >
     <div

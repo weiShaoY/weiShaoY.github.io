@@ -8,6 +8,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
+  const addEventListen: typeof import('./src/utils/index')['addEventListen']
   const app: typeof import('./src/composables/store')['app']
   const appS: typeof import('./src/composables/store')['appS']
   const appSt: typeof import('./src/composables/store')['appSt']
@@ -43,6 +44,7 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const eslintConfig: typeof import('./eslint.config.js')['default']
   const extendRef: typeof import('@vueuse/core')['extendRef']
+  const externalLinkRegex: typeof import('./src/utils/index')['externalLinkRegex']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -53,6 +55,7 @@ declare global {
   const is: typeof import('./src/utils/is')['is']
   const isArray: typeof import('./src/utils/is')['isArray']
   const isAsyncFunction: typeof import('./src/utils/is')['isAsyncFunction']
+  const isBlob: typeof import('./src/utils/is copy')['isBlob']
   const isBoolean: typeof import('./src/utils/is')['isBoolean']
   const isClient: typeof import('./src/utils/is')['isClient']
   const isDark: typeof import('./src/composables/dark')['isDark']
@@ -60,6 +63,9 @@ declare global {
   const isDef: typeof import('./src/utils/is')['isDef']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isElement: typeof import('./src/utils/is')['isElement']
+  const isEmptyObject: typeof import('./src/utils/is copy')['isEmptyObject']
+  const isExist: typeof import('./src/utils/is copy')['isExist']
+  const isFile: typeof import('./src/utils/is copy')['isFile']
   const isFunction: typeof import('./src/utils/is')['isFunction']
   const isHexColor: typeof import('./src/utils/is')['isHexColor']
   const isMobile: typeof import('./src/composables/mobile')['isMobile']
@@ -72,9 +78,12 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isRegExp: typeof import('./src/utils/is copy')['isRegExp']
   const isString: typeof import('./src/utils/is')['isString']
   const isUnDef: typeof import('./src/utils/is')['isUnDef']
+  const isUndefined: typeof import('./src/utils/is copy')['isUndefined']
   const isWindow: typeof import('./src/utils/is')['isWindow']
+  const listenerRouteChange: typeof import('./src/utils/route-listener')['listenerRouteChange']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -104,6 +113,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
+  const openWindow: typeof import('./src/utils/index')['openWindow']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
@@ -120,6 +130,9 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const regexUrl: typeof import('./src/utils/index')['regexUrl']
+  const removeEventListen: typeof import('./src/utils/index')['removeEventListen']
+  const removeRouteListener: typeof import('./src/utils/route-listener')['removeRouteListener']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
@@ -127,6 +140,7 @@ declare global {
   const router: typeof import('./src/composables/router')['router']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
+  const setRouteEmitter: typeof import('./src/utils/route-listener')['setRouteEmitter']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -350,6 +364,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly addEventListen: UnwrapRef<typeof import('./src/utils/index')['addEventListen']>
     readonly appStore: UnwrapRef<typeof import('./src/composables/store')['appStore']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -377,6 +392,7 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly externalLinkRegex: UnwrapRef<typeof import('./src/utils/index')['externalLinkRegex']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -386,6 +402,7 @@ declare module 'vue' {
     readonly is: UnwrapRef<typeof import('./src/utils/is')['is']>
     readonly isArray: UnwrapRef<typeof import('./src/utils/is')['isArray']>
     readonly isAsyncFunction: UnwrapRef<typeof import('./src/utils/is')['isAsyncFunction']>
+    readonly isBlob: UnwrapRef<typeof import('./src/utils/is copy')['isBlob']>
     readonly isBoolean: UnwrapRef<typeof import('./src/utils/is')['isBoolean']>
     readonly isClient: UnwrapRef<typeof import('./src/utils/is')['isClient']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
@@ -393,6 +410,9 @@ declare module 'vue' {
     readonly isDef: UnwrapRef<typeof import('./src/utils/is')['isDef']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isElement: UnwrapRef<typeof import('./src/utils/is')['isElement']>
+    readonly isEmptyObject: UnwrapRef<typeof import('./src/utils/is copy')['isEmptyObject']>
+    readonly isExist: UnwrapRef<typeof import('./src/utils/is copy')['isExist']>
+    readonly isFile: UnwrapRef<typeof import('./src/utils/is copy')['isFile']>
     readonly isFunction: UnwrapRef<typeof import('./src/utils/is')['isFunction']>
     readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
     readonly isNull: UnwrapRef<typeof import('./src/utils/is')['isNull']>
@@ -404,9 +424,12 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isRegExp: UnwrapRef<typeof import('./src/utils/is copy')['isRegExp']>
     readonly isString: UnwrapRef<typeof import('./src/utils/is')['isString']>
     readonly isUnDef: UnwrapRef<typeof import('./src/utils/is')['isUnDef']>
+    readonly isUndefined: UnwrapRef<typeof import('./src/utils/is copy')['isUndefined']>
     readonly isWindow: UnwrapRef<typeof import('./src/utils/is')['isWindow']>
+    readonly listenerRouteChange: UnwrapRef<typeof import('./src/utils/route-listener')['listenerRouteChange']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
@@ -430,6 +453,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
+    readonly openWindow: UnwrapRef<typeof import('./src/utils/index')['openWindow']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
@@ -446,9 +470,12 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly removeEventListen: UnwrapRef<typeof import('./src/utils/index')['removeEventListen']>
+    readonly removeRouteListener: UnwrapRef<typeof import('./src/utils/route-listener')['removeRouteListener']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
+    readonly setRouteEmitter: UnwrapRef<typeof import('./src/utils/route-listener')['setRouteEmitter']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
