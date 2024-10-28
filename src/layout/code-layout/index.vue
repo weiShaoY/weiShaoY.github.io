@@ -2,10 +2,9 @@
 
 import useResponsive from '@/hooks/responsive'
 
-import { useAppStore } from '@/store'
+import { useAppStore, useCodeStore } from '@/store'
 
 import {
-  computed,
   onMounted,
   provide,
   ref,
@@ -30,15 +29,9 @@ import TabBar from './components/tab-bar/index.vue'
  */
 const isInit = ref(false)
 
-/**
- * 获取应用状态 store
- */
 const appStore = useAppStore()
 
-/**
- * 获取用户状态 store
- * @type {ReturnType<typeof useUserStore>}
- */
+const codeStore = useCodeStore()
 
 const router = useRouter()
 
@@ -49,46 +42,6 @@ const router = useRouter()
 useResponsive(true)
 
 /**
- * 导航栏高度
- */
-const navbarHeight = `60px`
-
-/**
- * 是否显示导航栏
- */
-const navbar = computed(() => appStore.state.navbar)
-
-/**
- * 计算属性，判断是否渲染菜单
- * @returns {boolean} 是否渲染菜单
- */
-const renderMenu = computed(
-  () => appStore.state.menu && !appStore.state.topMenu,
-)
-
-/**
- * 计算属性，判断是否隐藏菜单
- * @returns {boolean} 是否隐藏菜单
- */
-const hideMenu = computed(() => appStore.state.hideMenu)
-
-/**
- * 计算属性，获取菜单宽度
- * @returns {number} 菜单宽度
- */
-const menuWidth = computed(() => {
-  return appStore.state.menuCollapse ? 48 : appStore.state.menuWidth
-})
-
-/**
- * 计算属性，获取菜单折叠状态
- * @returns {boolean} 菜单是否折叠
- */
-const collapsed = computed(() => {
-  return appStore.state.menuCollapse
-})
-
-/**
  * 设置菜单折叠状态
  */
 function setCollapsed(val: boolean) {
@@ -97,29 +50,21 @@ function setCollapsed(val: boolean) {
     return
   }
 
-  appStore.updateSettings({
-    menuCollapse: val,
-  })
+  codeStore.state.menu.collapsed = val
 }
-
-/**
- * 抽屉菜单可见状态
- * @type {boolean}
- */
-const drawerVisible = ref(false)
 
 /**
  * 取消抽屉菜单
  */
 function drawerCancel() {
-  drawerVisible.value = false
+  codeStore.state.drawer.visible = false
 }
 
 /**
  * 提供一个方法用于切换抽屉菜单可见状态
  */
 provide('toggleDrawerMenu', () => {
-  drawerVisible.value = !drawerVisible.value
+  codeStore.state.drawer.visible = !codeStore.state.drawer.visible
 })
 
 /**
@@ -132,58 +77,77 @@ onMounted(() => {
 
 <template>
   <a-layout
-    class="layout"
-    :class="{ mobile: appStore.state.hideMenu }"
+    class="h-full w-full"
+    :class="{ mobile: !codeStore.state.menu.visible }"
   >
+
+    <!-- 导航栏 -->
     <div
-      v-if="appStore.state.navbar"
-      class="layout-navbar"
+      v-if="codeStore.state.navbar.visible"
+      class="fixed left-0 top-0 z-100 w-full"
+      :style="{
+        height: `${codeStore.state.navbar.height}px`,
+      }"
     >
       <NavBar />
     </div>
 
-    <a-layout>
+    <!-- 导航栏下面部分  -->
+
+    <a-layout
+      class=""
+    >
       <a-layout>
+
+        <!-- 菜单栏  ( 左侧 ) -->
         <a-layout-sider
-          v-if="renderMenu"
-          v-show="!hideMenu"
+          v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'left'"
+          v-show="codeStore.state.menu.visible"
           class="layout-sider"
           breakpoint="xl"
-          :collapsed="collapsed"
+          :collapsed="codeStore.state.menu.collapsed"
           :collapsible="true"
-          :width="menuWidth"
-          :style="{ paddingTop: navbar ? '60px' : '' }"
+          :width="codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth"
+          :style="{
+            paddingTop: codeStore.state.navbar.visible ? '60px' : '',
+          }"
           :hide-trigger="true"
           @collapse="setCollapsed"
         >
           <div
             class="menu-wrapper"
           >
+            1111
             <Menu />
           </div>
         </a-layout-sider>
 
         <a-drawer
-          v-if="hideMenu"
-          :visible="drawerVisible"
+          v-if="!codeStore.state.menu.visible"
+          :visible="codeStore.state.drawer.visible"
           placement="left"
           :footer="false"
           mask-closable
           :closable="false"
+          class="bg-gradient-from-pink"
           @cancel="drawerCancel"
         >
-          22222222222
+          <!-- 抽屉里的菜单 -->
+          222222222222
+
           <Menu />
+          1111111111
         </a-drawer>
 
-        <!-- 右边 -->
+        <!-- 页面部分 -->
         <a-layout
           class="min-h-100vh overflow-y-hidden transition-padding duration-500 ease-in-out"
           :style="{
-            paddingLeft: renderMenu && !hideMenu ? `${menuWidth}px` : '0',
-            paddingTop: navbar ? `${navbarHeight}px` : '0',
+            paddingLeft: codeStore.state.menu.visible && codeStore.state.menu.position === 'left' ? `${codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth}px` : '0',
+            paddingTop: codeStore.state.navbar.visible ? `${codeStore.state.navbar.height}px` : '0',
           }"
         >
+
           <!-- 多页签 -->
           <TabBar
             v-if="appStore.state.tabBar"
@@ -196,17 +160,20 @@ onMounted(() => {
             "
           />
 
-          <!-- 内容区域 -->
+          <!-- 页面区域 -->
           <a-layout-content
             class="m-x-5 m-b-5 flex bg-white p-t-0"
           >
+
             <PageLayout />
+
           </a-layout-content>
 
           <Footer
-            v-if=" appStore.state.footer && !router.currentRoute.value.meta.noShowFooter
+            v-if="codeStore.state.footer.visible && !router.currentRoute.value.meta.noShowFooter
             "
           />
+
         </a-layout>
       </a-layout>
     </a-layout>
@@ -214,22 +181,6 @@ onMounted(() => {
 </template>
 
 <style scoped lang="less">
-@nav-size-height: 60px;
-@layout-max-width: 1100px;
-
-.layout {
-  width: 100%;
-  height: 100%;
-}
-
-.layout-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  height: @nav-size-height;
-}
 
 .layout-sider {
   position: fixed;

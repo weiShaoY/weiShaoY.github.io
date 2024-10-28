@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 
-import { useAppStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import { useRouter } from 'vue-router'
 
@@ -19,7 +19,7 @@ defineProps({
   },
 })
 
-const appStore = useAppStore()
+const codeStore = useCodeStore()
 
 const breadcrumbAffixRef = ref()
 
@@ -30,16 +30,15 @@ const router = useRouter()
  *  @returns {number} 顶部偏移量
  */
 const offsetTop = computed(() => {
-  // return appStore.state.navbar ? 60 : 0
-  if (appStore.state.navbar && appStore.state.tabBar) {
+  if (codeStore.state.navbar.visible && codeStore.state.tabBar.visible) {
     return 60 + 33
   }
 
-  if (appStore.state.navbar && !appStore.state.tabBar) {
+  if (codeStore.state.navbar.visible && !codeStore.state.tabBar.visible) {
     return 60
   }
 
-  if (appStore.state.tabBar && !appStore.state.navbar) {
+  if (!codeStore.state.navbar.visible && codeStore.state.tabBar.visible) {
     return 33
   }
 
@@ -53,9 +52,10 @@ const offsetTop = computed(() => {
 watch(
 
   () => [
-    appStore.state.navbar,
-    appStore.state.tabBar,
+    codeStore.state.navbar.visible,
+    codeStore.state.tabBar.visible,
   ],
+
   () => {
     breadcrumbAffixRef.value.updatePosition()
   },

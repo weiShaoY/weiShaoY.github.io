@@ -402,7 +402,6 @@ declare module 'vue' {
     readonly is: UnwrapRef<typeof import('./src/utils/is')['is']>
     readonly isArray: UnwrapRef<typeof import('./src/utils/is')['isArray']>
     readonly isAsyncFunction: UnwrapRef<typeof import('./src/utils/is')['isAsyncFunction']>
-    readonly isBlob: UnwrapRef<typeof import('./src/utils/is copy')['isBlob']>
     readonly isBoolean: UnwrapRef<typeof import('./src/utils/is')['isBoolean']>
     readonly isClient: UnwrapRef<typeof import('./src/utils/is')['isClient']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
@@ -410,9 +409,6 @@ declare module 'vue' {
     readonly isDef: UnwrapRef<typeof import('./src/utils/is')['isDef']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isElement: UnwrapRef<typeof import('./src/utils/is')['isElement']>
-    readonly isEmptyObject: UnwrapRef<typeof import('./src/utils/is copy')['isEmptyObject']>
-    readonly isExist: UnwrapRef<typeof import('./src/utils/is copy')['isExist']>
-    readonly isFile: UnwrapRef<typeof import('./src/utils/is copy')['isFile']>
     readonly isFunction: UnwrapRef<typeof import('./src/utils/is')['isFunction']>
     readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
     readonly isNull: UnwrapRef<typeof import('./src/utils/is')['isNull']>
@@ -424,10 +420,8 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
-    readonly isRegExp: UnwrapRef<typeof import('./src/utils/is copy')['isRegExp']>
     readonly isString: UnwrapRef<typeof import('./src/utils/is')['isString']>
     readonly isUnDef: UnwrapRef<typeof import('./src/utils/is')['isUnDef']>
-    readonly isUndefined: UnwrapRef<typeof import('./src/utils/is copy')['isUndefined']>
     readonly isWindow: UnwrapRef<typeof import('./src/utils/is')['isWindow']>
     readonly listenerRouteChange: UnwrapRef<typeof import('./src/utils/route-listener')['listenerRouteChange']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>

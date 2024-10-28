@@ -1,4 +1,4 @@
-import { useAppStore } from '@/store' // 导入应用状态管理
+import { useCodeStore } from '@/store' // 导入应用状态管理
 
 import { addEventListen, removeEventListen } from '@/utils' // 导入事件监听器添加和移除工具函数
 
@@ -27,10 +27,7 @@ function queryDevice() {
  * @param {boolean} immediate - 是否立即执行防抖函数
  */
 export default function useResponsive(immediate?: boolean) {
-  /**
-   *  获取应用状态管理实例
-   */
-  const appStore = useAppStore()
+  const codeStore = useCodeStore()
 
   /**
    * 窗口大小改变的处理函数
@@ -48,12 +45,12 @@ export default function useResponsive(immediate?: boolean) {
       /**
        *  切换设备类型
        */
-      appStore.toggleDevice(isMobile ? 'mobile' : 'desktop')
+      codeStore.toggleDevice(isMobile ? 'mobile' : 'desktop')
 
       /**
        *  切换菜单显示状态
        */
-      appStore.toggleMenu(isMobile)
+      codeStore.toggleMenu(isMobile)
     }
   }
 

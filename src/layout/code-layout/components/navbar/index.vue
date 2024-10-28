@@ -2,7 +2,7 @@
 
 <script lang="ts" setup>
 
-import { useAppStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import {
   useDark,
@@ -12,17 +12,11 @@ import {
 
 import Menu from '../menu/index.vue'
 
-const appStore = useAppStore()
+const codeStore = useCodeStore()
 
 const router = useRouter()
 
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
-
-const theme = computed(() => {
-  return appStore.state.theme
-})
-
-const topMenu = computed(() => appStore.state.topMenu && appStore.state.menu)
 
 /**
  *  暗黑模式
@@ -35,12 +29,15 @@ const isDark = useDark({
   valueLight: 'light',
   storageKey: 'arco-theme',
   onChanged(dark: boolean) {
-    appStore.toggleTheme(dark)
+    codeStore.toggleTheme(dark)
   },
 })
 
 const toggleTheme = useToggle(isDark)
 
+/**
+ *  切换主题
+ */
 function handleToggleTheme() {
   toggleTheme()
 }
@@ -48,10 +45,8 @@ function handleToggleTheme() {
 /**
  *  显示页面配置
  */
-function showGlobalSettings() {
-  appStore.updateSettings({
-    globalSettings: true,
-  })
+function showGlobalSetting() {
+  codeStore.state.globalSetting.visible = true
 }
 
 </script>
@@ -79,7 +74,7 @@ function showGlobalSettings() {
       class="flex-1"
     >
       <Menu
-        v-if="topMenu"
+        v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'top'"
       />
     </div>
 
@@ -90,8 +85,7 @@ function showGlobalSettings() {
       <li>
         <a-tooltip
           :content="
-            theme === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'
-
+            codeStore.state.theme.mode === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'
           "
         >
           <a-button
@@ -104,7 +98,7 @@ function showGlobalSettings() {
               #icon
             >
               <icon-moon-fill
-                v-if="theme === 'dark'"
+                v-if="codeStore.state.theme.mode === 'dark'"
               />
 
               <icon-sun-fill
@@ -152,7 +146,7 @@ function showGlobalSettings() {
             class="nav-btn"
             type="outline"
             shape="circle"
-            @click="showGlobalSettings"
+            @click="showGlobalSetting"
           >
             <template
               #icon

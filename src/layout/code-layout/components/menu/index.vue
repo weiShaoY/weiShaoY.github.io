@@ -3,6 +3,8 @@
 <script lang="ts" setup>
 import type { RouteRecordRaw } from 'vue-router'
 
+import { useAppStore, useCodeStore } from '@/store'
+
 import { listenerRouteChange } from '@/utils/route-listener'
 
 import SubMenu from './sub-menu.vue'
@@ -10,6 +12,10 @@ import SubMenu from './sub-menu.vue'
 import useMenuTree from './use-menu-tree'
 
 const { menuTree } = useMenuTree()
+
+const appStore = useAppStore()
+
+const codeStore = useCodeStore()
 
 /**
  * 设置菜单折叠状态
@@ -27,24 +33,24 @@ function setCollapse(val: boolean) {
 /**
  *  计算属性：菜单是否折叠
  */
-const collapsed = computed({
-  get() {
-    if (appStore.state.device === 'desktop') {
-      // 如果是桌面设备
+// const collapsed = computed({
+//   get() {
+//     if (appStore.state.device === 'desktop') {
+//       // 如果是桌面设备
 
-      // 返回菜单折叠状态
-      return appStore.state.menuCollapse
-    }
+//       // 返回菜单折叠状态
+//       return appStore.state.menuCollapse
+//     }
 
-    return false // 移动设备不折叠
-  },
-  set(value: boolean) {
-    // 更新菜单折叠状态
-    appStore.updateSettings({
-      menuCollapse: value,
-    })
-  },
-})
+//     return false // 移动设备不折叠
+//   },
+//   set(value: boolean) {
+//     // 更新菜单折叠状态
+//     appStore.updateSettings({
+//       menuCollapse: value,
+//     })
+//   },
+// })
 
 /**
  *  菜单展开的项
@@ -136,11 +142,11 @@ listenerRouteChange((newRoute) => {
 
 <template>
   <a-menu
-    v-model:collapsed="collapsed"
+    v-model:collapsed="codeStore.state.menu.collapsed"
     v-model:open-keys="openKeys"
     class="h-full w-full"
-    :mode="appStore.state.topMenu ? 'horizontal' : 'vertical'"
-    :show-collapse-button="appStore.state.device !== 'mobile'"
+    :mode="codeStore.state.menu.position === 'top' ? 'horizontal' : 'vertical'"
+    :show-collapse-button="codeStore.state.device !== 'mobile'"
     :auto-open="false"
     :selected-keys="selectedKey"
     :auto-open-selected="true"

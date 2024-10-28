@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 
-import { useAppStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import FormWrapper from './form-wrapper.vue'
 
@@ -30,7 +30,8 @@ defineProps({
     },
   },
 })
-const appStore = useAppStore()
+
+const codeStore = useCodeStore()
 
 async function handleChange({
   key,
@@ -44,9 +45,7 @@ async function handleChange({
   }
 
   if (key === 'topMenu') {
-    appStore.updateSettings({
-      menuCollapse: false,
-    })
+    codeStore.state.menu.collapsed = false
   }
 
   appStore.updateSettings({
