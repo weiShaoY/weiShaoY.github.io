@@ -1,3 +1,9 @@
+import type { RouteLocationNormalized } from 'vue-router'
+
+import config from '@/config'
+
+import { is } from '@/utils'
+
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
@@ -119,13 +125,135 @@ const useCodeStore = defineStore(
          */
         visible: true,
       },
-
     })
 
-    // / ///////////// tabBar //////////
+    // / ///////////// 标签栏 //////////
+    /**
+     * 禁止重定向的路由名称列表。
+     * @default 包含重定向路由名称
+     */
+    const BAN_LIST = [config.redirectRouteName]
+
+    /**
+     * 格式化路由为标签
+     * @param  route - 路由对象
+     * @returns  格式化后的标签属性
+     */
+    function formatTag(route: RouteLocationNormalized): CodeType.TagProps {
+      const { name, meta, fullPath, query } = route
+
+      return {
+        title: meta.locale as string || '',
+        name: String(name),
+        fullPath,
+        query,
+        ignoreCache: meta.ignoreCache as boolean,
+      }
+    }
+
+    /**
+     * 标签列表 包含当前打开的标签信息。
+     * @default  包含默认路由的标签信息
+     */
+    const tagList = ref<CodeType.TagProps[]>([config.code.defaultRoute])
+
+    /**
+     *  缓存标签列表 使用 Set 存储唯一的标签名称
+     *  @default  包含默认路由的标签名称
+     */
+    const cacheTabList = ref<Set<string>>(new Set([config.code.defaultRouteName]))
+
+    /**
+     * 获取标签列表
+     */
+    const getTabList = computed(() => tagList.value)
+
+    /**
+     * 获取缓存列表
+     */
+    const getCacheTabList = computed(() => Array.from(cacheTabList.value))
+
+    /**
+     * 更新标签列表
+     * @param  route - 路由对象
+     */
+    function updateTabList(route: RouteLocationNormalized) {
+      if (BAN_LIST.includes(route.name as string)) {
+        return
+      }
+
+      tagList.value.push(formatTag(route))
+
+      if (!route.meta.ignoreCache) {
+        cacheTabList.value.add(route.name as string)
+      }
+    }
+
+    /**
+     * 删除标签
+     * @param  idx - 标签索引
+     * @param  tag - 标签属性
+     */
+    function deleteTag(idx: number, tag: CodeType.TagProps) {
+      tagList.value.splice(idx, 1)
+      cacheTabList.value.delete(tag.name)
+    }
+
+    /**
+     * 添加缓存
+     * @param  name - 标签名称
+     */
+    function addCache(name: string) {
+      if (is.isString(name) && name !== '') {
+        cacheTabList.value.add(name)
+      }
+    }
+
+    /**
+     * 删除缓存
+     * @param  tag - 标签属性
+     */
+    function deleteCache(tag: CodeType.TagProps) {
+      cacheTabList.value.delete(tag.name)
+    }
+
+    /**
+     * 刷新标签列表
+     * @param  tags - 标签数组
+     */
+    function freshTabList(tags: CodeType.TagProps[]) {
+      tagList.value = tags
+      cacheTabList.value.clear()
+
+      // 添加不忽略缓存的标签到缓存列表
+      tagList.value
+        .filter(el => !el.ignoreCache)
+        .map(el => el.name)
+        .forEach(x => cacheTabList.value.add(x))
+    }
+
+    /**
+     * 关闭全部标签
+     * 重置标签列表
+     */
+    function resetTabList() {
+      tagList.value = [config.code.defaultRoute]
+      cacheTabList.value.clear()
+      cacheTabList.value.add(config.code.defaultRouteName)
+    }
 
     return {
       state,
+      tagList,
+      getTabList,
+      cacheTabList,
+      getCacheTabList,
+      updateTabList,
+      deleteTag,
+      addCache,
+      deleteCache,
+      freshTabList,
+      resetTabList,
     }
   },
   {

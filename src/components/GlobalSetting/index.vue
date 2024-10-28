@@ -143,7 +143,7 @@ function toggleColorWeak(value: any) {
         class="h-10 flex items-center justify-between"
       >
         <span>
-          底部是否显示
+          底部栏是否显示
         </span>
 
         <a-switch

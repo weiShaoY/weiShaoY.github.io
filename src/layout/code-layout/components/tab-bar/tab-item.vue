@@ -5,7 +5,7 @@ import type { PropType } from 'vue'
 
 import config from '@/config'
 
-import { useTabBarStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import { computed } from 'vue'
 
@@ -76,7 +76,7 @@ enum Eaction {
   all = 'all',
 }
 
-const tabBarStore = useTabBarStore()
+const codeStore = useCodeStore()
 
 /**
  * 跳转到指定标签
@@ -93,7 +93,7 @@ function goto(tag: TagProps) {
  * @returns {TagProps[]} 标签列表
  */
 const tagList = computed(() => {
-  return tabBarStore.getTabList
+  return codeStore.getTabList
 })
 
 /**
@@ -134,7 +134,7 @@ const disabledRight = computed(() => {
  * @param {number} idx - 标签索引
  */
 function tagClose(tag: TagProps, idx: number) {
-  tabBarStore.deleteTag(idx, tag) // 从标签列表中删除指定标签
+  codeStore.deleteTag(idx, tag) // 从标签列表中删除指定标签
   if (props.itemData.fullPath === route.fullPath) { // 如果当前路径等于要关闭的标签路径
     const latest = tagList.value[idx - 1] // 获取队列的前一个标签
 
@@ -172,7 +172,7 @@ async function actionSelect(value: any) {
     const currentRouteIdx = findCurrentRouteIndex()
 
     copyTagList.splice(1, props.index - 1)
-    tabBarStore.freshTabList(copyTagList)
+    codeStore.freshTabList(copyTagList)
     if (currentRouteIdx < index) {
       router.push({
         name: itemData.name,
@@ -185,7 +185,7 @@ async function actionSelect(value: any) {
     const currentRouteIdx = findCurrentRouteIndex()
 
     copyTagList.splice(props.index + 1)
-    tabBarStore.freshTabList(copyTagList)
+    codeStore.freshTabList(copyTagList)
     if (currentRouteIdx > index) {
       router.push({
         name: itemData.name,
@@ -199,7 +199,7 @@ async function actionSelect(value: any) {
       return idx === 0 || idx === props.index
     })
 
-    tabBarStore.freshTabList(filterList)
+    codeStore.freshTabList(filterList)
     router.push({
       name: itemData.name,
     })
@@ -207,19 +207,19 @@ async function actionSelect(value: any) {
 
   // 重新加载
   else if (value === Eaction.reload) {
-    tabBarStore.deleteCache(itemData)
+    codeStore.deleteCache(itemData)
     await router.push({
       name: config.redirectRouteName,
       params: {
         path: route.fullPath,
       },
     })
-    tabBarStore.addCache(itemData.name)
+    codeStore.addCache(itemData.name)
   }
 
   // 关闭全部标签
   else {
-    tabBarStore.resetTabList()
+    codeStore.resetTabList()
 
     router.push({
       name: config.code.defaultRouteName,

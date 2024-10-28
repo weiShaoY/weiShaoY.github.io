@@ -29,10 +29,10 @@ const config = {
    */
   redirectRouteName: 'Redirect',
 
-  // /**
-  //  *  @description : 404 路由
-  //  */
-  // notFound: 'notFound',
+  /**
+   *  @description : 未找到路由的名称(404)
+   */
+  notFoundRouteName: '404',
 
   /**
    *  @description: 代码模块相关配置

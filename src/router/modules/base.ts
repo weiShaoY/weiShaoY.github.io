@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
+import config from '@/config'
+
 /**
  *  baseRouter (基础路由)
  */
@@ -14,13 +16,13 @@ const baseRouter: RouteRecordRaw[] = [
   // 重定向路由
   {
     path: '/redirect/:path(.*)',
-    name: 'Redirect',
+    name: config.redirectRouteName,
     component: () => import('@/pages/error/redirect/index.vue'),
   },
 
   {
     path: '/:pathMatch(.*)*',
-    name: '404',
+    name: config.notFoundRouteName,
     component: () => import('@/pages/error/404/index.vue'),
   },
 

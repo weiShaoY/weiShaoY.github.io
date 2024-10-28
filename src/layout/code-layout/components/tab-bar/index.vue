@@ -3,10 +3,7 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized } from 'vue-router'
 
-import {
-  useCodeStore,
-  useTabBarStore,
-} from '@/store'
+import { useCodeStore } from '@/store'
 
 import {
   listenerRouteChange,
@@ -22,8 +19,6 @@ import {
 
 import tabItem from './tab-item.vue'
 
-const tabBarStore = useTabBarStore()
-
 const codeStore = useCodeStore()
 
 const affixRef = ref()
@@ -33,7 +28,7 @@ const affixRef = ref()
  *  @returns {Array} 标签列表
  */
 const tagList = computed(() => {
-  return tabBarStore.getTabList
+  return codeStore.getTabList
 })
 
 /**
@@ -57,13 +52,13 @@ watch(
 
 /**
  *  监听路由变化，更新标签栏列表
- *  @param {RouteLocationNormalized} route - 路由对象
+ *  @param  route - 路由对象
  */
 listenerRouteChange((route: RouteLocationNormalized) => {
   if (
     !route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)
   ) {
-    tabBarStore.updateTabList(route)
+    codeStore.updateTabList(route)
   }
 }, true)
 
