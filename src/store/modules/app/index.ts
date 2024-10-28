@@ -1,12 +1,6 @@
-import type { RouteRecordNormalized } from 'vue-router'
-
-import type { AppState } from './types'
-
-import defaultSettings from '@/config/settings.json'
-
 import { defineStore } from 'pinia'
 
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 /**
  * 定义名为 'app' 的 store
@@ -17,35 +11,64 @@ const useAppStore = defineStore(
   /**
    * 定义 store 的状态
    */
-    const state = ref<AppState>({
-      ...defaultSettings,
+    // const state = ref<AppState>({
+    //   ...defaultSettings,
+    // })
+
+    const state = ref ({
+
+      /**
+       *  当前设备类型
+       * @type {'desktop' | 'mobile'}
+       * @default 'desktop'
+       * @description 当前设备类型,可以是 "desktop" 或 "mobile"
+       */
+      device: 'desktop',
+
+      /**
+       * 主题配置
+       */
+      theme: {
+
+        /**
+         * 主题模式
+         * @type {'light' | 'dark'}
+         * @default 'light'
+         * @description 主题模式选择，可选 "light" 或 "dark" 模式。
+         */
+        mode: 'light',
+
+        /**
+         * 主题主色调
+         * @type {string}
+         * @default '#165DFF'
+         * @description 设置主题的主颜色，默认为蓝色 "#165DFF"。
+         */
+        primaryColor: '#165DFF',
+
+        /**
+         * 色弱模式
+         * @type {boolean}
+         * @default false
+         * @description 是否开启色弱模式，启用后优化对色弱用户的视觉体验。
+         */
+        colorWeak: false,
+      },
+
+      /**
+       *  设置模块
+       */
+      globalSetting: {
+        /**
+         * 是否显示全局设置
+         * @type {boolean}
+         * @default false
+         * @description 用于控制全局设置选项是否显示。
+         */
+        visible: false,
+      },
+
     })
-
-    /**
-     * 获取当前应用设置
-     */
-    const appCurrentSetting = computed(() => ({
-      ...state.value,
-    }))
-
-    /**
-     * 获取当前设备类型
-     */
-    const appDevice = computed(() => state.value.device)
-
-    /**
-     * 获取异步加载的菜单
-     */
-    const appAsyncMenus = computed(() => state.value.serverMenu as unknown as RouteRecordNormalized[])
-
-    /**
-     * 更新应用设置
-     * @param {Partial<AppState>} partial - 部分应用状态
-     */
-    function updateSettings(partial: Partial<AppState>) {
-    // 使用 Object.assign 方法局部更新状态
-      Object.assign(state.value, partial)
-    }
 
     /**
      * 切换主题颜色
@@ -54,37 +77,14 @@ const useAppStore = defineStore(
     function toggleTheme(dark: boolean) {
       if (dark) {
       // 切换到暗色主题
-        state.value.theme = 'dark'
+        state.value.theme.mode = 'dark'
         document.body.setAttribute('arco-theme', 'dark')
       }
       else {
       // 切换到亮色主题
-        state.value.theme = 'light'
+        state.value.theme.mode = 'light'
         document.body.removeAttribute('arco-theme')
       }
-    }
-
-    /**
-     * 切换设备类型
-     * @param {string} device - 设备类型
-     */
-    function toggleDevice(device: string) {
-      state.value.device = device
-    }
-
-    /**
-     * 切换菜单显示状态
-     * @param {boolean} value - 菜单是否隐藏
-     */
-    function toggleMenu(value: boolean) {
-      state.value.hideMenu = value
-    }
-
-    /**
-     * 清空服务器菜单数据
-     */
-    function clearServerMenu() {
-      state.value.serverMenu = []
     }
 
     const app = ref({
@@ -94,22 +94,13 @@ const useAppStore = defineStore(
         headerHeight: 80,
       },
 
-      theme: 'light',
-
     })
 
     return {
       app,
       state,
-      appCurrentSetting,
-      appDevice,
-      appAsyncMenus,
-      updateSettings,
       toggleTheme,
-      toggleDevice,
-      toggleMenu,
-      clearServerMenu
-      ,
+
     }
   },
 )

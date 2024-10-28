@@ -2,7 +2,7 @@
 
 import useResponsive from '@/hooks/responsive'
 
-import { useAppStore, useCodeStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import {
   onMounted,
@@ -12,6 +12,8 @@ import {
 
 import { useRouter } from 'vue-router'
 
+import CodePageLayout from './code-page-layout.vue'
+
 import Breadcrumb from './components/breadcrumb/index.vue'
 
 import Footer from './components/footer/index.vue'
@@ -20,16 +22,12 @@ import Menu from './components/menu/index.vue'
 
 import NavBar from './components/navbar/index.vue'
 
-import PageLayout from './components/page-layout/index.vue'
-
 import TabBar from './components/tab-bar/index.vue'
 
 /**
  * 用于标识是否初始化
  */
 const isInit = ref(false)
-
-const appStore = useAppStore()
 
 const codeStore = useCodeStore()
 
@@ -81,7 +79,7 @@ onMounted(() => {
     :class="{ mobile: !codeStore.state.menu.visible }"
   >
 
-    <!-- 导航栏 -->
+    <!-- 顶部导航栏 -->
     <div
       v-if="codeStore.state.navbar.visible"
       class="fixed left-0 top-0 z-100 w-full"
@@ -94,12 +92,14 @@ onMounted(() => {
 
     <!-- 导航栏下面部分  -->
 
+    <!-- 主体部分 ( 左侧抽屉( 左侧菜单)   ) -->
     <a-layout
       class=""
     >
       <a-layout>
 
-        <!-- 菜单栏  ( 左侧 ) -->
+        <!--  菜单栏 start -->
+        <!-- 菜单正常显示时的侧边栏菜单 -->
         <a-layout-sider
           v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'left'"
           v-show="codeStore.state.menu.visible"
@@ -117,11 +117,11 @@ onMounted(() => {
           <div
             class="menu-wrapper"
           >
-            1111
             <Menu />
           </div>
         </a-layout-sider>
 
+        <!-- 设置菜单不显示时 放到抽屉里的菜单 -->
         <a-drawer
           v-if="!codeStore.state.menu.visible"
           :visible="codeStore.state.drawer.visible"
@@ -132,12 +132,18 @@ onMounted(() => {
           class="bg-gradient-from-pink"
           @cancel="drawerCancel"
         >
-          <!-- 抽屉里的菜单 -->
-          222222222222
+          <template
+            #collapse-icon
+          />
+
+          <template
+            #expand-icon-right
+          />
 
           <Menu />
-          1111111111
+          3333333333333333
         </a-drawer>
+        <!--  菜单栏 end -->
 
         <!-- 页面部分 -->
         <a-layout
@@ -150,13 +156,13 @@ onMounted(() => {
 
           <!-- 多页签 -->
           <TabBar
-            v-if="appStore.state.tabBar"
+            v-if="codeStore.state.tabBar.visible"
           />
 
           <!-- 面包屑 -->
           <Breadcrumb
             v-if="
-              appStore.state.breadcrumb && !router.currentRoute.value.meta.noShowBreadcrumb
+              codeStore.state.breadcrumb.visible && !router.currentRoute.value.meta.noShowBreadcrumb
             "
           />
 
@@ -165,7 +171,7 @@ onMounted(() => {
             class="m-x-5 m-b-5 flex bg-white p-t-0"
           >
 
-            <PageLayout />
+            <CodePageLayout />
 
           </a-layout-content>
 

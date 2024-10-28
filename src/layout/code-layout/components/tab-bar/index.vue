@@ -3,7 +3,10 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized } from 'vue-router'
 
-import { useAppStore, useTabBarStore } from '@/store'
+import {
+  useCodeStore,
+  useTabBarStore,
+} from '@/store'
 
 import {
   listenerRouteChange,
@@ -19,9 +22,9 @@ import {
 
 import tabItem from './tab-item.vue'
 
-const appStore = useAppStore()
-
 const tabBarStore = useTabBarStore()
+
+const codeStore = useCodeStore()
 
 const affixRef = ref()
 
@@ -38,7 +41,7 @@ const tagList = computed(() => {
  *  @returns {number} 顶部偏移量
  */
 const offsetTop = computed(() => {
-  return appStore.state.navbar ? 60 : 0
+  return codeStore.state.navbar.visible ? 60 : 0
 })
 
 /**
@@ -46,7 +49,7 @@ const offsetTop = computed(() => {
  *  @param {Function} 回调函数，更新位置
  */
 watch(
-  () => appStore.state.navbar,
+  () => codeStore.state.navbar.visible,
   () => {
     affixRef.value.updatePosition()
   },

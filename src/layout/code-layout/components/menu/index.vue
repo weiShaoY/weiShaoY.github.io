@@ -24,9 +24,8 @@ function setCollapse(val: boolean) {
   // 如果是桌面设备
   if (appStore.state.device === 'desktop') {
   // 更新菜单折叠状态
-    appStore.updateSettings({
-      menuCollapse: val,
-    })
+
+    codeStore.state.menu.collapsed = val
   }
 }
 
@@ -146,7 +145,7 @@ listenerRouteChange((newRoute) => {
     v-model:open-keys="openKeys"
     class="h-full w-full"
     :mode="codeStore.state.menu.position === 'top' ? 'horizontal' : 'vertical'"
-    :show-collapse-button="codeStore.state.device !== 'mobile'"
+    :show-collapse-button="appStore.state.device !== 'mobile'"
     :auto-open="false"
     :selected-keys="selectedKey"
     :auto-open-selected="true"

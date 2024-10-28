@@ -23,7 +23,6 @@ const router = useRouter()
 const selectedKey = defineModel('selectedKey')
 
 function handleGoto(item: RouteRecordRaw) {
-  console.log('%c Line:26 🍇 item', 'color:#b03734', item.name)
   try {
     // 打开外部链接
     if (externalLinkRegex.test(item.path)) {

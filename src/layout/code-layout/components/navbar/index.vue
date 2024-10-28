@@ -2,7 +2,7 @@
 
 <script lang="ts" setup>
 
-import { useCodeStore } from '@/store'
+import { useAppStore, useCodeStore } from '@/store'
 
 import {
   useDark,
@@ -13,6 +13,8 @@ import {
 import Menu from '../menu/index.vue'
 
 const codeStore = useCodeStore()
+
+const appStore = useAppStore()
 
 const router = useRouter()
 
@@ -29,7 +31,7 @@ const isDark = useDark({
   valueLight: 'light',
   storageKey: 'arco-theme',
   onChanged(dark: boolean) {
-    codeStore.toggleTheme(dark)
+    appStore.toggleTheme(dark)
   },
 })
 
@@ -46,7 +48,7 @@ function handleToggleTheme() {
  *  显示页面配置
  */
 function showGlobalSetting() {
-  codeStore.state.globalSetting.visible = true
+  appStore.state.globalSetting.visible = true
 }
 
 </script>
@@ -70,6 +72,7 @@ function showGlobalSetting() {
       />
     </div>
 
+    <!-- 顶部导航栏中的菜单栏 -->
     <div
       class="flex-1"
     >
@@ -78,6 +81,7 @@ function showGlobalSetting() {
       />
     </div>
 
+    <!-- 右侧 -->
     <ul
       class="right-side"
     >
@@ -85,7 +89,7 @@ function showGlobalSetting() {
       <li>
         <a-tooltip
           :content="
-            codeStore.state.theme.mode === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'
+            appStore.state.theme.mode === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'
           "
         >
           <a-button
@@ -98,7 +102,7 @@ function showGlobalSetting() {
               #icon
             >
               <icon-moon-fill
-                v-if="codeStore.state.theme.mode === 'dark'"
+                v-if="appStore.state.theme.mode === 'dark'"
               />
 
               <icon-sun-fill
