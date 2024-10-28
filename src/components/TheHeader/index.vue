@@ -1,9 +1,14 @@
 <script lang="ts" setup>
+
+import { useAppStore } from '@/store'
+
 import DesktopPageSwitch from './components/desktop-page-switch.vue'
 
 import MobilePageSwitch from './components/mobile-page-switch.vue'
 
 import ThemeSwitch from './components/theme-switch.vue'
+
+const appStore = useAppStore()
 
 const router = useRouter()
 

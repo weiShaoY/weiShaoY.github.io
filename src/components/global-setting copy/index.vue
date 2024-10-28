@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAppStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import { Message } from '@arco-design/web-vue'
 
@@ -11,59 +11,53 @@ import Block from './block.vue'
 
 const emit = defineEmits(['cancel'])
 
-const appStore = useAppStore()
+const codeStore = useCodeStore()
 
 const { copy } = useClipboard()
 
-const visible = computed(() => appStore.state.globalSettings)
+const visible = computed(() => codeStore.state.globalSetting.visible)
 
 const contentOpts = computed(() => [
   {
     name: '菜单栏',
     key: 'menu',
-    defaultVal: appStore.state.menu,
+    defaultVal: codeStore.state.menu.visible,
   },
 
   {
     name: '顶部菜单栏',
     key: 'topMenu',
-    defaultVal: appStore.state.topMenu,
+    defaultVal: codeStore.state.menu.position === 'top',
   },
 
   {
     name: '导航栏',
     key: 'navbar',
-    defaultVal: appStore.state.navbar,
+    defaultVal: codeStore.state.navbar.visible,
   },
 
   {
     name: '多页签',
     key: 'tabBar',
-    defaultVal: appStore.state.tabBar,
+    defaultVal: codeStore.state.tabBar.visible,
   },
 
   {
     name: '面包屑',
     key: 'breadcrumb',
-    defaultVal: appStore.state.breadcrumb,
+    defaultVal: codeStore.state.breadcrumb.visible,
   },
 
   {
     name: '底部',
     key: 'footer',
-    defaultVal: appStore.state.footer,
-  },
-
-  {
-    name: '菜单来源于后台',
-    key: 'menuFromServer',
-    defaultVal: appStore.state.menuFromServer,
+    defaultVal: codeStore.state.footer.visible,
   },
 
   {
     name: '菜单宽度 (px)',
     key: 'menuWidth',
-    defaultVal: appStore.state.menuWidth,
+    defaultVal: codeStore.state.menu.expandedWidth,
     type: 'number',
   },
 ])
@@ -72,7 +66,7 @@ const othersOpts = computed(() => [
   {
     name: '色弱模式',
     key: 'colorWeak',
-    defaultVal: appStore.state.colorWeak,
+    defaultVal: codeStore.state.theme.colorWeak,
   },
 ])
 
@@ -108,8 +102,8 @@ function setVisible() {
 
 <template>
   <div
-    v-if="!appStore.state.navbar"
-    class="fixed-settings"
+    v-if="!codeStore.state.navbar.visible"
+    class="fixed right-0 top-70"
     @click="setVisible"
   >
     <a-button
@@ -118,7 +112,9 @@ function setVisible() {
       <template
         #icon
       >
-        <icon-settings />
+        <SvgIcon
+          icon="sheZhi"
+        />
       </template>
     </a-button>
   </div>
@@ -155,14 +151,5 @@ function setVisible() {
 </template>
 
 <style scoped lang="less">
-  .fixed-settings {
-  position: fixed;
-  top: 280px;
-  right: 0;
 
-  svg {
-    font-size: 18px;
-    vertical-align: -4px;
-  }
-}
 </style>

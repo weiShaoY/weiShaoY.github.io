@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 
-import { useAppStore } from '@/store'
+import { useAppStore, useCodeStore } from '@/store'
 
 import FormWrapper from './form-wrapper.vue'
 
@@ -30,6 +30,9 @@ defineProps({
     },
   },
 })
+
+const codeStore = useCodeStore()
+
 const appStore = useAppStore()
 
 async function handleChange({
@@ -43,16 +46,8 @@ async function handleChange({
     document.body.style.filter = value ? 'invert(80%)' : 'none'
   }
 
-  if (key === 'menuFromServer' && value) {
-    // await appStore.fetchServerMenuConfig()
-
-    console.log('%c Line:50 🍇 fetchServerMenuConfig', 'color:#42b983', 'fetchServerMenuConfig')
-  }
-
   if (key === 'topMenu') {
-    appStore.updateSettings({
-      menuCollapse: false,
-    })
+    codeStore.state.menu.collapsed = false
   }
 
   appStore.updateSettings({
@@ -63,10 +58,10 @@ async function handleChange({
 
 <template>
   <div
-    class="block"
+    class="m-b-6"
   >
     <h5
-      class="title"
+      class="m-3 p-0 text-4"
     >
       {{ title }}
     </h5>
@@ -74,7 +69,7 @@ async function handleChange({
     <div
       v-for="option in options"
       :key="option.name"
-      class="switch-wrapper"
+      class="h-8 flex items-center justify-between"
     >
       <span>{{ option.name }}</span>
 
@@ -89,20 +84,5 @@ async function handleChange({
 </template>
 
 <style scoped lang="less">
-  .block {
-  margin-bottom: 24px;
-}
 
-.title {
-  margin: 10px 0;
-  padding: 0;
-  font-size: 14px;
-}
-
-.switch-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 32px;
-}
 </style>

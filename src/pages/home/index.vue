@@ -1,4 +1,8 @@
-<script setup lang="ts" generic="T extends any, O extends any">
+<script setup lang="ts">
+
+import { useAppStore } from '@/store'
+
+const appStore = useAppStore()
 
 </script>
 

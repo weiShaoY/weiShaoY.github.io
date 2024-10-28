@@ -7,16 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Block: typeof import('./src/components/global-setting/block.vue')['default']
+    Block: typeof import('./src/components/global-setting copy/block.vue')['default']
     Chart: typeof import('./src/components/Chart/index.vue')['default']
     'Chart_副本': typeof import('./src/components/Chart_副本.vue')['default']
     Checkbox: typeof import('./src/components/Checkbox.vue')['default']
     ContextMenu: typeof import('./src/components/contextMenu/index.vue')['default']
-    copy: typeof import('./src/components/SvgIcon/index copy.vue')['default']
+    copy: typeof import('./src/components/global-setting copy/index.vue')['default']
     DesktopPageSwitch: typeof import('./src/components/TheHeader/components/desktop-page-switch.vue')['default']
     Echarts: typeof import('./src/components/echarts/index.vue')['default']
-    FormWrapper: typeof import('./src/components/global-setting/form-wrapper.vue')['default']
+    FormWrapper: typeof import('./src/components/global-setting copy/form-wrapper.vue')['default']
     GlobalSetting: typeof import('./src/components/global-setting/index.vue')['default']
+    'GlobalSetting copy': typeof import('./src/components/global-setting copy/index.vue')['default']
     MobilePageSwitch: typeof import('./src/components/TheHeader/components/mobile-page-switch.vue')['default']
     PageSwitch: typeof import('./src/components/TheHeader/components/page-switch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

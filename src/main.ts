@@ -6,7 +6,7 @@ import directives from './directives'
 
 import router from './router'
 
-import store from './store'
+import pinia from './store'
 
 import '@unocss/reset/tailwind.css'
 
@@ -19,9 +19,9 @@ import 'virtual:svg-icons-register'
 
 const app = createApp(App)
 
-app.use(router)
+app.use(pinia)
 
-app.use(store)
+app.use(router)
 
 app.use(directives)
 

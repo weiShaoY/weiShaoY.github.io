@@ -365,7 +365,6 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly addEventListen: UnwrapRef<typeof import('./src/utils/index')['addEventListen']>
-    readonly appStore: UnwrapRef<typeof import('./src/composables/store')['appStore']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
