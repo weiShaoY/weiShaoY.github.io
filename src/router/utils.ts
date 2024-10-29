@@ -6,6 +6,8 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
 
 /**
  *  格式化modules模块(将modules模块转化为数组)
+ *  @param  _modules - modules模块
+ *  @param  result - 格式化后的数组
  */
 function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   // 遍历_modules对象的属性
@@ -41,8 +43,6 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
  *  导出appRoutes和appExternalRoutes 变量是格式化过的modules模块
  */
 const appRoutes: RouteRecordNormalized[] = formatModules(appModules, [])
-
-console.log('%c Line:44 🍢 appRoutes', 'color:#e41a6a', appRoutes)
 
 export {
   appRoutes,
