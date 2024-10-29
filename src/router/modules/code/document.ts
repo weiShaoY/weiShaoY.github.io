@@ -1,24 +1,24 @@
-import type { AppRouteRecordRaw } from '../types'
+import type { AppRouteRecordRaw } from '@/router/types'
 
 const document: AppRouteRecordRaw = {
-  path: 'document1',
-  name: 'Document1',
+  path: 'document',
+  name: 'Document',
   redirect: {
-    name: 'Vue1',
+    name: 'Vue',
   },
   component: () => import('@/layout/code-layout/index.vue'),
   meta: {
-    locale: '开发文档1',
+    locale: '开发文档',
     icon: 'wenDang',
-    order: 10,
+    order: 1,
   },
   children: [
     {
-      path: 'vue1',
-      name: 'Vue1',
+      path: 'vue',
+      name: 'Vue',
       component: () => import('@/pages/code/document/vue/index.vue'),
       meta: {
-        locale: 'Vue1',
+        locale: 'Vue',
         icon: 'vue',
       },
     },

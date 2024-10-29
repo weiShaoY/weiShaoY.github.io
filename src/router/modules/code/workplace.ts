@@ -1,4 +1,4 @@
-import type { AppRouteRecordRaw } from '../types'
+import type { AppRouteRecordRaw } from '@/router/types'
 
 const document: AppRouteRecordRaw = {
   path: 'workplace',

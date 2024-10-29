@@ -1,6 +1,6 @@
 import type { RouteRecordNormalized } from 'vue-router'
 
-const appModules = import.meta.glob('./modules/*.ts', {
+const appModules = import.meta.glob('./modules/*/index.ts', {
   eager: true,
 })
 
@@ -41,6 +41,8 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
  *  导出appRoutes和appExternalRoutes 变量是格式化过的modules模块
  */
 const appRoutes: RouteRecordNormalized[] = formatModules(appModules, [])
+
+console.log('%c Line:44 🍢 appRoutes', 'color:#e41a6a', appRoutes)
 
 export {
   appRoutes,

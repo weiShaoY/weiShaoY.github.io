@@ -1,15 +1,15 @@
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
-import { codeRoutes } from '@/router/code'
+import { codeChildRoutes } from '@/router/modules/code'
 
 import { cloneDeep } from 'lodash'
 
 import { computed } from 'vue'
 
 /**
- *  克隆 appRoutes 数组
+ *  克隆 codeChildRoutes 数组
  */
-const mixinRoutes = [...codeRoutes]
+const mixinRoutes = [...codeChildRoutes]
 
 /**
  * 将路由配置映射到客户端菜单
