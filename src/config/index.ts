@@ -1,12 +1,43 @@
+import codeConfig from './code'
+
+import NProgress from './nprogress'
+
+export {
+  codeConfig,
+
+  NProgress,
+}
+
+/**
+ *  高德地图 key
+ */
+export const AMAP_MAP_KEY: string = ''
+
+/**
+ *  百度地图 key
+ */
+export const BAIDU_MAP_KEY: string = ''
+
 const config = {
+  /**
+   *  @description : 首页地址
+   */
+  homeRoutePath: '/home/about',
 
   /**
-   *  首页
+   *  @description : 重定向路由名称
    */
-  indexPage: {
-    headerHeight: 20,
-  },
+  redirectRouteName: 'Redirect',
 
+  /**
+   *  @description : 未找到路由的名称(404)
+   */
+  notFoundRouteName: '404',
+
+  /**
+   *  @description: 代码模块相关配置
+   */
+  code: codeConfig,
 }
 
 export default config

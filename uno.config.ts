@@ -79,7 +79,9 @@ export default defineConfig({
    */
   rules: [
     //  将 `bc-颜色值` 转换为对应的 border-color 样式
-    [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `#${color}` })],
+    [/^bc-(.+)$/, ([, color]) => ({
+      'border-color': `#${color}`,
+    })],
   ],
 
   /**
@@ -155,22 +157,6 @@ export default defineConfig({
            */
           theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
 
-          /**
-          //  *  @description 无衬线字体
-          //
-           */
-          // // sans: 'DM Sans',
-          // sans: 'gaiLiangShouJinTi',
-
-          // /**
-          //  *  @description 衬线字体
-          //  */
-          // serif: 'DM Serif Display',
-
-          // /**
-          //  *  @description 等宽字体
-          //  */
-          // mono: 'DM Mono',
         },
       },
     ),

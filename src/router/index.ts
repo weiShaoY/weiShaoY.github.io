@@ -1,96 +1,39 @@
-import NProgressPlugin from '@/utils/nporgress'
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
 
-import { createRouter, createWebHistory } from 'vue-router'
+import createRouteGuard from './guard/index'
 
-import { appRoutes } from './routes/index'
+import { appRoutes } from './utils'
 
-/**
- * 导入进度条样式
- */
-import 'nprogress/nprogress.css'
-
-console.log('%c Line:6 🥤 appRoutes', 'color:#4fff4B', appRoutes)
+const routerMode = {
+  hash: () => createWebHashHistory(),
+  history: () => createWebHistory(),
+}
 
 /**
  * 创建并配置路由器
  */
 const router = createRouter({
-
   /**
    *    路由模式
    */
-  history: createWebHistory(),
+  history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
+
   routes: [
-    {
-      path: '/',
-      redirect: {
-        name: 'Index',
-      },
-    },
-
-    // 首页
-    {
-      path: '/index',
-      name: 'Index',
-      redirect: {
-        name: 'About',
-      },
-      component: () => import('@/pages/index/index.vue'),
-      children: [
-        {
-          path: 'about',
-          name: 'About',
-          component: () => import('@/pages/index/about.vue'),
-        },
-        {
-          path: 'resume',
-          name: 'Resume',
-          component: () => import('@/pages/index/resume.vue'),
-        },
-      ],
-    },
-
     ...appRoutes,
-
-    // 代码
-    // {
-    //   path: '/coding',
-    //   name: 'Coding',
-    //   component: () => import('@/pages/coding/index.vue'),
-    // },
-
-    // 404
     {
-      path: '/:pathMatch(.*)*',
-      name: '404',
-      component: () => import('@/pages/404/index.vue'),
+      path: '/test',
+      component: () => import('@/pages/test/index.vue'),
     },
-
-    // ...appRoutes,
-
-    // REDIRECT_MAIN,
-
-    // NOT_FOUND_ROUTE,
   ],
-
-  /**
-   *  每次路由切换时滚动到页面顶部
-   */
-  scrollBehavior() {
-    return { top: 0 }
-  },
 })
 
-// beforeEach路由切换之前触发
-router.beforeEach(() => {
-  // 开始进度条
-  NProgressPlugin.start()
-})
-
-// afterEach路由切换之后触发
-router.afterEach(() => {
-  // 结束进度条
-  NProgressPlugin.close()
-})
+/**
+ *  设置路由守卫
+ */
+createRouteGuard (router)
 
 export default router

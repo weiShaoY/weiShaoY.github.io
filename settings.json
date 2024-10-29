@@ -1,0 +1,18 @@
+{
+  "theme": "light", // 主题模式，可选 "light"（亮色）或 "dark"（暗色）
+  "colorWeak": false, // 是否启用色弱模式
+  "navbar": true, // 是否显示顶部导航栏
+  "menu": true, // 是否显示侧边菜单
+  "topMenu": false, // 是否显示顶部菜单（适用于多级菜单结构）
+  "hideMenu": false, // 是否隐藏侧边菜单
+  "menuCollapse": false, // 菜单是否折叠（适用于侧边菜单）
+  "footer": false, // 是否显示底部信息栏
+  "themeColor": "#165DFF", // 主题颜色，用于自定义主要颜色
+  "menuWidth": 220, // 侧边菜单的宽度（以像素为单位）
+  "globalSettings": false, // 是否显示全局设置按钮
+  "device": "desktop", // 当前设备类型，"desktop"（桌面）或 "mobile"（移动）
+  "tabBar": true, // 是否启用标签栏（多页签）
+  "breadcrumb": true, // 是否显示面包屑导航
+  "menuFromServer": false, // 菜单数据是否来自服务器
+  "serverMenu": [] // 服务器提供的菜单数据（当 menuFromServer 为 true 时生效）
+}
