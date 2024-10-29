@@ -1,8 +1,9 @@
 import { useAppStore, useCodeStore } from '@/store' // 导入应用状态管理
 
-import { addEventListen, removeEventListen } from '@/utils' // 导入事件监听器添加和移除工具函数
+import utils from '@/utils'
 
-import { useDebounceFn } from '@vueuse/core' // 导入 vueuse 中的防抖函数
+// 导入 vueuse 中的防抖函数
+import { useDebounceFn } from '@vueuse/core'
 
 import {
   onBeforeMount,
@@ -14,7 +15,7 @@ const WIDTH = 992 // 响应式断点宽度
 
 /**
  * 检查设备类型
- * @returns {boolean} 是否为移动设备
+ * @returns  是否为移动设备
  */
 function queryDevice() {
   const rect = document.body.getBoundingClientRect() // 获取文档主体的边界矩形
@@ -24,7 +25,7 @@ function queryDevice() {
 
 /**
  * 自定义响应式 Hook
- * @param {boolean} immediate - 是否立即执行防抖函数
+ * @param  immediate - 是否立即执行防抖函数
  */
 export default function useResponsive(immediate?: boolean) {
   const codeStore = useCodeStore()
@@ -72,7 +73,7 @@ export default function useResponsive(immediate?: boolean) {
 
   onBeforeMount(() => {
     // 组件挂载前，添加窗口大小改变事件监听器
-    addEventListen(window, 'resize', debounceFn)
+    utils.addEventListen(window, 'resize', debounceFn)
   })
 
   onBeforeUnmount(() => {

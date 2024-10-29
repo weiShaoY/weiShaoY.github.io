@@ -3,14 +3,9 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized } from 'vue-router'
 
-import { useCodeStore } from '@/store'
-
-// import {
-//   listenerRouteChange,
-//   removeRouteListener,
-// } from '@/utils/route-listener'
-
 import { CodeGuard } from '@/router/guard'
+
+import { useCodeStore } from '@/store'
 
 import {
   computed,

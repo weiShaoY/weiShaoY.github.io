@@ -8,7 +8,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
-  const addEventListen: typeof import('./src/utils/index')['addEventListen']
+  const addEventListen: typeof import('./src/utils/event')['addEventListen']
   const app: typeof import('./src/composables/store')['app']
   const appS: typeof import('./src/composables/store')['appS']
   const appSt: typeof import('./src/composables/store')['appSt']
@@ -44,7 +44,7 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const eslintConfig: typeof import('./eslint.config.js')['default']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const externalLinkRegex: typeof import('./src/utils/index')['externalLinkRegex']
+  const externalLinkRegex: typeof import('./src/utils/externalLinkRegex')['externalLinkRegex']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -113,7 +113,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
-  const openWindow: typeof import('./src/utils/index')['openWindow']
+  const openWindow: typeof import('./src/utils/openWindow')['openWindow']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
@@ -131,7 +131,7 @@ declare global {
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
   const regexUrl: typeof import('./src/utils/index')['regexUrl']
-  const removeEventListen: typeof import('./src/utils/index')['removeEventListen']
+  const removeEventListen: typeof import('./src/utils/event')['removeEventListen']
   const removeRouteListener: typeof import('./src/utils/route-listener')['removeRouteListener']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
@@ -334,6 +334,7 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
+  const utils: typeof import('./src/utils/index')['default']
   const viteConfig: typeof import('./vite.config')['default']
   const watch: typeof import('vue')['watch']
   const watchArray: typeof import('@vueuse/core')['watchArray']
@@ -364,7 +365,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly addEventListen: UnwrapRef<typeof import('./src/utils/index')['addEventListen']>
+    readonly addEventListen: UnwrapRef<typeof import('./src/utils/event')['addEventListen']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -391,7 +392,7 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly externalLinkRegex: UnwrapRef<typeof import('./src/utils/index')['externalLinkRegex']>
+    readonly externalLinkRegex: UnwrapRef<typeof import('./src/utils/externalLinkRegex')['externalLinkRegex']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -445,7 +446,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
-    readonly openWindow: UnwrapRef<typeof import('./src/utils/index')['openWindow']>
+    readonly openWindow: UnwrapRef<typeof import('./src/utils/openWindow')['openWindow']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
@@ -462,7 +463,7 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
-    readonly removeEventListen: UnwrapRef<typeof import('./src/utils/index')['removeEventListen']>
+    readonly removeEventListen: UnwrapRef<typeof import('./src/utils/event')['removeEventListen']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
@@ -653,6 +654,7 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
+    readonly utils: UnwrapRef<typeof import('./src/utils/index')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>

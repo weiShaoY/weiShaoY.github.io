@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 
-import { externalLinkRegex, openWindow } from '@/utils'
+import utils from '@/utils'
 
 defineProps({
   /**
@@ -10,6 +10,13 @@ defineProps({
    */
   menuTree: {
     type: Array as PropType<RouteRecordRaw[]>,
+
+    /** ***********  ✨ Codeium Command ⭐  */
+    /**
+     *  Default value of the `menuTree` prop.
+     *  By default, the `menuTree` is an empty array.
+     */
+    /** ****  6114939f-4fc7-42f9-ab38-fdc62d78a6d5  */
     default() {
       return []
     },
@@ -26,7 +33,7 @@ function handleGoto(item: RouteRecordRaw) {
   try {
     // 打开外部链接
     if (externalLinkRegex.test(item.path)) {
-      openWindow(item.path)
+      utils.openWindow(item.path)
 
       selectedKey.value = [item.name as string]
 
