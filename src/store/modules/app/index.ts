@@ -6,15 +6,8 @@ import { ref } from 'vue'
  * 定义名为 'app' 的 store
  */
 const useAppStore = defineStore(
-  'app',
+  'home',
   () => {
-  /**
-   * 定义 store 的状态
-   */
-    // const state = ref<AppState>({
-    //   ...defaultSettings,
-    // })
-
     const state = ref ({
 
       /**
@@ -102,6 +95,9 @@ const useAppStore = defineStore(
       toggleTheme,
 
     }
+  },
+  {
+    persist: true,
   },
 )
 
