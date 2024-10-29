@@ -2,7 +2,7 @@ import type { Router } from 'vue-router'
 
 import { NProgress } from '@/config'
 
-import { setRouteEmitter } from '@/utils/route-listener'
+import CodeGuard from './codeGuard'
 
 /**
  * 设置页面守卫
@@ -13,17 +13,24 @@ function setupPageGuard(router: Router) {
    *  @description 路由跳转前
    */
   router.beforeEach(async (to) => {
-    // 触发路由变更事件
-    setRouteEmitter(to)
-
-    // 开始进度条
+    /**
+     *  开始进度条
+     */
     NProgress.start()
+
+    /**
+     *  代码模块触发路由变更事件
+     */
+    CodeGuard.emitRouteChange(to)
   })
 
   /**
    *  @description 路由跳转结束
    */
   router.afterEach(() => {
+    /**
+     *  结束进度条
+     */
     NProgress.done()
   })
 
@@ -38,8 +45,14 @@ function setupPageGuard(router: Router) {
 
 /**
  * 创建并设置路由守卫
- * @param {Router} router - 路由器实例
+ * @param router - 路由器实例
  */
 export default function createRouteGuard(router: Router) {
   setupPageGuard(router)
+}
+
+export {
+
+  // 导出代码模块的路由发射器
+  CodeGuard,
 }

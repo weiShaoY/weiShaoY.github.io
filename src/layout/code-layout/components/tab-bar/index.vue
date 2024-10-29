@@ -5,10 +5,12 @@ import type { RouteLocationNormalized } from 'vue-router'
 
 import { useCodeStore } from '@/store'
 
-import {
-  listenerRouteChange,
-  removeRouteListener,
-} from '@/utils/route-listener'
+// import {
+//   listenerRouteChange,
+//   removeRouteListener,
+// } from '@/utils/route-listener'
+
+import { CodeGuard } from '@/router/guard'
 
 import {
   computed,
@@ -54,7 +56,7 @@ watch(
  *  监听路由变化，更新标签栏列表
  *  @param  route - 路由对象
  */
-listenerRouteChange((route: RouteLocationNormalized) => {
+CodeGuard.listenerRouteChange((route: RouteLocationNormalized) => {
   if (
     !route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)
   ) {
@@ -66,7 +68,7 @@ listenerRouteChange((route: RouteLocationNormalized) => {
  *  组件卸载时移除路由监听器
  */
 onUnmounted(() => {
-  removeRouteListener()
+  CodeGuard.removeRouteChange()
 })
 </script>
 
@@ -96,10 +98,10 @@ onUnmounted(() => {
           </div>
         </div>
 
+        <!-- 右侧 -->
         <div
-          class="tag-bar-operation"
+          class="h-8 w-20"
         />
-
       </div>
     </a-affix>
   </div>
@@ -138,11 +140,6 @@ onUnmounted(() => {
         }
       }
     }
-  }
-
-  .tag-bar-operation {
-    width: 100px;
-    height: 32px;
   }
 }
 </style>

@@ -1,16 +1,17 @@
 <!------------------------------------  页面布局  ------------------------------------------------->
 
 <script lang="ts" setup>
-import { useTabBarStore } from '@/store'
+import { useCodeStore } from '@/store'
 
 import { computed } from 'vue'
 
-const tabBarStore = useTabBarStore()
+const codeStore = useCodeStore()
 
 /**
  *  缓存列表
  */
-const cacheList = computed(() => tabBarStore.getCacheList)
+const cacheTabList = computed(() => codeStore.getCacheTabList)
+
 </script>
 
 <template>
@@ -44,7 +45,7 @@ const cacheList = computed(() => tabBarStore.getCacheList)
       <!-- include 指定要缓存的组件列表 -->
       <keep-alive
         v-else
-        :include="cacheList"
+        :include="cacheTabList"
       >
 
         <template

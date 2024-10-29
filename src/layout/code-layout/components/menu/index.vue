@@ -3,9 +3,9 @@
 <script lang="ts" setup>
 import type { RouteRecordRaw } from 'vue-router'
 
-import { useAppStore, useCodeStore } from '@/store'
+import { CodeGuard } from '@/router/guard'
 
-import { listenerRouteChange } from '@/utils/route-listener'
+import { useAppStore, useCodeStore } from '@/store'
 
 import SubMenu from './sub-menu.vue'
 
@@ -109,7 +109,7 @@ function findMenuOpenKeys(target: string) {
 /**
  *  监听路由变化事件
  */
-listenerRouteChange((newRoute) => {
+CodeGuard.listenerRouteChange((newRoute) => {
   // 获取路由的 meta 信息
   const { activeMenu, hideInMenu } = newRoute.meta
 

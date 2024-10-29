@@ -8,6 +8,29 @@ import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
 
+/**
+ * 禁止重定向的路由名称列表。
+ * @default 包含重定向路由名称
+ */
+const BAN_LIST = [config.redirectRouteName]
+
+/**
+ * 格式化路由为标签
+ * @param  route - 路由对象
+ * @returns  格式化后的标签属性
+ */
+function formatTag(route: RouteLocationNormalized): CodeType.TagProps {
+  const { name, meta, fullPath, query } = route
+
+  return {
+    title: meta.locale as string || '',
+    name: String(name),
+    fullPath,
+    query,
+    ignoreCache: meta.ignoreCache as boolean,
+  }
+}
+
 const useCodeStore = defineStore(
   'code',
   () => {
@@ -128,28 +151,6 @@ const useCodeStore = defineStore(
     })
 
     // / ///////////// 标签栏 //////////
-    /**
-     * 禁止重定向的路由名称列表。
-     * @default 包含重定向路由名称
-     */
-    const BAN_LIST = [config.redirectRouteName]
-
-    /**
-     * 格式化路由为标签
-     * @param  route - 路由对象
-     * @returns  格式化后的标签属性
-     */
-    function formatTag(route: RouteLocationNormalized): CodeType.TagProps {
-      const { name, meta, fullPath, query } = route
-
-      return {
-        title: meta.locale as string || '',
-        name: String(name),
-        fullPath,
-        query,
-        ignoreCache: meta.ignoreCache as boolean,
-      }
-    }
 
     /**
      * 标签列表 包含当前打开的标签信息。
@@ -196,6 +197,7 @@ const useCodeStore = defineStore(
      */
     function deleteTag(idx: number, tag: CodeType.TagProps) {
       tagList.value.splice(idx, 1)
+
       cacheTabList.value.delete(tag.name)
     }
 

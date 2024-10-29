@@ -422,7 +422,6 @@ declare module 'vue' {
     readonly isString: UnwrapRef<typeof import('./src/utils/is')['isString']>
     readonly isUnDef: UnwrapRef<typeof import('./src/utils/is')['isUnDef']>
     readonly isWindow: UnwrapRef<typeof import('./src/utils/is')['isWindow']>
-    readonly listenerRouteChange: UnwrapRef<typeof import('./src/utils/route-listener')['listenerRouteChange']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
@@ -464,11 +463,9 @@ declare module 'vue' {
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
     readonly removeEventListen: UnwrapRef<typeof import('./src/utils/index')['removeEventListen']>
-    readonly removeRouteListener: UnwrapRef<typeof import('./src/utils/route-listener')['removeRouteListener']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
-    readonly setRouteEmitter: UnwrapRef<typeof import('./src/utils/route-listener')['setRouteEmitter']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

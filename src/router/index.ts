@@ -4,7 +4,7 @@ import {
   createWebHistory,
 } from 'vue-router'
 
-import createRouteGuard from './guard'
+import createRouteGuard from './guard/index'
 
 import { appRoutes } from './utils'
 
@@ -31,6 +31,9 @@ const router = createRouter({
   ],
 })
 
+/**
+ *  设置路由守卫
+ */
 createRouteGuard (router)
 
 export default router

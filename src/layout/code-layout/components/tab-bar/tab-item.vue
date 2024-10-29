@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { TagProps } from '@/store/modules/tab-bar/types'
 
 import type { PropType } from 'vue'
 
@@ -20,7 +19,7 @@ const props = defineProps({
    *  标签数据
    */
   itemData: {
-    type: Object as PropType<TagProps>, // 指定 itemData 的类型为 TagProps
+    type: Object as PropType<CodeType.TagProps>, // 指定 itemData 的类型为 TagProps
     default() {
       return [] // 默认值为空数组
     },
@@ -40,7 +39,7 @@ const router = useRouter()
 const route = useRoute()
 
 /**
- * 枚举类型 Eaction，用于表示不同的操作类型
+ * 操作类型
  * @enum {string}
  */
 enum Eaction {
@@ -82,10 +81,10 @@ const codeStore = useCodeStore()
  * 跳转到指定标签
  * @param {TagProps} tag - 标签属性
  */
-function goto(tag: TagProps) {
+function goto(tag: CodeType.TagProps) {
   router.push({
     ...tag,
-  }) // 使用 router.push 方法跳转
+  })
 }
 
 /**
@@ -133,8 +132,9 @@ const disabledRight = computed(() => {
  * @param {TagProps} tag - 标签属性
  * @param {number} idx - 标签索引
  */
-function tagClose(tag: TagProps, idx: number) {
+function tagClose(tag: CodeType.TagProps, idx: number) {
   codeStore.deleteTag(idx, tag) // 从标签列表中删除指定标签
+
   if (props.itemData.fullPath === route.fullPath) { // 如果当前路径等于要关闭的标签路径
     const latest = tagList.value[idx - 1] // 获取队列的前一个标签
 
@@ -208,6 +208,7 @@ async function actionSelect(value: any) {
   // 重新加载
   else if (value === Eaction.reload) {
     codeStore.deleteCache(itemData)
+
     await router.push({
       name: config.redirectRouteName,
       params: {
