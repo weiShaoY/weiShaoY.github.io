@@ -1,9 +1,6 @@
 import type { defineComponent } from 'vue'
 
-import type {
-  NavigationGuard,
-  RouteMeta,
-} from 'vue-router'
+import type { NavigationGuard, RouteMeta } from 'vue-router'
 
 export type Component<T = any> =
   | ReturnType<typeof defineComponent>
@@ -38,12 +35,12 @@ export type AppRouteRecordRaw = {
     locale?: string
 
     /**
-     *   是否显示在侧边菜单
+     *   是否在左侧菜单中隐藏该项
      */
     hideInMenu?: boolean
 
     /**
-     *  是否菜单在侧边菜单中不显示
+     *  强制在左侧菜单中显示单项
      */
     hideChildrenInMenu?: boolean
 
@@ -58,9 +55,9 @@ export type AppRouteRecordRaw = {
     order?: number
 
     /**
-     *   不显示面包屑
+     *  如果设置为true，标签将不会添加到tab-bar中
      */
-    noShowBreadcrumb?: boolean
+    noAffix?: boolean
 
     /**
      *  页面不会被缓存
@@ -73,10 +70,9 @@ export type AppRouteRecordRaw = {
     noShowFooter?: boolean
 
     /**
-     *  是否是独立的菜单项(在菜单中单独显示,没有子子菜单)
+     *   不显示面包屑
      */
-    isStandaloneMenu?: boolean
-
+    noShowBreadcrumb?: boolean
   }
 
   /**
@@ -118,5 +114,4 @@ export type AppRouteRecordRaw = {
    *   菜单中是否显示
    */
   hideInMenu?: boolean
-
 }

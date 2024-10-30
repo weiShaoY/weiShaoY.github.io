@@ -66,7 +66,7 @@ function handleGoto(item: RouteRecordRaw) {
     :key="item.path"
   >
     <a-sub-menu
-      v-if="item.children?.length && !item?.meta?.isStandaloneMenu"
+      v-if="item.children?.length"
       :key="item.name"
     >
       <template
