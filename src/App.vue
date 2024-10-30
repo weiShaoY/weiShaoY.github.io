@@ -11,6 +11,12 @@ useResponsive(true)
 </script>
 
 <template>
+  <div
+    class="h-300 p-t-100"
+  >
+    测试代码
+  </div>
+
   <a-config-provider
     global
   >

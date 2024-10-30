@@ -34,10 +34,6 @@ export default defineConfig({
        */
       red: '#E43961',
 
-      light: {
-        text: '#67e8f9',
-        bg: '#06b6d4',
-      },
     },
 
     /**
