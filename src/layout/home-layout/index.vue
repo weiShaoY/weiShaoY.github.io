@@ -26,7 +26,7 @@ const homeStore = useHomeStore()
     </div>
 
     <a-layout
-      class="min-h-100vh duration-500 ease-in-out"
+      class="min-h-100vh overflow-y-auto duration-500 ease-in-out"
       :style="{
         paddingTop: `${homeStore.state.navbar.visible ? `${homeStore.state.navbar.height}px` : '0'}`,
       }"
