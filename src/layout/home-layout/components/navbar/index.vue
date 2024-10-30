@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useAppStore } from '~/store'
 
 import DesktopPageSwitch from './components/desktop-page-switch.vue'
 
@@ -8,6 +9,7 @@ import ThemeSwitch from './components/theme-switch.vue'
 
 const router = useRouter()
 
+const appStore = useAppStore()
 </script>
 
 <template>
@@ -31,7 +33,7 @@ const router = useRouter()
 
       <!-- 桌面端页面切换 -->
       <DesktopPageSwitch
-        v-if="!isMobile"
+        v-if="!appStore.isMobile"
       />
 
       <!-- 右边 -->
@@ -43,7 +45,7 @@ const router = useRouter()
 
         <!-- 移动端页面切换 -->
         <MobilePageSwitch
-          v-if="isMobile"
+          v-if="appStore.isMobile"
         />
       </div>
     </div>

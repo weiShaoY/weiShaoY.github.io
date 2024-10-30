@@ -1,7 +1,8 @@
 import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
 /**
- *  使用权限
+ * 自定义权限 Hook
+ * @returns  权限相关的函数
  */
 export default function usePermission() {
   // const userStore = useUserStore()
@@ -9,8 +10,8 @@ export default function usePermission() {
   return {
     /**
      *  检查路由是否可以访问
-     *  @param {RouteLocationNormalized | RouteRecordRaw} route - 路由对象
-     *  @returns {boolean} 是否可以访问
+     *  @param  route - 路由对象
+     *  @returns  是否可以访问
      */
     accessRouter(route: RouteLocationNormalized | RouteRecordRaw) {
       return !!(
@@ -23,9 +24,9 @@ export default function usePermission() {
 
     /**
      *  查找第一个具有权限的路由
-     *  @param {Array<RouteRecordRaw>} _routers - 路由列表
-     *  @param {string} role - 用户角色
-     *  @returns {RouteLocationNormalized | null} 第一个具有权限的路由
+     *  @param  _routers - 路由列表
+     *  @param  role - 用户角色
+     *  @returns  第一个具有权限的路由
      */
     findFirstPermissionRoute(_routers: any, role = 'admin') {
       const cloneRouters = [..._routers]

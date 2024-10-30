@@ -1,8 +1,5 @@
 <!------------------------------------  代码模块  ------------------------------------------------->
 <script lang="ts" setup>
-
-import useResponsive from '@/hooks/responsive'
-
 import { useCodeStore } from '@/store'
 
 import {
@@ -33,12 +30,6 @@ const isInit = ref(false)
 const codeStore = useCodeStore()
 
 const router = useRouter()
-
-/**
- * 响应式布局处理
- * @param {boolean} immediate - 是否立即执行
- */
-useResponsive(true)
 
 /**
  * 设置菜单折叠状态
@@ -79,7 +70,6 @@ onMounted(() => {
     class="h-full w-full"
     :class="{ mobile: !codeStore.state.menu.visible }"
   >
-
     <!-- 顶部导航栏 -->
     <div
       v-if="codeStore.state.navbar.visible"
@@ -94,20 +84,24 @@ onMounted(() => {
     <!-- 导航栏下面部分  -->
 
     <!-- 导航栏下面主体部分 -->
-    <a-layout
-      class=""
-    >
-
+    <a-layout>
       <!--  菜单栏 start -->
       <!-- 菜单正常显示时的侧边栏菜单 -->
       <a-layout-sider
-        v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'left'"
+        v-if="
+          codeStore.state.menu.visible
+            && codeStore.state.menu.position === 'left'
+        "
         v-show="codeStore.state.menu.visible"
         class="layout-sider"
         breakpoint="xl"
         :collapsed="codeStore.state.menu.collapsed"
         :collapsible="true"
-        :width="codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth"
+        :width="
+          codeStore.state.menu.collapsed
+            ? codeStore.state.menu.collapsedWidth
+            : codeStore.state.menu.expandedWidth
+        "
         :style="{
           paddingTop: codeStore.state.navbar.visible ? '60px' : '',
         }"
@@ -148,11 +142,16 @@ onMounted(() => {
       <a-layout
         class="min-h-100vh overflow-y-hidden transition-padding duration-500 ease-in-out"
         :style="{
-          paddingLeft: codeStore.state.menu.visible && codeStore.state.menu.position === 'left' ? `${codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth}px` : '0',
-          paddingTop: codeStore.state.navbar.visible ? `${codeStore.state.navbar.height}px` : '0',
+          paddingLeft:
+            codeStore.state.menu.visible
+            && codeStore.state.menu.position === 'left'
+              ? `${codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth}px`
+              : '0',
+          paddingTop: codeStore.state.navbar.visible
+            ? `${codeStore.state.navbar.height}px`
+            : '0',
         }"
       >
-
         <!-- 多页签 -->
         <TabBar
           v-if="codeStore.state.tabBar.visible"
@@ -161,7 +160,8 @@ onMounted(() => {
         <!-- 面包屑 -->
         <Breadcrumb
           v-if="
-            codeStore.state.breadcrumb.visible && !router.currentRoute.value.meta.noShowBreadcrumb
+            codeStore.state.breadcrumb.visible
+              && !router.currentRoute.value.meta.noShowBreadcrumb
           "
         />
 
@@ -169,23 +169,22 @@ onMounted(() => {
         <a-layout-content
           class="m-x-5 m-b-5 flex bg-white p-t-0"
         >
-
           <CodePageLayout />
-
         </a-layout-content>
 
         <!-- 底部 -->
         <Footer
-          v-if="codeStore.state.footer.visible && !router.currentRoute.value.meta.noShowFooter"
+          v-if="
+            codeStore.state.footer.visible
+              && !router.currentRoute.value.meta.noShowFooter
+          "
         />
-
       </a-layout>
     </a-layout>
   </a-layout>
 </template>
 
 <style scoped lang="less">
-
 .layout-sider {
   position: fixed;
   top: 0;
@@ -205,7 +204,7 @@ onMounted(() => {
   }
 
   > :deep(.arco-layout-sider-children) {
-    overflow-y: hidden;
+    overflow-y: hidden '';
   }
 }
 

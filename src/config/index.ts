@@ -20,6 +20,11 @@ export const BAIDU_MAP_KEY: string = ''
 
 const config = {
   /**
+   *  @description :  移动端响应式断点
+   */
+  mobileMediaQueryBreakpoint: 768,
+
+  /**
    *  @description : 首页地址
    */
   homeRoutePath: '/home/about',

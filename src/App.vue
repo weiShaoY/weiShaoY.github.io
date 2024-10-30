@@ -1,10 +1,16 @@
-<template>
-  <!-- <a-layout
-    class="h-full w-full"
-  >
-    <RouterView />
-  </a-layout> -->
+<script lang="ts" setup>
 
+import { useResponsive } from '@/hooks'
+
+/**
+ * 响应式布局处理
+ * @param {boolean} immediate - 是否立即执行
+ */
+useResponsive(true)
+
+</script>
+
+<template>
   <a-config-provider
     global
   >
@@ -14,5 +20,4 @@
     <GlobalSetting />
 
   </a-config-provider>
-
 </template>

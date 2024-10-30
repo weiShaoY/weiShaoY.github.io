@@ -3,7 +3,11 @@ import type { EChartsOption } from 'echarts'
 
 import chinaMap from '@/assets/jsons/china.json'
 
+import { useAppStore } from '@/store'
+
 import { registerMap } from 'echarts/core'
+
+const appStore = useAppStore()
 
 /**
  *  定义数据和地理坐标
@@ -105,12 +109,12 @@ const option = computed<EChartsOption>(() => ({
     /**
      *  地图缩放级别
      */
-    zoom: isMobile.value ? 0.8 : 1,
+    zoom: appStore.isMobile ? 0.8 : 1,
 
     /**
      *  地图距顶部的距离
      */
-    top: isMobile.value ? '0%' : '10%',
+    top: '0%',
 
     /**
      *  地图距底部的距离

@@ -404,13 +404,11 @@ declare module 'vue' {
     readonly isAsyncFunction: UnwrapRef<typeof import('./src/utils/is')['isAsyncFunction']>
     readonly isBoolean: UnwrapRef<typeof import('./src/utils/is')['isBoolean']>
     readonly isClient: UnwrapRef<typeof import('./src/utils/is')['isClient']>
-    readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDate: UnwrapRef<typeof import('./src/utils/is')['isDate']>
     readonly isDef: UnwrapRef<typeof import('./src/utils/is')['isDef']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isElement: UnwrapRef<typeof import('./src/utils/is')['isElement']>
     readonly isFunction: UnwrapRef<typeof import('./src/utils/is')['isFunction']>
-    readonly isMobile: UnwrapRef<typeof import('./src/composables/mobile')['isMobile']>
     readonly isNull: UnwrapRef<typeof import('./src/utils/is')['isNull']>
     readonly isNullOrUnDef: UnwrapRef<typeof import('./src/utils/is')['isNullOrUnDef']>
     readonly isNumber: UnwrapRef<typeof import('./src/utils/is')['isNumber']>
@@ -480,7 +478,6 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
-    readonly toggleDark: UnwrapRef<typeof import('./src/composables/dark')['toggleDark']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>

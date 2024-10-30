@@ -145,7 +145,7 @@ CodeGuard.listenerRouteChange((newRoute) => {
     v-model:open-keys="openKeys"
     class="h-full w-full"
     :mode="codeStore.state.menu.position === 'top' ? 'horizontal' : 'vertical'"
-    :show-collapse-button="appStore.state.device !== 'mobile'"
+    :show-collapse-button="!appStore.isMobile"
     :auto-open="false"
     :selected-keys="selectedKey"
     :auto-open-selected="true"

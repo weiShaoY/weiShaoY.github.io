@@ -45,13 +45,15 @@ export default function useResponsive(immediate?: boolean) {
        */
       const isMobile = queryDevice()
 
+      appStore.isMobile = isMobile
+
       /**
        *  切换设备类型
        */
       appStore.state.device = isMobile ? 'mobile' : 'desktop'
 
       /**
-       *  切换菜单显示状态
+       *  code 代码模块 切换菜单显示状态
        */
       codeStore.state.menu.visible = !isMobile
     }

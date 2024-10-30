@@ -38,7 +38,7 @@ type IOptions = {
  *  设置卡片的光源
  * @param option - 光源的配置
  */
-export function useLightCard(option: IOptions = {
+export default function useLightCard(option: IOptions = {
 }) {
   /**
    *  获取卡片的dom节点
