@@ -1,6 +1,6 @@
 import { useAppStore, useCodeStore } from '@/store' // 导入应用状态管理
 
-import utils from '@/utils'
+import { addEventListen } from '@/utils'
 
 // 导入 vueuse 中的防抖函数
 import { useDebounceFn } from '@vueuse/core'
@@ -73,7 +73,7 @@ export default function useResponsive(immediate?: boolean) {
 
   onBeforeMount(() => {
     // 组件挂载前，添加窗口大小改变事件监听器
-    utils.addEventListen(window, 'resize', debounceFn)
+    addEventListen(window, 'resize', debounceFn)
   })
 
   onBeforeUnmount(() => {

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useAppStore } from '@/store'
 
 import DesktopPageSwitch from './components/desktop-page-switch.vue'
 
@@ -9,16 +8,13 @@ import ThemeSwitch from './components/theme-switch.vue'
 
 const router = useRouter()
 
-const appStore = useAppStore()
 </script>
 
 <template>
   <nav
-    class="fixed left-0 top-0 z-100 w-full flex justify-center bg-#B3AFA4 dark:bg-#191919"
-    :style="{
-      height: `${appStore.app.home.headerHeight}px`,
-    }"
+    class="h-full flex justify-center bg-#B3AFA4 dark:bg-#191919"
   >
+
     <div
       class="flex items-center justify-between p-x-5 container"
     >

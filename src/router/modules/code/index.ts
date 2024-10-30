@@ -14,15 +14,16 @@ const currentFileName = import.meta.url.split('/').pop() || ''
  *  @description  使用 eager: true 同步导入模块并过滤当前文件
  */
 const modules = Object.fromEntries(
-  Object.entries(import.meta.glob('./*.ts', {
-    eager: true,
-  }))
-    .filter(([path]) => {
-      /**
-       *  排除当前文件
-       */
-      return !path.endsWith(`/${currentFileName}`)
+  Object.entries(
+    import.meta.glob('./*.ts', {
+      eager: true,
     }),
+  ).filter(([path]) => {
+    /**
+     *  排除当前文件
+     */
+    return !path.endsWith(`/${currentFileName}`)
+  }),
 )
 
 /**
@@ -42,11 +43,8 @@ const codeRouter: RouteRecordRaw[] = [
     redirect: {
       name: config.code.defaultRouteName,
     },
-    children: [
-      ...codeChildRoutes,
-    ],
+    children: [...codeChildRoutes],
   },
-
 ]
 
 export default codeRouter

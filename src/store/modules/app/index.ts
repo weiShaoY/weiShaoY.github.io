@@ -6,7 +6,7 @@ import { ref } from 'vue'
  * 定义名为 'app' 的 store
  */
 const useAppStore = defineStore(
-  'home',
+  'app',
   () => {
     const state = ref ({
 
@@ -80,20 +80,9 @@ const useAppStore = defineStore(
       }
     }
 
-    const app = ref({
-
-      home: {
-
-        headerHeight: 80,
-      },
-
-    })
-
     return {
-      app,
       state,
       toggleTheme,
-
     }
   },
   {

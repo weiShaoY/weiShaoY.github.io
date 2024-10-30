@@ -2,6 +2,8 @@ import type { RouteLocationNormalized } from 'vue-router'
 
 import config from '@/config'
 
+import { isString } from '@/utils'
+
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
@@ -204,7 +206,7 @@ const useCodeStore = defineStore(
      * @param  name - 标签名称
      */
     function addCache(name: string) {
-      if (utils.isString(name) && name !== '') {
+      if (isString(name) && name !== '') {
         cacheTabList.value.add(name)
       }
     }

@@ -93,95 +93,92 @@ onMounted(() => {
 
     <!-- 导航栏下面部分  -->
 
-    <!-- 主体部分 ( 左侧抽屉( 左侧菜单)   ) -->
+    <!-- 导航栏下面主体部分 -->
     <a-layout
       class=""
     >
-      <a-layout>
 
-        <!--  菜单栏 start -->
-        <!-- 菜单正常显示时的侧边栏菜单 -->
-        <a-layout-sider
-          v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'left'"
-          v-show="codeStore.state.menu.visible"
-          class="layout-sider"
-          breakpoint="xl"
-          :collapsed="codeStore.state.menu.collapsed"
-          :collapsible="true"
-          :width="codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth"
-          :style="{
-            paddingTop: codeStore.state.navbar.visible ? '60px' : '',
-          }"
-          :hide-trigger="true"
-          @collapse="setCollapsed"
+      <!--  菜单栏 start -->
+      <!-- 菜单正常显示时的侧边栏菜单 -->
+      <a-layout-sider
+        v-if="codeStore.state.menu.visible && codeStore.state.menu.position === 'left'"
+        v-show="codeStore.state.menu.visible"
+        class="layout-sider"
+        breakpoint="xl"
+        :collapsed="codeStore.state.menu.collapsed"
+        :collapsible="true"
+        :width="codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth"
+        :style="{
+          paddingTop: codeStore.state.navbar.visible ? '60px' : '',
+        }"
+        :hide-trigger="true"
+        @collapse="setCollapsed"
+      >
+        <div
+          class="menu-wrapper"
         >
-          <div
-            class="menu-wrapper"
-          >
-            <Menu />
-          </div>
-        </a-layout-sider>
-
-        <!-- 设置菜单不显示时 放到抽屉里的菜单 -->
-        <a-drawer
-          v-if="!codeStore.state.menu.visible"
-          :visible="codeStore.state.drawer.visible"
-          placement="left"
-          :footer="false"
-          mask-closable
-          :closable="false"
-          class="bg-gradient-from-pink"
-          @cancel="drawerCancel"
-        >
-          <template
-            #collapse-icon
-          />
-
-          <template
-            #expand-icon-right
-          />
-
           <Menu />
-          3333333333333333
-        </a-drawer>
-        <!--  菜单栏 end -->
+        </div>
+      </a-layout-sider>
 
-        <!-- 页面部分 -->
-        <a-layout
-          class="min-h-100vh overflow-y-hidden transition-padding duration-500 ease-in-out"
-          :style="{
-            paddingLeft: codeStore.state.menu.visible && codeStore.state.menu.position === 'left' ? `${codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth}px` : '0',
-            paddingTop: codeStore.state.navbar.visible ? `${codeStore.state.navbar.height}px` : '0',
-          }"
+      <!-- 设置菜单不显示时 放到抽屉里的菜单 -->
+      <a-drawer
+        v-if="!codeStore.state.menu.visible"
+        :visible="codeStore.state.drawer.visible"
+        placement="left"
+        :footer="false"
+        mask-closable
+        :closable="false"
+        class="bg-gradient-from-pink"
+        @cancel="drawerCancel"
+      >
+        <template
+          #collapse-icon
+        />
+
+        <template
+          #expand-icon-right
+        />
+
+        <Menu />
+      </a-drawer>
+      <!--  菜单栏 end -->
+
+      <!-- 页面部分 -->
+      <a-layout
+        class="min-h-100vh overflow-y-hidden transition-padding duration-500 ease-in-out"
+        :style="{
+          paddingLeft: codeStore.state.menu.visible && codeStore.state.menu.position === 'left' ? `${codeStore.state.menu.collapsed ? codeStore.state.menu.collapsedWidth : codeStore.state.menu.expandedWidth}px` : '0',
+          paddingTop: codeStore.state.navbar.visible ? `${codeStore.state.navbar.height}px` : '0',
+        }"
+      >
+
+        <!-- 多页签 -->
+        <TabBar
+          v-if="codeStore.state.tabBar.visible"
+        />
+
+        <!-- 面包屑 -->
+        <Breadcrumb
+          v-if="
+            codeStore.state.breadcrumb.visible && !router.currentRoute.value.meta.noShowBreadcrumb
+          "
+        />
+
+        <!-- 页面区域 -->
+        <a-layout-content
+          class="m-x-5 m-b-5 flex bg-white p-t-0"
         >
 
-          <!-- 多页签 -->
-          <TabBar
-            v-if="codeStore.state.tabBar.visible"
-          />
+          <CodePageLayout />
 
-          <!-- 面包屑 -->
-          <Breadcrumb
-            v-if="
-              codeStore.state.breadcrumb.visible && !router.currentRoute.value.meta.noShowBreadcrumb
-            "
-          />
+        </a-layout-content>
 
-          <!-- 页面区域 -->
-          <a-layout-content
-            class="m-x-5 m-b-5 flex bg-white p-t-0"
-          >
+        <!-- 底部 -->
+        <Footer
+          v-if="codeStore.state.footer.visible && !router.currentRoute.value.meta.noShowFooter"
+        />
 
-            <CodePageLayout />
-
-          </a-layout-content>
-
-          <Footer
-            v-if="codeStore.state.footer.visible && !router.currentRoute.value.meta.noShowFooter
-            "
-          />
-
-        </a-layout>
       </a-layout>
     </a-layout>
   </a-layout>

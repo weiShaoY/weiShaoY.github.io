@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 
-import utils from '@/utils'
+import { openWindow } from '@/utils'
 
 defineProps({
   /**
@@ -33,7 +33,7 @@ function handleGoto(item: RouteRecordRaw) {
   try {
     // 打开外部链接
     if (externalLinkRegex.test(item.path)) {
-      utils.openWindow(item.path)
+      openWindow(item.path)
 
       selectedKey.value = [item.name as string]
 

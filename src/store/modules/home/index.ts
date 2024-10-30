@@ -12,6 +12,7 @@ const useHomeStore = defineStore(
 
       navbar: {
         height: 80,
+        visible: true,
       },
     })
 

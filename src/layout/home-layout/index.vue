@@ -4,23 +4,42 @@ import { useHomeStore } from '@/store'
 
 import Footer from './components/footer/index.vue'
 
+import Navbar from './components/navbar/index.vue'
+
 const homeStore = useHomeStore()
 </script>
 
 <template>
-  <TheHeader />
 
-  <div
-    class="w-ful h-full flex flex-col justify-between overflow-auto"
-    :style="{
-      paddingTop: `${homeStore.state.navbar.height}px`,
-    }"
+  <a-layout
+    class="h-full w-full"
   >
-    <RouterView />
+    <!-- 顶部导航栏 -->
+    <div
+      v-if="homeStore.state.navbar.visible"
+      class="fixed left-0 top-0 z-100 w-full"
+      :style="{
+        height: `${homeStore.state.navbar.height}px`,
+      }"
+    >
+      <Navbar />
+    </div>
 
-  </div>
+    <a-layout
+      class="min-h-100vh duration-500 ease-in-out"
+      :style="{
+        paddingTop: `${homeStore.state.navbar.visible ? `${homeStore.state.navbar.height}px` : '0'}`,
+      }"
+    >
 
-  <Footer />
+      <RouterView />
+
+      <!-- 底部 -->
+      <Footer />
+
+    </a-layout>
+
+  </a-layout>
 
 </template>
 

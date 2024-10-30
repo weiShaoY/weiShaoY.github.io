@@ -1,12 +1,14 @@
 import type { AppRouteRecordRaw } from '@/router/types'
 
+import { CODE_DEFAULT_LAYOUT } from '@/router/layout'
+
 const document: AppRouteRecordRaw = {
   path: 'document',
   name: 'Document',
   redirect: {
     name: 'Vue',
   },
-  component: () => import('@/layout/code-layout/index.vue'),
+  component: CODE_DEFAULT_LAYOUT,
   meta: {
     locale: '开发文档',
     icon: 'wenDang',

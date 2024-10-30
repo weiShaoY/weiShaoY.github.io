@@ -56,7 +56,7 @@ function handleSelect(value: string) {
         #icon
       >
         <SvgIcon
-          :name="dropdownVisible ? 'guanBi' : 'zhanKai'"
+          :icon="dropdownVisible ? 'guanBi' : 'zhanKai'"
           :size="36"
           class="group-hover:color-primary"
           :class="isDark ? 'color-white' : 'color-#333'"
