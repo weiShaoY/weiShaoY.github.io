@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 
-import { openWindow } from '@/utils'
+import { externalLinkRegex, openWindow } from '@/utils'
 
 defineProps({
   /**

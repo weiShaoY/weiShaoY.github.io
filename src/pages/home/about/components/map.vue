@@ -65,29 +65,32 @@ const option = computed<EChartsOption>(() => ({
    *  标题设置
    */
   title: {
-    /**
-     *  标题文本
-     */
-    text: '风里雨里,长沙等你',
 
-    /**
-     *  标题距离顶部的距离
-     */
-    // top: isMobile.value ? '12%' : '0%',
+    show: false,
 
-    /**
-     *  标题水平居中
-     */
-    left: 'center',
+    // /**
+    //  *  标题文本
+    //  */
+    // text: '风里雨里,长沙等你',
 
-    textStyle: {
+    // /**
+    //  *  标题距离顶部的距离
+    //  */
+    // // top: isMobile.value ? '12%' : '0%',
 
-      color: isDark.value ? '#d1d3d7' : '#000',
+    // /**
+    //  *  标题水平居中
+    //  */
+    // left: 'center',
 
-      fontSize: isMobile.value ? 24 : 30,
+    // textStyle: {
 
-      fontWeight: 700,
-    },
+    //   color: isDark.value ? '#d1d3d7' : '#000',
+
+    //   fontSize: isMobile.value ? 24 : 30,
+
+    //   fontWeight: 700,
+    // },
   },
 
   /**
@@ -251,11 +254,10 @@ const option = computed<EChartsOption>(() => ({
       },
 
       tooltip: {
-
+        // 风里雨里,长沙等你
         formatter() {
-          return `惟楚有材，于斯为盛`
-
-          // return `风里雨里,长沙等你`
+          // return `惟楚有材，于斯为盛`
+          return `风里雨里,长沙等你`
         },
         textStyle: {
           color: '#E43961',
