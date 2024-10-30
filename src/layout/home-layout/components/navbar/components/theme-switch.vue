@@ -1,12 +1,16 @@
 <!------------------------------------  主题切换开关  ------------------------------------------------->
 <script lang="ts" setup>
-const visible = isDark.value
+import { useAppStore } from '@/store'
+
+const appStore = useAppStore()
+
+const visible = appStore.isDark
 
 /**
  * 切换主题并发出事件
  */
 function toggleTheme() {
-  toggleDark()
+  appStore.toggleTheme()
 }
 </script>
 

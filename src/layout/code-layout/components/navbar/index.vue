@@ -4,11 +4,7 @@
 
 import { useAppStore, useCodeStore } from '@/store'
 
-import {
-  useDark,
-  useFullscreen,
-  useToggle,
-} from '@vueuse/core'
+import { useFullscreen } from '@vueuse/core'
 
 import Menu from '../menu/index.vue'
 
@@ -21,27 +17,10 @@ const router = useRouter()
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 
 /**
- *  暗黑模式
- */
-const isDark = useDark({
-
-  selector: 'body',
-  attribute: 'arco-theme',
-  valueDark: 'dark',
-  valueLight: 'light',
-  storageKey: 'arco-theme',
-  onChanged(dark: boolean) {
-    appStore.toggleTheme(dark)
-  },
-})
-
-const toggleTheme = useToggle(isDark)
-
-/**
  *  切换主题
  */
 function handleToggleTheme() {
-  toggleTheme()
+  appStore.toggleTheme()
 }
 
 /**
@@ -109,7 +88,7 @@ function handleGotoHome() {
               #icon
             >
               <icon-moon-fill
-                v-if="appStore.state.theme.mode === 'dark'"
+                v-if="appStore.isDark"
               />
 
               <icon-sun-fill
