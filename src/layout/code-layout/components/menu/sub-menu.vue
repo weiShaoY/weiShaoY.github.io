@@ -66,8 +66,9 @@ function handleGoto(item: RouteRecordRaw) {
     :key="item.path"
   >
     <a-sub-menu
-      v-if="item.children?.length && !item?.meta?.isStandaloneMenu"
+      v-if="item.children?.length"
       :key="item.name"
+      class="!text-4"
     >
       <template
         #icon
@@ -75,6 +76,7 @@ function handleGoto(item: RouteRecordRaw) {
         <SvgIcon
           v-if=" item?.meta?.icon"
           :icon="`code-${item.meta.icon}`"
+          class="!inline-block"
         />
 
       </template>
@@ -97,6 +99,7 @@ function handleGoto(item: RouteRecordRaw) {
 
       <a-menu-item
         :key="item.name"
+        class="!text-4"
         @click="() => handleGoto(item)"
       >
         <template
@@ -106,6 +109,7 @@ function handleGoto(item: RouteRecordRaw) {
           <SvgIcon
             v-if=" item?.meta?.icon"
             :icon="`code-${item.meta.icon}`"
+            class="!inline-block"
           />
 
         </template>
@@ -118,3 +122,7 @@ function handleGoto(item: RouteRecordRaw) {
   </template>
 
 </template>
+
+<style lang="less" scoped>
+
+</style>

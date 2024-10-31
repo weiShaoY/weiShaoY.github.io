@@ -11,6 +11,7 @@ useResponsive(true)
 </script>
 
 <template>
+
   <a-config-provider
     global
   >

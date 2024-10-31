@@ -30,13 +30,6 @@ function showGlobalSetting() {
   appStore.state.globalSetting.visible = true
 }
 
-/**
- *  跳转到首页
- */
-function handleGotoHome() {
-  router.push('/')
-}
-
 </script>
 
 <template>
@@ -49,12 +42,15 @@ function handleGotoHome() {
   >
     <!-- 左侧  -->
     <div
-      class="flex items-center p-l-5 hover:cursor-pointer hover:color-primary"
-      @click="handleGotoHome"
+      class="flex items-center justify-center hover:cursor-pointer hover:color-primary"
+      :style="{
+        width: `${codeStore.state.menu.expandedWidth}px`,
+      }"
+      @click=" router.push('/')"
     >
       <SvgIcon
         icon="weiShaoY"
-        class="w-30 !h-10"
+        class="w-30 !h-15"
       />
     </div>
 

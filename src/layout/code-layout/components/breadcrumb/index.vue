@@ -60,6 +60,10 @@ watch(
     breadcrumbAffixRef.value.updatePosition()
   },
 )
+
+console.log('%c Line:65 🌽 router', 'color:#6ec1c2', router)
+console.log('%c Line:65 🍰 router.currentRoute.value', 'color:#e41a6a', router.currentRoute.value)
+
 </script>
 
 <script lang="ts" setup>
@@ -74,7 +78,7 @@ watch(
       :offset-top="offsetTop"
     >
       <div
-        class="h-14 flex items-center overflow-hidden bg-#F2F3F5 p-l-7"
+        class="h-14 flex items-center overflow-hidden p-l-7"
       >
 
         <a-breadcrumb>
@@ -83,7 +87,7 @@ watch(
           </a-breadcrumb-item>
 
           <a-breadcrumb-item
-            v-for="(item, index) in router.currentRoute.value.matched"
+            v-for="(item, index) in router.currentRoute.value.matched.slice(1)"
             :key="index"
           >
             {{ item.meta.locale as string }}

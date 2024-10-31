@@ -4,7 +4,7 @@
 
 <template>
   <a-layout-footer
-    class="flex items-center justify-center text-center"
+    class="h-12 flex items-center justify-center text-center text-6 font-700"
   >
     代码改变世界
   </a-layout-footer>

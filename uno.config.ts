@@ -66,10 +66,27 @@ export default defineConfig({
     // 文本溢出显示省略号
     ['text-ellipsis', 'truncate'],
 
-    //  主题色
-    ['theme', 'light:text-#000000  dark:text-#d1d3d7 light:bg-#ffffff  dark:bg-#222325'],
+    //  首页模块
+    [
+      'home-theme',
+      'light:text-#000000 light:bg-#ffffff dark:text-#d1d3d7  dark:bg-#222325',
+    ],
 
-    ['theme-item', 'bg-#D8D5CA dark:bg-#323639'],
+    [
+      'home-theme-item',
+      'light:bg-#d1d3d7 dark:bg-#323639',
+    ],
+
+    //  代码模块
+    [
+      'code-theme',
+      'light:text-#000000 light:bg-#ffffff dark:text-#d1d3d7  dark:bg-#222325',
+    ],
+
+    [
+      'code-theme-item',
+      'light:bg-#d1d3d7 dark:bg-#323639',
+    ],
 
   ],
 

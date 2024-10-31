@@ -8,6 +8,8 @@ import createRouteGuard from './guard/index'
 
 import { appRoutes } from './utils'
 
+console.log('%c Line:10 🥐 appRoutes', 'color:#e41a6a', appRoutes)
+
 const routerMode = {
   hash: () => createWebHashHistory(),
   history: () => createWebHistory(),

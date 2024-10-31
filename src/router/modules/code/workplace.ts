@@ -10,7 +10,7 @@ const document: AppRouteRecordRaw = {
   meta: {
     locale: '工作台',
     icon: 'wenDang',
-    isStandaloneMenu: true,
+    hideChildrenInMenu: true,
     order: 0,
   },
 
@@ -19,6 +19,9 @@ const document: AppRouteRecordRaw = {
       path: 'index',
       name: 'Index',
       component: () => import('@/pages/code/workplace/index.vue'),
+      meta: {
+        activeMenu: 'Workplace',
+      },
     },
 
   ],
