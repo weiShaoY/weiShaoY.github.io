@@ -24,7 +24,24 @@ const document: AppRouteRecordRaw = {
         icon: 'vue',
       },
     },
-
+    {
+      path: 'muYu',
+      name: 'MuYu',
+      component: () => import('@/pages/code/creativeComponent/muYu/index.vue'),
+      meta: {
+        locale: '木鱼',
+        icon: 'vue',
+      },
+    },
+    {
+      path: 'riLi',
+      name: 'Daojishi',
+      component: () => import('~/pages/code/creativeComponent/riLi/index.vue'),
+      meta: {
+        locale: '日历',
+        icon: 'vue',
+      },
+    },
   ],
 }
 

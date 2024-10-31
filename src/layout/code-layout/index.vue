@@ -169,7 +169,7 @@ onMounted(() => {
 
         <!-- 页面区域 -->
         <a-layout-content
-          class="m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-t-0 code-theme-item"
+          class="m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-5 code-theme-item"
         >
           <CodePageLayout />
         </a-layout-content>
