@@ -75,6 +75,9 @@ const useAppStore = defineStore(
       // 切换到暗色主题
         state.value.theme.mode = 'dark'
         document.body.setAttribute('arco-theme', 'dark')
+
+        document.documentElement.className = '' // 清空所有类名
+        document.documentElement.classList.add('dark') // 添加 dark 类名
       }
       else {
       // 切换到亮色主题
@@ -82,6 +85,9 @@ const useAppStore = defineStore(
 
         // document.body.removeAttribute('arco-theme', 'light')
         document.body.setAttribute('arco-theme', 'light')
+
+        document.documentElement.className = '' // 清空所有类名
+        document.documentElement.classList.add('light') // 添加 dark 类名
       }
     }
 

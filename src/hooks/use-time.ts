@@ -20,7 +20,9 @@ export function useTime() {
 
   const nowTime = ref<string>('') // 当前时间
 
-  // 更新时间
+  /**
+   *  更新时间
+   */
   const updateTime = () => {
     const date = new Date()
 

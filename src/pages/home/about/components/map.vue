@@ -128,7 +128,7 @@ const option = computed<EChartsOption>(() => ({
       /**
        *  地图区域的颜色
        */
-      areaColor: '#D8D5CA',
+      areaColor: '#d1d3d7',
 
       /**
        *  描边颜色
