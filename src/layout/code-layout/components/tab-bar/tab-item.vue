@@ -133,7 +133,8 @@ const disabledRight = computed(() => {
  * @param {number} idx - 标签索引
  */
 function tagClose(tag: CodeType.TagProps, idx: number) {
-  codeStore.deleteTag(idx, tag) // 从标签列表中删除指定标签
+  // 从标签列表中删除指定标签
+  codeStore.deleteTag(idx, tag)
 
   if (props.itemData.fullPath === route.fullPath) { // 如果当前路径等于要关闭的标签路径
     const latest = tagList.value[idx - 1] // 获取队列的前一个标签
@@ -155,76 +156,81 @@ function findCurrentRouteIndex() {
  * 处理不同的操作类型
  */
 async function actionSelect(value: any) {
-  const { itemData, index } = props
+  try {
+    const { itemData, index } = props
 
-  /**
-   *  复制标签列表
-   */
-  const copyTagList = [...tagList.value]
+    /**
+     *  复制标签列表
+     */
+    const copyTagList = [...tagList.value]
 
-  // 关闭当前标签
-  if (value === Eaction.current) {
-    tagClose(itemData, index)
-  }
+    // 关闭当前标签
+    if (value === Eaction.current) {
+      tagClose(itemData, index)
+    }
 
-  // 关闭左侧标签
-  else if (value === Eaction.left) {
-    const currentRouteIdx = findCurrentRouteIndex()
+    // 关闭左侧标签
+    else if (value === Eaction.left) {
+      const currentRouteIdx = findCurrentRouteIndex()
 
-    copyTagList.splice(1, props.index - 1)
-    codeStore.freshTabList(copyTagList)
-    if (currentRouteIdx < index) {
+      copyTagList.splice(1, props.index - 1)
+      codeStore.freshTabList(copyTagList)
+      if (currentRouteIdx < index) {
+        router.push({
+          name: itemData.name,
+        })
+      }
+    }
+
+    // 关闭右侧标签
+    else if (value === Eaction.right) {
+      const currentRouteIdx = findCurrentRouteIndex()
+
+      copyTagList.splice(props.index + 1)
+      codeStore.freshTabList(copyTagList)
+      if (currentRouteIdx > index) {
+        router.push({
+          name: itemData.name,
+        })
+      }
+    }
+
+    // 关闭其他标签页
+    else if (value === Eaction.others) {
+      const filterList = tagList.value.filter((el, idx) => {
+        return idx === 0 || idx === props.index
+      })
+
+      codeStore.freshTabList(filterList)
       router.push({
         name: itemData.name,
       })
     }
-  }
 
-  // 关闭右侧标签
-  else if (value === Eaction.right) {
-    const currentRouteIdx = findCurrentRouteIndex()
+    // 重新加载
+    else if (value === Eaction.reload) {
+      codeStore.deleteCache(itemData)
 
-    copyTagList.splice(props.index + 1)
-    codeStore.freshTabList(copyTagList)
-    if (currentRouteIdx > index) {
+      await router.push({
+        name: config.redirectRouteName,
+        params: {
+          path: route.fullPath,
+        },
+      })
+      codeStore.addCache(itemData.name)
+    }
+
+    // 关闭全部标签
+    else {
+      codeStore.resetTabList()
+
       router.push({
-        name: itemData.name,
+        name: config.code.defaultRouteName,
       })
     }
   }
-
-  // 关闭其他标签页
-  else if (value === Eaction.others) {
-    const filterList = tagList.value.filter((el, idx) => {
-      return idx === 0 || idx === props.index
-    })
-
-    codeStore.freshTabList(filterList)
-    router.push({
-      name: itemData.name,
-    })
-  }
-
-  // 重新加载
-  else if (value === Eaction.reload) {
-    codeStore.deleteCache(itemData)
-
-    await router.push({
-      name: config.redirectRouteName,
-      params: {
-        path: route.fullPath,
-      },
-    })
-    codeStore.addCache(itemData.name)
-  }
-
-  // 关闭全部标签
-  else {
-    codeStore.resetTabList()
-
-    router.push({
-      name: config.code.defaultRouteName,
-    })
+  catch (error) {
+    console.error('操作出错:', error)
   }
 }
 </script>

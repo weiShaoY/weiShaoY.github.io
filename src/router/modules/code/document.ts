@@ -24,7 +24,14 @@ const document: AppRouteRecordRaw = {
         icon: 'vue',
       },
     },
-
+    {
+      path: 'https://arco.design/vue/docs/pro/faq',
+      name: 'React',
+      meta: {
+        locale: 'React',
+        icon: 'vue',
+      },
+    },
   ],
 }
 

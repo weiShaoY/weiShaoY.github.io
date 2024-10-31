@@ -158,7 +158,3 @@ CodeGuard.listenerRouteChange((newRoute) => {
     />
   </a-menu>
 </template>
-
-<style lang="less" scoped>
-
-</style>

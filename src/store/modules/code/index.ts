@@ -162,7 +162,7 @@ const useCodeStore = defineStore(
      *  缓存标签列表 使用 Set 存储唯一的标签名称
      *  @default  包含默认路由的标签名称
      */
-    const cacheTabList = ref<Set<string>>(new Set([config.code.defaultRouteName]))
+    const cacheTabList = new Set([config.code.defaultRouteName])
 
     /**
      * 获取标签列表
@@ -172,13 +172,16 @@ const useCodeStore = defineStore(
     /**
      * 获取缓存列表
      */
-    const getCacheTabList = computed(() => Array.from(cacheTabList.value))
+    const getCacheTabList = computed(() => Array.from(cacheTabList))
 
     /**
      * 更新标签列表
      * @param  route - 路由对象
      */
     function updateTabList(route: RouteLocationNormalized) {
+      console.log('%c Line:182 🥕 route', 'color:#ed9ec7', route)
+      console.log('%c Line:184 🥚 BAN_LIST', 'color:#465975', BAN_LIST)
+
       if (BAN_LIST.includes(route.name as string)) {
         return
       }
@@ -186,7 +189,7 @@ const useCodeStore = defineStore(
       tagList.value.push(formatTag(route))
 
       if (!route.meta.ignoreCache) {
-        cacheTabList.value.add(route.name as string)
+        cacheTabList.add(route.name as string)
       }
     }
 
@@ -198,7 +201,7 @@ const useCodeStore = defineStore(
     function deleteTag(idx: number, tag: CodeType.TagProps) {
       tagList.value.splice(idx, 1)
 
-      cacheTabList.value.delete(tag.name)
+      cacheTabList.delete(tag.name)
     }
 
     /**
@@ -207,7 +210,7 @@ const useCodeStore = defineStore(
      */
     function addCache(name: string) {
       if (isString(name) && name !== '') {
-        cacheTabList.value.add(name)
+        cacheTabList.add(name)
       }
     }
 
@@ -216,7 +219,7 @@ const useCodeStore = defineStore(
      * @param  tag - 标签属性
      */
     function deleteCache(tag: CodeType.TagProps) {
-      cacheTabList.value.delete(tag.name)
+      cacheTabList.delete(tag.name)
     }
 
     /**
@@ -225,13 +228,13 @@ const useCodeStore = defineStore(
      */
     function freshTabList(tags: CodeType.TagProps[]) {
       tagList.value = tags
-      cacheTabList.value.clear()
+      cacheTabList.clear()
 
       // 添加不忽略缓存的标签到缓存列表
       tagList.value
         .filter(el => !el.ignoreCache)
         .map(el => el.name)
-        .forEach(x => cacheTabList.value.add(x))
+        .forEach(x => cacheTabList.add(x))
     }
 
     /**
@@ -240,8 +243,8 @@ const useCodeStore = defineStore(
      */
     function resetTabList() {
       tagList.value = [config.code.defaultRoute]
-      cacheTabList.value.clear()
-      cacheTabList.value.add(config.code.defaultRouteName)
+      cacheTabList.clear()
+      cacheTabList.add(config.code.defaultRouteName)
     }
 
     return {
