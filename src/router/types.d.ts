@@ -73,6 +73,11 @@ export type AppRouteRecordRaw = {
      *   不显示面包屑
      */
     noShowBreadcrumb?: boolean
+
+    /**
+     *   在iframe中打开的url
+     */
+    iframeUrl?: string
   }
 
   /**

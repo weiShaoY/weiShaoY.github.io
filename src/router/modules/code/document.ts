@@ -1,6 +1,6 @@
 import type { AppRouteRecordRaw } from '@/router/types'
 
-import { CODE_DEFAULT_LAYOUT } from '@/router/layout'
+import { CODE_DEFAULT_LAYOUT, CODE_IFRAME_LAYOUT } from '@/router/layout'
 
 const document: AppRouteRecordRaw = {
   path: 'document',
@@ -25,11 +25,13 @@ const document: AppRouteRecordRaw = {
       },
     },
     {
-      path: 'https://arco.design/vue/docs/pro/faq',
+      path: 'react',
       name: 'React',
+      component: CODE_IFRAME_LAYOUT,
       meta: {
         locale: 'React',
         icon: 'vue',
+        iframeUrl: 'https://zh-hans.react.dev/',
       },
     },
   ],
