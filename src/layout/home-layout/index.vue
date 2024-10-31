@@ -12,7 +12,7 @@ const homeStore = useHomeStore()
 <template>
 
   <a-layout
-    class="h-full w-full"
+    class="h-full w-full home-theme"
   >
     <!-- 顶部导航栏 -->
     <div

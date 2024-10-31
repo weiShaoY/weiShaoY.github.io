@@ -68,6 +68,7 @@ function handleGoto(item: RouteRecordRaw) {
     <a-sub-menu
       v-if="item.children?.length"
       :key="item.name"
+      class="!text-4"
     >
       <template
         #icon
@@ -98,6 +99,7 @@ function handleGoto(item: RouteRecordRaw) {
 
       <a-menu-item
         :key="item.name"
+        class="!text-4"
         @click="() => handleGoto(item)"
       >
         <template

@@ -22,7 +22,7 @@ onMounted(() => {
     v-if="iframeUrl"
     :src="iframeUrl"
     frameborder="0"
-    style="width: 100%; height: 100vh;"
+    style="width: 100%; height: 100%;"
   />
 </template>
 
