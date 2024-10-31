@@ -96,7 +96,7 @@ onMounted(() => {
         "
         v-show="codeStore.state.menu.visible"
         class="layout-sider"
-        breakpoint="xl"
+        breakpoint="lg"
         :collapsed="codeStore.state.menu.collapsed"
         :collapsible="true"
         :width="
@@ -169,7 +169,7 @@ onMounted(() => {
 
         <!-- 页面区域 -->
         <a-layout-content
-          class="scroll-block-9xl m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-t-0 dark:bg-dark-400 light:bg-white"
+          class="m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-t-0 code-theme-item"
         >
           <CodePageLayout />
         </a-layout-content>

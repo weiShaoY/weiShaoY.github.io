@@ -21,7 +21,8 @@ const props = defineProps({
   itemData: {
     type: Object as PropType<CodeType.TagProps>, // 指定 itemData 的类型为 TagProps
     default() {
-      return [] // 默认值为空数组
+      return {
+      }
     },
   },
 
@@ -325,7 +326,7 @@ async function actionSelect(value: any) {
 
 <style scoped lang="less">
   .tag-link {
-  color: var(--color-text-2);
+  // color: var(--color-text-2);
   text-decoration: none;
 }
 .link-activated {

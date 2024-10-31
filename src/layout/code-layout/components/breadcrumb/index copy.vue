@@ -1,12 +1,23 @@
 <!------------------------------------  面包屑  ------------------------------------------------->
 
 <script lang="ts" setup>
-
-import config from '@/config'
+import type { PropType } from 'vue'
 
 import { useCodeStore } from '@/store'
 
 import { useRouter } from 'vue-router'
+
+defineProps({
+  /**
+   *  面包屑
+   */
+  items: {
+    type: Array as PropType<string[]>,
+    default() {
+      return []
+    },
+  },
+})
 
 const codeStore = useCodeStore()
 
@@ -39,18 +50,23 @@ const offsetTop = computed(() => {
  *  @param {Function} 回调函数，更新位置
  */
 watch(
-  () => [codeStore.state.navbar.visible, codeStore.state.tabBar.visible],
+
+  () => [
+    codeStore.state.navbar.visible,
+    codeStore.state.tabBar.visible,
+  ],
 
   () => {
     breadcrumbAffixRef.value.updatePosition()
   },
 )
 
-const matchedList = computed(() => {
-  const list = router.currentRoute.value.matched.slice(1)
+console.log('%c Line:65 🌽 router', 'color:#6ec1c2', router)
+console.log('%c Line:65 🍰 router.currentRoute.value', 'color:#e41a6a', router.currentRoute.value)
 
-  return list
-})
+</script>
+
+<script lang="ts" setup>
 </script>
 
 <template>
@@ -64,50 +80,28 @@ const matchedList = computed(() => {
       <div
         class="h-14 flex items-center overflow-hidden p-l-7"
       >
+
         <a-breadcrumb>
-          <a-breadcrumb-item
-            class="cursor-pointer"
-          >
-            <a-link
-              @click="codeStore.state.menu.collapsed = !codeStore.state.menu.collapsed"
-            >
-              <icon-apps />
-            </a-link>
+          <a-breadcrumb-item>
+            <icon-apps />
           </a-breadcrumb-item>
 
-          <template
-            v-for="(item, index) in matchedList"
+          <a-breadcrumb-item
+            v-for="(item, index) in router.currentRoute.value.matched.slice(1)"
             :key="index"
           >
-            <a-breadcrumb-item
-              v-if="index < matchedList.length - 1 && item.meta.locale !== config.code.defaultRoute.title"
-            >
-              <a-link
-                @click="router.push(item.path)"
-              >
-                {{ item.meta.locale }}
-              </a-link>
-            </a-breadcrumb-item>
-
-            <a-breadcrumb-item
-              v-else-if="item.meta.locale"
-            >
-              {{ item.meta.locale }}
-            </a-breadcrumb-item>
-
-          </template>
-
+            {{ item.meta.locale as string }}
+          </a-breadcrumb-item>
         </a-breadcrumb>
-
       </div>
+
     </a-affix>
   </div>
 </template>
 
 <style scoped lang="less">
-:deep(.arco-breadcrumb-item) {
+  :deep(.arco-breadcrumb-item) {
   color: rgb(var(--gray-6));
-
   &:last-child {
     color: rgb(var(--gray-8));
   }
