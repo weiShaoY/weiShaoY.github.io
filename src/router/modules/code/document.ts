@@ -11,7 +11,7 @@ const document: AppRouteRecordRaw = {
   component: CODE_DEFAULT_LAYOUT,
   meta: {
     locale: '开发文档',
-    icon: 'wenDang',
+    icon: 'code-menu-document',
     order: 1,
   },
   children: [
@@ -21,7 +21,7 @@ const document: AppRouteRecordRaw = {
       component: () => import('@/pages/code/document/vue/index.vue'),
       meta: {
         locale: 'Vue',
-        icon: 'vue',
+        icon: 'code-menu-vue',
       },
     },
     {
@@ -30,7 +30,7 @@ const document: AppRouteRecordRaw = {
       component: CODE_IFRAME_LAYOUT,
       meta: {
         locale: 'React',
-        icon: 'vue',
+        icon: 'code-menu-react',
         iframeUrl: 'https://zh-hans.react.dev/',
       },
     },

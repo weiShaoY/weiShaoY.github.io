@@ -75,7 +75,7 @@ function handleGoto(item: RouteRecordRaw) {
       >
         <SvgIcon
           v-if=" item?.meta?.icon"
-          :icon="`code-${item.meta.icon}`"
+          :icon="`${item.meta.icon}`"
           class="!inline-block"
         />
 
@@ -108,7 +108,7 @@ function handleGoto(item: RouteRecordRaw) {
 
           <SvgIcon
             v-if=" item?.meta?.icon"
-            :icon="`code-${item.meta.icon}`"
+            :icon="`${item.meta.icon}`"
             class="!inline-block"
           />
 

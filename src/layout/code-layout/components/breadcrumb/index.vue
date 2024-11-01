@@ -71,7 +71,10 @@ const matchedList = computed(() => {
             <a-link
               @click="codeStore.state.menu.collapsed = !codeStore.state.menu.collapsed"
             >
-              <icon-apps />
+              <SvgIcon
+                icon="code-breadcrumb-app"
+                :size="16"
+              />
             </a-link>
           </a-breadcrumb-item>
 

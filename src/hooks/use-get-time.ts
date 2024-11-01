@@ -32,9 +32,19 @@ export type TimeType = {
   hour12: number
 
   /**
+   *  格式化的小时（12小时制），带补零
+   */
+  hour12Formatted: string
+
+  /**
    *  当前时 24小时制
    */
   hour24: number
+
+  /**
+   *  格式化的小时（24小时制），带补零
+   */
+  hour24Formatted: string
 
   /**
    *  当前分
@@ -42,9 +52,19 @@ export type TimeType = {
   minute: number
 
   /**
+   *  格式化的分钟，带补零
+   */
+  minuteFormatted: string
+
+  /**
    *  当前秒
    */
   second: number
+
+  /**
+   *  格式化的秒钟，带补零
+   */
+  secondFormatted: string
 
   /**
    *  当前星期 (在 本年 中的第几周)
@@ -78,42 +98,45 @@ export type TimeType = {
 
 }
 
-const solar = ref<Solar | undefined>(undefined)
-
-const lunar = ref<Lunar | undefined>(undefined)
+/**
+ * @description 补零格式化函数
+ */
+function formatWithLeadingZero(value: number): string {
+  return value < 10 ? `0${value}` : `${value}`
+}
 
 /**
  *  获取当前时间
  */
 function getTime(time: TimeType) {
-  solar.value = Solar.fromDate(new Date())
-  lunar.value = Lunar.fromDate(new Date())
+  const now = new Date()
 
-  time.year = solar.value.getYear()
+  const solar = Solar.fromDate(now)
 
-  time.month = solar.value.getMonth()
+  const lunar = Lunar.fromDate(now)
 
-  time.day = solar.value.getDay()
+  time.year = solar.getYear()
+  time.month = solar.getMonth()
+  time.day = solar.getDay()
 
-  time.hour24 = solar.value.getHour()
+  time.hour24 = solar.getHour()
+  time.hour12 = time.hour24 % 12 || 12 // 12 小时制
 
-  time.hour12 = solar.value.getHour() % 12 === 0 ? 12 : solar.value.getHour() % 12
+  time.minute = solar.getMinute()
+  time.second = solar.getSecond()
 
-  time.minute = solar.value.getMinute()
+  // 格式化字符串
+  time.hour24Formatted = formatWithLeadingZero(time.hour24)
+  time.hour12Formatted = formatWithLeadingZero(time.hour12)
+  time.minuteFormatted = formatWithLeadingZero(time.minute)
+  time.secondFormatted = formatWithLeadingZero(time.second)
 
-  time.second = solar.value.getSecond()
-
-  time.currentWeekInYear = SolarWeek.fromDate(new Date(), 1).getIndexInYear()
-
-  time.week = solar.value.getWeekInChinese()
-
-  time.lunarDay = lunar.value.getDayInChinese()
-
-  time.lunarMonth = lunar.value.getMonthInChinese()
-
-  time.lunarYear = lunar.value.getYearInChinese()
-
-  time.lunarHour = lunar.value.getTimeZhi() // 地支
+  time.currentWeekInYear = SolarWeek.fromDate(now, 1).getIndexInYear()
+  time.week = solar.getWeekInChinese()
+  time.lunarDay = lunar.getDayInChinese()
+  time.lunarMonth = lunar.getMonthInChinese()
+  time.lunarYear = lunar.getYearInChinese()
+  time.lunarHour = lunar.getTimeZhi() // 地支
 }
 
 /**
@@ -129,9 +152,13 @@ export default function useGetTime() {
       month: 0,
       day: 0,
       hour12: 0,
+      hour12Formatted: '',
       hour24: 0,
+      hour24Formatted: '',
       minute: 0,
+      minuteFormatted: '',
       second: 0,
+      secondFormatted: '',
       currentWeekInYear: 0,
       week: '',
       lunarDay: '',

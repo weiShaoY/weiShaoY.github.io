@@ -1,4 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  时钟  ------------------------------------------------->
 <script lang="ts" setup>
 import { useGetTime } from '@/hooks'
 
@@ -20,10 +20,6 @@ const secondHandStyle = computed(() => {
   const degrees = time.value.second * 6
 
   return `transform: rotate(${degrees}deg)`
-})
-
-watchEffect(async () => {
-  console.log('%c Line:28 🥐 time', 'color:#42b983', time.value)
 })
 
 </script>
@@ -60,21 +56,20 @@ watchEffect(async () => {
       </div>
 
       <div
-        class="flex flex-col flex-1 items-center justify-center text-white"
+        class="flex flex-col flex-1 items-center justify-center text-6 text-white font-700"
       >
         <div>
           星期{{ time.week }}
         </div>
 
         <div>
+          {{ time.hour24Formatted }} : {{ time.minuteFormatted }} : {{ time.secondFormatted }}
+        </div>
+
+        <div>
           {{ time.year }} 年 {{ time.month }} 月 {{ time.day }}日
         </div>
 
-        <div
-          class=""
-        >
-          {{ time.hour24 }} : {{ time.minute }} : {{ time.second }}
-        </div>
       </div>
     </div>
   </div>

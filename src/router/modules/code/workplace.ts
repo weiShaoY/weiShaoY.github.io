@@ -9,7 +9,7 @@ const document: AppRouteRecordRaw = {
   component: CODE_DEFAULT_LAYOUT,
   meta: {
     locale: '工作台',
-    icon: 'wenDang',
+    icon: 'code-menu-workplace',
     hideChildrenInMenu: true,
     order: 0,
   },

@@ -2,47 +2,47 @@ import type { AppRouteRecordRaw } from '@/router/types'
 
 import { CODE_DEFAULT_LAYOUT } from '@/router/layout'
 
-const document: AppRouteRecordRaw = {
-  path: 'creativeComponent',
-  name: 'CreativeComponent',
+const Innovation: AppRouteRecordRaw = {
+  path: 'innovation',
+  name: 'Innovation',
   redirect: {
     name: 'Clock',
   },
   component: CODE_DEFAULT_LAYOUT,
   meta: {
     locale: '创意组件',
-    icon: 'wenDang',
+    icon: 'code-menu-innovation',
     order: 10,
   },
   children: [
     {
       path: 'clock',
       name: 'Clock',
-      component: () => import('@/pages/code/creativeComponent/clock/index.vue'),
+      component: () => import('@/pages/code/innovation/clock/index.vue'),
       meta: {
         locale: '时钟',
-        icon: 'vue',
+        icon: 'code-menu-clock',
       },
     },
     {
       path: 'muYu',
       name: 'MuYu',
-      component: () => import('@/pages/code/creativeComponent/muYu/index.vue'),
+      component: () => import('~/pages/code/innovation/muYu/index.vue'),
       meta: {
         locale: '木鱼',
-        icon: 'vue',
+        icon: 'code-menu-muYu',
       },
     },
     {
-      path: 'riLi',
-      name: 'Daojishi',
-      component: () => import('~/pages/code/creativeComponent/riLi/index.vue'),
+      path: 'calendar',
+      name: 'Calendar',
+      component: () => import('~/pages/code/innovation/calendar/index.vue'),
       meta: {
         locale: '日历',
-        icon: 'vue',
+        icon: 'code-menu-calendar',
       },
     },
   ],
 }
 
-export default document
+export default Innovation

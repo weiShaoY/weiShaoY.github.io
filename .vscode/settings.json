@@ -102,11 +102,13 @@
     "antfu",
     "autoresize",
     "baitian",
+    "caiShen",
     "composables",
     "daima",
     "daojishi",
     "droplist",
     "echarts",
+    "fuShen",
     "gaiLiangShouJinTi",
     "guanbi",
     "iconify",
@@ -119,6 +121,7 @@
     "persistedstate",
     "pinia",
     "presetAttributify",
+    "shengXiao",
     "sider",
     "sperate-line",
     "spreadsheetml",
@@ -132,7 +135,10 @@
     "unplugin",
     "videojs",
     "vueuse",
+    "youJianTou",
+    "yueXiang",
     "zhankai",
-    "zlevel"
+    "zlevel",
+    "zuoJianTou"
   ]
 }
