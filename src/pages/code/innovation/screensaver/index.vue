@@ -1,34 +1,47 @@
 <script setup lang="ts">
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref,
+} from 'vue'
+
 import ScreensaverItem from './screensaver-item.vue'
 
 /**
- *  获取当前时间数组
+ * 获取当前时间数组
+ * @param now 当前时间
+ * @returns 当前时间的数字数组
  */
-function getTimeArr(now = new Date()) {
-  const h = now.getHours()
+function getTimeArr(now: Date) {
+  const h = String(now.getHours())
+    .padStart(2, '0')
+    .split('')
+    .map(Number)
 
-  const m = now.getMinutes()
+  const m = String(now.getMinutes())
+    .padStart(2, '0')
+    .split('')
+    .map(Number)
 
-  const s = now.getSeconds()
+  const s = String(now.getSeconds())
+    .padStart(2, '0')
+    .split('')
+    .map(Number)
 
-  function toArr(n: number) {
-    return n >= 10 ? `${n}`.split('').map(item => Number(item)) : [0, n]
-  }
-
-  return [...toArr(h), ...toArr(m), ...toArr(s)]
+  return [...h, ...m, ...s]
 }
 
 /**
- *  当前时间数组
+ * 当前时间数组
  */
-const timeArr = ref(getTimeArr())
+const timeArr = ref(getTimeArr(new Date()))
 
 let timer: ReturnType<typeof setTimeout> | null = null
 
 function startTimer() {
   stopTimer()
   timer = setTimeout(() => {
-    timeArr.value = getTimeArr()
+    timeArr.value = getTimeArr(new Date())
     startTimer()
   }, 1000)
 }
@@ -39,17 +52,13 @@ function stopTimer() {
   }
 }
 
-onMounted(() => {
-  startTimer()
-})
-onBeforeUnmount(() => {
-  stopTimer()
-})
+onMounted(startTimer)
+onBeforeUnmount(stopTimer)
 </script>
 
 <template>
   <div
-    class="wrap"
+    class="h-full w-full flex items-center justify-center bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]"
   >
     <ScreensaverItem
       :total="2"
@@ -62,8 +71,16 @@ onBeforeUnmount(() => {
     />
 
     <div
-      class="colon"
-    />
+      class="h-12 flex flex-col justify-around px-2"
+    >
+      <span
+        class="h-2.5 w-2.5 rounded-full bg-black"
+      />
+
+      <span
+        class="h-2.5 w-2.5 rounded-full bg-black"
+      />
+    </div>
 
     <ScreensaverItem
       :total="5"
@@ -76,8 +93,16 @@ onBeforeUnmount(() => {
     />
 
     <div
-      class="colon"
-    />
+      class="h-12 flex flex-col justify-around px-2"
+    >
+      <span
+        class="h-2.5 w-2.5 rounded-full bg-black"
+      />
+
+      <span
+        class="h-2.5 w-2.5 rounded-full bg-black"
+      />
+    </div>
 
     <ScreensaverItem
       :total="5"
@@ -92,29 +117,5 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="less" scoped>
-.wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(ellipse at center, #969696 0%, #595959 100%);
-  height: 100%;
-  width: 100%;
-}
-.colon {
-  height: 50px;
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
 
-  &::after,
-  &::before {
-    content: '';
-    display: block;
-    width: 10px;
-    height: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 50%;
-  }
-}
 </style>

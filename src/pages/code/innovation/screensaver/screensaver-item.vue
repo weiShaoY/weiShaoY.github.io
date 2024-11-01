@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import {
+  defineProps,
+  ref,
+  watch,
+} from 'vue'
 
 const props = defineProps({
   /**
@@ -22,10 +27,11 @@ const before = ref(props.total === props.current ? -1 : props.total)
 
 const isPlay = ref(false)
 
+// 监控 current 的变化
 watch(() => props.current, (current, preCurrent) => {
-  before.value = preCurrent
-  if (!isPlay.value) {
-    isPlay.value = true
+  if (current !== preCurrent) {
+    before.value = preCurrent
+    isPlay.value = true // 触发播放动画
   }
 })
 </script>
@@ -52,9 +58,7 @@ watch(() => props.current, (current, preCurrent) => {
 
           <div
             class="inn"
-            :style="{
-              color: 'white',
-            }"
+            :style="{ color: 'white' }"
           >
             {{ key }}
           </div>
@@ -69,9 +73,7 @@ watch(() => props.current, (current, preCurrent) => {
 
           <div
             class="inn"
-            :style="{
-              color: 'white',
-            }"
+            :style="{ color: 'white' }"
           >
             {{ key }}
           </div>
@@ -98,78 +100,75 @@ watch(() => props.current, (current, preCurrent) => {
   line-height: @height - @lineWidth;
   border-radius: @radius;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+}
 
-  .item {
-    list-style: none;
+.item {
+  list-style: none;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  transition: opacity 0.3s;
+
+  &.active {
+    z-index: 2;
+  }
+
+  &:first-child {
+    z-index: 2;
+  }
+
+  .up,
+  .down {
     z-index: 1;
     position: absolute;
     left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-    perspective: 1200px;
-    transition: opacity 0.3s;
+    height: 50%;
+    overflow: hidden;
+  }
 
-    &.active {
-      z-index: 2;
-    }
+  .up {
+    transform-origin: 50% 100%;
+    top: 0;
 
-    &:first-child {
-      z-index: 2;
-    }
-
-    .up,
-    .down {
-      z-index: 1;
+    &:after {
+      content: '';
       position: absolute;
+      top: (@height / 2 - @lineWidth);
       left: 0;
+      z-index: 5;
       width: 100%;
-      height: 50%;
-      overflow: hidden;
+      height: @lineWidth;
+      background-color: rgba(0, 0, 0, 0.4);
     }
+  }
 
-    .up {
-      transform-origin: 50% 100%;
-      top: 0;
+  .down {
+    transform-origin: 50% 0;
+    bottom: 0;
+  }
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: (@height / 2 - @lineWidth);
-        left: 0;
-        z-index: 5;
-        width: 100%;
-        height: @lineWidth;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-    }
+  .inn {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 200%;
+    text-align: center;
+    background-color: #333;
+    border-radius: @radius;
+  }
 
-    .down {
-      transform-origin: 50% 0;
-      bottom: 0;
-      transition: opacity 0.3s;
-    }
+  .up .inn {
+    top: 0;
+  }
 
-    .inn {
-      position: absolute;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 200%;
-      // color: #fff;
-      // text-shadow: 0 1px 2px #000;
-      text-align: center;
-      background-color: #333;
-      border-radius: @radius;
-    }
-
-    .up .inn {
-      top: 0;
-    }
-
-    .down .inn {
-      bottom: 0;
-    }
+  .down .inn {
+    bottom: 0;
   }
 }
 
@@ -185,12 +184,10 @@ watch(() => props.current, (current, preCurrent) => {
     }
 
     &.before .up {
-      z-index: 2;
       animation: turn-up 0.5s linear both;
     }
 
     &.active .down {
-      z-index: 2;
       animation: turn-down 0.5s 0.5s linear both;
     }
   }
