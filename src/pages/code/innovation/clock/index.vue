@@ -39,6 +39,23 @@ const secondHandStyle = computed(() => {
           class="clock"
         >
           <div
+            v-for="num in 12"
+            :key="num"
+            class="absolute h-90% text-6 color-white font-700"
+            :style="{
+              transform: `rotate(${num * 30}deg)`,
+            }"
+          >
+            <div
+              :style="{
+                transform: `rotate(${num * -30}deg)`,
+              }"
+            >
+              {{ num }}
+            </div>
+          </div>
+
+          <div
             :style="hourHandStyle"
             class="absolute left-1/2 top-3/10 z-0 h-1/5 w-[4px] origin-bottom transform transform rounded-full bg-[#FFF] -ml-1px"
           />
@@ -77,7 +94,7 @@ const secondHandStyle = computed(() => {
 
 <style lang="less" scoped>
 .clock {
-  background-image: url('./image/clock.png');
+  position: relative;
   background-color: #1e1f26;
   background-size: cover;
   background-position: center center;
