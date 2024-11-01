@@ -42,6 +42,25 @@ const Innovation: AppRouteRecordRaw = {
         icon: 'code-menu-calendar',
       },
     },
+    {
+      path: 'screensaver',
+      name: 'Screensaver',
+      component: () => import('~/pages/code/innovation/screensaver/index.vue'),
+      meta: {
+        locale: '屏保',
+        icon: 'code-menu-screensaver',
+      },
+    },
+
+    // {
+    //   path: 'weather',
+    //   name: 'Weather',
+    //   component: () => import('~/pages/code/innovation/weather/index.vue'),
+    //   meta: {
+    //     locale: '天气',
+    //     icon: 'code-menu-weather',
+    //   },
+    // },
   ],
 }
 
