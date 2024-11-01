@@ -172,6 +172,11 @@ export type WeekType = {
    *  每周的索引(在一年中的第几周)
    */
   weekIndex: number
+
+  /**
+   *  是否是今天所在的周
+   */
+  isTodayWeek: boolean
 }
 
 /**
@@ -214,7 +219,7 @@ export type StateType = {
   /**
    *  被选中的日，类型为DayType
    */
-  selectedMonth: DayType
+  selectedDay: DayType
 
   /**
    *  年份，初始化为当前年份
@@ -263,10 +268,16 @@ class CalendarUtils {
    * @returns 初始化并填充数据的Day对象。
    */
   static buildDay(d: Solar, state: StateType): DayType {
-  // 获取该日期的年月日字符串
+    /**
+     *  获取该日期的年月日字符串
+     */
     const ymd = d.toYmd()
 
-    // 获取对应的农历对象
+    console.log('%c Line:270 🍇 ymd', 'color:#7f2b82', ymd)
+
+    /**
+     *  获取对应的农历对象
+     */
     const lunar = d.getLunar()
 
     // 创建一个新的 Day 对象并填充数据
@@ -295,7 +306,7 @@ class CalendarUtils {
       yiArray: lunar.getDayYi(),
       jiArray: lunar.getDayJi(),
       isToday: ymd === Solar.fromDate(new Date()).toYmd(),
-      isSelected: ymd === state.selectedMonth.ymd,
+      isSelected: ymd === state.selectedDay.ymd,
       isHoliday: false,
       isRestDay: [0, 6].includes(d.getWeek()), // 周末为休息日
       isFestival: false,
@@ -303,8 +314,8 @@ class CalendarUtils {
     }
 
     // 如果是今天且当前选中的Day对象为空，则将当前Day对象设为选中
-    if (day.isToday && !state.selectedMonth.day) {
-      state.selectedMonth = day
+    if (day.isToday && !state.selectedDay.day) {
+      state.selectedDay = day
     }
 
     // 合并农历节日  农历节气  阳历节日
@@ -345,7 +356,7 @@ class CalendarUtils {
    * 渲染函数，用于根据当前的年份和月份重新计算并渲染页面。
    */
   render(state: StateType) {
-    state.isShowBackToday = state.selectedMonth.ymd !== Solar.fromDate(new Date())
+    state.isShowBackToday = state.selectedDay.ymd !== Solar.fromDate(new Date())
       .toYmd()
       || state.month !== Solar.fromDate(new Date())
         .getMonth()
@@ -378,6 +389,7 @@ class CalendarUtils {
       const week: WeekType = {
         dayArray: [],
         weekIndex: w.getIndexInYear(),
+        isTodayWeek: false,
       }
 
       // 存储周的头部信息，即星期几
@@ -391,6 +403,20 @@ class CalendarUtils {
         // 构建并添加每一天的日期信息到当前周中
         week.dayArray.push(CalendarUtils.buildDay(d, state))
       })
+
+      /**
+       * 将计算标志设置为 false，表示已经检查过
+       */
+      let isWeekChecked = true
+
+      if (isWeekChecked
+        && w.getYear() === Solar.fromDate(new Date()).getYear()
+        && SolarWeek.fromYmd(w.getYear(), w.getMonth(), w.getDay(), 1).getIndexInYear() === SolarWeek.fromDate(new Date(), 1).getIndexInYear()) {
+        week.isTodayWeek = true
+      }
+
+      // 将计算标志设置为 false，表示已经检查过
+      isWeekChecked = false
 
       // 将头部信息存储到月份实例中
       monthData.weekTitleArray = weekTitle
@@ -432,7 +458,7 @@ class CalendarUtils {
     const nowLunar = now.getLunar()
 
     return {
-      selectedMonth: {
+      selectedDay: {
         desc: nowLunar.getDayInChinese(),
         ymd: now.toYmd(),
         year: now.getYear(),
