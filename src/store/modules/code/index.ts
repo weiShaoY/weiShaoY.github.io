@@ -179,9 +179,6 @@ const useCodeStore = defineStore(
      * @param  route - 路由对象
      */
     function updateTabList(route: RouteLocationNormalized) {
-      console.log('%c Line:182 🥕 route', 'color:#ed9ec7', route)
-      console.log('%c Line:184 🥚 BAN_LIST', 'color:#465975', BAN_LIST)
-
       if (BAN_LIST.includes(route.name as string)) {
         return
       }

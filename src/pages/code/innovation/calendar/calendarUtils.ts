@@ -273,8 +273,6 @@ class CalendarUtils {
      */
     const ymd = d.toYmd()
 
-    console.log('%c Line:270 🍇 ymd', 'color:#7f2b82', ymd)
-
     /**
      *  获取对应的农历对象
      */
