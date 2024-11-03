@@ -52,15 +52,15 @@ const Innovation: AppRouteRecordRaw = {
       },
     },
 
-    // {
-    //   path: 'weather',
-    //   name: 'Weather',
-    //   component: () => import('~/pages/code/innovation/weather/index.vue'),
-    //   meta: {
-    //     locale: '天气',
-    //     icon: 'code-menu-weather',
-    //   },
-    // },
+    {
+      path: 'time',
+      name: 'Time',
+      component: () => import('~/pages/code/innovation/time/index.vue'),
+      meta: {
+        locale: '时间',
+        icon: 'code-menu-time',
+      },
+    },
   ],
 }
 
