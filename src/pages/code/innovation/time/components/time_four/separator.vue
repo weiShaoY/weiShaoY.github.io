@@ -36,7 +36,7 @@ watch(
     class="flex flex-col justify-around"
   >
     <i
-      class="h-2.5 w-2.5 rounded-sm transition-all"
+      class="m-b-4 h-2.5 w-2.5 rounded-sm transition-all"
       :style="{
         backgroundColor: color,
         opacity: refresh ? 1 : 0.2,
