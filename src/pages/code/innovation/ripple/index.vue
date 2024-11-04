@@ -13,12 +13,12 @@ import WaterRipple from './waterRipple'
 /**
  * 画布宽度
  */
-const canvasWidth = ref(600)
+let canvasWidth = 600
 
 /**
  * 画布高度
  */
-const canvasHeight = ref(600)
+let canvasHeight = 600
 
 /**
  * 定时器 ID
@@ -38,7 +38,7 @@ const boxRef = ref<HTMLElement | null>(null)
 /**
  * 画布引用
  */
-const canvasRef = ref<HTMLCanvasElement | null>(null)
+const canvasRef = ref<HTMLCanvasElement>()
 
 /**
  * 组件挂载时执行
@@ -47,10 +47,10 @@ onMounted(() => {
   if (boxRef.value && canvasRef.value) {
     const { offsetWidth, offsetHeight } = boxRef.value
 
-    canvasWidth.value = offsetWidth // 设置画布宽度
-    canvasHeight.value = offsetHeight // 设置画布高度
-    canvasRef.value.width = canvasWidth.value // 设置画布的实际宽度
-    canvasRef.value.height = canvasHeight.value // 设置画布的实际高度
+    canvasWidth = offsetWidth // 设置画布宽度
+    canvasHeight = offsetHeight // 设置画布高度
+    canvasRef.value.width = canvasWidth // 设置画布的实际宽度
+    canvasRef.value.height = canvasHeight // 设置画布的实际高度
 
     const waterImg = new Image()
 
@@ -65,9 +65,9 @@ onMounted(() => {
     waterRipple.animate() // 开始动画
 
     timer = window.setInterval(() => {
-      const x = Math.floor(canvasWidth.value * Math.random()) // 随机 X 坐标
+      const x = Math.floor(canvasWidth * Math.random()) // 随机 X 坐标
 
-      const y = Math.floor(canvasHeight.value * Math.random()) // 随机 Y 坐标
+      const y = Math.floor(canvasHeight * Math.random()) // 随机 Y 坐标
 
       waterRipple?.ripple(x, y) // 添加涟漪效果
     }, 1000)
@@ -80,10 +80,7 @@ onMounted(() => {
  * 组件卸载时执行
  */
 onUnmounted(() => {
-  if (timer) {
-    clearInterval(timer) // 清除定时器
-  }
-
+  timer && clearInterval(timer) // 清除定时器
   waterRipple?.stop() // 停止水波动画
 })
 </script>

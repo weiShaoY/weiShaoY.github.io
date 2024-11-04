@@ -24,7 +24,7 @@ const text = 'abcdefghijklmnopqrstuvwxyz'
 /**
  * 每列的高度
  */
-const bl = 26
+const columnHeight = 26
 
 /**
  * 上下文引用
@@ -40,17 +40,12 @@ let frameId: number = 0
  * 每列的速率
  */
 const rates = ref<Record<number, number>>({
+
 })
 
-/**
- * 列的起始速率
- */
 const startRates = ref<Record<number, number>>({
 })
 
-/**
- * 列的结束速率
- */
 const endRates = ref<Record<number, number>>({
 })
 
@@ -63,21 +58,21 @@ const textObj = ref<Record<string, string>>({
 /**
  * 画布外部容器引用
  */
-const boxRef = ref<HTMLDivElement>()
+const boxRef = ref<HTMLDivElement | null>(null)
 
 /**
  * 画布引用
  */
-const canvasRef = ref<HTMLCanvasElement>()
+const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 /**
  * 初始化画布和上下文
  */
 function initCanvas() {
   if (boxRef.value && canvasRef.value) {
-    resizeCanvas() // 调整画布大小
-    ctxRef = canvasRef.value.getContext('2d') as CanvasRenderingContext2D // 获取绘图上下文
-    ctxRef.font = '14px SourceHanSansCN-Regular' // 设置字体
+    resizeCanvas()
+    ctxRef = canvasRef.value.getContext('2d')
+    ctxRef!.font = '14px SourceHanSansCN-Regular'
   }
 }
 
@@ -90,7 +85,7 @@ function startAnimation() {
   } // 如果没有上下文，则返回
 
   ctxRef.clearRect(0, 0, canvasWidth.value, canvasHeight.value) // 清空画布
-  for (let i = 0; i < canvasWidth.value; i += bl) { // 遍历每列
+  for (let i = 0; i < canvasWidth.value; i += columnHeight) {
     drawColumn(i) // 绘制当前列
   }
 
@@ -102,8 +97,12 @@ function startAnimation() {
  * @param {number} x - 列的 X 坐标
  */
 function drawColumn(x: number) {
-  ctxRef!.beginPath() // 开始新的路径
-  const gradient = ctxRef!.createLinearGradient(0, 0, 0, canvasHeight.value) // 创建渐变
+  if (!ctxRef) {
+    return
+  } // 确保上下文存在
+
+  ctxRef.beginPath()
+  const gradient = ctxRef.createLinearGradient(0, 0, 0, canvasHeight.value) // 创建渐变
 
   const s1 = Math.random() * 0.2 // 随机速率
 
@@ -115,19 +114,19 @@ function drawColumn(x: number) {
 
   // 设置渐变颜色
   gradient.addColorStop(0, '#000000')
-  gradient.addColorStop(startRates.value[x] < 0 ? 0 : startRates.value[x], '#000000')
-  gradient.addColorStop(rates.value[x] < 0 ? 0 : rates.value[x], '#0ee30e')
+  gradient.addColorStop(Math.max(startRates.value[x], 0), '#000000')
+  gradient.addColorStop(Math.max(rates.value[x], 0), '#0ee30e')
   gradient.addColorStop(endRates.value[x], '#000000')
   gradient.addColorStop(1, '#000000')
 
-  ctxRef!.fillStyle = gradient // 设置填充样式
+  ctxRef.fillStyle = gradient // 设置填充样式
 
-  for (let j = 0; j < canvasHeight.value; j += bl) { // 遍历每个高度
-    const key = `${x}-${j}` // 生成键
+  for (let j = 0; j < canvasHeight.value; j += columnHeight) {
+    const key = `${x}-${j}`
 
     // 为当前列的每一行分配随机字符
     textObj.value[key] = textObj.value[key] || text[Math.floor(Math.random() * text.length)]
-    ctxRef!.fillText(textObj.value[key], x, j) // 绘制文本
+    ctxRef.fillText(textObj.value[key], x, j) // 绘制文本
   }
 
   updateRates(x, s1, s2, step) // 更新速率
