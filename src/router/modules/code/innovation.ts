@@ -61,6 +61,15 @@ const Innovation: AppRouteRecordRaw = {
         icon: 'code-menu-time',
       },
     },
+    {
+      path: 'ripple',
+      name: 'Ripple',
+      component: () => import('~/pages/code/innovation/ripple/index.vue'),
+      meta: {
+        locale: '水波',
+        icon: 'code-menu-ripple',
+      },
+    },
   ],
 }
 

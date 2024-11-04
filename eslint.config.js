@@ -190,6 +190,13 @@ export default antfu({
         'always-multiline',
         { ignoreJSX: true },
       ],
+
+      'max-statements-per-line': [
+        'warn',
+        {
+          max: 1,
+        },
+      ],
     },
 
   },
