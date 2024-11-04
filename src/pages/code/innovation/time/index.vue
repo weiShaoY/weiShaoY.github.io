@@ -1,4 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  时间  ------------------------------------------------->
 <script lang="ts" setup>
 import { useGetTime } from '@/hooks'
 
@@ -43,11 +43,9 @@ const color = ref('#ffffff')
  *  是否24小时制
  */
 const is24Hour = ref(true)
-
 </script>
 
 <template>
-
   <div
     class="grid grid-cols-2 h-full w-full bg-[radial-gradient(ellipse_at_center,#969696_0%,#595959_100%)]"
   >
@@ -55,7 +53,6 @@ const is24Hour = ref(true)
       v-for="item in componentsList"
       :key="item.key"
     >
-
       <component
         :is="item.component"
         :time="time"

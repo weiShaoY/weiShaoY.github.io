@@ -1,6 +1,5 @@
 <!------------------------------------ 优化后的代码 ------------------------------------>
 <script lang="ts" setup>
-
 import { useAppStore } from '@/store'
 
 const router = useRouter()
@@ -42,7 +41,6 @@ function handleSelect(value: string) {
 
   router.push(value)
 }
-
 </script>
 
 <template>

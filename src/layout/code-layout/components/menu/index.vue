@@ -136,7 +136,6 @@ CodeGuard.listenerRouteChange((newRoute) => {
     selectedKey.value = [(activeMenu as string) || (menuOpenKeys[menuOpenKeys.length - 1] as string)]
   }
 }, true)
-
 </script>
 
 <template>

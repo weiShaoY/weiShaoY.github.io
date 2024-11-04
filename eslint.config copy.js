@@ -191,12 +191,13 @@ export default antfu({
         { ignoreJSX: true },
       ],
 
-      'max-statements-per-line': [
-        'warn',
-        {
-          max: 1,
-        },
-      ],
+      // 'max-statements-per-line': [
+      //   'warn',
+      //   {
+      //     max: 1,
+      //   },
+      // ],
+      'max-statements-per-line': 'off',
 
     },
 

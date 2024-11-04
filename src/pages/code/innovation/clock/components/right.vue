@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const canvasWidth = 400
 
 const canvasHeight = 400
@@ -162,7 +161,6 @@ onMounted(() => {
 onUnmounted(() => {
   timer && clearInterval(timer)
 })
-
 </script>
 
 <template>
@@ -178,7 +176,6 @@ onUnmounted(() => {
       position: 'relative',
     }"
   >
-
     <canvas
       ref="canvasRef"
     >

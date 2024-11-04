@@ -1,6 +1,5 @@
 <!------------------------------------  时钟  ------------------------------------------------->
 <script lang="ts" setup>
-
 import Left from './components/left.vue'
 
 import Right from './components/right.vue'

@@ -65,7 +65,6 @@ const hour = computed(() => {
       borderColor: color,
     }"
   >
-
     <div>
       <div
         class="text-3xl font-600 tabular-nums"
@@ -76,7 +75,6 @@ const hour = computed(() => {
       <div
         class="text-5xl font-700 tabular-nums"
       >
-
         {{ hour < 10 ? `0${hour}` : hour }}
         <span>
           :
@@ -94,6 +92,5 @@ const hour = computed(() => {
         </span>
       </div>
     </div>
-
   </div>
 </template>

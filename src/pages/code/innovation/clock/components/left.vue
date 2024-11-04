@@ -26,7 +26,6 @@ const secondHandStyle = computed(() => {
   <div
     class="h-full w-full flex justify-center justify-between bg-#1e1f26"
   >
-
     <div
       class="relative aspect-square h-full flex items-center justify-center bg-#1e1f26"
     >
@@ -84,7 +83,6 @@ const secondHandStyle = computed(() => {
 
     </div> -->
   </div>
-
 </template>
 
 <style lang="less" scoped>

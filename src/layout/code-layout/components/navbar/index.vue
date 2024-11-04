@@ -1,7 +1,6 @@
 <!------------------------------------  导航栏  ------------------------------------------------->
 
 <script lang="ts" setup>
-
 import { useAppStore, useCodeStore } from '@/store'
 
 import { useFullscreen } from '@vueuse/core'
@@ -29,7 +28,6 @@ function handleToggleTheme() {
 function showGlobalSetting() {
   appStore.state.globalSetting.visible = true
 }
-
 </script>
 
 <template>
@@ -67,7 +65,6 @@ function showGlobalSetting() {
     <ul
       class="right-side"
     >
-
       <li>
         <a-tooltip
           :content="
@@ -142,7 +139,6 @@ function showGlobalSetting() {
           </a-button>
         </a-tooltip>
       </li>
-
     </ul>
   </div>
 </template>

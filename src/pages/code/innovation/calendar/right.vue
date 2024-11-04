@@ -12,7 +12,6 @@ const state = defineModel<StateType>({
   <div
     class="h-full flex-1 rounded-5 bg-[#F5F5F5] p-5 text-center"
   >
-
     <div
       class="m-x-auto h20 w20 flex items-center justify-center rounded-3 bg-primary text-12 color-white"
     >
@@ -31,7 +30,6 @@ const state = defineModel<StateType>({
       >
         周{{ state.selectedDay.dayOfWeek }}
       </span>
-
     </div>
 
     <div>
@@ -103,7 +101,6 @@ const state = defineModel<StateType>({
 
         天
       </div>
-
     </template>
 
     <a-divider
@@ -169,7 +166,6 @@ const state = defineModel<StateType>({
             {{ festival }}
           </span>
         </div>
-
       </div>
 
       <a-divider
@@ -286,9 +282,7 @@ const state = defineModel<StateType>({
         </div>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <style lang="less" scoped>

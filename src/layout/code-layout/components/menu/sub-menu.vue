@@ -57,7 +57,6 @@ function handleGoto(item: RouteRecordRaw) {
     console.error('路由跳转出错:', error)
   }
 }
-
 </script>
 
 <template>
@@ -78,7 +77,6 @@ function handleGoto(item: RouteRecordRaw) {
           :icon="`${item.meta.icon}`"
           class="!inline-block"
         />
-
       </template>
 
       <template
@@ -96,7 +94,6 @@ function handleGoto(item: RouteRecordRaw) {
     <template
       v-else
     >
-
       <a-menu-item
         :key="item.name"
         class="!text-4"
@@ -105,22 +102,17 @@ function handleGoto(item: RouteRecordRaw) {
         <template
           #icon
         >
-
           <SvgIcon
             v-if=" item?.meta?.icon"
             :icon="`${item.meta.icon}`"
             class="!inline-block"
           />
-
         </template>
 
         {{ item.meta?.locale || '' }}
       </a-menu-item>
-
     </template>
-
   </template>
-
 </template>
 
 <style lang="less" scoped>

@@ -7,11 +7,9 @@
  * @param {boolean} immediate - 是否立即执行
  */
 // useResponsive(true)
-
 </script>
 
 <template>
-
   <a-config-provider
     global
   >
@@ -19,6 +17,5 @@
 
     <!-- 页面配置  -->
     <GlobalSetting />
-
   </a-config-provider>
 </template>

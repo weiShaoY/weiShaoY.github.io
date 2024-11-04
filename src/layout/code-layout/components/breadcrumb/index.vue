@@ -1,7 +1,6 @@
 <!------------------------------------  面包屑  ------------------------------------------------->
 
 <script lang="ts" setup>
-
 import config from '@/config'
 
 import { useCodeStore } from '@/store'
@@ -97,11 +96,8 @@ const matchedList = computed(() => {
             >
               {{ item.meta.locale }}
             </a-breadcrumb-item>
-
           </template>
-
         </a-breadcrumb>
-
       </div>
     </a-affix>
   </div>

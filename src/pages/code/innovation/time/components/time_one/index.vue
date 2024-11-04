@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import type { TimeType } from '@/hooks/use-get-time'
 
 defineProps({
@@ -27,7 +26,6 @@ defineProps({
     default: true,
   },
 })
-
 </script>
 
 <template>
@@ -84,7 +82,6 @@ defineProps({
       <div
         class="m-r-2"
       >
-
         <span>
           {{ time.year }}
         </span>
@@ -108,7 +105,6 @@ defineProps({
         <span>
           日
         </span>
-
       </div>
 
       <!-- 星期 -->

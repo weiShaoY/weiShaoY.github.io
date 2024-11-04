@@ -16,7 +16,6 @@ const state = ref<StateType>(CalendarUtils.init())
 onMounted(() => {
   CalendarUtils.render(state.value)
 })
-
 </script>
 
 <template>
@@ -26,7 +25,6 @@ onMounted(() => {
     <div
       class="h-full w-full flex items-center justify-between bg-white p-3"
     >
-
       <Left
         v-model="state"
       />

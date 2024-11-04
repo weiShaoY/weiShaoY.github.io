@@ -16,7 +16,6 @@ const appStore = useAppStore()
   <nav
     class="h-full flex justify-center bg-#e2e5e5 dark:bg-#191919"
   >
-
     <div
       class="flex items-center justify-between p-x-5 container"
     >

@@ -45,11 +45,9 @@ function mathNum(
 const hour = computed(() => {
   return props.is24Hour ? props.time.hour24 : props.time?.hour12
 })
-
 </script>
 
 <template>
-
   <div
     class="max-w-full flex items-center justify-center gap-1 px-2 md:gap-2 md:px-0"
   >

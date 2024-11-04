@@ -87,12 +87,10 @@ function handleNextMonth(): void {
   <div
     class="h-full w2/3 flex flex-col p-5"
   >
-
     <!-- 日期选择和按钮行  -->
     <div
       class="h10 flex items-center"
     >
-
       <a-month-picker
         v-model="monthPicker"
         class="m-l-3 w-30"
@@ -241,11 +239,8 @@ function handleNextMonth(): void {
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <style lang="less" scoped>

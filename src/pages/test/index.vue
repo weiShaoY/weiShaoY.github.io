@@ -132,7 +132,6 @@ onUnmounted(() => {
   frameId && cancelAnimationFrame(frameId)
   window.removeEventListener('resize', resize)
 })
-
 </script>
 
 <template>

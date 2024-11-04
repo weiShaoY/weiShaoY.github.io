@@ -10,7 +10,6 @@ const homeStore = useHomeStore()
 </script>
 
 <template>
-
   <a-layout
     class="h-full w-full home-theme"
   >
@@ -31,16 +30,12 @@ const homeStore = useHomeStore()
         paddingTop: `${homeStore.state.navbar.visible ? `${homeStore.state.navbar.height}px` : '0'}`,
       }"
     >
-
       <RouterView />
 
       <!-- 底部 -->
       <Footer />
-
     </a-layout>
-
   </a-layout>
-
 </template>
 
 <style lang="less" scoped>
