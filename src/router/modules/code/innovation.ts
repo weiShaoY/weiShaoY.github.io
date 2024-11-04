@@ -27,7 +27,7 @@ const Innovation: AppRouteRecordRaw = {
     {
       path: 'muYu',
       name: 'MuYu',
-      component: () => import('~/pages/code/innovation/muYu/index.vue'),
+      component: () => import('@/pages/code/innovation/muYu/index.vue'),
       meta: {
         locale: '木鱼',
         icon: 'code-menu-muYu',
@@ -36,7 +36,7 @@ const Innovation: AppRouteRecordRaw = {
     {
       path: 'calendar',
       name: 'Calendar',
-      component: () => import('~/pages/code/innovation/calendar/index.vue'),
+      component: () => import('@/pages/code/innovation/calendar/index.vue'),
       meta: {
         locale: '日历',
         icon: 'code-menu-calendar',
@@ -45,7 +45,7 @@ const Innovation: AppRouteRecordRaw = {
     {
       path: 'screensaver',
       name: 'Screensaver',
-      component: () => import('~/pages/code/innovation/screensaver/index.vue'),
+      component: () => import('@/pages/code/innovation/screensaver/index.vue'),
       meta: {
         locale: '屏保',
         icon: 'code-menu-screensaver',
@@ -55,7 +55,7 @@ const Innovation: AppRouteRecordRaw = {
     {
       path: 'time',
       name: 'Time',
-      component: () => import('~/pages/code/innovation/time/index.vue'),
+      component: () => import('@/pages/code/innovation/time/index.vue'),
       meta: {
         locale: '时间',
         icon: 'code-menu-time',
@@ -64,10 +64,19 @@ const Innovation: AppRouteRecordRaw = {
     {
       path: 'ripple',
       name: 'Ripple',
-      component: () => import('~/pages/code/innovation/ripple/index.vue'),
+      component: () => import('@/pages/code/innovation/ripple/index.vue'),
       meta: {
         locale: '水波',
         icon: 'code-menu-ripple',
+      },
+    },
+    {
+      path: 'codeBackgroundWall',
+      name: 'CodeBackgroundWall',
+      component: () => import('@/pages/code/innovation/codeBackgroundWall/index.vue'),
+      meta: {
+        locale: '代码背景墙',
+        icon: 'code-menu-codeBackgroundWall',
       },
     },
   ],

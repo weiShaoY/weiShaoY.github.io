@@ -1,6 +1,3 @@
-/**
- * 代码背景墙
- */
 <script setup lang="ts">
 import {
   onMounted,
@@ -138,13 +135,7 @@ onUnmounted(() => {
 <template>
   <div
     ref="boxRef"
-    :style="{
-      boxSizing: 'border-box',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      backgroundColor: '#000',
-    }"
+    class="box-border h-full w-full flex bg-#000000 hover:cursor-pointer"
   >
     <canvas
       ref="canvasRef"
