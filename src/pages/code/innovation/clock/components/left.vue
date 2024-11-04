@@ -52,7 +52,7 @@ const secondHandStyle = computed(() => {
 
         <div
           :style="hourHandStyle"
-          class="absolute left-1/2 top-3/10 z-0 h-1/5 w-[4px] origin-bottom transform transform rounded-full bg-[#FFF] -ml-1px"
+          class="absolute left-1/2 top-3/10 z-0 h-1/5 w-6px origin-bottom transform transform rounded-full bg-[#FFF] -m-l-4px"
         />
 
         <div
