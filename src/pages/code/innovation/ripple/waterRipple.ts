@@ -18,11 +18,9 @@ class WaterRipple {
   new_img_data: ImageData | null = null
   animation_idx: number | null = null
   mousemove_interval: number
-  animation_interval: number
   ripple_radius: number
   bridge: HTMLImageElement
-  buffer_1: number[][]
-  buffer_2: number[][]
+  buffer: number[]
 
   /**
    * 初始化 WaterRipple 类实例
@@ -31,9 +29,7 @@ class WaterRipple {
    * @param {HTMLCanvasElement} props.canvas - 渲染水波效果的 canvas 元素
    * @param {number} [props.amplitude] - 波纹的振幅
    * @param {number} [props.mousemove_interval] - 鼠标移动触发波纹的时间间隔
-   * @param {number} [props.animation_interval] - 动画帧的时间间隔
    * @param {number} [props.ripple_radius] - 波纹的半径
-   * @param {boolean} [props.resize] - 是否监听窗口大小变化
    * @param {HTMLImageElement} props.background - 背景
    */
   constructor(props: {
@@ -41,9 +37,7 @@ class WaterRipple {
     canvas: HTMLCanvasElement
     amplitude?: number
     mousemove_interval?: number
-    animation_interval?: number
     ripple_radius?: number
-    resize?: boolean
     background: HTMLImageElement
   }) {
     this.canvas = props.canvas
@@ -55,37 +49,16 @@ class WaterRipple {
     this.amplitude = props.amplitude || 512
     this.background = props.background
     this.mousemove_interval = props.mousemove_interval || 50
-    this.animation_interval = props.animation_interval || 20
     this.ripple_radius = props.ripple_radius || 3
     this.bridge = new Image()
     this.bridge.src = bridge
 
-    this.buffer_1 = Array.from(
-      {
-        length: this.width,
-      },
-      () =>
-        Array.from(
-          {
-            length: this.height,
-          },
-          () => 0,
-        ),
-    )
-    this.buffer_2 = Array.from(
-      {
-        length: this.width,
-      },
-      () =>
-        Array.from(
-          {
-            length: this.height,
-          },
-          () => 0,
-        ),
-    )
+    this.buffer = Array.from({
+      length: this.width * this.height,
+    }, () => 0)
 
-    if (props.resize) {
+    if (props.boxRef) {
+      this.boxRef = props.boxRef
       this.setResize()
     }
   }
@@ -110,50 +83,47 @@ class WaterRipple {
   render() {
     if (!this.load) {
       this.drawBackground()
-
       return
     }
-
-    const half_w = this.width >> 1
-
-    const half_h = this.height >> 1
 
     const len = this.new_img_data!.data.length
 
     for (let i = 0; i < len; i += 4) {
-      const buffer_idx = i >> 2
+      const x = (i / 4) % this.width
 
-      const x = buffer_idx % this.width
+      const y = Math.floor((i / 4) / this.width)
 
-      const y = (buffer_idx - x) / this.width
+      const buffer_idx = x + y * this.width
 
-      const left = Math.max(x - 1, 0)
+      let next_amplitude = 0
 
-      const right = Math.min(x + 1, this.width - 1)
+      // 计算相邻像素的波动
+      if (x > 0) {
+        next_amplitude += this.buffer[buffer_idx - 1]
+      }
 
-      const top = Math.min(y + 1, this.height - 1)
+      if (x < this.width - 1) {
+        next_amplitude += this.buffer[buffer_idx + 1]
+      }
 
-      const bottom = Math.max(y - 1, 0)
+      if (y > 0) {
+        next_amplitude += this.buffer[buffer_idx - this.width]
+      }
 
-      let next_amplitude
-        = this.buffer_1[x][top]
-        + this.buffer_1[x][bottom]
-        + this.buffer_1[right][y]
-        + this.buffer_1[left][y]
+      if (y < this.height - 1) {
+        next_amplitude += this.buffer[buffer_idx + this.width]
+      }
 
-      next_amplitude = (next_amplitude >> 1) - this.buffer_2[x][y]
+      next_amplitude = (next_amplitude >> 1) - this.buffer[buffer_idx]
       next_amplitude -= next_amplitude >> 5
 
-      this.buffer_2[x][y] = next_amplitude
+      this.buffer[buffer_idx] = next_amplitude
       const ratio = (this.max_amplitude - next_amplitude) / this.max_amplitude
 
       if (next_amplitude !== 0) {
-        let offset_x = (((x - half_w) * ratio) << 0) + half_w
+        const offset_x = Math.min(Math.max((x - this.width / 2) * ratio + this.width / 2, 0), this.width - 1)
 
-        let offset_y = (((y - half_h) * ratio) << 0) + half_h
-
-        offset_x = Math.min(Math.max(offset_x, 0), this.width - 1)
-        offset_y = Math.min(Math.max(offset_y, 0), this.height - 1)
+        const offset_y = Math.min(Math.max((y - this.height / 2) * ratio + this.height / 2, 0), this.height - 1)
 
         const img_data_idx = (offset_y * this.width + offset_x) << 2
 
@@ -164,30 +134,15 @@ class WaterRipple {
     }
 
     this.ctx.putImageData(this.new_img_data!, 0, 0)
-    this.ctx.drawImage(
-      this.bridge,
-      0,
-      this.height * 0.35,
-      this.width,
-      this.height * 0.65,
-    );
-    [this.buffer_1, this.buffer_2] = [this.buffer_2, this.buffer_1]
+    this.ctx.drawImage(this.bridge, 0, this.height * 0.35, this.width, this.height * 0.65)
   }
 
   /**
    * 启动动画循环
    */
   animate() {
-    let start = Date.now()
-
     const update = () => {
-      const now = Date.now()
-
-      if (now - start > this.animation_interval) {
-        this.render()
-        start = now
-      }
-
+      this.render()
       this.animation_idx = requestAnimationFrame(update)
     }
 
@@ -206,45 +161,15 @@ class WaterRipple {
 
     const left = Math.max(x - this.ripple_radius, 0)
 
-    const right = Math.min(x + this.ripple_radius, this.buffer_1.length - 1)
+    const right = Math.min(x + this.ripple_radius, this.width - 1)
 
     const top = Math.max(y - this.ripple_radius, 0)
 
-    const bottom = Math.min(
-      y + this.ripple_radius,
-      this.buffer_1[0].length - 1,
-    )
+    const bottom = Math.min(y + this.ripple_radius, this.height - 1)
 
-    for (let i = left; i < right; i++) {
-      for (let j = top; j < bottom; j++) {
-        this.buffer_1[i][j] = this.amplitude
-      }
-    }
-  }
-
-  /**
-   * 节流函数
-   * @param {Function} func - 需要节流的函数
-   * @param {number} time - 时间间隔
-   */
-  /**
-   * 创建一个节流函数，限制函数调用频率。
-   * @param func - 要进行节流的函数
-   * @param time - 两次函数调用的最小间隔时间，单位为毫秒
-   * @returns 返回一个新的函数，应用节流效果
-   */
-  throttle<T extends (...args: any[]) => void>(
-    func: T,
-    time: number,
-  ): (...args: Parameters<T>) => void {
-    let start = Date.now()
-
-    return (...args: Parameters<T>): void => {
-      const now = Date.now()
-
-      if (now - start >= time) {
-        start = now
-        func(...args)
+    for (let i = left; i <= right; i++) {
+      for (let j = top; j <= bottom; j++) {
+        this.buffer[i + j * this.width] = this.amplitude
       }
     }
   }
@@ -264,17 +189,37 @@ class WaterRipple {
   }
 
   /**
+   * 节流函数
+   * @param {Function} func - 需要节流的函数
+   * @param {number} time - 时间间隔
+   */
+  throttle<T extends (...args: any[]) => void>(func: T, time: number): (...args: Parameters<T>) => void {
+    let start = Date.now()
+
+    return (...args: Parameters<T>): void => {
+      const now = Date.now()
+
+      if (now - start >= time) {
+        start = now
+        func(...args)
+      }
+    }
+  }
+
+  /**
    * 设置窗口大小变化的监听器
    */
   setResize() {
     window.addEventListener('resize', () => {
-      const { offsetWidth, offsetHeight } = this.boxRef as HTMLElement
+      if (this.boxRef) {
+        const { offsetWidth, offsetHeight } = this.boxRef
 
-      this.canvas.width = offsetWidth
-      this.canvas.height = offsetHeight
-      this.width = this.canvas.width
-      this.height = this.canvas.height
-      this.load = false
+        this.canvas.width = offsetWidth
+        this.canvas.height = offsetHeight
+        this.width = this.canvas.width
+        this.height = this.canvas.height
+        this.load = false
+      }
     })
   }
 
