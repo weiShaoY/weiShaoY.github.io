@@ -1,154 +1,61 @@
-/**
- * 代码背景墙
- */
 <script setup lang="ts">
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue'
-
-let canvasWidth = 600
-
-let canvasHeight = 600
-
-const text = 'abcdefghijklmnopqrstuvwxyz'
-
-const bl = 26
-
-let ctxRef: CanvasRenderingContext2D | null = null
-
-let frameId: number = 0
-
-const startRates: Record<number, number> = {
-}
-
-const rates: Record<number, number> = {
-}
-
-const endRates: Record<number, number> = {
-}
-
-const textObj: Record<string, string> = {
-}
-
-const boxRef = ref<HTMLDivElement>()
-
-const canvasRef = ref<HTMLCanvasElement>()
-
-function init() {
-  if (boxRef.value && canvasRef.value) {
-    resize()
-    ctxRef = canvasRef.value.getContext(
-      '2d',
-    ) as CanvasRenderingContext2D
-    ctxRef.font = '14px SourceHanSansCN-Regular'
-  }
-}
-
-function play() {
-  if (ctxRef) {
-    ctxRef.clearRect(0, 0, canvasWidth, canvasHeight)
-    for (let i = 0; i < canvasWidth; i += bl) {
-      ctxRef.beginPath()
-      const gradient = ctxRef.createLinearGradient(
-        0,
-        0,
-        0,
-        canvasHeight,
-      )
-
-      const s1 = 0.2 * Math.random()
-
-      const s2 = 0.8 * Math.random() + 0.2
-
-      const step = 0.02 * Math.random()
-
-      rates[i] = rates[i] || -s1
-      endRates[i] = endRates[i] || 0
-      startRates[i] = startRates[i] || -s2
-      gradient.addColorStop(0, '#000000')
-      gradient.addColorStop(startRates[i] < 0 ? 0 : startRates[i], '#000000')
-      gradient.addColorStop(rates[i] < 0 ? 0 : rates[i], '#0ee30e')
-      gradient.addColorStop(endRates[i], '#000000')
-      gradient.addColorStop(1, '#000000')
-      ctxRef.fillStyle = gradient
-      for (let j = 0; j < canvasHeight; j += bl) {
-        textObj[`${i}-${j}`]
-          = textObj[`${i}-${j}`]
-          || text[Math.floor(Math.random() * text.length)]
-        ctxRef.fillText(textObj[`${i}-${j}`], i, j)
-      }
-
-      rates[i] += step
-      endRates[i] += step
-      startRates[i] += step
-      if (startRates[i] > 1) {
-        startRates[i] = -s2
-      }
-
-      if (rates[i] > 1) {
-        if (startRates[i] === -s2) {
-          rates[i] = -s1
-        }
-        else {
-          rates[i] = 1
-        }
-      }
-
-      if (endRates[i] > 1) {
-        if (rates[i] === -s1 && startRates[i] === -s2) {
-          endRates[i] = step
-        }
-        else {
-          endRates[i] = 1
-        }
-      }
-    }
-
-    frameId = window.requestAnimationFrame(play)
-  }
-}
-
-function resize() {
-  if (boxRef.value && canvasRef.value) {
-    const { offsetWidth, offsetHeight } = boxRef.value
-
-    canvasWidth = offsetWidth
-    canvasHeight = offsetHeight
-    canvasRef.value.width = canvasWidth
-    canvasRef.value.height = canvasHeight
-  }
-}
-
-onMounted(() => {
-  init()
-  play()
-
-  window.addEventListener('resize', resize)
-})
-
-onUnmounted(() => {
-  frameId && cancelAnimationFrame(frameId)
-  window.removeEventListener('resize', resize)
-})
 </script>
 
 <template>
   <div
-    ref="boxRef"
-    :style="{
-      boxSizing: 'border-box',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      backgroundColor: '#000',
-    }"
+    style="width: 100%"
   >
-    <canvas
-      ref="canvasRef"
+    <div
+      class="container"
     >
-      您的浏览器版本过低，请更新浏览器
-    </canvas>
+
+      <p
+        data-text="♠ CSS Animation ♣"
+      >
+        ♠ CSS Animation ♣
+      </p>
+    </div>
   </div>
 </template>
+
+<style scoped lang="less">
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 100px 0 60px;
+  background-color: #000;
+  position: relative;
+
+  p {
+    font-size: 64px;
+    font-weight: 500;
+    color: #222;
+    position: relative;
+
+    &::before {
+      content: attr(data-text);
+      position: absolute;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 4px solid #fff;
+      animation: move 8s linear infinite;
+      filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 50px #fff);
+    }
+
+    @keyframes move {
+      0%,
+      10%,
+      100% {
+        width: 0;
+      }
+
+      70%,
+      90% {
+        width: 100%;
+      }
+    }
+  }
+}
+</style>

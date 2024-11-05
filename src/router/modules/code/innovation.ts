@@ -71,12 +71,21 @@ const Innovation: AppRouteRecordRaw = {
       },
     },
     {
-      path: 'codeBackgroundWall',
-      name: 'CodeBackgroundWall',
-      component: () => import('@/pages/code/innovation/codeBackgroundWall/index.vue'),
+      path: 'codeWall',
+      name: 'CodeWall',
+      component: () => import('@/pages/code/innovation/codeWall/index.vue'),
       meta: {
-        locale: '代码背景墙',
-        icon: 'code-menu-codeBackgroundWall',
+        locale: '代码墙',
+        icon: 'code-menu-codeWall',
+      },
+    },
+    {
+      path: 'textAnimation',
+      name: 'TextAnimation',
+      component: () => import('@/pages/code/innovation/textAnimation/index.vue'),
+      meta: {
+        locale: '文字动效',
+        icon: 'code-menu-textAnimation',
       },
     },
   ],
