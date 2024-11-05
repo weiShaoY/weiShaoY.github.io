@@ -88,6 +88,15 @@ const Innovation: AppRouteRecordRaw = {
         icon: 'code-menu-textAnimation',
       },
     },
+    {
+      path: 'charge',
+      name: 'Charge',
+      component: () => import('@/pages/code/innovation/charge/index.vue'),
+      meta: {
+        locale: '充电',
+        icon: 'code-menu-charge',
+      },
+    },
   ],
 }
 

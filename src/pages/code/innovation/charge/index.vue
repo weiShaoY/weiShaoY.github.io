@@ -26,7 +26,7 @@ onBeforeMount(() => {
       <div
         class="number"
       >
-        30.02%
+        50.00%
       </div>
 
       <div
@@ -57,11 +57,11 @@ onBeforeMount(() => {
 
 <style scoped lang="less">
 .container {
-  height: 600px;
+  height: 100%;
   display: flex;
   flex: 1;
+  align-items: center;
   justify-content: center;
-  padding-top: 100px;
   background-color: #000;
   position: relative;
 
