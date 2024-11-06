@@ -4,7 +4,7 @@
 
 <template>
   <div
-    class="h-full bg-amber"
+    class="h-full w-full"
   >
     12111111111111111111111111111111111111111111111111111111111111111
   </div>

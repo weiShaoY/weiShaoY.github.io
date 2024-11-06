@@ -28,7 +28,6 @@ function setVisible() {
 function toggleColorWeak(value: any) {
   document.body.style.filter = value ? 'invert(80%)' : 'none'
 }
-
 </script>
 
 <template>
@@ -56,7 +55,6 @@ function toggleColorWeak(value: any) {
     @cancel="cancel"
     @ok="cancel"
   >
-
     <template
       #title
     >
@@ -67,7 +65,6 @@ function toggleColorWeak(value: any) {
     <div
       class="m-b-8"
     >
-
       <h5
         class="m-y-2 p-0 text-4 font-700"
       >
@@ -93,7 +90,6 @@ function toggleColorWeak(value: any) {
     <div
       class="m-b-8"
     >
-
       <h5
         class="m-y-2 p-0 text-4 font-700"
       >
@@ -163,7 +159,6 @@ function toggleColorWeak(value: any) {
           v-model="codeStore.state.menu.visible"
           size="small"
         />
-
       </div>
 
       <div
@@ -205,7 +200,6 @@ function toggleColorWeak(value: any) {
         />
       </div>
     </div>
-
   </a-drawer>
 </template>
 

@@ -11,7 +11,6 @@ const codeStore = useCodeStore()
  *  缓存列表
  */
 const cacheTabList = computed(() => codeStore.getCacheTabList)
-
 </script>
 
 <template>
@@ -19,7 +18,6 @@ const cacheTabList = computed(() => codeStore.getCacheTabList)
   <router-view
     v-slot="{ Component, route }"
   >
-
     <!-- 定义过渡效果的名称为 "fade" -->
     <!-- 定义过渡模式为 "out-in" -->
     <!-- appear 在初次渲染时应用过渡效果 -->
@@ -28,7 +26,6 @@ const cacheTabList = computed(() => codeStore.getCacheTabList)
       mode="out-in"
       appear
     >
-
       <!-- 动态组件绑定当前的路由组件 -->
       <!-- 如果路由元信息中忽略缓存，则直接渲染组件 -->
       <!-- 通过路由的完整路径作为组件的唯一键 -->
@@ -47,7 +44,6 @@ const cacheTabList = computed(() => codeStore.getCacheTabList)
         v-else
         :include="cacheTabList"
       >
-
         <template
           v-if="Component"
         >
@@ -56,7 +52,6 @@ const cacheTabList = computed(() => codeStore.getCacheTabList)
             :key="route.fullPath"
           />
         </template>
-
       </keep-alive>
     </transition>
   </router-view>

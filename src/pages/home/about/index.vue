@@ -20,7 +20,7 @@ const router = useRouter()
       <!-- About -->
       <div
         v-light
-        class="group relative col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+        class="group relative col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
       >
         <a
           class="h-full flex flex-col justify-between"
@@ -65,7 +65,7 @@ const router = useRouter()
       <!-- Coding -->
       <div
         v-light
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -87,7 +87,7 @@ const router = useRouter()
       <!-- Github -->
       <div
         v-light
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:color-primary hover:drop-shadow-2xl"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -112,7 +112,7 @@ const router = useRouter()
         v-light="{
           rotate: false,
         }"
-        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:drop-shadow-2xl hover:transition"
+        class="group col-span-2 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:drop-shadow-2xl hover:transition"
       >
         <div
           class="h-full flex flex-col justify-between"
@@ -130,7 +130,7 @@ const router = useRouter()
       <!-- Command -->
       <div
         v-light
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"
@@ -150,7 +150,7 @@ const router = useRouter()
       <!-- Test -->
       <div
         v-light
-        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
+        class="col-span-1 rounded-3xl p-8 max-xl:col-span-4 hover:cursor-pointer home-theme-item hover:color-primary hover:drop-shadow-2xl hover:transition"
       >
         <a
           class="h-full flex flex-col justify-between max-xl:flex-row max-xl:items-center"

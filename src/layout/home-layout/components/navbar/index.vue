@@ -14,9 +14,8 @@ const appStore = useAppStore()
 
 <template>
   <nav
-    class="h-full flex justify-center bg-#B3AFA4 dark:bg-#191919"
+    class="h-full flex justify-center bg-#e2e5e5 dark:bg-#191919"
   >
-
     <div
       class="flex items-center justify-between p-x-5 container"
     >

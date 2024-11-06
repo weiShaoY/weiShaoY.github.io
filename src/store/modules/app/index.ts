@@ -75,6 +75,9 @@ const useAppStore = defineStore(
       // 切换到暗色主题
         state.value.theme.mode = 'dark'
         document.body.setAttribute('arco-theme', 'dark')
+
+        document.documentElement.className = '' // 清空所有类名
+        document.documentElement.classList.add('dark') // 添加 dark 类名
       }
       else {
       // 切换到亮色主题
@@ -82,6 +85,9 @@ const useAppStore = defineStore(
 
         // document.body.removeAttribute('arco-theme', 'light')
         document.body.setAttribute('arco-theme', 'light')
+
+        document.documentElement.className = '' // 清空所有类名
+        document.documentElement.classList.add('light') // 添加 dark 类名
       }
     }
 
@@ -89,11 +95,29 @@ const useAppStore = defineStore(
      *  是否是暗色主题
      */
     const isDark = useDark({
-
+      /**
+       *  应用的元素
+       */
       selector: 'body',
+
+      /**
+       *  主题的属性
+       */
       attribute: 'arco-theme',
+
+      /**
+       *  暗黑模式属性值
+       */
       valueDark: 'dark',
+
+      /**
+       *  亮色模式属性值
+       */
       valueLight: 'light',
+
+      /**
+       *  本地存储的主题
+       */
       storageKey: 'arco-theme',
       onChanged(dark: boolean) {
         updateThemeMode(dark)

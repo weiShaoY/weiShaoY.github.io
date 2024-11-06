@@ -50,7 +50,7 @@ const svgSize = computed(() => {
 
 <template>
   <svg
-    :class="`fill-current ${props.class} w-1em h-1em relative`"
+    :class="`fill-current ${props.class} w-1em h-1em relative inline-block`"
     :font-size="svgSize"
   >
     <use

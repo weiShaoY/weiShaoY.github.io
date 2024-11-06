@@ -123,8 +123,6 @@ export default function useLightCard(option: IOptions = {
     setCardOverflowHidden()
   }
 
-  // use-light-card.ts
-
   /**
    *  监听卡片的鼠标移动
    */

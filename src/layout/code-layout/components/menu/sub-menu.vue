@@ -57,7 +57,6 @@ function handleGoto(item: RouteRecordRaw) {
     console.error('路由跳转出错:', error)
   }
 }
-
 </script>
 
 <template>
@@ -66,17 +65,18 @@ function handleGoto(item: RouteRecordRaw) {
     :key="item.path"
   >
     <a-sub-menu
-      v-if="item.children?.length && !item?.meta?.isStandaloneMenu"
+      v-if="item.children?.length"
       :key="item.name"
+      class="!text-4"
     >
       <template
         #icon
       >
         <SvgIcon
           v-if=" item?.meta?.icon"
-          :icon="`code-${item.meta.icon}`"
+          :icon="`${item.meta.icon}`"
+          class="!inline-block"
         />
-
       </template>
 
       <template
@@ -94,27 +94,27 @@ function handleGoto(item: RouteRecordRaw) {
     <template
       v-else
     >
-
       <a-menu-item
         :key="item.name"
+        class="!text-4"
         @click="() => handleGoto(item)"
       >
         <template
           #icon
         >
-
           <SvgIcon
             v-if=" item?.meta?.icon"
-            :icon="`code-${item.meta.icon}`"
+            :icon="`${item.meta.icon}`"
+            class="!inline-block"
           />
-
         </template>
 
         {{ item.meta?.locale || '' }}
       </a-menu-item>
-
     </template>
-
   </template>
-
 </template>
+
+<style lang="less" scoped>
+
+</style>

@@ -1,7 +1,10 @@
 <!------------------------------------ 优化后的代码 ------------------------------------>
 <script lang="ts" setup>
+import { useAppStore } from '@/store'
 
 const router = useRouter()
+
+const appStore = useAppStore()
 
 /**
  *  是否显示下拉菜单
@@ -38,7 +41,6 @@ function handleSelect(value: string) {
 
   router.push(value)
 }
-
 </script>
 
 <template>
@@ -59,7 +61,7 @@ function handleSelect(value: string) {
           :icon="dropdownVisible ? 'guanBi' : 'zhanKai'"
           :size="36"
           class="group-hover:color-primary"
-          :class="isDark ? 'color-white' : 'color-#333'"
+          :class="appStore.isDark ? 'color-white' : 'color-#333'"
         />
       </template>
     </a-button>

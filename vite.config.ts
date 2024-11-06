@@ -18,7 +18,7 @@ import { defineConfig } from 'vite'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-import vueDevTools from 'vite-plugin-vue-devtools'
+// import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   resolve: {
@@ -33,7 +33,7 @@ export default defineConfig({
   plugins: [
     vueJsx(),
 
-    vueDevTools(),
+    // vueDevTools(),
 
     VueMacros({
       /**

@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
   <a-layout
-    class="h-full w-full"
+    class="h-full w-full code-theme"
     :class="{ mobile: !codeStore.state.menu.visible }"
   >
     <!-- 顶部导航栏 -->
@@ -84,7 +84,9 @@ onMounted(() => {
     <!-- 导航栏下面部分  -->
 
     <!-- 导航栏下面主体部分 -->
-    <a-layout>
+    <a-layout
+      class="h-full w-full"
+    >
       <!--  菜单栏 start -->
       <!-- 菜单正常显示时的侧边栏菜单 -->
       <a-layout-sider
@@ -94,7 +96,7 @@ onMounted(() => {
         "
         v-show="codeStore.state.menu.visible"
         class="layout-sider"
-        breakpoint="xl"
+        breakpoint="lg"
         :collapsed="codeStore.state.menu.collapsed"
         :collapsible="true"
         :width="
@@ -140,7 +142,7 @@ onMounted(() => {
 
       <!-- 页面部分 -->
       <a-layout
-        class="min-h-100vh overflow-y-hidden transition-padding duration-500 ease-in-out"
+        class="min-h-100vh flex flex-col overflow-y-hidden transition-padding duration-500 ease-in-out light:bg-#F2F3F5"
         :style="{
           paddingLeft:
             codeStore.state.menu.visible
@@ -167,7 +169,7 @@ onMounted(() => {
 
         <!-- 页面区域 -->
         <a-layout-content
-          class="m-x-5 m-b-5 flex bg-white p-t-0"
+          class="m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-5 code-theme-item"
         >
           <CodePageLayout />
         </a-layout-content>
