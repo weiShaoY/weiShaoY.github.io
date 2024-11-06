@@ -1,154 +1,95 @@
-/**
- * 代码背景墙
- */
 <script setup lang="ts">
+import * as THREE from 'three'
+
+import { CineonToneMapping } from 'three'
+
 import {
+  onBeforeUnmount,
   onMounted,
-  onUnmounted,
   ref,
 } from 'vue'
 
-let canvasWidth = 600
+// 定义 Canvas 容器的引用类型
+const threeCanvasContainer = ref<HTMLDivElement | null>(null)
 
-let canvasHeight = 600
-
-const text = 'abcdefghijklmnopqrstuvwxyz'
-
-const bl = 26
-
-let ctxRef: CanvasRenderingContext2D | null = null
-
-let frameId: number = 0
-
-const startRates: Record<number, number> = {
+// 相机配置
+const cameraOptions = {
+  fov: 45,
+  near: 0.1,
+  position: [0, 2, 5] as [number, number, number],
+  far: 500,
 }
 
-const rates: Record<number, number> = {
-}
+// 定义 Three.js 相关的类型
+let scene: THREE.Scene
 
-const endRates: Record<number, number> = {
-}
+let camera: THREE.PerspectiveCamera
 
-const textObj: Record<string, string> = {
-}
-
-const boxRef = ref<HTMLDivElement>()
-
-const canvasRef = ref<HTMLCanvasElement>()
-
-function init() {
-  if (boxRef.value && canvasRef.value) {
-    resize()
-    ctxRef = canvasRef.value.getContext(
-      '2d',
-    ) as CanvasRenderingContext2D
-    ctxRef.font = '14px SourceHanSansCN-Regular'
-  }
-}
-
-function play() {
-  if (ctxRef) {
-    ctxRef.clearRect(0, 0, canvasWidth, canvasHeight)
-    for (let i = 0; i < canvasWidth; i += bl) {
-      ctxRef.beginPath()
-      const gradient = ctxRef.createLinearGradient(
-        0,
-        0,
-        0,
-        canvasHeight,
-      )
-
-      const s1 = 0.2 * Math.random()
-
-      const s2 = 0.8 * Math.random() + 0.2
-
-      const step = 0.02 * Math.random()
-
-      rates[i] = rates[i] || -s1
-      endRates[i] = endRates[i] || 0
-      startRates[i] = startRates[i] || -s2
-      gradient.addColorStop(0, '#000000')
-      gradient.addColorStop(startRates[i] < 0 ? 0 : startRates[i], '#000000')
-      gradient.addColorStop(rates[i] < 0 ? 0 : rates[i], '#0ee30e')
-      gradient.addColorStop(endRates[i], '#000000')
-      gradient.addColorStop(1, '#000000')
-      ctxRef.fillStyle = gradient
-      for (let j = 0; j < canvasHeight; j += bl) {
-        textObj[`${i}-${j}`]
-          = textObj[`${i}-${j}`]
-          || text[Math.floor(Math.random() * text.length)]
-        ctxRef.fillText(textObj[`${i}-${j}`], i, j)
-      }
-
-      rates[i] += step
-      endRates[i] += step
-      startRates[i] += step
-      if (startRates[i] > 1) {
-        startRates[i] = -s2
-      }
-
-      if (rates[i] > 1) {
-        if (startRates[i] === -s2) {
-          rates[i] = -s1
-        }
-        else {
-          rates[i] = 1
-        }
-      }
-
-      if (endRates[i] > 1) {
-        if (rates[i] === -s1 && startRates[i] === -s2) {
-          endRates[i] = step
-        }
-        else {
-          endRates[i] = 1
-        }
-      }
-    }
-
-    frameId = window.requestAnimationFrame(play)
-  }
-}
-
-function resize() {
-  if (boxRef.value && canvasRef.value) {
-    const { offsetWidth, offsetHeight } = boxRef.value
-
-    canvasWidth = offsetWidth
-    canvasHeight = offsetHeight
-    canvasRef.value.width = canvasWidth
-    canvasRef.value.height = canvasHeight
-  }
-}
+let renderer: THREE.WebGLRenderer
 
 onMounted(() => {
-  init()
-  play()
+  // 创建场景
+  scene = new THREE.Scene()
 
-  window.addEventListener('resize', resize)
+  // 创建相机
+  camera = new THREE.PerspectiveCamera(
+    cameraOptions.fov,
+    window.innerWidth / window.innerHeight,
+    cameraOptions.near,
+    cameraOptions.far,
+  )
+  camera.position.set(...cameraOptions.position)
+
+  // 创建渲染器
+  renderer = new THREE.WebGLRenderer()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.toneMapping = CineonToneMapping
+
+  // 将渲染器添加到 DOM
+  if (threeCanvasContainer.value) {
+    threeCanvasContainer.value.appendChild(renderer.domElement)
+  }
+
+  // 监听窗口尺寸变化
+  window.addEventListener('resize', onWindowResize)
+
+  // 渲染循环
+  const animate = () => {
+    requestAnimationFrame(animate)
+    renderer.render(scene, camera)
+  }
+
+  animate()
 })
 
-onUnmounted(() => {
-  frameId && cancelAnimationFrame(frameId)
-  window.removeEventListener('resize', resize)
+// 窗口尺寸调整
+function onWindowResize() {
+  if (camera && renderer) {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  }
+}
+
+// 清理工作
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', onWindowResize)
+  if (renderer) {
+    renderer.dispose()
+  }
 })
 </script>
 
 <template>
   <div
-    ref="boxRef"
-    :style="{
-      boxSizing: 'border-box',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      backgroundColor: '#000',
-    }"
-  >
-    <canvas
-      ref="canvasRef"
-    >
-      您的浏览器版本过低，请更新浏览器
-    </canvas>
-  </div>
+    ref="threeCanvasContainer"
+    class="webgl"
+  />
 </template>
+
+<style scoped>
+.webgl {
+  width: 100%;
+  height: 100%;
+}
+</style>
