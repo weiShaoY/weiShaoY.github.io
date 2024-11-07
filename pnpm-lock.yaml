@@ -20,12 +20,18 @@ importers:
       echarts:
         specifier: ^5.5.0
         version: 5.5.1
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
       lunar-typescript:
         specifier: ^1.7.5
         version: 1.7.5
+      meshopt-decoder:
+        specifier: ^1.0.2
+        version: 1.0.2
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2590,6 +2596,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
+  gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
+
   gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
@@ -3168,6 +3177,9 @@ packages:
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
+
+  meshopt-decoder@1.0.2:
+    resolution: {integrity: sha512-mbgD72Ak9MYWtKwCMOeIAjVI1JMBjG0amPXtZ6ApV2qQ48nIYRSakrvAANHDyzq45YlDrYEhtyR7A60nVVoc8w==}
 
   meshoptimizer@0.18.1:
     resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
@@ -7586,6 +7598,8 @@ snapshots:
 
   graphemer@1.4.0: {}
 
+  gsap@3.12.5: {}
+
   gzip-size@6.0.0:
     dependencies:
       duplexer: 0.1.2
@@ -8229,6 +8243,8 @@ snapshots:
   merge-stream@2.0.0: {}
 
   merge2@1.4.1: {}
+
+  meshopt-decoder@1.0.2: {}
 
   meshoptimizer@0.18.1: {}
 
