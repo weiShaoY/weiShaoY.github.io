@@ -1,11 +1,6 @@
 <script setup lang="ts">
 
-import type {
-  Mesh,
-  MeshPhysicalMaterial,
-
-  MeshStandardMaterial,
-} from 'three'
+import type { MeshStandardMaterial } from 'three'
 
 import { useTestStore } from '@/store'
 
@@ -14,7 +9,6 @@ import gsap from 'gsap'
 import * as THREE from 'three'
 
 import {
-  CineonToneMapping,
   Color,
   DoubleSide,
   LinearFilter,
@@ -32,13 +26,32 @@ import {
   Vector2,
 } from 'three'
 
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
+
 import {
   onBeforeUnmount,
   onMounted,
   ref,
 } from 'vue'
 
-import { loadModel, loadTexture } from './utils'
+import floorFrag from './shaders/sketch/floorfrag.glsl'
+
+import floorVertex from './shaders/sketch/floorver.glsl'
+
+import fragmentShader from './shaders/sketch/fragment.glsl'
+
+import vertexShader from './shaders/sketch/vertex.glsl'
+
+import {
+  flatModel,
+  loadModel,
+  loadTexture,
+  printModel,
+  useCarAnimation,
+  useCubeCamera,
+  useModifyCSM,
+  useModifyMaterial,
+} from './utils'
 
 const testStore = useTestStore()
 
@@ -136,6 +149,18 @@ const floorUniforms = ref({
   uTime: new Uniform(0),
 })
 
+const mat = computed(() => {
+  return new CustomShaderMaterial({
+    baseMaterial: ShaderMaterial,
+    uniforms: uniforms.value,
+    vertexShader,
+    fragmentShader,
+    silent: true,
+    transparent: true,
+    depthWrite: false,
+  })
+})
+
 /**
  *  Canvas 容器的引用类型
  */
@@ -186,7 +211,7 @@ const startRommgGltf = loadModel('/models/sm_startroom.raw.gltf', scene)
 /**
  *  加载加速模型
  */
-const speedupGltf = loadModel('/models/sm_speedup.gltf', scene)
+const gltf = loadModel('/models/sm_speedup.gltf', scene)
 
 /**
  * AO 贴图
@@ -258,7 +283,7 @@ watch(
 
     const lightMat = modelRef.value.lightMat
 
-    const flooMat = modelRef.value.floor?.material as MeshPhysicalMaterial
+    const flooMat = modelRef.value.floor?.material as THREE.MeshPhysicalMaterial
 
     const wheel = modelRef.value.wheel
 
@@ -312,8 +337,8 @@ watch(
               flooMat.envMapIntensity = baseParam.floorEnvIntensity
             }
 
-            wheel.forEach((item: Mesh) => {
-              const mat = item.material as MeshStandardMaterial
+            wheel.forEach((item: THREE.Mesh) => {
+              const mat = item.material as THREE.MeshStandardMaterial
 
               mat.roughness = baseParam.wheelRoughness
               mat.envMapIntensity = baseParam.wheelEnvIntensity
@@ -349,8 +374,8 @@ watch(
             flooMat.envMapIntensity = baseParam.floorEnvIntensity
           }
 
-          wheel.forEach((item: Mesh) => {
-            const mat = item.material as MeshStandardMaterial
+          wheel.forEach((item: THREE.Mesh) => {
+            const mat = item.material as THREE.MeshStandardMaterial
 
             mat.roughness = baseParam.wheelRoughness
             mat.envMapIntensity = baseParam.wheelEnvIntensity
@@ -390,6 +415,87 @@ watch(
     }
   },
 )
+function handleModel() {
+  const modelParts = flatModel(carGltf)
+
+  const modelParts2 = flatModel(gltf)
+
+  // 处理 body
+  const body = modelParts[2] as THREE.Mesh
+
+  const bodyMat = body.material as THREE.MeshStandardMaterial
+
+  bodyMat.envMapIntensity = 5
+
+  bodyMat.color = new Color('#26d6e9')
+
+  // 处理轮胎
+  modelParts.forEach((item) => {
+    if (item.isMesh) {
+      const mat = item.material as THREE.MeshStandardMaterial
+
+      mat.aoMap = aoMap.value
+    }
+  })
+
+  const wheel = modelParts[35] as THREE.Mesh
+
+  wheel.children.forEach((child) => {
+    const mesh = child as THREE.Mesh
+
+    const mat = mesh.material as THREE.MeshStandardMaterial
+
+    mat.envMapIntensity = 5
+
+    modelRef.value.wheel.push(mesh)
+  })
+
+  // 处理灯光材质
+
+  const light = modelParts2[1] as THREE.Mesh
+
+  const lightMat = light.material as THREE.MeshPhysicalMaterial
+
+  lightMat.emissive = new Color('white')
+  lightMat.toneMapped = false
+  lightMat.transparent = true
+
+  light.material = new MeshBasicMaterial({
+    color: 0xFFFFFF,
+    side: DoubleSide,
+    transparent: true,
+    alphaTest: 0.01,
+  })
+
+  // 处理地板
+  const floor = modelParts2[2] as THREE.Mesh
+
+  const floorMat = floor.material as THREE.MeshStandardMaterial
+
+  floorMat.roughnessMap = floorroughnessMap.value
+  floorMat.normalMap = floornormalMap.value
+  floorMat.aoMap = startRoomAoMap.value
+  floorMat.lightMap = lightMap.value
+
+  const floorCsmMat = new CustomShaderMaterial({
+    baseMaterial: floorMat,
+    uniforms: floorUniforms,
+    vertexShader: floorVertex,
+    fragmentShader: floorFrag,
+  })
+
+  floor.material = floorCsmMat
+
+  modelRef.value.bodyMat = bodyMat
+  modelRef.value.floor = floor
+
+  modelRef.value.lightMat = lightMat as MeshStandardMaterial
+}
+
+const { matrix, renderTarget } = useReflect(modelRef.value.floor!, {
+  resolution: [innerWidth, innerHeight],
+  ignoreObjects: [modelRef.value.floor!, gltf.scene, startRommgltf.scene],
+})
 
 // /////////////////////////////////////////////////
 onMounted(() => {
@@ -443,73 +549,40 @@ onMounted(() => {
     lightMap.value.colorSpace = SRGBColorSpace
   }
 
-  // ////////////////////////////////////////////////////////////////////////////////////////
+  useModifyCSM(gltf, mat.value)
 
-  // 设置相机的位置
-  camera.position.set(...cameraOptions.position)
+  // 调用模型处理函数
+  handleModel()
 
-  // 设置渲染器的尺寸和色调映射
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.toneMapping = CineonToneMapping
-  renderer.outputEncoding = THREE.sRGBEncoding
+  // 设置地板材质的分辨率 Uniform 值
+  floorUniforms.value.uResolution.value.set(
+    renderTarget.width,
+    renderTarget.height,
+  )
 
-  /**
-   *  环境光
-   */
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5)
+  testStore.loaded.ready = true
 
-  /**
-   *  平行光
-   */
-  const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
+  const { fbo, camera } = useCubeCamera({
+    resolution: 512,
+  })
 
-  // 设置平行光的位置
-  directionalLight.position.set(5, 10, 7.5)
+  fbo.texture.type = UnsignedByteType
+  fbo.texture.generateMipmaps = false
+  fbo.texture.minFilter = NearestFilter
+  fbo.texture.magFilter = NearestFilter
 
-  // 设置环境光的颜色
-  scene.add(ambientLight, directionalLight)
-
-  // 将渲染器添加到 DOM
-  if (threeCanvasContainer.value) {
-    threeCanvasContainer.value.appendChild(renderer.domElement)
-  }
-
-  // 监听窗口尺寸变化
-  window.addEventListener('resize', onWindowResize)
-
-  // 渲染循环
-  const animate = () => {
-    requestAnimationFrame(animate)
-
-    // 更新模型的旋转
-    if (carGltf) {
-      // 每次渲染增加一点Y轴旋转
-      carGltf.rotation.y += 0.01
-    }
-
-    renderer.render(scene, camera)
-  }
-
-  animate()
+  useCarAnimation({
+    uniforms,
+    floorUniforms,
+    params,
+    cargltf,
+    modelRef,
+    scene,
+    renderer,
+    camera,
+  })
 })
 
-/**
- *  调整窗口大小
- */
-function onWindowResize() {
-  if (camera && renderer) {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-  }
-}
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', onWindowResize)
-  if (renderer) {
-    renderer.dispose()
-  }
-})
 </script>
 
 <template>

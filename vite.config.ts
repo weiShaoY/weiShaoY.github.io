@@ -16,6 +16,8 @@ import VueMacros from 'unplugin-vue-macros/vite'
 
 import { defineConfig } from 'vite'
 
+import Glsl from 'vite-plugin-glsl'
+
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
@@ -31,6 +33,8 @@ export default defineConfig({
     },
   },
   plugins: [
+    Glsl(),
+
     vueJsx(),
 
     // vueDevTools(),
