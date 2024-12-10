@@ -1,4 +1,6 @@
 <script setup lang="ts" generic="T extends any, O extends any">
+import Desktop from '@/canvas/desktop/index.vue'
+
 import config from '@/config'
 
 import { useRouter } from 'vue-router'
@@ -14,6 +16,8 @@ const router = useRouter()
   <div
     class="m-x-auto flex-col flex-1 p-t-10 container"
   >
+    <Desktop />
+
     <div
       class="grid grid-cols-4 flex-grow-0 gap-5 p-x-5"
     >
@@ -45,18 +49,18 @@ const router = useRouter()
           </div>
 
           <div
-            class="text-5 font-600 max-xl:text-4"
+            class="text-5 font-semibold max-xl:text-4"
           >
             <p
-              class="lh-7"
+              class="leading-7"
             >一个热爱编程的前端开发 💻</p>
 
             <p
-              class="lh-7"
+              class="leading-7"
             >热爱计算机科学和IT互联网事业 🚀</p>
 
             <p
-              class="lh-7"
+              class="leading-7"
             >热爱编程、软路由、硬件、Diy等 🔨</p>
           </div>
         </a>
@@ -77,7 +81,7 @@ const router = useRouter()
           />
 
           <h1
-            class="text-3xl font-600"
+            class="text-3xl font-semibold"
           >
             Code
           </h1>
@@ -100,7 +104,7 @@ const router = useRouter()
           />
 
           <h1
-            class="text-3xl font-600"
+            class="text-3xl font-semibold"
           >
             Github
           </h1>
@@ -118,7 +122,7 @@ const router = useRouter()
           class="h-full flex flex-col justify-between"
         >
           <h1
-            class="m-b-4 text-3xl font-600 max-xl:text-6 group-hover:color-primary"
+            class="m-b-4 text-3xl font-semibold max-xl:text-6 group-hover:color-primary"
           >
             My Technology Stack
           </h1>
@@ -142,7 +146,7 @@ const router = useRouter()
           />
 
           <h1
-            class="text-3xl font-600"
+            class="text-3xl font-semibold"
           >Command</h1>
         </a>
       </div>
@@ -162,7 +166,7 @@ const router = useRouter()
           />
 
           <h1
-            class="text-3xl font-600"
+            class="text-3xl font-semibold"
           >Test</h1>
         </a>
       </div>
