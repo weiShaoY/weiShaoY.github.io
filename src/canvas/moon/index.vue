@@ -1,9 +1,10 @@
+<!------------------------------------  月球  ------------------------------------------------->
 <script lang="ts" setup>
 import earthFlyLine from 'earth-flyline' // 确保库名和导入路径正确
 
 import { onMounted, ref } from 'vue'
 
-const imageUrl = '/bumpImage.jpeg'
+import imageUrl from './image/bumpImage.jpeg'
 
 const container = ref<HTMLDivElement | null>(null)
 
@@ -17,17 +18,18 @@ onMounted(() => {
           path: imageUrl,
           mixed: false,
         },
-
-        wallStyle: {
-          color: '#RRGGBBAA', // 颜色
-        },
-        mapStyle: {
-          areaColor: '#RRGGBBAA',
+        bgStyle: {
+          color: '#0e0c15',
+          opacity: 0,
         },
         spriteStyle: {
-          color: '#797eff',
+          color: '#fff',
           show: false,
         },
+
+        // 是否允许滚轮放大缩小
+        enableZoom: false,
+
       },
 
     })

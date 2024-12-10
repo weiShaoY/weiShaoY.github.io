@@ -2,11 +2,13 @@
 <script lang="ts" setup>
 import Desktop from '@/canvas/desktop/index.vue'
 
+import Info from './components/info.vue'
+
 </script>
 
 <template>
   <div
-    class="h-full bg-red"
+    class="h-full"
   >
     <div
       class="h-screen"
@@ -16,10 +18,9 @@ import Desktop from '@/canvas/desktop/index.vue'
     </div>
 
     <div
-      class="h-screen"
+      class="mx-auto h-screen max-w-7xl"
     >
-      <Desktop />
-
+      <Info />
     </div>
   </div>
 </template>

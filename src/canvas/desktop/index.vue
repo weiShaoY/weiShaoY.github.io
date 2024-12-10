@@ -1,4 +1,4 @@
-<script setup >
+<script setup>
 import { isMobile } from '@/utils'
 
 import * as THREE from 'three'
@@ -43,6 +43,7 @@ function loadModel() {
 function initThree() {
   // 创建场景
   scene = new THREE.Scene()
+
   scene.background = null // 设置场景背景透明
 
   // 创建相机
