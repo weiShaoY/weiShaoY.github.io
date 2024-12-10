@@ -1,38 +1,47 @@
 <script lang="ts" setup>
-import { useAppStore } from '~/store'
+import MobileMenu from './components/mobile-menu.vue'
 
-import DesktopPageSwitch from './components/desktop-page-switch.vue'
-
-import MobilePageSwitch from './components/mobile-page-switch.vue'
+import PcMenu from './components/pc-menu.vue'
 
 import ThemeSwitch from './components/theme-switch.vue'
 
-const router = useRouter()
-
-const appStore = useAppStore()
+const menuList = [
+  {
+    key: '/home/about',
+    label: 'About',
+  },
+  {
+    key: '/home/work',
+    label: 'Work',
+  },
+  {
+    key: '/home/contact',
+    label: 'Contact',
+  },
+  {
+    key: '/blog',
+    label: 'Blog',
+  },
+  {
+    key: '/garage',
+    label: 'Garage',
+  },
+]
 </script>
 
 <template>
   <nav
-    class="h-full flex justify-center bg-#e2e5e5 dark:bg-#191919"
+    class="fixed left-0 right-0 top-0 z-100 h-20 flex justify-center bg-[#191919]"
   >
     <div
       class="flex items-center justify-between p-x-5 container"
     >
-      <!-- logo -->
-      <a
-        class="group hover:cursor-pointer"
-        @click="router.push('/home')"
-      >
-        <SvgIcon
-          icon="weiShaoY"
-          class="!h-full !w-35 group-hover:color-primary"
-        />
-      </a>
 
-      <!-- 桌面端页面切换 -->
-      <DesktopPageSwitch
-        v-if="!appStore.isMobile"
+      <Logo />
+
+      <PcMenu
+        v-if="!isMobile"
+        :menu-list="menuList"
       />
 
       <!-- 右边 -->
@@ -42,9 +51,9 @@ const appStore = useAppStore()
         <!-- 切换主题按钮 -->
         <ThemeSwitch />
 
-        <!-- 移动端页面切换 -->
-        <MobilePageSwitch
-          v-if="appStore.isMobile"
+        <MobileMenu
+          v-if="isMobile"
+          :menu-list="menuList"
         />
       </div>
     </div>

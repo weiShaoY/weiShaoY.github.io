@@ -20,7 +20,7 @@ const router = createRouter({
   /**
    *    路由模式
    */
-  history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
+  history: routerMode[import.meta.env.VITE_APP_ROUTER_MODE](),
 
   routes: [
     ...appRoutes,

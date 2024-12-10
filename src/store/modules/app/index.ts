@@ -127,7 +127,7 @@ const useAppStore = defineStore(
     /**
      *  是否为移动端  (由hooks:responsive 来切换)
      */
-    const isMobile = ref(false)
+    // const isMobile = ref(false)
 
     /**
      *  切换主题

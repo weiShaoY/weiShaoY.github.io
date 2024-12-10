@@ -24,6 +24,11 @@ const homeRouter: RouteRecordRaw[] = [
         name: 'Resume',
         component: () => import('@/pages/home/resume/index.vue'),
       },
+      {
+        path: 'contact',
+        name: 'Contact',
+        component: () => import('@/pages/home/contact/index.vue'),
+      },
     ],
   },
 

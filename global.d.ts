@@ -27,15 +27,20 @@ declare type ViteEnv = {
   /**
    *  用户环境
    */
-  VITE_NODE_ENV: 'development' | 'production'
+  VITE_APP_NODE_ENV: 'development' | 'production'
 
   /**
    *  路由模式
    */
-  VITE_ROUTER_MODE: 'hash' | 'history'
+  VITE_APP_ROUTER_MODE: 'hash' | 'history'
 
   /**
    *  打包时是否删除 console
    */
-  VITE_DROP_CONSOLE: boolean
+  VITE_APP_DROP_CONSOLE: boolean
+
+  /**
+   *  网站首页地址
+   */
+  VITE_APP_HOMEPAGE: string
 }

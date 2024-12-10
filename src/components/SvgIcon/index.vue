@@ -1,61 +1,95 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
-type Props = {
+/**
+ * 组件属性类型定义
+ */
+const props = defineProps({
+  /**
+   * 图标的前缀
+   */
+  prefix: {
+    type: String,
+    default: 'icon',
+  },
 
   /**
-   *  图标名称
+   * 图标的名称
    */
-  icon: string
+  icon: {
+    type: String,
+    required: true,
+  },
 
   /**
-   *  图标大小
+   * 图标的颜色
    */
-  size?: string | number
+  color: {
+    type: String,
+    default: 'currentColor',
+  },
 
   /**
-   *  图标类名
-   *  @description 如果传入 color属性 则不能传入的class里的颜色不会生效, 因为 fill 会被覆盖
+   * 图标的大小
    */
-  class?: string
+  size: {
+    type: [String, Number],
+    default: '1em',
+  },
 
   /**
-   *  图标颜色
+   * 额外的 CSS 类名
    */
-  color?: string
+  class: {
+    type: String,
+    default: '',
+  },
 
   /**
-   *  图标前缀
+   * 行内样式
    */
-  prefix?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  icon: '',
-  size: '20px',
-  class: '',
-  color: '',
-  prefix: '#icon-',
+  style: {
+    type: Object,
+    default: () => ({
+    }),
+  },
 })
 
-// 4. 计算图标大小
-const svgSize = computed(() => {
-  if (typeof props.size === 'number') {
-    return `${props.size}px`
-  }
+/**
+ * 计算 `symbolId` 用于引用图标
+ */
+const symbolId = computed(() => `#${props.prefix}-${props.icon}`)
 
-  return props.size
-})
+/**
+ * 计算合并后的类名
+ */
+const mergedClassName = computed(() =>
+  `${props.class} anticon fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none`,
+)
+
+/**
+ * 计算 SVG 的行内样式
+ */
+const svgStyle = computed(() => ({
+  verticalAlign: 'middle',
+  width: props.size,
+  height: props.size,
+  color: props.color,
+  ...props.style,
+}))
 </script>
 
 <template>
   <svg
-    :class="`fill-current ${props.class} w-1em h-1em relative inline-block`"
-    :font-size="svgSize"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 100"
+    :class="mergedClassName"
+    :style="svgStyle"
+    :aria-label="icon"
   >
+    <title>{{ icon }}</title>
+
     <use
-      :xlink:href="`${props.prefix}${props.icon}`"
-      :fill="`${props.color}`"
+      :xlink:href="symbolId"
+      fill="currentColor"
     />
   </svg>
 </template>

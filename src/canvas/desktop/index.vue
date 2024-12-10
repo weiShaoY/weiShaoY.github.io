@@ -1,20 +1,14 @@
-<script setup>
+<script setup >
+import { isMobile } from '@/utils'
+
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-import {
-  onBeforeUnmount,
-  onMounted,
-  ref,
-} from 'vue'
-
 // 定义引用
 const canvasContainer = ref(null)
-
-const isMobile = ref(false)
 
 let renderer, scene, camera, controls
 
@@ -30,9 +24,9 @@ function loadModel() {
       const model = gltf.scene
 
       // 根据设备调整模型属性
-      model.position.set(isMobile.value ? -2.5 : 0, isMobile.value ? -3 : -5, -1.5)
+      model.position.set(isMobile ? -2.5 : 0, isMobile ? -3 : -5, -1.5)
       model.rotation.set(-0.01, -0.2, -0.1)
-      model.scale.set(isMobile.value ? 0.4 : 1, isMobile.value ? 0.4 : 1, isMobile.value ? 0.4 : 1)
+      model.scale.set(isMobile ? 0.4 : 1, isMobile ? 0.4 : 1, isMobile ? 0.4 : 1)
 
       scene.add(model)
     },
@@ -107,54 +101,17 @@ function initThree() {
   animate()
 }
 
-/**
- * 窗口大小调整事件
- */
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-/**
- * 媒体查询监听器
- */
-function handleMediaQueryChange(event) {
-  isMobile.value = event.matches
-}
-
 // 生命周期钩子
 onMounted(() => {
   // 初始化场景
   initThree()
-
-  // 监听窗口调整
-  window.addEventListener('resize', onWindowResize)
-
-  // 设置媒体查询
-  const mediaQuery = window.matchMedia('(max-width: 500px)')
-
-  isMobile.value = mediaQuery.matches
-  mediaQuery.addEventListener('change', handleMediaQueryChange)
 })
 
-onBeforeUnmount(() => {
-  // 清理监听器
-  window.removeEventListener('resize', onWindowResize)
-})
 </script>
 
 <template>
   <div
     ref="canvasContainer"
-    class="three-canvas-container"
+    class="h-full w-full overflow-hidden"
   />
 </template>
-
-<style>
-.three-canvas-container {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-</style>

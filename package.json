@@ -14,9 +14,11 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@types/lodash": "^4.17.13",
     "@types/three": "^0.169.0",
     "@vueuse/core": "^11.2.0",
+    "earth-flyline": "^1.5.4",
     "echarts": "^5.5.0",
     "gsap": "^3.12.5",
     "lodash": "^4.17.21",
@@ -27,6 +29,7 @@
     "pinia-plugin-persistedstate": "^4.1.2",
     "three": "^0.170.0",
     "three-custom-shader-material": "^6.1.1",
+    "three-globe": "^2.35.6",
     "three-stdlib": "^2.34.0",
     "vue": "^3.5.0",
     "vue-echarts": "^7.0.3",
@@ -64,7 +67,6 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.6.2",
     "vue-tsc": "^2.1.6"
-
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

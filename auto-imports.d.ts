@@ -68,7 +68,7 @@ declare global {
   const isFile: typeof import('./src/utils/is copy')['isFile']
   const isFunction: typeof import('./src/utils/is')['isFunction']
   const isHexColor: typeof import('./src/utils/is')['isHexColor']
-  const isMobile: typeof import('./src/composables/mobile')['isMobile']
+  const isMobile: typeof import('./src/utils/isMobile')['isMobile']
   const isNull: typeof import('./src/utils/is')['isNull']
   const isNullOrUnDef: typeof import('./src/utils/is')['isNullOrUnDef']
   const isNumber: typeof import('./src/utils/is')['isNumber']
@@ -138,6 +138,7 @@ declare global {
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const route: typeof import('./src/composables/router')['route']
   const router: typeof import('./src/composables/router')['router']
+  const sendContactEmail: typeof import('./src/utils/sendContactEmail')['sendContactEmail']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const setRouteEmitter: typeof import('./src/utils/route-listener')['setRouteEmitter']
@@ -409,6 +410,7 @@ declare module 'vue' {
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isElement: UnwrapRef<typeof import('./src/utils/is')['isElement']>
     readonly isFunction: UnwrapRef<typeof import('./src/utils/is')['isFunction']>
+    readonly isMobile: UnwrapRef<typeof import('./src/utils/isMobile')['isMobile']>
     readonly isNull: UnwrapRef<typeof import('./src/utils/is')['isNull']>
     readonly isNullOrUnDef: UnwrapRef<typeof import('./src/utils/is')['isNullOrUnDef']>
     readonly isNumber: UnwrapRef<typeof import('./src/utils/is')['isNumber']>
@@ -465,6 +467,7 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
+    readonly sendContactEmail: UnwrapRef<typeof import('./src/utils/sendContactEmail')['sendContactEmail']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
