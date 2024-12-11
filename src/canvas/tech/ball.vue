@@ -1,23 +1,19 @@
 <script lang="ts" setup>
-import { Icosahedron } from '@tresjs/cientos'
+import * as THREE from 'three'
+
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import {
-  TresCanvas,
-  useLoader,
-  useRenderLoop,
-} from '@tresjs/core'
-
-import { TextureLoader } from 'three'
-
-import {
+  nextTick,
+  onMounted,
   ref,
-  shallowRef,
 } from 'vue'
 
 // 定义组件属性
 const props = defineProps({
   /**
    * 图标 - 用于球体贴图的纹理路径
+   * @type {string}
    */
   image: {
     type: String,
@@ -26,6 +22,7 @@ const props = defineProps({
 
   /**
    * 跳转地址
+   * @type {string}
    */
   url: {
     type: String,
@@ -33,86 +30,151 @@ const props = defineProps({
   },
 })
 
-// 用于引用 3D 对象
-const boxRef = shallowRef(null)
+// 引用用于挂载 Canvas 的容器
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
-// 加载状态和纹理
-const isTextureLoaded = ref(false)
-
-const texture = ref(null)
-
-// 使用 useLoader 加载纹理
-useLoader(TextureLoader, props.image, (loadedTexture) => {
-  texture.value = loadedTexture
-  isTextureLoaded.value = true
-})
-
-// 使用渲染循环
-const { onLoop } = useRenderLoop()
-
-onLoop(({ delta, elapsed }) => {
-  if (boxRef.value && isTextureLoaded.value) {
-    boxRef.value.rotation.y += delta
-    boxRef.value.rotation.z = elapsed * 0.2
+/**
+ * 创建并初始化 Three.js 场景，设置球体纹理、灯光、控制器等
+ * 仅在 canvasContainer 存在时执行
+ */
+function createBallScene() {
+  if (!canvasContainer.value) {
+    return
   }
+
+  /**
+   *  初始化 Three.js 场景
+   */
+  const scene = new THREE.Scene()
+
+  /**
+   *  初始化 Three.js 相机
+   */
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    canvasContainer.value.clientWidth / canvasContainer.value.clientHeight,
+    0.1,
+    1000,
+  )
+
+  camera.position.z = 5
+
+  /**
+   *  初始化 Three.js 渲染器
+   */
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+  })
+
+  renderer.setSize(
+    canvasContainer.value.clientWidth,
+    canvasContainer.value.clientHeight,
+  )
+  canvasContainer.value.appendChild(renderer.domElement)
+
+  /**
+   *  环境光
+   */
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 2)
+
+  scene.add(ambientLight)
+
+  /**
+   *  定向光
+   */
+  const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
+
+  directionalLight.position.set(0, 0, 0.05)
+
+  scene.add(directionalLight)
+
+  const texture = new THREE.TextureLoader().load(props.image)
+
+  // 创建 20 面体几何体
+  const geometry = new THREE.IcosahedronGeometry(1, 1)
+
+  // 为每个面设置不同的纹理 UV
+  const uvAttribute = geometry.getAttribute('uv')
+
+  for (let i = 0; i < uvAttribute.count; i++) {
+    const u = uvAttribute.getX(i)
+
+    const v = uvAttribute.getY(i)
+
+    // 简单的映射规则，按不同方向设置纹理区域
+    if (u < 0.5 && v < 0.5) {
+      uvAttribute.setXY(i, 0, 0) // 左上
+    }
+    else if (u > 0.5 && v < 0.5) {
+      uvAttribute.setXY(i, 1, 0) // 右上
+    }
+    else if (u < 0.5 && v > 0.5) {
+      uvAttribute.setXY(i, 0, 1) // 左下
+    }
+    else {
+      uvAttribute.setXY(i, 1, 1) // 右下
+    }
+  }
+
+  // 创建材质
+  const material = new THREE.MeshBasicMaterial({
+    map: texture,
+    color: 0xFFF8EF,
+  })
+
+  const mesh = new THREE.Mesh(geometry, material)
+
+  const group = new THREE.Mesh()
+
+  group.add(mesh)
+  scene.add(group)
+
+  // 设置交互事件
+  /**
+   * 双击事件，跳转到指定 URL
+   * @param {MouseEvent} event 鼠标事件对象
+   */
+  renderer.domElement.addEventListener('dblclick', (event: MouseEvent) => {
+    event.stopPropagation()
+    if (props.url) {
+      window.open(props.url, '_blank', 'noopener,noreferrer')
+    }
+  })
+
+  /**
+   *  设置 OrbitControls 以启用鼠标控制
+   */
+  const controls = new OrbitControls(camera, renderer.domElement)
+
+  controls.enableDamping = true // 开启惯性效果
+  controls.dampingFactor = 0.05 // 调整惯性阻尼
+  controls.rotateSpeed = 0.8 // 控制旋转速度
+
+  // 动画循环，更新场景并渲染
+  const animate = () => {
+    requestAnimationFrame(animate)
+
+    // 更新控制器状态
+    controls.update()
+
+    // 渲染场景
+    renderer.render(scene, camera)
+  }
+
+  animate() // 启动动画循环
+}
+
+// 在组件挂载时初始化场景
+onMounted(() => {
+  nextTick(createBallScene)
 })
 </script>
 
 <template>
-  <TresCanvas
-    alpha
-  >
-    <!-- 只有纹理加载完成后才渲染 -->
-    <template
-      v-if="isTextureLoaded"
-    >
-      <!-- 环境光 -->
-      <TresAmbientLight
-        :intensity="2"
-      />
-
-      <!-- 定向光 -->
-      <TresDirectionalLight
-        cast-shadow
-        :position="[0, 0, 0.05]"
-      />
-
-      <!-- 网格对象 -->
-      <TresMesh
-        ref="boxRef"
-        :scale="2"
-        cast-shadow
-      >
-        <TresMeshStandardMaterial
-          :map="texture"
-        />
-        <!-- 正二十面体 -->
-        <Icosahedron
-          :args="[1, 1]"
-        />
-      </TresMesh>
-    </template>
-
-    <template
-      v-else
-    >
-      <!-- 加载中提示 -->
-      <div
-        class="loading"
-      >
-        加载中...
-      </div>
-    </template>
-  </TresCanvas>
+  <div
+    ref="canvasContainer"
+    class="h-full w-full overflow-hidden"
+  />
 </template>
 
-<style scoped>
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;
-  color: #aaa;
-}
-</style>
+<style lang="less" scoped></style>

@@ -7,7 +7,7 @@ import Navbar from './components/navbar/index.vue'
 
 <template>
   <a-layout
-    class="relative h-[100vh] w-full bg-[#212224]"
+    class="relative  w-full bg-[#212224]"
   >
     <!-- 顶部导航栏 -->
     <Navbar />
