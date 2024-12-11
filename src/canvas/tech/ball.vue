@@ -88,46 +88,18 @@ function createBallScene() {
 
   scene.add(directionalLight)
 
-  const texture = new THREE.TextureLoader().load(props.image)
-
   // 创建 20 面体几何体
-  const geometry = new THREE.IcosahedronGeometry(1, 1)
+  const icosahedron = new THREE.IcosahedronGeometry(1, 1)
 
-  // 为每个面设置不同的纹理 UV
-  const uvAttribute = geometry.getAttribute('uv')
-
-  for (let i = 0; i < uvAttribute.count; i++) {
-    const u = uvAttribute.getX(i)
-
-    const v = uvAttribute.getY(i)
-
-    // 简单的映射规则，按不同方向设置纹理区域
-    if (u < 0.5 && v < 0.5) {
-      uvAttribute.setXY(i, 0, 0) // 左上
-    }
-    else if (u > 0.5 && v < 0.5) {
-      uvAttribute.setXY(i, 1, 0) // 右上
-    }
-    else if (u < 0.5 && v > 0.5) {
-      uvAttribute.setXY(i, 0, 1) // 左下
-    }
-    else {
-      uvAttribute.setXY(i, 1, 1) // 右下
-    }
-  }
-
-  // 创建材质
-  const material = new THREE.MeshBasicMaterial({
-    map: texture,
-    color: 0xFFF8EF,
+  const image = new THREE.MeshBasicMaterial({
+    map: new THREE.TextureLoader().load(props.image),
   })
 
-  const mesh = new THREE.Mesh(geometry, material)
+  const cubeG = new THREE.BoxGeometry(1, 1, 1)
 
-  const group = new THREE.Mesh()
+  const cube = new THREE.Mesh(cubeG, [image, image, image, image, image, image])
 
-  group.add(mesh)
-  scene.add(group)
+  scene.add(cube)
 
   // 设置交互事件
   /**
