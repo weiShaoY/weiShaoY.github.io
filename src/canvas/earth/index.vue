@@ -1,4 +1,4 @@
-<!------------------------------------  月球  ------------------------------------------------->
+<!------------------------------------  地球    ------------------------------------------------->
 <script lang="ts" setup>
 
 import earthFlyLine from 'earth-flyline'
@@ -21,9 +21,9 @@ const props = defineProps({
 /**
  * 计算 SVG 的行内样式
  */
-const earthStyle = computed(() => ({
-  width: typeof props.height === 'string' ? props.height : props.height,
-  height: typeof props.height === 'string' ? props.height : props.height,
+const cssStyle = computed(() => ({
+  width: typeof props.height === 'string' ? props.height : `${props.height}px`,
+  height: typeof props.height === 'string' ? props.height : `${props.height}px`,
 }))
 
 const geoJson: any = world
@@ -34,16 +34,73 @@ const container = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
   if (container.value) {
+    // earthFlyLine.init({
+    //   dom: container.value,
+    //   map: 'world',
+
+    //   config: {
+    //     textMark: {
+    //     // 公共样式配置
+    //       style: {
+    //         fontSize: 38,
+    //         color: '#fff',
+    //       },
+    //       data: [
+    //         {
+    //           position: {
+    //             lon: 112.93,
+    //             lat: 28.23,
+    //           },
+    //           text: '长沙',
+    //         },
+    //       ],
+    //     },
+    //     R: 140,
+    //     earth: {
+    //       color: '#13162c',
+    //     },
+    //     mapStyle: {
+    //       areaColor: '#2e3564',
+    //       lineColor: '#797eff',
+    //     },
+    //     spriteStyle: {
+    //       color: '#797eff',
+    //     },
+    //     pathStyle: {
+    //       color: '#cd79ff',
+    //     },
+    //     flyLineStyle: {
+    //       color: '#cd79ff',
+    //     },
+    //     scatterStyle: {
+    //       color: '#cd79ff',
+    //     },
+    //     hoverRegionStyle: {
+    //       areaColor: '#cd79ff',
+    //     },
+    //     regions: {
+    //       China: {
+    //         areaColor: '#2e3564',
+    //       },
+    //     },
+    //   },
+    // })
+
     earthFlyLine.init({
       dom: container.value,
-      map: 'world',
 
+      // helper: true,
+      map: 'world',
+      autoRotate: true,
+      mode: '3d',
       config: {
+        enableZoom: true,
+        stopRotateByHover: true,
+        R: 120,
         textMark: {
-        // 公共样式配置
           style: {
-            fontSize: 38,
             color: '#fff',
+            fontSize: 28,
           },
           data: [
             {
@@ -52,42 +109,24 @@ onMounted(() => {
                 lat: 28.23,
               },
               text: '长沙',
-
-              // 定制化样式配置
-              // style: {
-              //   fontSize: 22,
-              //   color: 'red',
-              // },
             },
           ],
         },
-        R: 140,
         earth: {
           color: '#13162c',
-        },
-        mapStyle: {
-          areaColor: '#2e3564',
-          lineColor: '#797eff',
-        },
-        spriteStyle: {
-          color: '#797eff',
-        },
-        pathStyle: {
-          color: '#cd79ff',
+          dragConfig: {
+            disableY: true,
+          },
         },
         flyLineStyle: {
-          color: '#cd79ff',
+          duration: 5000,
         },
-        scatterStyle: {
-          color: '#cd79ff',
+        bgStyle: {
+          color: '#0e0c15',
         },
-        hoverRegionStyle: {
-          areaColor: '#cd79ff',
-        },
-        regions: {
-          China: {
-            areaColor: '#2e3564',
-          },
+        spriteStyle: {
+          color: '#272335',
+          show: true,
         },
       },
     })
@@ -99,6 +138,6 @@ onMounted(() => {
   <div
     ref="container"
     class="overflow-hidden"
-    :style="earthStyle"
+    :style="cssStyle"
   />
 </template>

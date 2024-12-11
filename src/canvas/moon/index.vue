@@ -6,6 +6,24 @@ import { onMounted, ref } from 'vue'
 
 import imageUrl from './image/bumpImage.jpeg'
 
+const props = defineProps({
+  /**
+   *  高度
+   */
+  height: {
+    type: [String, Number],
+    default: '400px',
+  },
+})
+
+/**
+ * 计算 SVG 的行内样式
+ */
+const cssStyle = computed(() => ({
+  width: typeof props.height === 'string' ? props.height : `${props.height}px`,
+  height: typeof props.height === 'string' ? props.height : `${props.height}px`,
+}))
+
 const container = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
@@ -40,6 +58,7 @@ onMounted(() => {
 <template>
   <div
     ref="container"
-    class="h-[400px] w-[400px] overflow-hidden"
+    class="overflow-hidden"
+    :style="cssStyle"
   />
 </template>

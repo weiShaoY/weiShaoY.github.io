@@ -2,9 +2,11 @@
 <script setup lang="ts">
 import Earth from '@/canvas/earth/index.vue'
 
-// import Tech from '@/canvas/tech'
+import Tech from '@/canvas/tech/index.vue'
 
-// import Button from './button'
+import { copyText } from '@/utils'
+
+import { useRouter } from 'vue-router'
 
 import copyImg from './images/copy.svg'
 
@@ -16,8 +18,16 @@ import tickImg from './images/tick.svg'
 
 const hasCopied = ref(false)
 
+const router = useRouter()
+
+function handleContactMe() {
+  router.push({
+    name: 'Contact',
+  })
+}
+
 function handleCopy() {
-  navigator.clipboard.writeText('1604705673@qq.com')
+  copyText('1604705673@qq.com')
   hasCopied.value = true
 
   setTimeout(() => {
@@ -74,7 +84,7 @@ function handleCopy() {
             class="h-fit w-full flex items-center justify-center rounded-3xl sm:h-[326px]"
           >
             <Earth
-              height="326px"
+              :height="326"
             />
           </div>
 
@@ -91,11 +101,24 @@ function handleCopy() {
               我居住在湖南长沙，愿意进行远程工作。
             </p>
 
-            <!-- <Button
-              name="联系我"
-              :is-beam="true"
-              container-class="w-full mt-10"
-            /> -->
+            <button
+              class="mx-auto mt-10 w-full flex cursor-pointer items-center justify-center gap-4 rounded-md bg-[#1c1c21] p-3 text-white transition-all active:scale-95"
+              type="button"
+              @click="handleContactMe"
+            >
+              <span
+                class="relative h-3 w-3 flex"
+              >
+                <span
+                  class="absolute h-full w-full inline-flex animate-ping rounded-full bg-[#4ade80] opacity-75"
+                />
+
+                <span
+                  class="relative h-3 w-3 inline-flex rounded-full bg-[#22c55e]"
+                />
+              </span>
+              联系我
+            </button>
           </div>
         </div>
       </div>
@@ -173,7 +196,3 @@ function handleCopy() {
     </div>
   </section>
 </template>
-
-<style scoped>
-/* 在此添加您的样式 */
-</style>
