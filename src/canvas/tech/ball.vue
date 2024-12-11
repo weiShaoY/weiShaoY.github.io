@@ -1,9 +1,18 @@
 <script lang="ts" setup>
-import * as THREE from 'three'
+import { Icosahedron } from '@tresjs/cientos'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import {
+  TresCanvas,
+  useLoader,
+  useRenderLoop,
+} from '@tresjs/core'
 
-import { onMounted, ref } from 'vue'
+import { TextureLoader } from 'three'
+
+import {
+  ref,
+  shallowRef,
+} from 'vue'
 
 // 定义组件属性
 const props = defineProps({
@@ -24,103 +33,86 @@ const props = defineProps({
   },
 })
 
-// 引用用于挂载 Canvas 的容器
-const canvasContainer = ref<HTMLDivElement | null>(null)
+// 用于引用 3D 对象
+const boxRef = shallowRef(null)
 
-function createBallScene() {
-  if (!canvasContainer.value) {
-    return
+// 加载状态和纹理
+const isTextureLoaded = ref(false)
+
+const texture = ref(null)
+
+// 使用 useLoader 加载纹理
+useLoader(TextureLoader, props.image, (loadedTexture) => {
+  texture.value = loadedTexture
+  isTextureLoaded.value = true
+})
+
+// 使用渲染循环
+const { onLoop } = useRenderLoop()
+
+onLoop(({ delta, elapsed }) => {
+  if (boxRef.value && isTextureLoaded.value) {
+    boxRef.value.rotation.y += delta
+    boxRef.value.rotation.z = elapsed * 0.2
   }
-
-  // 初始化 Three.js 场景、相机和渲染器
-  const scene = new THREE.Scene()
-
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    canvasContainer.value.clientWidth / canvasContainer.value.clientHeight,
-    0.1,
-    1000,
-  )
-
-  camera.position.z = 5
-
-  const renderer = new THREE.WebGLRenderer({
-    antialias: true,
-  })
-
-  renderer.setSize(
-    canvasContainer.value.clientWidth,
-    canvasContainer.value.clientHeight,
-  )
-  canvasContainer.value.appendChild(renderer.domElement)
-
-  // 添加灯光
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 2)
-
-  scene.add(ambientLight)
-
-  const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
-
-  directionalLight.position.set(0, 0, 0.05)
-  scene.add(directionalLight)
-
-  // 加载纹理贴图
-  const textureLoader = new THREE.TextureLoader()
-
-  textureLoader.load(props.image, (texture) => {
-    const geometry = new THREE.IcosahedronGeometry(1, 1)
-
-    const material = new THREE.MeshStandardMaterial({
-      map: texture,
-      flatShading: true,
-    })
-
-    const ball = new THREE.Mesh(geometry, material)
-
-    ball.castShadow = true
-    ball.receiveShadow = true
-    ball.scale.set(3, 3, 3)
-    scene.add(ball)
-
-    // 设置交互事件
-    renderer.domElement.addEventListener('dblclick', (event: MouseEvent) => {
-      event.stopPropagation()
-      if (props.url) {
-        window.open(props.url, '_blank', 'noopener,noreferrer')
-      }
-    })
-
-    // 设置 OrbitControls 以启用鼠标控制
-    const controls = new OrbitControls(camera, renderer.domElement)
-
-    controls.enableDamping = true // 开启惯性效果
-    controls.dampingFactor = 0.05 // 调整惯性阻尼
-    controls.rotateSpeed = 0.8 // 控制旋转速度
-
-    // 渲染动画
-    const animate = () => {
-      requestAnimationFrame(animate)
-      ball.rotation.x += 0.005
-      ball.rotation.y += 0.005
-      controls.update() // 更新控制器状态
-      renderer.render(scene, camera)
-    }
-
-    animate()
-  })
-}
-
-// 在组件挂载时初始化场景
-onMounted(createBallScene)
+})
 </script>
 
 <template>
-  <div
-    ref="canvasContainer"
-    class="h-full w-full"
-  />
+  <TresCanvas
+    alpha
+  >
+    <!-- 只有纹理加载完成后才渲染 -->
+    <template
+      v-if="isTextureLoaded"
+    >
+      <!-- 环境光 -->
+      <TresAmbientLight
+        :intensity="2"
+      />
+
+      <!-- 定向光 -->
+      <TresDirectionalLight
+        cast-shadow
+        :position="[0, 0, 0.05]"
+      />
+
+      <!-- 网格对象 -->
+      <TresMesh
+        ref="boxRef"
+        :scale="2"
+        cast-shadow
+      >
+        <TresMeshStandardMaterial
+          :map="texture"
+        />
+        <!-- 正二十面体 -->
+        <Icosahedron
+          :args="[1, 1]"
+        />
+      </TresMesh>
+    </template>
+
+    <template
+      v-else
+    >
+      <!-- 加载中提示 -->
+      <div
+        class="loading"
+      >
+        加载中...
+      </div>
+    </template>
+  </TresCanvas>
 </template>
 
-<style lang="less" scoped>
-
+<style scoped>
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #aaa;
+}
 </style>

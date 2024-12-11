@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
 import { onMounted, ref } from 'vue'
 
 // 定义组件属性
@@ -21,8 +23,6 @@ const props = defineProps({
     default: '',
   },
 })
-
-console.log('%c Line:25 🍧 props', 'color:#ffdd4d', props)
 
 // 引用用于挂载 Canvas 的容器
 const canvasContainer = ref<HTMLDivElement | null>(null)
@@ -71,9 +71,8 @@ function createBallScene() {
     const geometry = new THREE.IcosahedronGeometry(1, 1)
 
     const material = new THREE.MeshStandardMaterial({
-
-      map: texture, // 将纹理应用到材质
-      flatShading: true, // 使三角形平滑
+      map: texture,
+      flatShading: true,
     })
 
     const ball = new THREE.Mesh(geometry, material)
@@ -83,68 +82,27 @@ function createBallScene() {
     ball.scale.set(3, 3, 3)
     scene.add(ball)
 
-    // 添加六个方向的贴图
-    const decalPositions: { position: [number, number, number], rotation: [number, number, number] }[] = [
-      {
-        position: [0, 0, 1],
-        rotation: [0, 0, 0],
-      }, // Front
-      {
-        position: [0, 0, -1],
-        rotation: [0, Math.PI, 0],
-      }, // Back
-      {
-        position: [1, 0, 0],
-        rotation: [0, Math.PI / 2, 0],
-      }, // Right
-      {
-        position: [-1, 0, 0],
-        rotation: [0, -Math.PI / 2, 0],
-      }, // Left
-      {
-        position: [0, 1, 0],
-        rotation: [-Math.PI / 2, 0, 0],
-      }, // Top
-      {
-        position: [0, -1, 0],
-        rotation: [Math.PI / 2, 0, 0],
-      }, // Bottom
-    ]
-
-    decalPositions.forEach(({ position, rotation }) => {
-      const decalMaterial = new THREE.MeshStandardMaterial({
-        map: texture,
-      })
-
-      const decalGeometry = new THREE.PlaneGeometry(1, 1)
-
-      const decal = new THREE.Mesh(decalGeometry, decalMaterial)
-
-      decal.position.set(...position)
-      decal.rotation.set(...rotation)
-      scene.add(decal)
-    })
-
     // 设置交互事件
-    ball.addEventListener('dblclick', (event: MouseEvent) => {
+    renderer.domElement.addEventListener('dblclick', (event: MouseEvent) => {
       event.stopPropagation()
       if (props.url) {
         window.open(props.url, '_blank', 'noopener,noreferrer')
       }
     })
 
-    renderer.domElement.addEventListener('pointerover', () => {
-      document.body.style.cursor = 'pointer'
-    })
-    renderer.domElement.addEventListener('pointerout', () => {
-      document.body.style.cursor = 'default'
-    })
+    // 设置 OrbitControls 以启用鼠标控制
+    const controls = new OrbitControls(camera, renderer.domElement)
+
+    controls.enableDamping = true // 开启惯性效果
+    controls.dampingFactor = 0.05 // 调整惯性阻尼
+    controls.rotateSpeed = 0.8 // 控制旋转速度
 
     // 渲染动画
     const animate = () => {
       requestAnimationFrame(animate)
-      ball.rotation.x += 0.01
-      ball.rotation.y += 0.01
+      ball.rotation.x += 0.005
+      ball.rotation.y += 0.005
+      controls.update() // 更新控制器状态
       renderer.render(scene, camera)
     }
 
