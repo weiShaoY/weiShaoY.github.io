@@ -31,10 +31,10 @@ const technologies = [
     <div
       v-for="tech in technologies"
       :key="tech.name"
-      class="h-20 w-20"
+      class="h-22 w-22"
     >
       <Ball
-        :image="tech.image"
+        :imageUrl="tech.image"
         :url="tech.url"
       />
     </div>

@@ -15,7 +15,7 @@ const props = defineProps({
    * 图标 - 用于球体贴图的纹理路径
    * @type {string}
    */
-  imageUrl: {
+  image: {
     type: String,
     required: true,
   },
@@ -92,7 +92,7 @@ function createBallScene() {
   const icosahedron = new THREE.IcosahedronGeometry(1, 1)
 
   const image = new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader().load(props.imageUrl),
+    map: new THREE.TextureLoader().load(props.image),
   })
 
   const cubeG = new THREE.BoxGeometry(1, 1, 1)
