@@ -1,11 +1,7 @@
 {
-  "recommendations": [
-    "antfu.vite",
-    "antfu.iconify",
-    "antfu.unocss",
-    "antfu.goto-alias",
-    "vue.volar",
-    "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig"
-  ]
+	"recommendations": [
+		"biomejs.biome",
+		"bradlc.vscode-tailwindcss",
+		"lokalise.i18n-ally"
+	]
 }

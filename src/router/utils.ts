@@ -1,50 +1,50 @@
-import type { RouteRecordNormalized } from 'vue-router'
-
-const appModules = import.meta.glob('./modules/*/index.ts', {
-  eager: true,
-})
+import { ascend } from "ramda";
+import type { AppRouteObject, RouteMeta } from "#/router";
 
 /**
- *  格式化modules模块(将modules模块转化为数组)
- *  @param  _modules - modules模块
- *  @param  result - 格式化后的数组
+ * 筛选并排序菜单路由
+ * @param  items - 路由对象数组
+ * @returns  返回经过筛选和排序后的菜单路由数组
  */
-function formatModules(_modules: any, result: RouteRecordNormalized[]) {
-  // 遍历_modules对象的属性
-  Object.keys(_modules).forEach((key) => {
-    /**
-     *  获取当前属性的默认模块
-     */
-    const defaultModule = _modules[key].default
-
-    // 如果当前模块不存在，则直接返回
-    if (!defaultModule) {
-      return
-    }
-
-    /**
-     *  将defaultModule转化为数组
-     */
-    const moduleList = Array.isArray(defaultModule)
-      ? [...defaultModule]
-      : [defaultModule]
-
-    // 将所有模块添加到result数组中
-    result.push(...moduleList)
-  })
-
-  /**
-   *  返回格式化后的result数组
-   */
-  return result
+export function menuFilter(items: AppRouteObject[]) {
+	return (
+		items
+			.filter((item) => {
+				// 根据 meta.key 判断是否显示菜单项
+				const show = item.meta?.key;
+				// 如果有子路由，递归过滤子路由
+				if (show && item.children) {
+					item.children = menuFilter(item.children);
+				}
+				return show;
+			})
+			// 使用 Ramda 的 ascend 方法根据 order 字段对菜单项进行升序排序
+			.sort(ascend((item) => item.order || Number.POSITIVE_INFINITY))
+	);
 }
 
 /**
- *  导出appRoutes和appExternalRoutes 变量是格式化过的modules模块
+ * 获取用于侧边栏菜单的路由
+ * @param  appRouteObjects - 路由对象数组
+ * @returns  返回经过过滤和排序后的菜单路由
  */
-const appRoutes: RouteRecordNormalized[] = formatModules(appModules, [])
+export function getMenuRoutes(appRouteObjects: AppRouteObject[]) {
+	// 过滤并返回菜单路由
+	return menuFilter(appRouteObjects);
+}
 
-export {
-  appRoutes,
-  formatModules,
+/**
+ * 扁平化菜单路由，返回包含 meta 信息的数组
+ * @param  routes - 路由对象数组
+ * @returns  返回扁平化后的路由 meta 信息数组
+ */
+export function flattenMenuRoutes(routes: AppRouteObject[]) {
+	return routes.reduce<RouteMeta[]>((prev, item) => {
+		const { meta, children } = item;
+		// 如果路由项有 meta 信息，添加到结果数组中
+		if (meta) prev.push(meta);
+		// 递归处理子路由，合并子路由的 meta 信息
+		if (children) prev.push(...flattenMenuRoutes(children));
+		return prev;
+	}, []);
 }

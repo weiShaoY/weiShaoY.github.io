@@ -1,5 +1,3 @@
-import FetchRequest from './fetch'
+import BlogApi from "./modules/blog";
 
-export {
-  FetchRequest,
-}
+export { BlogApi };

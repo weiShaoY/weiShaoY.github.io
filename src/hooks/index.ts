@@ -1,11 +1,5 @@
-import useResponsive from './responsive'
+import useGetTime from "./use-get-time";
 
-import useGetTime from './use-get-time'
+import useCopyToClipboard from "./use-copy-to-clipboard";
 
-import useLightCard from './use-light-card'
-
-export {
-  useGetTime,
-  useLightCard,
-  useResponsive,
-}
+export { useGetTime, useCopyToClipboard };
