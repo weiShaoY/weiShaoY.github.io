@@ -1,0 +1,170 @@
+{
+  "files.associations": {
+
+    // 将所有 .css 文件关联为 PostCSS 文件类型
+    "*.css": "postcss"
+
+  },
+
+  // 启用 ESlint flat config 支持
+  // "eslint.experimental.useFlatConfig": true,
+
+  // 禁用默认的代码格式化工具 Prettier
+  // "prettier.enable": false,
+
+  // 保存时不自动格式化代码
+  "editor.formatOnSave": false,
+
+  // 自动修复代码
+  "editor.codeActionsOnSave": {
+
+    // 保存时 ESLint 自动修复所有可以修复的错误
+    "source.fixAll.eslint": "explicit",
+
+    // 保存时不自动组织导入语句
+    "source.organizeImports": "never"
+  },
+
+  // 在 IDE 中关闭样式规则提示，但仍然自动修复它们
+  "eslint.rules.customizations": [
+
+    // 关闭所有与样式相关的规则提示
+    { "rule": "style/*", "severity": "off" },
+
+    // 关闭缩进相关的规则提示
+    { "rule": "*-indent", "severity": "off" },
+
+    // 关闭空格相关的规则提示
+    { "rule": "*-spacing", "severity": "off" },
+
+    // 关闭空格相关的规则提示
+    { "rule": "*-spaces", "severity": "off" },
+
+    // 关闭顺序相关的规则提示
+    { "rule": "*-order", "severity": "off" },
+
+    // 关闭尾随逗号相关的规则提示
+    { "rule": "*-dangle", "severity": "off" },
+
+    // 关闭换行相关的规则提示
+    { "rule": "*-newline", "severity": "off" },
+
+    // 关闭引号相关的规则提示
+    { "rule": "*quotes", "severity": "off" },
+
+    // 关闭分号相关的规则提示
+    { "rule": "*semi", "severity": "off" }
+  ],
+
+  // 下面的配置是可选的，建议放在项目的 `.vscode/settings.json` 中，
+  // 以避免在使用不同的 ESLint 配置时产生冲突
+  "eslint.validate": [
+
+    // 验证 JavaScript 文件
+    "javascript",
+
+    // 验证 React 的 JavaScript 文件
+    "javascriptreact",
+
+    // 验证 TypeScript 文件
+    "typescript",
+
+    // 验证 React 的 TypeScript 文件
+    "typescriptreact",
+
+    // 验证 Vue 文件
+    "vue",
+
+    // 验证 HTML 文件
+    "html",
+
+    // 验证 Markdown 文件
+    "markdown",
+
+    // 验证 JSON 文件
+    "json",
+
+    // 验证 JSONC（带注释的 JSON）文件
+    "jsonc",
+
+    // 验证 YAML 文件
+    "yaml"
+  ],
+  "cSpell.ignoreWords": [
+    "AIbk7rh8aKVjwVuot",
+    "AMAP_MAP_KEY",
+    "CineonToneMapping",
+    "Eaction",
+    "Fira",
+    "GLTFLoader",
+    "Gltf",
+    "MeshoptDecoder",
+    "Rommg",
+    "VITE",
+    "WeiShaoY",
+    "ZiHunBaiGeTianXingTi",
+    "ZiHunShouJinTi",
+    "a-doption",
+    "a-dsubmenu",
+    "antfu",
+    "anticon",
+    "autoresize",
+    "baitian",
+    "caiShen",
+    "cientos",
+    "composables",
+    "daima",
+    "daojishi",
+    "droplist",
+    "echarts",
+    "flooMat",
+    "floorfrag",
+    "floornormal",
+    "floorroughness",
+    "floorver",
+    "fuShen",
+    "gaiLiangShouJinTi",
+    "generateMipmaps",
+    "glsl",
+    "gsap",
+    "guanbi",
+    "iconify",
+    "jsons",
+    "killTweensOf",
+    "linebreak",
+    "lynkco09",
+    "meshopt",
+    "muyu",
+    "nporgress",
+    "nprogress",
+    "nums",
+    "openxmlformats-officedocument",
+    "persistedstate",
+    "pinia",
+    "presetAttributify",
+    "shengXiao",
+    "sider",
+    "sperate-line",
+    "spreadsheetml",
+    "startroom",
+    "sublink",
+    "svgs",
+    "t_startroom_light",
+    "tailwindcss",
+    "taze",
+    "template_7fqldmf",
+    "tresjs",
+    "twind",
+    "typecheck",
+    "unhead",
+    "unocss",
+    "unplugin",
+    "videojs",
+    "vueuse",
+    "youJianTou",
+    "yueXiang",
+    "zhankai",
+    "zlevel",
+    "zuoJianTou"
+  ]
+}
