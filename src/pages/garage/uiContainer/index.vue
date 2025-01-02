@@ -4,15 +4,11 @@ import type { PageActionType } from '../types'
 
 import { useGarageStore } from '@/store'
 
-import { useRouter } from 'vue-router'
-
 import Game from './components/game/index.vue'
 
 import Load from './components/load/index.vue'
 
 const garageStore = useGarageStore()
-
-const router = useRouter()
 
 function handleHideLoad(value: PageActionType) {
   console.log('%c Line:23 🌶 value', 'color:#93c0a4', value)
@@ -34,12 +30,6 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
 </script>
 
 <template>
-  <button
-    class="fixed left-10 top-10 flex items-center justify-center rounded-2 bg-amber p-2 text-xl font-bold"
-    @click="router.push('/')"
-  >
-    返回
-  </button>
 
   <div
     class="absolute left-0 top-0 h-screen w-screen"
