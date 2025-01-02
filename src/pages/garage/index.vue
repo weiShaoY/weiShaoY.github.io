@@ -1,6 +1,6 @@
 <!------------------------------------  车库  ------------------------------------------------->
 <script lang="ts" setup>
-import UiContainer from './uuiContainer/index.vue'
+import UiContainer from './uiContainer/index.vue'
 </script>
 
 <template>
