@@ -39,11 +39,20 @@ function addLights() {
    *  平行光
    */
   directionalLight.position.set(0, 10, 0)
+
   scene.add(directionalLight)
+
+  /**
+   * 点光源
+   */
+  const pointLight = new THREE.PointLight(0xFFFFFF, 1, 100)
+
+  pointLight.position.set(5, 5, 5)
+  scene.add(pointLight)
 }
 
 function initThree(canvas: HTMLCanvasElement) {
-  console.log('%c Line:42 🍆 canvas', 'color:#7f2b82', canvas)
+  console.log('%c Line:46 🥓 canvas', 'color:#7f2b82', canvas)
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
@@ -61,9 +70,9 @@ function initThree(canvas: HTMLCanvasElement) {
     500,
   )
   camera.position.set(0, 2, 5)
-  console.log('%c Line:62 🍭 camera', 'color:#ffdd4d', camera)
 
   renderer = new THREE.WebGLRenderer({
+    canvas,
     antialias: true,
   })
 
@@ -91,6 +100,22 @@ onMounted(() => {
   if (threeContainerRef.value) {
     initThree(threeContainerRef.value)
   }
+
+  // const geometry = new THREE.IcosahedronGeometry(1, 2)
+
+  // const material = new THREE.MeshStandardMaterial({
+  //   color: '#FF5555',
+  //   roughness: 0.5,
+  //   metalness: 0.5,
+  // })
+
+  // const mesh = new THREE.Mesh(geometry, material)
+
+  // mesh.scale.set(3, 3, 3)
+
+  // mesh.position.set(0, 1.5, 0)
+
+  // scene.add(mesh)
 })
 
 onUnmounted(() => {
@@ -111,7 +136,6 @@ onUnmounted(() => {
     :camera="camera"
     :renderer="renderer"
   />
-
 </template>
 
 <style lang="less" scoped>

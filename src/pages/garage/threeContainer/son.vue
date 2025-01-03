@@ -250,15 +250,12 @@ const floorUniforms = {
 }
 
 /**
- * 平展模型，将场景中的所有 Mesh 对象展平成数组
- * @param {THREE.Object3D} root - GLTF 模型的根节点或场景对象
- * @returns {THREE.Mesh[]} - 包含所有 Mesh 对象的数组
+ *  扁平化模型
  */
-// 扁平化模型
-function flatModel(gltf: GLTF & ObjectMap) {
+function flatModel(gltf: any) {
   const modelArr: THREE.Mesh[] = []
 
-  gltf.scene.traverse((child) => {
+  gltf.scene.traverse((child: any) => {
     modelArr.push(child as THREE.Mesh)
   })
   return modelArr
@@ -274,21 +271,15 @@ function handleModel() {
 
     const modelParts = flatModel(gltf)
 
-    console.log('%c Line:259 🍫 modelParts', 'color:#ffdd4d', modelParts)
-
     /**
      *  车身部分
      */
     const body = modelParts.find(part => part.name === 'body') as THREE.Mesh
 
-    console.log('%c Line:266 🍇 body', 'color:#3f7cff', body)
-
     /**
      *  车身材质
      */
     const bodyMat = body.material as THREE.MeshStandardMaterial
-
-    console.log('%c Line:294 🍎 bodyMat', 'color:#e41a6a', bodyMat)
 
     //  设置车身材质的环境强度
     bodyMat.envMapIntensity = 5
@@ -308,10 +299,7 @@ function handleModel() {
     /**
      *  获取轮子部分
      */
-    // const wheel = modelParts.find(part => part.name === 'wheel') as THREE.Mesh
     const wheel = modelParts[35] as THREE.Mesh
-
-    console.log('%c Line:316 🍭 wheel', 'color:#ffdd4d', wheel)
 
     wheel.children.forEach((child) => {
       const mesh = child as THREE.Mesh
@@ -331,11 +319,8 @@ function handleModel() {
 
   gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
     // 获取模型部分
-    // const modelParts = gltf.scene.children as THREE.Mesh[]
 
     const modelParts = flatModel(gltf)
-
-    console.log('%c Line:337 🥚 modelParts', 'color:#4fff4B', modelParts)
 
     // 获取光部分
     const light = modelParts[1] as THREE.Mesh
@@ -379,10 +364,27 @@ function handleModel() {
 
     modelRef.value.floor = floor // 保存地板的引用
     modelRef.value.lightMat = light.material as THREE.MeshStandardMaterial // 保存光材质的引用
+    console.log('%c Line:367 🌽 modelRef', 'color:#4fff4B', modelRef)
   })
 }
 
 onMounted(() => {
+  // const geometry = new three.IcosahedronGeometry(1, 2)
+
+  // const material = new three.MeshStandardMaterial({
+  //   color: '#FF5555',
+  //   roughness: 0.5,
+  //   metalness: 0.5,
+  // })
+
+  // const mesh = new three.Mesh(geometry, material)
+
+  // mesh.scale.set(3, 3, 3)
+
+  // mesh.position.set(0, 1.5, 0)
+
+  // props.scene.add(mesh)
+
   handleModel() // 调用模型处理函数
 
   // 创建轨道控制器
@@ -573,9 +575,9 @@ watch(() => garageStore.interact.touch, () => {
 })
 </script>
 
-<template>
+<!-- <template>
   <div />
-</template>
+</template> -->
 
 <style scoped>
 
