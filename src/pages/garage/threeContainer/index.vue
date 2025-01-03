@@ -2,6 +2,8 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 
+import Son from './son.vue'
+
 const threeContainerRef = ref<HTMLCanvasElement>()
 
 /**
@@ -18,6 +20,8 @@ let camera: THREE.PerspectiveCamera
  *  渲染器
  */
 let renderer: THREE.WebGLRenderer
+
+const loading = ref(false)
 
 /**
  * 添加光源
@@ -57,6 +61,7 @@ function initThree(canvas: HTMLCanvasElement) {
     500,
   )
   camera.position.set(0, 2, 5)
+  console.log('%c Line:62 🍭 camera', 'color:#ffdd4d', camera)
 
   renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -70,23 +75,16 @@ function initThree(canvas: HTMLCanvasElement) {
 
   addLights()
 
-  // addOrbitControls()
-
   function animate() {
     requestAnimationFrame(animate)
-
-    // 如果模型已经加载完成，绕 Y 轴旋转
-    // if (model) {
-    //   // 调整旋转速度
-    //   model.rotation.y += 0.002
-    // }
-
-    // controls.update()
 
     renderer.render(scene, camera)
   }
 
   animate()
+
+  loading.value = true
+  console.log('%c Line:87 🍭 loading.value', 'color:#ffdd4d', loading.value)
 }
 
 onMounted(() => {
@@ -97,8 +95,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   renderer.dispose()
-
-  // controls.dispose()
 })
 
 </script>
@@ -107,6 +103,13 @@ onUnmounted(() => {
   <canvas
     ref="threeContainerRef"
     class="h-screen w-full"
+  />
+
+  <Son
+    v-if="loading"
+    :scene="scene"
+    :camera="camera"
+    :renderer="renderer"
   />
 
 </template>
