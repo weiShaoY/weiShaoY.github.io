@@ -19,6 +19,12 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
+
+import floorFrag from '/models/garage/shaders/sketch/floorfrag.glsl?url'
+
+import floorVertex from '/models/garage/shaders/sketch/floorver.glsl?url'
+
 const props = defineProps<{
 
   /**
@@ -261,7 +267,7 @@ function flatModel(gltf: any) {
   return modelArr
 }
 
-function handleModel() {
+function getModel() {
   const gltfLoader = new GLTFLoader()
 
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
@@ -315,6 +321,9 @@ function handleModel() {
 
     //  保存车身材质的引用
     modelRef.value.bodyMat = bodyMat
+
+    // 添加 模型
+    props.scene.add(gltf.scene)
   })
 
   gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
@@ -343,8 +352,14 @@ function handleModel() {
       alphaTest: 0.01,
     })
 
-    const floor = modelParts[2] as THREE.Mesh // 获取地板部分
+    /**
+     *  获取地板部分
+     */
+    const floor = modelParts[2] as THREE.Mesh
 
+    /**
+     *  获取地板材质
+     */
     const floorMat = floor.material as THREE.MeshPhysicalMaterial
 
     // 设置地板粗糙度贴图
@@ -362,33 +377,57 @@ function handleModel() {
     // 设置地板环境贴图强度
     floorMat.envMapIntensity = 0
 
-    modelRef.value.floor = floor // 保存地板的引用
-    modelRef.value.lightMat = light.material as THREE.MeshStandardMaterial // 保存光材质的引用
-    console.log('%c Line:367 🌽 modelRef', 'color:#4fff4B', modelRef)
+    /**
+     *  创建地板的自定义材质
+     */
+    const floorCsmMat = new CustomShaderMaterial({
+      baseMaterial: floorMat,
+      uniforms: floorUniforms,
+      vertexShader: floorVertex,
+      fragmentShader: floorFrag,
+      silent: true,
+    })
+
+    // 设置地板的自定义材质
+    floor.material = floorCsmMat
+
+    // 设置反射纹理
+    // floorUniforms.uReflectTexture.value = renderTarget.texture
+
+    // // 设置反射纹理的最小过滤
+    // renderTarget.texture.minFilter = LinearFilter
+
+    // // 设置反射纹理的最大过滤
+    // renderTarget.texture.magFilter = LinearFilter
+
+    // 设置反射矩阵
+    // floorUniforms.uReflectMatrix.value = matrix
+
+    // 保存地板的引用
+    modelRef.value.floor = floor
+
+    // 保存光材质的引用
+    modelRef.value.lightMat = light.material as THREE.MeshStandardMaterial
+
+    props.scene.add(gltf.scene)
   })
 }
 
+// const { matrix, renderTarget } = useReflect(modelRef.value.current.floor!, {
+//   resolution: [innerWidth, innerHeight],
+//   ignoreObjects: [modelRef.value.current.floor!, gltf.scene, startRommgltf.scene],
+// })
+
 onMounted(() => {
-  // const geometry = new three.IcosahedronGeometry(1, 2)
+  // 调用模型处理函数
+  getModel()
 
-  // const material = new three.MeshStandardMaterial({
-  //   color: '#FF5555',
-  //   roughness: 0.5,
-  //   metalness: 0.5,
-  // })
-
-  // const mesh = new three.Mesh(geometry, material)
-
-  // mesh.scale.set(3, 3, 3)
-
-  // mesh.position.set(0, 1.5, 0)
-
-  // props.scene.add(mesh)
-
-  handleModel() // 调用模型处理函数
-
-  // 创建轨道控制器
+  /**
+   *  创建轨道控制器
+   */
   const controls = new OrbitControls(props.camera, props.renderer.domElement)
+
+  // const controls = new OrbitControls(props.camera, garageStore.interact.controlDom)
 
   // 设置控制器目标
   controls.target.set(0, 1.5, 0)
