@@ -13,7 +13,7 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass' // 导入Bloom通道
+import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 
@@ -21,9 +21,11 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 
-import floorFrag from '/models/garage/shaders/sketch/floorfrag.glsl?url'
+import floorFrag from './shaders/sketch/floorfrag.glsl'
 
-import floorVertex from '/models/garage/shaders/sketch/floorver.glsl?url'
+import floorVertex from './shaders/sketch/floorver.glsl'
+
+import { flatModel } from './utils'
 
 const props = defineProps<{
 
@@ -258,14 +260,6 @@ const floorUniforms = {
 /**
  *  扁平化模型
  */
-function flatModel(gltf: any) {
-  const modelArr: THREE.Mesh[] = []
-
-  gltf.scene.traverse((child: any) => {
-    modelArr.push(child as THREE.Mesh)
-  })
-  return modelArr
-}
 
 function getModel() {
   const gltfLoader = new GLTFLoader()
@@ -384,6 +378,7 @@ function getModel() {
       baseMaterial: floorMat,
       uniforms: floorUniforms,
       vertexShader: floorVertex,
+
       fragmentShader: floorFrag,
       silent: true,
     })

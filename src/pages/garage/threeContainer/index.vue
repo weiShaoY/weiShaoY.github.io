@@ -84,6 +84,8 @@ function initThree(canvas: HTMLCanvasElement) {
 
   addLights()
 
+  // 监听窗口大小调整事件
+  window.addEventListener('resize', onWindowResize)
   function animate() {
     requestAnimationFrame(animate)
 
@@ -96,30 +98,24 @@ function initThree(canvas: HTMLCanvasElement) {
   console.log('%c Line:87 🍭 loading.value', 'color:#ffdd4d', loading.value)
 }
 
+/**
+ * 处理窗口大小调整
+ */
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
 onMounted(() => {
   if (threeContainerRef.value) {
     initThree(threeContainerRef.value)
   }
-
-  // const geometry = new THREE.IcosahedronGeometry(1, 2)
-
-  // const material = new THREE.MeshStandardMaterial({
-  //   color: '#FF5555',
-  //   roughness: 0.5,
-  //   metalness: 0.5,
-  // })
-
-  // const mesh = new THREE.Mesh(geometry, material)
-
-  // mesh.scale.set(3, 3, 3)
-
-  // mesh.position.set(0, 1.5, 0)
-
-  // scene.add(mesh)
 })
 
 onUnmounted(() => {
   renderer.dispose()
+  window.removeEventListener('resize', onWindowResize)
 })
 
 </script>
