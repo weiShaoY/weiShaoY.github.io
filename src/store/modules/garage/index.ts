@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+import ts from 'typescript'
+
 import { ref } from 'vue'
 
 /**
@@ -57,39 +59,40 @@ export const useGarageStore = defineStore(
       end: false, // 游戏是否结束
     })
 
-    const game = ref ({
-
+    const ui = ref({
+      colorSelect: {
       /**
        *  游戏状态
        */
-      status: false,
+        status: false,
 
-      /**
-       *  游戏运行的时间
-       */
-      time: 0,
+        /**
+         *  游戏运行的时间
+         */
+        time: 0,
 
-      /**
-       *  是否切换场景
-       */
-      transfer: false,
+        /**
+         *  是否切换场景
+         */
+        transfer: false,
 
-      /**
-       *  游戏的背景颜色
-       */
-      bodyColor: '#26d6e9',
-    })
+        /**
+         *  背景颜色
+         */
+        bodyColor: '#26d6e9',
+      },
 
-    const load = ref({
-      /**
-       *  资源是否加载完成
-       */
-      status: true,
+      loading: {
+        /**
+         *  资源是否加载完成
+         */
+        status: true,
 
-      /**
-       *  资源是否加载完成
-       */
-      ready: false,
+        /**
+         *  资源是否加载完成
+         */
+        ready: false,
+      },
     })
 
     /**
@@ -99,16 +102,16 @@ export const useGarageStore = defineStore(
       console.log('%c Line:99 🌰 payload', 'color:#fca650', payload)
       switch (type) {
         case 'show-load':
-          load.value.status = true
+          ui.value.loading.status = true
           break
         case 'hide-load':
-          load.value.status = false
+          ui.value.loading.status = false
           break
         case 'show-game':
-          game.value.status = true
+          ui.value.colorSelect.status = true
           break
         case 'hide-game':
-          game.value.status = false
+          ui.value.colorSelect.status = false
           break
         default:
           console.warn(`未知的动作类型: ${type}`)
@@ -116,9 +119,9 @@ export const useGarageStore = defineStore(
     }
 
     return {
+
       interact,
-      game,
-      load,
+      ui,
       dispatchAction,
     }
   },

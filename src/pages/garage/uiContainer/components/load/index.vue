@@ -17,7 +17,7 @@ const panelRef = ref<HTMLElement>()
 // const TOTAL = 24
 
 watchEffect(() => {
-  if (!garageStore.load.ready) {
+  if (!garageStore.ui.loading.ready) {
     close()
   }
 })

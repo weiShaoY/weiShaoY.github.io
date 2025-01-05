@@ -81,7 +81,7 @@ function handleClick(index: number, color: string) {
   }
 
   activeIndex.value = index
-  garageStore.game.bodyColor = color
+  garageStore.ui.colorSelect.bodyColor = color
 }
 
 // 使用 onMounted 钩子来设置动画和交互存储

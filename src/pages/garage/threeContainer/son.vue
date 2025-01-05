@@ -455,7 +455,7 @@ onMounted(() => {
   animate()
 })
 
-watch(() => garageStore.game.bodyColor, () => {
+watch(() => garageStore.ui.colorSelect.bodyColor, () => {
   // 如果车身材质不存在，返回
   if (!modelRef.value.bodyMat) {
     return
@@ -466,7 +466,7 @@ watch(() => garageStore.game.bodyColor, () => {
     color: modelRef.value.bodyMat.color,
 
     // 目标颜色
-    targetColor: new three.Color(garageStore.game.bodyColor),
+    targetColor: new three.Color(garageStore.ui.colorSelect.bodyColor),
   }
 
   gsap.to(par.color, {

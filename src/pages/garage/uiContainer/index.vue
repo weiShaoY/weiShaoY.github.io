@@ -4,7 +4,7 @@ import type { PageActionType } from '../types'
 
 import { useGarageStore } from '@/store'
 
-import Game from './components/game/index.vue'
+import ColorSelect from './components/colorSelect/index.vue'
 
 import Load from './components/load/index.vue'
 
@@ -37,10 +37,11 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
   >
     <!-- v-if="garageStore.game.status" -->
 
-    <Game />
+    <ColorSelect />
 
     <Load
-      v-if="garageStore.load.status"
+      v-if="
+        garageStore.ui.loading.status"
       @hide-load="handleHideLoad"
       @show-game="handleShowGame"
     />
