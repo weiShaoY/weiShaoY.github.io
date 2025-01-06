@@ -114,10 +114,10 @@ onMounted(() => {
     />
 
     <div
-      class="absolute bottom-24 left-1/2 flex transform items-center rounded-5 bg-gray-300 bg-opacity-75 -translate-x-1/2"
+      class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"
     >
       <button
-        class="m-3 flex transform cursor-pointer items-center justify-center rounded-2 bg-primary p-1 text-sm font-bold transition-transform duration-500 hover:scale-110 hover:-translate-y-1"
+        class="flex transform cursor-pointer items-center justify-center rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
         @click="router.push('/')"
       >
         返回首页
@@ -126,7 +126,7 @@ onMounted(() => {
       <div
         v-for="(item, index) in res"
         :key="index"
-        class="m-3 h-8 w-8 cursor-pointer rounded-1/2 bg-[100%_100%] bg-cover"
+        class="h-8 w-8 cursor-pointer rounded-1/2 bg-[100%_100%] bg-cover transition-transform duration-500 hover:scale-110"
         :class="{ 'color-item': activeIndex === index }"
         :style="{
           backgroundImage: `url(${item.src})`,
