@@ -9,11 +9,12 @@ import UiContainer from './uiContainer/index.vue'
   <div
     class="relative h-screen"
   >
+    <!-- 3D场景层 -->
+    <ThreeContainer />
+
     <!-- UI界面层 -->
     <UiContainer />
 
-    <!-- 3D场景层 -->
-    <ThreeContainer />
   </div>
 </template>
 

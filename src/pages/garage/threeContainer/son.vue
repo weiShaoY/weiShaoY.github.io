@@ -50,7 +50,7 @@ const garageStore = useGarageStore()
 /**
  *  Bloom效果
  */
-const bloomRef = ref<any>(null)
+const bloomRef = ref<any>()
 
 const modelRef = ref({
   /**
@@ -439,6 +439,8 @@ onMounted(() => {
   // 添加Bloom通道
   composer.addPass(new BloomPass(1.25))
 
+  bloomRef.value = new BloomPass(1.25)
+
   const animate = () => {
     requestAnimationFrame(animate)
 
@@ -458,6 +460,7 @@ onMounted(() => {
   garageStore.ui.loading.ready = true
 })
 
+//  监听颜色变化
 watch(() => garageStore.ui.bar.bodyColor, () => {
   // 如果车身材质不存在，返回
   if (!modelRef.value.bodyMat) {
@@ -473,7 +476,7 @@ watch(() => garageStore.ui.bar.bodyColor, () => {
   }
 
   gsap.to(par.color, {
-    duration: 0.35, // 动画持续时间
+    duration: 0.65, // 动画持续时间
     ease: 'power1.out', // 动画缓动函数
     r: par.targetColor.r, // 目标红色通道
     g: par.targetColor.g, // 目标绿色通道
@@ -485,7 +488,7 @@ watch(() => garageStore.ui.bar.bodyColor, () => {
 })
 
 watch(() => garageStore.interact.touch, () => {
-  console.log('%c Line:488 🥟 touch', 'color:#b03734',  garageStore.interact.touch)
+  console.log('%c Line:488 🥟 touch', 'color:#b03734', garageStore.interact.touch)
 
   /**
    *  获取当前参数

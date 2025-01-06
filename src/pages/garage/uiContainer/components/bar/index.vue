@@ -67,7 +67,7 @@ const res = [
 
 const garageStore = useGarageStore()
 
-const gameRef = ref<HTMLDivElement>()
+const controlRef = ref<HTMLDivElement>()
 
 const aniDone = ref(false)
 
@@ -84,11 +84,11 @@ function handleClick(index: number, color: string) {
 
 // 使用 onMounted 钩子来设置动画和交互存储
 onMounted(() => {
-  if (gameRef.value) {
-    gsap.set(gameRef.value, {
+  if (controlRef.value) {
+    gsap.set(controlRef.value, {
       opacity: 0,
     })
-    gsap.to(gameRef.value, {
+    gsap.to(controlRef.value, {
       opacity: 1,
       duration: 0.5,
       ease: 'power2.in',
@@ -97,20 +97,25 @@ onMounted(() => {
       },
     })
 
-    garageStore.interact.controlDom = gameRef.value
+    garageStore.interact.controlDom = controlRef.value
   }
 })
+
+watchEffect(() => {
+  console.log('%c Line:128 🥑 garageStore.interact.touch', 'color:#fca650', garageStore.interact.touch)
+})
+
 </script>
 
 <template>
   <div
-    ref="gameRef"
     class="h-full w-full"
   >
     <div
+      ref="controlRef"
       class="control !h-full !w-full"
-      @onpointerdown="garageStore.interact.touch = true"
-      @onpointerup="garageStore.interact.touch = false"
+      @pointerdown="() => garageStore.interact.touch = true"
+      @pointerup="() => garageStore.interact.touch = false"
     />
 
     <div
