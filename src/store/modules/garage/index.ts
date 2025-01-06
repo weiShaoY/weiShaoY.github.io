@@ -1,5 +1,3 @@
-import { debug } from 'node:console'
-
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'

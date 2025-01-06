@@ -485,6 +485,8 @@ watch(() => garageStore.ui.bar.bodyColor, () => {
 })
 
 watch(() => garageStore.interact.touch, () => {
+  console.log('%c Line:488 🥟 touch', 'color:#b03734',  garageStore.interact.touch)
+
   /**
    *  获取当前参数
    */
