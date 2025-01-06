@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 
-import ts from 'typescript'
 
 import { ref } from 'vue'
 
@@ -60,14 +59,14 @@ export const useGarageStore = defineStore(
     })
 
     const ui = ref({
-      colorSelect: {
+      bar: {
       /**
-       *  游戏状态
+       *  操作栏显示状态
        */
         status: false,
 
         /**
-         *  游戏运行的时间
+         *  操作运行的时间
          */
         time: 0,
 
@@ -85,11 +84,13 @@ export const useGarageStore = defineStore(
       loading: {
         /**
          *  资源是否加载完成
+         *  @default true
          */
         status: true,
 
         /**
          *  资源是否加载完成
+         *  @default false
          */
         ready: false,
       },
@@ -99,19 +100,20 @@ export const useGarageStore = defineStore(
      *  分发动作
      */
     function dispatchAction(type: string, payload?: any) {
+      console.log("%c Line:103 🌮 type", "color:#4fff4B", type);
       console.log('%c Line:99 🌰 payload', 'color:#fca650', payload)
       switch (type) {
-        case 'show-load':
+        case 'show-loading':
           ui.value.loading.status = true
           break
-        case 'hide-load':
+        case 'hide-loading':
           ui.value.loading.status = false
           break
-        case 'show-game':
-          ui.value.colorSelect.status = true
+        case 'show-bar':
+          ui.value.bar.status = true
           break
-        case 'hide-game':
-          ui.value.colorSelect.status = false
+        case 'hide-bar':
+          ui.value.bar.status = false
           break
         default:
           console.warn(`未知的动作类型: ${type}`)

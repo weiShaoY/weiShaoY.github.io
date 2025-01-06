@@ -4,22 +4,11 @@ import type { PageActionType } from '../types'
 
 import { useGarageStore } from '@/store'
 
-import ColorSelect from './components/colorSelect/index.vue'
+import Bar from './components/bar/index.vue'
 
-import Load from './components/load/index.vue'
+import Loading from './components/loading/index.vue'
 
 const garageStore = useGarageStore()
-
-function handleHideLoad(value: PageActionType) {
-  console.log('%c Line:23 🌶 value', 'color:#93c0a4', value)
-
-  garageStore.dispatchAction(value)
-}
-
-function handleShowGame(value: PageActionType) {
-  console.log('%c Line:24 🥟 value', 'color:#93c0a4', value)
-  garageStore.dispatchAction(value)
-}
 
 // 音频播放逻辑监听
 watch(() => garageStore.interact.audioAllowed, (newVal) => {
@@ -27,6 +16,12 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
     // TODO: 播放音乐
   }
 })
+
+function pageActionChange(value: PageActionType) {
+  console.log('%c Line:21 🥟 value', 'color:#4fff4B', value)
+  garageStore.dispatchAction(value)
+}
+
 </script>
 
 <template>
@@ -35,15 +30,17 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
     class="absolute left-0 top-0 h-screen w-screen"
     @pointerup="garageStore.interact.touch = false"
   >
-    <!-- v-if="garageStore.game.status" -->
 
-    <ColorSelect />
+    <Bar
+      v-if="
+        garageStore.ui.bar.status"
+    />
 
-    <Load
+    <Loading
       v-if="
         garageStore.ui.loading.status"
-      @hide-load="handleHideLoad"
-      @show-game="handleShowGame"
+      @hide-loading="pageActionChange"
+      @show-bar="pageActionChange"
     />
   </div>
 </template>

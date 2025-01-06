@@ -5,7 +5,7 @@ import { useGarageStore } from '@/store'
 
 import { gsap } from 'gsap'
 
-const emit = defineEmits(['hideLoad', 'showGame'])
+const emit = defineEmits(['hideLoading', 'showBar'])
 
 const garageStore = useGarageStore()
 
@@ -17,7 +17,7 @@ const panelRef = ref<HTMLElement>()
 // const TOTAL = 24
 
 watchEffect(() => {
-  if (!garageStore.ui.loading.ready) {
+  if (garageStore.ui.loading.ready) {
     close()
   }
 })
@@ -34,9 +34,8 @@ function close() {
 
       onComplete: () => {
         garageStore.interact.audioAllowed = true
-        console.log('%c Line:36 🍒 garageStore.interact.audioAllowed', 'color:#42b983', garageStore.interact.audioAllowed)
-        emit('hideLoad', 'hide-load')
-        emit('showGame', 'show-game')
+        emit('hideLoading', 'hide-loading')
+        emit('showBar', 'show-bar')
       },
     })
   }

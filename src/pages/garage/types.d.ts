@@ -7,14 +7,15 @@
 export type PageActionType =
 
   // 加载页相关操作
-  | 'show-load' // 显示加载页
-  | 'hide-load' // 隐藏加载页
+  | 'show-loading' // 显示加载页
+  | 'hide-loading' // 隐藏加载页
 
-  // 游戏操作页相关操作
-  | 'show-game' // 显示游戏页面
-  | 'hide-game' // 隐藏游戏页面
+  // 操作页相关操作
+  | 'show-bar' // 显示游戏页面
+  | 'hide-bar' // 隐藏游戏页面
 
   // 音频相关操作
   | 'allow-audio' // 允许播放音乐
   | 'mute' // 静音操作
   | 'unmute' // 取消静音操作
+
