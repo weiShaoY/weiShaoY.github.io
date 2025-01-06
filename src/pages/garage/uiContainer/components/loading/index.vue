@@ -11,11 +11,7 @@ const garageStore = useGarageStore()
 
 const panelRef = ref<HTMLElement>()
 
-/**
- * 加载总数
- */
-// const TOTAL = 24
-
+//  监听资源是否加载完成
 watchEffect(() => {
   if (garageStore.ui.loading.ready) {
     close()

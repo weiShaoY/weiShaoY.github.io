@@ -74,8 +74,6 @@ const aniDone = ref(false)
 const activeIndex = ref(0)
 
 function handleClick(index: number, color: string) {
-  console.log('%c Line:73 🍇 index', 'color:#42b983', index)
-
   if (!aniDone.value) {
     return
   }
@@ -110,7 +108,7 @@ onMounted(() => {
     class="h-full w-full"
   >
     <div
-      class="control h-full w-full"
+      class="control !h-full !w-full"
       @onpointerdown="garageStore.interact.touch = true"
       @onpointerup="garageStore.interact.touch = false"
     />

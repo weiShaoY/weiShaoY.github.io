@@ -453,6 +453,9 @@ onMounted(() => {
   }
 
   animate()
+
+  // 设置 资源加载完成
+  garageStore.ui.loading.ready = true
 })
 
 watch(() => garageStore.ui.bar.bodyColor, () => {

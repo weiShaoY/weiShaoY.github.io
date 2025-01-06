@@ -1,5 +1,6 @@
-import { defineStore } from 'pinia'
+import { debug } from 'node:console'
 
+import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
 
@@ -12,7 +13,7 @@ export const useGarageStore = defineStore(
     /**
      *  用户交互
      */
-    const interact = ref ({
+    const interact = ref({
       /**
        *  用户是否触摸屏幕
        */
@@ -60,9 +61,10 @@ export const useGarageStore = defineStore(
 
     const ui = ref({
       bar: {
-      /**
-       *  操作栏显示状态
-       */
+        /**
+         *  操作栏显示状态
+         *  @default false
+         */
         status: false,
 
         /**
@@ -99,9 +101,7 @@ export const useGarageStore = defineStore(
     /**
      *  分发动作
      */
-    function dispatchAction(type: string, payload?: any) {
-      console.log("%c Line:103 🌮 type", "color:#4fff4B", type);
-      console.log('%c Line:99 🌰 payload', 'color:#fca650', payload)
+    function dispatchAction(type: string) {
       switch (type) {
         case 'show-loading':
           ui.value.loading.status = true
@@ -121,7 +121,6 @@ export const useGarageStore = defineStore(
     }
 
     return {
-
       interact,
       ui,
       dispatchAction,

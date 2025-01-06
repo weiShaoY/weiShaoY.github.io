@@ -52,7 +52,6 @@ function addLights() {
 }
 
 function initThree(canvas: HTMLCanvasElement) {
-  console.log('%c Line:46 🥓 canvas', 'color:#7f2b82', canvas)
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
@@ -95,7 +94,6 @@ function initThree(canvas: HTMLCanvasElement) {
   animate()
 
   loading.value = true
-  console.log('%c Line:87 🍭 loading.value', 'color:#ffdd4d', loading.value)
 }
 
 /**

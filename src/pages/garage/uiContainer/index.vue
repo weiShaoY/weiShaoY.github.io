@@ -18,7 +18,6 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
 })
 
 function pageActionChange(value: PageActionType) {
-  console.log('%c Line:21 🥟 value', 'color:#4fff4B', value)
   garageStore.dispatchAction(value)
 }
 
