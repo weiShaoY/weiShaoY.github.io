@@ -1,7 +1,5 @@
 import type * as THREE from 'three'
 
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
-
 import type { ThreeContainerType } from './types'
 
 import * as three from 'three'
@@ -11,7 +9,6 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
-
 
 import floorFrag from './shaders/sketch/floorfrag.glsl'
 
@@ -29,7 +26,7 @@ export function addModels(
   maps: Ref<ThreeContainerType.MapsType>,
   uniforms: Ref<ThreeContainerType.UniformsType>,
   floorUniforms: Ref<ThreeContainerType.FloorUniformsType>,
-  carGltf: GLTF & THREE.Object3D,
+  carGltf: Ref<ThreeContainerType.carGltfType>,
 ) {
   const gltfLoader = new GLTFLoader()
 
@@ -37,7 +34,8 @@ export function addModels(
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
   gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
-    carGltf = gltf as any
+    carGltf.value = gltf
+    console.log('%c Line:40 🍆 carGltf', 'color:#7f2b82', carGltf)
 
     const modelParts = flatModel(gltf)
 

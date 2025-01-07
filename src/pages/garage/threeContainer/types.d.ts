@@ -1,11 +1,15 @@
 import type * as THREE from 'three'
 
+import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+
 import type { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 
 import type ts from 'typescript'
 
 //  命名空间
 export namespace ThreeContainerType {
+
+  export type carGltfType = GLTF | null
 
   /**
    * 主模型类型

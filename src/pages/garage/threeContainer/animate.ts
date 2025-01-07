@@ -1,3 +1,5 @@
+import type { Ref } from 'vue'
+
 import type { ThreeContainerType } from './types'
 
 import * as three from 'three'
@@ -9,53 +11,28 @@ export function animate(
   sceneRenderParams: Ref<ThreeContainerType.SceneRenderParamsType>,
   uniforms: Ref<ThreeContainerType.UniformsType>,
   floorUniforms: Ref<ThreeContainerType.FloorUniformsType>,
+  renderer: three.WebGLRenderer,
+  scene: three.Scene,
+  camera: three.PerspectiveCamera,
 ) {
-  // 获取每一帧的时间差
-  // const delta = clock.getDelta()
+  const delta = clock.getDelta() // 获取帧间隔时间
 
-  // // 更新统一变量的时间值
-  // uniforms.value.uTime.value += delta
-  // floorUniforms.value.uTime.value += delta * sceneRenderParams.value.floorNormalSpeed * 20
+  function animateFrame() {
+    requestAnimationFrame(animateFrame)
 
-  // // 暂时隐藏 cargltf 场景
-  // // if (carGltf.scene) {
-  // //   carGltf.scene.visible = false
-  // // }
-
-  // // // 更新 CubeCamera
-  // // if (cubeCamera && scene) {
-  // //   cubeCamera.update(renderer, scene) // 假设有 renderer
-  // // }
-
-  // // // 恢复 carGltf 场景
-  // // if (carGltf.scene) {
-  // //   carGltf.scene.visible = true
-  // // }
-
-  // // 递归调用动画，使用 requestAnimationFrame 保证高效渲染
-  // // 使用一个局部变量来处理帧动画
-  // const animateFrame = () => {
-  //   requestAnimationFrame(animateFrame)
-  //   animate(modelRef, sceneRenderParams, uniforms, floorUniforms)
-  // }
-
-  // 使用下一帧的回调避免递归陷入响应式更新
-  const animateFrame = () => {
-    const delta = clock.getDelta() // 获取帧间隔时间
-
-    // 更新 uniforms 和 floorUniforms 的时间
+    // 更新时间统一变量
     uniforms.value.uTime.value += delta
+
+    // 更新地板时间统一变量
     floorUniforms.value.uTime.value += delta * sceneRenderParams.value.floorNormalSpeed * 20
 
-    // 更新模型轮子的旋转
+    renderer.render(scene, camera)
+
     modelRef.value.wheel.forEach((child) => {
       child.rotateZ(-delta * 30 * sceneRenderParams.value.speedFactor)
     })
-
-    // 确保 requestAnimationFrame 只被调用一次
-    requestAnimationFrame(animateFrame)
   }
 
-  // 启动动画
+  // 开始动画循环
   animateFrame()
 }
