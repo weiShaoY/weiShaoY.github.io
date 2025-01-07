@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-const sunRef = ref<HTMLCanvasElement | null>(null)
+const earthRef = ref<HTMLCanvasElement | null>(null)
 
 /**
  *  场景
@@ -144,8 +144,8 @@ function initThree(canvas: HTMLCanvasElement) {
 }
 
 onMounted(() => {
-  if (sunRef.value) {
-    initThree(sunRef.value)
+  if (earthRef.value) {
+    initThree(earthRef.value)
   }
 })
 
@@ -158,7 +158,7 @@ onUnmounted(() => {
 
 <template>
   <canvas
-    ref="sunRef"
+    ref="earthRef"
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>

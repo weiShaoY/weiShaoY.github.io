@@ -1,3 +1,5 @@
+import type { Object3D } from 'three'
+
 import type * as THREE from 'three'
 
 /**
@@ -6,7 +8,7 @@ import type * as THREE from 'three'
  * @param {string} modelName - 模型名称，用于生成打印代码
  * @returns {string} 打印结果字符串
  */
-function printModel(modelParts: THREE.Object3D[], modelName = 'modelParts') {
+function printModel(modelParts: Object3D[], modelName = 'modelParts') {
   const strArray = modelParts.map((obj, i) => {
     const row = `const ${obj.name || `part${i}`} = ${modelName}[${i}]-${obj.type};`
 

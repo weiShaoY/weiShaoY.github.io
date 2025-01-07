@@ -112,6 +112,7 @@ watchEffect(() => {
     class="h-full w-full"
   >
     <div
+      id="controlRef"
       ref="controlRef"
       class="control !h-full !w-full"
       @pointerdown="() => garageStore.interact.touch = true"

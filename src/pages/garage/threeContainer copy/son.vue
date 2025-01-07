@@ -267,8 +267,6 @@ function getModel() {
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
   gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
-    // const modelParts = gltf.scene.children as THREE.Mesh[]
-
     const modelParts = flatModel(gltf)
 
     /**

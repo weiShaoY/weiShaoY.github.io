@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import type * as THREE from 'three'
 
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
-
 import { useGarageStore } from '@/store'
 
 import gsap from 'gsap'
@@ -14,7 +12,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 
@@ -28,11 +26,7 @@ import floorFrag from './shaders/sketch/floorfrag.glsl'
 
 import floorVertex from './shaders/sketch/floorver.glsl'
 
-import fragmentShader from './shaders/sketch/fragment.glsl'
-
-import vertexShader from './shaders/sketch/vertex.glsl'
-
-import { flatModel, useModifyCSM } from './utils'
+import { flatModel } from './utils'
 
 const garageStore = useGarageStore()
 
@@ -40,8 +34,6 @@ const garageStore = useGarageStore()
  *  3D容器
  */
 const threeContainerRef = ref<HTMLCanvasElement>()
-
-let carGltf: GLTF & THREE.Object3D
 
 /**
  *  Bloom效果
@@ -68,14 +60,7 @@ let renderer: THREE.WebGLRenderer
  */
 let controls: OrbitControls
 
-/**
- *  效果组合器
- */
 let composer: EffectComposer
-
-let fbo: THREE.WebGLCubeRenderTarget
-
-let cubeCamera: THREE.CubeCamera
 
 /**
  *  主模型
@@ -316,12 +301,7 @@ function addLights() {
  */
 function addOrbitControls() {
   // 创建轨道控制器
-  // controls = new OrbitControls(camera, renderer.domElement)
-
-  garageStore.interact.controlDom = document.getElementById('controlRef')
-  console.log('%c Line:322 🍋 garageStore.interact.controlDom', 'color:#93c0a4', garageStore.interact.controlDom)
-
-  controls = new OrbitControls(camera, garageStore.interact.controlDom)
+  controls = new OrbitControls(camera, renderer.domElement)
 
   // 设置控制器目标
   controls.target.set(0, 1.5, 0)
@@ -336,18 +316,15 @@ function addOrbitControls() {
   controls.update()
 
   composer = new EffectComposer(renderer)
-
   composer.addPass(new RenderPass(scene, camera))
-
   const bloomPass = new BloomPass(1.25)
 
   composer.addPass(bloomPass)
-
   bloomRef.value = bloomPass
 
-  // if (threeContainerRef.value) {
-  //   threeContainerRef.value.appendChild(renderer.domElement)
-  // }
+  if (threeContainerRef.value) {
+    threeContainerRef.value.appendChild(renderer.domElement)
+  }
 }
 
 /**
@@ -416,8 +393,6 @@ function addModels() {
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
   gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
-    carGltf = gltf as any
-
     const modelParts = flatModel(gltf)
 
     /**
@@ -555,22 +530,6 @@ function addModels() {
 
     scene.add(gltf.scene)
   })
-
-  gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
-    const mat = new CustomShaderMaterial({
-      baseMaterial: three.MeshStandardMaterial,
-      uniforms,
-      vertexShader,
-      fragmentShader,
-      silent: true,
-      transparent: true,
-      depthWrite: false,
-    } as any)
-
-    useModifyCSM(gltf, mat)
-
-    scene.add(gltf.scene)
-  })
 }
 
 function initThree(canvas: HTMLCanvasElement) {
@@ -635,66 +594,15 @@ function onWindowResize() {
 }
 
 onMounted(() => {
-  if (!threeContainerRef.value) {
-    return
+  if (threeContainerRef.value) {
+    initThree(threeContainerRef.value)
+
+    // 监听窗口大小调整事件
+    window.addEventListener('resize', onWindowResize)
+
+    // 设置 资源加载完成
+    garageStore.ui.loading.ready = true
   }
-
-  initThree(threeContainerRef.value)
-
-  // 监听窗口大小调整事件
-  window.addEventListener('resize', onWindowResize)
-
-  // 设置 资源加载完成
-  garageStore.ui.loading.ready = true
-
-  //
-  // 创建 CubeCamera 用于环境映射
-  const cubeRenderTarget = new three.WebGLCubeRenderTarget(512, {
-    type: three.UnsignedByteType,
-    generateMipmaps: false,
-    minFilter: three.NearestFilter,
-    magFilter: three.NearestFilter,
-  })
-
-  cubeCamera = new three.CubeCamera(1, 1000, cubeRenderTarget)
-  fbo = cubeRenderTarget
-
-  scene.environment = fbo.texture
-
-  const clock = new three.Clock()
-
-  // 动画循环
-  const animate = () => {
-    const delta = clock.getDelta() // 获取帧间隔时间
-
-    uniforms.uTime.value += delta
-    floorUniforms.uTime.value += delta * params.value.floorNormalSpeed * 20
-
-    // 暂时隐藏 cargltf 场景
-    // if (carGltf.scene) {
-    //   carGltf.scene.visible = false
-    // }
-
-    // // 更新 CubeCamera
-    // if (cubeCamera && scene) {
-    //   cubeCamera.update(renderer, scene) // 假设有 renderer
-    // }
-
-    // // 恢复 carGltf 场景
-    // if (carGltf.scene) {
-    //   carGltf.scene.visible = true
-    // }
-
-    // // 更新模型轮子的旋转
-    modelRef.value.wheel.forEach((child) => {
-      child.rotateZ(-delta * 30 * params.value.speedFactor)
-    })
-
-    requestAnimationFrame(animate) // 请求下一帧
-  }
-
-  //  帧循环函数
-  animate()
 })
 
 onUnmounted(() => {
@@ -859,7 +767,6 @@ watch(() => garageStore.interact.touch, () => {
     )
   }
 })
-
 </script>
 
 <template>

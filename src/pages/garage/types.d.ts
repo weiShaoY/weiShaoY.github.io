@@ -1,6 +1,5 @@
 /**
  * 页面动作类型
- *
  * 定义了一组可能的页面操作类型，用于管理页面状态和行为的更改。
  * 每个操作类型都与特定的页面状态变化或操作相关。
  */
@@ -19,3 +18,28 @@ export type PageActionType =
   | 'mute' // 静音操作
   | 'unmute' // 取消静音操作
 
+/**
+ * 主模型类型
+ */
+export type ModelRefType = {
+
+  /**
+   * 轮子材质
+   */
+  wheel: THREE.Mesh[]
+
+  /**
+   * 车身材质
+   */
+  bodyMat: THREE.MeshStandardMaterial | null
+
+  /**
+   * 地板材质
+   */
+  floor: THREE.Mesh | null
+
+  /**
+   * 灯光材质
+   */
+  lightMat: THREE.MeshStandardMaterial | null
+}

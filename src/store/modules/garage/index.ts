@@ -49,7 +49,7 @@ export const useGarageStore = defineStore(
       /**
        *  控制器的 DOM 元素
        */
-      controlDom: document.createElement('div'),
+      controlDom: null as HTMLElement | null,
 
       /**
        *  游戏是否已结束
