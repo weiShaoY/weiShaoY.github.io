@@ -101,10 +101,6 @@ onMounted(() => {
   }
 })
 
-watchEffect(() => {
-  console.log('%c Line:128 🥑 garageStore.interact.touch', 'color:#fca650', garageStore.interact.touch)
-})
-
 </script>
 
 <template>

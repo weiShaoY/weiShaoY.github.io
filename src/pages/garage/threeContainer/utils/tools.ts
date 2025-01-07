@@ -19,14 +19,22 @@ import { onMounted } from 'vue'
  * @param {CustomShaderMaterial} mat - 自定义着色器材质
  */
 export function useModifyCSM(gltf: GLTF, mat: CustomShaderMaterial) {
-  onMounted(() => {
-    gltf.scene.traverse((child: Object3D) => {
-      if ((child as Mesh).isMesh) {
-        const mesh = child as Mesh
+  // onMounted(() => {
+  //   gltf.scene.traverse((child: Object3D) => {
+  //     if ((child as Mesh).isMesh) {
+  //       const mesh = child as Mesh
 
-        mesh.material = mat
-      }
-    })
+  //       mesh.material = mat
+  //     }
+  //   })
+  // })
+
+  gltf.scene.traverse((child: Object3D) => {
+    if ((child as Mesh).isMesh) {
+      const mesh = child as Mesh
+
+      mesh.material = mat
+    }
   })
 }
 
