@@ -9,7 +9,6 @@
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "up": "taze major -I",
-    "postinstall": "npx simple-git-hooks",
     "deploy": "bash d",
     "build": "vite build"
   },
@@ -62,9 +61,7 @@
     "eslint-plugin-format": "^0.1.2",
     "jsdom": "^25.0.0",
     "less": "^4.2.0",
-    "lint-staged": "^15.2.2",
     "pnpm": "^10.0.0",
-    "simple-git-hooks": "^2.9.0",
     "taze": "^0.18.0",
     "typescript": "^5.5.4",
     "unocss": "^0.65.0",
@@ -77,11 +74,6 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.6.2",
     "vue-tsc": "^2.1.6"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
   }
+
 }
