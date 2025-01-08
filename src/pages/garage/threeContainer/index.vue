@@ -22,6 +22,8 @@ import { addTextures } from './addTextures'
 
 import { animate } from './animate'
 
+import { useReflect } from './utils/useReflect'
+
 import { watchColorChange } from './watchColorChange'
 
 import { watchMouseTouch } from './watchMouseTouch'
@@ -63,7 +65,13 @@ let fbo: THREE.WebGLCubeRenderTarget
  */
 let cubeCamera: THREE.CubeCamera
 
-const carGltf = ref < GLTF | null > (null)
+const carGltf: GLTF | null = null
+
+const startRommGltf: GLTF | null = null
+
+const matrix: THREE.Matrix4 | null = null
+
+const renderTarget: THREE.WebGLRenderTarget<THREE.Texture> | null = null
 
 /**
  *  主模型
@@ -195,7 +203,7 @@ onMounted(() => {
 
   addOrbitControls(scene, camera, renderer, composer)
 
-  addModels(scene, modelRef, maps, uniforms, floorUniforms, carGltf)
+  addModels(scene, modelRef, maps, uniforms, floorUniforms, carGltf, startRommGltf, matrix, renderTarget)
 
   // 创建 CubeCamera 用于环境映射
   const cubeRenderTarget = new three.WebGLCubeRenderTarget(512, {
@@ -211,6 +219,15 @@ onMounted(() => {
 
   //  设置环境贴图
   scene.environment = fbo.texture
+
+  // ///////////////////////////////////////
+
+  // const { matrix, renderTarget } = useReflect(modelRef.floor!, {
+  //   resolution: [innerWidth, innerHeight],
+  //   ignoreObjects: [modelRef.floor!, carGltf.scene, startRommgltf.scene],
+  // })
+
+  // ///////////////////////////////////////
 
   animate(modelRef, sceneRenderParams, uniforms, floorUniforms, renderer, scene, camera, cubeCamera)
 

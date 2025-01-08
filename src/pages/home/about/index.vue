@@ -6,6 +6,8 @@ import Sun from '@/canvas/sun/index.vue'
 // import Desktop from '@/canvas/desktop/index.vue'
 import Test from '@/canvas/test/index.vue'
 
+import { isMobile } from '@/utils'
+
 import Info from './components/info.vue'
 
 import Intro from './components/intro.vue'
@@ -19,7 +21,8 @@ import Intro from './components/intro.vue'
 
     <!-- 第一页 -->
     <div
-      class="relative min-h-screen w-full"
+      class="relative w-full"
+      :class=" isMobile ? 'h-[40vh]' : 'min-h-screen'"
     >
 
       <!-- 太阳 -->
@@ -31,6 +34,7 @@ import Intro from './components/intro.vue'
 
       <!-- 电脑桌模型 -->
       <div
+        v-if="!isMobile"
         class="absolute z-1"
       >
         <!-- <Desktop /> -->

@@ -20,7 +20,11 @@ import fragmentShader from './shaders/sketch/fragment.glsl'
 
 import vertexShader from './shaders/sketch/vertex.glsl'
 
-import { flatModel, useModifyCSM } from './utils'
+import {
+  flatModel,
+  useModifyCSM,
+  useReflect,
+} from './utils'
 
 export function addModels(
   scene: THREE.Scene,
@@ -28,7 +32,11 @@ export function addModels(
   maps: Ref<ThreeContainerType.MapsType>,
   uniforms: ThreeContainerType.UniformsType,
   floorUniforms: ThreeContainerType.FloorUniformsType,
-  carGltf: Ref<GLTF | null>,
+  carGltf: GLTF | null,
+  startRommGltf: GLTF | null,
+  matrix: THREE.Matrix4 | null,
+  renderTarget: THREE.WebGLRenderTarget<THREE.Texture> | null,
+
 ) {
   const gltfLoader = new GLTFLoader()
 
@@ -36,10 +44,13 @@ export function addModels(
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
   gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
-    carGltf.value = gltf
+    gltf.scene.rotation.y = Math.PI
+
+    carGltf = gltf
+
     console.log('%c Line:40 🍆 carGltf', 'color:#7f2b82', carGltf)
 
-    const modelParts = flatModel(gltf)
+    const modelParts = flatModel(carGltf)
 
     /**
      *  车身部分
@@ -90,10 +101,39 @@ export function addModels(
     scene.add(gltf.scene)
   })
 
+  gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
+    const mat = new CustomShaderMaterial({
+      baseMaterial: three.MeshPhysicalMaterial,
+      uniforms,
+      vertexShader,
+      fragmentShader,
+
+      // silent: true,
+      transparent: true,
+      depthWrite: false,
+    })
+
+    useModifyCSM(gltf, mat)
+
+    scene.add(gltf.scene)
+
+    // //////////////////////
+    const reflect = useReflect(modelRef.floor!, {
+      resolution: [innerWidth, innerHeight],
+      ignoreObjects: [modelRef.floor!, gltf.scene, startRommGltf!.scene],
+    })
+
+    matrix = reflect.matrix
+
+    renderTarget = reflect.renderTarget
+  })
+
   gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
+    startRommGltf = gltf
+
     // 获取模型部分
 
-    const modelParts = flatModel(gltf)
+    const modelParts = flatModel(startRommGltf)
 
     // 获取光部分
     const light = modelParts[1] as THREE.Mesh
@@ -119,7 +159,7 @@ export function addModels(
     /**
      *  获取地板部分
      */
-    const floor = modelParts[2] as THREE.Mesh
+    const floor = modelParts[2]
 
     /**
      *  获取地板材质
@@ -165,16 +205,16 @@ export function addModels(
     floor.material = floorCsmMat
 
     // 设置反射纹理
-    // floorUniforms.uReflectTexture.value = renderTarget.texture
+    floorUniforms.uReflectTexture.value = renderTarget!.texture
 
-    // // 设置反射纹理的最小过滤
-    // renderTarget.texture.minFilter = LinearFilter
+    // 设置反射纹理的最小过滤
+    renderTarget!.texture.minFilter = three.LinearFilter
 
-    // // 设置反射纹理的最大过滤
-    // renderTarget.texture.magFilter = LinearFilter
+    // 设置反射纹理的最大过滤
+    renderTarget!.texture.magFilter = three.LinearFilter
 
     // 设置反射矩阵
-    // floorUniforms.uReflectMatrix.value = matrix
+    floorUniforms.uReflectMatrix.value = matrix!
 
     // 保存地板的引用
     modelRef.floor = floor
@@ -186,21 +226,4 @@ export function addModels(
   })
 
   // baseMaterial: three.MeshStandardMaterial,
-
-  gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
-    const mat = new CustomShaderMaterial({
-      baseMaterial: three.MeshPhysicalMaterial,
-      uniforms,
-      vertexShader,
-      fragmentShader,
-
-      // silent: true,
-      transparent: true,
-      depthWrite: false,
-    })
-
-    useModifyCSM(gltf, mat)
-
-    scene.add(gltf.scene)
-  })
 }

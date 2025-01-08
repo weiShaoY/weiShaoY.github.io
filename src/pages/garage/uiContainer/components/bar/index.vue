@@ -119,7 +119,7 @@ onMounted(() => {
       class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"
     >
       <button
-        class="flex transform cursor-pointer items-center justify-center rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
+        class="flex transform cursor-pointer items-center justify-center whitespace-nowrap rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
         @click="router.push('/')"
       >
         返回首页
