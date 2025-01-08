@@ -118,14 +118,14 @@ export function addModels(
     scene.add(gltf.scene)
 
     // //////////////////////
-    const reflect = useReflect(modelRef.floor!, {
-      resolution: [innerWidth, innerHeight],
-      ignoreObjects: [modelRef.floor!, gltf.scene, startRommGltf!.scene],
-    })
+    // const reflect = useReflect(modelRef.floor!, {
+    //   resolution: [innerWidth, innerHeight],
+    //   ignoreObjects: [modelRef.floor!, gltf.scene, startRommGltf!.scene],
+    // })
 
-    matrix = reflect.matrix
+    // matrix = reflect.matrix
 
-    renderTarget = reflect.renderTarget
+    // renderTarget = reflect.renderTarget
   })
 
   gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
@@ -205,16 +205,16 @@ export function addModels(
     floor.material = floorCsmMat
 
     // 设置反射纹理
-    floorUniforms.uReflectTexture.value = renderTarget!.texture
+    // floorUniforms.uReflectTexture.value = renderTarget!.texture
 
-    // 设置反射纹理的最小过滤
-    renderTarget!.texture.minFilter = three.LinearFilter
+    // // 设置反射纹理的最小过滤
+    // renderTarget!.texture.minFilter = three.LinearFilter
 
-    // 设置反射纹理的最大过滤
-    renderTarget!.texture.magFilter = three.LinearFilter
+    // // 设置反射纹理的最大过滤
+    // renderTarget!.texture.magFilter = three.LinearFilter
 
-    // 设置反射矩阵
-    floorUniforms.uReflectMatrix.value = matrix!
+    // // 设置反射矩阵
+    // floorUniforms.uReflectMatrix.value = matrix!
 
     // 保存地板的引用
     modelRef.floor = floor
@@ -224,6 +224,4 @@ export function addModels(
 
     scene.add(gltf.scene)
   })
-
-  // baseMaterial: three.MeshStandardMaterial,
 }

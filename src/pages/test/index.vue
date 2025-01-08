@@ -6,7 +6,7 @@
   <div
     class=""
   >
-    11
+    https://github.com/alphardex/su7-replica
   </div>
 </template>
 
