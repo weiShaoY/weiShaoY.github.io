@@ -13,20 +13,20 @@ import { watch } from 'vue'
  *
  * @param {Ref<THREE.Object3D>} modelRef - 模型的引用，包含车身材质。
  */
-export function watchColorChange(modelRef: Ref<ThreeContainerType.ModelRefType>) {
+export function watchColorChange(modelRef: ThreeContainerType.ModelRefType) {
   const garageStore = useGarageStore()
 
   watch(
     () => garageStore.ui.bar.bodyColor, // 监听颜色变化
     () => {
       // 如果车身材质不存在，直接返回
-      if (!modelRef.value.bodyMat) {
+      if (!modelRef.bodyMat) {
         return
       }
 
       const par = {
         // 当前颜色
-        color: modelRef.value.bodyMat.color,
+        color: modelRef.bodyMat.color,
 
         // 目标颜色
         targetColor: new three.Color(garageStore.ui.bar.bodyColor),
@@ -50,7 +50,7 @@ export function watchColorChange(modelRef: Ref<ThreeContainerType.ModelRefType>)
         b: par.targetColor.b,
         onUpdate: () => {
           // 更新车身颜色
-          modelRef.value.bodyMat!.color.set(par.color)
+          modelRef.bodyMat!.color.set(par.color)
         },
       })
     },

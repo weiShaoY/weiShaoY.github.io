@@ -49,17 +49,18 @@ let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
 /**
- *  轨道控制器
- */
-// let controls: OrbitControls
-
-/**
  *  效果组合器
  */
 let composer: EffectComposer
 
+/**
+ *  转换后的纹理
+ */
 let fbo: THREE.WebGLCubeRenderTarget
 
+/**
+ *   用于环境映射
+ */
 let cubeCamera: THREE.CubeCamera
 
 const carGltf = ref < GLTF | null > (null)
@@ -67,7 +68,7 @@ const carGltf = ref < GLTF | null > (null)
 /**
  *  主模型
  */
-const modelRef = ref({
+const modelRef = {
   /**
    *  轮子材质
    */
@@ -87,13 +88,13 @@ const modelRef = ref({
    *  灯光材质
    */
   lightMat: null as THREE.MeshStandardMaterial | null,
-})
+}
 
 /**
  * 场景渲染参数
  * 包含模型、地板、光照等渲染相关的参数，用于控制场景中的各种视觉效果。
  */
-const sceneRenderParams = ref<ThreeContainerType.SceneRenderParamsType>({
+const sceneRenderParams: ThreeContainerType.SceneRenderParamsType = ({
   speedFactor: 0,
   initColor: new three.Color('#fff'),
   speedupColor: new three.Color('#000'),
@@ -122,16 +123,16 @@ const maps = ref<ThreeContainerType.MapsType>({
  * 地板的着色器统一变量集合
  * 用于传递动态数据和控制地板的材质效果。
  */
-const uniforms = ref<ThreeContainerType.UniformsType> ({
+const uniforms: ThreeContainerType.UniformsType = {
   uTime: new three.Uniform(0),
   uSpeedFactor: new three.Uniform(0),
-})
+}
 
 /**
  * 地板的着色器统一变量集合
  * 用于传递地板材质中需要的动态数据和配置参数。
  */
-const floorUniforms = ref<ThreeContainerType.FloorUniformsType>({
+const floorUniforms: ThreeContainerType.FloorUniformsType = {
   uColor: new three.Uniform(new three.Color('white')),
   uReflectMatrix: new three.Uniform(new three.Matrix4()),
   uReflectTexture: new three.Uniform(new three.Texture()),
@@ -140,7 +141,7 @@ const floorUniforms = ref<ThreeContainerType.FloorUniformsType>({
   uLevel: new three.Uniform(0),
   uResolution: new three.Uniform(new three.Vector2()),
   uTime: new three.Uniform(0),
-})
+}
 
 /**
  * 处理窗口大小调整
@@ -155,11 +156,6 @@ onMounted(() => {
   if (!threeContainerRef.value) {
     return
   }
-
-  renderer = new three.WebGLRenderer({
-    canvas: threeContainerRef.value,
-    antialias: true,
-  })
 
   scene = new three.Scene()
 
@@ -177,7 +173,13 @@ onMounted(() => {
     // 远裁剪面
     500,
   )
+
   camera.position.set(0, 2, 5)
+
+  renderer = new three.WebGLRenderer({
+    canvas: threeContainerRef.value,
+    antialias: true,
+  })
 
   renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -195,7 +197,6 @@ onMounted(() => {
 
   addModels(scene, modelRef, maps, uniforms, floorUniforms, carGltf)
 
-  //
   // 创建 CubeCamera 用于环境映射
   const cubeRenderTarget = new three.WebGLCubeRenderTarget(512, {
     type: three.UnsignedByteType,
@@ -205,11 +206,13 @@ onMounted(() => {
   })
 
   cubeCamera = new three.CubeCamera(1, 1000, cubeRenderTarget)
+
   fbo = cubeRenderTarget
 
+  //  设置环境贴图
   scene.environment = fbo.texture
 
-  animate(modelRef, sceneRenderParams, uniforms, floorUniforms, renderer, scene, camera)
+  animate(modelRef, sceneRenderParams, uniforms, floorUniforms, renderer, scene, camera, cubeCamera)
 
   watchColorChange(modelRef)
 

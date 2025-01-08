@@ -1,7 +1,5 @@
 import type * as THREE from 'three'
 
-import type { Ref } from 'vue'
-
 import type { ThreeContainerType } from './types'
 
 import { useGarageStore } from '@/store'
@@ -12,10 +10,10 @@ import { gsap } from 'gsap'
  * 封装的动画函数，用于根据触摸状态来执行不同的动画。
  */
 export function watchMouseTouch(
-  modelRef: Ref<ThreeContainerType.ModelRefType>,
-  sceneRenderParams: Ref<ThreeContainerType.SceneRenderParamsType>,
-  uniforms: Ref<ThreeContainerType.UniformsType>,
-  floorUniforms: Ref<ThreeContainerType.FloorUniformsType>,
+  modelRef: ThreeContainerType.ModelRefType,
+  sceneRenderParams: ThreeContainerType.SceneRenderParamsType,
+  uniforms: ThreeContainerType.UniformsType,
+  floorUniforms: ThreeContainerType.FloorUniformsType,
 ) {
   const garageStore = useGarageStore()
 
@@ -24,28 +22,28 @@ export function watchMouseTouch(
     /**
      *  获取当前参数
      */
-    const baseParam = sceneRenderParams.value
+    const baseParam = sceneRenderParams
 
     /**
      *  获取光材质
      */
-    const lightMat = modelRef.value.lightMat //
+    const lightMat = modelRef.lightMat //
 
     /**
      *  获取地板材质
      */
-    const flooMat = modelRef.value.floor?.material as THREE.MeshPhysicalMaterial
+    const flooMat = modelRef.floor?.material as THREE.MeshPhysicalMaterial
 
-    const wheel = modelRef.value.wheel // 获取轮子
+    const wheel = modelRef.wheel // 获取轮子
 
     gsap.killTweensOf(baseParam) // 停止当前参数的动画
 
-    gsap.killTweensOf(floorUniforms.value.uColor.value) // 停止地板颜色的动画
+    gsap.killTweensOf(floorUniforms.uColor.value) // 停止地板颜色的动画
 
     if (garageStore.interact.touch) {
       const t1 = gsap.timeline() // 创建时间线动画
 
-      t1.to(floorUniforms.value.uColor.value, {
+      t1.to(floorUniforms.uColor.value, {
         duration: 1.5, // 动画持续时间
         ease: 'power1.in', // 动画缓动函数
         r: baseParam.speedupColor.r, // 加速颜色红色通道
@@ -79,7 +77,7 @@ export function watchMouseTouch(
           wheelEnvIntensity: 20, // 轮子环境强度
           floorNormalSpeed: 1, // 地板法线速度
           onUpdate: () => {
-            uniforms.value.uSpeedFactor.value = baseParam.speedFactor // 更新速度因子
+            uniforms.uSpeedFactor.value = baseParam.speedFactor // 更新速度因子
             flooMat && (flooMat.envMapIntensity = baseParam.floorEnvIntensity) // 更新地板环境强度
             wheel.forEach((item) => {
               const mat = item.material as THREE.MeshStandardMaterial
@@ -106,7 +104,7 @@ export function watchMouseTouch(
         wheelEnvIntensity: 5, // 轮子环境强度
         floorNormalSpeed: 0, // 地板法线速度
         onUpdate: () => {
-          uniforms.value.uSpeedFactor.value = baseParam.speedFactor // 更新速度因子
+          uniforms.uSpeedFactor.value = baseParam.speedFactor // 更新速度因子
           flooMat && (flooMat.envMapIntensity = baseParam.floorEnvIntensity) // 更新地板环境强度
           wheel.forEach((item) => {
             const mat = item.material as THREE.MeshStandardMaterial
@@ -117,7 +115,7 @@ export function watchMouseTouch(
         },
       })
       t2.to(
-        floorUniforms.value.uColor.value,
+        floorUniforms.uColor.value,
         {
           duration: 1.5, // 动画持续时间
           ease: 'power1.in', // 动画缓动函数

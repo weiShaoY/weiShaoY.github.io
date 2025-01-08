@@ -24,10 +24,10 @@ import { flatModel, useModifyCSM } from './utils'
 
 export function addModels(
   scene: THREE.Scene,
-  modelRef: Ref<ThreeContainerType.ModelRefType>,
+  modelRef: ThreeContainerType.ModelRefType,
   maps: Ref<ThreeContainerType.MapsType>,
-  uniforms: Ref<ThreeContainerType.UniformsType>,
-  floorUniforms: Ref<ThreeContainerType.FloorUniformsType>,
+  uniforms: ThreeContainerType.UniformsType,
+  floorUniforms: ThreeContainerType.FloorUniformsType,
   carGltf: Ref<GLTF | null>,
 ) {
   const gltfLoader = new GLTFLoader()
@@ -80,11 +80,11 @@ export function addModels(
       mat.envMapIntensity = 5
 
       // 保存轮子的引用
-      modelRef.value.wheel.push(mesh)
+      modelRef.wheel.push(mesh)
     })
 
     //  保存车身材质的引用
-    modelRef.value.bodyMat = bodyMat
+    modelRef.bodyMat = bodyMat
 
     // 添加 模型
     scene.add(gltf.scene)
@@ -149,7 +149,7 @@ export function addModels(
       baseMaterial: floorMat,
 
       // 设置自定义材质的 uniform 参数
-      uniforms: floorUniforms.value,
+      uniforms: floorUniforms,
 
       // 指定自定义顶点着色器的代码
       vertexShader: floorVertex,
@@ -177,10 +177,10 @@ export function addModels(
     // floorUniforms.uReflectMatrix.value = matrix
 
     // 保存地板的引用
-    modelRef.value.floor = floor
+    modelRef.floor = floor
 
     // 保存光材质的引用
-    modelRef.value.lightMat = light.material as THREE.MeshStandardMaterial
+    modelRef.lightMat = light.material as THREE.MeshStandardMaterial
 
     scene.add(gltf.scene)
   })
@@ -188,10 +188,9 @@ export function addModels(
   // baseMaterial: three.MeshStandardMaterial,
 
   gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
-    console.log('%c Line:181 🍩 gltf', 'color:#ea7e5c', gltf)
     const mat = new CustomShaderMaterial({
       baseMaterial: three.MeshPhysicalMaterial,
-      uniforms: uniforms.value,
+      uniforms,
       vertexShader,
       fragmentShader,
 
