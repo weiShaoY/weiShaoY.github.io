@@ -145,11 +145,19 @@ export function addModels(
      *  创建地板的自定义材质
      */
     const floorCsmMat = new CustomShaderMaterial({
+      // 设置基础材质为 floorMat
       baseMaterial: floorMat,
-      uniforms: floorUniforms,
+
+      // 设置自定义材质的 uniform 参数
+      uniforms: floorUniforms.value,
+
+      // 指定自定义顶点着色器的代码
       vertexShader: floorVertex,
 
+      // 指定自定义片段着色器的代码
       fragmentShader: floorFrag,
+
+      // 设置 silent 属性，可能是用于屏蔽某些日志或警告信息
       silent: true,
     })
 
@@ -177,15 +185,17 @@ export function addModels(
     scene.add(gltf.scene)
   })
 
+  // baseMaterial: three.MeshStandardMaterial,
+
   gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
     console.log('%c Line:181 🍩 gltf', 'color:#ea7e5c', gltf)
     const mat = new CustomShaderMaterial({
-      // baseMaterial: three.MeshStandardMaterial,
-      baseMaterial: three.ShaderMaterial,
+      baseMaterial: three.MeshPhysicalMaterial,
       uniforms: uniforms.value,
       vertexShader,
       fragmentShader,
-      silent: true,
+
+      // silent: true,
       transparent: true,
       depthWrite: false,
     })
