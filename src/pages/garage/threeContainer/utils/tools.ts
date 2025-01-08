@@ -7,6 +7,8 @@ import type {
   WebGLProgramParameters,
 } from 'three'
 
+import type * as THREE from 'three'
+
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import type CustomShaderMaterial from 'three-custom-shader-material/vanilla'
@@ -29,9 +31,18 @@ export function useModifyCSM(gltf: GLTF, mat: CustomShaderMaterial) {
   //   })
   // })
 
-  gltf.scene.traverse((child: Object3D) => {
-    if ((child as Mesh).isMesh) {
-      const mesh = child as Mesh
+  // gltf.scene.traverse((child: Object3D) => {
+  //   if ((child as Mesh).isMesh) {
+  //     const mesh = child as Mesh
+
+  //     mesh.material = mat
+  //   }
+  // })
+
+  gltf.scene.traverse((child: THREE.Object3D) => {
+    console.log('%c Line:43 🧀 child', 'color:#33a5ff', child)
+    if ((child as THREE.Mesh).isMesh) {
+      const mesh = child as THREE.Mesh
 
       mesh.material = mat
     }

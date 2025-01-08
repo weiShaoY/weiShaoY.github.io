@@ -2,9 +2,9 @@ import type * as THREE from 'three'
 
 /**
  * 打印扁平模型的所有部分
- * @param {Object3D[]} modelParts - 扁平化后的模型数组
- * @param {string} modelName - 模型名称，用于生成打印代码
- * @returns {string} 打印结果字符串
+ * @param  modelParts - 扁平化后的模型数组
+ * @param  modelName - 模型名称，用于生成打印代码
+ * @returns  打印结果字符串
  */
 function printModel(modelParts: THREE.Object3D[], modelName = 'modelParts') {
   const strArray = modelParts.map((obj, i) => {

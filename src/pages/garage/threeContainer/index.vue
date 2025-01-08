@@ -2,6 +2,8 @@
 <script lang="ts" setup>
 import type * as THREE from 'three'
 
+import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+
 import type { ThreeContainerType } from './types'
 
 import { useGarageStore } from '@/store'
@@ -60,7 +62,7 @@ let fbo: THREE.WebGLCubeRenderTarget
 
 let cubeCamera: THREE.CubeCamera
 
-const carGltf = ref<ThreeContainerType.carGltfType>(null)
+const carGltf = ref < GLTF | null > (null)
 
 /**
  *  主模型

@@ -1,5 +1,7 @@
 import type * as THREE from 'three'
 
+import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+
 import type { ThreeContainerType } from './types'
 
 import * as three from 'three'
@@ -26,7 +28,7 @@ export function addModels(
   maps: Ref<ThreeContainerType.MapsType>,
   uniforms: Ref<ThreeContainerType.UniformsType>,
   floorUniforms: Ref<ThreeContainerType.FloorUniformsType>,
-  carGltf: Ref<ThreeContainerType.carGltfType>,
+  carGltf: Ref<GLTF | null>,
 ) {
   const gltfLoader = new GLTFLoader()
 
@@ -176,15 +178,17 @@ export function addModels(
   })
 
   gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
+    console.log('%c Line:181 🍩 gltf', 'color:#ea7e5c', gltf)
     const mat = new CustomShaderMaterial({
-      baseMaterial: three.MeshStandardMaterial,
-      uniforms,
+      // baseMaterial: three.MeshStandardMaterial,
+      baseMaterial: three.ShaderMaterial,
+      uniforms: uniforms.value,
       vertexShader,
       fragmentShader,
       silent: true,
       transparent: true,
       depthWrite: false,
-    } as any)
+    })
 
     useModifyCSM(gltf, mat)
 
