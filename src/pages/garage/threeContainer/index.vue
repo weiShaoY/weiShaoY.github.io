@@ -133,13 +133,13 @@ const sceneRenderParams: ThreeContainerType.SceneRenderParamsType = ({
 /**
  *  贴图
  */
-const maps = ref<ThreeContainerType.MapsType>({
+const maps: ThreeContainerType.MapsType = {
   carAo: null,
   startRoomLight: null,
   startRoomAo: null,
   floorRoughness: null,
   floorNormal: null,
-})
+}
 
 /**
  * 地板的着色器统一变量集合
@@ -220,7 +220,7 @@ function addTextures() {
    * 加载汽车车身AO贴图
    * @param texture - 加载完成的纹理对象
    */
-  maps.value.carAo = textureLoader.load('/models/garage/textures/t_car_body_AO.raw.jpg', (texture) => {
+  maps.carAo = textureLoader.load('/models/garage/textures/t_car_body_AO.raw.jpg', (texture) => {
     // 设置汽车车身AO贴图的翻转
     texture.flipY = false
 
@@ -241,7 +241,7 @@ function addTextures() {
    * 加载起始房间光贴图
    * @param texture - 加载完成的纹理对象
    */
-  maps.value.startRoomLight = textureLoader.load('/models/garage/textures/t_startroom_light.raw.jpg', (texture) => {
+  maps.startRoomLight = textureLoader.load('/models/garage/textures/t_startroom_light.raw.jpg', (texture) => {
     // 设置起始房间光贴图的翻转
     texture.flipY = false
 
@@ -253,7 +253,7 @@ function addTextures() {
    * 加载起始房间AO贴图
    * @param texture - 加载完成的纹理对象
    */
-  maps.value.startRoomAo = textureLoader.load('/models/garage/textures/t_startroom_ao.raw.jpg', (texture) => {
+  maps.startRoomAo = textureLoader.load('/models/garage/textures/t_startroom_ao.raw.jpg', (texture) => {
     // 设置起始房间AO贴图的翻转
     texture.flipY = false
 
@@ -268,7 +268,7 @@ function addTextures() {
    * 加载地板粗糙度贴图
    * @param texture - 加载完成的纹理对象
    */
-  maps.value.floorRoughness = textureLoader.load('/models/garage/textures/t_floor_roughness.webp', (texture) => {
+  maps.floorRoughness = textureLoader.load('/models/garage/textures/t_floor_roughness.webp', (texture) => {
     // 设置地板粗糙度贴图的色彩空间
     texture.colorSpace = three.LinearSRGBColorSpace
 
@@ -280,7 +280,7 @@ function addTextures() {
    * 加载地板法线贴图
    * @param texture - 加载完成的纹理对象
    */
-  maps.value.floorNormal = textureLoader.load('/models/garage/textures/t_floor_normal.webp', (texture) => {
+  maps.floorNormal = textureLoader.load('/models/garage/textures/t_floor_normal.webp', (texture) => {
     // 设置地板法线贴图的色彩空间
     texture.colorSpace = three.LinearSRGBColorSpace
 
@@ -294,14 +294,9 @@ function addTextures() {
  */
 function addOrbitControls() {
   garageStore.interact.controlDom = document.getElementById('controlRef')
-  console.log('%c Line:322 🍋 garageStore.interact.controlDom', 'color:#93c0a4', garageStore.interact.controlDom)
 
   const controls = new OrbitControls(camera, garageStore.interact.controlDom)
 
-  // 设置控制器目标
-  controls.target.set(0, 1.5, 0)
-
-  // 启用阻尼
   controls.enableDamping = true
 
   // 禁用缩放
@@ -310,19 +305,11 @@ function addOrbitControls() {
   // 更新控制器
   controls.update()
 
-  // 限制旋转范围
+  // 限制旋转范围 90度
   controls.maxPolarAngle = Math.PI / 2
 
-  // 限制旋转范围
-  controls.minPolarAngle = 0
-
-  composer = new EffectComposer(renderer)
-
-  composer.addPass(new RenderPass(scene, camera))
-
-  const bloomPass = new BloomPass(1.25)
-
-  composer.addPass(bloomPass)
+  // 限制旋转范围 85度
+  controls.maxPolarAngle = 85 * Math.PI / 180
 }
 
 function addModels(
@@ -363,7 +350,7 @@ function addModels(
         const mat = item.material as THREE.MeshStandardMaterial
 
         //  设置材质的AO贴图
-        mat.aoMap = maps.value.carAo
+        mat.aoMap = maps.carAo
       }
     })
 
@@ -457,16 +444,16 @@ function addModels(
     const floorMat = floor.material as THREE.MeshPhysicalMaterial
 
     // 设置地板粗糙度贴图
-    floorMat.roughnessMap = maps.value.floorRoughness
+    floorMat.roughnessMap = maps.floorRoughness
 
     // 设置地板法线贴图
-    floorMat.normalMap = maps.value.floorNormal
+    floorMat.normalMap = maps.floorNormal
 
     // 设置地板AO贴图
-    floorMat.aoMap = maps.value.startRoomAo
+    floorMat.aoMap = maps.startRoomAo
 
     // 设置地板光贴图
-    floorMat.lightMap = maps.value.startRoomLight
+    floorMat.lightMap = maps.startRoomLight
 
     // 设置地板环境贴图强度
     floorMat.envMapIntensity = 0
@@ -519,6 +506,9 @@ function addModels(
 const clock = new three.Clock()
 
 function animate() {
+  // 请求下一帧
+  requestAnimationFrame(animate)
+
   const delta = clock.getDelta() // 获取帧间隔时间
 
   // 更新时间统一变量
@@ -535,11 +525,10 @@ function animate() {
     child.rotateZ(-delta * 30 * sceneRenderParams.speedFactor)
   })
 
+  composer.render()
+
   // 渲染场景
   renderer.render(scene, camera)
-
-  // 请求下一帧
-  requestAnimationFrame(animate)
 }
 
 onMounted(() => {
@@ -578,6 +567,10 @@ onMounted(() => {
   renderer.toneMapping = three.CineonToneMapping
 
   composer = new EffectComposer(renderer)
+
+  composer.addPass(new RenderPass(scene, camera))
+
+  composer.addPass(new BloomPass(1.25))
 
   addLights()
 
