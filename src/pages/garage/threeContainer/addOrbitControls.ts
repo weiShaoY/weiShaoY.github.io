@@ -30,6 +30,12 @@ export function addOrbitControls(scene: THREE.Scene, camera: THREE.PerspectiveCa
   // 更新控制器
   controls.update()
 
+  // 限制旋转范围
+  controls.maxPolarAngle = Math.PI / 2
+
+  // 限制旋转范围
+  controls.minPolarAngle = 0
+
   composer = new EffectComposer(renderer)
 
   composer.addPass(new RenderPass(scene, camera))
