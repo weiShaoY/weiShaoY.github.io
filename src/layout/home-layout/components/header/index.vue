@@ -28,6 +28,10 @@ const menuList = [
     key: '/garage',
     label: 'Garage',
   },
+  {
+    key: '/test',
+    label: 'Test',
+  }
 ]
 </script>
 
