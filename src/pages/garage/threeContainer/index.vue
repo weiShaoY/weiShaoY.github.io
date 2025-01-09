@@ -79,9 +79,20 @@ let fbo: THREE.WebGLCubeRenderTarget
  */
 let cubeCamera: THREE.CubeCamera
 
+/**
+ *  汽车模型
+ */
 let carGltf: GLTF | null = null
 
+/**
+ *  起始房间模型
+ */
 let startRommGltf: GLTF | null = null
+
+/**
+ *  地板模型
+ */
+let sm_speedupGltf: GLTF | null = null
 
 const matrix: THREE.Matrix4 | null = null
 
@@ -320,6 +331,7 @@ function addModels(
   // 设置模型加载器的解码器
   gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
+  //  加载汽车
   gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
     gltf.scene.rotation.y = Math.PI
 
@@ -378,7 +390,10 @@ function addModels(
     scene.add(gltf.scene)
   })
 
+  //  加载加速器
   gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
+    sm_speedupGltf = gltf
+
     const mat = new CustomShaderMaterial({
       baseMaterial: three.MeshPhysicalMaterial,
       uniforms,
@@ -405,6 +420,7 @@ function addModels(
     // renderTarget = reflect.renderTarget
   })
 
+  //  加载起始房间
   gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
     startRommGltf = gltf
 
@@ -446,6 +462,8 @@ function addModels(
     // 设置地板粗糙度贴图
     floorMat.roughnessMap = maps.floorRoughness
 
+    console.log('%c Line:458 🍡 maps.floorRoughness', 'color:#33a5ff', maps.floorRoughness)
+
     // 设置地板法线贴图
     floorMat.normalMap = maps.floorNormal
 
@@ -481,17 +499,23 @@ function addModels(
     // 设置地板的自定义材质
     floor.material = floorCsmMat
 
-    // 设置反射纹理
-    // floorUniforms.uReflectTexture.value = renderTarget!.texture
+    // #  ///////
 
-    // // 设置反射纹理的最小过滤
-    // renderTarget!.texture.minFilter = three.LinearFilter
+    // /////////////////////////////////
+    const { matrix, renderTarget } = useReflect(modelRef.floor!, {
+      resolution: [innerWidth, innerHeight],
+      ignoreObjects: [modelRef.floor!, sm_speedupGltf!.scene, startRommGltf!.scene],
+    })
 
-    // // 设置反射纹理的最大过滤
-    // renderTarget!.texture.magFilter = three.LinearFilter
+    floorUniforms.uReflectTexture.value = renderTarget.texture
+    renderTarget.texture.minFilter = three.LinearFilter
+    renderTarget.texture.magFilter = three.LinearFilter
+    floorUniforms.uReflectMatrix.value = matrix
 
-    // // 设置反射矩阵
-    // floorUniforms.uReflectMatrix.value = matrix!
+    floorUniforms.uResolution.value.set(renderTarget.width, renderTarget.height)
+
+    // /////////////////////////////////
+    // #  ///////
 
     // 保存地板的引用
     modelRef.floor = floor
@@ -531,7 +555,7 @@ function animate() {
   renderer.render(scene, camera)
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (!threeContainerRef.value) {
     return
   }
@@ -574,11 +598,11 @@ onMounted(() => {
 
   addLights()
 
-  addTextures()
-
   addOrbitControls()
 
   addModels()
+
+  addTextures()
 
   // 创建 CubeCamera 用于环境映射
   const cubeRenderTarget = new three.WebGLCubeRenderTarget(512, {
@@ -591,18 +615,13 @@ onMounted(() => {
   cubeCamera = new three.CubeCamera(1, 1000, cubeRenderTarget)
 
   fbo = cubeRenderTarget
+  fbo.texture.type = three.UnsignedByteType
+  fbo.texture.generateMipmaps = false
+  fbo.texture.minFilter = three.NearestFilter
+  fbo.texture.magFilter = three.NearestFilter
 
   //  设置环境贴图
   scene.environment = fbo.texture
-
-  // ///////////////////////////////////////
-
-  // const { matrix, renderTarget } = useReflect(modelRef.floor!, {
-  //   resolution: [innerWidth, innerHeight],
-  //   ignoreObjects: [modelRef.floor!, carGltf.scene, startRommgltf.scene],
-  // })
-
-  // ///////////////////////////////////////
 
   animate()
 
