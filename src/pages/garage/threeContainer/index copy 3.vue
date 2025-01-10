@@ -601,13 +601,53 @@ onMounted(async () => {
   watchColorChange(modelRef)
   watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms)
   window.addEventListener('resize', onWindowResize)
+
+  // threeContainerRef.value.addEventListener('pointerdown', onPointerDown)
+  // threeContainerRef.value.addEventListener('pointerup', onPointerUp)
 })
 
 onUnmounted(() => {
   renderer.dispose()
   window.removeEventListener('resize', onWindowResize)
+
+  // threeContainerRef.value?.removeEventListener('pointerdown', onPointerDown)
+  // threeContainerRef.value?.removeEventListener('pointerup', onPointerUp)
 })
 
+// const mouse = new Three.Vector2()
+
+// function onPointerDown(event: PointerEvent) {
+//   updateMousePosition(event)
+//   checkIntersection()
+// }
+
+// function onPointerUp(event: PointerEvent) {
+//   updateMousePosition(event)
+//   checkIntersection()
+
+//   garageStore.state.isTouch = false
+// }
+
+// function updateMousePosition(event: PointerEvent) {
+//   const rect = threeContainerRef.value!.getBoundingClientRect()
+
+//   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+//   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+// }
+
+// function checkIntersection() {
+//   raycaster.setFromCamera(mouse, camera)
+//   const intersects = raycaster.intersectObject(carGltf!.scene, true)
+
+//   if (intersects.length > 0) {
+//     const intersectedObject = intersects[0].object
+
+//     garageStore.state.isTouch = true
+
+//     // 这里可以添加对选中对象的处理逻辑
+//     console.log('Intersected object:', intersectedObject)
+//   }
+// }
 </script>
 
 <template>
