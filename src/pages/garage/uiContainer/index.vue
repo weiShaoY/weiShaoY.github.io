@@ -9,12 +9,8 @@ import Loading from './components/loading/index.vue'
 
 const garageStore = useGarageStore()
 
-watchEffect(() => {
-  console.log('%c Line:13 🍑 garageStore.ui.loading.status', 'color:#ed9ec7', garageStore.ui.loading.status)
-})
-
 // 音频播放逻辑监听
-watch(() => garageStore.interact.audioAllowed, (newVal) => {
+watch(() => garageStore.state.isMute, (newVal) => {
   if (newVal) {
     // TODO: 播放音乐
   }
@@ -26,7 +22,7 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
 
   <div>
     <Loading
-      v-if=" garageStore.ui.loading.status "
+      v-if=" garageStore.state.isLoading"
     />
 
     <Bar

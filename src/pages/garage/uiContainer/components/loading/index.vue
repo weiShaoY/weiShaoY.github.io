@@ -9,19 +9,14 @@ const garageStore = useGarageStore()
 
 const panelRef = ref<HTMLElement>()
 
-console.log('%c Line:13 🎂 garageStore.ui.loading.ready', 'color:#3f7cff', garageStore.ui.loading)
-
 //  监听资源是否加载完成
 watchEffect(() => {
-  if (garageStore.ui.loading.ready) {
-    console.log('%c Line:15 🍣 garageStore.ui.loading.ready', 'color:#6ec1c2', garageStore.ui.loading.ready)
+  if (garageStore.state.isLoaded) {
     close()
   }
 })
 
 function close() {
-  garageStore.interact.demand = false
-
   if (panelRef.value) {
     gsap.to(panelRef.value, {
       opacity: 0,
@@ -30,9 +25,9 @@ function close() {
       ease: 'none',
 
       onComplete: () => {
-        garageStore.interact.audioAllowed = true
+        garageStore.state.isAudioAllowed = true
 
-        garageStore.ui.loading.status = false
+        garageStore.state.isLoading = false
       },
     })
   }

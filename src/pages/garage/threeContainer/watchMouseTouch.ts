@@ -18,7 +18,7 @@ export function watchMouseTouch(
   const garageStore = useGarageStore()
 
   //  监听交互
-  watch(() => garageStore.interact.touch, () => {
+  watch(() => garageStore.state.isTouch, () => {
     /**
      *  获取当前参数
      */
@@ -27,7 +27,7 @@ export function watchMouseTouch(
     /**
      *  获取光材质
      */
-    const lightMat = modelRef.lightMat //
+    const lightMat = modelRef.lightMat
 
     /**
      *  获取地板材质
@@ -40,7 +40,7 @@ export function watchMouseTouch(
 
     gsap.killTweensOf(floorUniforms.uColor.value) // 停止地板颜色的动画
 
-    if (garageStore.interact.touch) {
+    if (garageStore.state.isTouch) {
       const t1 = gsap.timeline() // 创建时间线动画
 
       t1.to(floorUniforms.uColor.value, {

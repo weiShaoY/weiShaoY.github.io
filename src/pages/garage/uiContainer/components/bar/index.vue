@@ -79,7 +79,8 @@ function handleClick(index: number, color: string) {
   }
 
   activeIndex.value = index
-  garageStore.ui.bar.bodyColor = color
+
+  garageStore.state.carColor = color
 }
 
 // 使用 onMounted 钩子来设置动画和交互存储
@@ -96,8 +97,6 @@ onMounted(() => {
         aniDone.value = true
       },
     })
-
-    garageStore.interact.controlDom = controlRef.value
   }
 })
 

@@ -16,8 +16,9 @@ import { watch } from 'vue'
 export function watchColorChange(modelRef: ThreeContainerType.ModelRefType) {
   const garageStore = useGarageStore()
 
+  // 监听颜色变化
   watch(
-    () => garageStore.ui.bar.bodyColor, // 监听颜色变化
+    () => garageStore.state.carColor,
     () => {
       // 如果车身材质不存在，直接返回
       if (!modelRef.bodyMat) {
@@ -29,7 +30,7 @@ export function watchColorChange(modelRef: ThreeContainerType.ModelRefType) {
         color: modelRef.bodyMat.color,
 
         // 目标颜色
-        targetColor: new three.Color(garageStore.ui.bar.bodyColor),
+        targetColor: new three.Color(garageStore.state.carColor),
       }
 
       // 使用 GSAP 动画过渡颜色变化

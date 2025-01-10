@@ -1,14 +1,9 @@
 <!------------------------------------  车库  ------------------------------------------------->
 <script lang="ts" setup>
-import { useGarageStore } from '@/store'
 
 import ThreeContainer from './threeContainer/index.vue'
 
 import UiContainer from './uiContainer/index.vue'
-
-const garageStore = useGarageStore()
-
-garageStore.init()
 
 </script>
 

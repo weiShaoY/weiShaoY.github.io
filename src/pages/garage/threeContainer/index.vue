@@ -492,10 +492,8 @@ function addModels(
     scene.add(gltf.scene)
   })
 
-  // garageStore.ui.loading.ready = true
-
   setTimeout(() => {
-    garageStore.ui.loading.ready = true
+    garageStore.state.isLoaded = true
   }, 5000)
 }
 
@@ -593,8 +591,8 @@ onUnmounted(() => {
   <canvas
     ref="threeContainerRef"
     class="h-screen w-full"
-    @pointerdown="() => garageStore.interact.touch = true"
-    @pointerup="() => garageStore.interact.touch = false"
+    @pointerdown="() => garageStore.state.isTouch = true"
+    @pointerup="() => garageStore.state.isTouch = false"
   />
 
 </template>
