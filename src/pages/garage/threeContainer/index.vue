@@ -311,7 +311,7 @@ function addOrbitControls() {
   controls.enableDamping = true
 
   // 禁用缩放
-  // controls.enableZoom = false
+  controls.enableZoom = false
 
   // 更新控制器
   controls.update()
