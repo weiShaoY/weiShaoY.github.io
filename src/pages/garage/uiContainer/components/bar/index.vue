@@ -90,7 +90,7 @@ onMounted(() => {
     })
     gsap.to(controlRef.value, {
       opacity: 1,
-      duration: 0.5,
+      duration: 2,
       ease: 'power2.in',
       onComplete: () => {
         aniDone.value = true
@@ -105,37 +105,26 @@ onMounted(() => {
 
 <template>
   <div
-    class="h-full w-full"
+    ref="controlRef"
+    class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"
   >
-    <div
-      id="controlRef"
-      ref="controlRef"
-      class="control !h-full !w-full"
-      @pointerdown="() => garageStore.interact.touch = true"
-      @pointerup="() => garageStore.interact.touch = false"
-    />
-
-    <div
-      class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"
+    <button
+      class="flex transform cursor-pointer items-center justify-center whitespace-nowrap rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
+      @click="router.push('/')"
     >
-      <button
-        class="flex transform cursor-pointer items-center justify-center whitespace-nowrap rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
-        @click="router.push('/')"
-      >
-        返回首页
-      </button>
+      返回首页
+    </button>
 
-      <div
-        v-for="(item, index) in res"
-        :key="index"
-        class="h-8 w-8 cursor-pointer rounded-1/2 bg-[100%_100%] bg-cover transition-transform duration-500 hover:scale-110"
-        :class="{ 'color-item': activeIndex === index }"
-        :style="{
-          backgroundImage: `url(${item.src})`,
-        }"
-        @click="handleClick(index, item.color)"
-      />
-    </div>
+    <div
+      v-for="(item, index) in res"
+      :key="index"
+      class="h-8 w-8 cursor-pointer rounded-1/2 bg-[100%_100%] bg-cover transition-transform duration-500 hover:scale-110"
+      :class="{ 'color-item': activeIndex === index }"
+      :style="{
+        backgroundImage: `url(${item.src})`,
+      }"
+      @click="handleClick(index, item.color)"
+    />
   </div>
 </template>
 

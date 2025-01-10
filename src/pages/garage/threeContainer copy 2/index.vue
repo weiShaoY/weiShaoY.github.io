@@ -253,6 +253,8 @@ onUnmounted(() => {
   <canvas
     ref="threeContainerRef"
     class="h-screen w-full"
+    @pointerdown="() => garageStore.interact.touch = true"
+    @pointerup="() => garageStore.interact.touch = false"
   />
 
 </template>

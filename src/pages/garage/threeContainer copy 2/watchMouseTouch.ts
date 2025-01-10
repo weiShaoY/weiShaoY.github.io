@@ -19,6 +19,7 @@ export function watchMouseTouch(
 
   //  监听交互
   watch(() => garageStore.interact.touch, () => {
+
     /**
      *  获取当前参数
      */

@@ -96,32 +96,16 @@ export const useGarageStore = defineStore(
       },
     })
 
-    /**
-     *  分发动作
-     */
-    function dispatchAction(type: string) {
-      switch (type) {
-        case 'show-loading':
-          ui.value.loading.status = true
-          break
-        case 'hide-loading':
-          ui.value.loading.status = false
-          break
-        case 'show-bar':
-          ui.value.bar.status = true
-          break
-        case 'hide-bar':
-          ui.value.bar.status = false
-          break
-        default:
-          console.warn(`未知的动作类型: ${type}`)
-      }
+    function init() {
+      ui.value.loading.status = true
+      ui.value.loading.ready = false
+      
     }
 
     return {
       interact,
       ui,
-      dispatchAction,
+      init,
     }
   },
   {

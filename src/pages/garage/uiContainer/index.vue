@@ -9,6 +9,10 @@ import Loading from './components/loading/index.vue'
 
 const garageStore = useGarageStore()
 
+watchEffect(() => {
+  console.log('%c Line:13 🍑 garageStore.ui.loading.status', 'color:#ed9ec7', garageStore.ui.loading.status)
+})
+
 // 音频播放逻辑监听
 watch(() => garageStore.interact.audioAllowed, (newVal) => {
   if (newVal) {
@@ -16,48 +20,19 @@ watch(() => garageStore.interact.audioAllowed, (newVal) => {
   }
 })
 
-/**
- * 页面动作类型
- * 定义了一组可能的页面操作类型，用于管理页面状态和行为的更改。
- * 每个操作类型都与特定的页面状态变化或操作相关。
- */
- type PageActionType =
-
-// 加载页相关操作
-   | 'show-loading' // 显示加载页
-   | 'hide-loading' // 隐藏加载页
-// 操作页相关操作
-   | 'show-bar' // 显示游戏页面
-   | 'hide-bar' // 隐藏游戏页面
-// 音频相关操作
-   | 'allow-audio' // 允许播放音乐
-   | 'mute' // 静音操作
-   | 'unmute' // 取消静音操作
-
-function pageActionChange(value: PageActionType) {
-  garageStore.dispatchAction(value)
-}
-
 </script>
 
 <template>
 
-  <div
-    class="absolute left-0 top-0 h-screen w-screen"
-    @pointerup="garageStore.interact.touch = false"
-  >
+  <div>
+    <Loading
+      v-if=" garageStore.ui.loading.status "
+    />
 
     <Bar
-      v-if="
-        garageStore.ui.bar.status"
+      v-else
     />
 
-    <Loading
-      v-if="
-        garageStore.ui.loading.status"
-      @hide-loading="pageActionChange"
-      @show-bar="pageActionChange"
-    />
   </div>
 </template>
 

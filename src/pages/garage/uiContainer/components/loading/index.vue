@@ -5,15 +5,16 @@ import { useGarageStore } from '@/store'
 
 import { gsap } from 'gsap'
 
-const emit = defineEmits(['hideLoading', 'showBar'])
-
 const garageStore = useGarageStore()
 
 const panelRef = ref<HTMLElement>()
 
+console.log('%c Line:13 🎂 garageStore.ui.loading.ready', 'color:#3f7cff', garageStore.ui.loading)
+
 //  监听资源是否加载完成
 watchEffect(() => {
   if (garageStore.ui.loading.ready) {
+    console.log('%c Line:15 🍣 garageStore.ui.loading.ready', 'color:#6ec1c2', garageStore.ui.loading.ready)
     close()
   }
 })
@@ -30,13 +31,12 @@ function close() {
 
       onComplete: () => {
         garageStore.interact.audioAllowed = true
-        emit('hideLoading', 'hide-loading')
-        emit('showBar', 'show-bar')
+
+        garageStore.ui.loading.status = false
       },
     })
   }
 }
-
 
 </script>
 
@@ -44,7 +44,7 @@ function close() {
   <div
     ref="panelRef"
 
-    class="relative h-full w-full flex items-center justify-center bg-black"
+    class="fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black"
   >
     <div
       class="loading relative h-48 w-48 animate-spin rounded-full from-teal-200 via-yellow-300 to-pink-500 bg-gradient-to-r"
