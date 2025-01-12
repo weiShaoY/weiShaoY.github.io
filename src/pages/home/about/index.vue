@@ -38,7 +38,10 @@ import Intro from './components/intro.vue'
         class="absolute z-1"
       >
         <!-- <Desktop /> -->
-        <Test />
+        <!-- <Test /> -->
+        <CanvasLoader>
+          <Test />
+        </CanvasLoader>
 
       </div>
 

@@ -11,6 +11,7 @@ declare module 'vue' {
     3: typeof import('./src/components/Test/son copy 3.vue')['default']
     4: typeof import('./src/components/Test/son copy 4.vue')['default']
     Block: typeof import('./src/components/global-setting/block.vue')['default']
+    CanvasLoader: typeof import('./src/components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./src/components/Chart/index.vue')['default']
     'Chart_副本': typeof import('./src/components/Chart_副本.vue')['default']
     Checkbox: typeof import('./src/components/Checkbox.vue')['default']
