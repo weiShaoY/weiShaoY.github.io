@@ -19,6 +19,8 @@ export const useGarageStore = defineStore(
        */
       isMute: false,
 
+      // isMute: import.meta.env.VITE_APP_NODE_ENV !== 'development',
+
       /**
        *  是否允许播放音频
        */

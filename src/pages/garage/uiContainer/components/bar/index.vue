@@ -1,5 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import bgmAudioSrc from '@/assets/music/garage-bgm.mp3'
+
 import { useGarageStore } from '@/store'
 
 import { gsap } from 'gsap'
@@ -65,6 +67,8 @@ const res = [
   },
 ]
 
+const bgmAudio = ref<HTMLAudioElement | null>(null)
+
 const garageStore = useGarageStore()
 
 const controlRef = ref<HTMLDivElement>()
@@ -98,11 +102,55 @@ onMounted(() => {
       },
     })
   }
+
+  if (bgmAudio.value) {
+    if (garageStore.state.isMute) {
+      bgmAudio.value.muted = false // 确保取消静音
+      bgmAudio.value
+        .play()
+    }
+  }
 })
 
+// 监听静音状态
+watch(() => garageStore.state.isMute, (isMute) => {
+  if (bgmAudio.value) {
+    if (isMute) {
+      bgmAudio.value.muted = false // 确保取消静音
+      bgmAudio.value
+        .play()
+    }
+    else {
+      bgmAudio.value.muted = true // 确保设置静音
+      bgmAudio.value.pause()
+    }
+  }
+})
 </script>
 
 <template>
+  <div
+    class=""
+  >
+    <!-- 隐藏播放器 -->
+    <audio
+      id="bgmAudio"
+      ref="bgmAudio"
+      :src="bgmAudioSrc"
+      loop
+    />
+
+    <button
+      class="absolute right-10 top-10 cursor-pointer duration-500 hover:scale-110"
+      @click="garageStore.state.isMute = !garageStore.state.isMute"
+    >
+      <SvgIcon
+        :icon="garageStore.state.isMute ? 'garage-music-play' : 'garage-music-stop'"
+        :size="40"
+      />
+    </button>
+  </div>
+
   <div
     ref="controlRef"
     class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"

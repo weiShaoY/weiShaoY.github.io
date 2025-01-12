@@ -589,7 +589,7 @@ onMounted(async () => {
   animate()
 
   watchColorChange(modelRef)
-  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms, camera)
+  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms)
   window.addEventListener('resize', onWindowResize)
 })
 
