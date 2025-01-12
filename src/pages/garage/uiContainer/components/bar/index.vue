@@ -2,6 +2,8 @@
 <script lang="ts" setup>
 import bgmAudioSrc from '@/assets/music/garage-bgm.mp3'
 
+import changeAudioSrc from '@/assets/music/garage-change.mp3'
+
 import { useGarageStore } from '@/store'
 
 import { gsap } from 'gsap'
@@ -85,6 +87,12 @@ function handleClick(index: number, color: string) {
   activeIndex.value = index
 
   garageStore.state.carColor = color
+
+  if (garageStore.state.isMute) {
+    const audio = new Audio(changeAudioSrc)
+
+    audio.play()
+  }
 }
 
 // 使用 onMounted 钩子来设置动画和交互存储
