@@ -45,11 +45,6 @@ import { watchMouseTouch } from './watchMouseTouch'
 const garageStore = useGarageStore()
 
 /**
- *  射线
- */
-const raycaster = new Three.Raycaster()
-
-/**
  *  3D容器
  */
 const threeContainerRef = ref<HTMLCanvasElement>()
@@ -222,80 +217,60 @@ function addLights() {
 /**
  * 添加贴图
  */
-function addTextures() {
+async function addTextures(): Promise<void> {
   const textureLoader = new Three.TextureLoader()
 
   /**
-   * 加载汽车车身AO贴图
-   * @param texture - 加载完成的纹理对象
+   * 加载单个纹理的辅助函数
+   * @param {string} url - 纹理的路径
+   * @param {(texture: THREE.Texture) => void} onLoad - 纹理加载成功时的回调
+   * @returns {Promise<THREE.Texture>} 返回加载完成的纹理
    */
-  maps.carAo = textureLoader.load('/models/garage/textures/t_car_body_AO.raw.jpg', (texture) => {
-    // 设置汽车车身AO贴图的翻转
+  function loadTexture(
+    url: string,
+    onLoad: (texture: Three.Texture) => void,
+  ): Promise<Three.Texture> {
+    return new Promise((resolve, reject) => {
+      textureLoader.load(
+        url,
+        (texture) => {
+          onLoad(texture)
+          resolve(texture)
+        },
+        undefined,
+        error => reject(error),
+      )
+    })
+  }
+
+  // 使用 Promise 异步加载纹理
+  maps.carAo = await loadTexture('/models/garage/textures/t_car_body_AO.raw.jpg', (texture) => {
     texture.flipY = false
-
-    // 设置汽车车身AO贴图的色彩空间
     texture.colorSpace = Three.LinearSRGBColorSpace
-
-    // 设置汽车车身AO贴图的最小过滤
     texture.minFilter = Three.LinearFilter
-
-    // 设置汽车车身AO贴图的最大过滤
     texture.magFilter = Three.LinearFilter
-
-    // 设置汽车车身AO贴图的通道
     texture.channel = 1
   })
 
-  /**
-   * 加载起始房间光贴图
-   * @param texture - 加载完成的纹理对象
-   */
-  maps.startRoomLight = textureLoader.load('/models/garage/textures/t_startroom_light.raw.jpg', (texture) => {
+  maps.startRoomLight = await loadTexture('/models/garage/textures/t_startroom_light.raw.jpg', (texture) => {
     texture.channel = 1
-
-    // 设置起始房间光贴图的翻转
     texture.flipY = false
-
-    // 设置起始房间光贴图的色彩空间
     texture.colorSpace = Three.LinearSRGBColorSpace
   })
 
-  /**
-   * 加载起始房间AO贴图
-   * @param texture - 加载完成的纹理对象
-   */
-  maps.startRoomAo = textureLoader.load('/models/garage/textures/t_startroom_ao.raw.jpg', (texture) => {
-    // 设置起始房间AO贴图的翻转
+  maps.startRoomAo = await loadTexture('/models/garage/textures/t_startroom_ao.raw.jpg', (texture) => {
     texture.flipY = false
-
-    // 设置起始房间AO贴图的通道
     texture.channel = 1
-
-    // 设置起始房间AO贴图的色彩空间
     texture.colorSpace = Three.LinearSRGBColorSpace
   })
 
-  /**
-   * 加载地板粗糙度贴图
-   * @param texture - 加载完成的纹理对象
-   */
-  maps.floorRoughness = textureLoader.load('/models/garage/textures/t_floor_roughness.webp', (texture) => {
-    // 设置地板粗糙度贴图的色彩空间
+  maps.floorRoughness = await loadTexture('/models/garage/textures/t_floor_roughness.webp', (texture) => {
     texture.colorSpace = Three.LinearSRGBColorSpace
-
-    // 设置地板粗糙度贴图的包裹方式
     texture.wrapS = texture.wrapT = Three.RepeatWrapping
   })
 
-  /**
-   * 加载地板法线贴图
-   * @param texture - 加载完成的纹理对象
-   */
-  maps.floorNormal = textureLoader.load('/models/garage/textures/t_floor_normal.webp', (texture) => {
-    // 设置地板法线贴图的色彩空间
+  maps.floorNormal = await loadTexture('/models/garage/textures/t_floor_normal.webp', (texture) => {
     texture.colorSpace = Three.LinearSRGBColorSpace
-
-    // 设置地板法线贴图的包裹方式
     texture.wrapS = texture.wrapT = Three.RepeatWrapping
   })
 }
@@ -322,185 +297,151 @@ function addOrbitControls() {
   controls.maxPolarAngle = 85 * Math.PI / 180
 }
 
-function addModels(
-
-) {
+async function addModels(): Promise<void> {
   /**
-   *  GLTF加载器并设置解码器
+   * GLTF加载器并设置解码器
    */
   const gltfLoader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
 
-  //  加载汽车模型
-  gltfLoader.load('/models/garage/models/sm_car.gltf', (gltf) => {
-    // 设置汽车模型的旋转
-    gltf.scene.rotation.y = Math.PI
+  // 加载汽车模型
+  const loadCarModel = async () => {
+    return new Promise<void>((resolve, reject) => {
+      gltfLoader.load(
+        '/models/garage/models/sm_car.gltf',
+        (gltf) => {
+          gltf.scene.rotation.y = Math.PI
+          carGltf = gltf
 
-    carGltf = gltf
+          const modelParts = flatModel(carGltf)
 
-    const modelParts = flatModel(carGltf)
+          // 车身部分
+          const body = modelParts.find(part => part.name === 'body') as THREE.Mesh
 
-    /**
-     *  车身部分
-     */
-    const body = modelParts.find(part => part.name === 'body') as THREE.Mesh
+          const bodyMat = body.material as THREE.MeshStandardMaterial
 
-    /**
-     *  车身材质
-     */
-    const bodyMat = body.material as THREE.MeshStandardMaterial
+          bodyMat.envMapIntensity = 5
+          bodyMat.color = new Three.Color('#26d6e9')
 
-    //  设置车身材质的环境强度
-    bodyMat.envMapIntensity = 5
+          modelParts.forEach((item: THREE.Mesh) => {
+            if (item.isMesh) {
+              const mat = item.material as THREE.MeshStandardMaterial
 
-    //  设置车身颜色
-    bodyMat.color = new Three.Color('#26d6e9')
+              mat.aoMap = maps.carAo
+            }
+          })
 
-    modelParts.forEach((item: THREE.Mesh) => {
-      if (item.isMesh) {
-        const mat = item.material as THREE.MeshStandardMaterial
+          // 获取汽车轮子
+          const wheel = modelParts[35] as THREE.Mesh
 
-        //  设置材质的AO贴图
-        mat.aoMap = maps.carAo
-      }
+          wheel.children.forEach((child) => {
+            const mesh = child as THREE.Mesh
+
+            const mat = mesh.material as THREE.MeshStandardMaterial
+
+            mat.envMapIntensity = 5
+            modelRef.wheel.push(mesh)
+          })
+
+          modelRef.bodyMat = bodyMat
+          scene.add(gltf.scene)
+          resolve()
+        },
+        undefined,
+        error => reject(error),
+      )
     })
+  }
 
-    /**
-     *  获取汽车轮子
-     */
-    const wheel = modelParts[35] as THREE.Mesh
+  // 加载加速器
+  const loadSpeedupModel = async () => {
+    return new Promise<void>((resolve, reject) => {
+      gltfLoader.load(
+        '/models/garage/models/sm_speedup.gltf',
+        (gltf) => {
+          speedupGltf = gltf
 
-    wheel.children.forEach((child) => {
-      const mesh = child as THREE.Mesh
+          const mat = new CustomShaderMaterial({
+            baseMaterial: Three.MeshPhysicalMaterial,
+            uniforms,
+            vertexShader,
+            fragmentShader,
+            transparent: true,
+            depthWrite: false,
+          })
 
-      const mat = mesh.material as THREE.MeshStandardMaterial
-
-      //  设置轮子环境贴图强度
-      mat.envMapIntensity = 5
-
-      // 保存轮子的引用
-      modelRef.wheel.push(mesh)
+          useModifyCSM(gltf, mat)
+          scene.add(gltf.scene)
+          resolve()
+        },
+        undefined,
+        error => reject(error),
+      )
     })
+  }
 
-    //  保存车身材质的引用
-    modelRef.bodyMat = bodyMat
+  // 加载起始房间
+  const loadStartRoomModel = async () => {
+    return new Promise<void>((resolve, reject) => {
+      gltfLoader.load(
+        '/models/garage/models/sm_startroom.raw.gltf',
+        (gltf) => {
+          startRommGltf = gltf
+          const modelParts = flatModel(startRommGltf)
 
-    // 添加 模型
-    scene.add(gltf.scene)
-  })
+          const light = modelParts[1] as THREE.Mesh
 
-  //  加载加速器
-  gltfLoader.load('/models/garage/models/sm_speedup.gltf', (gltf) => {
-    speedupGltf = gltf
+          const lightMat = light.material as THREE.MeshPhysicalMaterial
 
-    const mat = new CustomShaderMaterial({
-      baseMaterial: Three.MeshPhysicalMaterial,
-      uniforms,
-      vertexShader,
-      fragmentShader,
+          lightMat.emissive = new Three.Color('white')
+          lightMat.toneMapped = false
+          lightMat.transparent = true
+          light.material = new Three.MeshBasicMaterial({
+            color: 0xFFFFFF,
+            side: Three.DoubleSide,
+            transparent: true,
+            alphaTest: 0.01,
+          })
 
-      // silent: true,
-      transparent: true,
-      depthWrite: false,
+          const floor = modelParts[2]
+
+          const floorMat = floor.material as THREE.MeshPhysicalMaterial
+
+          floorMat.roughnessMap = maps.floorRoughness
+          floorMat.normalMap = maps.floorNormal
+          floorMat.aoMap = maps.startRoomAo
+          floorMat.lightMap = maps.startRoomLight
+          floorMat.envMapIntensity = 0
+
+          const floorCsmMat = new CustomShaderMaterial({
+            baseMaterial: floorMat,
+            uniforms: floorUniforms,
+            vertexShader: floorVertex,
+            fragmentShader: floorFrag,
+            silent: true,
+          })
+
+          floor.material = floorCsmMat
+
+          modelRef.floor = floor
+          modelRef.lightMat = light.material as THREE.MeshStandardMaterial
+          scene.add(gltf.scene)
+          resolve()
+        },
+        undefined,
+        error => reject(error),
+      )
     })
+  }
 
-    useModifyCSM(gltf, mat)
-
-    scene.add(gltf.scene)
-  })
-
-  //  加载起始房间
-  gltfLoader.load('/models/garage/models/sm_startroom.raw.gltf', (gltf) => {
-    startRommGltf = gltf
-
-    // 获取模型部分
-
-    const modelParts = flatModel(startRommGltf)
-
-    // 获取光部分
-    const light = modelParts[1] as THREE.Mesh
-
-    const lightMat = light.material as THREE.MeshPhysicalMaterial
-
-    // 设置光的发光颜色
-    lightMat.emissive = new Three.Color('white')
-
-    // 设置光不进行色调映射
-    lightMat.toneMapped = false
-
-    // 设置光透明
-    lightMat.transparent = true
-
-    light.material = new Three.MeshBasicMaterial({
-      color: 0xFFFFFF,
-      side: Three.DoubleSide,
-      transparent: true,
-      alphaTest: 0.01,
-    })
-
-    /**
-     *  获取地板部分
-     */
-    const floor = modelParts[2]
-
-    /**
-     *  获取地板材质
-     */
-    const floorMat = floor.material as THREE.MeshPhysicalMaterial
-
-    // 设置地板粗糙度贴图
-    floorMat.roughnessMap = maps.floorRoughness
-
-    console.log('%c Line:458 🍡 maps.floorRoughness', 'color:#33a5ff', maps.floorRoughness)
-
-    // 设置地板法线贴图
-    floorMat.normalMap = maps.floorNormal
-
-    // 设置地板AO贴图
-    floorMat.aoMap = maps.startRoomAo
-
-    // 设置地板光贴图
-    floorMat.lightMap = maps.startRoomLight
-
-    // 设置地板环境贴图强度
-    floorMat.envMapIntensity = 0
-
-    /**
-     *  创建地板的自定义材质
-     */
-    const floorCsmMat = new CustomShaderMaterial({
-      // 设置基础材质为 floorMat
-      baseMaterial: floorMat,
-
-      // 设置自定义材质的 uniform 参数
-      uniforms: floorUniforms,
-
-      // 指定自定义顶点着色器的代码
-      vertexShader: floorVertex,
-
-      // 指定自定义片段着色器的代码
-      fragmentShader: floorFrag,
-
-      // 设置 silent 属性，可能是用于屏蔽某些日志或警告信息
-      silent: true,
-    })
-
-    // 设置地板的自定义材质
-    floor.material = floorCsmMat
-
-    // #  ///////
-
-    // 保存地板的引用
-    modelRef.floor = floor
-
-    // 保存光材质的引用
-    modelRef.lightMat = light.material as THREE.MeshStandardMaterial
-
-    scene.add(gltf.scene)
-  })
-
-  setTimeout(() => {
-    garageStore.state.isLoaded = true
-  }, 2000)
+  try {
+    // 并行加载所有模型
+    await Promise.all([loadCarModel(), loadSpeedupModel(), loadStartRoomModel()])
+    garageStore.state.isLoaded = true // 设置加载完成状态
+  }
+  catch (error) {
+    console.error('加载模型时出错:', error)
+    throw error // 抛出错误供调用方处理
+  }
 }
 
 const clock = new Three.Clock()
@@ -538,7 +479,7 @@ onMounted(async () => {
 
   scene = new Three.Scene()
   camera = new Three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500)
-  camera.position.set(0, 2, 5)
+  camera.position.set(0, 1, 5)
 
   renderer = new Three.WebGLRenderer({
     canvas: threeContainerRef.value,
@@ -554,8 +495,10 @@ onMounted(async () => {
 
   addLights()
   addOrbitControls()
+
+  await addTextures()
+
   await addModels()
-  addTextures()
 
   // const { matrix, renderTarget } = useReflect(modelRef.floor!, {
   //   resolution: [innerWidth, innerHeight],
@@ -582,64 +525,32 @@ onMounted(async () => {
   animate()
 
   watchColorChange(modelRef)
-  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms)
-  window.addEventListener('resize', onWindowResize)
 
-  threeContainerRef.value.addEventListener('pointerdown', onPointerDown)
-  threeContainerRef.value.addEventListener('pointerup', onPointerUp)
+  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms)
+
+  window.addEventListener('resize', onWindowResize)
 })
 
 onUnmounted(() => {
   renderer.dispose()
   window.removeEventListener('resize', onWindowResize)
-
-  threeContainerRef.value?.removeEventListener('pointerdown', onPointerDown)
-  threeContainerRef.value?.removeEventListener('pointerup', onPointerUp)
 })
-const mouse = new Three.Vector2()
 
-function onPointerDown(event: PointerEvent) {
-  updateMousePosition(event)
-  checkIntersection()
-}
-
-function onPointerUp(event: PointerEvent) {
-  updateMousePosition(event)
-  checkIntersection()
-
-  garageStore.state.isTouch = false
-}
-
-function updateMousePosition(event: PointerEvent) {
-  const rect = threeContainerRef.value!.getBoundingClientRect()
-
-  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
-}
-
-function checkIntersection() {
-  raycaster.setFromCamera(mouse, camera)
-  const intersects = raycaster.intersectObject(carGltf!.scene, true)
-
-  if (intersects.length > 0) {
-    const intersectedObject = intersects[0].object
-
-    garageStore.state.isTouch = true
-
-    // 这里可以添加对选中对象的处理逻辑
-    console.log('Intersected object:', intersectedObject)
-  }
-}
 </script>
 
 <template>
   <canvas
     ref="threeContainerRef"
     class="h-screen w-full"
+    @pointerdown="garageStore.state.isTouch = true"
+    @pointerup="garageStore.state.isTouch = false"
   />
-<!--
-  @pointerdown="() => garageStore.state.isTouch = true"
-  @pointerup="() => garageStore.state.isTouch = false" -->
+  <!-- <canvas
+    ref="threeContainerRef"
+    class="h-screen w-full"
+    @pointerdown="handlePointerdown"
+    @pointerup="handlePointerup"
+  /> -->
 </template>
 
 <style lang="less" scoped>
