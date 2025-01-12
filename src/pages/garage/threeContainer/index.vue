@@ -35,7 +35,6 @@ import vertexShader from './shaders/sketch/vertex.glsl'
 import {
   flatModel,
   useModifyCSM,
-  useRaycaster,
   useReflect,
 } from './utils'
 
@@ -44,11 +43,6 @@ import { watchColorChange } from './watchColorChange'
 import { watchMouseTouch } from './watchMouseTouch'
 
 const garageStore = useGarageStore()
-
-/**
- *  射线
- */
-const raycaster = new Three.Raycaster()
 
 /**
  *  3D容器
@@ -388,21 +382,19 @@ function addModels(
     // 添加 模型
     scene.add(gltf.scene)
 
-    useRaycaster({
-      container: threeContainerRef.value!,
-      camera,
-      targetObject: carGltf.scene,
-      onIntersect: (object) => {
-        garageStore.state.isTouch = true
-        document.body.style.cursor = 'pointer'
-
-        console.log('Intersected object:', object)
-      },
-      onNoIntersect: () => {
-        garageStore.state.isTouch = false
-        document.body.style.cursor = 'default'
-      },
-    })
+    // useRaycaster({
+    //   container: threeContainerRef.value!,
+    //   camera,
+    //   targetObject: carGltf.scene,
+    //   onIntersect: () => {
+    //     garageStore.state.isTouch = true
+    //     document.body.style.cursor = 'pointer'
+    //   },
+    //   onNoIntersect: () => {
+    //     garageStore.state.isTouch = false
+    //     document.body.style.cursor = 'default'
+    //   },
+    // })
   })
 
   //  加载加速器
@@ -466,8 +458,6 @@ function addModels(
 
     // 设置地板粗糙度贴图
     floorMat.roughnessMap = maps.floorRoughness
-
-    console.log('%c Line:458 🍡 maps.floorRoughness', 'color:#33a5ff', maps.floorRoughness)
 
     // 设置地板法线贴图
     floorMat.normalMap = maps.floorNormal
@@ -555,7 +545,7 @@ onMounted(async () => {
 
   scene = new Three.Scene()
   camera = new Three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500)
-  camera.position.set(0, 2, 5)
+  camera.position.set(0, 1, 5)
 
   renderer = new Three.WebGLRenderer({
     canvas: threeContainerRef.value,
@@ -599,7 +589,7 @@ onMounted(async () => {
   animate()
 
   watchColorChange(modelRef)
-  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms)
+  watchMouseTouch(modelRef, sceneRenderParams, uniforms, floorUniforms, camera)
   window.addEventListener('resize', onWindowResize)
 })
 
@@ -614,10 +604,15 @@ onUnmounted(() => {
   <canvas
     ref="threeContainerRef"
     class="h-screen w-full"
+    @pointerdown="garageStore.state.isTouch = true"
+    @pointerup="garageStore.state.isTouch = false"
   />
-<!--
-  @pointerdown="() => garageStore.state.isTouch = true"
-  @pointerup="() => garageStore.state.isTouch = false" -->
+  <!-- <canvas
+    ref="threeContainerRef"
+    class="h-screen w-full"
+    @pointerdown="handlePointerdown"
+    @pointerup="handlePointerup"
+  /> -->
 </template>
 
 <style lang="less" scoped>

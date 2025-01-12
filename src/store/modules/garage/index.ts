@@ -15,7 +15,7 @@ export const useGarageStore = defineStore(
       isTouch: false,
 
       /**
-       *  是否静音
+       *  是否静音     根据环境变量播放  开发环境不播放
        */
       isMute: false,
 

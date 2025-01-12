@@ -42,7 +42,7 @@ function close() {
     class="fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black"
   >
     <div
-      class="loading relative h-48 w-48 animate-spin rounded-full from-teal-200 via-yellow-300 to-pink-500 bg-gradient-to-r"
+      class="loading relative h-60 w-60 animate-spin rounded-full from-teal-200 via-yellow-300 to-pink-500 bg-gradient-to-r"
     >
       <div
         class="absolute bottom-2.5 left-2.5 right-2.5 top-2.5 z-1 rounded-full bg-black"

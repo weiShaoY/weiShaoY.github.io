@@ -22,7 +22,6 @@ import { onMounted } from 'vue'
  */
 export function useModifyCSM(gltf: GLTF, mat: CustomShaderMaterial) {
   gltf.scene.traverse((child: THREE.Object3D) => {
-    console.log('%c Line:43 🧀 child', 'color:#33a5ff', child)
     if ((child as THREE.Mesh).isMesh) {
       const mesh = child as THREE.Mesh
 
