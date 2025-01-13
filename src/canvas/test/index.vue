@@ -1,14 +1,16 @@
 <script setup lang="ts">
 
-import { isMobile } from '@/utils'
+import { loadGLTFModel } from '@/utils'
 
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-
 // const imageUrl = 'https://api.lolimi.cn/API/dmtx/api.php' // 替换为实际的纹理 URL
+/**
+ *  是否加载完成
+ */
+const isLoaded = ref(false)
 
 const desktopRef = ref<(HTMLCanvasElement | null)>()
 
@@ -89,41 +91,42 @@ function addOrbitControls() {
 /**
  * 加载 3D 模型
  */
-function addModel() {
-  const loader = new GLTFLoader()
+async function addModel() {
+  await loadGLTFModel ('/models/test/index.glb', (gltf) => {
+    model = gltf.scene
 
-  loader.load(
-    '/models/test/index.glb',
-    (gltf) => {
-      model = gltf.scene
+    // 根据设备调整模型属性
+    const position: [number, number, number] = isMobile ? [-2.5, -3, -1.5] : [0, -5, -1.5]
 
-      // 根据设备调整模型属性
-      const position: [number, number, number] = isMobile ? [-2.5, -3, -1.5] : [0, -5, -1.5]
+    const scale = isMobile ? 0.4 : 1
 
-      const scale = isMobile ? 0.4 : 1
+    model.position.set(...position)
 
-      model.position.set(...position)
+    model.rotation.set(-0.01, -0.2, -0.1)
 
-      model.rotation.set(-0.01, -0.2, -0.1)
+    model.scale.set(scale, scale, scale)
 
-      model.scale.set(scale, scale, scale)
+    // 遍历并替换纹理
+    // replaceTexturesInScene(model)
 
-      // 遍历并替换纹理
-      // replaceTexturesInScene(model)
-
-      scene.add(model)
-    },
-    undefined,
-    (error) => {
-      console.error('模型加载失败:', error)
-    },
-  )
+    scene.add(model)
+  })
 }
 
 /**
- * 初始化 Three.js 场景
+ * 处理窗口大小调整
  */
-function initThree(canvas: HTMLCanvasElement) {
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+onMounted(async () => {
+  if (!desktopRef.value) {
+    return
+  }
+
   scene = new THREE.Scene()
 
   // 设置场景背景透明
@@ -152,7 +155,7 @@ function initThree(canvas: HTMLCanvasElement) {
    *  创建渲染器，开启 alpha 通道支持透明背景
    */
   renderer = new THREE.WebGLRenderer({
-    canvas,
+    canvas: desktopRef.value,
     antialias: true,
     preserveDrawingBuffer: false,
     alpha: true,
@@ -174,7 +177,9 @@ function initThree(canvas: HTMLCanvasElement) {
   addOrbitControls()
 
   // 加载模型
-  addModel()
+  await addModel()
+
+  isLoaded.value = true
 
   // 监听窗口大小调整事件
   window.addEventListener('resize', onWindowResize)
@@ -189,21 +194,6 @@ function initThree(canvas: HTMLCanvasElement) {
   }
 
   animate()
-}
-
-/**
- * 处理窗口大小调整
- */
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-onMounted(() => {
-  if (desktopRef.value) {
-    initThree(desktopRef.value)
-  }
 })
 
 onUnmounted(() => {
@@ -215,8 +205,20 @@ onUnmounted(() => {
 </script>
 
 <template>
+
+  <!-- <CanvasLoader
+    :is-loaded="isLoaded"
+  >
+    <canvas
+      ref="desktopRef"
+      class="overflow-hidden !h-full !w-full"
+    />
+  </CanvasLoader> -->
+
   <canvas
     ref="desktopRef"
+    v-loading="true"
     class="overflow-hidden !h-full !w-full"
   />
+
 </template>

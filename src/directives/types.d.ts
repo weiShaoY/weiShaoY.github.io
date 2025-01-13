@@ -14,4 +14,9 @@ export type Directives = {
    *  动画文字指令
    */
   vAnimatedText: Directive<HTMLElement>
+
+  /**
+   *  加载指令
+   */
+  vLoading: Directive 
 }

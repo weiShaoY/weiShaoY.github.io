@@ -536,12 +536,6 @@ onUnmounted(() => {
     @pointerdown="garageStore.state.isTouch = true"
     @pointerup="garageStore.state.isTouch = false"
   />
-  <!-- <canvas
-    ref="threeContainerRef"
-    class="h-screen w-full"
-    @pointerdown="handlePointerdown"
-    @pointerup="handlePointerup"
-  /> -->
 </template>
 
 <style lang="less" scoped>
