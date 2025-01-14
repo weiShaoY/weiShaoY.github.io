@@ -208,7 +208,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="desktopRef"
-    v-loading="{ isLoading, size: 50 }"
+    v-loading="{ isLoading, size: 50 , showErrorText: true, errorText: '加载失败' }"
     class="overflow-hidden !h-full !w-full"
   />
 </template>

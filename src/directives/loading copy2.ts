@@ -10,7 +10,8 @@ type CustomHTMLElement = {
   _loadingApp?: ReturnType<typeof createApp>
   _loadingSpinner?: HTMLElement
   _timeoutId?: number
-  _errorContainer?: HTMLElement
+  _errorSvg?: HTMLElement
+  _errorTextElement?: HTMLElement
 } & HTMLElement
 
 const useLoading = {
@@ -66,8 +67,12 @@ const useLoading = {
       el._loadingSpinner.remove()
     }
 
-    if (el._errorContainer) {
-      el._errorContainer.remove()
+    if (el._errorSvg) {
+      el._errorSvg.remove()
+    }
+
+    if (el._errorTextElement) {
+      el._errorTextElement.remove()
     }
 
     clearTimeout(el._timeoutId)
@@ -75,7 +80,8 @@ const useLoading = {
     el._loadingApp = undefined
     el._loadingSpinner = undefined
     el._timeoutId = undefined
-    el._errorContainer = undefined
+    el._errorSvg = undefined
+    el._errorTextElement = undefined
   },
 }
 
@@ -92,40 +98,42 @@ function setLoadingState(el: CustomHTMLElement, isLoading: boolean, size: number
         if (el._loadingSpinner) {
           el._loadingSpinner.style.display = 'none'
 
-          // 创建错误容器
-          const errorContainer = document.createElement('div')
-
-          errorContainer.className = 'absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center'
-
           // 创建错误 SVG 元素
           const errorSvg = document.createElement('img')
 
           errorSvg.src = directivesLoadingErrorSvg
           errorSvg.style.width = `${size}px`
           errorSvg.style.height = `${size}px`
+          errorSvg.className = 'absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'
 
-          errorContainer.appendChild(errorSvg)
+          el._errorSvg = errorSvg
+          el.parentNode?.appendChild(errorSvg)
+          el.style.opacity = '1'
 
           // 创建错误文本元素
           if (showErrorText) {
             const errorTextElement = document.createElement('div')
 
             errorTextElement.innerText = errorText || '加载错误'
-            errorTextElement.className = 'text-white mt-2' // 调整样式
-            errorContainer.appendChild(errorTextElement)
-          }
+            errorTextElement.className = 'absolute left-1/2  z-10 -translate-x-1/2 text-white text-center' // 调整位置
+            errorTextElement.style.top = `calc(50% + ${size}px)`
 
-          el._errorContainer = errorContainer
-          el.parentNode?.appendChild(errorContainer)
-          el.style.opacity = '1'
+            el._errorTextElement = errorTextElement
+            el.parentNode?.appendChild(errorTextElement)
+          }
         }
       }, 5000)
     }
     else {
       clearTimeout(el._timeoutId)
-      if (el._errorContainer) {
-        el._errorContainer.remove()
-        el._errorContainer = undefined
+      if (el._errorSvg) {
+        el._errorSvg.remove()
+        el._errorSvg = undefined
+      }
+
+      if (el._errorTextElement) {
+        el._errorTextElement.remove()
+        el._errorTextElement = undefined
       }
     }
   }
