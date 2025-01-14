@@ -86,6 +86,7 @@ declare global {
   const isUndefined: typeof import('./src/utils/is copy')['isUndefined']
   const isWindow: typeof import('./src/utils/is')['isWindow']
   const listenerRouteChange: typeof import('./src/utils/route-listener')['listenerRouteChange']
+  const loadGLTFModel: typeof import('./src/utils/loadGLTFModel')['loadGLTFModel']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -434,6 +435,7 @@ declare module 'vue' {
     readonly isString: UnwrapRef<typeof import('./src/utils/is')['isString']>
     readonly isUnDef: UnwrapRef<typeof import('./src/utils/is')['isUnDef']>
     readonly isWindow: UnwrapRef<typeof import('./src/utils/is')['isWindow']>
+    readonly loadGLTFModel: UnwrapRef<typeof import('./src/utils/loadGLTFModel')['loadGLTFModel']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>

@@ -3,6 +3,8 @@ import type { Directive } from 'vue'
 
 import type { useLightParamsType } from './modules/light'
 
+import type { useLoadingParamsType } from './modules/loading'
+
 export type Directives = {
 
   /**
@@ -18,5 +20,5 @@ export type Directives = {
   /**
    *  加载指令
    */
-  vLoading: Directive 
+  vLoading: Directive< HTMLElement, useLoadingParamsType>
 }

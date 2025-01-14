@@ -178,9 +178,9 @@ onMounted(async () => {
   addOrbitControls()
 
   // 加载模型
-  // await addModel()
-
-  // isShowLoading.value = false
+  await addModel().finally(() => {
+    isLoading.value = false
+  })
 
   // 监听窗口大小调整事件
   window.addEventListener('resize', onWindowResize)
@@ -208,7 +208,16 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="desktopRef"
-    v-loading="{ isLoading, size: 50 , showErrorText: true, errorText: '加载失败' }"
+    v-loading="{
+      isLoading,
+      size: 50,
+      error: {
+        isShow: true,
+        text: '模型加载失败',
+        timeout: 20000,
+      },
+
+    }"
     class="overflow-hidden !h-full !w-full"
   />
 </template>

@@ -123,9 +123,9 @@ onMounted(async () => {
 
   addOrbitControls()
 
-  await addModel(scene)
-
-  isLoading.value = false
+  await addModel(scene).finally(() => {
+    isLoading.value = false
+  })
 
   // 渲染循环
   function animate() {

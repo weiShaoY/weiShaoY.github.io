@@ -28,6 +28,11 @@ const props = defineProps({
 })
 
 /**
+ *  是否显示加载loading
+ */
+const isLoading = ref(true)
+
+/**
  *  定义一个响应式数组，用于存储 canvas 元素的引用
  */
 const itemRef = ref<(HTMLCanvasElement | null)>()
@@ -105,7 +110,7 @@ function addOrbitControls() {
 /**
  *  添加模型
  */
-function addModel() {
+async function addModel() {
   // 创建球体几何体 半径为1，细分等级为1
   const geometry = new THREE.IcosahedronGeometry(1, 2)
 
@@ -114,7 +119,7 @@ function addModel() {
    */
   const textureLoader = new THREE.TextureLoader()
 
-  textureLoader.load(
+  await textureLoader.load(
     props.imageUrl, // 纹理图片的路径
     (texture) => {
       // 设置纹理颜色空间
@@ -281,6 +286,8 @@ function initThree(canvas: HTMLCanvasElement) {
 
   addModel()
 
+  isLoading.value = false
+
   /**
    *  动画循环函数
    */
@@ -321,6 +328,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="itemRef"
+    v-loading="isLoading"
     class="cursor-pointer !h-full !w-full"
   />
 </template>
