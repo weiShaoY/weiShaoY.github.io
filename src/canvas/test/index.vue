@@ -7,10 +7,11 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 // const imageUrl = 'https://api.lolimi.cn/API/dmtx/api.php' // 替换为实际的纹理 URL
+
 /**
- *  是否加载完成
+ *  是否显示加载loading
  */
-const isLoaded = ref(false)
+const isLoading = ref(true)
 
 const desktopRef = ref<(HTMLCanvasElement | null)>()
 
@@ -177,9 +178,9 @@ onMounted(async () => {
   addOrbitControls()
 
   // 加载模型
-  await addModel()
+  // await addModel()
 
-  isLoaded.value = true
+  // isShowLoading.value = false
 
   // 监听窗口大小调整事件
   window.addEventListener('resize', onWindowResize)
@@ -205,20 +206,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-
-  <!-- <CanvasLoader
-    :is-loaded="isLoaded"
-  >
-    <canvas
-      ref="desktopRef"
-      class="overflow-hidden !h-full !w-full"
-    />
-  </CanvasLoader> -->
-
   <canvas
     ref="desktopRef"
-    v-loading="true"
+    v-loading="{ isLoading, size: 50 }"
     class="overflow-hidden !h-full !w-full"
   />
-
 </template>

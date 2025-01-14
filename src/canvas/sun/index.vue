@@ -7,9 +7,9 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
- *  是否加载完成
+ *  是否显示加载loading
  */
-const isLoaded = ref(false)
+const isLoading = ref(true)
 
 const sunRef = ref<HTMLCanvasElement | null>(null)
 
@@ -124,7 +124,8 @@ onMounted(async () => {
   addOrbitControls()
 
   await addModel(scene)
-  isLoaded.value = true
+
+  isLoading.value = false
 
   // 渲染循环
   function animate() {
@@ -152,19 +153,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-
-  <CanvasLoader
-    :is-loaded="isLoaded"
-  >
-    <canvas
-      ref="sunRef"
-      class="cursor-pointer overflow-hidden !h-full !w-full"
-    />
-  </CanvasLoader>
-
-  <!-- <canvas
+  <canvas
     ref="sunRef"
-    v-loading="!isLoaded"
+    v-loading="isLoading"
     class="cursor-pointer overflow-hidden !h-full !w-full"
-  /> -->
+  />
 </template>
