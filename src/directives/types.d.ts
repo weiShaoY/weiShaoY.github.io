@@ -1,9 +1,9 @@
 // types.ts
 import type { Directive } from 'vue'
 
-import type { useLightParamsType } from './modules/light'
+import type { useCanvasLoadingParamsType } from './modules/canvas-loading'
 
-import type { useLoadingParamsType } from './modules/loading'
+import type { useLightParamsType } from './modules/light'
 
 export type Directives = {
 
@@ -20,5 +20,5 @@ export type Directives = {
   /**
    *  加载指令
    */
-  vLoading: Directive< HTMLElement, useLoadingParamsType>
+  vLoading: Directive< HTMLElement, useCanvasLoadingParamsType>
 }

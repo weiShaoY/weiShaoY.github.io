@@ -5,9 +5,9 @@ import directivesLoadingSvg from '@/assets/svgs/directives-loading.svg' // 使�
 import directivesLoadingErrorSvg from '@/assets/svgs/directives-loading-error.svg'
 
 /**
- * loading指令的参数类型
+ * CanvasLoading指令的参数类型
  */
-export type useLoadingParamsType = {
+export type useCanvasLoadingParamsType = {
 
   /**
    * 是否处于加载状态
@@ -33,7 +33,7 @@ export type useLoadingParamsType = {
 
     /**
      * 错误文本
-     * @default '加载失败'
+     * @default '模型加载失败'
      */
     text?: string
 
@@ -71,13 +71,16 @@ type CustomHTMLElementType = {
   _errorContainer?: HTMLElement
 } & HTMLElement // 继承自原生的 HTMLElement
 
-const useLoading = {
+/**
+ *  CanvasLoading指令
+ */
+const useCanvasLoading = {
   /**
    * 在元素挂载时调用的钩子，初始化加载状态并创建加载动画。
    * @param {CustomHTMLElementType} el - 绑定指令的元素。
-   * @param {DirectiveBinding<useLoadingParamsType>} binding - 指令绑定的值。
+   * @param {DirectiveBinding<useCanvasLoadingParamsType>} binding - 指令绑定的值。
    */
-  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<useLoadingParamsType>) {
+  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<useCanvasLoadingParamsType>) {
     const parent = el.parentNode as HTMLElement
 
     const normalizedOptions = normalizeBinding(binding.value)
@@ -146,9 +149,9 @@ const useLoading = {
   /**
    * 在元素更新时调用的钩子，根据新的绑定值更新加载状态。
    * @param {CustomHTMLElementType} el - 绑定指令的元素。
-   * @param {DirectiveBinding<useLoadingParamsType>} binding - 更新后的指令绑定值。
+   * @param {DirectiveBinding<useCanvasLoadingParamsType>} binding - 更新后的指令绑定值。
    */
-  updated(el: CustomHTMLElementType, binding: DirectiveBinding<useLoadingParamsType>) {
+  updated(el: CustomHTMLElementType, binding: DirectiveBinding<useCanvasLoadingParamsType>) {
     const normalizedOptions = normalizeBinding(binding.value)
 
     // 动态控制显示和隐藏
@@ -179,11 +182,11 @@ const useLoading = {
 
 /**
  * 规范化指令绑定值，返回标准化的加载选项对象。
- * @param {useLoadingParamsType} bindingValue - 指令绑定的值。
+ * @param {useCanvasLoadingParamsType} bindingValue - 指令绑定的值。
  * @returns {object} 标准化的加载选项对象。
  */
 function normalizeBinding(
-  bindingValue: useLoadingParamsType,
+  bindingValue: useCanvasLoadingParamsType,
 ): { isLoading: boolean, size: number, error: { isShow: boolean, text: string, timeout: number } } {
   if (typeof bindingValue === 'boolean') {
     return {
@@ -191,7 +194,7 @@ function normalizeBinding(
       size: 30,
       error: {
         isShow: false,
-        text: '加载失败',
+        text: '模型加载失败',
         timeout: 10000,
       },
     }
@@ -203,12 +206,12 @@ function normalizeBinding(
     error: typeof bindingValue.error === 'boolean'
       ? {
           isShow: bindingValue.error,
-          text: '加载失败',
+          text: '模型加载失败',
           timeout: 10000,
         }
       : {
           isShow: bindingValue.error?.isShow ?? false,
-          text: bindingValue.error?.text ?? '加载失败',
+          text: bindingValue.error?.text ?? '模型加载失败',
           timeout: bindingValue.error?.timeout ?? 10000,
         },
   }
@@ -286,4 +289,4 @@ function setLoadingState(
   }
 }
 
-export default useLoading
+export default useCanvasLoading

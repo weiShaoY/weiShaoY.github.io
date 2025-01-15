@@ -155,7 +155,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="sunRef"
-    v-loading="isLoading"
+    v-canvas-loading="isLoading"
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>
