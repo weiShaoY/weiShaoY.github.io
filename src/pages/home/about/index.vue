@@ -28,7 +28,6 @@ import Intro from './components/intro.vue'
       <!-- 太阳 -->
       <div
         className="z-2 absolute right-0 top-20 !w-60  aspect-square sm:flex hidden"
-        v-copy
       >
         <Sun />
       </div>
@@ -52,7 +51,6 @@ import Intro from './components/intro.vue'
     <div
       class="relative mx-auto max-w-7xl min-h-screen"
     >
-      >
       <Info />
     </div>
   </div>
