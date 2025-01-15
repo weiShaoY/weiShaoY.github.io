@@ -39,10 +39,3 @@ const technologies = [
     </div>
   </div>
 </template>
-
-<style scoped lang="less">
-/* 设置 canvas 的样式 */
-canvas {
-  display: block; // 确保 canvas 为块级元素
-}
-</style>

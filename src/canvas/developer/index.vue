@@ -1,13 +1,11 @@
 <script lang="ts" setup>
+import { loadGLTFModel } from '@/utils'
+
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import { SkeletonUtils } from 'three-stdlib'
 
@@ -28,6 +26,11 @@ const props = defineProps({
     default: 'idle',
   },
 })
+
+/**
+ *  是否显示加载loading
+ */
+const isLoading = ref(true)
 
 const developerRef = ref<HTMLCanvasElement | null>(null)
 
@@ -92,16 +95,8 @@ function addOrbitControls() {
   controls.enableZoom = false
 }
 
-function addModel() {
-  const dracoLoader = new DRACOLoader()
-
-  dracoLoader.setDecoderPath('/draco/')
-
-  const gltfLoader = new GLTFLoader()
-
-  gltfLoader.setDRACOLoader(dracoLoader)
-
-  gltfLoader.load('/models/developer/index.glb', (gltf) => {
+async function addModel() {
+  await loadGLTFModel('/models/developer/index.glb', (gltf) => {
     const model = SkeletonUtils.clone(gltf.scene)
 
     model.scale.set(scale.value, scale.value, scale.value)
@@ -146,12 +141,33 @@ function addModel() {
   })
 }
 
-function initThree(canvas: HTMLCanvasElement) {
+function onWindowResize() {
+  if (developerRef.value) {
+    camera.aspect = developerRef.value.offsetWidth / developerRef.value.offsetHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(developerRef.value.offsetWidth, developerRef.value.offsetHeight)
+  }
+}
+
+watch(
+  () => props.animationName,
+  (newAnimation) => {
+    if (actions[newAnimation]) {
+      Object.values(actions).forEach(action => action.stop())
+      actions[newAnimation].play()
+    }
+  },
+)
+onMounted(async () => {
+  if (!developerRef.value) {
+    return
+  }
+
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
     75,
-    canvas.offsetWidth / canvas.offsetHeight,
+    developerRef.value.offsetWidth / developerRef.value.offsetHeight,
     0.1,
     1000,
   )
@@ -160,14 +176,18 @@ function initThree(canvas: HTMLCanvasElement) {
   renderer = new THREE.WebGLRenderer({
     antialias: true,
   })
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+  renderer.setSize(developerRef.value.offsetWidth, developerRef.value.offsetHeight)
   if (developerRef.value) {
     developerRef.value.appendChild(renderer.domElement)
   }
 
   addLights()
+
   addOrbitControls()
-  addModel()
+
+  await addModel().finally(() => {
+    isLoading.value = false
+  })
 
   window.addEventListener('resize', onWindowResize)
 
@@ -186,20 +206,6 @@ function initThree(canvas: HTMLCanvasElement) {
   }
 
   animate()
-}
-
-function onWindowResize() {
-  if (developerRef.value) {
-    camera.aspect = developerRef.value.offsetWidth / developerRef.value.offsetHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(developerRef.value.offsetWidth, developerRef.value.offsetHeight)
-  }
-}
-
-onMounted(() => {
-  if (developerRef.value) {
-    initThree(developerRef.value)
-  }
 })
 
 onUnmounted(() => {
@@ -208,29 +214,15 @@ onUnmounted(() => {
   window.removeEventListener('resize', onWindowResize)
 })
 
-watch(
-  () => props.animationName,
-  (newAnimation) => {
-    if (actions[newAnimation]) {
-      Object.values(actions).forEach(action => action.stop())
-      actions[newAnimation].play()
-    }
-  },
-)
 </script>
 
 <template>
   <div
     ref="developerRef"
+    v-canvas-loading="{
+      isLoading,
+      size: 80,
+    }"
     class="relative cursor-pointer !h-full !w-full"
   />
 </template>
-
-<style scoped>
-.relative {
-  position: relative;
-}
-.cursor-pointer {
-  cursor: pointer;
-}
-</style>

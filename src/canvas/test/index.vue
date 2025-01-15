@@ -210,7 +210,7 @@ onUnmounted(() => {
     ref="desktopRef"
     v-canvas-loading="{
       isLoading,
-      size: 50,
+      size: 80,
     }"
     class="overflow-hidden !h-full !w-full"
   />

@@ -8,10 +8,10 @@ export * from './is'
 
 export * from './isMobile'
 
-export * from './loadGLTFModel'
-
 export * from './openUrlInWindow'
 
 export * from './sendContactEmail'
 
 export * from './techStack'
+
+export * from './threeJs'

@@ -1,12 +1,17 @@
 <script setup lang="ts">
 
+import { loadGLTFModel } from '@/utils'
+
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+/**
+ *  是否显示加载loading
+ */
+const isLoading = ref(true)
 
-const sunRef = ref<HTMLCanvasElement | null>(null)
+const moonRef = ref<HTMLCanvasElement | null>(null)
 
 /**
  *  场景
@@ -71,29 +76,23 @@ function addOrbitControls() {
 /**
  * 加载 3D 模型
  */
-function addModel(scene: THREE.Scene) {
-  const loader = new GLTFLoader()
+async function addModel(scene: THREE.Scene) {
+  await loadGLTFModel('/models/moon/index.glb', (gltf) => {
+    model = gltf.scene
 
-  loader.load(
-    '/models/moon/index.glb',
-    (gltf) => {
-      model = gltf.scene
+    model.position.set(0, 0, 0) // 将模型移到场景的中心
 
-      model.position.set(0, 0, 0) // 将模型移到场景的中心
+    model.scale.set(15, 15, 15)
 
-      // model.scale.set(1.5, 1.5, 1.5)
-      model.scale.set(15, 15, 15)
-
-      scene.add(model)
-    },
-    undefined,
-    (error) => {
-      console.error('模型加载失败:', error)
-    },
-  )
+    scene.add(model)
+  })
 }
 
-function initThree(canvas: HTMLCanvasElement) {
+onMounted(async () => {
+  if (!moonRef.value) {
+    return
+  }
+
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
@@ -102,7 +101,7 @@ function initThree(canvas: HTMLCanvasElement) {
     75,
 
     // 宽高比
-    canvas.offsetWidth / canvas.offsetHeight,
+    moonRef.value.offsetWidth / moonRef.value.offsetHeight,
 
     // 近裁剪面
     0.1,
@@ -113,18 +112,20 @@ function initThree(canvas: HTMLCanvasElement) {
   camera.position.set(0, 0, 5)
 
   renderer = new THREE.WebGLRenderer({
-    canvas,
+    canvas: moonRef.value,
     antialias: true,
     alpha: true,
   })
 
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+  renderer.setSize(moonRef.value.offsetWidth, moonRef.value.offsetHeight)
 
   addLights()
 
   addOrbitControls()
 
-  addModel(scene)
+  await addModel(scene).finally(() => {
+    isLoading.value = false
+  })
 
   // 渲染循环
   function animate() {
@@ -136,18 +137,12 @@ function initThree(canvas: HTMLCanvasElement) {
       model.rotation.y += 0.002
     }
 
-    controls?.update()
+    controls.update()
 
     renderer.render(scene, camera)
   }
 
   animate()
-}
-
-onMounted(() => {
-  if (sunRef.value) {
-    initThree(sunRef.value)
-  }
 })
 
 onUnmounted(() => {
@@ -159,7 +154,11 @@ onUnmounted(() => {
 
 <template>
   <canvas
-    ref="sunRef"
+    ref="moonRef"
+    v-canvas-loading="{
+      isLoading,
+      size: 80,
+    }"
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>

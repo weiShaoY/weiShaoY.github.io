@@ -1,6 +1,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
+import { loadTexture } from '@/utils'
+
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -32,9 +34,6 @@ const props = defineProps({
  */
 const isLoading = ref(true)
 
-/**
- *  定义一个响应式数组，用于存储 canvas 元素的引用
- */
 const itemRef = ref<(HTMLCanvasElement | null)>()
 
 /**
@@ -62,6 +61,9 @@ let controls: OrbitControls
  */
 let mesh: THREE.Mesh
 
+/**
+ *  双击事件
+ */
 function handleDoubleClick(event: MouseEvent) {
   // 阻止事件冒泡
   event.stopPropagation()
@@ -114,132 +116,118 @@ async function addModel() {
   // 创建球体几何体 半径为1，细分等级为1
   const geometry = new THREE.IcosahedronGeometry(1, 2)
 
-  /**
-   *  加载纹理
-   */
-  const textureLoader = new THREE.TextureLoader()
+  // 加载纹理
+  await loadTexture (props.imageUrl, (texture) => {
+    // 设置纹理颜色空间
+    texture.colorSpace = THREE.SRGBColorSpace
 
-  await textureLoader.load(
-    props.imageUrl, // 纹理图片的路径
-    (texture) => {
-      // 设置纹理颜色空间
-      texture.colorSpace = THREE.SRGBColorSpace
-
-      const baseMaterial = new THREE.MeshStandardMaterial({
-        /**
-         * color: 材质的基本颜色，这里设置为浅米色（#fff8ef）。
-         * 如果提供了贴图 (map)，颜色会与贴图混合。
-         */
-        color: '#fff8ef',
-
-        /**
-         * polygonOffset: 启用多边形偏移，避免深度冲突（z-fighting）。
-         * 默认为 false，这里设置为 true 以开启功能。
-         */
-        polygonOffset: true,
-
-        /**
-         * polygonOffsetFactor: 多边形偏移因子，决定偏移强度。
-         * 设置为 -5，确保多边形的深度值减小，从而更好地控制叠加效果。
-         */
-        polygonOffsetFactor: 2,
-
-        /**
-         * flatShading: 是否使用平面着色。
-         * 设置为 true，以生成平滑边缘的低多边形外观。
-         */
-        flatShading: true,
-
-      })
+    const baseMaterial = new THREE.MeshStandardMaterial({
+      /**
+       * color: 材质的基本颜色，这里设置为浅米色（#fff8ef）。
+       * 如果提供了贴图 (map)，颜色会与贴图混合。
+       */
+      color: '#fff8ef',
 
       /**
-       *  创建球体网格对象，并添加到场景中。
+       * polygonOffset: 启用多边形偏移，避免深度冲突（z-fighting）。
+       * 默认为 false，这里设置为 true 以开启功能。
        */
-      mesh = new THREE.Mesh(geometry, baseMaterial)
+      polygonOffset: true,
 
-      mesh.scale.set(3, 3, 3)
+      /**
+       * polygonOffsetFactor: 多边形偏移因子，决定偏移强度。
+       * 设置为 -5，确保多边形的深度值减小，从而更好地控制叠加效果。
+       */
+      polygonOffsetFactor: 2,
 
-      // 将球体添加到场景中
-      scene.add(mesh)
+      /**
+       * flatShading: 是否使用平面着色。
+       * 设置为 true，以生成平滑边缘的低多边形外观。
+       */
+      flatShading: true,
 
-      // 定义贴图位置和方向
-      const decalPositions = [
+    })
 
-        //   正面
-        {
-          position: new THREE.Vector3(0, 0, 1),
-          direction: new THREE.Euler(Math.PI * 2, 0, 0),
-        },
+    /**
+     *  创建球体网格对象，并添加到场景中。
+     */
+    mesh = new THREE.Mesh(geometry, baseMaterial)
 
-        //   背面
-        {
-          position: new THREE.Vector3(0, 0, -1),
-          direction: new THREE.Euler(0, Math.PI, 0),
-        },
+    mesh.scale.set(3, 3, 3)
 
-        //   左侧
-        {
-          position: new THREE.Vector3(-1, 0, 0),
-          direction: new THREE.Euler(0, -Math.PI / 2, 0),
-        },
+    // 将球体添加到场景中
+    scene.add(mesh)
 
-        //   右侧
-        {
-          position: new THREE.Vector3(1, 0, 0),
-          direction: new THREE.Euler(0, Math.PI / 2, 0),
-        },
+    // 定义贴图位置和方向
+    const decalPositions = [
 
-        //   顶部
-        {
-          position: new THREE.Vector3(0, 1, 0),
-          direction: new THREE.Euler(-Math.PI / 2, 0, 0),
-        },
+      //   正面
+      {
+        position: new THREE.Vector3(0, 0, 1),
+        direction: new THREE.Euler(Math.PI * 2, 0, 0),
+      },
 
-        //   底部
-        {
-          position: new THREE.Vector3(0, -1, 0),
-          direction: new THREE.Euler(Math.PI / 2, 0, 0),
-        },
-      ]
+      //   背面
+      {
+        position: new THREE.Vector3(0, 0, -1),
+        direction: new THREE.Euler(0, Math.PI, 0),
+      },
 
-      // 创建材质
-      const decalMaterial = new THREE.MeshBasicMaterial({
-        map: texture, // 使用贴图
-        transparent: true, // 贴图透明
-        depthTest: true, // 启用深度测试
+      //   左侧
+      {
+        position: new THREE.Vector3(-1, 0, 0),
+        direction: new THREE.Euler(0, -Math.PI / 2, 0),
+      },
 
-      })
+      //   右侧
+      {
+        position: new THREE.Vector3(1, 0, 0),
+        direction: new THREE.Euler(0, Math.PI / 2, 0),
+      },
 
-      // 遍历位置数组创建贴图
-      decalPositions.forEach(({ position, direction }) => {
-        const decal = new THREE.Mesh(
-          new DecalGeometry(
-            mesh, // 球体网格对象
-            position, // 贴图位置
-            direction, // 贴图方向
-            new THREE.Vector3(1, 1, 1), // 缩放比例
-          ),
-          decalMaterial, // 使用相同材质
-        )
+      //   顶部
+      {
+        position: new THREE.Vector3(0, 1, 0),
+        direction: new THREE.Euler(-Math.PI / 2, 0, 0),
+      },
 
-        mesh.add(decal) // 添加贴图到球体
-      })
+      //   底部
+      {
+        position: new THREE.Vector3(0, -1, 0),
+        direction: new THREE.Euler(Math.PI / 2, 0, 0),
+      },
+    ]
 
-      // 绑定事件监听
-      itemRef.value?.addEventListener('dblclick', handleDoubleClick)
-    },
-    undefined, // 加载进度回调（可选）
-    (error) => {
-      console.error('纹理加载失败:', error) // 加载失败时打印错误
-    },
-  )
+    // 创建材质
+    const decalMaterial = new THREE.MeshBasicMaterial({
+      map: texture, // 使用贴图
+      transparent: true, // 贴图透明
+      depthTest: true, // 启用深度测试
+
+    })
+
+    // 遍历位置数组创建贴图
+    decalPositions.forEach(({ position, direction }) => {
+      const decal = new THREE.Mesh(
+        new DecalGeometry(
+          mesh, // 球体网格对象
+          position, // 贴图位置
+          direction, // 贴图方向
+          new THREE.Vector3(1, 1, 1), // 缩放比例
+        ),
+        decalMaterial, // 使用相同材质
+      )
+
+      mesh.add(decal) // 添加贴图到球体
+    })
+  })
 }
 
-/**
- * 创建一个 3D 球体并应用 Decal 贴图
- * @param canvas HTMLCanvasElement - 渲染的目标画布
- */
-function initThree(canvas: HTMLCanvasElement) {
+onMounted(async () => {
+  if (!itemRef.value) {
+    return
+  }
+
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
@@ -248,7 +236,7 @@ function initThree(canvas: HTMLCanvasElement) {
     75,
 
     // 宽高比
-    canvas.offsetWidth / canvas.offsetHeight,
+    itemRef.value.offsetWidth / itemRef.value.offsetHeight,
 
     // 近裁剪面
     0.1,
@@ -263,7 +251,7 @@ function initThree(canvas: HTMLCanvasElement) {
    *  创建 WebGL 渲染器
    */
   renderer = new THREE.WebGLRenderer({
-    canvas,
+    canvas: itemRef.value,
 
     // 开启抗锯齿
     antialias: true,
@@ -278,15 +266,15 @@ function initThree(canvas: HTMLCanvasElement) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   // 设置渲染器的尺寸
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+  renderer.setSize(itemRef.value.offsetWidth, itemRef.value.offsetHeight)
 
   addLights()
 
   addOrbitControls()
 
-  addModel()
-
-  isLoading.value = false
+  await addModel().finally(() => {
+    isLoading.value = false
+  })
 
   /**
    *  动画循环函数
@@ -306,19 +294,9 @@ function initThree(canvas: HTMLCanvasElement) {
 
   // 开始动画
   animate()
-}
-
-onMounted(async () => {
-  if (itemRef.value) {
-    initThree(itemRef.value)
-  }
 })
 
 onUnmounted(() => {
-  if (itemRef.value) {
-    itemRef.value.removeEventListener('dblclick', handleDoubleClick)
-  }
-
   renderer.dispose()
   controls.dispose()
 })
@@ -330,6 +308,7 @@ onUnmounted(() => {
     ref="itemRef"
     v-canvas-loading="isLoading"
     class="cursor-pointer !h-full !w-full"
+    @dblclick="handleDoubleClick"
   />
 </template>
 

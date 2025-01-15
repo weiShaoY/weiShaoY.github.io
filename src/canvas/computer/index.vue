@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 
+import { loadGLTFModel } from '@/utils'
+
 import gsap from 'gsap'
 
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-
-// 定义组件属性
 const props = defineProps({
   /**
    *  视频地址
@@ -21,7 +18,11 @@ const props = defineProps({
   },
 })
 
-// 定义一个响应式引用，用于存储 canvas 元素的引用
+/**
+ *  是否显示加载loading
+ */
+const isLoading = ref(true)
+
 const computerRef = ref<HTMLCanvasElement | null>(null)
 
 /**
@@ -60,6 +61,11 @@ let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 
 /**
+ *  模型
+ */
+let model: THREE.Group
+
+/**
  * 添加光源
  */
 function addLights() {
@@ -86,73 +92,71 @@ function addOrbitControls() {
 /**
  * 加载 3D 模型并应用视频纹理
  */
-function addModel(videoTexture: THREE.VideoTexture) {
-  const loader = new GLTFLoader()
+async function addModel(videoTexture: THREE.VideoTexture) {
+  await loadGLTFModel('/models/computer/index.glb', (gltf) => {
+    model = gltf.scene
 
-  const dracoLoader = new DRACOLoader()
+    // 设置模型的缩放、位置和旋转
+    model.scale.set(2, 2, 2)
+    model.position.set(-0.5, -3, 0)
+    model.rotation.set(0, -0.1, 0)
 
-  dracoLoader.setDecoderPath('/draco/') // 确保路径正确指向 Draco 解码器文件
+    // 假设你有一个名为 'monitor-screen' 的 mesh
+    const monitorScreen = model.getObjectByName('monitor-screen') as THREE.Mesh
 
-  loader.setDRACOLoader(dracoLoader)
+    if (monitorScreen) {
+      // 创建并应用视频纹理材质
+      const videoMaterial = new THREE.MeshBasicMaterial({
+        map: videoTexture,
+        toneMapped: false,
+      })
 
-  loader.load(
-    '/models/computer/index.glb',
-    (gltf) => {
-      const model = gltf.scene
+      monitorScreen.material = videoMaterial
+      monitorScreen.position.set(0.127, 1.831, 0.511)
+      monitorScreen.rotation.set(1.571, -0.005, 0.031)
+      monitorScreen.scale.set(0.661, 0.608, 0.401)
+    }
 
-      // 设置模型的缩放、位置和旋转
-      model.scale.set(2, 2, 2)
-      model.position.set(-0.5, -3, 0)
-      model.rotation.set(0, -0.1, 0)
+    // 将模型添加到场景
+    scene.add(model)
 
-      // 假设你有一个名为 'monitor-screen' 的 mesh
-      const monitorScreen = model.getObjectByName('monitor-screen') as THREE.Mesh
+    // 为模型添加旋转动画，仅在第一次加载时执行
+    if (isFirstLoad.value) {
+      gsap.from(model.rotation, {
+        y: Math.PI / 2,
+        duration: 1,
+        ease: 'power3.out',
+      })
 
-      if (monitorScreen) {
-        // 创建并应用视频纹理材质
-        const videoMaterial = new THREE.MeshBasicMaterial({
-          map: videoTexture,
-          toneMapped: false,
-        })
-
-        monitorScreen.material = videoMaterial
-        monitorScreen.position.set(0.127, 1.831, 0.511)
-        monitorScreen.rotation.set(1.571, -0.005, 0.031)
-        monitorScreen.scale.set(0.661, 0.608, 0.401)
-      }
-
-      // 将模型添加到场景
-      scene.add(model)
-
-      // 为模型添加旋转动画，仅在第一次加载时执行
-      if (isFirstLoad.value) {
-        gsap.from(model.rotation, {
-          y: Math.PI / 2,
-          duration: 1,
-          ease: 'power3.out',
-        })
-
-        // 标记第一次加载已完成
-        isFirstLoad.value = false
-      }
-    },
-    undefined,
-    (error) => {
-      console.error('模型加载失败:', error)
-    },
-  )
+      // 标记第一次加载已完成
+      isFirstLoad.value = false
+    }
+  })
 }
 
-async function initThree(canvas: HTMLCanvasElement) {
+// 监听视频属性变化
+watch(() => props.video, (newVideoSrc) => {
+  if (video) {
+    video.src = newVideoSrc
+    video.load()
+    video.play()
+  }
+})
+
+onMounted(async () => {
+  if (!computerRef.value) {
+    return
+  }
+
   scene = new THREE.Scene()
-  camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000)
+  camera = new THREE.PerspectiveCamera(75, computerRef.value.offsetWidth / computerRef.value.offsetHeight, 0.1, 1000)
   camera.position.set(0, 1.6, 5)
 
   renderer = new THREE.WebGLRenderer({
-    canvas,
+    canvas: computerRef.value,
     antialias: true,
   })
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
+  renderer.setSize(computerRef.value.offsetWidth, computerRef.value.offsetHeight)
 
   addLights()
 
@@ -165,12 +169,14 @@ async function initThree(canvas: HTMLCanvasElement) {
   video.autoplay = true
   video.playsInline = true
 
-  video.addEventListener('loadeddata', () => {
+  video.addEventListener('loadeddata', async () => {
     if (video) {
       videoTexture = new THREE.VideoTexture(video)
       videoTexture.flipY = false
       video.play()
-      addModel(videoTexture)
+      await addModel(videoTexture).finally(() => {
+        isLoading.value = false
+      })
     }
     else {
       console.error('视频元素不存在')
@@ -188,21 +194,6 @@ async function initThree(canvas: HTMLCanvasElement) {
   video.addEventListener('error', (e) => {
     console.error('视频加载错误', e)
   })
-}
-
-// 监听视频属性变化
-watch(() => props.video, (newVideoSrc) => {
-  if (video) {
-    video.src = newVideoSrc
-    video.load()
-    video.play()
-  }
-})
-
-onMounted(async () => {
-  if (computerRef.value) {
-    initThree(computerRef.value)
-  }
 })
 
 onUnmounted(() => {
@@ -215,10 +206,10 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="computerRef"
+    v-canvas-loading="{
+      isLoading,
+      size: 80,
+    }"
     class="cursor-pointer !block !h-full !w-full"
   />
-
 </template>
-
-<style scoped>
-</style>
