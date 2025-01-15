@@ -2,9 +2,11 @@
 <script setup lang="ts">
 import contactImage from '@/assets/images/home-about-info-contact.png'
 
-import passionImage from '@/assets/images/home-about-info-passion.png'
+// import passionImage from '@/assets/images/home-about-info-passion.png'
 
 import Earth from '@/canvas/earth/index.vue'
+
+import Keyboard from '@/canvas/keyboard/index.vue'
 
 import Tech from '@/canvas/tech/index.vue'
 
@@ -126,11 +128,16 @@ function handleCopy() {
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
         >
-          <img
+          <!-- <img
             :src="passionImage"
             alt="grid-3"
             class="h-fit w-full object-contain sm:h-[266px]"
+          > -->
+          <div
+            class="h-fit w-full cursor-pointer sm:h-[266px]"
           >
+            <Keyboard />
+          </div>
 
           <div>
             <p
@@ -142,7 +149,7 @@ function handleCopy() {
             <p
               class="text-base text-[#afb0b6]"
             >
-              我喜欢通过代码解决问题和构建事物。编程不仅仅是我的职业，更是我的激情所在。我喜欢探索新技术并提高自己的技能。
+              我喜欢通过代码解决问题和构建事物,喜欢探索新技术并提高自己的技能。
             </p>
           </div>
         </div>
