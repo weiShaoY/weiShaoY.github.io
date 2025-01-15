@@ -1,4 +1,8 @@
-import type { createApp, DirectiveBinding } from 'vue'
+import type {
+  createApp,
+  Directive,
+  DirectiveBinding,
+} from 'vue'
 
 import directivesLoadingSvg from '@/assets/svgs/directives-loading.svg' // 使用正确的加载 SVG 路径
 
@@ -74,7 +78,7 @@ type CustomHTMLElementType = {
 /**
  *  CanvasLoading指令
  */
-const useCanvasLoading = {
+const useCanvasLoading: Directive = {
   /**
    * 在元素挂载时调用的钩子，初始化加载状态并创建加载动画。
    * @param {CustomHTMLElementType} el - 绑定指令的元素。

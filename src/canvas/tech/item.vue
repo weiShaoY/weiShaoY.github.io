@@ -328,7 +328,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="itemRef"
-    v-loading="isLoading"
+    v-canvas-loading="isLoading"
     class="cursor-pointer !h-full !w-full"
   />
 </template>

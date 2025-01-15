@@ -11,7 +11,8 @@ import { Notification } from '@arco-design/web-vue'
 type ElType = {
   copyData: string | number
 } & HTMLElement
-const copy: Directive = {
+
+const useCopy: Directive = {
   mounted(el: ElType, binding: DirectiveBinding) {
     el.copyData = binding.value
     el.addEventListener('click', handleClick)
@@ -27,7 +28,7 @@ const copy: Directive = {
 async function handleClick(this: any) {
   try {
     await navigator.clipboard.writeText(this.copyData)
-    Notification.info({
+    Notification.success({
       content: '复制成功',
     })
   }
@@ -36,4 +37,4 @@ async function handleClick(this: any) {
   }
 }
 
-export default copy
+export default useCopy

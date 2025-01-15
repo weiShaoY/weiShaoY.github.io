@@ -1,4 +1,4 @@
-import type { DirectiveBinding } from 'vue'
+import type { Directive, DirectiveBinding } from 'vue'
 
 function animateLines(el: HTMLElement, binding: DirectiveBinding) {
   // 获取文本内容，按换行符分割成多行
@@ -33,7 +33,7 @@ function animateLines(el: HTMLElement, binding: DirectiveBinding) {
 /**
  * 逐行文字加载动画指令
  */
-const useAnimatedText = {
+const useAnimatedText: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     animateLines(el, binding)
   },

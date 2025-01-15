@@ -1,4 +1,4 @@
-import type { DirectiveBinding } from 'vue'
+import type { Directive, DirectiveBinding } from 'vue'
 
 export type useLightParamsType = {
 
@@ -129,7 +129,7 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement, rota
 /**
  * 光源卡片指令，用于在绑定元素上添加光源效果
  */
-const useLight = {
+const useLight: Directive = {
   mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<useLightParamsType>) {
     const lightDom = document.createElement('div')
 
