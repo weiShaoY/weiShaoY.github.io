@@ -174,12 +174,10 @@ onMounted(async () => {
   camera.position.set(0, 1.6, 5)
 
   renderer = new THREE.WebGLRenderer({
+    canvas: developerRef.value,
     antialias: true,
   })
   renderer.setSize(developerRef.value.offsetWidth, developerRef.value.offsetHeight)
-  if (developerRef.value) {
-    developerRef.value.appendChild(renderer.domElement)
-  }
 
   addLights()
 
@@ -217,7 +215,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
+  <canvas
     ref="developerRef"
     v-canvas-loading="{
       isLoading,

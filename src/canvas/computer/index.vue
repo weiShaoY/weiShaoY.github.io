@@ -149,7 +149,12 @@ onMounted(async () => {
   }
 
   scene = new THREE.Scene()
-  camera = new THREE.PerspectiveCamera(75, computerRef.value.offsetWidth / computerRef.value.offsetHeight, 0.1, 1000)
+  camera = new THREE.PerspectiveCamera(
+    75,
+    computerRef.value.offsetWidth / computerRef.value.offsetHeight,
+    0.1,
+    1000,
+  )
   camera.position.set(0, 1.6, 5)
 
   renderer = new THREE.WebGLRenderer({
