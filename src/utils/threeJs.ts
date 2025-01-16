@@ -72,4 +72,7 @@ export function disposeScene(scene: THREE.Scene) {
       }
     })
   }
+
+  // 清空场景的子对象
+  scene.clear()
 }
