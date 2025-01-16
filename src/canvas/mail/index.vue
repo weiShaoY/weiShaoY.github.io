@@ -70,12 +70,16 @@ function addOrbitControls() {
 
   // 禁用缩放
   controls.enableZoom = false
+
+  // 限制旋转范围，只允许围绕 y 轴旋转
+  controls.minPolarAngle = Math.PI / 2 // 最小极角
+  controls.maxPolarAngle = Math.PI / 2 // 最大极角
 }
 
 /**
  * 加载 3D 模型
  */
-async function addModel(scene: THREE.Scene) {
+async function addModel() {
   await loadGLTFModel('/models/mail/index.glb', (gltf) => {
     model = gltf.scene
     model.position.set(0, 0, 0) // 将模型移到场景的中心
@@ -84,6 +88,19 @@ async function addModel(scene: THREE.Scene) {
     model.scale.set(scale, scale, scale)
     scene.add(model)
   })
+}
+
+/**
+ * 动画更新函数
+ */
+function animate() {
+  requestAnimationFrame(animate)
+  if (model) {
+    model.rotation.y -= 0.01
+  }
+
+  controls.update()
+  renderer.render(scene, camera)
 }
 
 onMounted(async () => {
@@ -108,23 +125,15 @@ onMounted(async () => {
   })
   renderer.setSize(mailRef.value.offsetWidth, mailRef.value.offsetHeight)
 
+  // 添加光源
   addLights()
+
+  // 添加轨道
   addOrbitControls()
 
-  await addModel(scene).finally(() => {
+  await addModel().finally(() => {
     isLoading.value = false
   })
-
-  // 渲染循环
-  function animate() {
-    requestAnimationFrame(animate)
-    if (model) {
-      model.rotation.y -= 0.01
-    }
-
-    controls.update()
-    renderer.render(scene, camera)
-  }
 
   animate()
 })

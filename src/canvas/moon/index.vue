@@ -88,6 +88,23 @@ async function addModel(scene: THREE.Scene) {
   })
 }
 
+/**
+ * 动画更新函数
+ */
+function animate() {
+  requestAnimationFrame(animate)
+
+  // 如果模型已经加载完成，绕 Y 轴旋转
+  if (model) {
+    // 调整旋转速度
+    model.rotation.y += 0.002
+  }
+
+  controls.update()
+
+  renderer.render(scene, camera)
+}
+
 onMounted(async () => {
   if (!moonRef.value) {
     return
@@ -128,20 +145,6 @@ onMounted(async () => {
   })
 
   // 渲染循环
-  function animate() {
-    requestAnimationFrame(animate)
-
-    // 如果模型已经加载完成，绕 Y 轴旋转
-    if (model) {
-      // 调整旋转速度
-      model.rotation.y += 0.002
-    }
-
-    controls.update()
-
-    renderer.render(scene, camera)
-  }
-
   animate()
 })
 

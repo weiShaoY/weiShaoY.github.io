@@ -123,6 +123,15 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight)
 }
 
+/**
+ * 渲染循环
+ */
+function animate() {
+  requestAnimationFrame(animate)
+  controls?.update()
+  renderer.render(scene, camera)
+}
+
 onMounted(async () => {
   if (!desktopRef.value) {
     return
@@ -184,15 +193,6 @@ onMounted(async () => {
 
   // 监听窗口大小调整事件
   window.addEventListener('resize', onWindowResize)
-
-  /**
-   * 渲染循环
-   */
-  function animate() {
-    requestAnimationFrame(animate)
-    controls?.update()
-    renderer.render(scene, camera)
-  }
 
   animate()
 })

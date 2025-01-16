@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {
+  disposeScene,
   isMobile,
   loadTexture,
   techStack,
@@ -41,25 +42,80 @@ const isLoading = ref(true)
 // 获取容器引用
 const containerRef = ref<HTMLDivElement | null>(null)
 
-// 定义组件中的场景、相机和渲染器
+/**
+ *  场景
+ */
 let scene: THREE.Scene
 
+/**
+ *  透视相机
+ */
 let camera: THREE.OrthographicCamera
 
+/**
+ *  渲染器
+ */
 let renderer: THREE.WebGLRenderer
 
+/**
+ *  轨道控制器
+ */
 let controls: OrbitControls
 
+/**
+ *  动画帧
+ */
 let animationFrameId: number
 
+/**
+ *  射线
+ */
 let raycaster: THREE.Raycaster
 
+/**
+ *  鼠标
+ */
 let mouse: THREE.Vector2
+
+/**
+ * 添加光源
+ */
+function addLights() {
+  /**
+   *  环境光
+   */
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1)
+
+  scene.add(ambientLight)
+
+  /**
+   *  平行光
+   */
+  const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
+
+  directionalLight.position.set(5, 5, 5)
+
+  scene.add(directionalLight)
+}
+
+/**
+ *  添加轨道
+ */
+function addOrbitControls() {
+  // 创建轨道控制器
+  controls = new OrbitControls(camera, renderer.domElement)
+
+  // 启用阻尼
+  controls.enableDamping = true
+
+  // 禁用缩放
+  controls.enableZoom = false
+}
 
 /**
  * 创建二十面体几何体并添加贴图
  */
-async function createIcosahedrons() {
+async function addIcosahedrons() {
   const geometry = new THREE.IcosahedronGeometry(1, 2)
 
   /**
@@ -219,7 +275,7 @@ function handleDoubleClick(event: MouseEvent) {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (!containerRef.value) {
     return
   }
@@ -233,10 +289,13 @@ onMounted(() => {
   const d = isMobile ? 6 : 5 // 设置视锥体的大小
 
   camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 1000)
+
   camera.zoom = 1.4 // 调整zoom属性，放大视图
+
   camera.updateProjectionMatrix()
 
   camera.position.set(0, 0, 10)
+
   camera.lookAt(new THREE.Vector3(0, 0, 0))
 
   // 创建渲染器
@@ -247,26 +306,20 @@ onMounted(() => {
   renderer.setSize(containerRef.value.offsetWidth, containerRef.value.offsetHeight)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-  // 创建光源
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.8)
+  // 添加光源
+  addLights()
 
-  const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
-
-  directionalLight.position.set(5, 5, 5)
-  scene.add(ambientLight, directionalLight)
-
-  // 创建轨道控制器
-  controls = new OrbitControls(camera, renderer.domElement)
-  controls.enableDamping = true
-
-  controls.enableZoom = false
+  // 添加轨道
+  addOrbitControls()
 
   // 创建Raycaster和鼠标向量
   raycaster = new THREE.Raycaster()
   mouse = new THREE.Vector2()
 
   // 添加二十面体
-  createIcosahedrons()
+  await addIcosahedrons().finally(() => {
+    isLoading.value = false
+  })
 
   // 添加鼠标点击事件监听
   containerRef.value.addEventListener('dblclick', handleDoubleClick)
@@ -287,20 +340,20 @@ onMounted(() => {
     camera.top = d
     camera.bottom = -d
     camera.updateProjectionMatrix()
+
     renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
   }
 
   window.addEventListener('resize', handleResize)
 
-  isLoading.value = false
-
   // 清理函数
   onUnmounted(() => {
     cancelAnimationFrame(animationFrameId)
-    renderer.dispose()
     window.removeEventListener('resize', handleResize)
     containerRef.value?.removeEventListener('click', handleDoubleClick)
-    scene.clear()
+    renderer.dispose()
+    controls.dispose()
+    disposeScene(scene)
   })
 })
 </script>

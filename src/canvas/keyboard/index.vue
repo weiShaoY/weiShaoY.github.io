@@ -79,13 +79,13 @@ function addOrbitControls() {
 
   // 限制 Y 轴上下旋转范围（上下30度）
 
-  controls.minPolarAngle = 40 * angle // 向上最大角度
-  controls.maxPolarAngle = 140 * angle // 向下最大角度
+  controls.minPolarAngle = 60 * angle // 向上最大角度
+  controls.maxPolarAngle = 120 * angle // 向下最大角度
 
   // 限制 X 轴左右旋转范围
 
-  controls.minAzimuthAngle = -20 * angle // 向左最大角度
-  controls.maxAzimuthAngle = 20 * angle // 向右最大角度
+  controls.minAzimuthAngle = -10 * angle // 向左最大角度
+  controls.maxAzimuthAngle = 10 * angle // 向右最大角度
 }
 
 /**
@@ -106,6 +106,16 @@ async function addModel(scene: THREE.Scene) {
 
     scene.add(model)
   })
+}
+
+/**
+ * 动画更新函数
+ */
+function animate() {
+  requestAnimationFrame(animate)
+
+  controls.update()
+  renderer.render(scene, camera)
 }
 
 onMounted(async () => {
@@ -148,20 +158,6 @@ onMounted(async () => {
   })
 
   // 渲染循环
-  function animate() {
-    requestAnimationFrame(animate)
-
-    // 如果模型已经加载完成，绕 Y 轴旋转
-    if (model) {
-      // 调整旋转速度
-      // model.rotation.y += 0.002
-    }
-
-    controls.update()
-
-    renderer.render(scene, camera)
-  }
-
   animate()
 })
 

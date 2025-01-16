@@ -158,6 +158,23 @@ watch(
     }
   },
 )
+
+/**
+ * 动画更新函数
+ */
+function animate() {
+  controls.update()
+  requestAnimationFrame(animate)
+
+  if (mixer) {
+    const delta = clock.getDelta()
+
+    mixer.update(delta)
+  }
+
+  renderer.render(scene, camera)
+}
+
 onMounted(async () => {
   if (!developerRef.value) {
     return
@@ -190,18 +207,6 @@ onMounted(async () => {
   window.addEventListener('resize', onWindowResize)
 
   clock = new THREE.Clock()
-
-  function animate() {
-    controls.update()
-    requestAnimationFrame(animate)
-    if (mixer) {
-      const delta = clock.getDelta()
-
-      mixer.update(delta)
-    }
-
-    renderer.render(scene, camera)
-  }
 
   animate()
 })
