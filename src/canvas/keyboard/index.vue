@@ -72,17 +72,20 @@ function addOrbitControls() {
   // 禁用缩放
   controls.enableZoom = false
 
+  /**
+   *  每一度
+   */
+  const angle = Math.PI / 180
+
   // 限制 Y 轴上下旋转范围（上下30度）
-  const polarAngleRange = Math.PI / 6 // 30度
 
-  controls.minPolarAngle = Math.PI / 2 - polarAngleRange // 向上最大角度
-  controls.maxPolarAngle = Math.PI / 2 + polarAngleRange // 向下最大角度
+  controls.minPolarAngle = 40 * angle // 向上最大角度
+  controls.maxPolarAngle = 140 * angle // 向下最大角度
 
-  // 限制 X 轴左右旋转范围（左右30度）
-  const azimuthAngleRange = Math.PI / 6 // 30度
+  // 限制 X 轴左右旋转范围
 
-  controls.minAzimuthAngle = -azimuthAngleRange // 向左最大角度
-  controls.maxAzimuthAngle = azimuthAngleRange // 向右最大角度
+  controls.minAzimuthAngle = -20 * angle // 向左最大角度
+  controls.maxAzimuthAngle = 20 * angle // 向右最大角度
 }
 
 /**
@@ -94,7 +97,9 @@ async function addModel(scene: THREE.Scene) {
 
     model.position.set(0, 0, 0) // 将模型移到场景的中心
 
-    model.scale.set(26, 26, 26)
+    const scale = 40
+
+    model.scale.set(scale, scale, scale)
 
     //  设置模型 Y 轴旋转角度
     model.rotation.x = Math.PI / 2
