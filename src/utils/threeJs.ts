@@ -51,3 +51,25 @@ export async function loadTexture(url: string, onLoad: (texture: THREE.Texture) 
     }, undefined, error => reject(error))
   })
 }
+
+/**
+ * 销毁场景中的对象
+ * @param scene - THREE.Scene 对象
+ */
+export function disposeScene(scene: THREE.Scene) {
+  if (scene) {
+    scene.traverse((object) => {
+      if (object instanceof THREE.Mesh) {
+        object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((material) => {
+            material.dispose()
+          })
+        }
+        else {
+          object.material.dispose()
+        }
+      }
+    })
+  }
+}

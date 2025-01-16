@@ -17,8 +17,9 @@ const technologies = [
   techStack.tailwindCss,
   techStack.unocss,
   techStack.threeJs,
-  techStack.git,
-  techStack.pinia,
+
+  // techStack.git,
+  // techStack.pinia,
 ]
 
 </script>

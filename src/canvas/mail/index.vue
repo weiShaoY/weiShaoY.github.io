@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { loadGLTFModel } from '@/utils'
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import * as THREE from 'three'
 
@@ -11,7 +11,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
  */
 const isLoading = ref(true)
 
-const sunRef = ref<HTMLCanvasElement | null>(null)
+const mailRef = ref<HTMLCanvasElement | null>(null)
 
 /**
  *  场景
@@ -55,7 +55,6 @@ function addLights() {
   const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 2)
 
   directionalLight.position.set(5, 5, 5)
-
   scene.add(directionalLight)
 }
 
@@ -77,50 +76,39 @@ function addOrbitControls() {
  * 加载 3D 模型
  */
 async function addModel(scene: THREE.Scene) {
-  await loadGLTFModel('/models/sun/index.glb', (gltf) => {
+  await loadGLTFModel('/models/mail/index.glb', (gltf) => {
     model = gltf.scene
-
     model.position.set(0, 0, 0) // 将模型移到场景的中心
+    const scale = 1
 
-    model.scale.set(0.1, 0.1, 0.1)
-
+    model.scale.set(scale, scale, scale)
     scene.add(model)
   })
 }
 
 onMounted(async () => {
-  if (!sunRef.value) {
+  if (!mailRef.value) {
     return
   }
 
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(
-
-    // 视角
     75,
-
-    // 宽高比
-    sunRef.value.offsetWidth / sunRef.value.offsetHeight,
-
-    // 近裁剪面
+    mailRef.value.offsetWidth / mailRef.value.offsetHeight,
     0.1,
-
-    // 远裁剪面
     1000,
   )
   camera.position.set(0, 0, 5)
 
   renderer = new THREE.WebGLRenderer({
-    canvas: sunRef.value,
+    canvas: mailRef.value,
     antialias: true,
     alpha: true,
   })
-
-  renderer.setSize(sunRef.value.offsetWidth, sunRef.value.offsetHeight)
+  renderer.setSize(mailRef.value.offsetWidth, mailRef.value.offsetHeight)
 
   addLights()
-
   addOrbitControls()
 
   await addModel(scene).finally(() => {
@@ -130,55 +118,38 @@ onMounted(async () => {
   // 渲染循环
   function animate() {
     requestAnimationFrame(animate)
-
-    // 如果模型已经加载完成，绕 Y 轴旋转
     if (model) {
-      // 调整旋转速度
-      model.rotation.y += 0.002
+      model.rotation.y -= 0.01
     }
 
     controls.update()
-
     renderer.render(scene, camera)
   }
 
   animate()
 })
 
-/**
- * 销毁场景中的对象
- */
-function disposeScene() {
-  if (scene) {
-    scene.traverse((object) => {
-      if (object instanceof THREE.Mesh) {
-        object.geometry.dispose()
-        if (Array.isArray(object.material)) {
-          object.material.forEach((material) => {
-            material.dispose()
-          })
-        }
-        else {
-          object.material.dispose()
-        }
-      }
-    })
-  }
-}
-
 onUnmounted(() => {
-  renderer.dispose()
-  controls.dispose()
+  if (renderer) {
+    renderer.dispose()
+  }
 
-  disposeScene()
+  if (controls) {
+    controls.dispose()
+  }
+
+  disposeScene(scene)
 })
 
 </script>
 
 <template>
   <canvas
-    ref="sunRef"
-    v-canvas-loading="isLoading"
+    ref="mailRef"
+    v-canvas-loading="{
+      isLoading,
+      size: 80,
+    }"
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>

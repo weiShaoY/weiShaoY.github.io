@@ -1,12 +1,15 @@
 <!------------------------------------    ------------------------------------------------->
 <script setup lang="ts">
-import contactImage from '@/assets/images/home-about-info-contact.png'
+
+// import contactImage from '@/assets/images/home-about-info-contact.png'
 
 // import passionImage from '@/assets/images/home-about-info-passion.png'
 
 import Earth from '@/canvas/earth/index.vue'
 
 import Keyboard from '@/canvas/keyboard/index.vue'
+
+import Mail from '@/canvas/mail/index.vue'
 
 import Tech from '@/canvas/tech/index.vue'
 
@@ -162,11 +165,16 @@ function handleCopy() {
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
         >
-          <img
+          <!-- <img
             :src="contactImage"
             alt="grid-4"
             class="h-fit w-full object-cover md:h-[126px] sm:h-[276px] sm:object-top"
+          > -->
+          <div
+            class="aspect-square h-fit w-full cursor-pointer sm:h-[120px]"
           >
+            <Mail />
+          </div>
 
           <div
             class="space-y-2"

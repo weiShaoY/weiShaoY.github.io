@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { loadGLTFModel } from '@/utils'
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import gsap from 'gsap'
 
@@ -204,6 +204,8 @@ onMounted(async () => {
 onUnmounted(() => {
   renderer.dispose()
   controls.dispose()
+
+  disposeScene(scene)
 })
 
 </script>

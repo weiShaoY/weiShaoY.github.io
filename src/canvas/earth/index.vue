@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { loadGLTFModel } from '@/utils'
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import * as THREE from 'three'
 
@@ -144,9 +144,11 @@ onMounted(async () => {
 
   animate()
 })
+
 onUnmounted(() => {
   renderer.dispose()
   controls.dispose()
+  disposeScene(scene)
 })
 
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { loadGLTFModel } from '@/utils'
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import * as THREE from 'three'
 
@@ -209,6 +209,7 @@ onMounted(async () => {
 onUnmounted(() => {
   renderer.dispose()
   controls.dispose()
+  disposeScene(scene)
   window.removeEventListener('resize', onWindowResize)
 })
 

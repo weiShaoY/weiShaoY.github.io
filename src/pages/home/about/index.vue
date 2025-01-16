@@ -4,6 +4,7 @@
 import Sun from '@/canvas/sun/index.vue'
 
 // import Desktop from '@/canvas/desktop/index.vue'
+
 import Test from '@/canvas/test/index.vue'
 
 import { isMobile } from '@/utils'
