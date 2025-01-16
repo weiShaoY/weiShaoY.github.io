@@ -1,12 +1,17 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import Lynk from '@/canvas/lynk/index.vue'
 </script>
 
 <template>
   <div
-    class=""
+    class="h-screen flex items-center justify-center bg-black"
   >
-    https://github.com/alphardex/su7-replica
+    <div
+      class="h-200 w-200"
+    >
+      <Lynk />
+    </div>
   </div>
 </template>
 

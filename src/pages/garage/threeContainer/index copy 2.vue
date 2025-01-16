@@ -260,8 +260,8 @@ async function addTextures(): Promise<void> {
 
   maps.startRoomAo = await loadTexture('/models/garage/textures/t_startroom_ao.raw.jpg', (texture) => {
     texture.flipY = false
-    texture.channel = 1
-    texture.colorSpace = Three.LinearSRGBColorSpace
+LinearSRGBColorSpace    texture.channel = 1
+    texture.colorSpace = Three.
   })
 
   maps.floorRoughness = await loadTexture('/models/garage/textures/t_floor_roughness.webp', (texture) => {
