@@ -100,14 +100,9 @@ function handleWindowResize() {
   }
 }
 
-// 当前视角状态
-const isInsideCar = ref(false)
-
 // 处理鼠标点击
 function pickupObjects(event: MouseEvent) {
-  if (!lynkRef.value) {
-    return
-  }
+  if (!lynkRef.value) { return }
 
   const rect = lynkRef.value.getBoundingClientRect()
 
@@ -126,8 +121,6 @@ function pickupObjects(event: MouseEvent) {
   if (intersects.length > 0) {
     const intersectedObject = intersects[0].object as THREE.Mesh
 
-    console.log('%c Line:128 🥥 intersectedObject', 'color:#f5ce50', intersectedObject.name)
-
     if (intersectedObject.name.includes('Door') || intersectedObject.name.includes('Trunk')) {
       const doorName = intersectedObject.name.split('_')[0]
 
@@ -143,8 +136,6 @@ function pickupObjects(event: MouseEvent) {
       const INT = models.find(item => item.name === 'INT')
 
       setupTweenCarIn(INT)
-
-      isInsideCar.value = true
     }
   }
 }
