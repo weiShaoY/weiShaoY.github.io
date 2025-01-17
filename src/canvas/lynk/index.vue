@@ -38,6 +38,9 @@ const models: THREE.Group[] = []
 // 射线
 const raycaster = new THREE.Raycaster()
 
+// 当前视角状态
+const isInsideCar = ref(false)
+
 // 缓动动画集合
 const tweenCollection: Record<string, any> = {
   LBDoor: {
@@ -100,14 +103,9 @@ function handleWindowResize() {
   }
 }
 
-// 当前视角状态
-const isInsideCar = ref(false)
-
 // 处理鼠标点击
 function pickupObjects(event: MouseEvent) {
-  if (!lynkRef.value) {
-    return
-  }
+  if (!lynkRef.value) { return }
 
   const rect = lynkRef.value.getBoundingClientRect()
 
@@ -123,10 +121,10 @@ function pickupObjects(event: MouseEvent) {
   raycaster.setFromCamera(mouse, camera)
   const intersects = raycaster.intersectObjects(scene.children)
 
+  console.log('Intersects:', intersects)
+
   if (intersects.length > 0) {
     const intersectedObject = intersects[0].object as THREE.Mesh
-
-    console.log('%c Line:128 🥥 intersectedObject', 'color:#f5ce50', intersectedObject.name)
 
     if (intersectedObject.name.includes('Door') || intersectedObject.name.includes('Trunk')) {
       const doorName = intersectedObject.name.split('_')[0]
@@ -134,18 +132,39 @@ function pickupObjects(event: MouseEvent) {
       const door = models.find(item => item.name === doorName)
 
       if (door && door.outer && door.status) {
+        console.log('Setting tween for door:', doorName)
         setupTweenDoor(door, door.status)
       }
     }
-
-    if (intersectedObject.name.includes('INT')) {
+    else if (intersectedObject.name.includes('INT')) {
       controls.autoRotate = false
-      const INT = models.find(item => item.name === 'INT')
+      if (isInsideCar.value) {
+        console.log('离开 car')
 
-      setupTweenCarIn(INT)
+        // setupTweenCarOut()
+      }
+      else {
+        console.log('Entering car')
+        const INT = models.find(item => item.name === 'INT')
 
-      isInsideCar.value = true
+        setupTweenCarIn(INT)
+        isInsideCar.value = true
+      }
+
+      // isInsideCar.value = !isInsideCar.value
     }
+    else if (isInsideCar.value) {
+      // If clicked outside while inside the car, exit the car
+      console.log('Exiting car by clicking outside')
+      setupTweenCarOut()
+      isInsideCar.value = false
+    }
+  }
+  else if (isInsideCar.value) {
+    // If clicked outside while inside the car, exit the car
+    console.log('Exiting car by clicking outside')
+    setupTweenCarOut()
+    isInsideCar.value = false
   }
 }
 
@@ -190,6 +209,12 @@ function setupTweenCarIn(model: any) {
 
   const { x: tocx, y: tocy, z: tocz } = model.carInCameraPosition
 
+  console.log('Moving camera to:', {
+    tocx,
+    tocy,
+    tocz,
+  })
+
   new TWEEN.Tween({
     cx,
     cy,
@@ -205,6 +230,40 @@ function setupTweenCarIn(model: any) {
       ox: 0,
       oy: tocy,
       oz: 0.1,
+    }, 2000)
+    .easing(TWEEN.Easing.Quadratic.Out)
+    .onUpdate(({ cx, cy, cz, ox, oy, oz }) => {
+      camera.position.set(cx, cy, cz)
+      controls.target.set(ox, oy, oz)
+    })
+    .start()
+}
+
+// 设置退出车内的缓动动画
+function setupTweenCarOut() {
+  const initialCameraPosition = new THREE.Vector3(
+    5 * Math.sin(0.2 * Math.PI),
+    2.5,
+    5 * Math.cos(0.2 * Math.PI),
+  )
+
+  console.log('Moving camera to initial position:', initialCameraPosition)
+
+  new TWEEN.Tween({
+    cx: camera.position.x,
+    cy: camera.position.y,
+    cz: camera.position.z,
+    ox: controls.target.x,
+    oy: controls.target.y,
+    oz: controls.target.z,
+  })
+    .to({
+      cx: initialCameraPosition.x,
+      cy: initialCameraPosition.y,
+      cz: initialCameraPosition.z,
+      ox: -0.5,
+      oy: 0.5,
+      oz: 0,
     }, 2000)
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(({ cx, cy, cz, ox, oy, oz }) => {
@@ -281,8 +340,7 @@ function addOrbitControls() {
   controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   controls.enableZoom = false
-
-  // controls.autoRotate = true
+  controls.autoRotate = true
   controls.target = new THREE.Vector3(-0.5, 0.5, 0)
 }
 
@@ -378,9 +436,7 @@ function animate() {
 }
 
 onMounted(async () => {
-  if (!lynkRef.value) {
-    return
-  }
+  if (!lynkRef.value) { return }
 
   scene = new THREE.Scene()
 
@@ -448,3 +504,10 @@ onUnmounted(() => {
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>
+
+<style scoped>
+.three-container {
+  width: 100%;
+  height: 100%;
+}
+</style>
