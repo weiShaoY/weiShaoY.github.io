@@ -275,6 +275,25 @@ function handleDoubleClick(event: MouseEvent) {
   }
 }
 
+const d = isMobile ? 6 : 5 // 设置视锥体的大小
+
+// 响应窗口大小调整
+function handleResize() {
+  if (!containerRef.value) {
+    return
+  }
+
+  const aspect = containerRef.value.clientWidth / containerRef.value.clientHeight
+
+  camera.left = -d * aspect
+  camera.right = d * aspect
+  camera.top = d
+  camera.bottom = -d
+  camera.updateProjectionMatrix()
+
+  renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
+}
+
 onMounted(async () => {
   if (!containerRef.value) {
     return
@@ -285,8 +304,6 @@ onMounted(async () => {
 
   // 创建相机
   const aspect = containerRef.value.offsetWidth / containerRef.value.offsetHeight
-
-  const d = isMobile ? 6 : 5 // 设置视锥体的大小
 
   camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 1000)
 
@@ -327,34 +344,17 @@ onMounted(async () => {
   // 开始动画
   animate()
 
-  // 响应窗口大小调整
-  const handleResize = () => {
-    if (!containerRef.value) {
-      return
-    }
-
-    const aspect = containerRef.value.clientWidth / containerRef.value.clientHeight
-
-    camera.left = -d * aspect
-    camera.right = d * aspect
-    camera.top = d
-    camera.bottom = -d
-    camera.updateProjectionMatrix()
-
-    renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight)
-  }
-
   window.addEventListener('resize', handleResize)
+})
 
-  // 清理函数
-  onUnmounted(() => {
-    cancelAnimationFrame(animationFrameId)
-    window.removeEventListener('resize', handleResize)
-    containerRef.value?.removeEventListener('click', handleDoubleClick)
-    renderer.dispose()
-    controls.dispose()
-    disposeScene(scene)
-  })
+// 清理函数
+onUnmounted(() => {
+  cancelAnimationFrame(animationFrameId)
+  window.removeEventListener('resize', handleResize)
+  containerRef.value?.removeEventListener('click', handleDoubleClick)
+  renderer.dispose()
+  controls.dispose()
+  disposeScene(scene)
 })
 </script>
 
