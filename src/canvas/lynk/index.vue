@@ -13,35 +13,51 @@ import {
   ref,
 } from 'vue'
 
-import { addMaterialAndAction } from './MaterialAndAction'
+import { addMaterialAndAction } from './materialAndAction'
 
-// 是否显示加载loading
+/**
+ *  是否显示加载loading
+ */
 const isLoading = ref(true)
 
 const lynkRef = ref<HTMLCanvasElement | null>(null)
 
-// 场景
+/**
+ *  场景
+ */
 let scene: THREE.Scene
 
-// 透视相机
+/**
+ *  透视相机
+ */
 let camera: THREE.PerspectiveCamera
 
-// 渲染器
+/**
+ *  渲染器
+ */
 let renderer: THREE.WebGLRenderer
 
-// 轨道控制器
+/**
+ *  轨道控制器
+ */
 let controls: OrbitControls
 
 // 模型
 const models: THREE.Group[] = []
 
-// 射线
+/**
+ *  射线
+ */
 const raycaster = new THREE.Raycaster()
 
-// 当前视角状态
+/**
+ *  当前视角状态
+ */
 const isInsideCar = ref(false)
 
-// 缓动动画集合
+/**
+ *  缓动动画集合
+ */
 const tweenCollection: Record<string, any> = {
   LBDoor: {
     tween: null,
@@ -90,7 +106,9 @@ const tweenCollection: Record<string, any> = {
   },
 }
 
-// 调整窗口大小
+/**
+ *  调整窗口大小
+ */
 function handleWindowResize() {
   if (lynkRef.value && renderer && camera) {
     const width = lynkRef.value.clientWidth
@@ -103,9 +121,13 @@ function handleWindowResize() {
   }
 }
 
-// 处理鼠标点击
+/**
+ *  处理鼠标点击
+ */
 function pickupObjects(event: MouseEvent) {
-  if (!lynkRef.value) { return }
+  if (!lynkRef.value) {
+    return
+  }
 
   const rect = lynkRef.value.getBoundingClientRect()
 
@@ -121,54 +143,45 @@ function pickupObjects(event: MouseEvent) {
   raycaster.setFromCamera(mouse, camera)
   const intersects = raycaster.intersectObjects(scene.children)
 
-  console.log('Intersects:', intersects)
-
   if (intersects.length > 0) {
     const intersectedObject = intersects[0].object as THREE.Mesh
 
     if (intersectedObject.name.includes('Door') || intersectedObject.name.includes('Trunk')) {
       const doorName = intersectedObject.name.split('_')[0]
 
-      const door = models.find(item => item.name === doorName)
+      const door = models.find(item => item.name === doorName) as any
 
       if (door && door.outer && door.status) {
-        console.log('Setting tween for door:', doorName)
         setupTweenDoor(door, door.status)
       }
     }
     else if (intersectedObject.name.includes('INT')) {
       controls.autoRotate = false
       if (isInsideCar.value) {
-        console.log('离开 car')
 
         // setupTweenCarOut()
       }
       else {
-        console.log('Entering car')
         const INT = models.find(item => item.name === 'INT')
 
         setupTweenCarIn(INT)
         isInsideCar.value = true
       }
-
-      // isInsideCar.value = !isInsideCar.value
     }
     else if (isInsideCar.value) {
-      // If clicked outside while inside the car, exit the car
-      console.log('Exiting car by clicking outside')
       setupTweenCarOut()
       isInsideCar.value = false
     }
   }
   else if (isInsideCar.value) {
-    // If clicked outside while inside the car, exit the car
-    console.log('Exiting car by clicking outside')
     setupTweenCarOut()
     isInsideCar.value = false
   }
 }
 
-// 设置门的缓动动画
+/**
+ *  设置门的缓动动画
+ */
 function setupTweenDoor(door: any, status: string) {
   const { from, to } = door.rotateDirection[status]
 
@@ -203,17 +216,13 @@ function setupTweenDoor(door: any, status: string) {
     .start()
 }
 
-// 设置进入车内的缓动动画
+/**
+ *  设置进入车内的缓动动画
+ */
 function setupTweenCarIn(model: any) {
   const { x: cx, y: cy, z: cz } = camera.position
 
-  const { x: tocx, y: tocy, z: tocz } = model.carInCameraPosition
-
-  console.log('Moving camera to:', {
-    tocx,
-    tocy,
-    tocz,
-  })
+  const { x: tocX, y: tocY, z: tocZ } = model.carInCameraPosition
 
   new TWEEN.Tween({
     cx,
@@ -224,11 +233,11 @@ function setupTweenCarIn(model: any) {
     oz: 0,
   })
     .to({
-      cx: tocx,
-      cy: tocy,
-      cz: tocz,
+      cx: tocX,
+      cy: tocY,
+      cz: tocZ,
       ox: 0,
-      oy: tocy,
+      oy: tocY,
       oz: 0.1,
     }, 2000)
     .easing(TWEEN.Easing.Quadratic.Out)
@@ -239,15 +248,15 @@ function setupTweenCarIn(model: any) {
     .start()
 }
 
-// 设置退出车内的缓动动画
+/**
+ *  设置退出车内的缓动动画
+ */
 function setupTweenCarOut() {
   const initialCameraPosition = new THREE.Vector3(
     5 * Math.sin(0.2 * Math.PI),
     2.5,
     5 * Math.cos(0.2 * Math.PI),
   )
-
-  console.log('Moving camera to initial position:', initialCameraPosition)
 
   new TWEEN.Tween({
     cx: camera.position.x,
@@ -273,7 +282,9 @@ function setupTweenCarOut() {
     .start()
 }
 
-// 添加光源
+/**
+ * 添加光源
+ */
 function addLights() {
   const ambientLight = new THREE.AmbientLight(0xFFFFFF, 5)
 
@@ -335,16 +346,23 @@ function addLights() {
   })
 }
 
-// 添加轨道控制器
+/**
+ *  添加轨道
+ */
 function addOrbitControls() {
   controls = new OrbitControls(camera, renderer.domElement)
+
   controls.enableDamping = true
+
   controls.enableZoom = false
-  controls.autoRotate = true
+
+  // controls.autoRotate = true
   controls.target = new THREE.Vector3(-0.5, 0.5, 0)
 }
 
-// 加载 3D 模型
+/**
+ * 加载 3D 模型
+ */
 async function addModel() {
   const GLBs = [
     {
@@ -400,7 +418,9 @@ async function addModel() {
   )
 }
 
-// 定义缓动函数
+/**
+ *  定义缓动函数
+ */
 function easeOutCirc(x: number) {
   return Math.sqrt(1 - (x - 1) ** 4)
 }
@@ -436,7 +456,9 @@ function animate() {
 }
 
 onMounted(async () => {
-  if (!lynkRef.value) { return }
+  if (!lynkRef.value) {
+    return
+  }
 
   scene = new THREE.Scene()
 
@@ -504,10 +526,3 @@ onUnmounted(() => {
     class="cursor-pointer overflow-hidden !h-full !w-full"
   />
 </template>
-
-<style scoped>
-.three-container {
-  width: 100%;
-  height: 100%;
-}
-</style>
