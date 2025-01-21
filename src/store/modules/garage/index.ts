@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 /**
- * 定义名为 'test' 的 store
+ * 定义名为 '车库' 的 store
  */
 export const useGarageStore = defineStore(
   'garage',

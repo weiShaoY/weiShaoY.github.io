@@ -6,6 +6,8 @@ export * from './modules/app'
 
 export * from './modules/blog'
 
+export * from './modules/command'
+
 export * from './modules/garage'
 
 export * from './modules/test'
