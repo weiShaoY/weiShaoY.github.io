@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import { HOME_DEFAULT_LAYOUT } from '@/router/layout'
+import { HOME_DEFAULT_LAYOUT } from '@/layout'
 
 /**
  *  首页路由

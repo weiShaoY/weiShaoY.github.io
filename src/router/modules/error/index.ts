@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import { SIMPLE_Layout } from '@/router/layout'
+import { SIMPLE_Layout } from '@/layout'
 
 /**
  *  错误页面路由

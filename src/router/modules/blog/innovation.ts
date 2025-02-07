@@ -1,6 +1,6 @@
 import type { AppRouteRecordRaw } from '@/router/types'
 
-import { BLOG_DEFAULT_LAYOUT } from '@/router/layout'
+import { BLOG_DEFAULT_LAYOUT } from '@/layout'
 
 const Innovation: AppRouteRecordRaw = {
   path: 'innovation',
