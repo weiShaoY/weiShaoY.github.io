@@ -4,7 +4,7 @@ import {
   ThemeColorPresets,
   ThemeLayout,
   ThemeMode,
-} from '@/layout/test-layout/types/enum'
+} from '@/layouts/test/types/enum'
 
 import { defineStore } from 'pinia'
 

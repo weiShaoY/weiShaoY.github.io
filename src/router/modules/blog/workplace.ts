@@ -1,6 +1,6 @@
 import type { AppRouteRecordRaw } from '@/router/types'
 
-import { BLOG_DEFAULT_LAYOUT } from '@/layout'
+import { BLOG_DEFAULT_LAYOUT } from '@/layouts'
 
 const document: AppRouteRecordRaw = {
   path: 'workplace',
