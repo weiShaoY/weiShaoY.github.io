@@ -17,3 +17,8 @@ export const BLOG_DEFAULT_LAYOUT = () => import('./blog/index.vue')
  *  blog 代码模块 iframe 渲染组件
  */
 export const BLOG_IFRAME_LAYOUT = () => import('./blog/iframe/index.vue')
+
+/**
+ *  blog 代码模块 external 渲染组件
+ */
+export const BLOG_EXTERNAL_LAYOUT = () => import('./blog/external/index.vue')

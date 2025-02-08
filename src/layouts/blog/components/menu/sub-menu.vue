@@ -70,6 +70,7 @@ function handleGoto(item: RouteRecordRaw) {
           v-if=" item?.meta?.icon"
           :icon="`${item.meta.icon}`"
           class="!inline-block"
+          :size="26"
         />
       </template>
 
@@ -100,6 +101,7 @@ function handleGoto(item: RouteRecordRaw) {
             v-if=" item?.meta?.icon"
             :icon="`${item.meta.icon}`"
             class="!inline-block"
+            :size="26"
           />
         </template>
 
