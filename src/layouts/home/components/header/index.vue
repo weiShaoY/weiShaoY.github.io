@@ -17,7 +17,7 @@ const menuList = [
     label: 'Contact',
   },
   {
-    key: '/blog',
+    key: '/blog/Workbench/index',
     label: 'Blog',
   },
   {

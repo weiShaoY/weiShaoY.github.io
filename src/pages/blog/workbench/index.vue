@@ -1,12 +1,14 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import ChinaMap from './china-map.vue'
 </script>
 
 <template>
   <div
     class="h-full w-full"
   >
-    12111111111111111111111111111111111111111111111111111111111111111
+
+    <ChinaMap />
   </div>
 </template>
 

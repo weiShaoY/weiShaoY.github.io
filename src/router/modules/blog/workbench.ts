@@ -3,23 +3,23 @@ import type { AppRouteRecordRaw } from '@/router/types'
 import { BLOG_DEFAULT_LAYOUT } from '@/layouts'
 
 const document: AppRouteRecordRaw = {
-  path: 'workplace',
-  name: 'Workplace',
+  path: 'workbench',
+  name: 'Workbench',
   meta: {
     locale: '工作台',
-    icon: 'blog-menu-workplace',
+    icon: 'blog-menu-workbench',
     hideChildrenInMenu: true,
     order: 0,
   },
-  redirect: '/blog/workplace/index',
+  redirect: '/blog/workbench/index',
   component: BLOG_DEFAULT_LAYOUT,
   children: [
     {
       path: 'index',
       name: 'Index',
-      component: () => import('@/pages/blog/workplace/index.vue'),
+      component: () => import('@/pages/blog/workbench/index.vue'),
       meta: {
-        activeMenu: 'Workplace',
+        activeMenu: 'Workbench',
       },
     },
   ],

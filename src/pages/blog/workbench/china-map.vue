@@ -1,63 +1,19 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
 
-import chinaMap from '@/assets/jsons/china.json'
+import chinaMap from '@/assets/jsons/china-map.json'
 
-import { useAppStore } from '@/store'
+import { isMobile } from '@/utils'
 
 import { registerMap } from 'echarts/core'
-
-const appStore = useAppStore()
-
-/**
- *  定义数据和地理坐标
- */
-const data = [
-  {
-    name: '长沙',
-    value: 100,
-  },
-]
-
-/**
- *  定义城市名称与经纬度对应的映射
- */
-const geoCoordMap: Record<string, [number, number]> = {
-  长沙: [113, 28.21],
-}
-
-/**
- * 转换数据格式，结合地理坐标和数值
- * @param data - 包含城市名称和数值的数据数组
- * @returns 转换后的数据数组，包含城市名称、坐标和数值
- */
-function convertData(data: { name: string, value: number }[]): { name: string, value: [number, number, number] }[] {
-  const res = []
-
-  for (let i = 0; i < data.length; i++) {
-    const geoCoord = geoCoordMap[data[i].name]
-
-    if (geoCoord) {
-      res.push({
-        name: data[i].name,
-        value: geoCoord.concat(data[i].value),
-      })
-    }
-  }
-
-  return res as { name: string, value: [number, number, number] }[]
-}
 
 /**
  *  定义 ECharts 配置项并添加类型注释
  */
 
 const option = computed<EChartsOption>(() => ({
-
   textStyle: {
-
     fontFamily: 'gaiLiangShouJinTi',
-
   },
 
   /**
@@ -70,31 +26,15 @@ const option = computed<EChartsOption>(() => ({
    */
   title: {
 
-    show: false,
-
-    // /**
-    //  *  标题文本
-    //  */
-    // text: '风里雨里,长沙等你',
-
-    // /**
-    //  *  标题距离顶部的距离
-    //  */
-    // // top: isMobile.value ? '12%' : '0%',
-
-    // /**
-    //  *  标题水平居中
-    //  */
-    // left: 'center',
-
-    // textStyle: {
-
-    //   color: isDark.value ? '#d1d3d7' : '#000',
-
-    //   fontSize: isMobile.value ? 24 : 30,
-
-    //   fontWeight: 700,
-    // },
+    text: '风里雨里,长沙等你', // 标题文本
+    top: isMobile ? '12%' : '14%', // 标题距离顶部的距离
+    left: 'center', // 标题水平居中
+    textStyle: {
+      // color: "#000", // 标题颜色
+      color: '#333639',
+      fontSize: isMobile ? 30 : 35, // 标题字体大小
+      fontWeight: 700, // 标题字体粗细
+    },
   },
 
   /**
@@ -109,7 +49,7 @@ const option = computed<EChartsOption>(() => ({
     /**
      *  地图缩放级别
      */
-    zoom: appStore.isMobile ? 0.8 : 1,
+    zoom: isMobile ? 0.8 : 0.8,
 
     /**
      *  地图距顶部的距离
@@ -134,14 +74,12 @@ const option = computed<EChartsOption>(() => ({
        *  描边颜色
        */
       borderColor: '#111',
-
     },
 
     /**
      *   鼠标悬停时的区域颜色
      */
     emphasis: {
-
       label: {
         show: false,
       },
@@ -167,7 +105,6 @@ const option = computed<EChartsOption>(() => ({
         shadowBlur: 2,
       },
     },
-
   },
 
   /**
@@ -191,7 +128,9 @@ const option = computed<EChartsOption>(() => ({
     },
   },
 
-  // 数据系列
+  /**
+   *  数据系列
+   */
   series: [
     {
       /**
@@ -212,7 +151,12 @@ const option = computed<EChartsOption>(() => ({
       /**
        *  排序后取前5名的数据s
        */
-      data: convertData([...data].sort((a, b) => b.value - a.value).slice(0, 6)),
+      data: [
+        {
+          name: '长沙', // 数据点名称
+          value: [113, 28.21, 100], // 数据坐标（[经度, 纬度, 数值]）
+        },
+      ],
 
       /**
        *  动态设置散点大小
@@ -228,7 +172,6 @@ const option = computed<EChartsOption>(() => ({
        *  涟漪特效相关配置
        */
       rippleEffect: {
-
         /**
          *  波纹的数量
          */
@@ -260,8 +203,7 @@ const option = computed<EChartsOption>(() => ({
       tooltip: {
         // 风里雨里,长沙等你
         formatter() {
-          // return `惟楚有材，于斯为盛`
-          return `风里雨里,长沙等你`
+          return `惟楚有材，于斯为盛`
         },
         textStyle: {
           color: '#E43961',
@@ -269,8 +211,8 @@ const option = computed<EChartsOption>(() => ({
           fontWeight: 700,
         },
 
+        // 提示框背景色
         backgroundColor: 'rgba(255,255,255,0.9)',
-
       },
 
       label: {
@@ -278,7 +220,6 @@ const option = computed<EChartsOption>(() => ({
          *  标注的名称   长沙
          */
         formatter: (params) => {
-          // return `${params.name}`
           return `${params.name}`
         },
 
@@ -300,7 +241,6 @@ const option = computed<EChartsOption>(() => ({
       },
 
       itemStyle: {
-
         /**
          *  散点颜色
          */
@@ -315,10 +255,11 @@ const option = computed<EChartsOption>(() => ({
          *  阴影颜色
          */
         shadowColor: '#333',
-
       },
 
-      // 图层级别
+      /**
+       *  图层级别
+       */
       zlevel: 1,
     },
   ],
@@ -333,5 +274,4 @@ registerMap('china', chinaMap as any)
   />
 </template>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

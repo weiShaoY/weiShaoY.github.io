@@ -8,37 +8,53 @@ import VCharts from 'vue-echarts'
 
 import 'echarts'
 
-withDefaults(defineProps<{
+const props = defineProps({
 
   /**
-   *  配置
+   *  颜色
    */
-  option: EChartsOption
+  option: {
+    type: Object as () => EChartsOption,
+    required: true,
+  },
 
   /**
-   *  自适应
+   *  大小
    */
-  autoResize?: boolean
+  autoResize: {
+    type: Boolean,
+    default: true,
+  },
 
   /**
    *  宽
    */
-  width?: string
+  width: {
+    type: String,
+    default: '100%',
+  },
 
   /**
    *  高
    */
-  height?: string
-}>(), {
-  autoResize: true,
-  width: '100%',
-  height: '100%',
+  height: {
+    type: String,
+    default: '100%',
+  },
 })
-const renderChart = ref(true)
 
-nextTick(() => {
-  renderChart.value = false
+const isLoading = ref(true)
+
+onMounted(() => {
+  nextTick(() => {
+    isLoading.value = false
+  })
 })
+
+// nextTick(() => {
+//   isLoading.value = false
+// })
+
 </script>
 
 <template>
@@ -46,7 +62,7 @@ nextTick(() => {
     :option="option"
     :autoresize="autoResize"
     :style="{ width, height }"
-    :loading="renderChart"
+    :loading="isLoading"
   />
 </template>
 

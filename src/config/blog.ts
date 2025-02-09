@@ -17,12 +17,12 @@ const codeConfig = {
     /**
      *  路由名称
      */
-    name: 'Workplace',
+    name: 'Workbench',
 
     /**
      *  路由路径
      */
-    fullPath: '/code/workplace/index',
+    fullPath: '/blog/workbench/index',
 
   },
 
