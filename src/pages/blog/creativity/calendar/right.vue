@@ -13,7 +13,7 @@ const state = defineModel<StateType>({
     class="h-full flex-1 rounded-5 bg-[#F5F5F5] p-5 text-center"
   >
     <div
-      class="m-x-auto h20 w20 flex items-center justify-center rounded-3 bg-primary text-12 color-white"
+      class="m-x-auto h-20 w-20 flex items-center justify-center rounded-3 bg-primary text-12 color-white"
     >
       {{ state.selectedDay.day }}
     </div>
@@ -177,7 +177,7 @@ const state = defineModel<StateType>({
       class="flex items-center"
     >
       <div
-        class="m-r-3 w10 rounded-1 bg-green text-white"
+        class="m-r-3 w-10 rounded-1 bg-green text-white"
       >
         宜
       </div>
@@ -202,7 +202,7 @@ const state = defineModel<StateType>({
       class="flex items-center"
     >
       <div
-        class="m-r-3 w10 rounded-1 bg-red text-white"
+        class="m-r-3 w-10 rounded-1 bg-red text-white"
       >
         忌
       </div>
@@ -224,13 +224,13 @@ const state = defineModel<StateType>({
     />
 
     <div
-      class="grid grid-cols-2 w-full gap3"
+      class="grid grid-cols-2 w-full gap-3"
     >
       <div
         class="m-r-10 flex"
       >
         <div
-          class="bg-grey m-r-3 w10 rounded-1 text-white"
+          class="bg-grey m-r-3 w-10 rounded-1 bg-gray text-white"
         >
           月相
         </div>
@@ -244,7 +244,7 @@ const state = defineModel<StateType>({
         class="flex"
       >
         <div
-          class="bg-grey m-r-3 w10 rounded-1 text-white"
+          class="bg-grey m-r-3 w-10 rounded-1 bg-gray text-white"
         >
           物候
         </div>
@@ -258,7 +258,7 @@ const state = defineModel<StateType>({
         class="m-r-10 flex"
       >
         <div
-          class="bg-grey m-r-3 w10 rounded-1 text-white"
+          class="bg-grey m-r-3 w-10 rounded-1 bg-gray text-white"
         >
           福神
         </div>
@@ -272,7 +272,7 @@ const state = defineModel<StateType>({
         class="m-r-10 flex"
       >
         <div
-          class="bg-grey m-r-3 w10 rounded-1 text-white"
+          class="bg-grey m-r-3 w-10 rounded-1 bg-gray text-white"
         >
           财神
         </div>

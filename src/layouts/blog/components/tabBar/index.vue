@@ -85,7 +85,7 @@ onUnmounted(() => {
           <div
             class="tags-wrap"
           >
-            <tab-item
+            <tabItem
               v-for="(tag, index) in tagList"
               :key="tag.fullPath"
               :index="index"

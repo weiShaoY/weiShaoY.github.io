@@ -62,8 +62,6 @@ provide('toggleDrawerMenu', () => {
  */
 onMounted(() => {
   isInit.value = true
-
-  console.log('%c Line:67 🍺 blogStore.state.menu.expandedWidth', 'color:#e41a6a', blogStore.state.menu.expandedWidth)
 })
 </script>
 

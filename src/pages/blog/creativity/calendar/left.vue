@@ -142,7 +142,7 @@ onMounted(() => {
           #icon
         >
           <SvgIcon
-            icon="blog-tabBar-close"
+            icon="blog-creativity-position"
           />
         </template>
       </a-button>

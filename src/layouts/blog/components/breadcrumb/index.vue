@@ -72,7 +72,7 @@ const matchedList = computed(() => {
             >
               <SvgIcon
                 icon="blog-breadcrumb-app"
-                :size="16"
+                :size="20"
               />
             </a-link>
           </a-breadcrumb-item>
