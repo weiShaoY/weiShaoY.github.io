@@ -150,6 +150,7 @@ BlogGuard.listenerRouteChange((newRoute) => {
     :auto-open-selected="true"
     :level-indent="34"
     @collapse="setCollapse"
+    
   >
     <SubMenu
       v-model:selected-key="selectedKey"

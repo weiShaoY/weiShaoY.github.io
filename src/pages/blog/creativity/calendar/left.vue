@@ -249,51 +249,5 @@ onMounted(() => {
 </template>
 
 <style lang="less" scoped>
-//  选中的
-.today {
-  background-color: #7777ff !important;
 
-  .date {
-    color: white;
-  }
-
-  .desc {
-    color: white;
-  }
-}
-
-//  选中
-.selected {
-  border: 3px solid #7777ff;
-}
-
-// 为节假日
-.festival {
-  .desc {
-    color: #7777ff;
-  }
-}
-
-// 为休息日
-.rest {
-  background-color: #fef5f5;
-
-  .date {
-    color: red;
-  }
-}
-
-// 周末
-.weekend {
-  background-color: #fef5f5;
-
-  .date {
-    color: red;
-  }
-}
-
-// 其他
-.other {
-  opacity: 0.3;
-}
 </style>

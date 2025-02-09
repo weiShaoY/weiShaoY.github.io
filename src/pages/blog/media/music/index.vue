@@ -4,15 +4,9 @@
 
 <template>
   <div
-    class="h-full w-full"
+    class=""
   >
-    <div
-      v-for="item in 112"
-      :key="item"
-      class=""
-    >
-      1111111111
-    </div>
+    12
   </div>
 </template>
 

@@ -93,9 +93,9 @@ export const useBlogStore = defineStore(
         /**
          * 菜单栏展开时的宽度（单位：像素）
          * @type {number}
-         * @default 220
+         * @default 260
          */
-        expandedWidth: 220,
+        expandedWidth: 260,
       },
 
       /**
