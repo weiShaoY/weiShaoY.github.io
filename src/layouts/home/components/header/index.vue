@@ -17,7 +17,7 @@ const menuList = [
     label: 'Contact',
   },
   {
-    key: '/blog/Workbench/index',
+    key: '/blog',
     label: 'Blog',
   },
   {
@@ -31,7 +31,7 @@ const menuList = [
   {
     key: '/test',
     label: 'Test',
-  }
+  },
 ]
 </script>
 

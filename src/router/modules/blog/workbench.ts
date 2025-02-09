@@ -11,12 +11,14 @@ const document: AppRouteRecordRaw = {
     hideChildrenInMenu: true,
     order: 0,
   },
-  redirect: '/blog/workbench/index',
+  redirect: {
+    name: 'WorkbenchIndex',
+  },
   component: BLOG_DEFAULT_LAYOUT,
   children: [
     {
       path: 'index',
-      name: 'Index',
+      name: 'WorkbenchIndex',
       component: () => import('@/pages/blog/workbench/index.vue'),
       meta: {
         activeMenu: 'Workbench',

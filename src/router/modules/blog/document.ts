@@ -95,7 +95,16 @@ const document: AppRouteRecordRaw = {
       },
       component: BLOG_IFRAME_LAYOUT,
     },
-
+    {
+      path: 'vueRouter',
+      name: 'VueRouter',
+      meta: {
+        locale: 'VueRouter',
+        icon: 'blog-menu-vue',
+        iframeUrl: 'https://router.vuejs.org/zh/',
+      },
+      component: BLOG_IFRAME_LAYOUT,
+    },
     {
       path: 'unocss',
       name: 'Unocss',

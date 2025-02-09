@@ -46,9 +46,13 @@ function showGlobalSetting() {
       }"
       @click=" router.push('/')"
     >
-      <SvgIcon
+      <!-- <SvgIcon
         icon="weiShaoY"
-        class="w-30 !h-15"
+        class="w-30 color-amber !h-15"
+      /> -->
+
+      <Logo
+        text-color="black"
       />
     </div>
 

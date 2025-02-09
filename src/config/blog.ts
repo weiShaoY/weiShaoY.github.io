@@ -3,7 +3,7 @@ const codeConfig = {
   /**
    *  默认路由名称
    */
-  defaultRouteName: 'Workplace',
+  defaultRouteName: 'Workbench',
 
   /**
    *  默认路由配置
