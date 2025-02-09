@@ -2,13 +2,11 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
 
-import { nextTick, ref } from 'vue'
-
 import VCharts from 'vue-echarts'
 
 import 'echarts'
 
-const props = defineProps({
+defineProps({
 
   /**
    *  颜色
@@ -43,18 +41,6 @@ const props = defineProps({
   },
 })
 
-const isLoading = ref(true)
-
-onMounted(() => {
-  nextTick(() => {
-    isLoading.value = false
-  })
-})
-
-// nextTick(() => {
-//   isLoading.value = false
-// })
-
 </script>
 
 <template>
@@ -62,7 +48,6 @@ onMounted(() => {
     :option="option"
     :autoresize="autoResize"
     :style="{ width, height }"
-    :loading="isLoading"
   />
 </template>
 

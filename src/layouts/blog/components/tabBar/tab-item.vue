@@ -257,7 +257,7 @@ async function actionSelect(value: any) {
         @click.stop="tagClose(itemData, index)"
       >
         <SvgIcon
-          icon="guanBi"
+          icon="blog-tabBar-close"
           :size="16"
         />
       </span>

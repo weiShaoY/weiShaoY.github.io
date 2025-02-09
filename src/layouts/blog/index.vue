@@ -20,7 +20,7 @@ import Menu from './components/menu/index.vue'
 
 import NavBar from './components/navbar/index.vue'
 
-import TabBar from './components/tab-bar/index.vue'
+import TabBar from './components/tabBar/index.vue'
 
 /**
  * 用于标识是否初始化

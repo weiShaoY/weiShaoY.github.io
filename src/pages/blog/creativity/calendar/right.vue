@@ -1,6 +1,6 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import type { StateType } from './calendarUtils'
+import type { StateType } from './utils'
 
 const state = defineModel<StateType>({
   required: true,

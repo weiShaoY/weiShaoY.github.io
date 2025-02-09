@@ -1,10 +1,10 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import type { DayType, StateType } from './calendarUtils'
+import type { DayType, StateType } from './utils'
 
-import CalendarUtils from './calendarUtils'
+import CalendarUtils from './utils'
 
-const elementRef = ref(null)
+const elementRef = ref<HTMLElement | null>(null)
 
 const state = defineModel<StateType>({
   required: true,
@@ -38,18 +38,6 @@ watchEffect(() => {
   CalendarUtils.render(state.value)
 })
 
-/**
- *  监听鼠标滚动
- */
-useEventListener(elementRef, 'wheel', (event) => {
-  if (event.deltaY < 0) {
-    CalendarUtils.toPrevMonth(state.value)
-  }
-  else {
-    CalendarUtils.toNextMonth(state.value)
-  }
-})
-
 watch(() => state.value.holidayMonth, (newVal) => {
   const month = Number.parseInt(`${newVal}`, 10)
 
@@ -80,6 +68,23 @@ function handlePreviousMonth(): void {
 function handleNextMonth(): void {
   CalendarUtils.toNextMonth(state.value)
 }
+
+/**
+ *  监听鼠标滚动
+ */
+onMounted(() => {
+  if (elementRef.value) {
+    useEventListener(elementRef.value, 'wheel', (event: WheelEvent) => {
+      if (event.deltaY < 0) {
+        CalendarUtils.toPrevMonth(state.value)
+      }
+      else {
+        CalendarUtils.toNextMonth(state.value)
+      }
+    })
+  }
+})
+
 </script>
 
 <template>
@@ -137,7 +142,7 @@ function handleNextMonth(): void {
           #icon
         >
           <SvgIcon
-            icon="dingWei"
+            icon="blog-tabBar-close"
           />
         </template>
       </a-button>
