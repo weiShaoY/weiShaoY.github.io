@@ -43,6 +43,7 @@ declare global {
   const definePage: typeof import('unplugin-vue-router/runtime')['definePage']
   const defineStore: typeof import('pinia')['defineStore']
   const disposeScene: typeof import('./src/utils/threeJs')['disposeScene']
+  const downloadImage: typeof import('./src/utils/downloadImage')['downloadImage']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const eslintConfig: typeof import('./eslint.config.js')['default']
@@ -405,6 +406,7 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly disposeScene: UnwrapRef<typeof import('./src/utils/threeJs')['disposeScene']>
+    readonly downloadImage: UnwrapRef<typeof import('./src/utils/downloadImage')['downloadImage']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>

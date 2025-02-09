@@ -20,7 +20,7 @@ const Test: AppRouteRecordRaw = {
       path: 'api',
       name: 'Api',
       meta: {
-        locale: '壁纸',
+        locale: '接口',
         icon: 'blog-menu-api',
       },
       component: import('@/pages/blog/test/api/index.vue'),
@@ -29,7 +29,7 @@ const Test: AppRouteRecordRaw = {
       path: 'component',
       name: 'Component',
       meta: {
-        locale: '视频',
+        locale: '组件',
         icon: 'blog-menu-component',
       },
       component: import('@/pages/blog/test/component/index.vue'),

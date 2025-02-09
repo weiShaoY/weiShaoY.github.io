@@ -1,8 +1,5 @@
-import { fetchHttp } from './fetch'
-
-import HomeApi from './modules/home'
+import BlogApi from './modules/blog'
 
 export {
-  fetchHttp,
-  HomeApi,
+  BlogApi,
 }

@@ -1,5 +1,7 @@
 export * from './copyText'
 
+export * from './downloadImage'
+
 export * from './event'
 
 export * from './externalLinkRegex'

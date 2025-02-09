@@ -169,18 +169,18 @@ onMounted(() => {
 
         <!-- 页面区域 -->
         <a-layout-content
-          class="blog-theme-item m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 p-5"
+          class="blog-theme-item m-x-3 box-border flex flex-1 overflow-y-auto rounded-2 bg-white p-5"
         >
           <BlogPageLayout />
         </a-layout-content>
 
         <!-- 底部 -->
-        <Footer
+        <!-- <Footer
           v-if="
             blogStore.state.footer.visible
               && !router.currentRoute.value.meta.noShowFooter
           "
-        />
+        /> -->
       </a-layout>
     </a-layout>
   </a-layout>
