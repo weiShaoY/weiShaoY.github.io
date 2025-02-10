@@ -85,6 +85,7 @@ const computedStyle = computed<CSSProperties>(() => ({
       :preview="preview"
       :style="computedStyle"
       class="border-radius"
+      fit="contain"
       :show-loader="loading"
     />
   </a-spin>

@@ -11,7 +11,7 @@ const isLoading = ref(false)
 /**
  *  分类
  */
-const category = ref('mn')
+const category = ref('sg')
 
 /**
  *  分类选项
@@ -136,6 +136,7 @@ watchEffect(() => {
         class="w-40"
         placeholder="请选择"
         allow-clear
+        allow-search
         @change="getData"
       />
 
