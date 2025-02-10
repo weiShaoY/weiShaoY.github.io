@@ -71,8 +71,6 @@ async function getData() {
   }
 }
 
-getData()
-
 watchEffect(() => {
   console.log('%c Line:120 🥃 keyword.value', 'color:#3f7cff', data.value)
 })
@@ -81,9 +79,11 @@ const isAutoPlayNext = ref(false)
 
 const isAutoPlay = ref(false)
 
-const videoRef = ref<HTMLDivElement | null>(null)
+const videoRef = ref<HTMLElement | null>(null)
 
-onMounted(() => {
+onMounted(async () => {
+  await getData()
+
   if (!videoRef.value) {
     return
   }
@@ -180,20 +180,20 @@ onMounted(() => {
   /**
    *  视频截图结束
    */
-  // player.on(Player.Events.SCREEN_SHOT, (url) => {
-  //   copyImageToClipboard(url)
-  // })
+  player.on(Player.Events.SCREEN_SHOT, (url) => {
+    // copyImageToClipboard(url)
+  })
 
-  // /**
-  //  *  点击按钮播放下一个视频源的时候触发
-  //  */
-  // player.on(Player.Events.PLAYNEXT, async () => {
-  //   if (!isAutoPlay.value) {
-  //     setIsAutoPlay(true)
-  //   }
+  /**
+   *  点击按钮播放下一个视频源的时候触发
+   */
+  player.on(Player.Events.PLAYNEXT, async () => {
+    if (!isAutoPlay.value) {
+      isAutoPlay.value = true
+    }
 
-  //   getData()
-  // })
+    await getData()
+  })
 })
 
 </script>
