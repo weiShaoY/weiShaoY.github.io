@@ -47,15 +47,21 @@ type MyComponentProps = {
    *   头像大小
    */
   size?: number
+
+  /**
+   * 额外的 CSS 类名
+   */
+  class?: string
 }
 
 const props = withDefaults(defineProps<MyComponentProps>(), {
   loading: false,
   preview: true,
-  height: '100%',
   width: '100%',
+  height: '100%',
   avatar: false,
   size: 30,
+  class: '',
   style: () => ({
   }),
 })
@@ -66,6 +72,8 @@ const computedStyle = computed<CSSProperties>(() => ({
   height: props.height,
   width: props.width,
 }))
+
+const computedClass = computed(() => `${props.class}`)
 </script>
 
 <template>
@@ -77,16 +85,21 @@ const computedStyle = computed<CSSProperties>(() => ({
       v-if="avatar"
       :image-url="src"
       :size="size"
+      :class="computedClass"
+      :style="computedStyle"
     />
 
     <a-image
       v-else
       :src="src"
-      :preview="preview"
-      :style="computedStyle"
-      class="border-radius"
+      class="border-radius h-full w-full"
       fit="contain"
-      :show-loader="loading"
+      show-loader
+      :height="height"
+      :width="width"
+      :preview="preview"
+      :class="computedClass"
+      :style="computedStyle"
     />
   </a-spin>
 </template>

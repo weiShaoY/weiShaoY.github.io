@@ -1,3 +1,5 @@
+export * from './copyImageToClipboard'
+
 export * from './copyText'
 
 export * from './downloadImage'

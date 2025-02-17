@@ -1,6 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
 import { BlogApi } from '@/api'
 
 import { copyImageToClipboard, downloadImage } from '@/utils'
@@ -43,17 +41,16 @@ const categoryApiMap: Record<number, () => Promise<string>> = {
 }
 
 /**
- *  关键字
+ *  视频数据
  */
 const videoUrl = ref('')
 
 /**
- * 获取壁纸数据
+ * 获取视频数据
  */
 async function getData() {
   try {
     isLoading.value = true
-
     const fetchData = categoryApiMap[category.value]
 
     const response = await fetchData()
@@ -94,104 +91,44 @@ onMounted(async () => {
 
   player.value = new Player({
     el: videoRef.value,
-
     url: videoUrl.value,
-
     height: '100%',
-
     width: '100%',
-
-    /**
-     *  播放器初始显示语言
-     */
     lang: 'zh',
-
-    /**
-     *  自动播放
-     */
     autoplay: isAutoPlay.value,
-
-    /**
-     *  自动静音自动播放
-     */
     autoplayMuted: true,
-
-    /**
-     *  开启画面和控制栏分离模式
-     */
     marginControls: true,
-
-    /**
-     *  截图配置
-     */
     screenShot: {
-      saveImg: false, // 禁止截图后下载图片
+      saveImg: false,
       quality: 0.92,
     },
-
-    /**
-     *  video扩展属性
-     */
     videoAttributes: {
       crossOrigin: 'anonymous',
     },
-
-    /**
-     *  播放器区域是否允许右键功能菜单
-     */
     enableContextmenu: true,
-
-    /**
-     *  下载
-     */
     download: true,
-
-    /**
-     *  动态背景高斯模糊渲染插件
-     */
     dynamicBg: {
       disable: false,
     },
-
-    /**
-     *  控制栏播放下一个视频按钮插件
-     */
     playnext: {
       urlList: [videoUrl.value],
     },
-
-    /**
-     *  播放器旋转控件
-     */
     rotate: {
       disable: false,
     },
   })
 
-  /**
-   *  视频播放结束
-   */
   player.value.on(Player.Events.ENDED, async () => {
     if (isAutoPlayNext.value) {
-      if (!isAutoPlay.value) {
-        isAutoPlay.value = true
-      }
-
       await getData()
     }
   })
 
-  /**
-   *  点击按钮播放下一个视频源的时候触发
-   */
   player.value.on(Player.Events.PLAYNEXT, async () => {
     await getData()
   })
 
-  /**
-   *  视频截图结束
-   */
-  player.value.on(Player.Events.SCREEN_SHOT, async (url) => {
+  player.value.on(Player.Events.SCREEN_SHOT, (url) => {
     copyImageToClipboard(url)
   })
 
@@ -208,6 +145,7 @@ onMounted(async () => {
     }
   })
 })
+
 onBeforeUnmount(() => {
   if (player.value) {
     player.value.destroy()
@@ -220,7 +158,6 @@ onBeforeUnmount(() => {
   <div
     class="h-full w-full flex flex-col gap-5 overflow-hidden"
   >
-
     <div
       class="flex items-center gap-5"
     >
@@ -282,10 +219,34 @@ onBeforeUnmount(() => {
     <div
       ref="videoRef"
     />
-
   </div>
 </template>
 
 <style lang="less" scoped>
+.h-full {
+  height: 100%;
+}
 
-</style>
+.w-full {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.items-center {
+  align-items: center;
+ ▋
