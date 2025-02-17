@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 
-import { copyImageToClipboard } from '@/utils'
-
-import { Notification } from '@arco-design/web-vue'
-
 import {
   onBeforeUnmount,
   onMounted,
@@ -14,6 +10,8 @@ import {
 
 import Player from 'xgplayer'
 
+import MusicPreset from 'xgplayer-music'
+
 import 'xgplayer/dist/index.min.css'
 
 type VideoPlayerPropsType = {
@@ -21,7 +19,7 @@ type VideoPlayerPropsType = {
   /**
    * 视频 URL
    */
-  videoUrl: string
+  musicUrl: string
 
   /**
    *  是否自动播放
@@ -51,19 +49,19 @@ const props = withDefaults(defineProps<VideoPlayerPropsType>(), {
 
 const emit = defineEmits(['playEnded', 'playNext'])
 
-const videoRef = ref<HTMLElement | null>(null)
+const musicRef = ref<HTMLElement | null>(null)
 
 const player = ref<Player | null>(null)
 
 onMounted(() => {
-  if (!videoRef.value) {
+  if (!musicRef.value) {
     return
   }
 
   player.value = new Player({
-    el: videoRef.value,
+    el: musicRef.value,
 
-    url: props.videoUrl,
+    url: props.musicUrl,
 
     autoplay: props.isAutoPlay,
 
@@ -71,12 +69,26 @@ onMounted(() => {
 
     width: '100%',
 
+    /**
+     *  媒体类型
+     */
+    mediaType: 'audio',
+
+    /**
+     *  播放器初始显示语言
+     */
     lang: 'zh',
 
     /**
      *  是否自动静音自动播放
      */
-    autoplayMuted: true,
+    // autoplayMuted: true,
+
+    ignores: ['playbackrate'],
+    controls: {
+      initShow: true,
+      mode: 'flex',
+    },
 
     /**
      *  开启画面和控制栏分离模式
@@ -84,19 +96,16 @@ onMounted(() => {
     marginControls: true,
 
     /**
-     *  播放器内部截图
+     *  截图
      */
-    screenShot: {
-      /**
-       *  是否保存截图
-       */
-      saveImg: true,
+    // screenShot: {
 
-      /**
-       *  截图质量
-       */
-      quality: 1,
-    },
+    //   /**
+    //    *  是否保存截图
+    //    */
+    //   saveImg: false,
+    //   quality: 1,
+    // },
 
     /**
      *  video扩展属性
@@ -119,7 +128,6 @@ onMounted(() => {
      *  动态背景高斯模糊渲染插件
      */
     dynamicBg: {
-
       disable: false,
     },
 
@@ -127,7 +135,7 @@ onMounted(() => {
      *  控制栏播放下一个视频按钮插件
      */
     playnext: {
-      urlList: [props.videoUrl],
+      urlList: [props.musicUrl],
     },
 
     /**
@@ -136,6 +144,9 @@ onMounted(() => {
     rotate: {
       disable: false,
     },
+
+    // presets: [MusicPreset],
+
   })
 
   // 监听播放结束
@@ -148,16 +159,19 @@ onMounted(() => {
     emit('playNext')
   })
 
-  // 监听截图
-  player.value.on(Player.Events.SCREEN_SHOT, (url: string) => {
-    Notification.success('截图下载成功')
-
-    copyImageToClipboard(url)
-  })
+  // // 监听截图
+  // player.value.on(Player.Events.SCREEN_SHOT, (url: string) => {
+  //   copyImageToClipboard(url)
+  // })
 })
 
+// window.analyze = new Analyze(player, document.querySelector('canvas'), {
+//   bgColor: 'rgba(0,0,0,0.65)',
+//   stroke: 1,
+
+// })
 watch(
-  () => props.videoUrl,
+  () => props.musicUrl,
   (newUrl) => {
     if (player.value && newUrl) {
       player.value.src = newUrl
@@ -185,6 +199,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    ref="videoRef"
+    ref="musicRef"
   />
 </template>

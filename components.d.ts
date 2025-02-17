@@ -25,6 +25,7 @@ declare module 'vue' {
     Loading: typeof import('./src/components/Loading/index.vue')['default']
     Logo: typeof import('./src/components/Logo/index.vue')['default']
     MobilePageSwitch: typeof import('./src/components/TheHeader/components/mobile-page-switch.vue')['default']
+    MusicPlayer: typeof import('./src/components/MusicPlayer/index.vue')['default']
     PageSwitch: typeof import('./src/components/TheHeader/components/page-switch.vue')['default']
     PreviewImg: typeof import('./src/components/PreviewImg/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

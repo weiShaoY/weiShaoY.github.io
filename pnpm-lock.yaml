@@ -89,6 +89,9 @@ importers:
       xgplayer:
         specifier: ^3.0.20
         version: 3.0.20(core-js@3.39.0)
+      xgplayer-music:
+        specifier: ^3.0.20
+        version: 3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0))
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^4.1.1
@@ -2387,6 +2390,10 @@ packages:
 
   deep-pick-omit@1.2.1:
     resolution: {integrity: sha512-2J6Kc/m3irCeqVG42T+SaUMesaK7oGWaedGnQQK/+O0gYc+2SP5bKh/KKTE7d7SJ+GCA9UUE1GRzh6oDe0EnGw==}
+
+  deepmerge@2.2.1:
+    resolution: {integrity: sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==}
+    engines: {node: '>=0.10.0'}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -5209,6 +5216,12 @@ packages:
       utf-8-validate:
         optional: true
 
+  xgplayer-music@3.0.20:
+    resolution: {integrity: sha512-Kv6F2BZHauoQPLN4czcVT8zqNfXRmxQFGeKKZi4DxDztk27JCQUOd3jVm/EhsPZBjxjJ8SJycrq73CGjwVJXMg==}
+    peerDependencies:
+      core-js: '>=3.12.1'
+      xgplayer: 3.0.20
+
   xgplayer-subtitles@3.0.20:
     resolution: {integrity: sha512-I1bjsIY+aKOrhYQspLdneOkYg+Vf4cJVGPnDSFnNebnxXl9Mhz5SEpWGzYizMYxL9UvsQ9pgjeEY0o4hkwM+kQ==}
     peerDependencies:
@@ -7951,6 +7964,8 @@ snapshots:
   deep-object-diff@1.1.9: {}
 
   deep-pick-omit@1.2.1: {}
+
+  deepmerge@2.2.1: {}
 
   deepmerge@4.3.1: {}
 
@@ -11374,6 +11389,13 @@ snapshots:
       strip-ansi: 7.1.0
 
   ws@8.18.0: {}
+
+  xgplayer-music@3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0)):
+    dependencies:
+      core-js: 3.39.0
+      deepmerge: 2.2.1
+      eventemitter3: 4.0.7
+      xgplayer: 3.0.20(core-js@3.39.0)
 
   xgplayer-subtitles@3.0.20(core-js@3.39.0):
     dependencies:

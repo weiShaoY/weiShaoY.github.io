@@ -142,15 +142,17 @@ class BlogApi {
    *  获取 随机绿茶语音
    *  @see https://api.pearktrue.cn/info?id=143
    */
-  getRandomGreenTeaVoice() {
-    return fetchHttp('https://api.pearktrue.cn/api/greentea/?type=mp3')
+  async getRandomGreenTeaVoice() {
+    const data = await fetchHttp('https://api.pearktrue.cn/api/greentea/?type=mp3')
+
+    return data.audiopath
   }
 
   /**
    *  获取 随机怼人语音
    *  @see https://api.pearktrue.cn/info?id=146
    */
-  getRandomDuiRenVoice() {
+  async getRandomDuiRenVoice() {
     return fetchHttp('https://api.pearktrue.cn/api/duiren/?type=mp3')
   }
 
@@ -158,16 +160,20 @@ class BlogApi {
    *  获取 随机御姐撒娇语音
    *  @see https://api.pearktrue.cn/info?id=145
    */
-  getRandomYujieVoice() {
-    return fetchHttp('https://api.pearktrue.cn/api/yujie/?type=mp3')
+  async getRandomYujieVoice() {
+    const data = await fetchHttp('https://api.pearktrue.cn/api/yujie/?type=mp3')
+
+    return data.audiopath
   }
 
   /**
    *  全国油价查询
    *  @see https://api.pearktrue.cn/info?id=282
    */
-  getOilPrices() {
-    return fetchHttp('https://api.pearktrue.cn/api/oil/')
+  async getOilPrices() {
+    const data = await fetchHttp('https://api.pearktrue.cn/api/oil/')
+
+    return data.audiopath
   }
 
   /**
