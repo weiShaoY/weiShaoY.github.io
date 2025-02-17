@@ -263,9 +263,11 @@ const option = computed<EChartsOption>(() => ({
       zlevel: 1,
     },
   ],
+
 }))
 
 registerMap('china', chinaMap as any)
+
 </script>
 
 <template>

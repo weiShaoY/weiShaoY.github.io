@@ -3,23 +3,23 @@
 
 import { openUrlInWindow } from '@/utils'
 
-const props = defineProps({
+type GithubPropsType = {
 
   /**
    *  颜色
    */
-  color: {
-    type: String,
-    default: 'white',
-  },
+  color?: string
 
   /**
    *  大小
    */
-  size: {
-    type: Number,
-    default: 34,
-  },
+  size?: number
+
+}
+
+const props = withDefaults(defineProps<GithubPropsType>(), {
+  color: 'white',
+  size: 34,
 })
 
 function handleClick() {

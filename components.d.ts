@@ -7,7 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    2: typeof import('./src/components/Test/son copy 2.vue')['default']
+    2: typeof import('./src/components/VideoPlayer/index copy 2.vue')['default']
     3: typeof import('./src/components/Test/son copy 3.vue')['default']
     4: typeof import('./src/components/Test/son copy 4.vue')['default']
     Block: typeof import('./src/components/global-setting/block.vue')['default']
@@ -16,7 +16,7 @@ declare module 'vue' {
     'Chart_副本': typeof import('./src/components/Chart_副本.vue')['default']
     Checkbox: typeof import('./src/components/Checkbox.vue')['default']
     ContextMenu: typeof import('./src/components/contextMenu/index.vue')['default']
-    copy: typeof import('./src/components/CanvasLoader/index copy.vue')['default']
+    copy: typeof import('./src/components/VideoPlayer/index copy.vue')['default']
     DesktopPageSwitch: typeof import('./src/components/TheHeader/components/desktop-page-switch.vue')['default']
     Echarts: typeof import('./src/components/echarts/index.vue')['default']
     FormWrapper: typeof import('./src/components/global-setting/form-wrapper.vue')['default']
@@ -37,5 +37,6 @@ declare module 'vue' {
     TheHeader: typeof import('./src/components/TheHeader/index.vue')['default']
     ThemeSwitch: typeof import('./src/components/TheHeader/components/theme-switch.vue')['default']
     VideoPlay: typeof import('./src/components/VideoPlay/index.vue')['default']
+    VideoPlayer: typeof import('./src/components/VideoPlayer/index.vue')['default']
   }
 }

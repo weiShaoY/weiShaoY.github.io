@@ -169,7 +169,7 @@ watchEffect(() => {
 
     <PreviewImg
       :src="data"
-      :loading="isLoading"
+      :is-loading="isLoading"
     />
 
   </div>

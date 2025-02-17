@@ -1,28 +1,22 @@
-<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
 import { BlogApi } from '@/api'
 
-import { copyImageToClipboard, downloadImage } from '@/utils'
+import { downloadImage } from '@/utils'
 
 import { Notification } from '@arco-design/web-vue'
 
-import Player from 'xgplayer'
-
-import 'xgplayer/dist/index.min.css'
-
-const player = ref<Player | null>(null)
+import { ref } from 'vue'
 
 const isLoading = ref(false)
 
-/**
- *  分类
- */
 const category = ref(1)
 
-/**
- *  分类选项
- */
+const videoUrl = ref('')
+
+const isAutoPlay = ref(false)
+
+const isAutoPlayNext = ref(true)
+
 const categoryOptions = [
   {
     value: 1,
@@ -34,34 +28,20 @@ const categoryOptions = [
   },
 ]
 
-/**
- *  分类接口映射
- */
 const categoryApiMap: Record<number, () => Promise<string>> = {
   1: BlogApi.getRandomGirlVideo,
   2: BlogApi.getRandomReturnOneGirlVideo,
 }
 
-/**
- *  关键字
- */
-const videoUrl = ref('')
-
-/**
- * 获取壁纸数据
- */
 async function getData() {
   try {
     isLoading.value = true
-
     const fetchData = categoryApiMap[category.value]
 
     const response = await fetchData()
 
-    if (response) {
-      videoUrl.value = response
-    }
-    else {
+    videoUrl.value = response || ''
+    if (!response) {
       throw new Error('未获取到视频资源')
     }
   }
@@ -73,146 +53,19 @@ async function getData() {
   }
 }
 
-/**
- *  是否自动播放
- */
-const isAutoPlay = ref(false)
-
-/**
- *  是否自动播放下一个
- */
-const isAutoPlayNext = ref(true)
-
-const videoRef = ref<HTMLElement | null>(null)
-
-onMounted(async () => {
-  await getData()
-
-  if (!videoRef.value) {
-    return
+function handlePlayEnded() {
+  if (isAutoPlayNext.value) {
+    isAutoPlay.value = true
+    getData()
   }
+}
 
-  player.value = new Player({
-    el: videoRef.value,
+function handlePlayNext() {
+  getData()
+}
 
-    url: videoUrl.value,
-
-    height: '100%',
-
-    width: '100%',
-
-    /**
-     *  播放器初始显示语言
-     */
-    lang: 'zh',
-
-    /**
-     *  自动播放
-     */
-    autoplay: isAutoPlay.value,
-
-    /**
-     *  自动静音自动播放
-     */
-    autoplayMuted: true,
-
-    /**
-     *  开启画面和控制栏分离模式
-     */
-    marginControls: true,
-
-    /**
-     *  截图配置
-     */
-    screenShot: {
-      saveImg: false, // 禁止截图后下载图片
-      quality: 0.92,
-    },
-
-    /**
-     *  video扩展属性
-     */
-    videoAttributes: {
-      crossOrigin: 'anonymous',
-    },
-
-    /**
-     *  播放器区域是否允许右键功能菜单
-     */
-    enableContextmenu: true,
-
-    /**
-     *  下载
-     */
-    download: true,
-
-    /**
-     *  动态背景高斯模糊渲染插件
-     */
-    dynamicBg: {
-      disable: false,
-    },
-
-    /**
-     *  控制栏播放下一个视频按钮插件
-     */
-    playnext: {
-      urlList: [videoUrl.value],
-    },
-
-    /**
-     *  播放器旋转控件
-     */
-    rotate: {
-      disable: false,
-    },
-  })
-
-  /**
-   *  视频播放结束
-   */
-  player.value.on(Player.Events.ENDED, async () => {
-    if (isAutoPlayNext.value) {
-      if (!isAutoPlay.value) {
-        isAutoPlay.value = true
-      }
-
-      await getData()
-    }
-  })
-
-  /**
-   *  点击按钮播放下一个视频源的时候触发
-   */
-  player.value.on(Player.Events.PLAYNEXT, async () => {
-    await getData()
-  })
-
-  /**
-   *  视频截图结束
-   */
-  player.value.on(Player.Events.SCREEN_SHOT, async (url) => {
-    copyImageToClipboard(url)
-  })
-
-  watch(videoUrl, (newUrl) => {
-    if (player.value && newUrl) {
-      player.value.src = newUrl
-      player.value.load()
-    }
-  })
-
-  watch(isAutoPlay, (newAutoPlay) => {
-    if (player.value) {
-      player.value.autoplay = newAutoPlay
-    }
-  })
-})
-onBeforeUnmount(() => {
-  if (player.value) {
-    player.value.destroy()
-    player.value = null
-  }
+onMounted(() => {
+  getData()
 })
 </script>
 
@@ -220,7 +73,6 @@ onBeforeUnmount(() => {
   <div
     class="h-full w-full flex flex-col gap-5 overflow-hidden"
   >
-
     <div
       class="flex items-center gap-5"
     >
@@ -279,13 +131,12 @@ onBeforeUnmount(() => {
       </a-switch>
     </div>
 
-    <div
-      ref="videoRef"
+    <VideoPlayer
+      :video-url="videoUrl"
+      :is-auto-play="isAutoPlay"
+      :is-auto-play-next="isAutoPlayNext"
+      @play-ended="handlePlayEnded"
+      @play-next="handlePlayNext"
     />
-
   </div>
 </template>
-
-<style lang="less" scoped>
-
-</style>

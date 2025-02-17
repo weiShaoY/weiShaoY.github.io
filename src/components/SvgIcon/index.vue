@@ -1,56 +1,43 @@
 <script setup lang="ts">
-/**
- * 组件属性类型定义
- */
-const props = defineProps({
-  /**
-   * 图标的前缀
-   */
-  prefix: {
-    type: String,
-    default: 'icon',
-  },
+import type { CSSProperties } from 'vue'
+
+type SvgIconPropsType = {
 
   /**
    * 图标的名称
    */
-  icon: {
-    type: String,
-    required: true,
-  },
+  icon: string
 
   /**
-   * 图标的颜色
+   * 图标的前缀
    */
-  color: {
-    type: String,
-    default: 'currentColor',
-  },
+  prefix?: string
+
+  /**
+   *  图标的颜色
+   */
+  color?: string
 
   /**
    * 图标的大小
    */
-  size: {
-    type: [String, Number],
-    default: '1em',
-  },
+  size?: string | number
 
   /**
-   * 额外的 CSS 类名
+   *  额外的 CSS 类名
    */
-  class: {
-    type: String,
-    default: '',
-  },
+  class?: string
 
   /**
    * 行内样式
    */
-  style: {
-    type: Object,
-    default: () => ({
-    }),
-  },
+  style?: CSSProperties
+}
+
+const props = withDefaults(defineProps<SvgIconPropsType>(), {
+  prefix: 'icon',
+  size: '1em',
+  color: 'currentColor',
 })
 
 /**
@@ -61,14 +48,14 @@ const symbolId = computed(() => `#${props.prefix}-${props.icon}`)
 /**
  * 计算合并后的类名
  */
-const mergedClassName = computed(() =>
+const computedClass = computed(() =>
   `${props.class} anticon fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none`,
 )
 
 /**
  * 计算 SVG 的行内样式
  */
-const svgStyle = computed(() => ({
+const computedStyle = computed(() => ({
   verticalAlign: 'middle',
   width: props.size,
   height: props.size,
@@ -81,9 +68,9 @@ const svgStyle = computed(() => ({
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
-    :class="mergedClassName"
-    :style="svgStyle"
     :aria-label="icon"
+    :class="computedClass"
+    :style="computedStyle"
   >
     <title>{{ icon }}</title>
 

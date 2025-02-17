@@ -22,6 +22,7 @@ declare global {
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
+  const copyImageToClipboard: typeof import('./src/utils/copyImageToClipboard')['copyImageToClipboard']
   const copyText: typeof import('./src/utils/copyText')['copyText']
   const createApp: typeof import('vue')['createApp']
   const createEventHook: typeof import('@vueuse/core')['createEventHook']
@@ -390,6 +391,7 @@ declare module 'vue' {
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
+    readonly copyImageToClipboard: UnwrapRef<typeof import('./src/utils/copyImageToClipboard')['copyImageToClipboard']>
     readonly copyText: UnwrapRef<typeof import('./src/utils/copyText')['copyText']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>

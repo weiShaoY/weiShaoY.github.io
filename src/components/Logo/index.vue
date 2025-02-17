@@ -2,15 +2,16 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 
-const props = defineProps({
+type LogoPropsType = {
 
   /**
-   *  文字颜色
+   *  颜色
    */
-  textColor: {
-    type: String,
-    default: 'white',
-  },
+  textColor?: string
+}
+
+const props = withDefaults(defineProps<LogoPropsType>(), {
+  textColor: 'white',
 })
 
 const router = useRouter()

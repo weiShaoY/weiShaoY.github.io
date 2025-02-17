@@ -16,7 +16,7 @@ type MyComponentProps = {
   /**
    *   是否显示加载中
    */
-  loading?: boolean
+  isLoading?: boolean
 
   /**
    *   style 样式
@@ -61,9 +61,6 @@ const props = withDefaults(defineProps<MyComponentProps>(), {
   height: '100%',
   avatar: false,
   size: 30,
-  class: '',
-  style: () => ({
-  }),
 })
 
 /** 计算最终的样式 */
@@ -78,7 +75,7 @@ const computedClass = computed(() => `${props.class}`)
 
 <template>
   <a-spin
-    :loading="loading"
+    :loading="isLoading"
     class="h-full w-full"
   >
     <a-avatar
