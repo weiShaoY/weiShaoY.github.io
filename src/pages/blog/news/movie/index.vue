@@ -142,6 +142,7 @@ onMounted(() => {
         :data="movies"
         :loading="isLoading"
         scrollbar
+
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
@@ -175,11 +176,13 @@ onMounted(() => {
           <a-table-column
             title="电影名称"
             data-index="nm"
+            align="center"
           />
 
           <a-table-column
             title="上映日期"
             data-index="rt"
+            align="center"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"
@@ -188,11 +191,13 @@ onMounted(() => {
           <a-table-column
             title="主演"
             data-index="star"
+            align="center"
           />
 
           <a-table-column
             title="期待值"
             data-index="wish"
+            align="center"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"
@@ -201,6 +206,7 @@ onMounted(() => {
           <a-table-column
             title="评分"
             data-index="sc"
+            align="center"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"

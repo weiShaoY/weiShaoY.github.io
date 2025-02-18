@@ -153,7 +153,9 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=146
    */
   async getRandomDuiRenVoice() {
-    return fetchHttp('https://api.pearktrue.cn/api/duiren/?type=mp3')
+    const data = await fetchHttp('https://api.pearktrue.cn/api/duiren/?type=mp3')
+
+    return data.audiopath
   }
 
   /**
@@ -171,9 +173,7 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=282
    */
   async getOilPrices() {
-    const data = await fetchHttp('https://api.pearktrue.cn/api/oil/')
-
-    return data.audiopath
+    return fetchHttp('https://api.pearktrue.cn/api/oil/')
   }
 
   /**

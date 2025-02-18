@@ -95,7 +95,7 @@ const News: AppRouteRecordRaw = {
           path: 'oil',
           name: 'Oil',
           meta: {
-            locale: '油价',
+            locale: '燃油',
             icon: 'blog-menu-oil',
           },
           component: import('@/pages/blog/news/price/oil/index.vue'),

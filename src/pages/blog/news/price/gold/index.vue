@@ -7,87 +7,6 @@ import { Notification } from '@arco-design/web-vue'
 const isLoading = ref(false)
 
 /**
- *  电影列表每一项
- */
-type MovieDataItemType = {
-
-  /**
-   * 电影唯一标识符
-   */
-  id: number
-
-  /**
-   * 是否有促销标签
-   */
-  haspromotionTag: boolean
-
-  /**
-   * 电影海报图片地址
-   */
-  img: string
-
-  /**
-   * 电影版本描述
-   */
-  version: string
-
-  /**
-   * 电影名称
-   */
-  nm: string
-
-  /**
-   * 是否为点映状态
-   */
-  preShow: boolean
-
-  /**
-   * 电影评分
-   */
-  sc: number
-
-  /**
-   * 是否已在全球范围上映
-   */
-  globalReleased: boolean
-
-  /**
-   * 用户期待值
-   */
-  wish: number
-
-  /**
-   * 主演列表，多个演员名称以逗号分隔
-   */
-  star: string
-
-  /**
-   * 上映日期，格式为 YYYY-MM-DD
-   */
-  rt: string
-
-  /**
-   * 今日上映信息
-   */
-  showInfo: string
-
-  /**
-   * 上映状态，数值为状态枚举
-   */
-  showst: number
-
-  /**
-   * 期待状态，数值为状态枚举
-   */
-  wishst: number
-
-  /**
-   * 上映标题，如 "11月30日 周六"
-   */
-  comingTitle: string
-}
-
-/**
  *  数据
  */
 const goldData = ref<{
@@ -95,22 +14,22 @@ const goldData = ref<{
   /**
    *  大盘黄金
    */
-  marketGold: MovieDataItemType[]
+  marketGold: []
 
   /**
    *  国内十大金店
    */
-  domesticTopGoldStores: MovieDataItemType[]
+  domesticTopGoldStores: []
 
   /**
    *  国内黄金
    */
-  domesticGold: MovieDataItemType[]
+  domesticGold: []
 
   /**
    *  国际黄金
    */
-  internationalGold: MovieDataItemType[]
+  internationalGold: []
 
 }>({
   marketGold: [],
