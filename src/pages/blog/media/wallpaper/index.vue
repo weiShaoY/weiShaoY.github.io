@@ -82,7 +82,7 @@ const categoryOptions = [
 /**
  *  关键字
  */
-const data = ref('')
+const wallpaperUrl = ref('')
 
 /**
  * 获取壁纸数据
@@ -94,17 +94,17 @@ async function getData() {
     if (category.value === 'tui') {
       const response = await BlogApi.getTuiImage()
 
-      data.value = response.text
+      wallpaperUrl.value = response.text
     }
     else if (category.value === 'sg') {
       const response = await BlogApi.getRandomManImage()
 
-      data.value = response.img
+      wallpaperUrl.value = response.img
     }
     else {
       const response = await BlogApi.getWallpaper(category.value)
 
-      data.value = response.img_url
+      wallpaperUrl.value = response.img_url
     }
   }
   catch (error: any) {
@@ -115,11 +115,10 @@ async function getData() {
   }
 }
 
-getData()
-
-watchEffect(() => {
-  console.log('%c Line:120 🥃 keyword.value', 'color:#3f7cff', data.value)
+onMounted(() => {
+  getData()
 })
+
 </script>
 
 <template>
@@ -155,7 +154,7 @@ watchEffect(() => {
       </a-button>
 
       <a-button
-        @click="downloadImage(data)"
+        @click="downloadImage(wallpaperUrl)"
       >
         <template
           #icon
@@ -168,10 +167,14 @@ watchEffect(() => {
       </a-button>
     </div>
 
-    <PreviewImg
-      :src="data"
-      :is-loading="isLoading"
-    />
+    <div
+      class="h-[calc(100vh-240px)]"
+    >
+      <PreviewImg
+        :src="wallpaperUrl"
+        :is-loading="isLoading"
+      />
+    </div>
 
   </div>
 </template>

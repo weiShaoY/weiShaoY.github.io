@@ -31,6 +31,11 @@ function clearData() {
 
 async function getData() {
   try {
+    if (!apiUrl.value) {
+      throw new Error('请输入接口地址')
+    }
+
+
     isLoading.value = true
 
     clearData()

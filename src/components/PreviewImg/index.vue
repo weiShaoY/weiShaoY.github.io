@@ -70,7 +70,7 @@ const computedStyle = computed<CSSProperties>(() => ({
   width: props.width,
 }))
 
-const computedClass = computed(() => `${props.class}`)
+const computedClass = computed(() => `${props.class} cursor-pointer`)
 </script>
 
 <template>
@@ -89,7 +89,7 @@ const computedClass = computed(() => `${props.class}`)
     <a-image
       v-else
       :src="src"
-      class="border-radius h-full w-full"
+      class="border-radius h-full w-full flex items-center justify-center"
       fit="contain"
       show-loader
       :height="height"
@@ -102,7 +102,7 @@ const computedClass = computed(() => `${props.class}`)
 </template>
 
 <style lang="less" scoped>
-.border-radius :deep(.arco-image-img) {
-  border-radius: 12px;
-}
+// .border-radius :deep(.arco-image-img) {
+//   border-radius: 10%;
+// }
 </style>
