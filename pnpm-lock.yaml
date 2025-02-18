@@ -90,7 +90,7 @@ importers:
         specifier: ^3.0.20
         version: 3.0.20(core-js@3.39.0)
       xgplayer-music:
-        specifier: ^3.0.20
+        specifier: ^3.0.10
         version: 3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0))
     devDependencies:
       '@antfu/eslint-config':

@@ -43,8 +43,6 @@ async function getData() {
 
     const response = await fetchData()
 
-    console.log('%c Line:47 🌶 response', 'color:#ffdd4d', response)
-
     musicUrl.value = response || ''
 
     if (!response) {

@@ -10,8 +10,6 @@ import {
 
 import Player from 'xgplayer'
 
-import MusicPreset from 'xgplayer-music'
-
 import 'xgplayer/dist/index.min.css'
 
 type VideoPlayerPropsType = {
@@ -61,7 +59,8 @@ onMounted(() => {
   player.value = new Player({
     el: musicRef.value,
 
-    url: props.musicUrl,
+    // url: props.musicUrl,
+    url: 'https://zj.v.api.aa1.cn/api/qqmusic/demo.php?type=3&mid=001tPuED43HIPj&fid=001tPuED43HIPj&t=3',
 
     autoplay: props.isAutoPlay,
 
@@ -145,8 +144,6 @@ onMounted(() => {
       disable: false,
     },
 
-    // presets: [MusicPreset],
-
   })
 
   // 监听播放结束
@@ -158,18 +155,8 @@ onMounted(() => {
   player.value.on(Player.Events.PLAYNEXT, () => {
     emit('playNext')
   })
-
-  // // 监听截图
-  // player.value.on(Player.Events.SCREEN_SHOT, (url: string) => {
-  //   copyImageToClipboard(url)
-  // })
 })
 
-// window.analyze = new Analyze(player, document.querySelector('canvas'), {
-//   bgColor: 'rgba(0,0,0,0.65)',
-//   stroke: 1,
-
-// })
 watch(
   () => props.musicUrl,
   (newUrl) => {
