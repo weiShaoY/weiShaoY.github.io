@@ -12,14 +12,20 @@ type ElType = {
   copyData: string | number
 } & HTMLElement
 
+/**
+ *  复制的文本
+ */
+export type UseCopyParamsType = string | number
+
 const useCopy: Directive = {
-  mounted(el: ElType, binding: DirectiveBinding) {
+  mounted(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
     el.copyData = binding.value
     el.addEventListener('click', handleClick)
   },
-  updated(el: ElType, binding: DirectiveBinding) {
+  updated(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
     el.copyData = binding.value
   },
+
   beforeUnmount(el: ElType) {
     el.removeEventListener('click', handleClick)
   },

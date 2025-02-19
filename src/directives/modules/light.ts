@@ -1,6 +1,6 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
-export type useLightParamsType = {
+export type UseLightParamsType = {
 
   /**
    *  宽
@@ -33,7 +33,7 @@ export type useLightParamsType = {
  * @param {HTMLElement} lightDom - 绑定的元素
  * @param {DirectiveBinding} option - 指令绑定的参数对象
  */
-function setLightStyle(lightDom: HTMLElement, option: useLightParamsType) {
+function setLightStyle(lightDom: HTMLElement, option: UseLightParamsType) {
   const { width = 60, height = 60, color = '#ffffff', blur = 40 } = option ?? {
   }
 
@@ -130,7 +130,7 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement, rota
  * 光源卡片指令，用于在绑定元素上添加光源效果
  */
 const useLight: Directive = {
-  mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<useLightParamsType>) {
+  mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<UseLightParamsType>) {
     const lightDom = document.createElement('div')
 
     setLightStyle(lightDom, binding.value ?? {

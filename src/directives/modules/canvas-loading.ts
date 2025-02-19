@@ -4,14 +4,14 @@ import type {
   DirectiveBinding,
 } from 'vue'
 
-import directivesLoadingSvg from '@/assets/svgs/directives-loading.svg' // 使用正确的加载 SVG 路径
-
 import directivesLoadingErrorSvg from '@/assets/svgs/directives-loading-error.svg'
+
+import directivesLoadingSvg from '@/assets/svgs/directives-loading.svg' // 使用正确的加载 SVG 路径
 
 /**
  * CanvasLoading指令的参数类型
  */
-export type useCanvasLoadingParamsType = {
+export type UseCanvasLoadingParamsType = {
 
   /**
    * 是否处于加载状态
@@ -82,9 +82,9 @@ const useCanvasLoading: Directive = {
   /**
    * 在元素挂载时调用的钩子，初始化加载状态并创建加载动画。
    * @param {CustomHTMLElementType} el - 绑定指令的元素。
-   * @param {DirectiveBinding<useCanvasLoadingParamsType>} binding - 指令绑定的值。
+   * @param {DirectiveBinding<UseCanvasLoadingParamsType>} binding - 指令绑定的值。
    */
-  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<useCanvasLoadingParamsType>) {
+  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
     const parent = el.parentNode as HTMLElement
 
     const normalizedOptions = normalizeBinding(binding.value)
@@ -153,9 +153,9 @@ const useCanvasLoading: Directive = {
   /**
    * 在元素更新时调用的钩子，根据新的绑定值更新加载状态。
    * @param {CustomHTMLElementType} el - 绑定指令的元素。
-   * @param {DirectiveBinding<useCanvasLoadingParamsType>} binding - 更新后的指令绑定值。
+   * @param {DirectiveBinding<UseCanvasLoadingParamsType>} binding - 更新后的指令绑定值。
    */
-  updated(el: CustomHTMLElementType, binding: DirectiveBinding<useCanvasLoadingParamsType>) {
+  updated(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
     const normalizedOptions = normalizeBinding(binding.value)
 
     // 动态控制显示和隐藏
@@ -186,11 +186,11 @@ const useCanvasLoading: Directive = {
 
 /**
  * 规范化指令绑定值，返回标准化的加载选项对象。
- * @param {useCanvasLoadingParamsType} bindingValue - 指令绑定的值。
+ * @param {UseCanvasLoadingParamsType} bindingValue - 指令绑定的值。
  * @returns {object} 标准化的加载选项对象。
  */
 function normalizeBinding(
-  bindingValue: useCanvasLoadingParamsType,
+  bindingValue: UseCanvasLoadingParamsType,
 ): { isLoading: boolean, size: number, error: { isShow: boolean, text: string, timeout: number } } {
   if (typeof bindingValue === 'boolean') {
     return {

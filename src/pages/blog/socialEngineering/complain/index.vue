@@ -624,7 +624,21 @@ const data = [
             title="电话号码"
             data-index="number"
             align="center"
-          />
+          >
+
+            <template
+              #cell="{ record }"
+            >
+              <a-link
+                v-copy="record.number"
+                target="_blank"
+              >
+                {{ record.number }}
+              </a-link>
+
+            </template>
+
+          </a-table-column>
 
           <a-table-column
             title="电话官网"

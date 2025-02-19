@@ -1,16 +1,13 @@
 // types.ts
 import type { Directive } from 'vue'
 
-import type { useCanvasLoadingParamsType } from './modules/canvas-loading'
+import type { UseCanvasLoadingParamsType } from './modules/canvas-loading'
 
-import type { useLightParamsType } from './modules/light'
+import type { UseCopyParamsType } from './modules/copy'
+
+import type { UseLightParamsType } from './modules/light'
 
 export type Directives = {
-
-  /**
-   *  光源指令
-   */
-  vLight: Directive<HTMLElement, useLightParamsType >
 
   /**
    *  动画文字指令
@@ -18,7 +15,17 @@ export type Directives = {
   vAnimatedText: Directive<HTMLElement>
 
   /**
-   *  加载指令
+   *  Canvas 加载指令
    */
-  vLoading: Directive< HTMLElement, useCanvasLoadingParamsType>
+  vCanvasLoading: Directive<HTMLElement, UseCanvasLoadingParamsType>
+
+  /**
+   *  点击复制指令
+   */
+  vCopy: Directive<HTMLElement, UseCopyParamsType>
+
+  /**
+   *  鼠标光源指令
+   */
+  vLight: Directive<HTMLElement, UseLightParamsType>
 }
