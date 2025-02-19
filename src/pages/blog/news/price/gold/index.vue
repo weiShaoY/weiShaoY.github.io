@@ -89,6 +89,7 @@ onMounted(() => {
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns
@@ -192,6 +193,7 @@ onMounted(() => {
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns
@@ -259,6 +261,7 @@ onMounted(() => {
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns
@@ -338,6 +341,7 @@ onMounted(() => {
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns

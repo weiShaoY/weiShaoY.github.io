@@ -82,7 +82,7 @@ async function getData() {
       prices: { 0: string, 92: string, 95: string, 98: string }
     }, index: number) => ({
       province,
-      id: index,
+      id: index + 1,
       0: Number(prices[0]),
       92: Number(prices[92]),
       95: Number(prices[95]),
@@ -121,6 +121,7 @@ onMounted(() => {
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns
@@ -142,15 +143,6 @@ onMounted(() => {
           />
 
           <a-table-column
-            title="92"
-            data-index="92"
-            align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
-          />
-
-          <a-table-column
             title="92号"
             data-index="92"
             align="center"
@@ -161,6 +153,15 @@ onMounted(() => {
 
           <a-table-column
             title="95号"
+            data-index="92"
+            align="center"
+            :sortable="{
+              sortDirections: ['ascend', 'descend'],
+            }"
+          />
+
+          <a-table-column
+            title="98号"
             data-index="92"
             align="center"
             :sortable="{

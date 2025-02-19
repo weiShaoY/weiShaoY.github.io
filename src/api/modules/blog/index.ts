@@ -248,9 +248,34 @@ class BlogApi {
   getCigarettePrice(cigarette: string) {
     // return fetchHttp("https://api.lolimi.cn/API/xyan/api.php?msg=白沙");
 
-		type Cigarette = {
-		  name: string // 香烟名称
-		  [key: string]: string | undefined // 其他属性，键是字符串，值是字符串或未定义
+		type CigaretteType = {
+
+		  /**
+				 *  香烟名称
+				 */
+		  name: string
+
+		  /**
+				 *  其他属性，键是字符串，值是字符串或未定义
+				 */
+		  [key: string]: string | undefined | number
+
+		  /**
+				 *  新增 id 字段，表示香烟的唯一标识
+				 */
+		  id: number
+		}
+
+		function convertPrice(price: string): number {
+		  // 使用正则表达式提取数字部分
+		  const match = price.match(/(\d+(\.\d+)?)/)
+
+		  // 如果匹配到数字，则返回数字，否则返回 null
+		  if (match) {
+		    return Number.parseFloat(match[0])
+		  }
+
+		  return 0
 		}
 
 		/**
@@ -258,13 +283,13 @@ class BlogApi {
 		 * @param {string} data - 包含香烟信息的原始数据字符串
 		 * @returns {Array} 格式化后的香烟信息数组
 		 */
-		function formatCigaretteData(data: string): Array<Cigarette> {
-		  const formattedData: Array<Cigarette> = []
+		function formatCigaretteData(data: string): Array<CigaretteType> {
+		  const formattedData: Array<CigaretteType> = []
 
 		  // 按照 "====================" 分割各条香烟信息
 		  const cigarettes = data.split('====================')
 
-		  for (const item of cigarettes) {
+		  cigarettes.forEach((item, index) => {
 		    // 过滤掉空字符串
 		    if (item.trim()) {
 		      // 按行分割每个香烟的属性
@@ -277,24 +302,28 @@ class BlogApi {
 		      const name = lines[0].replace('香烟: ', '').trim()
 
 		      // 创建一个对象存储香烟信息
-		      const cigaretteInfo: Cigarette = {
+		      const cigaretteInfo: CigaretteType = {
 		        name,
+		        id: index + 1,
 		      }
 
 		      // 提取其他属性
-		      for (const line of lines.slice(1)) {
+		      lines.slice(1).forEach((line) => {
 		        const [key, value] = line.split('：')
 
 		        if (key && value) {
 		          cigaretteInfo[key.trim()] = value.trim()
 		        }
-		      }
+
+		        if (key === '单盒参考价' || key === '条盒参考价') {
+		          cigaretteInfo[key.trim()] = convertPrice(value)
+		        }
+		      })
 
 		      // 将格式化后的香烟对象添加到数组中
 		      formattedData.push(cigaretteInfo)
 		    }
-		  }
-
+		  })
 		  return formattedData
 		}
 

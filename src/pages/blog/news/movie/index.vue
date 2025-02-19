@@ -142,10 +142,10 @@ onMounted(() => {
         :data="movies"
         :loading="isLoading"
         scrollbar
-
         :scroll="{
           maxHeight: 'calc(100vh - 300px)',
         }"
+        :pagination="false"
       >
         <template
           #columns

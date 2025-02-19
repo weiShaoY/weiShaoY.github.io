@@ -35,10 +35,9 @@ async function getData() {
       throw new Error('请输入接口地址')
     }
 
+    clearData()
 
     isLoading.value = true
-
-    clearData()
 
     const response = await fetch(apiUrl.value)
 
@@ -90,7 +89,6 @@ onMounted(() => {
         class="w-[60%]"
         allow-clear
         search-button
-        button-text="搜索"
         placeholder="请输入接口地址"
         :loading="isLoading"
         @search="getData"
