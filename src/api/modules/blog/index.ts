@@ -414,6 +414,15 @@ class BlogApi {
     // return fetchHttp(`http://www.nmc.cn/rest/real/${city}`);
     return fetchHttp(`http://www.nmc.cn/rest/weather?stationid=${city}`)
   }
+
+
+    /**
+     *  爱情文案
+     *  @see https://api.aa1.cn/doc/api-wenan-aiqing.html
+     */
+    getLoveText() {
+      return fetchHttp('https://v.api.aa1.cn/api/api-wenan-aiqing/index.php?type=json')
+    }
 }
 
 export default new BlogApi()
