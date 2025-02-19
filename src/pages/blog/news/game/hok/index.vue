@@ -11,7 +11,8 @@ const region = ref('ios_qq')
 
 const hero = ref('百里守约')
 
-const hokData = ref<any>([])
+const hokData = ref<any>({
+})
 
 /**
  *  英雄选项
@@ -674,9 +675,3 @@ onMounted(() => {
 
   </div>
 </template>
-
-<style lang="less" scoped>
-// :deep(.arco-card-body) {
-//   height: calc(100% - 60px);
-// }
-</style>
