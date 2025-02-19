@@ -89,9 +89,6 @@ importers:
       xgplayer:
         specifier: ^3.0.20
         version: 3.0.20(core-js@3.39.0)
-      xgplayer-music:
-        specifier: ^3.0.10
-        version: 3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0))
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^4.1.1
@@ -192,6 +189,9 @@ importers:
       vue-tsc:
         specifier: ^2.1.6
         version: 2.1.8(typescript@5.6.3)
+      xmorse:
+        specifier: ^1.0.0
+        version: 1.0.0
 
 packages:
 
@@ -2390,10 +2390,6 @@ packages:
 
   deep-pick-omit@1.2.1:
     resolution: {integrity: sha512-2J6Kc/m3irCeqVG42T+SaUMesaK7oGWaedGnQQK/+O0gYc+2SP5bKh/KKTE7d7SJ+GCA9UUE1GRzh6oDe0EnGw==}
-
-  deepmerge@2.2.1:
-    resolution: {integrity: sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==}
-    engines: {node: '>=0.10.0'}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -5216,12 +5212,6 @@ packages:
       utf-8-validate:
         optional: true
 
-  xgplayer-music@3.0.20:
-    resolution: {integrity: sha512-Kv6F2BZHauoQPLN4czcVT8zqNfXRmxQFGeKKZi4DxDztk27JCQUOd3jVm/EhsPZBjxjJ8SJycrq73CGjwVJXMg==}
-    peerDependencies:
-      core-js: '>=3.12.1'
-      xgplayer: 3.0.20
-
   xgplayer-subtitles@3.0.20:
     resolution: {integrity: sha512-I1bjsIY+aKOrhYQspLdneOkYg+Vf4cJVGPnDSFnNebnxXl9Mhz5SEpWGzYizMYxL9UvsQ9pgjeEY0o4hkwM+kQ==}
     peerDependencies:
@@ -5242,6 +5232,9 @@ packages:
 
   xmlchars@2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
+
+  xmorse@1.0.0:
+    resolution: {integrity: sha512-J+H7u9jrWLtrslHYRyybYX8SgnXCYU5qUxA79aVBu4jM8xtMnLSPwURb36I8vbVvWLmTcZp6dV/yDt3MW6bmgA==}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -7964,8 +7957,6 @@ snapshots:
   deep-object-diff@1.1.9: {}
 
   deep-pick-omit@1.2.1: {}
-
-  deepmerge@2.2.1: {}
 
   deepmerge@4.3.1: {}
 
@@ -11390,13 +11381,6 @@ snapshots:
 
   ws@8.18.0: {}
 
-  xgplayer-music@3.0.20(core-js@3.39.0)(xgplayer@3.0.20(core-js@3.39.0)):
-    dependencies:
-      core-js: 3.39.0
-      deepmerge: 2.2.1
-      eventemitter3: 4.0.7
-      xgplayer: 3.0.20(core-js@3.39.0)
-
   xgplayer-subtitles@3.0.20(core-js@3.39.0):
     dependencies:
       core-js: 3.39.0
@@ -11416,6 +11400,8 @@ snapshots:
   xml-name-validator@5.0.0: {}
 
   xmlchars@2.2.0: {}
+
+  xmorse@1.0.0: {}
 
   xtend@4.0.2: {}
 

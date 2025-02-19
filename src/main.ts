@@ -27,10 +27,10 @@ const app = createApp(App)
  */
 app.use(createHead())
 
+app.use(directives)
+
 app.use(pinia)
 
 app.use(router)
-
-app.use(directives)
 
 app.mount('#app')

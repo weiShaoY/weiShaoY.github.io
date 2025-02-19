@@ -12,25 +12,6 @@ type ElType = {
   copyData: string | number
 } & HTMLElement
 
-/**
- *  复制的文本
- */
-export type UseCopyParamsType = string | number
-
-const useCopy: Directive = {
-  mounted(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
-    el.copyData = binding.value
-    el.addEventListener('click', handleClick)
-  },
-  updated(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
-    el.copyData = binding.value
-  },
-
-  beforeUnmount(el: ElType) {
-    el.removeEventListener('click', handleClick)
-  },
-}
-
 async function handleClick(this: any) {
   try {
     await navigator.clipboard.writeText(this.copyData)
@@ -41,6 +22,26 @@ async function handleClick(this: any) {
   catch (err) {
     console.error('复制操作不被支持或失败: ', err)
   }
+}
+
+/**
+ *  复制的文本
+ */
+export type UseCopyParamsType = string | number
+
+const useCopy: Directive = {
+  mounted(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
+    console.log('%c Line:34 🍞 el', 'color:#6ec1c2', el)
+    el.copyData = binding.value
+    el.addEventListener('click', handleClick)
+  },
+  updated(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
+    el.copyData = binding.value
+  },
+
+  beforeUnmount(el: ElType) {
+    el.removeEventListener('click', handleClick)
+  },
 }
 
 export default useCopy

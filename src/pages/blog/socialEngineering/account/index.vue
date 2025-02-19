@@ -283,6 +283,11 @@ async function getData() {
   }
 }
 
+function handleSelectChange() {
+  searchValue.value = ''
+  clearData()
+}
+
 onMounted(() => {
   getData()
 })
@@ -299,7 +304,7 @@ onMounted(() => {
         v-model="type"
         class="w-40"
         placeholder="请选择查询类型"
-        @change="getData"
+        @change="handleSelectChange"
       >
         <a-option
           value="qq"
