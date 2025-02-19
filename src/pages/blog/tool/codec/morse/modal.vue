@@ -199,37 +199,20 @@ const morseCodeData = [
 
     </template>
 
-    <!-- <a-table
-      :data="morseCodeData"
-      scrollbar
-      :scroll="{
-        maxHeight: 'calc(100vh - 300px)',
-      }"
-      :pagination="false"
-    >
-      <template
-        #columns
-      >
-        <a-table-column
-          title="字符"
-          data-index="char"
-          align="center"
-          :width="100"
-        />
-
-        <a-table-column
-          title="摩斯电码"
-          data-index="code"
-          align="center"
-        />
-
-      </template>
-    </a-table> -->
-
     <a-descriptions
-      :column="{ xs: 1, md: 2, lg: 4 }"
+      :column="{ xs: 4, md: 4, lg: 4 }"
       bordered
+      align="center"
     >
+      <a-descriptions-item
+        v-for="item in 4"
+        :key="item"
+        :span="1"
+        label="码值"
+      >
+        字符
+      </a-descriptions-item>
+
       <a-descriptions-item
         v-for="item in morseCodeData"
         :key="item.key"

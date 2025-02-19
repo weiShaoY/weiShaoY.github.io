@@ -14,6 +14,12 @@ type ElType = {
 
 async function handleClick(this: any) {
   try {
+    console.log('%c Line:18 🍕 this.copyData', 'color:#93c0a4', this.copyData)
+
+    if (!this.copyData) {
+      return
+    }
+
     await navigator.clipboard.writeText(this.copyData)
     Notification.success({
       content: '复制成功',
@@ -31,7 +37,6 @@ export type UseCopyParamsType = string | number
 
 const useCopy: Directive = {
   mounted(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
-    console.log('%c Line:34 🍞 el', 'color:#6ec1c2', el)
     el.copyData = binding.value
     el.addEventListener('click', handleClick)
   },

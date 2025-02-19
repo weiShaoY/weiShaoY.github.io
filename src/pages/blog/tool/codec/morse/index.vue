@@ -14,8 +14,6 @@ const encodedText = ref('')
 
 function handleSelectChange() {
   inputText.value = ''
-
-  // clearData()
 }
 
 watchEffect(() => {
@@ -77,16 +75,29 @@ onMounted(() => {
       v-model="inputText"
       class="h-[40%] w-full"
       allow-clear
-      placeholder="请输入需要编码的文本"
+      :placeholder="type === 'code' ? '请输入要编码的内容' : '请输入要解码的内容'"
     />
 
     <a-divider />
 
     <div
       v-copy="encodedText"
-      class="h-[40%] border p-2"
+      class="h-[40%] flex cursor-pointer border p-2"
     >
-      {{ encodedText || '编码结果' }}
+
+      <span
+        v-if="encodedText"
+      >
+        {{ encodedText }}
+      </span>
+
+      <span
+        v-else
+        class="m-auto text-6"
+      >
+        {{ type === 'code' ? '编码结果' : '解码结果' }}
+      </span>
+
     </div>
   </div>
 </template>
