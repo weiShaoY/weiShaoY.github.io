@@ -132,10 +132,14 @@ class BlogApi {
    *  @param {string} domain - 域名
    *  @see https://api.pearktrue.cn/info?id=199
    */
-  getWebsiteDetails(domain: string) {
-    return fetchHttp(
+  async getWebsiteDetails(domain: string) {
+    const data = await fetchHttp(
       `https://api.pearktrue.cn/api/website/synthesis.php?url=${domain}`,
     )
+
+    //  data.whois.domainStatusList = data.whois["Domain Status"]
+
+    return data
   }
 
   /**

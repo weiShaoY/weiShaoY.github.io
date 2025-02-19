@@ -516,7 +516,7 @@ const heroSelectOptions = [
  *  清空数据
  */
 function clearData() {
-  hokData.value = []
+  hokData.value = {}
 }
 
 async function getData() {
@@ -544,10 +544,6 @@ async function getData() {
   }
 }
 
-function handleClear() {
-  clearData()
-}
-
 onMounted(() => {
   getData()
 })
@@ -565,7 +561,7 @@ onMounted(() => {
         class="w-40"
         placeholder="请选择大区"
         allow-clear
-        @clear="handleClear"
+        @clear="clearData"
         @change="getData"
       >
         <a-option
@@ -600,7 +596,7 @@ onMounted(() => {
         allow-clear
         allow-search
         :options="heroSelectOptions"
-        @clear="handleClear"
+        @clear="clearData"
         @change="getData"
       />
     </div>

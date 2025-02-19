@@ -67,11 +67,6 @@ async function getData() {
   }
 }
 
-function handleClear() {
-  apiUrl.value = ''
-  clearData()
-}
-
 onMounted(() => {
   getData()
 })
@@ -93,7 +88,7 @@ onMounted(() => {
         :loading="isLoading"
         @search="getData"
         @press-enter="getData"
-        @clear="handleClear"
+        @clear="clearData"
       >
         <template
           #button-icon

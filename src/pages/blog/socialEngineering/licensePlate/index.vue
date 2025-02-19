@@ -44,11 +44,6 @@ async function getData() {
   }
 }
 
-function handleClear() {
-  licensePlate.value = ''
-  clearData()
-}
-
 const typeMap: Record<string, string> = {
   10: '民用',
   20: '军用',
@@ -78,7 +73,7 @@ onMounted(() => {
         :loading="isLoading"
         @search="getData"
         @press-enter="getData"
-        @clear="handleClear"
+        @clear="clearData"
       >
         <template
           #button-icon
