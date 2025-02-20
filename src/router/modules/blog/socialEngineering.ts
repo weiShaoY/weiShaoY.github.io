@@ -3,7 +3,7 @@ import type { AppRouteRecordRaw } from '@/router/types'
 import { BLOG_DEFAULT_LAYOUT } from '@/layouts'
 
 const SocialEngineering: AppRouteRecordRaw = {
-  path: 'socialengineering',
+  path: 'socialEngineering',
   name: 'SocialEngineering',
   meta: {
     locale: '社工',
@@ -23,7 +23,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         icon: 'blog-menu-licensePlate',
       },
       component: import(
-        '@/pages/blog/socialengineering/licensePlate/index.vue'
+        '@/pages/blog/socialEngineering/licensePlate/index.vue'
       ),
     },
     {
@@ -33,7 +33,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         locale: '域名查询',
         icon: 'blog-menu-domain',
       },
-      component: import('@/pages/blog/socialengineering/domain/index.vue'),
+      component: import('@/pages/blog/socialEngineering/domain/index.vue'),
     },
     {
       path: 'loveSpeech',
@@ -42,7 +42,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         locale: '恋爱话术',
         icon: 'blog-menu-loveSpeech',
       },
-      component: import('@/pages/blog/socialengineering/loveSpeech/index.vue'),
+      component: import('@/pages/blog/socialEngineering/loveSpeech/index.vue'),
     },
     {
       path: 'logistic',
@@ -51,7 +51,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         locale: '物流查询',
         icon: 'blog-menu-logistic',
       },
-      component: import('@/pages/blog/socialengineering/logistic/index.vue'),
+      component: import('@/pages/blog/socialEngineering/logistic/index.vue'),
     },
     {
       path: 'account',
@@ -60,7 +60,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         locale: '账号查询',
         icon: 'blog-menu-account',
       },
-      component: import('@/pages/blog/socialengineering/account/index.vue'),
+      component: import('@/pages/blog/socialEngineering/account/index.vue'),
     },
     {
       path: 'complain',
@@ -69,7 +69,7 @@ const SocialEngineering: AppRouteRecordRaw = {
         locale: '投诉举报',
         icon: 'blog-menu-complain',
       },
-      component: import('@/pages/blog/socialengineering/complain/index.vue'),
+      component: import('@/pages/blog/socialEngineering/complain/index.vue'),
     },
   ],
 }
