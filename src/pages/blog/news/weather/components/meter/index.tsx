@@ -1,4 +1,4 @@
-import type { WeatherType } from "../../type";
+import type { WeatherType } from "../../types";
 import type { EChartsOption } from "echarts";
 import Chart from "@/components/chart";
 

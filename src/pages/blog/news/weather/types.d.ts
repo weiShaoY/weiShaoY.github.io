@@ -1,7 +1,7 @@
 /**
  *  实时天气数据
  */
-type RealWeatherData = {
+type RealWeatherDataType = {
 
   /**
    * 站点信息

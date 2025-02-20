@@ -7,7 +7,6 @@ import ChinaMap from './china-map.vue'
   <div
     class="h-full w-full"
   >
-
     <ChinaMap />
   </div>
 </template>

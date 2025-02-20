@@ -59,6 +59,25 @@ const minTempData = computed(() => data.tempchart.map(item => item.min_temp))
  */
 const minTemp = computed(() => Math.floor((Math.min(...minTempData.value) - 10) / 10) * 10)
 
+const imageMap = {
+  0: day_0,
+  1: day_1,
+  2: day_2,
+  3: day_3,
+  7: day_7,
+  8: day_8,
+  13: day_13,
+  14: day_14,
+  night_0,
+  night_1,
+  night_2,
+  night_3,
+  night_7,
+  night_8,
+  night_13,
+  night_14,
+}
+
 const option = computed<EChartsOption>(() => {
   const formatDate = (value: string): string => {
     const [year, month, day] = value.split('/')
@@ -75,17 +94,11 @@ const option = computed<EChartsOption>(() => {
     dayAfterTomorrow.setDate(today.getDate() + 2)
     const formattedDate = `${month}/${day}`
 
-    if (date.toDateString() === today.toDateString()) {
-      return `{highlightDate|${formattedDate}}\n{highlightText|今天}`
-    }
+    if (date.toDateString() === today.toDateString()) { return `{highlightDate|${formattedDate}}\n{highlightText|今天}` }
 
-    if (date.toDateString() === tomorrow.toDateString()) {
-      return `{highlightDate|${formattedDate}}\n{highlightText|明天}`
-    }
+    if (date.toDateString() === tomorrow.toDateString()) { return `{highlightDate|${formattedDate}}\n{highlightText|明天}` }
 
-    if (date.toDateString() === dayAfterTomorrow.toDateString()) {
-      return `{highlightDate|${formattedDate}}\n{highlightText|后天}`
-    }
+    if (date.toDateString() === dayAfterTomorrow.toDateString()) { return `{highlightDate|${formattedDate}}\n{highlightText|后天}` }
 
     const dayOfWeek = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][date.getDay()]
 
@@ -93,55 +106,23 @@ const option = computed<EChartsOption>(() => {
   }
 
   const formatImage = (value: string, type: string): string => {
-    if (value === '9999') {
-      return ''
-    }
+    if (value === '9999') { return '' }
 
     return `{${type}_${value}|}`
-  }
-
-  const imageMap = {
-    day_0,
-    day_1,
-    day_2,
-    day_3,
-    day_7,
-    day_8,
-    day_13,
-    day_14,
-    night_0,
-    night_1,
-    night_2,
-    night_3,
-    night_7,
-    night_8,
-    night_13,
-    night_14,
   }
 
   const createRichObject = (prefix: string) => {
     return Object.fromEntries(
       Object.entries(imageMap)
-        .filter(([key]) => key.startsWith(prefix)) // 根据前缀过滤
-        .map(([key, val]) => [
-          key, // 保留原始的键名
-          {
-            backgroundColor: {
-              image: val, // 使用对应的图片
-            },
-            fontSize: 40, // 设置字体大小
+        .filter(([key]) => key.startsWith(prefix))
+        .map(([key, val]) => [key.replace(`${prefix}_`, ''), {
+          backgroundColor: {
+            image: val,
           },
-        ]),
+          fontSize: 40,
+        }]),
     )
   }
-
-  // 示例使用，生成 day 和 night 的 rich 对象
-  const dayRichObject = createRichObject('day')
-
-  const nightRichObject = createRichObject('night')
-
-  console.log(dayRichObject)
-  console.log(nightRichObject)
 
   return {
     tooltip: {
@@ -221,7 +202,58 @@ const option = computed<EChartsOption>(() => {
         axisLabel: {
           formatter: (value: string) => formatImage(value, 'day'),
 
-          rich: createRichObject('day'),
+          // rich: createRichObject('day'),
+          rich: {
+            day_0: {
+              backgroundColor: {
+                image: day_0,
+              },
+              fontSize: 40,
+            },
+            day_1: {
+              backgroundColor: {
+                image: day_1,
+              },
+              fontSize: 40,
+            },
+
+            day_2: {
+              backgroundColor: {
+                image: day_2,
+              },
+              fontSize: 40,
+            },
+            day_3: {
+              backgroundColor: {
+                image: day_3,
+              },
+              fontSize: 40,
+            },
+            day_7: {
+              backgroundColor: {
+                image: day_7,
+              },
+              fontSize: 40,
+            },
+            day_8: {
+              backgroundColor: {
+                image: day_8,
+              },
+              fontSize: 40,
+            },
+            day_13: {
+              backgroundColor: {
+                image: day_13,
+              },
+              fontSize: 40,
+            },
+            day_14: {
+              backgroundColor: {
+                image: day_14,
+              },
+              fontSize: 40,
+            },
+          },
         },
       },
       {
@@ -240,7 +272,6 @@ const option = computed<EChartsOption>(() => {
         data: data.tempchart.map(item => item.night_img),
         axisLabel: {
           formatter: (value: string) => formatImage(value, 'night'),
-
           rich: createRichObject('night'),
         },
       },
@@ -314,7 +345,7 @@ const option = computed<EChartsOption>(() => {
 
 <template>
   <div
-    class="h-[500px] w-full"
+    class="h-[500px] w-full bg-amber"
   >
     <Chart
       :option="option"
@@ -323,3 +354,4 @@ const option = computed<EChartsOption>(() => {
 </template>
 
 <style lang="less" scoped></style>
+``` ▋

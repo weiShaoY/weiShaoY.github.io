@@ -1,6 +1,6 @@
 import type { EChartsOption } from 'echarts'
 
-import type { WeatherType } from '../../type'
+import type { WeatherType } from '../../types'
 
 import Chart from '@/components/chart'
 
