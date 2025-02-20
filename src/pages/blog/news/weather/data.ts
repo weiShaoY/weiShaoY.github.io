@@ -1,4 +1,4 @@
-export const optionData = [
+export const provinceCityData = [
 	{
 		code: "ABJ",
 		name: "北京市",

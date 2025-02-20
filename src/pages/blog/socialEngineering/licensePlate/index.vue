@@ -52,8 +52,8 @@ const typeMap: Record<string, string> = {
   50: '武警',
 }
 
-onMounted(() => {
-  getData()
+onMounted(async() => {
+  await getData()
 })
 </script>
 

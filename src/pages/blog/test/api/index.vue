@@ -67,8 +67,8 @@ async function getData() {
   }
 }
 
-onMounted(() => {
-  getData()
+onMounted(async() => {
+  await getData()
 })
 </script>
 

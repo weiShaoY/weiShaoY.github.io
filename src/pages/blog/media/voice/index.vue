@@ -68,8 +68,8 @@ function handlePlayNext() {
   getData()
 }
 
-onMounted(() => {
-  getData()
+onMounted(async() => {
+  await getData()
 })
 </script>
 

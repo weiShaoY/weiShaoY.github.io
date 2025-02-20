@@ -1,6 +1,6 @@
 import { Select, Spin } from "antd";
 import { useState, useEffect, useCallback } from "react";
-import { optionData } from "./data";
+import { provinceCityData } from "./data";
 import { BlogApi } from "@/api";
 import { toast } from "sonner";
 import Card from "@/components/card";
@@ -14,7 +14,7 @@ import { Tabs } from "antd";
 /**
  *  省份选择框的选项
  */
-const provinceSelectOptions = optionData.map((region) => ({
+const provinceSelectOptions = provinceCityData.map((region) => ({
 	value: region.code,
 	label: region.name,
 }));
@@ -22,7 +22,7 @@ const provinceSelectOptions = optionData.map((region) => ({
 /**
  *  根据省份获取对应城市选项
  */
-const citySelectOptions = optionData.reduce(
+const citySelectOptions = provinceCityData.reduce(
 	(acc, region) => {
 		acc[region.code] = region.children.map((city) => ({
 			value: city.code,

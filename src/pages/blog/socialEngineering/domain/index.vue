@@ -256,8 +256,8 @@ function handleDate(date: string) {
   return ''
 }
 
-onMounted(() => {
-  getData()
+onMounted(async() => {
+  await getData()
 })
 </script>
 

@@ -23,7 +23,7 @@ const Media: AppRouteRecordRaw = {
         locale: '壁纸',
         icon: 'blog-menu-wallpaper',
       },
-      component: import('@/pages/blog/media/wallpaper/index.vue'),
+      component: () => import('@/pages/blog/media/wallpaper/index.vue'),
     },
     {
       path: 'video',
@@ -32,7 +32,7 @@ const Media: AppRouteRecordRaw = {
         locale: '视频',
         icon: 'blog-menu-video',
       },
-      component: import('@/pages/blog/media/video/index.vue'),
+      component: () => import('@/pages/blog/media/video/index.vue'),
     },
     {
       path: 'voice',
@@ -41,7 +41,7 @@ const Media: AppRouteRecordRaw = {
         locale: '语音',
         icon: 'blog-menu-voice',
       },
-      component: import('@/pages/blog/media/voice/index.vue'),
+      component: () => import('@/pages/blog/media/voice/index.vue'),
     },
     {
       path: 'music',
@@ -50,7 +50,7 @@ const Media: AppRouteRecordRaw = {
         locale: '音乐',
         icon: 'blog-menu-music',
       },
-      component: import('@/pages/blog/media/music/index.vue'),
+      component: () => import('@/pages/blog/media/music/index.vue'),
     },
   ],
 }

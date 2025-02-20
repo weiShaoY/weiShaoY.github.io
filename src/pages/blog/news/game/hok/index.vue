@@ -516,7 +516,8 @@ const heroSelectOptions = [
  *  清空数据
  */
 function clearData() {
-  hokData.value = {}
+  hokData.value = {
+  }
 }
 
 async function getData() {
@@ -544,8 +545,8 @@ async function getData() {
   }
 }
 
-onMounted(() => {
-  getData()
+onMounted(async () => {
+  await getData()
 })
 </script>
 

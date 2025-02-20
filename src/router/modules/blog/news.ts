@@ -37,7 +37,7 @@ const News: AppRouteRecordRaw = {
         locale: '电影',
         icon: 'blog-menu-movie',
       },
-      component: import('@/pages/blog/news/movie/index.vue'),
+      component: () => import('@/pages/blog/news/movie/index.vue'),
     },
     {
       path: 'weather',
@@ -46,7 +46,7 @@ const News: AppRouteRecordRaw = {
         locale: '天气',
         icon: 'blog-menu-weather',
       },
-      component: import('@/pages/blog/news/weather/index.vue'),
+      component: () => import('@/pages/blog/news/weather/index.vue'),
     },
 
     {
@@ -67,7 +67,7 @@ const News: AppRouteRecordRaw = {
             locale: '王者荣耀',
             icon: 'blog-menu-hok',
           },
-          component: import('@/pages/blog/news/game/hok/index.vue'),
+          component: () => import('@/pages/blog/news/game/hok/index.vue'),
         },
       ],
     },
@@ -89,7 +89,7 @@ const News: AppRouteRecordRaw = {
             locale: '黄金',
             icon: 'blog-menu-gold',
           },
-          component: import('@/pages/blog/news/price/gold/index.vue'),
+          component: () => import('@/pages/blog/news/price/gold/index.vue'),
         },
         {
           path: 'oil',
@@ -98,7 +98,7 @@ const News: AppRouteRecordRaw = {
             locale: '燃油',
             icon: 'blog-menu-oil',
           },
-          component: import('@/pages/blog/news/price/oil/index.vue'),
+          component: () => import('@/pages/blog/news/price/oil/index.vue'),
         },
         {
           path: 'cigarette',
@@ -107,7 +107,7 @@ const News: AppRouteRecordRaw = {
             locale: '香烟',
             icon: 'blog-menu-cigarette',
           },
-          component: import('@/pages/blog/news/price/cigarette/index.vue'),
+          component: () => import('@/pages/blog/news/price/cigarette/index.vue'),
         },
       ],
     },

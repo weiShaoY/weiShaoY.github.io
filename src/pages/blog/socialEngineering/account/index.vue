@@ -288,8 +288,8 @@ function handleSelectChange() {
   clearData()
 }
 
-onMounted(() => {
-  getData()
+onMounted(async() => {
+  await getData()
 })
 </script>
 

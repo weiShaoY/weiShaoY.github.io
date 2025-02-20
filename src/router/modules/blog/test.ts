@@ -23,7 +23,7 @@ const Test: AppRouteRecordRaw = {
         locale: '接口',
         icon: 'blog-menu-api',
       },
-      component: import('@/pages/blog/test/api/index.vue'),
+      component: () => import('@/pages/blog/test/api/index.vue'),
     },
     {
       path: 'component',
@@ -32,7 +32,7 @@ const Test: AppRouteRecordRaw = {
         locale: '组件',
         icon: 'blog-menu-component',
       },
-      component: import('@/pages/blog/test/component/index.vue'),
+      component: () => import('@/pages/blog/test/component/index.vue'),
     },
 
   ],
