@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+
 import MobileMenu from './components/mobile-menu.vue'
 
 import PcMenu from './components/pc-menu.vue'
@@ -33,6 +34,8 @@ const menuList = [
     label: 'Test',
   },
 ]
+
+const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
 </script>
 
 <template>
@@ -61,8 +64,17 @@ const menuList = [
           :menu-list="menuList"
         />
 
-        <!-- 托管紧开发模式显示  -->
-         
+        <!-- 仅开发环境显示  -->
+        <a-link
+          v-if="isDevelopment"
+          href="https://weishaoy.github.io/"
+          target="_blank"
+        >
+          <SvgIcon
+            :size="32"
+            icon="home-navbar-demo"
+          />
+        </a-link>
       </div>
     </div>
   </nav>
