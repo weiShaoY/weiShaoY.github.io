@@ -169,7 +169,9 @@ const provinceSelectOptions = provinceCityData.map((item) => {
  * 根据当前选择的省份来动态生成城市列表
  */
 const citySelectOptions = computed(() => {
-  const selectedProvince = provinceCityData.find(region => region.code === province.value)
+  const selectedProvince = provinceCityData.find(
+    region => region.code === province.value,
+  )
 
   return selectedProvince
     ? selectedProvince.children.map(city => ({
