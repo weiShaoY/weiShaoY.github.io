@@ -42,7 +42,7 @@ async function getData() {
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -76,7 +76,7 @@ onMounted(async() => {
         <template
           #button-default
         >
-          搜索
+          香烟搜索
         </template>
       </a-input-search>
     </div>

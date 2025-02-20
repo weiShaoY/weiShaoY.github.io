@@ -33,15 +33,16 @@ const SocialEngineering: AppRouteRecordRaw = {
       },
       component: () => import('@/pages/blog/socialEngineering/domain/index.vue'),
     },
-    {
-      path: 'loveSpeech',
-      name: 'LoveSpeech',
-      meta: {
-        locale: '恋爱话术',
-        icon: 'blog-menu-loveSpeech',
-      },
-      component: () => import('@/pages/blog/socialEngineering/loveSpeech/index.vue'),
-    },
+
+    // {
+    //   path: 'loveSpeech',
+    //   name: 'LoveSpeech',
+    //   meta: {
+    //     locale: '恋爱话术',
+    //     icon: 'blog-menu-loveSpeech',
+    //   },
+    //   component: () => import('@/pages/blog/socialEngineering/loveSpeech/index.vue'),
+    // },
     {
       path: 'logistic',
       name: 'Logistic',

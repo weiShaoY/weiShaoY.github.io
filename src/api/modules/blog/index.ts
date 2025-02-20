@@ -147,7 +147,9 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=143
    */
   async getRandomGreenTeaVoice() {
-    const data = await fetchHttp('https://api.pearktrue.cn/api/greentea/?type=mp3')
+    const data = await fetchHttp(
+      'https://api.pearktrue.cn/api/greentea/?type=mp3',
+    )
 
     return data.audiopath
   }
@@ -157,7 +159,9 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=146
    */
   async getRandomDuiRenVoice() {
-    const data = await fetchHttp('https://api.pearktrue.cn/api/duiren/?type=mp3')
+    const data = await fetchHttp(
+      'https://api.pearktrue.cn/api/duiren/?type=mp3',
+    )
 
     return data.audiopath
   }
@@ -167,7 +171,9 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=145
    */
   async getRandomYujieVoice() {
-    const data = await fetchHttp('https://api.pearktrue.cn/api/yujie/?type=mp3')
+    const data = await fetchHttp(
+      'https://api.pearktrue.cn/api/yujie/?type=mp3',
+    )
 
     return data.audiopath
   }
@@ -205,7 +211,7 @@ class BlogApi {
    */
   getDomainExtensionPriceRanking(
     domainExtension: string,
-		type: 'new' | 'renew' | 'transfer' = 'new',
+    type: 'new' | 'renew' | 'transfer' = 'new',
   ) {
     return fetchHttp(
       `https://api.pearktrue.cn/api/website/domain/?domain=${domainExtension}&type=${type}`,
@@ -252,100 +258,100 @@ class BlogApi {
   getCigarettePrice(cigarette: string) {
     // return fetchHttp("https://api.lolimi.cn/API/xyan/api.php?msg=白沙");
 
-		type CigaretteType = {
+    type CigaretteType = {
 
-		  /**
-				 *  香烟名称
-				 */
-		  name: string
+      /**
+       *  香烟名称
+       */
+      name: string
 
-		  /**
-				 *  其他属性，键是字符串，值是字符串或未定义
-				 */
-		  [key: string]: string | undefined | number
+      /**
+       *  其他属性，键是字符串，值是字符串或未定义
+       */
+      [key: string]: string | undefined | number
 
-		  /**
-				 *  新增 id 字段，表示香烟的唯一标识
-				 */
-		  id: number
-		}
+      /**
+       *  新增 id 字段，表示香烟的唯一标识
+       */
+      id: number
+    }
 
-		function convertPrice(price: string): number {
-		  // 使用正则表达式提取数字部分
-		  const match = price.match(/(\d+(\.\d+)?)/)
+    function convertPrice(price: string): number {
+      // 使用正则表达式提取数字部分
+      const match = price.match(/(\d+(\.\d+)?)/)
 
-		  // 如果匹配到数字，则返回数字，否则返回 null
-		  if (match) {
-		    return Number.parseFloat(match[0])
-		  }
+      // 如果匹配到数字，则返回数字，否则返回 null
+      if (match) {
+        return Number.parseFloat(match[0])
+      }
 
-		  return 0
-		}
+      return 0
+    }
 
-		/**
-		 * 格式化香烟信息数据为数组
-		 * @param {string} data - 包含香烟信息的原始数据字符串
-		 * @returns {Array} 格式化后的香烟信息数组
-		 */
-		function formatCigaretteData(data: string): Array<CigaretteType> {
-		  const formattedData: Array<CigaretteType> = []
+    /**
+     * 格式化香烟信息数据为数组
+     * @param {string} data - 包含香烟信息的原始数据字符串
+     * @returns {Array} 格式化后的香烟信息数组
+     */
+    function formatCigaretteData(data: string): Array<CigaretteType> {
+      const formattedData: Array<CigaretteType> = []
 
-		  // 按照 "====================" 分割各条香烟信息
-		  const cigarettes = data.split('====================')
+      // 按照 "====================" 分割各条香烟信息
+      const cigarettes = data.split('====================')
 
-		  cigarettes.forEach((item, index) => {
-		    // 过滤掉空字符串
-		    if (item.trim()) {
-		      // 按行分割每个香烟的属性
-		      const lines = item
-		        .split('\n')
-		        .map(line => line.trim())
-		        .filter(line => line !== '')
+      cigarettes.forEach((item, index) => {
+        // 过滤掉空字符串
+        if (item.trim()) {
+          // 按行分割每个香烟的属性
+          const lines = item
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line !== '')
 
-		      // 提取香烟名称
-		      const name = lines[0].replace('香烟: ', '').trim()
+          // 提取香烟名称
+          const name = lines[0].replace('香烟: ', '').trim()
 
-		      // 创建一个对象存储香烟信息
-		      const cigaretteInfo: CigaretteType = {
-		        name,
-		        id: index + 1,
-		      }
+          // 创建一个对象存储香烟信息
+          const cigaretteInfo: CigaretteType = {
+            name,
+            id: index + 1,
+          }
 
-		      // 提取其他属性
-		      lines.slice(1).forEach((line) => {
-		        const [key, value] = line.split('：')
+          // 提取其他属性
+          lines.slice(1).forEach((line) => {
+            const [key, value] = line.split('：')
 
-		        if (key && value) {
-		          cigaretteInfo[key.trim()] = value.trim()
-		        }
+            if (key && value) {
+              cigaretteInfo[key.trim()] = value.trim()
+            }
 
-		        if (key === '单盒参考价' || key === '条盒参考价') {
-		          cigaretteInfo[key.trim()] = convertPrice(value)
-		        }
-		      })
+            if (key === '单盒参考价' || key === '条盒参考价') {
+              cigaretteInfo[key.trim()] = convertPrice(value)
+            }
+          })
 
-		      // 将格式化后的香烟对象添加到数组中
-		      formattedData.push(cigaretteInfo)
-		    }
-		  })
-		  return formattedData
-		}
+          // 将格式化后的香烟对象添加到数组中
+          formattedData.push(cigaretteInfo)
+        }
+      })
+      return formattedData
+    }
 
-		async function getData() {
-		  const response = await fetch(
-		    `https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
-		  )
+    async function getData() {
+      const response = await fetch(
+        `https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
+      )
 
-		  if (!response.ok) {
-		    throw new Error('网络请求失败')
-		  }
+      if (!response.ok) {
+        throw new Error('网络请求失败')
+      }
 
-		  const data = await response.text()
+      const data = await response.text()
 
-		  return formatCigaretteData(data)
-		}
+      return formatCigaretteData(data)
+    }
 
-		return getData()
+    return getData()
   }
 
   /**
@@ -415,14 +421,25 @@ class BlogApi {
     return fetchHttp(`http://www.nmc.cn/rest/weather?stationid=${city}`)
   }
 
+  /**
+   *  爱情文案
+   *  @see https://api.aa1.cn/doc/api-wenan-aiqing.html
+   */
+  getLoveText() {
+    return fetchHttp(
+      'https://v.api.aa1.cn/api/api-wenan-aiqing/index.php?type=json',
+    )
+  }
 
-    /**
-     *  爱情文案
-     *  @see https://api.aa1.cn/doc/api-wenan-aiqing.html
-     */
-    getLoveText() {
-      return fetchHttp('https://v.api.aa1.cn/api/api-wenan-aiqing/index.php?type=json')
-    }
+  /**
+   *  可用快递查询
+   *  @see https://api.aa1.cn/doc/szx-express-tracking.html
+   */
+  getExpressTracking(tracking: string) {
+    return fetchHttp(
+      `https://api.songzixian.com/api/express/tracking?dataSource=nationwide_express&trackingNumber=${tracking}`,
+    )
+  }
 }
 
 export default new BlogApi()

@@ -52,7 +52,7 @@ const typeMap: Record<string, string> = {
   50: '武警',
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -86,7 +86,7 @@ onMounted(async() => {
         <template
           #button-default
         >
-          搜索
+          车牌搜索
         </template>
       </a-input-search>
 

@@ -256,7 +256,7 @@ function handleDate(date: string) {
   return ''
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -290,7 +290,7 @@ onMounted(async() => {
         <template
           #button-default
         >
-          搜索
+          域名搜索
         </template>
       </a-input-search>
     </div>
