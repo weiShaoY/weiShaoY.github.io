@@ -35,29 +35,35 @@ import night_13 from '@/assets/svgs/blog-weather-night_13.svg'
 
 import night_14 from '@/assets/svgs/blog-weather-night_14.svg'
 
-const { data } = defineProps<{
+const data = defineModel<WeatherType>({
+  required: true,
+})
 
-  /**
-   *  天气数据
-   */
-  data: WeatherType
-}>()
+const timeAxis = computed(() =>
+  data.value.tempchart.map(item => item.time || ''),
+)
 
-const timeAxis = computed(() => data.tempchart.map(item => item.time || ''))
-
-const maxTempData = computed(() => data.tempchart.map(item => item.max_temp))
+const maxTempData = computed(() =>
+  data.value.tempchart.map(item => item.max_temp),
+)
 
 /**
  *  最高温度
  */
-const maxTemp = computed(() => Math.ceil((Math.max(...maxTempData.value) + 10) / 10) * 10)
+const maxTemp = computed(
+  () => Math.ceil((Math.max(...maxTempData.value) + 10) / 10) * 10,
+)
 
-const minTempData = computed(() => data.tempchart.map(item => item.min_temp))
+const minTempData = computed(() =>
+  data.value.tempchart.map(item => item.min_temp),
+)
 
 /**
  *  最低温度
  */
-const minTemp = computed(() => Math.floor((Math.min(...minTempData.value) - 10) / 10) * 10)
+const minTemp = computed(
+  () => Math.floor((Math.min(...minTempData.value) - 10) / 10) * 10,
+)
 
 const option = computed<EChartsOption>(() => {
   const formatDate = (value: string): string => {
@@ -87,7 +93,9 @@ const option = computed<EChartsOption>(() => {
       return `{highlightDate|${formattedDate}}\n{highlightText|后天}`
     }
 
-    const dayOfWeek = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][date.getDay()]
+    const dayOfWeek = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][
+      date.getDay()
+    ]
 
     return `${formattedDate}\n${dayOfWeek}`
   }
@@ -153,7 +161,8 @@ const option = computed<EChartsOption>(() => {
         let relVal = params[0].name
 
         params.forEach((param: any) => {
-          const isTemperature = param.seriesName === '最高温度' || param.seriesName === '最低温度'
+          const isTemperature
+            = param.seriesName === '最高温度' || param.seriesName === '最低温度'
 
           const isValidValue = param.value !== '9999'
 
@@ -217,7 +226,7 @@ const option = computed<EChartsOption>(() => {
         axisPointer: {
           show: false,
         },
-        data: data.tempchart.map(item => item.day_img),
+        data: data.value.tempchart.map(item => item.day_img),
         axisLabel: {
           formatter: (value: string) => formatImage(value, 'day'),
 
@@ -237,7 +246,7 @@ const option = computed<EChartsOption>(() => {
         axisPointer: {
           show: false,
         },
-        data: data.tempchart.map(item => item.night_img),
+        data: data.value.tempchart.map(item => item.night_img),
         axisLabel: {
           formatter: (value: string) => formatImage(value, 'night'),
 
@@ -298,14 +307,14 @@ const option = computed<EChartsOption>(() => {
         type: 'line',
         smooth: true,
         color: '#FFA500',
-        data: data.tempchart.map(item => item.day_text),
+        data: data.value.tempchart.map(item => item.day_text),
       },
       {
         name: '夜晚天气',
         type: 'line',
         smooth: true,
         color: '#8A2BE2',
-        data: data.tempchart.map(item => item.night_text),
+        data: data.value.tempchart.map(item => item.night_text),
       },
     ],
   }

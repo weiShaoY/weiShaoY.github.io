@@ -5,9 +5,15 @@ import { BlogApi } from '@/api'
 
 import { Notification } from '@arco-design/web-vue'
 
+import Climate from './components/climate/index.vue'
+
+import Meter from './components/meter/index.vue'
+
+import PassedChart from './components/passedChart/index.vue'
+
 import TempChart from './components/tempChart/index.vue'
 
-import { provinceCityData } from './data' // 当前选择的城市
+import { provinceCityData } from './data'
 
 const isLoading = ref(false)
 
@@ -68,33 +74,7 @@ const data = ref<WeatherType>({
     },
     publish_time: '2024-01-01T00:00:00Z',
     detail: [
-      {
-        date: '',
-        pt: '',
-        day: {
-          weather: {
-            info: 'Clear',
-            img: '01',
-            temperature: '20',
-          },
-          wind: {
-            direct: 'North',
-            power: '1级',
-          },
-        },
-        night: {
-          weather: {
-            info: 'Clear',
-            img: '01',
-            temperature: '15',
-          },
-          wind: {
-            direct: 'North',
-            power: '1级',
-          },
-        },
-        precipitation: 0,
-      },
+
     ],
   },
   air: {
@@ -105,46 +85,12 @@ const data = ref<WeatherType>({
     aqiCode: '99031;99032;99033;99035;99037;99038;99039;99040',
   },
   tempchart: [
-    // {
-    //   time: '2024-01-01T12:00:00Z',
-    //   max_temp: 25,
-    //   min_temp: 18,
-    //   day_img: '01',
-    //   day_text: 'Clear',
-    //   night_img: '01',
-    //   night_text: 'Clear',
-    // },
   ],
-  passedchart: [
-    {
-      rain1h: 0,
-      rain6h: 0,
-      rain12h: 0,
-      rain24h: 0,
-      temperature: 20,
-      tempDiff: '',
-      humidity: 50,
-      pressure: 1013,
-      windDirection: 0,
-      windSpeed: 0,
-      time: '2024-01-01T00:00:00Z',
-    },
-  ],
+  passedchart: [],
   climate: {
     time: '',
     month: [
-      {
-        month: 1,
-        maxTemp: 25,
-        minTemp: 18,
-        precipitation: 0,
-      },
-      {
-        month: 2,
-        maxTemp: 25,
-        minTemp: 18,
-        precipitation: 0,
-      },
+
     ],
   },
   radar: {
@@ -237,35 +183,7 @@ function clearData() {
         url: 'http://default.url',
       },
       publish_time: '2024-01-01T00:00:00Z',
-      detail: [
-        {
-          date: '',
-          pt: '',
-          day: {
-            weather: {
-              info: 'Clear',
-              img: '01',
-              temperature: '20',
-            },
-            wind: {
-              direct: 'North',
-              power: '1级',
-            },
-          },
-          night: {
-            weather: {
-              info: 'Clear',
-              img: '01',
-              temperature: '15',
-            },
-            wind: {
-              direct: 'North',
-              power: '1级',
-            },
-          },
-          precipitation: 0,
-        },
-      ],
+      detail: [],
     },
     air: {
       forecasttime: '2024-12-19 15:00',
@@ -274,48 +192,11 @@ function clearData() {
       text: '良',
       aqiCode: '99031;99032;99033;99035;99037;99038;99039;99040',
     },
-    tempchart: [
-      {
-        time: '2024-01-01T12:00:00Z',
-        max_temp: 25,
-        min_temp: 18,
-        day_img: '01',
-        day_text: 'Clear',
-        night_img: '01',
-        night_text: 'Clear',
-      },
-    ],
-    passedchart: [
-      {
-        rain1h: 0,
-        rain6h: 0,
-        rain12h: 0,
-        rain24h: 0,
-        temperature: 20,
-        tempDiff: '',
-        humidity: 50,
-        pressure: 1013,
-        windDirection: 0,
-        windSpeed: 0,
-        time: '2024-01-01T00:00:00Z',
-      },
-    ],
+    tempchart: [],
+    passedchart: [],
     climate: {
       time: '',
-      month: [
-        {
-          month: 1,
-          maxTemp: 25,
-          minTemp: 18,
-          precipitation: 0,
-        },
-        {
-          month: 2,
-          maxTemp: 25,
-          minTemp: 18,
-          precipitation: 0,
-        },
-      ],
+      month: [],
     },
     radar: {
       title: '实时雷达数据',
@@ -407,17 +288,22 @@ onMounted(async () => {
     <div
       class=""
     >
+      <Meter
+        v-if="data.tempchart.length && !isLoading"
+        v-model="data"
+      />
+
       <a-tabs
         class="w-full"
-        default-active-key="1"
+        default-active-key="2"
       >
         <a-tab-pane
           key="1"
           title="预报数据"
         >
           <TempChart
-            v-if="data.tempchart"
-            :data="data"
+            v-if="data.tempchart.length"
+            v-model="data"
           />
         </a-tab-pane>
 
@@ -425,10 +311,19 @@ onMounted(async () => {
           key="2"
           title="24小时实时天气"
         >
-          2
+          <PassedChart
+            v-if="data.passedchart.length"
+            v-model="data"
+          />
         </a-tab-pane>
       </a-tabs>
-      <!-- {{ data }} -->
+
+      <a-divider />
+
+      <Climate
+        v-if="data.tempchart.length"
+        v-model="data"
+      />
     </div>
   </div>
 </template>

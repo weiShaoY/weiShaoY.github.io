@@ -1,6 +1,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-const visible = defineModel() as any
+const visible = defineModel({
+  type: Boolean,
+})
 
 const base64Data = [
   {
