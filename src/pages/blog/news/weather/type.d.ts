@@ -2,676 +2,723 @@
  *  实时天气数据
  */
 type RealWeatherData = {
-	/**
-	 * 站点信息
-	 */
-	station: {
-		/**
-		 * 站点代码
-		 */
-		code: string;
 
-		/**
-		 * 所在省份
-		 */
-		province: string;
+  /**
+   * 站点信息
+   */
+  station: {
 
-		/**
-		 * 所在城市
-		 */
-		city: string;
+    /**
+     * 站点代码
+     */
+    code: string
 
-		/**
-		 * 站点网址
-		 */
-		url: string;
-	};
+    /**
+     * 所在省份
+     */
+    province: string
 
-	/**
-	 * 实况发布时间
-	 */
-	publish_time: string;
+    /**
+     * 所在城市
+     */
+    city: string
 
-	/**
-	 * 天气信息
-	 */
-	weather: {
-		/**
-		 * 当前温度
-		 */
-		temperature: number;
+    /**
+     * 站点网址
+     */
+    url: string
+  }
 
-		/**
-		 * 温度差（与前次温度对比）
-		 */
-		temperatureDiff: number;
+  /**
+   * 实况发布时间
+   */
+  publish_time: string
 
-		/**
-		 * 气压
-		 */
-		airpressure: number;
+  /**
+   * 天气信息
+   */
+  weather: {
 
-		/**
-		 * 湿度
-		 */
-		humidity: number;
+    /**
+     * 当前温度
+     */
+    temperature: number
 
-		/**
-		 * 降雨量
-		 */
-		rain: number;
+    /**
+     * 温度差（与前次温度对比）
+     */
+    temperatureDiff: number
 
-		/**
-		 * 体感舒适度（以温度和湿度等因素计算）
-		 */
-		rcomfort: number;
+    /**
+     * 气压
+     */
+    airpressure: number
 
-		/**
-		 * 体感指数
-		 */
-		icomfort: number;
+    /**
+     * 湿度
+     */
+    humidity: number
 
-		/**
-		 * 天气状况简述
-		 */
-		info: string;
+    /**
+     * 降雨量
+     */
+    rain: number
 
-		/**
-		 * 天气图标（如图标编号）
-		 */
-		img: string;
+    /**
+     * 体感舒适度（以温度和湿度等因素计算）
+     */
+    rcomfort: number
 
-		/**
-		 * 体感温度
-		 */
-		feelst: number;
-	};
+    /**
+     * 体感指数
+     */
+    icomfort: number
 
-	/**
-	 * 风力信息
-	 */
-	wind: {
-		/**
-		 * 风向（如“西北风”）
-		 */
-		direct: string;
+    /**
+     * 天气状况简述
+     */
+    info: string
 
-		/**
-		 * 风向角度（如“319”表示西北风的角度）
-		 */
-		degree: number;
+    /**
+     * 天气图标（如图标编号）
+     */
+    img: string
 
-		/**
-		 * 风力等级（如“3级”）
-		 */
-		power: string;
+    /**
+     * 体感温度
+     */
+    feelst: number
+  }
 
-		/**
-		 * 风速（单位：米/秒）
-		 */
-		speed: number;
-	};
+  /**
+   * 风力信息
+   */
+  wind: {
 
-	/**
-	 * 预警信息
-	 */
-	warn: {
-		/**
-		 * 警报信息
-		 */
-		alert: string;
+    /**
+     * 风向（如“西北风”）
+     */
+    direct: string
 
-		/**
-		 * 预警图片链接
-		 */
-		pic: string;
+    /**
+     * 风向角度（如“319”表示西北风的角度）
+     */
+    degree: number
 
-		/**
-		 * 预警所在省份
-		 */
-		province: string;
+    /**
+     * 风力等级（如“3级”）
+     */
+    power: string
 
-		/**
-		 * 预警所在城市
-		 */
-		city: string;
+    /**
+     * 风速（单位：米/秒）
+     */
+    speed: number
+  }
 
-		/**
-		 * 预警网址链接
-		 */
-		url: string;
+  /**
+   * 预警信息
+   */
+  warn: {
 
-		/**
-		 * 发布内容
-		 */
-		issuecontent: string;
+    /**
+     * 警报信息
+     */
+    alert: string
 
-		/**
-		 * 防范措施
-		 */
-		fmeans: string;
+    /**
+     * 预警图片链接
+     */
+    pic: string
 
-		/**
-		 * 信号类型（如“红色”）
-		 */
-		signaltype: string;
+    /**
+     * 预警所在省份
+     */
+    province: string
 
-		/**
-		 * 信号等级（如“高级”）
-		 */
-		signallevel: string;
+    /**
+     * 预警所在城市
+     */
+    city: string
 
-		/**
-		 * 预警图片 2（备用图片）
-		 */
-		pic2: string;
-	};
+    /**
+     * 预警网址链接
+     */
+    url: string
 
-	/**
-	 * 日出日落信息
-	 */
-	sunriseSunset: {
-		/**
-		 * 日出时间
-		 */
-		sunrise: string;
+    /**
+     * 发布内容
+     */
+    issuecontent: string
 
-		/**
-		 * 日落时间
-		 */
-		sunset: string;
-	};
-};
+    /**
+     * 防范措施
+     */
+    fmeans: string
+
+    /**
+     * 信号类型（如“红色”）
+     */
+    signaltype: string
+
+    /**
+     * 信号等级（如“高级”）
+     */
+    signallevel: string
+
+    /**
+     * 预警图片 2（备用图片）
+     */
+    pic2: string
+  }
+
+  /**
+   * 日出日落信息
+   */
+  sunriseSunset: {
+
+    /**
+     * 日出时间
+     */
+    sunrise: string
+
+    /**
+     * 日落时间
+     */
+    sunset: string
+  }
+}
 
 /**
  *  天气数据
  */
 export type WeatherType = {
-	/**
-	 *  实时天气数据
-	 */
-	real: {
-		/**
-		 * 站点信息
-		 */
-		station: {
-			/**
-			 * 站点代码
-			 */
-			code: string;
 
-			/**
-			 * 所在省份
-			 */
-			province: string;
+  /**
+   *  实时天气数据
+   */
+  real: {
 
-			/**
-			 * 所在城市
-			 */
-			city: string;
+    /**
+     * 站点信息
+     */
+    station: {
 
-			/**
-			 * 站点网址
-			 */
-			url: string;
-		};
+      /**
+       * 站点代码
+       */
+      code: string
 
-		/**
-		 * 实况发布时间
-		 */
-		publish_time: string;
+      /**
+       * 所在省份
+       */
+      province: string
 
-		/**
-		 * 天气信息
-		 */
-		weather: {
-			/**
-			 * 当前温度
-			 */
-			temperature: number;
+      /**
+       * 所在城市
+       */
+      city: string
 
-			/**
-			 * 温度差（与前次温度对比）
-			 */
-			temperatureDiff: number;
+      /**
+       * 站点网址
+       */
+      url: string
+    }
 
-			/**
-			 * 气压
-			 */
-			airpressure: number;
+    /**
+     * 实况发布时间
+     */
+    publish_time: string
 
-			/**
-			 * 湿度
-			 */
-			humidity: number;
+    /**
+     * 天气信息
+     */
+    weather: {
 
-			/**
-			 * 降雨量
-			 */
-			rain: number;
+      /**
+       * 当前温度
+       */
+      temperature: number
 
-			/**
-			 * 体感舒适度（以温度和湿度等因素计算）
-			 */
-			rcomfort: number;
+      /**
+       * 温度差（与前次温度对比）
+       */
+      temperatureDiff: number
 
-			/**
-			 * 体感指数
-			 */
-			icomfort: number;
+      /**
+       * 气压
+       */
+      airpressure: number
 
-			/**
-			 * 天气状况简述
-			 */
-			info: string;
+      /**
+       * 湿度
+       */
+      humidity: number
 
-			/**
-			 * 天气图标（如图标编号）
-			 */
-			img: string;
+      /**
+       * 降雨量
+       */
+      rain: number
 
-			/**
-			 * 体感温度
-			 */
-			feelst: number;
-		};
+      /**
+       * 体感舒适度（以温度和湿度等因素计算）
+       */
+      rcomfort: number
 
-		/**
-		 * 风力信息
-		 */
-		wind: {
-			/**
-			 * 风向（如“西北风”）
-			 */
-			direct: string;
+      /**
+       * 体感指数
+       */
+      icomfort: number
 
-			/**
-			 * 风向角度（如“319”表示西北风的角度）
-			 */
-			degree: number;
+      /**
+       * 天气状况简述
+       */
+      info: string
 
-			/**
-			 * 风力等级（如“3级”）
-			 */
-			power: string;
+      /**
+       * 天气图标（如图标编号）
+       */
+      img: string
 
-			/**
-			 * 风速（单位：米/秒）
-			 */
-			speed: number;
-		};
+      /**
+       * 体感温度
+       */
+      feelst: number
+    }
 
-		/**
-		 * 预警信息
-		 */
-		warn: {
-			/**
-			 * 警报信息
-			 */
-			alert: string;
+    /**
+     * 风力信息
+     */
+    wind: {
 
-			/**
-			 * 预警图片链接
-			 */
-			pic: string;
+      /**
+       * 风向（如“西北风”）
+       */
+      direct: string
 
-			/**
-			 * 预警所在省份
-			 */
-			province: string;
+      /**
+       * 风向角度（如“319”表示西北风的角度）
+       */
+      degree: number
 
-			/**
-			 * 预警所在城市
-			 */
-			city: string;
+      /**
+       * 风力等级（如“3级”）
+       */
+      power: string
 
-			/**
-			 * 预警网址链接
-			 */
-			url: string;
+      /**
+       * 风速（单位：米/秒）
+       */
+      speed: number
+    }
 
-			/**
-			 * 发布内容
-			 */
-			issuecontent: string;
+    /**
+     * 预警信息
+     */
+    warn: {
 
-			/**
-			 * 防范措施
-			 */
-			fmeans: string;
+      /**
+       * 警报信息
+       */
+      alert: string
 
-			/**
-			 * 信号类型（如“红色”）
-			 */
-			signaltype: string;
+      /**
+       * 预警图片链接
+       */
+      pic: string
 
-			/**
-			 * 信号等级（如“高级”）
-			 */
-			signallevel: string;
+      /**
+       * 预警所在省份
+       */
+      province: string
 
-			/**
-			 * 预警图片 2（备用图片）
-			 */
-			pic2: string;
-		};
+      /**
+       * 预警所在城市
+       */
+      city: string
 
-		/**
-		 * 日出日落信息
-		 */
-		sunriseSunset: {
-			/**
-			 * 日出时间
-			 */
-			sunrise: string;
+      /**
+       * 预警网址链接
+       */
+      url: string
 
-			/**
-			 * 日落时间
-			 */
-			sunset: string;
-		};
-	};
+      /**
+       * 发布内容
+       */
+      issuecontent: string
 
-	/**
-	 *  天气预报数据
-	 */
-	predict: {
-		/**
-		 *  站点信息
-		 */
-		station: {
-			/**
-			 *  站点代码
-			 */
-			code: string;
-			/**
-			 *  所在省份
-			 */
-			province: string;
+      /**
+       * 防范措施
+       */
+      fmeans: string
 
-			/**
-			 *  所在城市
-			 */
-			city: string;
+      /**
+       * 信号类型（如“红色”）
+       */
+      signaltype: string
 
-			/**
-			 *  站点网址
-			 */
-			url: string;
-		};
+      /**
+       * 信号等级（如“高级”）
+       */
+      signallevel: string
 
-		/**
-		 * 实况发布时间
-		 */
-		publish_time: string;
+      /**
+       * 预警图片 2（备用图片）
+       */
+      pic2: string
+    }
 
-		/**
-		 *  详细预报
-		 */
-		detail: {
-			/**
-			 *  日期
-			 */
-			date: string;
-			/**
-			 *  预报时间
-			 */
-			pt: string;
+    /**
+     * 日出日落信息
+     */
+    sunriseSunset: {
 
-			/**
-			 *  白天天气
-			 */
-			day: {
-				/**
-				 *  天气信息
-				 */
-				weather: {
-					/**
-					 *  天气情况
-					 */
-					info: string;
-					/**
-					 *  天气图标
-					 */
-					img: string;
-					/**
-					 *  温度
-					 */
-					temperature: string;
-				};
-				/**
-				 *  风力信息
-				 */
-				wind: {
-					/**
-					 *  风向
-					 */
-					direct: string;
-					/**
-					 *  风力等级
-					 */
-					power: string;
-				};
-			};
+      /**
+       * 日出时间
+       */
+      sunrise: string
 
-			/**
-			 *  夜间天气
-			 */
-			night: {
-				/**
-				 *  天气信息
-				 */
-				weather: {
-					/**
-					 *  天气情况
-					 */
-					info: string;
-					/**
-					 *  天气图标
-					 */
-					img: string;
-					/**
-					 *  温度
-					 */
-					temperature: string;
-				};
-				/**
-				 *  风力信息
-				 */
-				wind: {
-					/**
-					 *  风向
-					 */
-					direct: string;
-					/**
-					 *  风力等级
-					 */
-					power: string;
-				};
-			};
+      /**
+       * 日落时间
+       */
+      sunset: string
+    }
+  }
 
-			/**
-			 *  降水量
-			 */
-			precipitation: number;
-		}[];
-	};
+  /**
+   *  天气预报数据
+   */
+  predict: {
 
-	/**
-	 *  空气质量实况数据
-	 */
-	air: {
-		/**
-		 *  更新时间
-		 */
-		forecasttime: "2024-12-19 15:00";
-		/**
-		 *  空气质量指数
-		 */
-		aqi: 91;
-		/**
-		 *  空气质量等级
-		 */
-		aq: 2;
+    /**
+     *  站点信息
+     */
+    station: {
 
-		/**
-		 *  空气质量文本
-		 */
-		text: "良";
-		/**
-		 *  空气质量代码
-		 */
-		aqiCode: "99031;99032;99033;99035;99037;99038;99039;99040";
-	};
+      /**
+       *  站点代码
+       */
+      code: string
 
-	/**
-	 *  温度变化图表
-	 */
-	tempchart: {
-		/**
-		 *  时间
-		 */
-		time: string;
-		/**
-		 *  最高温度
-		 */
-		max_temp: number;
-		/**
-		 *  最低温度
-		 */
-		min_temp: number;
-		/**
-		 *  白天天气图标
-		 */
-		day_img: string;
-		/**
-		 *  白天天气文本
-		 */
-		day_text: string;
-		/**
-		 *  夜间天气图标
-		 */
-		night_img: string;
-		/**
-		 *  夜间天气文本
-		 */
-		night_text: string;
-	}[];
+      /**
+       *  所在省份
+       */
+      province: string
 
-	/**
-	 *  过去的天气数据
-	 */
-	passedchart: {
-		/**
-		 *  1小时降雨量
-		 */
-		rain1h: number;
+      /**
+       *  所在城市
+       */
+      city: string
 
-		/**
-		 *  6小时降雨量
-		 */
-		rain6h: number;
+      /**
+       *  站点网址
+       */
+      url: string
+    }
 
-		/**
-		 *  12小时降雨量
-		 */
-		rain12h: number;
+    /**
+     * 实况发布时间
+     */
+    publish_time: string
 
-		/**
-		 *  24小时降雨量
-		 */
-		rain24h: number;
+    /**
+     *  详细预报
+     */
+    detail: {
 
-		/**
-		 *  温度
-		 */
-		temperature: number;
+      /**
+       *  日期
+       */
+      date: string
 
-		/**
-		 *  温差
-		 */
-		tempDiff: "";
+      /**
+       *  预报时间
+       */
+      pt: string
 
-		/**
-		 *  湿度
-		 */
-		humidity: number;
+      /**
+       *  白天天气
+       */
+      day: {
 
-		/**
-		 *  气压
-		 */
-		pressure: number;
+        /**
+         *  天气信息
+         */
+        weather: {
 
-		/**
-		 *  风向
-		 */
-		windDirection: number;
+          /**
+           *  天气情况
+           */
+          info: string
 
-		/**
-		 *  风速
-		 */
-		windSpeed: number;
+          /**
+           *  天气图标
+           */
+          img: string
 
-		/**
-		 *  时间
-		 */
-		time: string;
-	}[];
+          /**
+           *  温度
+           */
+          temperature: string
+        }
 
-	/**
-	 *  气候数据
-	 */
-	climate: {
-		/**
-		 *  时间范围
-		 *  @description  一般是 1981～2010
-		 */
-		time: string;
+        /**
+         *  风力信息
+         */
+        wind: {
 
-		/**
-		 *  月份数据
-		 */
-		month: {
-			/**
-			 *  月份
-			 */
-			month: number;
+          /**
+           *  风向
+           */
+          direct: string
 
-			/**
-			 *  最高温度
-			 */
-			maxTemp: number;
+          /**
+           *  风力等级
+           */
+          power: string
+        }
+      }
 
-			/**
-			 *  最低温度
-			 */
-			minTemp: number;
+      /**
+       *  夜间天气
+       */
+      night: {
 
-			/**
-			 *  降水量
-			 */
-			precipitation: number;
-		}[];
-	};
+        /**
+         *  天气信息
+         */
+        weather: {
 
-	/**
-	 *  实况雷达数据
-	 */
-	radar: {
-		/**
-		 *  标题
-		 */
-		title: string;
+          /**
+           *  天气情况
+           */
+          info: string
 
-		/**
-		 *  图片
-		 *  @description  图片地址前缀拼接  http://www.nmc.cn/
-		 */
-		image: string;
+          /**
+           *  天气图标
+           */
+          img: string
 
-		/**
-		 *  链接
-		 */
-		url: string;
-	};
-};
+          /**
+           *  温度
+           */
+          temperature: string
+        }
+
+        /**
+         *  风力信息
+         */
+        wind: {
+
+          /**
+           *  风向
+           */
+          direct: string
+
+          /**
+           *  风力等级
+           */
+          power: string
+        }
+      }
+
+      /**
+       *  降水量
+       */
+      precipitation: number
+    }[]
+  }
+
+  /**
+   *  空气质量实况数据
+   */
+  air: {
+
+    /**
+     *  更新时间
+     */
+    forecasttime: '2024-12-19 15:00'
+
+    /**
+     *  空气质量指数
+     */
+    aqi: 91
+
+    /**
+     *  空气质量等级
+     */
+    aq: 2
+
+    /**
+     *  空气质量文本
+     */
+    text: '良'
+
+    /**
+     *  空气质量代码
+     */
+    aqiCode: '99031;99032;99033;99035;99037;99038;99039;99040'
+  }
+
+  /**
+   *  温度变化图表
+   */
+  tempchart: {
+
+    /**
+     *  时间
+     */
+    time: string
+
+    /**
+     *  最高温度
+     */
+    max_temp: number
+
+    /**
+     *  最低温度
+     */
+    min_temp: number
+
+    /**
+     *  白天天气图标
+     */
+    day_img: string
+
+    /**
+     *  白天天气文本
+     */
+    day_text: string
+
+    /**
+     *  夜间天气图标
+     */
+    night_img: string
+
+    /**
+     *  夜间天气文本
+     */
+    night_text: string
+  }[]
+
+  /**
+   *  过去的天气数据
+   */
+  passedchart: {
+
+    /**
+     *  1小时降雨量
+     */
+    rain1h: number
+
+    /**
+     *  6小时降雨量
+     */
+    rain6h: number
+
+    /**
+     *  12小时降雨量
+     */
+    rain12h: number
+
+    /**
+     *  24小时降雨量
+     */
+    rain24h: number
+
+    /**
+     *  温度
+     */
+    temperature: number
+
+    /**
+     *  温差
+     */
+    tempDiff: ''
+
+    /**
+     *  湿度
+     */
+    humidity: number
+
+    /**
+     *  气压
+     */
+    pressure: number
+
+    /**
+     *  风向
+     */
+    windDirection: number
+
+    /**
+     *  风速
+     */
+    windSpeed: number
+
+    /**
+     *  时间
+     */
+    time: string
+  }[]
+
+  /**
+   *  气候数据
+   */
+  climate: {
+
+    /**
+     *  时间范围
+     *  @description  一般是 1981～2010
+     */
+    time: string
+
+    /**
+     *  月份数据
+     */
+    month: {
+
+      /**
+       *  月份
+       */
+      month: number
+
+      /**
+       *  最高温度
+       */
+      maxTemp: number
+
+      /**
+       *  最低温度
+       */
+      minTemp: number
+
+      /**
+       *  降水量
+       */
+      precipitation: number
+    }[]
+  }
+
+  /**
+   *  实况雷达数据
+   */
+  radar: {
+
+    /**
+     *  标题
+     */
+    title: string
+
+    /**
+     *  图片
+     *  @description  图片地址前缀拼接  http://www.nmc.cn/
+     */
+    image: string
+
+    /**
+     *  链接
+     */
+    url: string
+  }
+}

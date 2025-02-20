@@ -25,9 +25,6 @@ watchEffect(() => {
   }
 })
 
-onMounted(() => {
-  // getData()
-})
 </script>
 
 <template>

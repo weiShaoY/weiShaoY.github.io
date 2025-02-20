@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 
-import { decode, encode } from 'xmorse'
-
 import Modal from './modal.vue'
 
 const isShowModel = ref(false)
@@ -16,222 +14,41 @@ function handleSelectChange() {
   inputText.value = ''
 }
 
+/**
+ *  base64 编码
+ */
+function base64Encode(str: string): string {
+  return btoa(
+    encodeURIComponent(str).replace(
+      /%([0-9A-F]{2})/g,
+      (_, p1) => {
+        return String.fromCharCode(Number.parseInt(p1, 16))
+      },
+    ),
+  )
+}
+
+/**
+ *  base64 解码
+ */
+function base64Decode(base64Str: string) {
+  return decodeURIComponent(
+    Array.prototype.map
+      .call(atob(base64Str), (c) => {
+        return `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`
+      })
+      .join(''),
+  )
+}
+
 watchEffect(() => {
   if (type.value === 'code') {
-    encodedText.value = encode(inputText.value)
+    encodedText.value = base64Encode(inputText.value)
   }
   else {
-    encodedText.value = decode(inputText.value)
+    encodedText.value = base64Decode(inputText.value)
   }
 })
-
-onMounted(() => {
-  // getData()
-})
-
-/**
- * Base64 编码
- * @param {string} input - 需要编码的字符串
- * @returns {string} - 返回 Base64 编码后的字符串
- */
-function base64Encode(input) {
-  const base64Charset = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '+',
-    '/',
-  ]
-
-  // 将字符串转换为二进制数据
-  let binaryString = ''
-
-  for (let i = 0; i < input.length; i++) {
-    binaryString += input.charCodeAt(i).toString(2).padStart(8, '0') // 转为二进制
-  }
-
-  // 分组并编码为 Base64
-  let base64String = ''
-
-  for (let i = 0; i < binaryString.length; i += 6) {
-    const segment = binaryString.slice(i, i + 6)
-
-    const index = Number.parseInt(segment.padEnd(6, '0'), 2) // 将6位二进制转换为10进制索引
-
-    base64String += base64Charset[index]
-  }
-
-  // 添加填充字符
-  while (base64String.length % 4 !== 0) {
-    base64String += '=' // 根据 Base64 的规则添加 '=' 填充
-  }
-
-  return base64String
-}
-
-/**
- * Base64 解码
- * @param {string} input - 需要解码的 Base64 编码字符串
- * @returns {string} - 返回解码后的字符串
- */
-function base64Decode(input) {
-  const base64Charset = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '+',
-    '/',
-  ]
-
-  // 创建反向查找表
-  const reverseCharset = {
-  }
-
-  base64Charset.forEach((char, index) => {
-    reverseCharset[char] = index
-  })
-
-  // 去除末尾的填充字符
-  input = input.replace(/=/g, '')
-
-  // 将 Base64 字符串转换为二进制数据
-  let binaryString = ''
-
-  for (let i = 0; i < input.length; i++) {
-    const index = reverseCharset[input[i]]
-
-    binaryString += index.toString(2).padStart(6, '0')
-  }
-
-  // 将二进制字符串转换回字符
-  let decodedString = ''
-
-  for (let i = 0; i < binaryString.length; i += 8) {
-    const segment = binaryString.slice(i, i + 8)
-
-    decodedString += String.fromCharCode(Number.parseInt(segment, 2)) // 转回字符
-  }
-
-  return decodedString
-}
 
 </script>
 
