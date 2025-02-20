@@ -26,16 +26,6 @@
       <div>Please enable JavaScript to use this application.</div>
     </noscript>
 
-    <script>
-      ;(function () {
-        const redir = sessionStorage.redirect
-        delete sessionStorage.redirect
-        if (redir && redir !== location.href) {
-          history.replaceState(null, null, redir)
-        }
-      })()
-    </script>
-
     <!-- 引入 Vue 应用的入口文件 -->
     <script type="module" src="/src/main.ts"></script>
   </body>
