@@ -9,18 +9,20 @@ class BlogApi {
   }
 
   /**
+   *  获取 大盘黄金价格
+   *  @see https://api.aa1.cn/doc/pear_goldPrice.html
+   */
+  getMarketGoldPrice() {
+    //  *  @see https://api.pearktrue.cn/info?id=348
+    //  return fetchHttp('https://api.pearktrue.cn/api/goldprice/')
+    return fetchHttp('https://tools.mgtv100.com/external/v1/pear/goldPrice')
+  }
+
+  /**
    *  获取 黄金价格实时查询
    */
   getRealTimeGoldPrice() {
     return fetchHttp('https://api.lolimi.cn/API/huangj/api.php')
-  }
-
-  /**
-   *  获取 大盘黄金价格
-   *  @see https://api.pearktrue.cn/info?id=348
-   */
-  getMarketGoldPrice() {
-    return fetchHttp('https://api.pearktrue.cn/api/goldprice/')
   }
 
   /**

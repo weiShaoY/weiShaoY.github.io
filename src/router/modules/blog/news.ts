@@ -34,7 +34,7 @@ const News: AppRouteRecordRaw = {
       path: 'movie',
       name: 'Movie',
       meta: {
-        locale: '电影',
+        locale: '影视',
         icon: 'blog-menu-movie',
       },
       component: () => import('@/pages/blog/news/movie/index.vue'),

@@ -5,6 +5,8 @@ import { Notification } from '@arco-design/web-vue'
 
 import { onMounted, ref } from 'vue'
 
+import Parse from './components/parse/index.vue'
+
 const isLoading = ref(false)
 
 /**
@@ -122,7 +124,7 @@ async function getData() {
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 
@@ -133,6 +135,7 @@ onMounted(async() => {
     class="w-full"
     default-active-key="comingSoon"
   >
+
     <a-tab-pane
       v-for="(movies, key) in movieData"
       :key="key"
@@ -224,6 +227,14 @@ onMounted(async() => {
         </template>
       </a-table>
     </a-tab-pane>
+
+    <a-tab-pane
+      key="1"
+      title="影视解析"
+    >
+      <Parse />
+    </a-tab-pane>
+
   </a-tabs>
 </template>
 
