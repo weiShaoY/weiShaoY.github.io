@@ -56,6 +56,39 @@ const Tool: AppRouteRecordRaw = {
         },
       ],
     },
+    {
+      path: 'network',
+      name: 'Network',
+      meta: {
+        locale: '网络',
+        icon: 'blog-menu-network',
+      },
+      redirect: {
+        name: 'Base64',
+      },
+      children: [
+        {
+          path: 'http',
+          name: 'Http',
+          meta: {
+            locale: 'HTTP响应码',
+            icon: 'blog-menu-http',
+          },
+          component: () => import('@/pages/blog/tool/network/http/index.vue'),
+        },
+        {
+          path: 'dns',
+          name: 'Dns',
+          meta: {
+            locale: 'DNS',
+            icon: 'blog-menu-dns',
+          },
+          component: () => import('@/pages/blog/tool/network/dns/index.vue'),
+        },
+
+
+      ],
+    },
   ],
 }
 
