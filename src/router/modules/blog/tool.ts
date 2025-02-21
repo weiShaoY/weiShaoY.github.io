@@ -71,7 +71,7 @@ const Tool: AppRouteRecordRaw = {
           path: 'http',
           name: 'Http',
           meta: {
-            locale: 'HTTP响应码',
+            locale: 'HTTP状态码',
             icon: 'blog-menu-http',
           },
           component: () => import('@/pages/blog/tool/network/http/index.vue'),
