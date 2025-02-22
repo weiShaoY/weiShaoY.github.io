@@ -1,8 +1,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import bgmAudioSrc from '@/assets/music/garage-bgm.mp3'
+import bgmAudioSrc from '@/assets/musics/garage-bgm.mp3'
 
-import changeAudioSrc from '@/assets/music/garage-change.mp3'
+import changeAudioSrc from '@/assets/musics/garage-change.mp3'
 
 import { useGarageStore } from '@/store'
 

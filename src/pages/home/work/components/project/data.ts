@@ -20,15 +20,15 @@ import spotlight4 from '@/assets/images/home-work-project-spotlight-4.png'
 
 import spotlight5 from '@/assets/images/home-work-project-spotlight-5.png'
 
-import video1 from '@/assets/video/home-work-project-video-1.mp4'
+import video1 from '@/assets/videos/home-work-project-video-1.mp4'
 
-import video2 from '@/assets/video/home-work-project-video-2.mp4'
+import video2 from '@/assets/videos/home-work-project-video-2.mp4'
 
-import video3 from '@/assets/video/home-work-project-video-3.mp4'
+import video3 from '@/assets/videos/home-work-project-video-3.mp4'
 
-import video4 from '@/assets/video/home-work-project-video-4.mp4'
+import video4 from '@/assets/videos/home-work-project-video-4.mp4'
 
-import video5 from '@/assets/video/home-work-project-video-5.mp4'
+import video5 from '@/assets/videos/home-work-project-video-5.mp4'
 
 import { techStack } from '@/utils'
 
