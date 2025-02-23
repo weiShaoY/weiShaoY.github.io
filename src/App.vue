@@ -10,7 +10,9 @@
 
 import { useHead } from '@/hooks'
 
-useHead('Vue-实现')
+const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
+
+useHead(isDevelopment ? 'Vue-实现' : '代码改变世界')
 
 console.info(
   '%cNiceToMeetYou,我是weiShaoY',
