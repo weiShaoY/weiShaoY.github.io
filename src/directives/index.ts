@@ -12,6 +12,8 @@ import light from './modules/light'
 
 import throttle from './modules/throttle'
 
+import vWaterMarker from './modules/waterMarker'
+
 const directivesList: { [key: string]: Directive } = {
   animatedText,
   canvasLoading,
@@ -19,6 +21,7 @@ const directivesList: { [key: string]: Directive } = {
   debounce,
   light,
   throttle,
+  vWaterMarker,
 }
 
 export default {

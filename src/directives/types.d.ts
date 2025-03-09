@@ -10,6 +10,8 @@ import type { UseLightParamsType } from './modules/light'
 
 import type { ThrottleParamsType } from './modules/throttle'
 
+import type { WaterMarkerParamsType } from './modules/waterMarker'
+
 /**
  *  vue指令类型
  */
@@ -44,4 +46,9 @@ export type DirectivesType = {
    *  按钮节流指令
    */
   vThrottle: Directive<HTMLElement, ThrottleParamsType>
+
+  /**
+   *  水印指令
+   */
+  vWaterMarker: Directive<HTMLElement, WaterMarkerParamsType>
 }
