@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import config from '@/config'
 
-import { formatModules } from '../../utils'
+import { formatModules } from '../../utils/index'
 
 /**
  *  获取当前文件名

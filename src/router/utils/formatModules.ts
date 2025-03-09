@@ -1,9 +1,5 @@
 import type { RouteRecordNormalized } from 'vue-router'
 
-const appModules = import.meta.glob('./modules/*/index.ts', {
-  eager: true,
-})
-
 /**
  *  格式化modules模块(将modules模块转化为数组)
  *  @param  _modules - modules模块
@@ -38,8 +34,3 @@ export function formatModules(_modules: any, result: RouteRecordNormalized[]) {
    */
   return result
 }
-
-/**
- *  获取路由列表
- */
-export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])

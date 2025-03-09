@@ -6,7 +6,7 @@ import directives from './directives'
 
 import { setupNProgress } from './plugins'
 
-import router from './router'
+import { setupRouter } from './router'
 
 import pinia from './store'
 
@@ -34,7 +34,8 @@ async function setupApp() {
 
   app.use(pinia)
 
-  app.use(router)
+  // 设置路由
+  await setupRouter(app)
 
   app.mount('#app')
 }
