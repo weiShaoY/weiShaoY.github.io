@@ -1,5 +1,3 @@
-import { createHead } from '@unhead/vue'
-
 import { createApp } from 'vue'
 
 import App from './App.vue'
@@ -20,12 +18,6 @@ import './theme/index.less'
 import 'virtual:svg-icons-register'
 
 const app = createApp(App)
-
-/**
- *  unhead 通用文档 <head> 标签管理器
- *  @see  https://github.com/unjs/unhead
- */
-app.use(createHead())
 
 app.use(directives)
 
