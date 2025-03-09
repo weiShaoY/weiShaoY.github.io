@@ -44,5 +44,10 @@ declare namespace Env {
      */
     readonly VITE_APP_HOME_PAGE: string
 
+    /**
+     *  应用字体家族
+     */
+    readonly VITE_APP_FONT_FAMILY: string
+
   } & ImportMetaEnv
 }

@@ -65,18 +65,6 @@ export default defineConfig({
 
     // 文本溢出显示省略号
     ['text-ellipsis', 'truncate'],
-
-    //  代码模块
-    [
-      'code-theme',
-      'light:text-#000000 light:bg-#ffffff dark:text-#d1d3d7  dark:bg-#222325',
-    ],
-
-    [
-      'code-theme-item',
-      'light:bg-#d1d3d7 dark:bg-#323639',
-    ],
-
   ],
 
   /**
@@ -101,7 +89,7 @@ export default defineConfig({
     transformerDirectives(),
 
     /**
-     *  @description 允许通过逗号分隔的语法同时应用多个变体
+     *  @description 允许通过逗号分隔的语法同时应用多个变体 例如 hover:(text-red bg-blue)
      *  @see https://github.com/unocss/unocss#transformer-variantgroup
      */
     transformerVariantGroup(),

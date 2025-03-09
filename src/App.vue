@@ -8,11 +8,11 @@
  */
 // useResponsive(true)
 
-import { useHead } from '@/hooks'
+import { useSetHead } from '@/hooks'
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
 
-useHead(isDevelopment ? 'Vue-实现' : '代码改变世界')
+useSetHead(isDevelopment ? 'Vue-实现' : '代码改变世界')
 
 console.info(
   '%cNiceToMeetYou,我是weiShaoY',

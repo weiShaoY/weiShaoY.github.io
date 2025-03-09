@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useHead } from '@/hooks'
+import { useSetHead } from '@/hooks'
 
 import { useRouter } from 'vue-router'
 
-useHead('500! 内部服务器错误!')
+useSetHead('500! 内部服务器错误!')
 
 const router = useRouter()
 

@@ -1,14 +1,14 @@
+import useGetTime from './get-time'
+
+import useLightCard from './light-card'
+
 import useResponsive from './responsive'
 
-import useGetTime from './use-get-time'
-
-import useHead from './use-head'
-
-import useLightCard from './use-light-card'
+import useSetHead from './set-head'
 
 export {
   useGetTime,
-  useHead,
   useLightCard,
   useResponsive,
+  useSetHead,
 }

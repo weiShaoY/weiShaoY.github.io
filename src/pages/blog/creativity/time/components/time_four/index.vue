@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { TimeType } from '@/hooks/use-get-time'
+import type { TimeType } from '@/hooks/get-time'
 
 import Digit from './digit.vue'
 
