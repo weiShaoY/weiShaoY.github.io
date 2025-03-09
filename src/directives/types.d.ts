@@ -5,9 +5,17 @@ import type { UseCanvasLoadingParamsType } from './modules/canvas-loading'
 
 import type { UseCopyParamsType } from './modules/copy'
 
+
+import type { DebounceParamsType } from './modules/debounce'
+
 import type { UseLightParamsType } from './modules/light'
 
-export type Directives = {
+
+
+/**
+ *  vue指令类型
+ */
+export type DirectivesType = {
 
   /**
    *  动画文字指令
@@ -23,6 +31,11 @@ export type Directives = {
    *  点击复制指令
    */
   vCopy: Directive<HTMLElement, UseCopyParamsType>
+
+  /**
+   *  按钮防抖指令
+   */
+  vDebounce: Directive<HTMLElement, DebounceParamsType>;
 
   /**
    *  鼠标光源指令

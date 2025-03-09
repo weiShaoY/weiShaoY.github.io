@@ -1,18 +1,27 @@
-import type { App } from 'vue'
+import type { App, Directive } from 'vue'
 
-import useAnimatedText from './modules/animated-text'
+import animatedText from './modules/animated-text'
 
-import useCanvasLoading from './modules/canvas-loading'
+import canvasLoading from './modules/canvas-loading'
 
-import useCopy from './modules/copy'
+import copy from './modules/copy'
 
-import useLight from './modules/light'
+import debounce from './modules/debounce'
+
+import light from './modules/light'
+
+const directivesList: { [key: string]: Directive } = {
+  animatedText,
+  canvasLoading,
+  copy,
+  debounce,
+  light,
+}
 
 export default {
-  install(app: App) {
-    app.directive('animatedText', useAnimatedText)
-    app.directive('canvasLoading', useCanvasLoading)
-    app.directive('copy', useCopy)
-    app.directive('light', useLight)
+  install(app: App<Element>) {
+    Object.keys(directivesList).forEach((key) => {
+      app.directive(key, directivesList[key])
+    })
   },
 }

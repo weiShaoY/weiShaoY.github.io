@@ -1,0 +1,64 @@
+/**
+ * v-debounce
+ * 按钮防抖指令，可自行扩展至input
+ * 接收参数：function类型
+ */
+// import type { Directive, DirectiveBinding } from 'vue'
+
+// type ElType = {
+//   __handleClick__: () => any
+// } & HTMLElement
+import type { Directive, DirectiveBinding } from 'vue'
+
+type DebounceHandlerType = (...args: any[]) => void
+
+/**
+ * 防抖指令的参数类型
+ */
+export type DebounceParamsType = {
+
+  /**
+   * 防抖时间（毫秒）
+   */
+  delay?: number
+
+  /**
+   * 回调函数
+   */
+  handler: DebounceHandlerType
+}
+
+type ElType = {
+  __handleClick__: () => any
+} & HTMLElement
+
+const debounce: Directive = {
+  mounted(el: ElType, binding: DirectiveBinding<DebounceParamsType>) {
+    const { delay = 500, handler } = binding.value
+
+    if (typeof handler !== 'function') {
+      throw new TypeError('handler 必须是一个函数')
+    }
+
+    let timer: NodeJS.Timeout | null = null
+
+    el.__handleClick__ = function () {
+      if (timer) {
+        clearTimeout(timer)
+      }
+
+      timer = setTimeout(() => {
+        handler()
+      }, delay)
+    }
+
+    el.addEventListener('click', el.__handleClick__)
+  },
+  beforeUnmount(el: ElType) {
+    el.removeEventListener('click', el.__handleClick__)
+  },
+}
+
+export default debounce
+
+// <button v-debounce="handleClick">点击我（防抖）</button>
