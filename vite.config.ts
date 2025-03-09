@@ -10,6 +10,8 @@ import UnoCSS from 'unocss/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 import Components from 'unplugin-vue-components/vite'
 
 import VueMacros from 'unplugin-vue-macros/vite'
@@ -95,6 +97,12 @@ export default defineConfig({
        */
       dts: 'src/types/components.d.ts', // 生成的组件类型声明文件
 
+      resolvers: [
+        // 自动导入 Element Plus 组件，完整导入可查看 /src/plugins/ui.ts
+        ElementPlusResolver({
+          importStyle: false, // 不自动导入样式，完整导入可查看 /theme/index.ts
+        }),
+      ],
     }),
 
     VueRouter({

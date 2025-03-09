@@ -10,14 +10,16 @@ import router from './router'
 
 import pinia from './store'
 
+// import './plugins/assets'
+
 // vite-plugin-svg-icons
-import 'virtual:svg-icons-register'
+// import 'virtual:svg-icons-register'
 
-import '@unocss/reset/tailwind.css'
+// import '@unocss/reset/tailwind.css'
 
-import 'uno.css'
+// import 'uno.css'
 
-import './theme/index.less'
+import './theme/index'
 
 /**
  *  设置应用程序
