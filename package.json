@@ -1,7 +1,20 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@9.9.0",
+  "description": "代码改变世界",
+  "license": "MIT",
+  "keywords": [
+    "Vue3",
+    "Vite5",
+    "TypeScript",
+    "element-plus",
+    "UnoCSS",
+    "ThreeJS"
+  ],
+  "engines": {
+    "node": ">=18.12.0",
+    "pnpm": ">=8.7.0"
+  },
   "scripts": {
     "dev": "vite --port 3333",
     "lint": "eslint .",
@@ -23,6 +36,7 @@
     "color": "^5.0.0",
     "copy-text-to-clipboard": "^3.2.0",
     "echarts": "^5.6.0",
+    "element-plus": "^2.9.5",
     "gsap": "^3.12.5",
     "lodash": "^4.17.21",
     "lunar-typescript": "^1.7.8",
@@ -77,5 +91,6 @@
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.8",
     "xmorse": "^1.0.0"
+
   }
 }

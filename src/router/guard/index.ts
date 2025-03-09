@@ -1,7 +1,5 @@
 import type { Router } from 'vue-router'
 
-import { NProgress } from '@/config'
-
 import BlogGuard from './blogGuard'
 
 /**
@@ -17,7 +15,7 @@ function progressGuard(router: Router) {
     /**
      *  开始进度条
      */
-    NProgress.start()
+    window.NProgress?.start?.()
 
     /**
      *  代码模块触发路由变更事件
@@ -32,7 +30,7 @@ function progressGuard(router: Router) {
     /**
      *  结束进度条
      */
-    NProgress.done()
+    window.NProgress?.done()
   })
 
   /**
@@ -40,7 +38,7 @@ function progressGuard(router: Router) {
    */
   router.onError(() => {
     // 错误时也结束进度条
-    NProgress.done()
+    window.NProgress?.done()
   })
 }
 
