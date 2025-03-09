@@ -14,6 +14,8 @@ import Components from 'unplugin-vue-components/vite'
 
 import VueMacros from 'unplugin-vue-macros/vite'
 
+import VueRouter from 'unplugin-vue-router/vite'
+
 import { defineConfig } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
@@ -31,6 +33,7 @@ export default defineConfig({
       '@/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
+
   plugins: [
     Glsl(),
 
@@ -72,14 +75,12 @@ export default defineConfig({
       /**
        *  生成类型定义文件
        */
-      dts: true,
+      dts: 'src/types/auto-imports.d.ts',
 
       /**
        *  自动导入的目录
        */
       dirs: ['./src/composables', './src/utils'],
-
-      // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
 
       /**
        *  启用 Vue 模板
@@ -92,7 +93,13 @@ export default defineConfig({
       /**
        *  生成类型定义文件
        */
-      dts: true,
+      dts: 'src/types/components.d.ts', // 生成的组件类型声明文件
+
+    }),
+
+    VueRouter({
+      // 生成路由类型声明文件
+      dts: 'src/types/routes.d.ts',
     }),
 
     // https://github.com/antfu/unocss

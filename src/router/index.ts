@@ -6,9 +6,7 @@ import {
 
 import createRouteGuard from './guard/index'
 
-import { appRoutes } from './utils'
-
-console.log('%c Line:10 🥖 appRoutes', 'color:#4fff4B', appRoutes)
+import { routeList } from './utils'
 
 const routerMode = {
   hash: () => createWebHashHistory(),
@@ -32,7 +30,7 @@ const router = createRouter({
       },
     },
 
-    ...appRoutes,
+    ...routeList,
 
     {
       path: '/test',

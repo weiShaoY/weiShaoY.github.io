@@ -18,7 +18,7 @@ const router = useRouter()
 
 function handleClick() {
   // 判断当前路由地址是不是 '/home'
-  if (router.currentRoute.value.path === import.meta.env.VITE_APP_HOMEPAGE) {
+  if (router.currentRoute.value.path === import.meta.env.VITE_APP_HOME_PAGE) {
     return
   }
 
