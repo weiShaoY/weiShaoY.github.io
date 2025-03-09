@@ -78,6 +78,11 @@ export type AppRouteRecordRaw = {
      *   在iframe中打开的url
      */
     iframeUrl?: string
+
+    /**
+     *  文档标题
+     */
+    documentTitle?: string
   }
 
   /**

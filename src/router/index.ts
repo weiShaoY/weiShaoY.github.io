@@ -4,7 +4,7 @@ import {
   createWebHistory,
 } from 'vue-router'
 
-import createRouteGuard from './guard/index'
+import { createRouteGuard } from './guard/index'
 
 import { routeList } from './utils'
 
@@ -24,6 +24,7 @@ const router = createRouter({
 
   routes: [
     {
+      name: 'Root',
       path: '/',
       redirect: {
         name: 'Home',

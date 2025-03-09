@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import { useSetHead } from '@/hooks'
 
 import { useRouter } from 'vue-router'
-
-useSetHead('403! 没有权限!')
 
 const router = useRouter()
 

@@ -5,10 +5,11 @@ import { NProgress } from '@/config'
 import BlogGuard from './blogGuard'
 
 /**
- * 设置页面守卫
- * @param {Router} router - 路由器实例
+ * 创建进度条守卫
+ *
+ * @param router - 路由实例
  */
-function setupPageGuard(router: Router) {
+function progressGuard(router: Router) {
   /**
    *  @description 路由跳转前
    */
@@ -44,15 +45,40 @@ function setupPageGuard(router: Router) {
 }
 
 /**
+ * 创建文档标题守卫
+ *
+ * @param router - 路由实例
+ */
+export function documentTitleGuard(router: Router) {
+  router.afterEach((to) => {
+    /**
+     * 路由元信息中的文档标题
+     */
+    const { documentTitle } = to.meta
+
+    if (documentTitle) {
+    // 设置文档标题
+      useTitle(documentTitle as string)
+    }
+  })
+}
+
+/**
  * 创建并设置路由守卫
  * @param router - 路由器实例
  */
-export default function createRouteGuard(router: Router) {
-  setupPageGuard(router)
+export function createRouteGuard(router: Router) {
+  // 创建进度条守卫
+  progressGuard(router)
+
+  // 创建文档标题守卫
+  documentTitleGuard(router)
 }
 
 export {
 
-  // 导出代码模块的路由发射器
+  /**
+   *  @description 博客模块路由发射器
+   */
   BlogGuard,
 }

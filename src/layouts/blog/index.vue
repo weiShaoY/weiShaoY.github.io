@@ -14,7 +14,7 @@ import BlogPageLayout from './blog-page-layout.vue'
 
 import Breadcrumb from './components/breadcrumb/index.vue'
 
-import Footer from './components/footer/index.vue'
+// import Footer from './components/footer/index.vue'
 
 import Menu from './components/menu/index.vue'
 

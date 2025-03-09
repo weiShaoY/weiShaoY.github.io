@@ -1,18 +1,9 @@
 <script lang="ts" setup>
-
-// import { useResponsive } from '@/hooks'
-
-/**
- * 响应式布局处理
- * @param {boolean} immediate - 是否立即执行
- */
-// useResponsive(true)
-
-import { useSetHead } from '@/hooks'
+import { useTitle } from '@vueuse/core'
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
 
-useSetHead(isDevelopment ? 'Vue-实现' : '代码改变世界')
+useTitle(isDevelopment ? 'Vue-实现' : '代码改变世界')
 
 console.info(
   '%cNiceToMeetYou,我是weiShaoY',

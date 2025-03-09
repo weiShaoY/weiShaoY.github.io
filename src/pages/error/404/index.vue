@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import { useSetHead } from '@/hooks'
 
 import { useRouter } from 'vue-router'
-
-useSetHead('404! 页面未找到!')
 
 const router = useRouter()
 

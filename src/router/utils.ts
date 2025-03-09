@@ -9,7 +9,7 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
  *  @param  _modules - modules模块
  *  @param  result - 格式化后的数组
  */
-function formatModules(_modules: any, result: RouteRecordNormalized[]) {
+export function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   // 遍历_modules对象的属性
   Object.keys(_modules).forEach((key) => {
     /**
@@ -39,9 +39,7 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   return result
 }
 
-const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
-
-export {
-  formatModules,
-  routeList,
-}
+/**
+ *  获取路由列表
+ */
+export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
