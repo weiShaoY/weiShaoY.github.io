@@ -10,12 +10,15 @@ import debounce from './modules/debounce'
 
 import light from './modules/light'
 
+import throttle from './modules/throttle'
+
 const directivesList: { [key: string]: Directive } = {
   animatedText,
   canvasLoading,
   copy,
   debounce,
   light,
+  throttle,
 }
 
 export default {

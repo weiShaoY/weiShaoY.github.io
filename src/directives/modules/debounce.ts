@@ -1,13 +1,3 @@
-/**
- * v-debounce
- * 按钮防抖指令，可自行扩展至input
- * 接收参数：function类型
- */
-// import type { Directive, DirectiveBinding } from 'vue'
-
-// type ElType = {
-//   __handleClick__: () => any
-// } & HTMLElement
 import type { Directive, DirectiveBinding } from 'vue'
 
 type DebounceHandlerType = (...args: any[]) => void
@@ -32,6 +22,9 @@ type ElType = {
   __handleClick__: () => any
 } & HTMLElement
 
+/**
+ *  防抖指令
+ */
 const debounce: Directive = {
   mounted(el: ElType, binding: DirectiveBinding<DebounceParamsType>) {
     const { delay = 500, handler } = binding.value
@@ -60,5 +53,3 @@ const debounce: Directive = {
 }
 
 export default debounce
-
-// <button v-debounce="handleClick">点击我（防抖）</button>
