@@ -42,7 +42,10 @@ declare global {
   const externalLinkRegex: typeof import('../utils/externalLinkRegex')['externalLinkRegex']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getDarkColor: typeof import('../utils/color')['getDarkColor']
+  const getLightColor: typeof import('../utils/color')['getLightColor']
   const h: typeof import('vue')['h']
+  const hexToRgb: typeof import('../utils/color')['hexToRgb']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
@@ -73,6 +76,7 @@ declare global {
   const loadTexture: typeof import('../utils/threeJs')['loadTexture']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
+  const mittBus: typeof import('../utils/mittBus')['mittBus']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -116,6 +120,7 @@ declare global {
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
+  const rgbToHex: typeof import('../utils/color')['rgbToHex']
   const sendContactEmail: typeof import('../utils/sendContactEmail')['sendContactEmail']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
@@ -375,7 +380,10 @@ declare module 'vue' {
     readonly externalLinkRegex: UnwrapRef<typeof import('../utils/externalLinkRegex')['externalLinkRegex']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDarkColor: UnwrapRef<typeof import('../utils/color')['getDarkColor']>
+    readonly getLightColor: UnwrapRef<typeof import('../utils/color')['getLightColor']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly hexToRgb: UnwrapRef<typeof import('../utils/color')['hexToRgb']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
@@ -406,6 +414,7 @@ declare module 'vue' {
     readonly loadTexture: UnwrapRef<typeof import('../utils/threeJs')['loadTexture']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly mittBus: UnwrapRef<typeof import('../utils/mittBus')['mittBus']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
@@ -449,6 +458,7 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
+    readonly rgbToHex: UnwrapRef<typeof import('../utils/color')['rgbToHex']>
     readonly sendContactEmail: UnwrapRef<typeof import('../utils/sendContactEmail')['sendContactEmail']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>

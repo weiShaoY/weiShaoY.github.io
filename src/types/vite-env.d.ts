@@ -49,5 +49,15 @@ declare namespace Env {
      */
     readonly VITE_APP_FONT_FAMILY: string
 
+    /**
+     *  博客模块首页
+     */
+    readonly VITE_APP_BLOG_HOME_PAGE: string
+
+    /**
+     *  博客模块主题色
+     */
+    readonly VITE_APP_BLOG_THEME_COLOR: string
+
   } & ImportMetaEnv
 }

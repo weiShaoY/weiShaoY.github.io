@@ -103,6 +103,8 @@ declare module 'vue-router/auto-routes' {
     '/home/work/': RouteRecordInfo<'/home/work/', '/home/work', Record<never, never>, Record<never, never>>,
     '/home/work/components/experience/': RouteRecordInfo<'/home/work/components/experience/', '/home/work/components/experience', Record<never, never>, Record<never, never>>,
     '/home/work/components/project/': RouteRecordInfo<'/home/work/components/project/', '/home/work/components/project', Record<never, never>, Record<never, never>>,
-    '/test/': RouteRecordInfo<'/test/', '/test', Record<never, never>, Record<never, never>>,
+    '/Lynk/': RouteRecordInfo<'/Lynk/', '/Lynk', Record<never, never>, Record<never, never>>,
+    '/test/proTable/useProTable/': RouteRecordInfo<'/test/proTable/useProTable/', '/test/proTable/useProTable', Record<never, never>, Record<never, never>>,
+    '/test/workbench/': RouteRecordInfo<'/test/workbench/', '/test/workbench', Record<never, never>, Record<never, never>>,
   }
 }

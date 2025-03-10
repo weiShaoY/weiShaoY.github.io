@@ -3,8 +3,8 @@ import type { AppRouteRecordRaw } from '@/router/types'
 import { BLOG_DEFAULT_LAYOUT } from '@/layouts'
 
 const Test: AppRouteRecordRaw = {
-  path: 'test',
-  name: 'Test',
+  path: 'test1',
+  name: 'Test1',
   meta: {
     locale: '测试',
     icon: 'blog-menu-test',

@@ -1,3 +1,5 @@
+import type { App } from 'vue'
+
 import type { RouteRecordNormalized } from 'vue-router'
 
 import {
@@ -41,11 +43,6 @@ const router = createRouter({
     },
 
     ...routeList,
-
-    {
-      path: '/test',
-      component: () => import('@/pages/test/index.vue'),
-    },
   ],
 })
 
@@ -64,3 +61,5 @@ export async function setupRouter(app: App) {
   // 等待路由准备就绪
   await router.isReady()
 }
+
+export default router
