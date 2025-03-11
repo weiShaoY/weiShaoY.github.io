@@ -78,7 +78,7 @@
     "less": "^4.2.0",
     "md5-ts": "^0.1.6",
     "pnpm": "^10.0.0",
-    "taze": "^18.1.0",
+    "taze": "^19.0.0",
     "typescript": "^5.5.4",
     "unocss": "^66.0.0",
     "unplugin-auto-import": "^19.1.1",
