@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import type { RouteRecordRaw } from 'vue-router'
 
-import { BlogGuard } from '@/router/guard'
+import { BlogGuard } from '@/router/utils'
 
 import { useAppStore, useBlogStore } from '@/store'
 
@@ -150,7 +150,7 @@ BlogGuard.listenerRouteChange((newRoute) => {
     :auto-open-selected="true"
     :level-indent="34"
     @collapse="setCollapse"
-    
+
   >
     <SubMenu
       v-model:selected-key="selectedKey"

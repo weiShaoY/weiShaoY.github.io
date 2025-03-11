@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized } from 'vue-router'
 
-import { BlogGuard } from '@/router/guard'
+import { BlogGuard } from '@/router/utils'
 
 import { useBlogStore } from '@/store'
 
