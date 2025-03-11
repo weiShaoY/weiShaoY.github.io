@@ -1,36 +1,35 @@
-import { createHead } from '@unhead/vue'
-
 import { createApp } from 'vue'
 
 import App from './App.vue'
 
 import directives from './directives'
 
-import router from './router'
+import { setupNProgress } from './plugins'
+
+import { setupRouter } from './router'
 
 import pinia from './store'
 
-import '@unocss/reset/tailwind.css'
-
-import 'uno.css'
-
-import './theme/index.less'
-
-// vite-plugin-svg-icons
-import 'virtual:svg-icons-register'
-
-const app = createApp(App)
+import './theme/index'
 
 /**
- *  unhead 通用文档 <head> 标签管理器
- *  @see  https://github.com/unjs/unhead
+ *  设置应用程序
  */
-app.use(createHead())
+async function setupApp() {
+  // 设置顶部进度条
+  setupNProgress()
 
-app.use(directives)
+  const app = createApp(App)
 
-app.use(pinia)
+  app.use(directives)
 
-app.use(router)
+  app.use(pinia)
 
-app.mount('#app')
+  // 设置路由
+  await setupRouter(app)
+
+  app.mount('#app')
+}
+
+// 初始化应用程序
+setupApp()

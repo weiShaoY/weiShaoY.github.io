@@ -65,7 +65,7 @@ export function documentTitleGuard(router: Router) {
  * 创建并设置路由守卫
  * @param router - 路由器实例
  */
-export function createRouteGuard(router: Router) {
+export function createRouterGuard(router: Router) {
   // 创建进度条守卫
   progressGuard(router)
 

@@ -1,11 +1,8 @@
 import blogConfig from './blog'
 
-import NProgress from './nprogress'
-
 export {
   blogConfig,
 
-  NProgress,
 }
 
 /**

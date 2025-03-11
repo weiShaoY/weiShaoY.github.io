@@ -1,12 +1,21 @@
+import type { RouteRecordNormalized } from 'vue-router'
+
 import {
   createRouter,
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router'
 
-import { createRouteGuard } from './guard/index'
+import { createRouterGuard, formatModules } from './utils/index'
 
-import { routeList } from './utils'
+const appModules = import.meta.glob('./modules/*/index.ts', {
+  eager: true,
+})
+
+/**
+ *  获取路由列表
+ */
+export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
 
 const routerMode = {
   hash: () => createWebHashHistory(),
@@ -41,8 +50,17 @@ const router = createRouter({
 })
 
 /**
- *  设置路由守卫
+ * 设置 Vue Router
+ *
+ * @param app Vue 应用实例
  */
-createRouteGuard (router)
+export async function setupRouter(app: App) {
+  // 在 Vue 应用中使用路由
+  app.use(router)
 
-export default router
+  // 创建并应用路由守卫
+  createRouterGuard(router)
+
+  // 等待路由准备就绪
+  await router.isReady()
+}

@@ -1,6 +1,6 @@
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
-import { blogChildRoutes } from '@/router/modules/blog'
+import { blogChildRouterList } from '@/router/modules/blog'
 
 import { cloneDeep } from 'lodash'
 
@@ -9,7 +9,7 @@ import { computed } from 'vue'
 /**
  *  克隆 blogChildRoutes 数组
  */
-const mixinRoutes = [...blogChildRoutes]
+const mixinRoutes = [...blogChildRouterList]
 
 /**
  * 将路由配置映射到客户端菜单
