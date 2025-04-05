@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.8.1",
-    "@arco-design/web-vue": "^2.56.3",
+    "@arco-design/web-vue": "^2.57.0",
     "@arco-plugins/vite-vue": "^1.4.5",
     "@types/color": "^4.2.0",
     "@types/node": "^22.5.4",
