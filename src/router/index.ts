@@ -29,7 +29,7 @@ const router = createRouter({
   /**
    *    路由模式
    */
-  history: routerMode[import.meta.env.VITE_APP_ROUTER_MODE](),
+  history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
 
   routes: [
     {
@@ -42,10 +42,6 @@ const router = createRouter({
 
     ...routeList,
 
-    {
-      path: '/test',
-      component: () => import('@/pages/test/index.vue'),
-    },
   ],
 })
 
@@ -60,7 +56,4 @@ export async function setupRouter(app: App) {
 
   // 创建并应用路由守卫
   createRouterGuard(router)
-
-  // 等待路由准备就绪
-  await router.isReady()
 }

@@ -19,7 +19,7 @@ const BAN_LIST = [config.redirectRouteName]
  * @param  route - 路由对象
  * @returns  格式化后的标签属性
  */
-function formatTag(route: RouteLocationNormalized): BlogType.TagProps {
+function formatTag(route: RouteLocationNormalized): BlogType1111.TagProps {
   const { name, meta, fullPath, query } = route
 
   return {
@@ -156,7 +156,7 @@ export const useBlogStore = defineStore(
      * 标签列表 包含当前打开的标签信息。
      * @default  包含默认路由的标签信息
      */
-    const tagList = ref<BlogType.TagProps[]>([config.blog.defaultRoute])
+    const tagList = ref<BlogType11.TagProps[]>([config.blog.defaultRoute])
 
     /**
      *  缓存标签列表 使用 Set 存储唯一的标签名称
@@ -195,7 +195,7 @@ export const useBlogStore = defineStore(
      * @param  idx - 标签索引
      * @param  tag - 标签属性
      */
-    function deleteTag(idx: number, tag: BlogType.TagProps) {
+    function deleteTag(idx: number, tag: BlogType11.TagProps) {
       tagList.value.splice(idx, 1)
 
       cacheTabList.delete(tag.name)
@@ -215,7 +215,7 @@ export const useBlogStore = defineStore(
      * 删除缓存
      * @param  tag - 标签属性
      */
-    function deleteCache(tag: BlogType.TagProps) {
+    function deleteCache(tag: BlogType11.TagProps) {
       cacheTabList.delete(tag.name)
     }
 
@@ -223,7 +223,7 @@ export const useBlogStore = defineStore(
      * 刷新标签列表
      * @param  tags - 标签数组
      */
-    function freshTabList(tags: BlogType.TagProps[]) {
+    function freshTabList(tags: BlogType11.TagProps[]) {
       tagList.value = tags
       cacheTabList.clear()
 

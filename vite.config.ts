@@ -107,7 +107,7 @@ export default defineConfig({
 
     VueRouter({
       // 生成路由类型声明文件
-      dts: 'src/types/routes.d.ts',
+      dts: 'src/types/vue-router-vite.d.ts',
     }),
 
     // https://github.com/antfu/unocss

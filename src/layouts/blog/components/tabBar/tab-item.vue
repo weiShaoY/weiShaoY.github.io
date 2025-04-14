@@ -18,7 +18,7 @@ const props = defineProps({
    *  标签数据
    */
   itemData: {
-    type: Object as PropType<BlogType.TagProps>, // 指定 itemData 的类型为 TagProps
+    type: Object as PropType<BlogType11.TagProps>, // 指定 itemData 的类型为 TagProps
     default() {
       return {
       }
@@ -81,7 +81,7 @@ const blogStore = useBlogStore()
  * 跳转到指定标签
  * @param {TagProps} tag - 标签属性
  */
-function goto(tag: BlogType.TagProps) {
+function goto(tag: BlogType11.TagProps) {
   router.push({
     ...tag,
   })
@@ -132,7 +132,7 @@ const disabledRight = computed(() => {
  * @param {TagProps} tag - 标签属性
  * @param {number} idx - 标签索引
  */
-function tagClose(tag: BlogType.TagProps, idx: number) {
+function tagClose(tag: BlogType11.TagProps, idx: number) {
   // 从标签列表中删除指定标签
   blogStore.deleteTag(idx, tag)
 

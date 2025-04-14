@@ -1,9 +1,5 @@
 import 'virtual:svg-icons-register'
 
-import 'element-plus/dist/index.css'
-
-import 'element-plus/theme-chalk/dark/css-vars.css'
-
 import '@unocss/reset/tailwind.css'
 
 import 'uno.css'
@@ -19,3 +15,9 @@ import './arco.less'
 import './theme.less'
 
 import './base.less'
+
+import './element-plus'
+
+// / ////////  blog 模块
+
+import './blog'

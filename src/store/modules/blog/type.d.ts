@@ -3,7 +3,7 @@
 // /**
 //  * 代码模块类型定义
 //  */
-// declare namespace BlogType {
+// declare namespace BlogType11 {
 
 //   /**
 //    * 布局类型定义
@@ -155,7 +155,7 @@
 /**
  *  代码模块类型定义
  */
-declare namespace BlogType {
+declare namespace BlogType1111 {
 
   /**
    *  标签属性类型

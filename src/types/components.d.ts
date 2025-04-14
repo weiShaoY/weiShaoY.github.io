@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
     Github: typeof import('./../components/Github/index.vue')['default']
     GlobalSetting: typeof import('./../components/GlobalSetting/index.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']

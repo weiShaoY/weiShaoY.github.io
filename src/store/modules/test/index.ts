@@ -1,119 +1,102 @@
-import {
-
-  // StorageEnum,
-  ThemeColorPresets,
-  ThemeLayout,
-  ThemeMode,
-} from '@/layouts/test/types/enum'
+// src/stores/index.ts
+// 2025-04-14---17:00---星期一
 
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
 
 /**
- * 设置类型
+ *  Index模块
  */
-type SettingsType = {
+export const useTestStore = defineStore('test', () => {
+  const theme = ref<BlogType.Theme>({
+    themeScheme: 'light',
+    grayscale: false,
+    colourWeakness: false,
+    recommendColor: false,
+    themeColor: '#646cff',
+    otherColor: {
+      info: '#2080f0',
+      success: '#52c41a',
+      warning: '#faad14',
+      error: '#f5222d',
+    },
+    isInfoFollowPrimary: true,
+    resetCacheStrategy: 'close',
+    layout: {
+      mode: 'vertical',
+      scrollMode: 'content',
+      reverseHorizontalMix: false,
+    },
+    page: {
+      animate: true,
+      animateMode: 'fade-slide',
+    },
+    header: {
+      height: 56,
+      breadcrumb: {
+        visible: true,
+        showIcon: true,
+      },
+    },
+    tab: {
+      visible: true,
+      cache: true,
+      height: 44,
+      mode: 'chrome',
+    },
+    fixedHeaderAndTab: true,
+    sider: {
+      inverted: false,
+      width: 220,
+      collapsedWidth: 64,
+      mixWidth: 90,
+      mixCollapsedWidth: 64,
+      mixChildMenuWidth: 200,
+    },
+    footer: {
+      visible: true,
+      fixed: false,
+      height: 48,
+      right: true,
+    },
+    watermark: {
+      visible: false,
+      text: 'SoybeanAdmin',
+    },
+    tokens: {
+      light: {
+        colors: {
+          'container': 'rgb(255, 255, 255)',
+          'layout': 'rgb(247, 250, 252)',
+          'inverted': 'rgb(0, 20, 40)',
+          'base-text': 'rgb(31, 31, 31)',
+        },
+        boxShadow: {
+          header: '0 1px 2px rgb(0, 21, 41, 0.08)',
+          sider: '2px 0 8px 0 rgb(29, 35, 41, 0.05)',
+          tab: '0 1px 2px rgb(0, 21, 41, 0.08)',
+        },
+      },
+      dark: {
+        colors: {
+          'container': 'rgb(28, 28, 28)',
+          'layout': 'rgb(18, 18, 18)',
+          'base-text': 'rgb(224, 224, 224)',
+        },
+      },
+    },
+  })
 
-  /**
-   * 主题颜色预设
-   */
-  themeColorPresets: ThemeColorPresets
+  const app = ref({
+    /**
+     *   侧边栏是否折叠
+     */
+    siderCollapse: false,
+  })
 
-  /**
-   * 主题模式（光明或黑暗）
-   */
-  themeMode: ThemeMode
-
-  /**
-   * 主题布局（垂直、水平或迷你）
-   */
-  themeLayout: ThemeLayout
-
-  /**
-   * 是否拉伸主题布局
-   */
-  themeStretch: boolean
-
-  /**
-   * 是否显示面包屑导航
-   */
-  breadCrumb: boolean
-
-  /**
-   * 是否启用多标签页
-   */
-  multiTab: boolean
-
-  /**
-   * 是否使用黑暗侧边栏
-   */
-  darkSidebar: boolean
-
-  /**
-   * 字体族
-   */
-  fontFamily: string
-
-  /**
-   * 字体大小（以像素为单位）
-   */
-  fontSize: number
-
-  /**
-   * 文字方向（从左到右或从右到左）
-   */
-  direction: 'ltr' | 'rtl'
-}
-
-/**
- * 定义名为 'test' 的 store
- */
-export const useTestStore = defineStore(
-  'test',
-  () => {
-    const settings = ref<SettingsType>({
-      themeColorPresets: ThemeColorPresets.Default,
-      themeMode: ThemeMode.Light,
-      themeLayout: ThemeLayout.Vertical,
-      themeStretch: false,
-      breadCrumb: true,
-      multiTab: true,
-      darkSidebar: false,
-      fontFamily: 'Public Sans, sans-serif',
-      fontSize: 14,
-      direction: 'ltr',
-    })
-
-    function setSettings(newSettings: Partial<SettingsType>) {
-      settings.value = {
-        ...settings.value,
-        ...newSettings,
-      }
-    }
-
-    function clearSettings() {
-      settings.value = {
-        themeColorPresets: ThemeColorPresets.Default,
-        themeMode: ThemeMode.Light,
-        themeLayout: ThemeLayout.Vertical,
-        themeStretch: false,
-        breadCrumb: true,
-        multiTab: true,
-        darkSidebar: false,
-        fontFamily: 'Public Sans, sans-serif',
-        fontSize: 14,
-        direction: 'ltr',
-      }
-    }
-
-    return {
-      settings,
-      setSettings,
-      clearSettings,
-    }
-  },
-  {
-    persist: true,
-  },
-)
+  return {
+    theme,
+    app,
+  }
+})

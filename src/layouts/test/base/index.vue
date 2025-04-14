@@ -1,0 +1,103 @@
+<!------------------------------------    ------------------------------------------------->
+<script lang="ts" setup>
+
+import type { LayoutMode } from '@sa/materials'
+
+import { useTestStore } from '@/store'
+
+import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@sa/materials'
+
+import GlobalHeader from '../components/global-header/index.vue'
+
+const testStore = useTestStore()
+
+/**
+ *  当前激活的一级菜单是否有子菜单
+ */
+const isActiveFirstLevelMenuHasChildren = ref(false)
+
+/** 获取头部属性配置 */
+/** 获取头部属性配置 */
+const globalHeaderProps = computed(() => {
+  const { mode, reverseHorizontalMix } = testStore.theme.layout
+
+  const headerPropsConfig: Record<BlogType.Theme['layout']['mode'], {
+
+    /** 是否显示 logo */
+    showLogo?: boolean
+
+    /** 是否显示菜单切换按钮 */
+    showMenuToggler?: boolean
+
+    /** 是否显示菜单 */
+    showMenu?: boolean
+  }> = {
+    'vertical': {
+      showLogo: false,
+      showMenu: false,
+      showMenuToggler: true,
+    },
+    'vertical-mix': {
+      showLogo: false,
+      showMenu: false,
+      showMenuToggler: false,
+    },
+    'horizontal': {
+      showLogo: true,
+      showMenu: true,
+      showMenuToggler: false,
+    },
+    'horizontal-mix': {
+      showLogo: true,
+      showMenu: true,
+      showMenuToggler: reverseHorizontalMix && isActiveFirstLevelMenuHasChildren.value,
+    },
+  }
+
+  return headerPropsConfig[mode]
+})
+</script>
+
+<template>
+  <AdminLayout
+    v-model:sider-collapse="testStore.app.siderCollapse"
+  >
+    <template
+      #header
+    >
+      2222
+
+      <GlobalHeader
+        v-bind="globalHeaderProps"
+      />
+    </template>
+
+    <template
+      #tab
+    >
+      <GlobalTab />
+    </template>
+
+    <template
+      #sider
+    >
+      <GlobalSider />
+    </template>
+
+    <GlobalMenu />
+
+    <GlobalContent />
+
+    <ThemeDrawer />
+
+    <template
+      #footer
+    >
+      <GlobalFooter />
+    </template>
+  </AdminLayout>
+</template>
+
+<style lang="less" scoped>
+
+</style>
