@@ -16,11 +16,6 @@ declare namespace Env {
   /** import.meta 接口 */
   type ImportMeta = {
 
-    /**
-     * 应用程序的环境
-     */
-    readonly VITE_APP_ENV: 'development' | 'production'
-
     /** 应用程序的基本 URL */
     readonly VITE_BASE_URL: string
 
@@ -35,19 +30,29 @@ declare namespace Env {
     readonly VITE_APP_DESC: string
 
     /**
-     * 路由历史模式
-     */
-    readonly VITE_APP_ROUTER_MODE: 'hash' | 'history'
-
-    /**
-     * 应用首页地址
-     */
-    readonly VITE_APP_HOME_PAGE: string
-
-    /**
      *  应用字体家族
      */
     readonly VITE_APP_FONT_FAMILY: string
+
+    /**
+     * 路由-模式
+     */
+    readonly VITE_ROUTER_MODE: 'hash' | 'history'
+
+    /**
+     * 路由-根路径
+     */
+    readonly VITE_ROUTER_ROOT_PATH: string
+
+    /**
+     * 路由-博客模块路径
+     */
+    readonly VITE_ROUTER_BLOG_PATH: string
+
+    /**
+     *  路由-博客模块首页路径
+     */
+    readonly VITE_ROUTER_BLOG_HOME_PATH: string
 
   } & ImportMetaEnv
 }
