@@ -30,6 +30,11 @@ declare namespace Env {
     readonly VITE_APP_DESC: string
 
     /**
+     *  图标名称的前缀，用于统一应用内的图标命名规则
+     */
+    readonly VITE_APP_ICON_PREFIX: string
+
+    /**
      *  应用字体家族
      */
     readonly VITE_APP_FONT_FAMILY: string

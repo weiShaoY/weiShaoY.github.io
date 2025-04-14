@@ -48,6 +48,7 @@
     "nprogress": "^0.2.0",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
+    "tailwind-merge": "2.5.4",
     "three": "^0.175.0",
     "three-custom-shader-material": "^6.3.1",
     "three-globe": "^2.42.1",
@@ -56,11 +57,13 @@
     "vue-echarts": "^7.0.3",
     "vue-router": "^4.5.0",
     "xgplayer": "^3.0.20"
+
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.8.1",
     "@arco-design/web-vue": "^2.56.3",
     "@arco-plugins/vite-vue": "^1.4.5",
+    "@sa/uno-preset": "workspace:*",
     "@types/color": "^4.2.0",
     "@types/node": "^22.5.4",
     "@types/nprogress": "^0.2.3",
@@ -81,6 +84,7 @@
     "less": "^4.2.0",
     "md5-ts": "^0.1.6",
     "pnpm": "^10.0.0",
+    "sass": "1.83.0",
     "taze": "^19.0.0",
     "typescript": "^5.5.4",
     "unocss": "^66.0.0",

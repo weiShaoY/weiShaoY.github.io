@@ -8,11 +8,22 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Github: typeof import('./../components/Github/index.vue')['default']
     GlobalSetting: typeof import('./../components/GlobalSetting/index.vue')['default']
+    IconAntDesignEnterOutlined: typeof import('~icons/ant-design/enter-outlined')['default']
+    IconMdiArrowDownThin: typeof import('~icons/mdi/arrow-down-thin')['default']
+    IconMdiArrowUpThin: typeof import('~icons/mdi/arrow-up-thin')['default']
+    IconMdiKeyboardEsc: typeof import('~icons/mdi/keyboard-esc')['default']
+    IconMdiKeyboardReturn: typeof import('~icons/mdi/keyboard-return')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     Logo: typeof import('./../components/Logo/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']

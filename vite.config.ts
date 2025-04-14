@@ -18,7 +18,7 @@ import VueMacros from 'unplugin-vue-macros/vite'
 
 import VueRouter from 'unplugin-vue-router/vite'
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
 
@@ -26,103 +26,127 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
 
-export default defineConfig({
-  resolve: {
-    /**
-     *  设置路径别名
-     */
-    alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`,
-    },
-  },
+export default defineConfig((configEnv) => {
+  const viteEnv = loadEnv(
+    configEnv.mode,
+    process.cwd(),
+  ) as unknown as Env.ImportMeta
 
-  plugins: [
-    Glsl(),
-
-    vueJsx(),
-
-    // vueDevTools(),
-
-    VueMacros({
+  return {
+    resolve: {
       /**
-       *  禁用宏选项定义
+       *  设置路径别名
        */
-      defineOptions: false,
-
-      /**
-       *  禁用宏模型定义
-       */
-      defineModels: false,
-      plugins: {
-        vue: Vue({
-          script: {
-            /**
-             *  启用属性解构
-             */
-            propsDestructure: true,
-
-            /**
-             *  启用模型定义
-             */
-            defineModel: true,
-          },
-        }),
+      alias: {
+        '@/': `${path.resolve(__dirname, 'src')}/`,
       },
-    }),
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 使用现代编译器 API (Sass 新特性支持)
+          api: 'modern-compiler',
 
-    // https://github.com/antfu/unplugin-auto-import
-    AutoImport({
-      imports: ['vue', 'vue-router', '@vueuse/core'],
+          /**
+           * 全局注入的 SCSS 代码
+           * @use 指令引入全局样式文件
+           * as * 表示将所有 mixin/variables 导入全局命名空间
+           */
+          additionalData: `@use "@/theme/blog/scss/global.scss" as *;`,
 
-      /**
-       *  生成类型定义文件
-       */
-      dts: 'src/types/auto-imports.d.ts',
+          // 注意：实际路径请根据项目结构调整
+          // @/ 别名通常指向 src 目录
+        },
+      },
+    },
+    plugins: [
+      Glsl(),
 
-      /**
-       *  自动导入的目录
-       */
-      dirs: ['./src/composables', './src/utils'],
+      vueJsx(),
 
-      /**
-       *  启用 Vue 模板
-       */
-      vueTemplate: true,
-    }),
+      // vueDevTools(),
 
-    // https://github.com/antfu/vite-plugin-components
-    Components({
-      /**
-       *  生成类型定义文件
-       */
-      dts: 'src/types/components.d.ts', // 生成的组件类型声明文件
+      VueMacros({
+        /**
+         *  禁用宏选项定义
+         */
+        defineOptions: false,
 
-      resolvers: [
-        // 自动导入 Element Plus 组件，完整导入可查看 /src/plugins/ui.ts
-        ElementPlusResolver({
-          importStyle: false, // 不自动导入样式，完整导入可查看 /theme/index.ts
-        }),
-      ],
-    }),
+        /**
+         *  禁用宏模型定义
+         */
+        defineModels: false,
+        plugins: {
+          vue: Vue({
+            script: {
+              /**
+               *  启用属性解构
+               */
+              propsDestructure: true,
 
-    VueRouter({
-      // 生成路由类型声明文件
-      dts: 'src/types/vue-router-vite.d.ts',
-    }),
+              /**
+               *  启用模型定义
+               */
+              defineModel: true,
+            },
+          }),
+        },
+      }),
 
-    // https://github.com/antfu/unocss
-    // 查看 uno.config.ts 文件进行 Uno.css 配置
-    UnoCSS(),
+      // https://github.com/antfu/unplugin-auto-import
+      AutoImport({
+        imports: ['vue', 'vue-router', '@vueuse/core'],
 
-    //  Arco 按需引入
-    vitePluginForArco({
-      style: 'css',
-    }),
+        /**
+         *  生成类型定义文件
+         */
+        dts: 'src/types/auto-imports.d.ts',
 
-    createSvgIconsPlugin({
-      // 指定需要缓存的图标文件夹
-      iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
-      symbolId: 'icon-[dir]-[name]',
-    }),
-  ],
+        /**
+         *  自动导入的目录
+         */
+        dirs: ['./src/composables', './src/utils'],
+
+        /**
+         *  启用 Vue 模板
+         */
+        vueTemplate: true,
+      }),
+
+      // https://github.com/antfu/vite-plugin-components
+      Components({
+        /**
+         *  生成类型定义文件
+         */
+        dts: 'src/types/components.d.ts', // 生成的组件类型声明文件
+
+        resolvers: [
+          // 自动导入 Element Plus 组件，完整导入可查看 /src/plugins/ui.ts
+          ElementPlusResolver({
+            importStyle: false, // 不自动导入样式，完整导入可查看 /theme/index.ts
+          }),
+        ],
+      }),
+
+      VueRouter({
+        // 生成路由类型声明文件
+        dts: 'src/types/vue-router-vite.d.ts',
+      }),
+
+      // https://github.com/antfu/unocss
+      // 查看 uno.config.ts 文件进行 Uno.css 配置
+      UnoCSS(),
+
+      //  Arco 按需引入
+      vitePluginForArco({
+        style: 'css',
+      }),
+
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
+        symbolId: `${viteEnv.VITE_APP_ICON_PREFIX}-[dir]-[name]`,
+      }),
+    ],
+  }
 })

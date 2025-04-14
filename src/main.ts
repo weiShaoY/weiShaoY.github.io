@@ -4,7 +4,7 @@ import App from './App.vue'
 
 import directives from './directives'
 
-import { setupNProgress } from './plugins'
+import { setupNProgress, setupUI } from './plugins'
 
 import { setupRouter } from './router'
 
@@ -24,6 +24,9 @@ async function setupApp() {
   app.use(directives)
 
   app.use(pinia)
+
+  // 设置 UI (ElementPlus)
+  setupUI(app)
 
   // 设置路由
   await setupRouter(app)

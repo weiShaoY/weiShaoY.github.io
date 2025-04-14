@@ -268,6 +268,23 @@ declare namespace BlogType {
       /** 是否显示菜单 */
       showMenu?: boolean
     }
-
   }
+
+    /** 菜单项 */
+    type MenuItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
+
+      /** 子菜单 */
+      children?: BlogMenuItem[]
+    }
+
+    /** 面包屑 */
+    type BreadcrumbItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
+
+      /** 子菜单 */
+      children?: BlogMenuItem[]
+    }
+
+  // namespace Menu {
+
+  // }
 }

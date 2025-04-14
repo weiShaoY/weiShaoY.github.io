@@ -1,9 +1,23 @@
 // src/stores/index.ts
 // 2025-04-14---17:00---星期一
 
+import {
+  breakpointsTailwind,
+  useBreakpoints,
+  useEventListener,
+} from '@vueuse/core'
+
 import { defineStore } from 'pinia'
 
+import { a } from 'unplugin-vue-router/types-CTGkmk9e'
+
 import { ref } from 'vue'
+
+import { transformMenuToSearchMenuList } from './shared'
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const osTheme = usePreferredColorScheme()
 
 /**
  *  Index模块
@@ -88,15 +102,97 @@ export const useTestStore = defineStore('test', () => {
     },
   })
 
+  /**
+   *  主题-函数集合
+   */
+  const themeFUNC = ref({
+    /**
+     * 获取当前是否暗黑模式
+     * @returns  是否暗黑模式
+     */
+    get darkMode() {
+      if (theme.value.themeScheme === 'auto') {
+        return osTheme.value === 'dark'
+      }
+
+      return theme.value.themeScheme === 'dark'
+    },
+
+    setThemeScheme(themeScheme: BlogType.Theme['themeScheme']) {
+      theme.value.themeScheme = themeScheme
+    },
+    toggleThemeScheme() {
+      const themeSchemes: BlogType.Theme['themeScheme'][] = ['light', 'dark', 'auto']
+
+      const index = themeSchemes.findIndex(item => item === theme.value.themeScheme)
+
+      const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1
+
+      const nextThemeScheme = themeSchemes[nextIndex]
+
+      themeFUNC.value.setThemeScheme(nextThemeScheme)
+    },
+
+  })
+
   const app = ref({
     /**
      *   侧边栏是否折叠
      */
     siderCollapse: false,
+
+    /**
+     *  是否为移动布局
+     */
+    isMobile: breakpoints.smaller('sm'),
+
+    /**
+     *  主题设置抽屉是否可见
+     */
+    themeDrawerVisible: false,
   })
 
+  const appFUNC = ref({
+
+  })
+
+  /**
+   *
+   *  菜单列表
+   */
+  const menuList = ref<BlogType.MenuItem[]>([])
+
+  /**
+   *  搜索菜单列表
+   */
+  const searchMenuList = computed(() => transformMenuToSearchMenuList(menuList.value))
+
   return {
+    /**
+     *   主题
+     */
     theme,
+
+    /**
+     *   主题函数
+     */
+    themeFUNC,
+
+    /**
+     *   应用
+     */
     app,
+
+    appFUNC,
+
+    /**
+     *  菜单列表
+     */
+    menuList,
+
+    /**
+     *  搜索菜单列表
+     */
+    searchMenuList,
   }
 })

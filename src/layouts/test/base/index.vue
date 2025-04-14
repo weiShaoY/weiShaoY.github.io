@@ -7,7 +7,7 @@ import { useTestStore } from '@/store'
 
 import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@sa/materials'
 
-import GlobalHeader from '../components/global-header/index.vue'
+import GlobalHeader from './modules/global-header/index.vue'
 
 const testStore = useTestStore()
 
