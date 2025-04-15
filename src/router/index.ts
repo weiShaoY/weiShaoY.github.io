@@ -1,3 +1,5 @@
+import type { App } from 'vue'
+
 import type { RouteRecordNormalized } from 'vue-router'
 
 import {
@@ -25,7 +27,7 @@ const routerMode = {
 /**
  * 创建并配置路由器
  */
-const router = createRouter({
+export const router = createRouter({
   /**
    *    路由模式
    */

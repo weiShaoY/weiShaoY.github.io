@@ -21,7 +21,7 @@ const isActiveFirstLevelMenuHasChildren = ref(false)
 const globalHeaderProps = computed(() => {
   const { mode, reverseHorizontalMix } = testStore.theme.layout
 
-  const headerPropsConfig: Record<BlogType.Theme['layout']['mode'], {
+  const headerPropsConfig: Record<BlogType.Setting['layout']['mode'], {
 
     /** 是否显示 logo */
     showLogo?: boolean
@@ -65,7 +65,6 @@ const globalHeaderProps = computed(() => {
     <template
       #header
     >
-      2222
 
       <GlobalHeader
         v-bind="globalHeaderProps"

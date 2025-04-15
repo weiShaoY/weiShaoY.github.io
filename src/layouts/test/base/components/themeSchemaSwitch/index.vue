@@ -17,7 +17,7 @@ const emit = defineEmits<Emits>()
 type Props = {
 
   /** 主题方案 */
-  themeSchema: BlogType.Theme['themeScheme']
+  themeSchema: BlogType.Setting['themeScheme']
 
   /** 显示工具提示 */
   showTooltip?: boolean
@@ -34,7 +34,7 @@ function handleSwitch() {
   emit('switch')
 }
 
-const icons: Record<BlogType.Theme['themeScheme'], string> = {
+const icons: Record<BlogType.Setting['themeScheme'], string> = {
   light: 'blog-theme-light',
   dark: 'blog-theme-dark',
   auto: 'blog-theme-auto',

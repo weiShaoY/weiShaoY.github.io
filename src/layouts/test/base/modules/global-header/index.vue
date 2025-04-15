@@ -6,6 +6,8 @@ import { useFullscreen } from '@vueuse/core'
 
 import { GLOBAL_HEADER_MENU_ID } from '../../app'
 
+import DarkModeContainer from '../../components/darkModeContainer/index.vue'
+
 import FullScreen from '../../components/fullScreen/index.vue'
 
 import MenuToggler from '../../components/menuToggler/index.vue'
@@ -15,8 +17,6 @@ import ThemeButton from '../../components/themeButton/index.vue'
 import ThemeSchemaSwitch from '../../components/themeSchemaSwitch/index.vue'
 
 import GlobalBreadcrumb from '../global-breadcrumb/index.vue'
-
-// import { useThemeStore } from '@/store/modules/theme'
 
 import GlobalLogo from '../global-logo/index.vue'
 
@@ -35,17 +35,17 @@ type Props = {
   /**
    * 是否显示 Logo
    */
-  showLogo?: BlogType.App.HeaderProps['showLogo']
+  showLogo?: BlogType.Global.HeaderProps['showLogo']
 
   /**
    *  是否显示菜单切换按钮
    */
-  showMenuToggler?: BlogType.App.HeaderProps['showMenuToggler']
+  showMenuToggler?: BlogType.Global.HeaderProps['showMenuToggler']
 
   /**
    *  是否显示菜单
    */
-  showMenu?: BlogType.App.HeaderProps['showMenu']
+  showMenu?: BlogType.Global.HeaderProps['showMenu']
 }
 
 const testStore = useTestStore()
@@ -55,7 +55,7 @@ const { isFullscreen, toggle } = useFullscreen()
 
 <template>
   <DarkModeContainer
-    class="flex-y-center shadow-header h-full px-[12px]"
+    class="h-full flex-y-center px-[12px] shadow-header"
   >
     <!-- 全局Logo -->
     <GlobalLogo
@@ -71,21 +71,17 @@ const { isFullscreen, toggle } = useFullscreen()
       @click="testStore.app.siderCollapse = !testStore.app.siderCollapse"
     />
 
-    <!-- <el-button>
-      菜单切换按钮
-    </el-button> -->
-
     <!-- 菜单 -->
     <div
       v-if="showMenu"
       :id="GLOBAL_HEADER_MENU_ID"
-      class="flex-y-center flex-1-hidden h-full"
+      class="h-full flex-y-center flex-1-hidden"
     />
 
     <!-- 面包屑导航 -->
     <div
       v-else
-      class="flex-y-center flex-1-hidden h-full"
+      class="h-full flex-y-center flex-1-hidden"
     >
       <GlobalBreadcrumb
         v-if="!testStore.app.isMobile"
@@ -95,7 +91,7 @@ const { isFullscreen, toggle } = useFullscreen()
 
     <!-- 右侧操作区 -->
     <div
-      class="flex-y-center h-full justify-end"
+      class="h-full flex-y-center justify-end"
     >
       <GlobalSearch />
 

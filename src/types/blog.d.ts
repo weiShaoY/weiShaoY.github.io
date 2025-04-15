@@ -2,100 +2,107 @@
  * 博客模块命名类型
  */
 declare namespace BlogType {
+  namespace Theme {
 
-  /** 其他颜色 */
-  type OtherColor = {
+    /**
+     *  主题编号
+     */
+    type ColorPaletteNumber = import('@sa/color').ColorPaletteNumber
 
-    /** 信息颜色 */
-    info: string
+    /** 其他颜色 */
+    type OtherColor = {
 
-    /** 成功颜色 */
-    success: string
+      /** 信息颜色 */
+      info: string
 
-    /** 警告颜色 */
-    warning: string
+      /** 成功颜色 */
+      success: string
 
-    /** 错误颜色 */
-    error: string
-  }
+      /** 警告颜色 */
+      warning: string
 
-  /** 主题颜色 */
-  type ThemeColor = {
+      /** 错误颜色 */
+      error: string
+    }
 
-    /** 主色 */
-    primary: string
-  } & OtherColor
+    /** 主题颜色 */
+    type ThemeColor = {
 
-  /** 主题颜色键 */
-  type ThemeColorKey = keyof ThemeColor
+      /** 主色 */
+      primary: string
+    } & OtherColor
 
-  /** 主题调色板颜色 */
-  type ThemePaletteColor = {
-    [key in ThemeColorKey | `${ThemeColorKey}-${ColorPaletteNumber}`]: string;
-  }
+    /** 主题颜色键 */
+    type ThemeColorKey = keyof ThemeColor
 
-  /** 基础 token */
-  type BaseToken = Record<string, Record<string, string>>
+    /** 主题调色板颜色 */
+    type ThemePaletteColor = {
+      [key in ThemeColorKey | `${ThemeColorKey}-${ColorPaletteNumber}`]: string;
+    }
 
-  /** 主题设置 token 颜色 */
-  type ThemeSettingTokenColor = {
+    /** 基础 token */
+    type BaseToken = Record<string, Record<string, string>>
 
-    /** 进度条颜色，如果未设置，则使用主色 */
-    'nprogress'?: string
+    /** 主题设置 token 颜色 */
+    type ThemeSettingTokenColor = {
 
-    /** 容器颜色 */
-    'container': string
+      /** 进度条颜色，如果未设置，则使用主色 */
+      'nprogress'?: string
 
-    /** 布局颜色 */
-    'layout': string
+      /** 容器颜色 */
+      'container': string
 
-    /** 反转颜色 */
-    'inverted': string
+      /** 布局颜色 */
+      'layout': string
 
-    /** 基础文本颜色 */
-    'base-text': string
-  }
+      /** 反转颜色 */
+      'inverted': string
 
-  /** 主题设置 token 阴影 */
-  type ThemeSettingTokenBoxShadow = {
+      /** 基础文本颜色 */
+      'base-text': string
+    }
 
-    /** 头部阴影 */
-    header: string
+    /** 主题设置 token 阴影 */
+    type ThemeSettingTokenBoxShadow = {
 
-    /** 侧边栏阴影 */
-    sider: string
+      /** 头部阴影 */
+      header: string
 
-    /** 标签页阴影 */
-    tab: string
-  }
+      /** 侧边栏阴影 */
+      sider: string
 
-  /** 主题设置 token */
-  type ThemeSettingToken = {
+      /** 标签页阴影 */
+      tab: string
+    }
 
-    /** 颜色 */
-    colors: ThemeSettingTokenColor
+    /** 主题设置 token */
+    type ThemeSettingToken = {
 
-    /** 阴影 */
-    boxShadow: ThemeSettingTokenBoxShadow
-  }
+      /** 颜色 */
+      colors: ThemeSettingTokenColor
 
-  /** 主题 token 颜色 */
-  type ThemeTokenColor = ThemePaletteColor & ThemeSettingTokenColor
+      /** 阴影 */
+      boxShadow: ThemeSettingTokenBoxShadow
+    }
 
-  /** 主题 token CSS 变量 */
-  type ThemeTokenCSSVars = {
+    /** 主题 token 颜色 */
+    type ThemeTokenColor = ThemePaletteColor & ThemeSettingTokenColor
 
-    /** 颜色 */
-    colors: ThemeTokenColor & { [key: string]: string }
+    /** 主题 token CSS 变量 */
+    type ThemeTokenCSSVars = {
 
-    /** 阴影 */
-    boxShadow: ThemeSettingTokenBoxShadow & { [key: string]: string }
+      /** 颜色 */
+      colors: ThemeTokenColor & { [key: string]: string }
+
+      /** 阴影 */
+      boxShadow: ThemeSettingTokenBoxShadow & { [key: string]: string }
+    }
   }
 
   // / / ////////////////////////  主题 2025-04-14---18:16---星期一  ////////////////////////
 
   /** 主题设置 */
-  type Theme = {
+  type Setting = {
 
     /** 主题方案 */
     themeScheme: 'dark' | 'light' | 'auto'
@@ -254,7 +261,24 @@ declare namespace BlogType {
 
   // //////////////////////// app  2025-04-14---18:30---星期一  ////////////////////////
 
-  namespace App {
+  /** 菜单项 */
+  type MenuItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
+
+    /** 子菜单 */
+    children?: BlogMenuItem[]
+  }
+
+  /** 面包屑 */
+  type BreadcrumbItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
+
+    /** 子菜单 */
+    children?: BlogMenuItem[]
+  }
+
+  /**
+   *  全局
+   */
+  namespace Global {
 
     /** 全局头部属性 */
     type HeaderProps = {
@@ -268,23 +292,57 @@ declare namespace BlogType {
       /** 是否显示菜单 */
       showMenu?: boolean
     }
+
+    /** 全局下拉菜单键 */
+    type DropdownKey =
+      | 'closeCurrent'
+      | 'closeOther'
+      | 'closeLeft'
+      | 'closeRight'
+      | 'closeAll'
+
+    /** 全局标签页 */
+    type Tab = {
+
+      /** 标签页 ID */
+      path: string
+
+      /** 标签页标签 */
+      label: string
+
+      /**
+       * 新标签页标签
+       *
+       * 如果设置，标签页标签将被此值替换
+       */
+      newLabel?: string
+
+      /**
+       * 旧标签页标签
+       *
+       * 当重置标签页标签时，标签页标签将被此值替换
+       */
+      oldLabel?: string
+
+      /** 标签页完整路径 */
+      fullPath: string
+
+      /** 标签页固定索引 */
+      fixedIndex?: number | null
+
+      /**
+       * 标签页图标
+       *
+       * Iconify 图标
+       */
+      icon?: string
+
+      /**
+       * 标签页本地图标
+       *
+       * 本地图标
+       */
+      localIcon?: string
+    }
   }
-
-    /** 菜单项 */
-    type MenuItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
-
-      /** 子菜单 */
-      children?: BlogMenuItem[]
-    }
-
-    /** 面包屑 */
-    type BreadcrumbItem = Omit<RouterType.BlogRouteRecordRaw, 'children'> & {
-
-      /** 子菜单 */
-      children?: BlogMenuItem[]
-    }
-
-  // namespace Menu {
-
-  // }
 }
