@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import BetterScroll from '@/components/blog/custom/better-scroll.vue'
-
 import { useTestStore } from '@/store'
 
 import { isPC } from '@/utils'
@@ -17,7 +15,13 @@ import {
 
 import { useRoute } from 'vue-router'
 
+import BetterScroll from '../../components/betterScroll/index.vue'
+
+import DarkModeContainer from '../../components/darkModeContainer/index.vue'
+
 import FullScreen from '../../components/fullScreen/index.vue'
+
+import ReloadButton from '../../components/reloadButton/index.vue'
 
 import ContextMenu from './context-menu.vue'
 
@@ -113,17 +117,17 @@ function getContextMenuDisabledKeys(tabId: string) {
 }
 
 /** 关闭选项卡 */
-async function handleCloseTab(tab: App.Global.Tab) {
+async function handleCloseTab(tab: BlogType.Global.Tab) {
   await testStore.tabFUNC.removeTab(tab.path)
 
   if (testStore.theme.resetCacheStrategy === 'close') {
-    routeStore.resetRouteCache(tab.path)
+    testStore.routerFUNC.resetCacheRouteList(tab.path)
   }
 }
 
 /** 刷新页面 */
 async function refresh() {
-  appStore.reloadPage(500)
+  testStore.appFUNC.reloadPage(500)
 }
 
 type DropdownConfig = {
@@ -205,7 +209,7 @@ async function handleContextMenu(e: MouseEvent, tabId: string) {
 
 /** 初始化标签页存储 */
 function init() {
-  tabStore.initTabStore(route as any)
+  testStore.tabFUNC.initTab(route as any)
 }
 
 /** 移除焦点 */
@@ -255,15 +259,15 @@ init()
         >
           <!-- 遍历所有 Tab 并渲染 -->
           <PageTab
-            v-for="tab in tabStore.tabs"
+            v-for="tab in testStore.tab.tabList"
             :key="tab.path"
             :[TAB_DATA_ID]="tab.path"
             :mode="testStore.theme.tab.mode"
             :dark-mode="testStore.themeFUNC.darkMode"
-            :active="tab.path === tabStore.activeTabPath"
+            :active="tab.path === testStore.tab.activeTabPath"
             :active-color="testStore.theme.themeColor"
-            :closable="!tabStore.isTabRetain(tab.path)"
-            @click="tabStore.switchRouteByTab(tab)"
+            :closable="!testStore.tabFUNC.isTabRetain(tab.path)"
+            @click="testStore.tabFUNC.switchRouteByTab(tab)"
             @close="handleCloseTab(tab)"
             @contextmenu="handleContextMenu($event, tab.path)"
           >

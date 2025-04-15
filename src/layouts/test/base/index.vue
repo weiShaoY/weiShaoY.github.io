@@ -7,7 +7,15 @@ import { useTestStore } from '@/store'
 
 import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@sa/materials'
 
+import GlobalContent from './modules/global-content/index.vue'
+
 import GlobalHeader from './modules/global-header/index.vue'
+
+import GlobalSider from './modules/global-sider/index.vue'
+
+import GlobalTab from './modules/global-tab/index.vue'
+
+import ThemeDrawer from './modules/theme-drawer/index.vue'
 
 const testStore = useTestStore()
 
@@ -21,7 +29,7 @@ const isActiveFirstLevelMenuHasChildren = ref(false)
 const globalHeaderProps = computed(() => {
   const { mode, reverseHorizontalMix } = testStore.theme.layout
 
-  const headerPropsConfig: Record<BlogType.Setting['layout']['mode'], {
+  const headerPropsConfig: Record<BlogType.Theme.Setting['layout']['mode'], {
 
     /** 是否显示 logo */
     showLogo?: boolean
@@ -97,6 +105,8 @@ const globalHeaderProps = computed(() => {
   </AdminLayout>
 </template>
 
-<style lang="less" scoped>
-
+<style lang="scss">
+#__SCROLL_EL_ID__ {
+  @include scrollbar();
+}
 </style>

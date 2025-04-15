@@ -10,11 +10,7 @@ import './fonts.less'
 
 import './nprogress.less'
 
-import './arco.less'
-
-import './theme.less'
-
-import './base.less'
+// import './base.less'
 
 import './element-plus'
 

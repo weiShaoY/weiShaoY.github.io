@@ -1,12 +1,15 @@
 // src/stores/index.ts
 // 2025-04-14---17:00---星期一
 
-import { router } from '@/router'
+import { router as vueRouter } from '@/router'
+
+import { testRouterList } from '@/router/modules/test'
+
+import { getPaletteColorByNumber } from '@sa/color'
 
 import {
   breakpointsTailwind,
   useBreakpoints,
-  useEventListener,
 } from '@vueuse/core'
 
 import { defineStore } from 'pinia'
@@ -17,8 +20,11 @@ import {
   extractTabsByAllRoutes,
   filterTabsByIds,
   filterTabsByPath,
+  findBlogRouteByPath,
+  getCacheRouteNames,
   getFixedTabPaths,
   getTabByRoute,
+  getTabPathByRoute,
   isTabInTabs,
   transformMenuToSearchMenuList,
 } from './shared'
@@ -33,7 +39,7 @@ const osTheme = usePreferredColorScheme()
 export const useTestStore = defineStore(
   'test',
   () => {
-    const theme = ref<BlogType.Setting>({
+    const theme = ref<BlogType.Theme.Setting>({
       themeScheme: 'light',
       grayscale: false,
       colourWeakness: false,
@@ -115,7 +121,7 @@ export const useTestStore = defineStore(
     /**
      *  主题-函数集合
      */
-    const themeFUNC = ref({
+    const themeFUNC = {
       /**
        * 获取当前是否暗黑模式
        * @returns  是否暗黑模式
@@ -128,11 +134,32 @@ export const useTestStore = defineStore(
         return theme.value.themeScheme === 'dark'
       },
 
-      setThemeScheme(themeScheme: BlogType.Setting['themeScheme']) {
+      /**
+       *  主题颜色
+       */
+      get themeColors() {
+        const { themeColor, otherColor, isInfoFollowPrimary } = theme.value
+
+        const colors: BlogType.Theme.ThemeColor = {
+          primary: themeColor,
+          ...otherColor,
+          info: isInfoFollowPrimary ? themeColor : otherColor.info,
+        }
+
+        return colors
+      },
+
+      /**
+       * 设置主题方案
+       * @param themeScheme 主题方案
+       */
+      setThemeScheme(themeScheme: BlogType.Theme.Setting['themeScheme']) {
         theme.value.themeScheme = themeScheme
       },
+
+      /** 切换主题方案 */
       toggleThemeScheme() {
-        const themeSchemes: BlogType.Setting['themeScheme'][] = [
+        const themeSchemes: BlogType.Theme.Setting['themeScheme'][] = [
           'light',
           'dark',
           'auto',
@@ -146,9 +173,32 @@ export const useTestStore = defineStore(
 
         const nextThemeScheme = themeSchemes[nextIndex]
 
-        themeFUNC.value.setThemeScheme(nextThemeScheme)
+        themeFUNC.setThemeScheme(nextThemeScheme)
       },
-    })
+
+      /**
+       * 更新主题颜色
+       *
+       * @param key 主题颜色键
+       * @param color 主题颜色
+       */
+      updateThemeColors(key: BlogType.Theme.ThemeColorKey, color: string) {
+        let colorValue = color
+
+        if (theme.value.recommendColor) {
+          // get a color palette by provided color and color name, and use the suitable color
+
+          colorValue = getPaletteColorByNumber(color, 500, true)
+        }
+
+        if (key === 'primary') {
+          theme.value.themeColor = colorValue
+        }
+        else {
+          theme.value.otherColor[key] = colorValue
+        }
+      },
+    }
 
     const app = ref({
       /**
@@ -159,7 +209,7 @@ export const useTestStore = defineStore(
       /**
        *  是否为移动布局
        */
-      isMobile: breakpoints.smaller('sm'),
+      isMobile: breakpoints.smaller('sm') || false,
 
       /**
        *  主题设置抽屉是否可见
@@ -187,8 +237,28 @@ export const useTestStore = defineStore(
       mixSiderFixed: false,
     })
 
-    const appFUNC = ref({
-    })
+    const appFUNC = {
+      /**
+       * 重新加载页面
+       * @param  duration 持续时间
+       */
+      async reloadPage(duration = 300) {
+        app.value.reloadFlag = false
+
+        const d = theme.value.page.animate ? duration : 40
+
+        await new Promise((resolve) => {
+          setTimeout(resolve, d)
+        })
+
+        app.value.reloadFlag = true
+
+        if (theme.value.resetCacheStrategy === 'refresh') {
+          // eslint-disable-next-line ts/no-use-before-define
+          routerFUNC.resetCacheRouteList()
+        }
+      },
+    }
 
     /**
      *
@@ -202,20 +272,6 @@ export const useTestStore = defineStore(
     const searchMenuList = computed(() =>
       transformMenuToSearchMenuList(menuList.value),
     )
-
-    /**
-     * Tab 列表
-     */
-    const tabList = ref<BlogType.Global.Tab[]>([])
-
-    /**
-     * 首页 Tab
-     */
-    const homeTab = ref<BlogType.Global.Tab>({
-      path: '/test/home',
-      label: 'home',
-      fullPath: '/test/home',
-    })
 
     /**
      *  tab
@@ -239,21 +295,21 @@ export const useTestStore = defineStore(
     /**
      *  tab 函数
      */
-    const tabFUNC = ref({
+    const tabFUNC = {
       /**
        *   初始化 Tab
        */
       initTab(currentRoute: RouterType.BlogRouteRecordRaw) {
-        if (theme.value.tab.cache && tabList.value.length > 0) {
+        if (theme.value.tab.cache && tab.value.tabList.length > 0) {
           // 根据当前所有路由信息，提取有效的标签页（排除无效或不存在的路由）
-          const extractedTabs = extractTabsByAllRoutes(router, tabList.value)
+          const extractedTabs = extractTabsByAllRoutes(vueRouter, tab.value.tabList)
 
           // 更新标签页状态
-          tabList.value = extractedTabs
+          tab.value.tabList = extractedTabs
         }
 
         // 把当前路由添加为一个新标签页
-        tabFUNC.value.addTab(currentRoute)
+        tabFUNC.addTab(currentRoute)
       },
 
       /**
@@ -270,16 +326,16 @@ export const useTestStore = defineStore(
        * @param active 是否激活该 Tab
        */
       addTab(route: RouterType.BlogRouteRecordRaw, active = true) {
-        const tab = getTabByRoute(route)
+        const currentTab = getTabByRoute(route)
 
-        const isHomeTab = tab.path === homeTab.value?.path
+        const isHomeTab = currentTab.path === tab.value.homeTab?.path
 
-        if (!isHomeTab && !isTabInTabs(tab.path, tabList.value)) {
-          tabList.value.push(tab)
+        if (!isHomeTab && !isTabInTabs(currentTab.path, tab.value.tabList)) {
+          tab.value.tabList.push(currentTab)
         }
 
         if (active) {
-          tabFUNC.value.setActiveTabPath(tab.path)
+          tabFUNC.setActiveTabPath(currentTab.path)
         }
       },
 
@@ -291,10 +347,10 @@ export const useTestStore = defineStore(
       async  removeTab(tabPath: string) {
         const isRemoveActiveTab = tab.value.activeTabPath === tabPath
 
-        const updatedTabs = filterTabsByPath(tabPath, tabList.value)
+        const updatedTabs = filterTabsByPath(tabPath, tab.value.tabList)
 
         function update() {
-          tabList.value = updatedTabs
+          tab.value.tabList = updatedTabs
         }
 
         if (!isRemoveActiveTab) {
@@ -302,10 +358,10 @@ export const useTestStore = defineStore(
           return
         }
 
-        const activeTab = updatedTabs.at(-1) || homeTab.value
+        const activeTab = updatedTabs.at(-1) || tab.value.homeTab
 
         if (activeTab) {
-          await tabFUNC.value.switchRouteByTab(activeTab)
+          await tabFUNC.switchRouteByTab(activeTab)
           update()
         }
       },
@@ -314,7 +370,7 @@ export const useTestStore = defineStore(
        * 移除当前激活的 Tab
        */
       async  removeActiveTab() {
-        await tabFUNC.value.removeTab(tab.value.activeTabPath)
+        await tabFUNC.removeTab(tab.value.activeTabPath)
       },
 
       /**
@@ -323,18 +379,18 @@ export const useTestStore = defineStore(
        * @param excludes 需要排除的 Tab ID 列表
        */
       async  clearTabs(excludes: string[] = []) {
-        const remainTabPaths = [...getFixedTabPaths(tabList.value), ...excludes]
+        const remainTabPaths = [...getFixedTabPaths(tab.value.tabList), ...excludes]
 
-        const removedTabsPaths = tabList.value
+        const removedTabsPaths = tab.value.tabList
           .map(tab => tab.path)
           .filter(path => !remainTabPaths.includes(path))
 
         const isRemoveActiveTab = removedTabsPaths.includes(tab.value.activeTabPath)
 
-        const updatedTabs = filterTabsByIds(removedTabsPaths, tabList.value)
+        const updatedTabs = filterTabsByIds(removedTabsPaths, tab.value.tabList)
 
         function update() {
-          tabList.value = updatedTabs
+          tab.value.tabList = updatedTabs
         }
 
         if (!isRemoveActiveTab) {
@@ -342,9 +398,9 @@ export const useTestStore = defineStore(
           return
         }
 
-        const activeTab = updatedTabs[updatedTabs.length - 1] || homeTab.value
+        const activeTab = updatedTabs[updatedTabs.length - 1] || tab.value.homeTab
 
-        await tabFUNC.value.switchRouteByTab(activeTab)
+        await tabFUNC.switchRouteByTab(activeTab)
         update()
       },
 
@@ -356,7 +412,7 @@ export const useTestStore = defineStore(
         const fail = await routerPush(tab.fullPath)
 
         if (!fail) {
-          tabFUNC.value.setActiveTabPath(tab.path)
+          tabFUNC.setActiveTabPath(tab.path)
         }
       },
 
@@ -366,7 +422,7 @@ export const useTestStore = defineStore(
        * @param tabPath 当前 Tab 路径
        */
       async  clearLeftTabs(tabPath: string) {
-        const tabPathList = tabList.value.map(tab => tab.path)
+        const tabPathList = tab.value.tabList.map(tab => tab.path)
 
         const index = tabPathList.indexOf(tabPath)
 
@@ -376,7 +432,7 @@ export const useTestStore = defineStore(
 
         const excludes = tabPathList.slice(index)
 
-        await tabFUNC.value.clearTabs(excludes)
+        await tabFUNC.clearTabs(excludes)
       },
 
       /**
@@ -385,14 +441,14 @@ export const useTestStore = defineStore(
        * @param tabPath 当前 Tab 路径
        */
       async  clearRightTabs(tabPath: string) {
-        const isHomeTab = tabPath === homeTab.value?.path
+        const isHomeTab = tabPath === tab.value.homeTab?.path
 
         if (isHomeTab) {
-          tabFUNC.value.clearTabs()
+          tabFUNC.clearTabs()
           return
         }
 
-        const tabPathList = tabList.value.map(tab => tab.path)
+        const tabPathList = tab.value.tabList.map(tab => tab.path)
 
         const index = tabPathList.indexOf(tabPath)
 
@@ -402,7 +458,7 @@ export const useTestStore = defineStore(
 
         const excludes = tabPathList.slice(0, index + 1)
 
-        await tabFUNC.value.clearTabs(excludes)
+        await tabFUNC.clearTabs(excludes)
       },
 
       /**
@@ -411,16 +467,80 @@ export const useTestStore = defineStore(
        * @param tabPath Tab 路径
        */
       isTabRetain(tabPath: string) {
-        if (tabPath === homeTab.value?.path) {
+        if (tabPath === tab.value.homeTab?.path) {
           return true
         }
 
-        const fixedTabPathList = getFixedTabPaths(tabList.value)
+        const fixedTabPathList = getFixedTabPaths(tab.value.tabList)
 
         return fixedTabPathList.includes(tabPath)
       },
+
+      /** 根据路由获取 Tab path */
+      getTabPathByRoute,
+    }
+
+    const router = ref<{
+
+      /**
+       *   路由-博客模块首页路径
+       */
+      routeHomePath: string
+
+      /**
+       *  缓存路由数组
+       */
+      cacheRouteList: string[]
+
+      /**
+       *  排除缓存路由数组，用于重置路由缓存
+       */
+      excludeCacheRouteList: string[]
+    }>({
+
+      routeHomePath: import.meta.env.VITE_ROUTER_BLOG_HOME_PATH,
+      cacheRouteList: [],
+      excludeCacheRouteList: [],
     })
 
+    const routerFUNC = {
+
+      /**
+       * 获取缓存路由
+       *
+       * @param routeList Vue 路由数组
+       */
+      getCacheRouteList(routeList: RouterType.BlogRouteRecordRaw[]) {
+        router.value.cacheRouteList = getCacheRouteNames(routeList)
+      },
+
+      /**
+       * 重置路由缓存
+       *
+       * @param routePath 路由键，默认值为当前路由名
+       */
+      async resetCacheRouteList(routePath?: string) {
+        const routeName = routePath
+          ? findBlogRouteByPath(testRouterList, routePath)?.name
+          : (vueRouter.currentRoute.value.name as string)
+
+        router.value.excludeCacheRouteList.push(routeName as string)
+
+        await nextTick()
+
+        router.value.excludeCacheRouteList = []
+      },
+    }
+
+    /**
+     *  初始化函数
+     */
+    function initTest() {
+      //  获取缓存路由
+      routerFUNC.getCacheRouteList(testRouterList)
+    }
+
+    initTest()
     return {
       /**
        *   主题
@@ -449,12 +569,12 @@ export const useTestStore = defineStore(
        */
       searchMenuList,
 
-      tabList,
-
-      homeTab,
-
       tab,
       tabFUNC,
+
+      router,
+
+      routerFUNC,
     }
   },
   {

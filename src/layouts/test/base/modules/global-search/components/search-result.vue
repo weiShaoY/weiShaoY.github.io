@@ -47,7 +47,7 @@ function handleTo() {
         :key="item.path"
       >
         <div
-          class="flex-y-center mt-[8px] h-[56px] cursor-pointer justify-between rounded-[4px] bg-[#e5e7eb] px-[14px] dark:bg-dark"
+          class="mt-[8px] h-[56px] flex-y-center cursor-pointer justify-between rounded-[4px] bg-[#e5e7eb] px-[14px] dark:bg-dark"
           :style="{
             background: item.path === active ? testStore.theme.themeColor : '',
             color: item.path === active ? '#fff' : '',

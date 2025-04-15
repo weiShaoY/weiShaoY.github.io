@@ -18,7 +18,7 @@ type Props = {
 <template>
   <RouterLink
     to="/"
-    class="nowrap-hidden w-full flex items-center justify-center"
+    class="w-full flex items-center justify-center nowrap-hidden"
   >
     <!-- <SystemLogo
       class="text-[32px] text-primary"

@@ -1,11 +1,11 @@
 /** Create color palette vars */
 function createColorPaletteVars() {
-  const colors: App.Theme.ThemeColorKey[] = ['primary', 'info', 'success', 'warning', 'error']
+  const colors: BlogType.Theme.ThemeColorKey[] = ['primary', 'info', 'success', 'warning', 'error']
 
-  const colorPaletteNumbers: App.Theme.ColorPaletteNumber[] = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+  const colorPaletteNumbers: BlogType.Theme.ColorPaletteNumber[] = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
   const colorPaletteVar = {
-  } as App.Theme.ThemePaletteColor
+  } as BlogType.Theme.ThemePaletteColor
 
   colors.forEach((color) => {
     colorPaletteVar[color] = `rgb(var(--${color}-color))`
@@ -20,7 +20,7 @@ function createColorPaletteVars() {
 const colorPaletteVars = createColorPaletteVars()
 
 /** Theme vars */
-export const themeVars: App.Theme.ThemeTokenCSSVars = {
+export const themeVars: BlogType.Theme.ThemeTokenCSSVars = {
   colors: {
     ...colorPaletteVars,
     'nprogress': 'rgb(var(--nprogress-color))',

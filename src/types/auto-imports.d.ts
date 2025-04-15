@@ -61,6 +61,7 @@ declare global {
   const isNullOrUnDef: typeof import('../utils/is')['isNullOrUnDef']
   const isNumber: typeof import('../utils/is')['isNumber']
   const isObject: typeof import('../utils/is')['isObject']
+  const isPC: typeof import('../utils/isPC')['isPC']
   const isPromise: typeof import('../utils/is')['isPromise']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
@@ -131,6 +132,9 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
+  const toggleHtmlClass: typeof import('../utils/common')['toggleHtmlClass']
+  const transformRecordToOption: typeof import('../utils/common')['transformRecordToOption']
+  const translateOptions: typeof import('../utils/common')['translateOptions']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
@@ -394,6 +398,7 @@ declare module 'vue' {
     readonly isNullOrUnDef: UnwrapRef<typeof import('../utils/is')['isNullOrUnDef']>
     readonly isNumber: UnwrapRef<typeof import('../utils/is')['isNumber']>
     readonly isObject: UnwrapRef<typeof import('../utils/is')['isObject']>
+    readonly isPC: UnwrapRef<typeof import('../utils/isPC')['isPC']>
     readonly isPromise: UnwrapRef<typeof import('../utils/is')['isPromise']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -464,6 +469,9 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
+    readonly toggleHtmlClass: UnwrapRef<typeof import('../utils/common')['toggleHtmlClass']>
+    readonly transformRecordToOption: UnwrapRef<typeof import('../utils/common')['transformRecordToOption']>
+    readonly translateOptions: UnwrapRef<typeof import('../utils/common')['translateOptions']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>

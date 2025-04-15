@@ -97,164 +97,162 @@ declare namespace BlogType {
       /** 阴影 */
       boxShadow: ThemeSettingTokenBoxShadow & { [key: string]: string }
     }
-  }
 
-  // / / ////////////////////////  主题 2025-04-14---18:16---星期一  ////////////////////////
+    /** 主题设置 */
+    type Setting = {
 
-  /** 主题设置 */
-  type Setting = {
+      /** 主题方案 */
+      themeScheme: 'dark' | 'light' | 'auto'
 
-    /** 主题方案 */
-    themeScheme: 'dark' | 'light' | 'auto'
+      /** 灰度模式 */
+      grayscale: boolean
 
-    /** 灰度模式 */
-    grayscale: boolean
+      /** 色弱模式 */
+      colourWeakness: boolean
 
-    /** 色弱模式 */
-    colourWeakness: boolean
+      /** 是否推荐颜色 */
+      recommendColor: boolean
 
-    /** 是否推荐颜色 */
-    recommendColor: boolean
+      /** 主题颜色 */
+      themeColor: string
 
-    /** 主题颜色 */
-    themeColor: string
+      /** 其他颜色 */
+      otherColor: OtherColor
 
-    /** 其他颜色 */
-    otherColor: OtherColor
+      /** 信息颜色是否跟随主色 */
+      isInfoFollowPrimary: boolean
 
-    /** 信息颜色是否跟随主色 */
-    isInfoFollowPrimary: boolean
+      /** 重置缓存策略 */
+      resetCacheStrategy: 'close' | 'refresh'
 
-    /** 重置缓存策略 */
-    resetCacheStrategy: 'close' | 'refresh'
+      /** 布局 */
+      layout: {
 
-    /** 布局 */
-    layout: {
+        /** 布局模式 */
+        mode: 'horizontal' | 'vertical' | 'vertical-mix' | 'horizontal-mix'
 
-      /** 布局模式 */
-      mode: 'horizontal' | 'vertical' | 'vertical-mix' | 'horizontal-mix'
+        /** 滚动模式 */
+        scrollMode: 'content' | 'wrapper'
 
-      /** 滚动模式 */
-      scrollMode: 'content' | 'wrapper'
+        /**
+         * 是否反转水平混合布局
+         *
+         * 如果为 true，左侧的垂直子菜单和顶部的水平一级菜单将反转
+         */
+        reverseHorizontalMix: boolean
+      }
 
-      /**
-       * 是否反转水平混合布局
-       *
-       * 如果为 true，左侧的垂直子菜单和顶部的水平一级菜单将反转
-       */
-      reverseHorizontalMix: boolean
-    }
+      /** 页面 */
+      page: {
 
-    /** 页面 */
-    page: {
+        /** 是否显示页面过渡动画 */
+        animate: boolean
 
-      /** 是否显示页面过渡动画 */
-      animate: boolean
+        /** 页面动画模式 */
+        animateMode:
+          | 'none'
+          | 'fade'
+          | 'fade-slide'
+          | 'fade-bottom'
+          | 'fade-scale'
+          | 'zoom-fade'
+          | 'zoom-out'
+      }
 
-      /** 页面动画模式 */
-      animateMode:
-        | 'none'
-        | 'fade'
-        | 'fade-slide'
-        | 'fade-bottom'
-        | 'fade-scale'
-        | 'zoom-fade'
-        | 'zoom-out'
-    }
+      /** 头部 */
+      header: {
 
-    /** 头部 */
-    header: {
+        /** 头部高度 */
+        height: number
 
-      /** 头部高度 */
-      height: number
+        /** 头部面包屑 */
+        breadcrumb: {
 
-      /** 头部面包屑 */
-      breadcrumb: {
+          /** 是否显示面包屑 */
+          visible: boolean
 
-        /** 是否显示面包屑 */
+          /** 是否显示面包屑图标 */
+          showIcon: boolean
+        }
+      }
+
+      /** 标签页 */
+      tab: {
+
+        /** 是否显示标签页 */
         visible: boolean
 
-        /** 是否显示面包屑图标 */
-        showIcon: boolean
+        /**
+         * 是否缓存标签页
+         *
+         * 如果缓存，页面刷新时会从本地存储中获取标签页
+         */
+        cache: boolean
+
+        /** 标签页高度 */
+        height: number
+
+        /** 标签页模式 */
+        mode: 'button' | 'chrome'
       }
-    }
 
-    /** 标签页 */
-    tab: {
+      /** 固定头部和标签页 */
+      fixedHeaderAndTab: boolean
 
-      /** 是否显示标签页 */
-      visible: boolean
+      /** 侧边栏 */
+      sider: {
 
-      /**
-       * 是否缓存标签页
-       *
-       * 如果缓存，页面刷新时会从本地存储中获取标签页
-       */
-      cache: boolean
+        /** 反转侧边栏 */
+        inverted: boolean
 
-      /** 标签页高度 */
-      height: number
+        /** 侧边栏宽度 */
+        width: number
 
-      /** 标签页模式 */
-      mode: 'button' | 'chrome'
-    }
+        /** 折叠侧边栏宽度 */
+        collapsedWidth: number
 
-    /** 固定头部和标签页 */
-    fixedHeaderAndTab: boolean
+        /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的侧边栏宽度 */
+        mixWidth: number
 
-    /** 侧边栏 */
-    sider: {
+        /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的折叠侧边栏宽度 */
+        mixCollapsedWidth: number
 
-      /** 反转侧边栏 */
-      inverted: boolean
+        /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的子菜单宽度 */
+        mixChildMenuWidth: number
+      }
 
-      /** 侧边栏宽度 */
-      width: number
+      /** 底部 */
+      footer: {
 
-      /** 折叠侧边栏宽度 */
-      collapsedWidth: number
+        /** 是否显示底部 */
+        visible: boolean
 
-      /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的侧边栏宽度 */
-      mixWidth: number
+        /** 是否固定底部 */
+        fixed: boolean
 
-      /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的折叠侧边栏宽度 */
-      mixCollapsedWidth: number
+        /** 底部高度 */
+        height: number
 
-      /** 当布局为 'vertical-mix' 或 'horizontal-mix' 时的子菜单宽度 */
-      mixChildMenuWidth: number
-    }
+        /** 当布局为 'horizontal-mix' 时，是否将底部浮动到右侧 */
+        right: boolean
+      }
 
-    /** 底部 */
-    footer: {
+      /** 水印 */
+      watermark: {
 
-      /** 是否显示底部 */
-      visible: boolean
+        /** 是否显示水印 */
+        visible: boolean
 
-      /** 是否固定底部 */
-      fixed: boolean
+        /** 水印文本 */
+        text: string
+      }
 
-      /** 底部高度 */
-      height: number
-
-      /** 当布局为 'horizontal-mix' 时，是否将底部浮动到右侧 */
-      right: boolean
-    }
-
-    /** 水印 */
-    watermark: {
-
-      /** 是否显示水印 */
-      visible: boolean
-
-      /** 水印文本 */
-      text: string
-    }
-
-    /** 定义一些主题设置的 tokens，将转换为 CSS 变量 */
-    tokens: {
-      light: ThemeSettingToken
-      dark?: {
-        [K in keyof ThemeSettingToken]?: Partial<ThemeSettingToken[K]>;
+      /** 定义一些主题设置的 tokens，将转换为 CSS 变量 */
+      tokens: {
+        light: ThemeSettingToken
+        dark?: {
+          [K in keyof ThemeSettingToken]?: Partial<ThemeSettingToken[K]>;
+        }
       }
     }
   }
