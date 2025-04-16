@@ -34,7 +34,7 @@ type Props = {
   zIndex?: number
 }
 
-const DEFAULT_CLASS = 'h-[36px] text-icon'
+const DEFAULT_CLASS = '!h-[40px] !w-[40px] text-icon'
 </script>
 
 <template>

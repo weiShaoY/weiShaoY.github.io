@@ -88,7 +88,7 @@ const width = `${testStore.setting.menu.rightMenuWidth}px`
 
 <template>
   <div
-    class="layout-sidebar fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white scrollbar-hide"
+    class="layout-sidebar scrollbar-hide fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white"
   >
 
     <!-- 左侧菜单 -->

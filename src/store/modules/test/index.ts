@@ -3,8 +3,6 @@
 
 import { defineStore } from 'pinia'
 
-import { contain } from 'three/src/extras/TextureUtils'
-
 import { ref } from 'vue'
 
 /**
@@ -41,23 +39,17 @@ export const useTestStore = defineStore('test', () => {
     },
   })
 
-  const cacheRouteList = ref<string>()
-
-  const excludeCacheRouteList = ref<string[]>()
-
   const reloadFlag = ref(true)
 
   const keepAliveExclude = ref<string[]>()
 
-  const refresh = ref(true)
+  const isRefresh = ref(true)
 
   return {
     setting,
-    cacheRouteList,
-    excludeCacheRouteList,
+
     reloadFlag,
     keepAliveExclude,
-    refresh,
-
+    isRefresh,
   }
 })

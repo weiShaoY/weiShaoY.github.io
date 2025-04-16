@@ -47,7 +47,6 @@ const filteredMenuItems = computed(() => filterRoutes(props.menuList))
 
 // 跳转页面
 function goPage(item: RouterType.BlogRouteRecordRaw) {
-  // router.push(item.path)
   blogMenuJump(item)
 }
 </script>

@@ -22,8 +22,7 @@ function reload() {
   })
 }
 
-// Watchers
-watch(() => testStore.refresh, reload)
+watch(() => testStore.isRefresh, reload)
 </script>
 
 <template>

@@ -52,7 +52,7 @@ export default defineConfig((configEnv) => {
            * @use 指令引入全局样式文件
            * as * 表示将所有 mixin/variables 导入全局命名空间
            */
-          additionalData: `@use "@/theme/blog/scss/global.scss" as *;`,
+          additionalData: `@use "@/theme/variables.scss" as *;`,
 
           // 注意：实际路径请根据项目结构调整
           // @/ 别名通常指向 src 目录

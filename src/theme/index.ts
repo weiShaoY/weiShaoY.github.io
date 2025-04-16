@@ -13,7 +13,3 @@ import './nprogress.less'
 // import './base.less'
 
 import './element-plus'
-
-// / ////////  blog 模块
-
-import './blog'

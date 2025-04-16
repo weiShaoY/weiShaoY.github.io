@@ -3,9 +3,11 @@
 
 import { useTestStore } from '@/store'
 
-import Menu from './modules/menu/index.vue'
+import GlobalContent from './modules/global-content/index.vue'
 
-import PageContent from './modules/pageContent/index.vue'
+import GlobalHeader from './modules/global-header/index.vue'
+
+import GlobalMenu from './modules/global-menu/index.vue'
 
 const testStore = useTestStore()
 
@@ -21,9 +23,11 @@ const layoutStyle = computed(() => ({
     class="h-full min-h-[100vh] w-full overflow-hidden bg-[#F7FAFC] transition-all duration-300"
     :style="layoutStyle"
   >
-    <Menu />
+    <GlobalHeader />
 
-    <PageContent />
+    <GlobalMenu />
+
+    <GlobalContent />
   </div>
 </template>
 
