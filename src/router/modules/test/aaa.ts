@@ -1,0 +1,48 @@
+const aaa: RouterType.BlogRouteRecordRaw = {
+  path: '/blog/aaa',
+  name: 'Aaa',
+  meta: {
+    title: 'aa',
+    icon: 'blog-menu-vue',
+    textBadge: 'new',
+    order: 0,
+  },
+  children: [
+    {
+      path: '/blog/aaa/index1',
+      name: 'AaaIndex',
+      component: () => import('@/pages/test/home/index.vue'),
+      meta: {
+        title: 'aaa-1',
+        icon: 'blog-menu-vue',
+        textBadge: 'new',
+        order: 0,
+      },
+    },
+    {
+      path: '/blog/aaa/index2',
+      name: 'AaaIndex2',
+      meta: {
+        title: 'aaa-2',
+        icon: 'blog-menu-vue',
+        textBadge: 'new',
+        order: 0,
+      },
+      children: [
+        {
+          path: '/blog/aaa/index3',
+          name: 'AaaIndex3',
+          component: () => import('@/pages/test/aaa/index.vue'),
+          meta: {
+            title: 'aaa-3',
+            icon: 'blog-menu-vue',
+            textBadge: 'new',
+            order: 0,
+          },
+        },
+      ],
+    },
+  ],
+}
+
+export default aaa

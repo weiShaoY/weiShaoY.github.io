@@ -1,5 +1,3 @@
-import { presetSoybeanAdmin } from '@sa/uno-preset'
-
 import {
   defineConfig,
   presetAttributify,
@@ -11,24 +9,24 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { themeVars } from './src/theme/unocss-var'
+import { presetScrollbarHide } from 'unocss-preset-scrollbar-hide'
+
+// import { themeVars } from './src/theme/unocss-var'
 
 /**
  *  @description UnoCSS 配置文件
  */
 export default defineConfig({
-
   /**
    *  @description 定义全局主题设置，供规则或组件之间共享
    */
   theme: {
-    ...themeVars,
+    // ...themeVars,
 
     /**
      *  @description 主题颜色
      */
     colors: {
-
       /**
        *  @description 主题色
        */
@@ -38,7 +36,6 @@ export default defineConfig({
        *  @description 红色
        */
       red: '#E43961',
-
     },
     fontSize: {
       'icon-xs': '0.875rem',
@@ -59,7 +56,6 @@ export default defineConfig({
     //   gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
 
     // },
-
   },
 
   /**
@@ -87,9 +83,12 @@ export default defineConfig({
    */
   rules: [
     //  将 `bc-颜色值` 转换为对应的 border-color 样式
-    [/^bc-(.+)$/, ([, color]) => ({
-      'border-color': `#${color}`,
-    })],
+    [
+      /^bc-(.+)$/,
+      ([, color]) => ({
+        'border-color': `#${color}`,
+      }),
+    ],
   ],
 
   /**
@@ -113,7 +112,7 @@ export default defineConfig({
    *  @description UnoCSS 使用的预设
    */
   presets: [
-    presetSoybeanAdmin(),
+    // presetSoybeanAdmin(),
 
     /**
      *  @description UnoCSS 的核心预设
@@ -154,25 +153,25 @@ export default defineConfig({
      *  @description Google Web Fonts 预设，自动生成 Web 字体相关的 CSS
      *  @see https://github.com/unocss/unocss#preset-webfonts
      */
-    presetWebFonts(
-      {
-        provider: 'none',
+    presetWebFonts({
+      provider: 'none',
 
+      /**
+       *  @description 定义字体家族
+       */
+      fonts: {
         /**
-         *  @description 定义字体家族
+         *  @description 中文字体
+         *  @default '改良瘦金体'
          */
-        fonts: {
-
-          /**
-           *  @description 中文字体
-           *  @default '改良瘦金体'
-           */
-          theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
-
-        },
+        theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
       },
-    ),
+    }),
 
+    /**
+     *  @description 隐藏滚动条的预设
+     *  @see https://github.com/reslear/unocss-preset-scrollbar-hide
+     */
+    presetScrollbarHide(),
   ],
-
 })

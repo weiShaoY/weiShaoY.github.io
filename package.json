@@ -54,11 +54,11 @@
     "three-custom-shader-material": "^6.3.1",
     "three-globe": "^2.42.1",
     "three-stdlib": "^2.35.14",
+    "unocss-preset-scrollbar-hide": "^1.0.1",
     "vue": "^3.5.0",
     "vue-echarts": "^7.0.3",
     "vue-router": "^4.5.0",
     "xgplayer": "^3.0.20"
-
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.8.1",
@@ -99,6 +99,5 @@
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.8",
     "xmorse": "^1.0.0"
-
   }
 }

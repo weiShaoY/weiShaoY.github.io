@@ -8,21 +8,28 @@ type LogoPropsType = {
    *  颜色
    */
   textColor?: string
+
+  /**
+   *  是否隐藏logo
+   */
+  isHideLogo?: boolean
+
+  /**
+   *  是否隐藏文字
+   */
+  isHideText?: boolean
 }
 
 const props = withDefaults(defineProps<LogoPropsType>(), {
   textColor: 'white',
+  isHideLogo: false,
+  isHideText: false,
 })
 
 const router = useRouter()
 
 function handleClick() {
-  // 判断当前路由地址是不是 '/home'
-  if (router.currentRoute.value.path === import.meta.env.VITE_ROUTER_ROOT_PATH) {
-    return
-  }
-
-  router.push('/home')
+  router.push('/')
 }
 </script>
 
@@ -32,11 +39,13 @@ function handleClick() {
     @click="handleClick"
   >
     <SvgIcon
+      v-if="!props.isHideLogo"
       icon="logo"
       size="60"
     />
 
     <SvgIcon
+      v-if="!props.isHideText"
       icon="weiShaoY"
       size="120"
       :style="{

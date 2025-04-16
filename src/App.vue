@@ -26,7 +26,7 @@ const testStore = useTestStore()
 
 const watermarkProps = computed<WatermarkProps>(() => {
   return {
-    content: testStore.theme.watermark.visible ? testStore.theme.watermark.text || 'SoybeanAdmin' : '',
+    content: testStore.setting.watermark.isShow ? testStore.setting.watermark.text : '',
     cross: true,
     fontSize: 16,
     lineHeight: 16,
@@ -42,15 +42,13 @@ const watermarkProps = computed<WatermarkProps>(() => {
   <ElConfigProvider
     :locale="zhCn"
   >
-    <AppProvider>
-      <ElWatermark
-        class="h-full"
-        v-bind="watermarkProps"
-      >
-        <RouterView
-          class="bg-layout"
-        />
-      </ElWatermark>
-    </AppProvider>
+    <ElWatermark
+      class="h-full"
+      v-bind="watermarkProps"
+    >
+      <RouterView
+        class="bg-layout"
+      />
+    </ElWatermark>
   </ElConfigProvider>
 </template>

@@ -1,112 +1,32 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
-import type { LayoutMode } from '@sa/materials'
-
 import { useTestStore } from '@/store'
 
-import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@sa/materials'
+import Menu from './modules/menu/index.vue'
 
-import GlobalContent from './modules/global-content/index.vue'
-
-import GlobalHeader from './modules/global-header/index.vue'
-
-import GlobalSider from './modules/global-sider/index.vue'
-
-import GlobalTab from './modules/global-tab/index.vue'
-
-import ThemeDrawer from './modules/theme-drawer/index.vue'
+import PageContent from './modules/pageContent/index.vue'
 
 const testStore = useTestStore()
 
-/**
- *  当前激活的一级菜单是否有子菜单
- */
-const isActiveFirstLevelMenuHasChildren = ref(false)
+const layoutStyle = computed(() => ({
+  paddingLeft: `calc(${testStore.setting.menu.leftMenuWidth}px + ${testStore.setting.menu.rightMenuWidth}px)`,
+  paddingTop: `122px`,
+}))
 
-/** 获取头部属性配置 */
-/** 获取头部属性配置 */
-const globalHeaderProps = computed(() => {
-  const { mode, reverseHorizontalMix } = testStore.theme.layout
-
-  const headerPropsConfig: Record<BlogType.Theme.Setting['layout']['mode'], {
-
-    /** 是否显示 logo */
-    showLogo?: boolean
-
-    /** 是否显示菜单切换按钮 */
-    showMenuToggler?: boolean
-
-    /** 是否显示菜单 */
-    showMenu?: boolean
-  }> = {
-    'vertical': {
-      showLogo: false,
-      showMenu: false,
-      showMenuToggler: true,
-    },
-    'vertical-mix': {
-      showLogo: false,
-      showMenu: false,
-      showMenuToggler: false,
-    },
-    'horizontal': {
-      showLogo: true,
-      showMenu: true,
-      showMenuToggler: false,
-    },
-    'horizontal-mix': {
-      showLogo: true,
-      showMenu: true,
-      showMenuToggler: reverseHorizontalMix && isActiveFirstLevelMenuHasChildren.value,
-    },
-  }
-
-  return headerPropsConfig[mode]
-})
 </script>
 
 <template>
-  <AdminLayout
-    v-model:sider-collapse="testStore.app.siderCollapse"
+  <div
+    class="h-full min-h-[100vh] w-full overflow-hidden bg-[#F7FAFC] transition-all duration-300"
+    :style="layoutStyle"
   >
-    <template
-      #header
-    >
+    <Menu />
 
-      <GlobalHeader
-        v-bind="globalHeaderProps"
-      />
-    </template>
-
-    <template
-      #tab
-    >
-      <GlobalTab />
-    </template>
-
-    <template
-      #sider
-    >
-      <GlobalSider />
-    </template>
-
-    <GlobalMenu />
-
-    <GlobalContent />
-
-    <ThemeDrawer />
-
-    <template
-      #footer
-    >
-      <GlobalFooter />
-    </template>
-  </AdminLayout>
+    <PageContent />
+  </div>
 </template>
 
 <style lang="scss">
-#__SCROLL_EL_ID__ {
-  @include scrollbar();
-}
+
 </style>
