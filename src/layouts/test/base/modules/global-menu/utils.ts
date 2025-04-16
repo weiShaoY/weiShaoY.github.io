@@ -58,6 +58,7 @@ export function blogMenuJump(item: RouterType.BlogRouteRecordRaw, jumpToFirst: b
 
   // 如果不需要跳转到第一个子菜单，或者没有子菜单，直接跳转当前路径
   if (!jumpToFirst || !item.children?.length) {
+    console.log('%c Line:61 🍖 jumpToFirst', 'color:#f5ce50', jumpToFirst)
     return router.push(item.path)
   }
 

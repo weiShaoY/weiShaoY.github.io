@@ -85,7 +85,7 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
             :disabled="dualMenuShowText"
           >
             <div
-              class="flex-col items-center justify-center rounded-1 text-center hover:cursor-pointer"
+              class="flex-col items-center justify-center rounded-1 text-center transition-all duration-300 hover:cursor-pointer"
               :class="[
                 currentRoute?.path === menu.path ? 'bg-[#F3B03D] color-white' : '',
                 dualMenuShowText ? 'm-[5px] h-15' : 'm-[15px] h-12',
