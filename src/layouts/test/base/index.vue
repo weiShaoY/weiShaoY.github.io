@@ -9,6 +9,8 @@ import GlobalHeader from './modules/global-header/index.vue'
 
 import GlobalMenu from './modules/global-menu/index.vue'
 
+import GlobalSearch from './modules/global-search/index.vue'
+
 const testStore = useTestStore()
 
 const layoutStyle = computed(() => ({
@@ -23,11 +25,14 @@ const layoutStyle = computed(() => ({
     class="h-full min-h-[100vh] w-full overflow-hidden bg-[#F7FAFC] transition-all duration-300"
     :style="layoutStyle"
   >
+
     <GlobalHeader />
 
     <GlobalMenu />
 
     <GlobalContent />
+
+    <GlobalSearch />
   </div>
 </template>
 

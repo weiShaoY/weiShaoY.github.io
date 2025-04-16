@@ -1,6 +1,8 @@
 // src/stores/index.ts
 // 2025-04-16---14:15---星期三
 
+import { testRouterList } from '@/router/modules/test'
+
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
@@ -39,17 +41,32 @@ export const useTestStore = defineStore('test', () => {
     },
   })
 
-  const reloadFlag = ref(true)
-
+  /**
+   *  不需要缓存的组件
+   */
   const keepAliveExclude = ref<string[]>()
 
+  /**
+   *  是否刷新
+   */
   const isRefresh = ref(true)
+
+  /**
+   *  菜单列表
+   */
+  const menuList = ref<RouterType.BlogRouteRecordRaw[]>(testRouterList)
+
+  /**
+   *  搜索历史列表
+   */
+  const searchHistoryList = ref<RouterType.BlogRouteRecordRaw[]>([])
 
   return {
     setting,
-
-    reloadFlag,
     keepAliveExclude,
     isRefresh,
+
+    menuList,
+    searchHistoryList,
   }
 })

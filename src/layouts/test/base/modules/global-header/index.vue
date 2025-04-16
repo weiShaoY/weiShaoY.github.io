@@ -1,7 +1,12 @@
 <!------  2025-04-16---18:18---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+
 import { useTestStore } from '@/store'
+
+import { blogMittBus } from '@/utils'
+
+import { useFullscreen } from '@vueuse/core'
 
 import Breadcrumb from './breadcrumb.vue'
 
@@ -33,6 +38,20 @@ function handleRefresh(time: number = 300) {
     testStore.isRefresh = !testStore.isRefresh
   }, time)
 }
+
+/**
+ *  打开顶部搜索框
+ */
+function openSearchDialog() {
+  blogMittBus.emit('openSearchDialog')
+}
+
+const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
+
+function toggleFullScreen() {
+  toggleFullscreen()
+}
+
 </script>
 
 <template>
@@ -54,10 +73,10 @@ function handleRefresh(time: number = 300) {
         <ButtonIcon
           class="ml-3"
           tooltip-content="刷新页面"
+          @click="handleRefresh()"
         >
           <div
             :class="{ 'animate-spin duration-[750ms]': refreshLoading }"
-            @click="handleRefresh()"
           >
             <SvgIcon
               icon="blog-refresh"
@@ -72,50 +91,62 @@ function handleRefresh(time: number = 300) {
 
         <!-- 面包屑 -->
         <Breadcrumb />
-
       </div>
 
       <!-- 右侧 -->
       <div
-        class=""
+        class="flex items-center gap-3 p-r-5"
       >
+
         <!-- 搜索 -->
         <div
-          class="search-wrap"
+          class="group h-9 w-40 flex items-center justify-between border border-[#dbdfe9] rounded-3 border-solid p-x-3 hover:cursor-pointer"
+          @click="openSearchDialog"
         >
           <div
-            class="search-input"
-            @click="openSearchDialog"
+            class="left"
           >
-            <div
-              class="left"
-            >
+            <SvgIcon
+              icon="search"
+              class="transition-transform duration-300 !group-hover:scale-180"
+            />
 
-              <SvgIcon
-                icon="search"
-              />
+            <span
+              class="ml-2 text-[13px] color-[#99a1b7]"
+            > 搜索 </span>
+          </div>
 
-              <span>搜索</span>
-            </div>
+          <div
+            class="h-5 flex items-center border border-[#dbdfe9] border-solid bg-[#fafbfc] p-x-[6px] color-[#99a1b7]"
+          >
+            <i
+              class="iconfont-sys text-3"
+            > &#xeeac; </i>
 
-            <div
-              class="search-keydown"
-            >
-              <i
-                class="iconfont-sys"
-              >&#xeeac;</i>
-
-              <span>k</span>
-            </div>
+            <span
+              class="ml-[2px] text-3"
+            > k </span>
           </div>
         </div>
 
+        <!-- 全屏按钮 -->
+        <ButtonIcon
+          tooltip-content="进入全屏"
+          @click="toggleFullScreen()"
+        >
+          <div
+            class="transition-transform duration-300"
+            :class="{ 'hover:scale-120  ': !isFullscreen, 'hover:scale-90': isFullscreen }"
+          >
+            <SvgIcon
+              :icon="!isFullscreen ? 'blog-topBar-fullscreen' : 'blog-topBar-exit-fullscreen'"
+            />
+          </div>
+        </ButtonIcon>
+
       </div>
     </div>
-
   </div>
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
