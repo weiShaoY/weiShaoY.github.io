@@ -5,8 +5,6 @@ import SubMenu from './sub-menu.vue'
 
 const { menuList } = defineProps<Props>()
 
-console.log('%c Line:7 🥒 menuList', 'color:#2eafb0', menuList)
-
 const route = useRoute()
 
 type Props = {

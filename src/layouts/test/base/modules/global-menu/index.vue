@@ -67,8 +67,6 @@ const rightMenuList = computed(() => {
 
   const target = findTopRouteByPath(route.path, testRouterList)
 
-  console.log('%c Line:65 🍧 target', 'color:#3f7cff', target)
-
   if (target) {
   // 返回该菜单的子项，如果存在
     if (target?.children?.length) {
@@ -88,7 +86,7 @@ const width = `${testStore.setting.menu.rightMenuWidth}px`
 
 <template>
   <div
-    class="layout-sidebar scrollbar-hide fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white"
+    class="layout-sidebar fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white scrollbar-hide"
   >
 
     <!-- 左侧菜单 -->

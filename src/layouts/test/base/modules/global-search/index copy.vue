@@ -480,6 +480,54 @@ onUnmounted(() => {
           </div>
         </div>
 
+        <svg
+          class="mr-[6px] inline-block p-[2px] text-[20px] shadow-[inset_0_-2px_#cdcde6,inset_0_0_1px_1px_#fff,0_1px_2px_1px_#1e235a66]"
+          viewBox="0 0 24 24"
+          width="1em"
+          height="1em"
+        >
+          <path
+            fill="currentColor"
+            d="M7.03 9.97h4v8.92l2.01.03V9.97h3.99l-5-5Z"
+          />
+        </svg>
+
+        <svg
+          class="mr-[6px] inline-block p-[2px] text-[20px] shadow-[inset_0_-2px_#cdcde6,inset_0_0_1px_1px_#fff,0_1px_2px_1px_#1e235a66]"
+          viewBox="0 0 24 24"
+          width="1em"
+          height="1em"
+        >
+          <path
+            fill="currentColor"
+            d="M7.03 13.92h4V5l2.01-.03v8.95h3.99l-5 5Z"
+          />
+        </svg>
+
+        <svg
+          class="mr-[6px] inline-block p-[2px] text-[20px] shadow-[inset_0_-2px_#cdcde6,inset_0_0_1px_1px_#fff,0_1px_2px_1px_#1e235a66]"
+          viewBox="0 0 24 24"
+          width="1em"
+          height="1em"
+        >
+          <path
+            fill="currentColor"
+            d="M19 7v4H5.83l3.58-3.59L8 6l-6 6l6 6l1.41-1.42L5.83 13H21V7z"
+          />
+        </svg>
+
+        <svg
+          class="mr-[6px] inline-block p-[2px] text-[20px] shadow-[inset_0_-2px_#cdcde6,inset_0_0_1px_1px_#fff,0_1px_2px_1px_#1e235a66]"
+          viewBox="0 0 24 24"
+          width="1em"
+          height="1em"
+        >
+          <path
+            fill="currentColor"
+            d="M1 7h6v2H3v2h4v2H3v2h4v2H1zm10 0h4v2h-4v2h2a2 2 0 0 1 2 2v2c0 1.11-.89 2-2 2H9v-2h4v-2h-2a2 2 0 0 1-2-2V9c0-1.1.9-2 2-2m8 0h2a2 2 0 0 1 2 2v1h-2V9h-2v6h2v-1h2v1c0 1.11-.89 2-2 2h-2a2 2 0 0 1-2-2V9c0-1.1.9-2 2-2"
+          />
+        </svg>
+
       </template>
     </el-dialog>
   </div>
@@ -525,6 +573,7 @@ onUnmounted(() => {
   .result {
     width: 100%;
     margin-top: 30px;
+    // background: var(--rt-main-bg-color);
 
     .box {
       margin-top: 0 !important;

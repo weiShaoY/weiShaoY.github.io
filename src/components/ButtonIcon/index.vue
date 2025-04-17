@@ -56,6 +56,7 @@ const DEFAULT_CLASS = '!h-[40px] !w-[40px] text-icon'
         <slot>
           <SvgIcon
             :icon="icon"
+            :size="24"
           />
         </slot>
       </div>

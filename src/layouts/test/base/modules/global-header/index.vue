@@ -16,11 +16,11 @@ const { width } = useWindowSize()
 
 const testStore = useTestStore()
 
+const isWindows = navigator.userAgent.includes('Windows')
+
 const topWidth = computed(() => {
   return `calc(100% - ${testStore.setting.menu.leftMenuWidth + testStore.setting.menu.rightMenuWidth}px`
 })
-
-console.log('%c Line:14 🍑 topWidth.value', 'color:#465975', topWidth.value)
 
 /**
  *  是否刷新
@@ -90,7 +90,9 @@ function toggleFullScreen() {
         />
 
         <!-- 面包屑 -->
-        <Breadcrumb />
+        <Breadcrumb
+          class="ml-5"
+        />
       </div>
 
       <!-- 右侧 -->
@@ -117,15 +119,19 @@ function toggleFullScreen() {
           </div>
 
           <div
-            class="h-5 flex items-center border border-[#dbdfe9] border-solid bg-[#fafbfc] p-x-[6px] color-[#99a1b7]"
+            class="h-5 flex items-center border border-[#dbdfe9] rounded-1 border-solid bg-[#fafbfc] p-x-[6px] color-[#99a1b7]"
           >
-            <i
-              class="iconfont-sys text-3"
-            > &#xeeac; </i>
+            <span
+              class="text-3"
+            >
+              {{ isWindows ? 'ctrl' : '⌘' }}
+            </span>
 
             <span
-              class="ml-[2px] text-3"
-            > k </span>
+              class="ml-2 text-3"
+            >
+              k
+            </span>
           </div>
         </div>
 

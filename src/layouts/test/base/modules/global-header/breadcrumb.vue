@@ -1,13 +1,5 @@
 <script setup lang="ts">
 
-/**
- *  导入类型定义
- */
-import type { RouteLocationMatched, RouteRecordRaw } from 'vue-router'
-
-/**
- *  导入Vue组合式API
- */
 import { ref, watch } from 'vue'
 
 /**
@@ -18,9 +10,10 @@ import { useRoute, useRouter } from 'vue-router'
 /**
  *  面包屑项类型定义
  */
-export type BreadcrumbItem = {
+type BreadcrumbItem = {
   path: string
-  meta: RouteRecordRaw['meta']
+  meta: RouterType.BlogRouteRecordRaw['meta']
+  children?: BreadcrumbItem[]
 }
 
 /**
@@ -36,87 +29,28 @@ const router = useRouter()
 const breadList = ref<BreadcrumbItem[]>([])
 
 /**
- *  判断是否为最后一项
- *  @param index 当前索引
- *  @returns 是否为最后一项
- */
-const isLastItem = (index: number) => index === breadList.value.length - 1
-
-/**
- *  判断是否为首页路由
- *  @param route 路由匹配项
- *  @returns 是否为首页
- */
-const isHome = (route: RouteLocationMatched) => route.name === '/'
-
-/**
  *  获取面包屑数据
  *  @description 根据当前路由生成面包屑导航
  */
 function getBreadcrumb() {
   const { matched } = route
 
-  console.log('%c Line:58 🥛 matched', 'color:#3f7cff', matched)
-
-  // 首页特殊处理
-  if (isHome(matched[0])) {
-    breadList.value = []
-    return
+  if (matched.length === 2) {
+    breadList.value = [
+      matched[1],
+    ] as any[]
   }
 
-  // 主容器内的一级菜单特殊处理
-  if (matched[0].meta.isInMainContainer) {
-    const currentRoute = matched[matched.length - 1]
-
-    breadList.value = [{
-      path: currentRoute.path,
-      meta: currentRoute.meta,
-    }]
-    return
-  }
-
-  // 常规路由处理
-  breadList.value = matched.map(({ path, meta }) => ({
+  breadList.value = matched.slice(1).map(({ path, meta, children }) => ({
     path,
     meta,
-  }))
+    children,
+  })) as BreadcrumbItem[]
 }
 
-watchEffect(() => {
-  console.log('%c Line:83 🍤 breadList.value', 'color:#b03734', breadList.value)
-})
-
-/**
- *  处理面包屑点击事件
- *  @param item 点击的面包屑项
- *  @description 根据点击项执行路由跳转
- */
-async function handleClick(item: BreadcrumbItem) {
-  const { path } = item
-
-  const currentRoute = router.getRoutes().find(route => route.path === path)
-
-  // 无子路由直接跳转
-  if (!currentRoute?.children?.length) {
-    await router.push(path)
-    return
-  }
-
-  // 查找第一个有效子路由
-  const firstValidChild = currentRoute.children.find(
-    child => !child.redirect && !child.meta?.isHide,
-  )
-
-  // 有有效子路由则跳转，否则跳转当前路由
-  if (firstValidChild) {
-    const fullPath = `/${firstValidChild.path}`.replace('//', '/')
-
-    await router.push(fullPath)
-  }
-  else {
-    await router.push(path)
-  }
-}
+// watchEffect(() => {
+//   console.log('%c Line:57 🥒 breadList.value', 'color:#ea7e5c', breadList.value)
+// })
 
 /**
  *  监听路由变化
@@ -128,52 +62,158 @@ watch(() => route.path, getBreadcrumb, {
 </script>
 
 <template>
-  <nav
-    class="flex items-center"
-    aria-label="breadcrumb"
+  <el-breadcrumb
+    separator="/"
   >
-    <ul
-      class="flex items-center gap-1"
+    <el-breadcrumb-item
+      v-for="item in breadList"
+      :key="item.path"
+      :to="{ path: item.path }"
     >
-      <li
-        v-for="(item, index) in breadList"
-        :key="item.path"
+      <div
+        v-if="item.children?.length === 0"
+        class="flex items-center gap-2"
       >
-        <div
-          :class="{ clickable: item.path !== '/' && !isLastItem(index) }"
-          @click="!isLastItem(index) && handleClick(item)"
+        <SvgIcon
+          v-if="item.meta.icon"
+          :icon="item.meta.icon"
+          :size="20"
+        />
+
+        <span
+          class="text-4"
         >
-          <span>
-            {{ item.meta?.title }}
-          </span>
+          {{ item.meta.title }}
+        </span>
+
+        <!-- 外链徽标 -->
+        <SvgIcon
+          v-if="item.meta.externalUrl"
+          icon="blog-menu-externalUrl"
+          :size="16"
+        />
+
+        <!-- 文本徽标 -->
+        <div
+          v-else-if="item.meta.textBadge"
+          class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+        >
+          {{ item.meta.textBadge }}
         </div>
 
-        <i
-          v-if="!isLastItem(index) && item.meta?.title"
-          aria-hidden="true"
+        <!-- 图标徽标 -->
+        <SvgIcon
+          v-else-if="item.meta.iconBadge"
+          :icon="item.meta.iconBadge"
+          :size="16"
+        />
+      </div>
+
+      <el-dropdown
+        v-else
+      >
+
+        <div
+          class="flex items-center gap-2"
         >
-          /
-        </i>
-      </li>
-    </ul>
-  </nav>
+          <SvgIcon
+            v-if="item.meta.icon"
+            :icon="item.meta.icon"
+            :size="20"
+          />
+
+          <span
+            class="text-4"
+          >
+            {{ item.meta.title }}
+          </span>
+
+          <!-- 外链徽标 -->
+          <SvgIcon
+            v-if="item.meta.externalUrl"
+            icon="blog-menu-externalUrl"
+            :size="16"
+          />
+
+          <!-- 文本徽标 -->
+          <div
+            v-else-if="item.meta.textBadge"
+            class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+          >
+            {{ item.meta.textBadge }}
+          </div>
+
+          <!-- 图标徽标 -->
+          <SvgIcon
+            v-else-if="item.meta.iconBadge"
+            :icon="item.meta.iconBadge"
+            :size="16"
+          />
+        </div>
+
+        <template
+          #dropdown
+        >
+          <el-dropdown-menu>
+            <el-dropdown-item
+              v-for="sub in item.children"
+              :key="sub.path"
+              @click="router.push(sub.path)"
+            >
+
+              <div
+                class="flex items-center gap-2"
+              >
+                <SvgIcon
+                  v-if="sub.meta?.icon"
+                  :icon="sub.meta.icon"
+                  :size="20"
+                />
+
+                <div
+                  class="flex items-center gap-2"
+                >
+                  <span
+                    class="text-4"
+                  >
+                    {{ sub.meta.title }}
+                  </span>
+
+                  <!-- 外链徽标 -->
+                  <SvgIcon
+                    v-if="sub.meta.externalUrl"
+                    icon="blog-menu-externalUrl"
+                    :size="16"
+                  />
+
+                  <!-- 文本徽标 -->
+                  <div
+                    v-else-if="sub.meta.textBadge"
+                    class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+                  >
+                    {{ sub.meta.textBadge }}
+                  </div>
+
+                  <!-- 图标徽标 -->
+                  <SvgIcon
+                    v-else-if="sub.meta.iconBadge"
+                    :icon="sub.meta.iconBadge"
+                    :size="16"
+                  />
+                </div>
+              </div>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </el-breadcrumb-item>
+  </el-breadcrumb>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
-ul {
-  li {
-    display: flex;
-    align-items: center;
-
-    .clickable {
-      cursor: pointer;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: var(--el-color-primary);
-      }
-    }
-  }
+:deep(.el-dropdown-menu__item) {
+  min-width: 100px;
+  padding: 10px 20px;
 }
 </style>
