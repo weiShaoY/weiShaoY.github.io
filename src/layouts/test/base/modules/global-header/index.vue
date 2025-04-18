@@ -70,25 +70,6 @@ function toggleFullScreen() {
       <div
         class="flex items-center gap-3"
       >
-        <!-- 刷新按钮 -->
-        <ButtonIcon
-          class="ml-3"
-          tooltip-content="刷新页面"
-          @click="handleRefresh()"
-        >
-          <div
-            :class="{ 'animate-spin duration-[750ms]': refreshLoading }"
-          >
-            <SvgIcon
-              icon="blog-refresh"
-            />
-          </div>
-        </ButtonIcon>
-
-        <!-- 快速入口 -->
-        <FastWidth
-          v-if="width >= 1200"
-        />
 
         <!-- 面包屑 -->
         <Breadcrumb
@@ -135,6 +116,25 @@ function toggleFullScreen() {
             </span>
           </div>
         </div>
+
+        <!-- 快速入口 -->
+        <FastWidth
+          v-if="width >= 1200"
+        />
+
+        <!-- 刷新按钮 -->
+        <ButtonIcon
+          tooltip-content="刷新页面"
+          @click="handleRefresh()"
+        >
+          <div
+            :class="{ 'animate-spin duration-[750ms]': refreshLoading }"
+          >
+            <SvgIcon
+              icon="blog-refresh"
+            />
+          </div>
+        </ButtonIcon>
 
         <!-- 全屏按钮 -->
         <ButtonIcon
