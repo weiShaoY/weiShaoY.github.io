@@ -212,7 +212,7 @@ defineExpose({
                 >{{ item.label }}</span>
 
                 <el-icon>
-                  <ArrowRight />
+                  <!-- <ArrowRight /> -->
                 </el-icon>
               </div>
 

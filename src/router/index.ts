@@ -10,7 +10,13 @@ import {
 
 import { createRouterGuard } from './guard'
 
-import { formatModules } from './utils/index'
+import { fallbackRouter } from './modules/fallback'
+
+import {
+  formatModules,
+  normalizeRoutesWithFullPath,
+  setRouteDefaultRedirect,
+} from './utils'
 
 const appModules = import.meta.glob('./modules/*/index.ts', {
   eager: true,
@@ -19,9 +25,13 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
 /**
  *  获取路由列表
  */
-export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
+export const formatModulesList: RouteRecordNormalized[] = formatModules(appModules, [])
 
-console.log('%c Line:23 🍉 总路由', 'color:#3f7cff', routeList)
+const aaa = normalizeRoutesWithFullPath(formatModulesList)
+
+const routeList = setRouteDefaultRedirect(aaa) // aaa
+
+console.log('%c Line:33 🍪 routeList', 'color:#33a5ff', routeList)
 
 const routerMode = {
   hash: () => createWebHashHistory(),
@@ -41,13 +51,12 @@ export const router = createRouter({
     {
       name: 'Root',
       path: '/',
-      redirect: {
-        name: 'Home',
-      },
+      redirect: import.meta.env.VITE_ROUTER_ROOT_PATH || routeList[0].path,
     },
 
     ...routeList,
 
+    ...fallbackRouter,
   ],
 })
 

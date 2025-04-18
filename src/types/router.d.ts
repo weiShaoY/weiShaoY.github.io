@@ -4,7 +4,7 @@ declare namespace RouterType {
 
   import type { Component } from 'vue'
 
-  import type { RouteLocationRaw } from 'vue-router'
+  import type { RouteRecordRedirectOption } from 'vue-router'
 
   /** 路由类型 */
   type RouteRecordRaw = {
@@ -19,7 +19,7 @@ declare namespace RouterType {
     component?: Component | (() => Promise<Component>)
 
     /** 路由重定向 */
-    redirect?: RouteLocationRaw
+    redirect?: RouteRecordRedirectOption
 
     /** 路由别名，可以是字符串或字符串数组 */
     alias?: string | string[]
@@ -41,7 +41,7 @@ declare namespace RouterType {
     name: string
 
     /** 重定向地址 */
-    redirect?: RouteLocationRaw
+    redirect?: RouteRecordRedirectOption
 
     /** 组件路径的异步导入 */
     component?: Component | (() => Promise<Component>)

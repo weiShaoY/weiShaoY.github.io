@@ -45,9 +45,10 @@ function filterRoutes(
 // 计算属性
 const filteredMenuItems = computed(() => filterRoutes(props.menuList))
 
-// 跳转页面
+/**
+ *  跳转页面
+ */
 function goPage(item: RouterType.BlogRouteRecordRaw) {
-  console.log('%c Line:50 🥝 item', 'color:#93c0a4', item)
   blogMenuJump(item)
 }
 </script>

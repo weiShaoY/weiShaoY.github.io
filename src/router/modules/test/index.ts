@@ -2,7 +2,11 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import { TEST_BASE_LAYOUT } from '@/layouts'
 
-import { formatModules } from '../../utils/index'
+import {
+  formatModules,
+  normalizeRoutesWithFullPath,
+  sortRoutesByOrder,
+} from '../../utils'
 
 /**
  *  获取当前文件名
@@ -31,9 +35,13 @@ const modules = Object.fromEntries(
  * @constant
  * @description 通过调用 `formatModules` 函数格式化模块化路由，并排除当前文件，以便生成代码模块的子路由列表。
  */
-const testRouterList = formatModules(modules, []) as any
+const formatModulesList = formatModules(modules, []) as any
 
-console.log('%c Line:35 🥕 testRouterList', 'color:#2eafb0', testRouterList)
+const normalizeRoutesWithFullPathList = normalizeRoutesWithFullPath(formatModulesList, '/test')
+
+const testRouterList = sortRoutesByOrder(normalizeRoutesWithFullPathList)
+
+console.log('%c Line:37 🍓 testRouterList', 'color:#465975', testRouterList)
 
 /**
  *  testRouter (代码模块路由)
@@ -42,7 +50,8 @@ const testRouter: RouteRecordRaw[] = [
   {
     path: '/test',
     name: 'Test',
-    redirect: import.meta.env.VITE_ROUTER_BLOG_HOME_PATH,
+
+    // redirect: import.meta.env.VITE_ROUTER_BLOG_HOME_PATH,
     component: TEST_BASE_LAYOUT,
     children: [...testRouterList],
   },
@@ -54,4 +63,4 @@ export {
   testRouterList,
 }
 
-console.log('%c Line:55 🌽 testRouterList', 'color:#7f2b82', testRouterList)
+console.table(testRouterList)

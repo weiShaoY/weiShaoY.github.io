@@ -1,6 +1,6 @@
-const home: RouterType.BlogRouteRecordRaw = {
-  path: '/blog/home',
-  name: 'Home',
+const ccc: RouterType.BlogRouteRecordRaw = {
+  path: 'ccc',
+  name: 'ccc',
   meta: {
     title: '首页',
     icon: 'blog-menu-workbench',
@@ -9,7 +9,7 @@ const home: RouterType.BlogRouteRecordRaw = {
   },
   children: [
     {
-      path: '/blog/home/index',
+      path: 'index',
       name: 'HomeIndex',
       component: () => import('@/pages/test/home/index.vue'),
       meta: {
@@ -22,4 +22,4 @@ const home: RouterType.BlogRouteRecordRaw = {
   ],
 }
 
-export default home
+export default ccc

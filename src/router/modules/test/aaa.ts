@@ -1,5 +1,5 @@
 const aaa: RouterType.BlogRouteRecordRaw = {
-  path: '/blog/aaa',
+  path: 'aaa',
   name: 'Aaa',
   meta: {
     title: 'aa',
@@ -9,7 +9,7 @@ const aaa: RouterType.BlogRouteRecordRaw = {
   },
   children: [
     {
-      path: '/blog/aaa/index1',
+      path: 'index1',
       name: 'AaaIndex',
       component: () => import('@/pages/test/home/index.vue'),
       meta: {
@@ -20,7 +20,7 @@ const aaa: RouterType.BlogRouteRecordRaw = {
       },
     },
     {
-      path: '/blog/aaa/index2',
+      path: 'index2',
       name: 'AaaIndex2',
       meta: {
         title: 'aaa-2',
@@ -30,7 +30,7 @@ const aaa: RouterType.BlogRouteRecordRaw = {
       },
       children: [
         {
-          path: '/blog/aaa/index3',
+          path: 'index3',
           name: 'AaaIndex3',
           component: () => import('@/pages/test/aaa/index.vue'),
           meta: {
