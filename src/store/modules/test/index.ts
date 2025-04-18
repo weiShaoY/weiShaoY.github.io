@@ -1,6 +1,3 @@
-// src/stores/index.ts
-// 2025-04-16---14:15---星期三
-
 import { router } from '@/router'
 
 import { testRouterList } from '@/router/modules/test'
@@ -40,10 +37,16 @@ export const useTestStore = defineStore('test', () => {
       text: import.meta.env.VITE_APP_TITLE,
     },
 
+    /**
+     *  选项卡
+     */
     tab: {
       height: 139,
     },
 
+    /**
+     *  容器
+     */
     container: {
       maxWidth: '100%', //  100% 1200px
       minHeight: `calc(100vh - 139px)`,
@@ -263,29 +266,17 @@ export const useTestStore = defineStore('test', () => {
   // /**
   //  * 检查第一个选项卡是否为首页，否则清空所有标签并跳转首页
   //  */
-  // const checkFirstHomePage = () => {
-  //   if (openedTabList.value.length && openedTabList.value[0].path !== BLOG_HOME) {
-  //     removeAll(BLOG_HOME)
-  //   }
-  // }
+  const checkFirstHomePage = () => {
+    if (openedTabList.value.length && openedTabList.value[0].path !== BLOG_HOME) {
+      removeAll(BLOG_HOME)
+    }
+  }
 
-  // /**
-  //  * 初始化状态，从系统存储中加载工作台配置
-  //  */
-  // const initState = () => {
-  //   const sysStorage = getSysStorage()
+  function init() {
+    checkFirstHomePage()
+  }
 
-  //   if (sysStorage) {
-  //     const sys = JSON.parse(sysStorage)
-
-  //     const { workTab } = sys.user
-
-  //     current.value = workTab.current || {
-  //     }
-  //     openedTabList.value = workTab.opened || []
-  //     checkFirstHomePage()
-  //   }
-  // }
+  init()
 
   return {
     setting,
@@ -311,4 +302,6 @@ export const useTestStore = defineStore('test', () => {
     markTabsToRemove,
 
   }
+}, {
+  persist: true,
 })

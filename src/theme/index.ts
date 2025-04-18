@@ -18,3 +18,5 @@ import './element-plus'
 
 // 重置HTML样式
 import './reset.scss'
+
+import './el-ui.scss' // 优化element样式

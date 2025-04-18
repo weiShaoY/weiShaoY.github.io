@@ -1,5 +1,6 @@
 @use '@/theme/variables.scss' as *;
 
+
 .workTab {
   box-sizing: border-box;
   display: flex;
@@ -51,7 +52,7 @@
         }
       }
 
-      .activ-tab {
+      .active-tab {
         color: var(--main-color) !important;
       }
     }
@@ -133,7 +134,7 @@
           opacity: 0;
         }
 
-        &.activ-tab {
+        &.active-tab {
           color: var(--main-color) !important;
           background-color: var(--el-color-primary-light-9) !important;
           border-bottom: 0 !important;
@@ -150,7 +151,7 @@
           }
         }
 
-        &.activ-tab + li .line {
+        &.active-tab + li .line {
           opacity: 0;
         }
 
@@ -204,13 +205,13 @@
 }
 
 @media only screen and (max-width: $device-ipad) {
-  .workTab {
+  .worktab {
     padding: 6px 10px;
   }
 }
 
 @media only screen and (max-width: $device-phone) {
-  .workTab {
+  .worktab {
     padding: 0 15px;
   }
 }

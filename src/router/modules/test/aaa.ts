@@ -5,7 +5,7 @@ const aaa: RouterType.BlogRouteRecordRaw = {
     title: 'aa',
     icon: 'blog-menu-vue',
     textBadge: 'new',
-    order: 0,
+    order: 2,
   },
   children: [
     {

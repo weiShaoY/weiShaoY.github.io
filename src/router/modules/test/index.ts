@@ -33,6 +33,8 @@ const modules = Object.fromEntries(
  */
 const testRouterList = formatModules(modules, []) as any
 
+console.log('%c Line:35 🥕 testRouterList', 'color:#2eafb0', testRouterList)
+
 /**
  *  testRouter (代码模块路由)
  */

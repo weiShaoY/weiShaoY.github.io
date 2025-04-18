@@ -6,11 +6,10 @@
 
 import type { LocationQueryRaw } from 'vue-router'
 
+import type { MenuItemType } from './menu-right.vue'
+
 import { useTestStore } from '@/store'
 
-/**
- * 导入Vue组合式API
- */
 import {
   computed,
   onMounted,
@@ -23,11 +22,9 @@ import {
   useRouter,
 } from 'vue-router'
 
+import MenuRight from './menu-right.vue'
+
 const testStore = useTestStore()
-/**
- * 导入子组件
- */
-// import MenuRight from '../MenuRight/index.vue'
 
 const route = useRoute()
 
@@ -73,48 +70,6 @@ const activeTab = computed(() => currentRoute.value.path) // 当前激活的标�
 const activeTabIndex = computed(() =>
   list.value.findIndex(tab => tab.path === activeTab.value),
 )
-
-/**
- * 右键菜单选项配置
- */
-const menuItems = computed(() => {
-  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
-
-  const isLastTab = clickedIndex === list.value.length - 1
-
-  const isFirstOrSecondTab = clickedIndex <= 1
-
-  const isOneTab = list.value.length === 1
-
-  const disableOther = list.value.length === 2 && clickedIndex === 1
-
-  return [
-    {
-      key: 'left',
-      label: '关闭左侧',
-      icon: 'blog-workTab-close-left',
-      disabled: isFirstOrSecondTab,
-    },
-    {
-      key: 'right',
-      label: '关闭右侧',
-      icon: 'blog-workTab-close-right',
-      disabled: isLastTab,
-    },
-    {
-      key: 'other',
-      label: '关闭其他',
-      icon: 'blog-workTab-close-other',
-      disabled: isOneTab || disableOther,
-    },
-    {
-      key: 'all',
-      label: '关闭全部',
-      icon: 'blog-workTab-close-all',
-      disabled: isOneTab,
-    },
-  ]
-})
 
 /**
  * 获取当前激活标签页的DOM元素
@@ -273,29 +228,6 @@ function showMenu(e: MouseEvent, path?: string) {
 }
 
 /**
- * 处理右键菜单选择
- */
-function handleSelect(item: MenuItemType) {
-  const { key } = item
-
-  const activeIndex = list.value.findIndex(tab => tab.path === activeTab.value)
-
-  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
-
-  // 处理标签跳转逻辑
-  const shouldNavigate
-       = (key === 'left' && activeIndex < clickedIndex)
-         || (key === 'right' && activeIndex > clickedIndex)
-         || key === 'other'
-
-  if (shouldNavigate) {
-    router.push(clickedPath.value)
-  }
-
-  closeWorkTab(key, clickedPath.value)
-}
-
-/**
  * 监听滚动事件
  */
 function listenerScroll() {
@@ -367,6 +299,72 @@ function handleTouchMove(event: TouchEvent) {
 function handleTouchEnd() {
   setTransition()
 }
+
+/**
+ * 右键菜单选项配置
+ */
+const menuItems = computed(() => {
+  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
+
+  const isLastTab = clickedIndex === list.value.length - 1
+
+  const isFirstOrSecondTab = clickedIndex <= 1
+
+  const isOneTab = list.value.length === 1
+
+  const disableOther = list.value.length === 2 && clickedIndex === 1
+
+  return [
+    {
+      key: 'left',
+      label: '关闭左侧',
+      icon: 'blog-tab-close-left',
+      disabled: isFirstOrSecondTab,
+    },
+    {
+      key: 'right',
+      label: '关闭右侧',
+      icon: 'blog-tab-close-right',
+      disabled: isLastTab,
+    },
+    {
+      key: 'other',
+      label: '关闭其他',
+      icon: 'blog-tab-close-other',
+      disabled: isOneTab || disableOther,
+    },
+    {
+      key: 'all',
+      label: '关闭全部',
+      icon: 'blog-tab-close-all',
+      disabled: isOneTab,
+    },
+  ]
+})
+
+/**
+ * 处理右键菜单选择
+ */
+function handleSelect(item: MenuItemType) {
+  const { key } = item
+
+  const activeIndex = list.value.findIndex(tab => tab.path === activeTab.value)
+
+  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
+
+  // 处理标签跳转逻辑
+  const shouldNavigate
+       = (key === 'left' && activeIndex < clickedIndex)
+         || (key === 'right' && activeIndex > clickedIndex)
+         || key === 'other'
+
+  if (shouldNavigate) {
+    router.push(clickedPath.value)
+  }
+
+  closeWorkTab(key, clickedPath.value)
+}
+
 </script>
 
 <template>
@@ -391,7 +389,7 @@ function handleTouchEnd() {
           :id="`scroll-li-${index}`"
           :key="item.path"
           class="art-custom-card"
-          :class="{ 'activ-tab': item.path === activeTab }"
+          :class="{ 'active-tab': item.path === activeTab }"
           @click="clickTab(item)"
           @contextmenu.prevent="(e: MouseEvent) => showMenu(e, item.path)"
         >
@@ -430,7 +428,7 @@ function handleTouchEnd() {
 
         <SvgIcon
           class="btn art-custom-card console-box"
-          icon="blog-workTab-close-open"
+          icon="blog-tab-close-open"
         />
 
         <template
@@ -443,7 +441,7 @@ function handleTouchEnd() {
             >
               <SvgIcon
                 class="mr-2"
-                icon="blog-workTab-close-left"
+                icon="blog-tab-close-left"
               />
 
               <span>关闭左侧</span>
@@ -455,7 +453,7 @@ function handleTouchEnd() {
             >
               <SvgIcon
                 class="mr-2"
-                icon="blog-workTab-close-right"
+                icon="blog-tab-close-right"
               />
 
               <span>关闭右侧</span>
@@ -467,7 +465,7 @@ function handleTouchEnd() {
             >
               <SvgIcon
                 class="mr-2"
-                icon="blog-workTab-close-other"
+                icon="blog-tab-close-other"
               />
 
               <span>关闭其他</span>
@@ -479,7 +477,7 @@ function handleTouchEnd() {
             >
               <SvgIcon
                 class="mr-2"
-                icon="blog-workTab-close-all"
+                icon="blog-tab-close-all"
               />
 
               <span>关闭全部</span>
@@ -490,14 +488,14 @@ function handleTouchEnd() {
     </div>
 
     <!-- 右键菜单组件 -->
-    <!-- <MenuRight
-       ref="menuRef"
-       :menu-items="menuItems"
-       @select="handleSelect"
-     /> -->
+    <MenuRight
+      ref="menuRef"
+      :menu-items="menuItems"
+      @select="handleSelect"
+    />
   </div>
 </template>
 
    <style lang="scss" scoped>
-   @use './style';
+   @use './index.scss';
 </style>

@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import type { RouteRecordRaw } from 'vue-router'
 
-import { BlogGuard } from '@/router/utils'
+// import { BlogGuard } from '@/router/utils'
 
 import { useAppStore, useBlogStore } from '@/store'
 
@@ -109,33 +109,33 @@ function findMenuOpenKeys(target: string) {
 /**
  *  监听路由变化事件
  */
-BlogGuard.listenerRouteChange((newRoute) => {
-  // 获取路由的 meta 信息
-  const { activeMenu, hideInMenu } = newRoute.meta
+// BlogGuard.listenerRouteChange((newRoute) => {
+//   // 获取路由的 meta 信息
+//   const { activeMenu, hideInMenu } = newRoute.meta
 
-  // 如果需要认证且没有隐藏在菜单中或者有激活菜单
-  if (!hideInMenu || activeMenu) {
-    /**
-     *  菜单展开项数组
-     */
-    const menuOpenKeys = findMenuOpenKeys((activeMenu || newRoute.name) as string)
+//   // 如果需要认证且没有隐藏在菜单中或者有激活菜单
+//   if (!hideInMenu || activeMenu) {
+//     /**
+//      *  菜单展开项数组
+//      */
+//     const menuOpenKeys = findMenuOpenKeys((activeMenu || newRoute.name) as string)
 
-    /**
-     *  合并当前展开项和新找到的展开项
-     */
-    const keySet = new Set([...menuOpenKeys, ...openKeys.value])
+//     /**
+//      *  合并当前展开项和新找到的展开项
+//      */
+//     const keySet = new Set([...menuOpenKeys, ...openKeys.value])
 
-    /**
-     *  更新展开项
-     */
-    openKeys.value = [...keySet]
+//     /**
+//      *  更新展开项
+//      */
+//     openKeys.value = [...keySet]
 
-    /**
-     *  更新选中的菜单项
-     */
-    selectedKey.value = [(activeMenu as string) || (menuOpenKeys[menuOpenKeys.length - 1] as string)]
-  }
-}, true)
+//     /**
+//      *  更新选中的菜单项
+//      */
+//     selectedKey.value = [(activeMenu as string) || (menuOpenKeys[menuOpenKeys.length - 1] as string)]
+//   }
+// }, true)
 </script>
 
 <template>
@@ -150,7 +150,6 @@ BlogGuard.listenerRouteChange((newRoute) => {
     :auto-open-selected="true"
     :level-indent="34"
     @collapse="setCollapse"
-
   >
     <SubMenu
       v-model:selected-key="selectedKey"

@@ -1,9 +1,10 @@
 <!------------------------------------  标签栏  ------------------------------------------------->
 
 <script lang="ts" setup>
-import type { RouteLocationNormalized } from 'vue-router'
 
-import { BlogGuard } from '@/router/utils'
+// import type { RouteLocationNormalized } from 'vue-router'
+
+// import { BlogGuard } from '@/router/utils'
 
 import { useBlogStore } from '@/store'
 
@@ -51,20 +52,20 @@ watch(
  *  监听路由变化，更新标签栏列表
  *  @param  route - 路由对象
  */
-BlogGuard.listenerRouteChange((route: RouteLocationNormalized) => {
-  console.log('%c Line:55 🍏 route', 'color:#7f2b82', route)
-  if (
-    !route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)
-  ) {
-    blogStore.updateTabList(route)
-  }
-}, true)
+// BlogGuard.listenerRouteChange((route: RouteLocationNormalized) => {
+//   console.log('%c Line:55 🍏 route', 'color:#7f2b82', route)
+//   if (
+//     !route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)
+//   ) {
+//     blogStore.updateTabList(route)
+//   }
+// }, true)
 
 /**
  *  组件卸载时移除路由监听器
  */
 onUnmounted(() => {
-  BlogGuard.removeRouteChange()
+  // BlogGuard.removeRouteChange()
 })
 </script>
 

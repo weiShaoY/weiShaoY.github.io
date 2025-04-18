@@ -8,7 +8,9 @@ import {
   createWebHistory,
 } from 'vue-router'
 
-import { createRouterGuard, formatModules } from './utils/index'
+import { createRouterGuard } from './guard'
+
+import { formatModules } from './utils/index'
 
 const appModules = import.meta.glob('./modules/*/index.ts', {
   eager: true,
@@ -18,6 +20,8 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
  *  获取路由列表
  */
 export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
+
+console.log('%c Line:23 🍉 总路由', 'color:#3f7cff', routeList)
 
 const routerMode = {
   hash: () => createWebHashHistory(),
