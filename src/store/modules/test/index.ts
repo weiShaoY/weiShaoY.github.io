@@ -15,8 +15,6 @@ export const useTestStore = defineStore('test', () => {
    */
   const BLOG_HOME = import.meta.env.VITE_ROUTER_BLOG_HOME_PATH
 
-  // /blog/home/index
-
   /**
    *  index
    */
@@ -235,6 +233,7 @@ export const useTestStore = defineStore('test', () => {
    * @param tab - 要打开的路由标签页对象，类型为BlogRouteRecordRaw
    */
   const openTab = (tab: BlogType.Tab): void => {
+    console.log('%c Line:236 🥛 tab', 'color:#fca650', tab)
     removeKeepAliveExclude(tab.name as string)
 
     // 从keep-alive的排除列表中移除当前标签页名称

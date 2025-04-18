@@ -48,7 +48,12 @@ function openExternalLink(link: string) {
  * @param item 菜单项
  * @param jumpToFirst 是否跳转到第一个子菜单
  */
-export function blogMenuJump(item: RouterType.BlogRouteRecordRaw, jumpToFirst: boolean = false) {
+export function blogMenuJump(
+  item: RouterType.BlogRouteRecordRaw,
+  jumpToFirst: boolean = false,
+) {
+  console.log('%c Line:52 🍕 item', 'color:#33a5ff', item)
+
   // 处理外部链接
   const { externalUrl } = item.meta
 
@@ -63,7 +68,8 @@ export function blogMenuJump(item: RouterType.BlogRouteRecordRaw, jumpToFirst: b
   }
 
   // 获取第一个可见的子菜单，如果没有则取第一个子菜单
-  const firstChild = item.children.find(child => !child.meta.isHideInMenu) || item.children[0]
+  const firstChild
+    = item.children.find(child => !child.meta.isHideInMenu) || item.children[0]
 
   // 如果第一个子菜单是外部链接 并且不是 iframe，打开外部链接
   if (firstChild.meta?.externalUrl) {

@@ -1,7 +1,5 @@
 import type { RouteRecordNormalized } from 'vue-router'
 
-
-
 /**
  *  格式化modules模块(将modules模块转化为数组)
  *  @param  _modules - modules模块

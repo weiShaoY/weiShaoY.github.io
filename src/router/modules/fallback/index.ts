@@ -1,9 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 /**
  *  未找到和重定向路由
  */
-export const fallbackRouter: RouteRecordRaw[] = [
+export const fallbackRouter: RouterType.RouteRecordRaw[] = [
   {
     // 重定向
     path: '/redirect/:path(.*)',

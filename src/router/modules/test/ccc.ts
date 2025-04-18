@@ -5,7 +5,7 @@ const ccc: RouterType.BlogRouteRecordRaw = {
     title: '首页',
     icon: 'blog-menu-workbench',
     textBadge: 'new',
-    order: 0,
+    order: 4,
   },
   children: [
     {

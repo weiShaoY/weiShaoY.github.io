@@ -14,8 +14,8 @@ import { fallbackRouter } from './modules/fallback'
 
 import {
   formatModules,
-  normalizeRoutesWithFullPath,
-  setRouteDefaultRedirect,
+  recursiveNormalizeRoutesPath,
+  recursiveSetRoutesRedirect,
 } from './utils'
 
 const appModules = import.meta.glob('./modules/*/index.ts', {
@@ -27,11 +27,11 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
  */
 export const formatModulesList: RouteRecordNormalized[] = formatModules(appModules, [])
 
-const aaa = normalizeRoutesWithFullPath(formatModulesList)
+const normalizeRoutesWithFullPathList = recursiveNormalizeRoutesPath(formatModulesList)
 
-const routeList = setRouteDefaultRedirect(aaa) // aaa
+const routeList = recursiveSetRoutesRedirect(normalizeRoutesWithFullPathList)
 
-console.log('%c Line:33 🍪 routeList', 'color:#33a5ff', routeList)
+console.log('%c Line:33 🍕 routeList', 'color:#f5ce50', routeList)
 
 const routerMode = {
   hash: () => createWebHashHistory(),

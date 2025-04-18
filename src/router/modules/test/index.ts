@@ -4,8 +4,8 @@ import { TEST_BASE_LAYOUT } from '@/layouts'
 
 import {
   formatModules,
-  normalizeRoutesWithFullPath,
-  sortRoutesByOrder,
+  recursiveNormalizeRoutesPath,
+  recursiveSortRoutesByOrder,
 } from '../../utils'
 
 /**
@@ -37,11 +37,14 @@ const modules = Object.fromEntries(
  */
 const formatModulesList = formatModules(modules, []) as any
 
-const normalizeRoutesWithFullPathList = normalizeRoutesWithFullPath(formatModulesList, '/test')
+const normalizeRoutesWithFullPathList = recursiveNormalizeRoutesPath(
+  formatModulesList,
+  '/test',
+)
 
-const testRouterList = sortRoutesByOrder(normalizeRoutesWithFullPathList)
-
-console.log('%c Line:37 🍓 testRouterList', 'color:#465975', testRouterList)
+const testRouterList = recursiveSortRoutesByOrder(
+  normalizeRoutesWithFullPathList,
+)
 
 /**
  *  testRouter (代码模块路由)

@@ -2,6 +2,11 @@ import type { RouteLocationNormalized, Router } from 'vue-router'
 
 import { useTestStore } from '@/store'
 
+/**
+ *  路由-博客模块路径
+ */
+const VITE_ROUTER_BLOG_PATH = import.meta.env.VITE_ROUTER_BLOG_PATH
+
 function handleBlogWorkTabGuard(to: RouteLocationNormalized) {
   const testStore = useTestStore()
 
@@ -38,7 +43,7 @@ export function blogRouteGuard(router: Router): void {
   // 全局后置守卫
   router.afterEach((to) => {
     // 如果目标路径包含博客路径，执行工作标签和主题守卫逻辑
-    if (to.path.includes('/blog')) {
+    if (to.path.includes(VITE_ROUTER_BLOG_PATH)) {
       handleBlogWorkTabGuard(to)
     }
   })

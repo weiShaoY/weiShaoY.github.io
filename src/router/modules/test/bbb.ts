@@ -6,7 +6,7 @@ const one: RouterType.BlogRouteRecordRaw = {
     title: '一级单页',
     icon: 'blog-menu-react',
     textBadge: 'new',
-    order: 0,
+    order: 3,
   },
 
 }

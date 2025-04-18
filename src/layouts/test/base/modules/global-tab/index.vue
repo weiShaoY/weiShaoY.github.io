@@ -64,6 +64,8 @@ const list = computed(() => testStore.openedTabList) // 已打开的标签页列
  */
 const activeTab = computed(() => currentRoute.value.path) // 当前激活的标签页
 
+console.log('%c Line:66 🍖 activeTab', 'color:#b03734', activeTab.value)
+
 /**
  * 获取当前激活标签的索引
  */
@@ -153,6 +155,7 @@ watch(
  * 点击标签页导航
  */
 function clickTab(item: BlogType.Tab) {
+  console.log('%c Line:156 🍏 item', 'color:#42b983', item)
   router.push({
     path: item.path,
     query: item.query as LocationQueryRaw,

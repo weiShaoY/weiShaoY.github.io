@@ -1,9 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 /**
  *  指挥台路由
  */
-const commandRouter: RouteRecordRaw[] = [
+const commandRouter: RouterType.RouteRecordRaw[] = [
 
   {
     path: '/command',
