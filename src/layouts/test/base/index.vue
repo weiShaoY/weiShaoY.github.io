@@ -11,7 +11,7 @@ import GlobalMenu from './modules/global-menu/index.vue'
 
 import GlobalSearch from './modules/global-search/index.vue'
 
-import GlobalTab from './modules/global-tab/index.vue'
+// import GlobalTab from './modules/global-tab/index.vue'
 
 const testStore = useTestStore()
 

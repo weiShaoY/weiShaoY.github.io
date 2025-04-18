@@ -8,9 +8,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BetterScroll: typeof import('./../components/BetterScroll/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
+    copy: typeof import('./../components/better-scroll copy.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -46,6 +48,7 @@ declare module 'vue' {
     IconMdiArrowUpThin: typeof import('~icons/mdi/arrow-up-thin')['default']
     IconMdiKeyboardEsc: typeof import('~icons/mdi/keyboard-esc')['default']
     IconMdiKeyboardReturn: typeof import('~icons/mdi/keyboard-return')['default']
+    Inddex: typeof import('./../components/BetterScroll/inddex.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     Logo: typeof import('./../components/Logo/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']

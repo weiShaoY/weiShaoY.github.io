@@ -13,3 +13,8 @@ import './nprogress.less'
 // import './base.less'
 
 import './element-plus'
+
+// / /////////////////////// ////////////////////////  2025-04-17---22:32---星期四  ////////////////////////
+
+// 重置HTML样式
+import './reset.scss'

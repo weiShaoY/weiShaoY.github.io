@@ -60,7 +60,7 @@ let currentX = 0 // 当前触摸X坐标
 /**
  * 计算属性
  */
-const list = computed(() => testStore.openedTabList) // 已打开的标签页列表
+const list = computed(() => store.opened) // 已打开的标签页列表
 
 /**
  *  当前激活的标签路径
@@ -197,7 +197,7 @@ watch(
 /**
  * 点击标签页导航
  */
-function clickTab(item: BlogType.Tab) {
+function clickTab(item: WorkTabType) {
   router.push({
     path: item.path,
     query: item.query as LocationQueryRaw,
@@ -214,19 +214,19 @@ function closeWorkTab(type: string, tabPath: string) {
 
   switch (type) {
     case 'current':
-      testStore.removeTab(path)
+      store.removeTab(path)
       break
     case 'left':
-      testStore.removeLeft(path)
+      store.removeLeft(path)
       break
     case 'right':
-      testStore.removeRight(path)
+      store.removeRight(path)
       break
     case 'other':
-      testStore.removeOthers(path)
+      store.removeOthers(path)
       break
     case 'all':
-      testStore.removeAll(path)
+      store.removeAll(path)
       break
   }
 
@@ -284,9 +284,9 @@ function handleSelect(item: MenuItemType) {
 
   // 处理标签跳转逻辑
   const shouldNavigate
-       = (key === 'left' && activeIndex < clickedIndex)
-         || (key === 'right' && activeIndex > clickedIndex)
-         || key === 'other'
+      = (key === 'left' && activeIndex < clickedIndex)
+        || (key === 'right' && activeIndex > clickedIndex)
+        || key === 'other'
 
   if (shouldNavigate) {
     router.push(clickedPath.value)
@@ -491,13 +491,13 @@ function handleTouchEnd() {
 
     <!-- 右键菜单组件 -->
     <!-- <MenuRight
-       ref="menuRef"
-       :menu-items="menuItems"
-       @select="handleSelect"
-     /> -->
+      ref="menuRef"
+      :menu-items="menuItems"
+      @select="handleSelect"
+    /> -->
   </div>
 </template>
 
-   <style lang="scss" scoped>
-   @use './style';
+  <style lang="scss" scoped>
+  @use './style';
 </style>

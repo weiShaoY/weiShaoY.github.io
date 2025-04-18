@@ -1,12 +1,13 @@
 <!------  2025-04-16---18:18---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
 import { useTestStore } from '@/store'
 
 import { blogMittBus } from '@/utils'
 
 import { useFullscreen } from '@vueuse/core'
+
+import GlobalTab from '../global-tab/index.vue'
 
 import Breadcrumb from './breadcrumb.vue'
 
@@ -152,6 +153,8 @@ function toggleFullScreen() {
 
       </div>
     </div>
+
+    <GlobalTab />
   </div>
 </template>
 

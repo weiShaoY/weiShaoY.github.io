@@ -11,7 +11,6 @@ const containerStyle = computed(() => {
   }
 })
 
-// State
 const isRefresh = ref(true)
 
 // Methods
