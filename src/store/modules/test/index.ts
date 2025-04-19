@@ -19,11 +19,12 @@ export const useTestStore = defineStore('test', () => {
    *  index
    */
   const setting = ref({
+
     /**
      *  菜单
      */
     menu: {
-      leftMenuWidth: 80,
+      leftMenuWidth: 100,
       rightMenuWidth: 252,
     },
 
@@ -36,11 +37,18 @@ export const useTestStore = defineStore('test', () => {
     },
 
     /**
-     *  选项卡
+     *  头部
      */
-    tab: {
-      height: 139,
+    header: {
+      height: 135,
     },
+
+    // /**
+    //  *  选项卡
+    //  */
+    // tab: {
+    //   height: 139,
+    // },
 
     /**
      *  容器

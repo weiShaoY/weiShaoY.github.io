@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useTestStore } from '@/store'
+
 import { useRoute } from 'vue-router'
 
 import SubMenu from './sub-menu.vue'
@@ -15,11 +17,15 @@ type Props = {
   menuList: RouterType.BlogRouteRecordRaw[]
 }
 
+const testStore = useTestStore()
+
+const width = `${testStore.setting.menu.rightMenuWidth}px`
+
 </script>
 
 <template>
   <div
-    class="pl-"
+    class=""
   >
     <div
       class="h-15 flex items-center justify-center"
@@ -44,4 +50,8 @@ type Props = {
 
 <style lang="scss">
 
+// 展开的宽度
+.el-menu:not(.el-menu--collapse) {
+  width: v-bind(width);
+}
 </style>

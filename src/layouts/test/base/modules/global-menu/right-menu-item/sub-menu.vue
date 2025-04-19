@@ -1,6 +1,7 @@
 <!------  2025-04-16---15:03---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+
 import { blogMenuJump } from '../utils'
 
 defineOptions({
@@ -51,6 +52,7 @@ const filteredMenuItems = computed(() => filterRoutes(props.menuList))
 function goPage(item: RouterType.BlogRouteRecordRaw) {
   blogMenuJump(item)
 }
+
 </script>
 
 <template>
@@ -67,20 +69,47 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
       <template
         #title
       >
-        <SvgIcon
-          v-if="item.meta.icon"
-          :icon="item.meta.icon"
-        />
+        <div
+          class="flex items-center gap-2"
+        >
+          <SvgIcon
+            v-if="item.meta?.icon"
+            :icon="item.meta.icon"
+            :size="20"
+          />
 
-        <span
-          class="menu-name"
-        >{{ item.meta.title }}</span>
+          <div
+            class="flex items-center gap-2"
+          >
+            <span
+              class="text-4"
+            >
+              {{ item.meta.title }}
+            </span>
 
-        <!-- <div
-              v-if="item.meta.showBadge"
-              class="badge"
-              style="right: 35px"
-            /> -->
+            <!-- 外链徽标 -->
+            <SvgIcon
+              v-if="item.meta.externalUrl"
+              icon="blog-menu-externalUrl"
+              :size="16"
+            />
+
+            <!-- 文本徽标 -->
+            <div
+              v-else-if="item.meta.textBadge"
+              class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+            >
+              {{ item.meta.textBadge }}
+            </div>
+
+            <!-- 图标徽标 -->
+            <SvgIcon
+              v-else-if="item.meta.iconBadge"
+              :icon="item.meta.iconBadge"
+              :size="16"
+            />
+          </div>
+        </div>
       </template>
 
       <Submenu
@@ -94,89 +123,72 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
       v-else
       :index="item.path"
       :level-item="level + 1"
+      class="m-x-auto mb-2 w-[calc(100%-16px)] rounded-3"
       @click="goPage(item)"
     >
-      <SvgIcon
-        v-if="item.meta.icon"
-        :icon="item.meta.icon"
-      />
-
       <template
         #title
       >
-        <span
-          class="menu-name"
+        <div
+          class="flex items-center gap-2"
         >
-          {{ item.meta.title }}
-        </span>
+          <SvgIcon
+            v-if="item.meta?.icon"
+            :icon="item.meta.icon"
+            :size="20"
+          />
 
-        <!-- <div
-              v-if="item.meta.showBadge"
-              class="badge"
+          <div
+            class="flex items-center gap-2"
+          >
+            <span
+              class="text-4"
+            >
+              {{ item.meta.title }}
+            </span>
+
+            <!-- 外链徽标 -->
+            <SvgIcon
+              v-if="item.meta.externalUrl"
+              icon="blog-menu-externalUrl"
+              :size="16"
             />
 
+            <!-- 文本徽标 -->
             <div
-              v-if="item.meta.showTextBadge"
-              class="text-badge"
+              v-else-if="item.meta.textBadge"
+              class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
             >
-              {{ item.meta.showTextBadge }}
-            </div> -->
+              {{ item.meta.textBadge }}
+            </div>
+
+            <!-- 图标徽标 -->
+            <SvgIcon
+              v-else-if="item.meta.iconBadge"
+              :icon="item.meta.iconBadge"
+              :size="16"
+            />
+          </div>
+        </div>
       </template>
     </el-menu-item>
   </template>
 </template>
 
 <style lang="scss">
-// 重新修改菜单样式
-
-.el-popper.is-pure {
-  border: 0.5px solid var(--art-border-dashed-color) !important;
-  border-radius: 12px;
-}
-
-// 菜单折叠 hover 弹窗样式
-.el-menu--vertical,
-.el-menu--popup-container {
-  .el-menu--popup {
-    padding: 8px;
-
-    .el-sub-menu__title:hover,
-    .el-menu-item:hover {
-      background-color: var(--art-gray-200) !important;
-      border-radius: 6px;
-    }
-
-    .el-menu-item {
-      height: 40px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-
-    .el-menu-item.is-active {
-      color: var(--art-gray-900) !important;
-      background-color: var(--art-gray-200) !important;
-    }
-  }
-}
-
-.el-sub-menu__title,
-.el-menu-item {
-  width: 100%;
-  border-radius: 0;
-}
+@use '@/theme/variables.scss' as *;
 
 .el-sub-menu__title {
-  .iconfont-sys {
-    margin-left: 3px !important;
-  }
+  margin: 0 auto !important;
+  margin-bottom: 8px !important;
+  width: calc(100% - 16px) !important;
+  border-radius: 12px !important;
 }
-
+// 右侧箭头
 .el-sub-menu__icon-arrow {
-  color: var(--art-gray-600);
+  right: 20px;
+  width: 15px !important;
+  font-weight: bold;
 }
 
 // 选中颜色
@@ -184,48 +196,5 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
   color: var(--main-color) !important;
   background-color: var(--el-color-primary-light-9);
   background-image: var(--el-color-primary-custom-14);
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    content: '';
-    background: var(--main-color);
-  }
-}
-
-// 鼠标移入背景色
-.el-sub-menu__title:hover,
-.el-menu-item:not(.is-active):hover {
-  background: var(--art-gray-100) !important;
-}
-
-.el-menu-design {
-  .el-sub-menu__title,
-  .el-menu-item {
-    width: calc(100% - 16px);
-    margin: 0 auto;
-    margin-bottom: 5px;
-    border-radius: 6px;
-  }
-
-  .el-sub-menu__icon-arrow {
-    color: var(--art-gray-600);
-  }
-
-  // 选中颜色
-  .el-menu-item.is-active {
-    color: var(--main-color) !important;
-    background-color: var(--el-color-primary-light-9);
-    background-image: var(--el-color-primary-custom-14);
-  }
-
-  // 鼠标移入背景色
-  .el-sub-menu__title:hover,
-  .el-menu-item:not(.is-active):hover {
-    background: var(--art-gray-100) !important;
-  }
 }
 </style>

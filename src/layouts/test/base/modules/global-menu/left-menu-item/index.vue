@@ -45,6 +45,7 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
   return findTopRouteByPath(route.path, menuList)
 })
 
+console.log('%c Line:48 🍎 testStore.setting.menu.leftMenuWidth', 'color:#2eafb0', testStore.setting.menu.leftMenuWidth)
 </script>
 
 <template>
@@ -66,13 +67,17 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
     </div>
 
     <el-scrollbar
-      class="h-[calc(100%-135px)]"
+      :style="{
+        height: `calc(100% - ${testStore.setting.header.height}px)`,
+      }"
     >
-      <ul>
+      <ul
+        class=""
+      >
         <li
           v-for="menu in menuList"
           :key="menu.path"
-
+          class="mb-1 flex items-center justify-center"
           @click="emits('blogMenuJump', menu, true)"
         >
           <el-tooltip
@@ -85,24 +90,21 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
             :disabled="dualMenuShowText"
           >
             <div
-              class="flex-col items-center justify-center rounded-1 text-center transition-all duration-300 hover:cursor-pointer"
+              class="aspect-square flex-col items-center justify-center rounded-1 text-center transition-all duration-300 hover:cursor-pointer"
               :class="[
                 currentRoute?.path === menu.path ? 'bg-[#F3B03D] color-white' : '',
-                dualMenuShowText ? 'm-[5px] h-15' : 'm-[15px] h-12',
+                dualMenuShowText ? 'w-[80%]' : 'w-[70%]',
               ]"
             >
               <SvgIcon
                 v-if="menu.meta.icon"
                 :icon="menu.meta.icon"
-                :size=" dualMenuShowText ? 18 : 22"
-                :style="{
-                  marginBottom: dualMenuShowText ? '5px' : '0',
-                }"
+                :class="dualMenuShowText ? 'mb-1 ' : 'scale-130'"
               />
 
               <span
                 v-if="dualMenuShowText"
-                class="max-w-12 text-ellipsis"
+                class="max-w-[90%] text-ellipsis"
               >
                 {{ menu.meta.title }}
               </span>
@@ -132,10 +134,5 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
 </template>
 
 <style scoped>
-.ib-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  position: relative;
-}
+
 </style>

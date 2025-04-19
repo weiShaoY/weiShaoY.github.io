@@ -6,8 +6,6 @@ import { router } from '@/router'
 
 import { testRouterList } from '@/router/modules/test'
 
-import { useTestStore } from '@/store'
-
 import { useRoute } from 'vue-router'
 
 import LeftMenuItem from './left-menu-item/index.vue'
@@ -15,8 +13,6 @@ import LeftMenuItem from './left-menu-item/index.vue'
 import RightMenuItem from './right-menu-item/index.vue'
 
 import { findTopRouteByPath } from './utils'
-
-const testStore = useTestStore()
 
 const route = useRoute()
 
@@ -81,12 +77,11 @@ const rightMenuList = computed(() => {
   }
 })
 
-const width = `${testStore.setting.menu.rightMenuWidth}px`
 </script>
 
 <template>
   <div
-    class="layout-sidebar fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white scrollbar-hide"
+    class="fixed left-0 top-0 z-101 h-[100vh] flex select-none border-r-1 border-[#EAECF1] bg-white scrollbar-hide"
   >
 
     <!-- 左侧菜单 -->
@@ -110,10 +105,4 @@ const width = `${testStore.setting.menu.rightMenuWidth}px`
 
 <style lang="scss">
 
-.layout-sidebar {
-  // 展开的宽度
-  .el-menu:not(.el-menu--collapse) {
-    width: v-bind(width);
-  }
-}
 </style>
