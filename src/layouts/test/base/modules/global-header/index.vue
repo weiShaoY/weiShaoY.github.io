@@ -92,7 +92,7 @@ function toggleFullScreen() {
           >
             <SvgIcon
               icon="search"
-              class="transition-transform duration-300 !group-hover:scale-180"
+              class="transition-transform duration-300 !group-hover:scale-130"
             />
 
             <span
@@ -122,20 +122,6 @@ function toggleFullScreen() {
           v-if="width >= 1200"
         />
 
-        <!-- 刷新按钮 -->
-        <ButtonIcon
-          tooltip-content="刷新页面"
-          @click="handleRefresh()"
-        >
-          <div
-            :class="{ 'animate-spin duration-[750ms]': refreshLoading }"
-          >
-            <SvgIcon
-              icon="blog-refresh"
-            />
-          </div>
-        </ButtonIcon>
-
         <!-- 全屏按钮 -->
         <ButtonIcon
           tooltip-content="进入全屏"
@@ -151,6 +137,19 @@ function toggleFullScreen() {
           </div>
         </ButtonIcon>
 
+        <!-- 刷新按钮 -->
+        <ButtonIcon
+          tooltip-content="刷新页面"
+          @click="handleRefresh()"
+        >
+          <div
+            :class="{ 'animate-spin duration-[750ms]': refreshLoading }"
+          >
+            <SvgIcon
+              icon="blog-refresh"
+            />
+          </div>
+        </ButtonIcon>
       </div>
     </div>
 

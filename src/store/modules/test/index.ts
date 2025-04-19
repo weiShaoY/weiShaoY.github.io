@@ -59,12 +59,12 @@ export const useTestStore = defineStore('test', () => {
   /**
    *  菜单列表
    */
-  const menuList = ref<BlogType.Tab[]>(testRouterList)
+  const menuList = ref<RouterType.BlogRouteRecordRaw[]>(testRouterList)
 
   /**
    *  搜索历史列表
    */
-  const searchHistoryList = ref<BlogType.Tab[]>([])
+  const searchHistoryList = ref<RouterType.BlogRouteRecordRaw[]>([])
 
   /**
    *  已经打开的选项卡

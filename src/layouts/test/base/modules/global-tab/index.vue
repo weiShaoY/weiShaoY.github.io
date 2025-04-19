@@ -64,8 +64,6 @@ const list = computed(() => testStore.openedTabList) // 已打开的标签页列
  */
 const activeTab = computed(() => currentRoute.value.path) // 当前激活的标签页
 
-console.log('%c Line:66 🍖 activeTab', 'color:#b03734', activeTab.value)
-
 /**
  * 获取当前激活标签的索引
  */
@@ -155,7 +153,6 @@ watch(
  * 点击标签页导航
  */
 function clickTab(item: BlogType.Tab) {
-  console.log('%c Line:156 🍏 item', 'color:#42b983', item)
   router.push({
     path: item.path,
     query: item.query as LocationQueryRaw,
@@ -428,11 +425,13 @@ function handleSelect(item: MenuItemType) {
       <el-dropdown
         @command="closeWorkTab"
       >
-
-        <SvgIcon
-          class="btn art-custom-card console-box"
-          icon="blog-tab-close-open"
-        />
+        <div
+          class=""
+        >
+          <ButtonIcon
+            icon="blog-tab-close-open"
+          />
+        </div>
 
         <template
           #dropdown
@@ -445,6 +444,7 @@ function handleSelect(item: MenuItemType) {
               <SvgIcon
                 class="mr-2"
                 icon="blog-tab-close-left"
+                :size="18"
               />
 
               <span>关闭左侧</span>
@@ -457,6 +457,7 @@ function handleSelect(item: MenuItemType) {
               <SvgIcon
                 class="mr-2"
                 icon="blog-tab-close-right"
+                :size="18"
               />
 
               <span>关闭右侧</span>
@@ -469,6 +470,7 @@ function handleSelect(item: MenuItemType) {
               <SvgIcon
                 class="mr-2"
                 icon="blog-tab-close-other"
+                :size="18"
               />
 
               <span>关闭其他</span>
@@ -481,6 +483,7 @@ function handleSelect(item: MenuItemType) {
               <SvgIcon
                 class="mr-2"
                 icon="blog-tab-close-all"
+                :size="18"
               />
 
               <span>关闭全部</span>

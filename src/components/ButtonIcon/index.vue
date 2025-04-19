@@ -7,7 +7,6 @@ defineOptions({
   name: 'ButtonIcon',
   inheritAttrs: false,
 })
-
 const props = withDefaults(defineProps<Props>(), {
   class: '',
   icon: '',

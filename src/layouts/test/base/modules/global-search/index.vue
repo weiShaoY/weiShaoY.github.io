@@ -392,8 +392,46 @@ onUnmounted(() => {
             @click="searchGoPage(item)"
             @mouseenter="highlightOnHover(index)"
           >
-            {{ item.meta.title }}
+            <!-- 左侧 -->
+            <div
+              class="flex items-center gap-5"
+            >
+              <SvgIcon
+                v-if="item.meta.icon"
+                :icon="item.meta.icon"
+                :size="20"
+              />
 
+              <span
+                class="text-4"
+              >
+                {{ item.meta.title }}
+              </span>
+
+              <!-- 外链徽标 -->
+              <SvgIcon
+                v-if="item.meta.externalUrl"
+                icon="blog-menu-externalUrl"
+                :size="16"
+              />
+
+              <!-- 文本徽标 -->
+              <div
+                v-else-if="item.meta.textBadge"
+                class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+              >
+                {{ item.meta.textBadge }}
+              </div>
+
+              <!-- 图标徽标 -->
+              <SvgIcon
+                v-else-if="item.meta.iconBadge"
+                :icon="item.meta.iconBadge"
+                :size="16"
+              />
+            </div>
+
+            <!-- 右侧 -->
             <SvgIcon
               v-show="isHighlighted(index)"
               icon="blog-search-enter"
@@ -430,10 +468,47 @@ onUnmounted(() => {
             @click="searchGoPage(item)"
             @mouseenter="historyHIndex = index"
           >
-            <span>
-              {{ item.meta.title }}
-            </span>
 
+            <!-- 左侧 -->
+            <div
+              class="flex items-center gap-5"
+            >
+              <SvgIcon
+                v-if="item.meta.icon"
+                :icon="item.meta.icon"
+                :size="20"
+              />
+
+              <span
+                class="text-4"
+              >
+                {{ item.meta.title }}
+              </span>
+
+              <!-- 外链徽标 -->
+              <SvgIcon
+                v-if="item.meta.externalUrl"
+                icon="blog-menu-externalUrl"
+                :size="16"
+              />
+
+              <!-- 文本徽标 -->
+              <div
+                v-else-if="item.meta.textBadge"
+                class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
+              >
+                {{ item.meta.textBadge }}
+              </div>
+
+              <!-- 图标徽标 -->
+              <SvgIcon
+                v-else-if="item.meta.iconBadge"
+                :icon="item.meta.iconBadge"
+                :size="16"
+              />
+            </div>
+
+            <!-- 右侧 -->
             <SvgIcon
               icon="close"
               :size="18"
@@ -533,10 +608,10 @@ onUnmounted(() => {
       line-height: 1;
       cursor: pointer;
 
-      .menu-icon {
-        margin-right: 5px;
-        font-size: 18px;
-      }
+      // .menu-icon {
+      //   margin-right: 5px;
+      //   font-size: 18px;
+      // }
 
       div {
         display: flex;
