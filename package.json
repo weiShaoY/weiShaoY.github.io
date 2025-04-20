@@ -28,8 +28,6 @@
   "dependencies": {
     "@better-scroll/core": "2.5.1",
     "@emailjs/browser": "^4.4.1",
-    "@sa/color": "workspace:*",
-    "@sa/materials": "workspace:*",
     "@sa/utils": "workspace:*",
     "@tresjs/cientos": "^4.2.0",
     "@tresjs/core": "^4.3.3",

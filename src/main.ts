@@ -4,7 +4,11 @@ import App from './App.vue'
 
 import directives from './directives'
 
-import { setupNProgress, setupUI } from './plugins'
+import {
+  setupLoading,
+  setupNProgress,
+  setupUI,
+} from './plugins'
 
 import { setupRouter } from './router'
 
@@ -16,6 +20,9 @@ import './theme/index'
  *  设置应用程序
  */
 async function setupApp() {
+  // 设置加载
+  setupLoading()
+
   // 设置顶部进度条
   setupNProgress()
 
@@ -34,5 +41,4 @@ async function setupApp() {
   app.mount('#app')
 }
 
-// 初始化应用程序
 setupApp()

@@ -43,9 +43,9 @@ export const useTestStore = defineStore('test', () => {
       height: 60,
     },
 
-    // /**
-    //  *  选项卡
-    //  */
+    /**
+     *  选项卡
+     */
     tab: {
       height: 45,
     },
