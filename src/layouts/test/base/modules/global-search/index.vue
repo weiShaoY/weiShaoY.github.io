@@ -103,18 +103,12 @@ function search(val: string) {
   searchResult.value = filteredList.flatMap((category) => {
     // 分类下没有子项时直接返回空数组
     if (!category.children?.length) {
-      return []
+      return [category]
     }
 
     // 处理当前分类的扁平化
     return flattenItems([category])
   })
-
-  console.log(
-    '%c Line:101 🍊 searchResult.value',
-    'color:#42b983',
-    searchResult.value,
-  )
 }
 
 /**

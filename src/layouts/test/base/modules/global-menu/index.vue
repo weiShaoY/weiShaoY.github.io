@@ -4,7 +4,7 @@
 
 import { router } from '@/router'
 
-import { testRouterList } from '@/router/modules/test'
+import { useTestStore } from '@/store'
 
 import { useRoute } from 'vue-router'
 
@@ -16,7 +16,9 @@ import { findTopRouteByPath } from './utils'
 
 const route = useRoute()
 
-const menuList = computed(() => testRouterList) as Ref<RouterType.BlogRouteRecordRaw[]>
+const testStore = useTestStore()
+
+const menuList = computed(() => testStore.menuList)
 
 /**
  *  打开外部链接
@@ -61,7 +63,7 @@ function blogMenuJump(item: RouterType.BlogRouteRecordRaw, jumpToFirst: boolean 
 const rightMenuList = computed(() => {
   // 获取当前路由的顶级路径，如 '/blog/detail' => '/blog'
 
-  const target = findTopRouteByPath(route.path, testRouterList)
+  const target = findTopRouteByPath(route.path, menuList.value)
 
   if (target) {
   // 返回该菜单的子项，如果存在
