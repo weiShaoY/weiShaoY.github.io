@@ -15,7 +15,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'TypeScript',
         icon: 'blog-menu-typeScript',
         iframeUrl: 'https://www.typescriptlang.org/zh/',
-        keepAlive: false,
       },
     },
     {
@@ -25,7 +24,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Vite',
         icon: 'blog-menu-vite',
         iframeUrl: 'https://cn.vitejs.dev/',
-        keepAlive: false,
       },
     },
     {
@@ -35,7 +33,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'React',
         icon: 'blog-menu-react',
         iframeUrl: 'https://zh-hans.react.dev/',
-        keepAlive: false,
       },
     },
     {
@@ -45,7 +42,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Vue',
         icon: 'blog-menu-vue',
         externalUrl: 'https://cn.vuejs.org/',
-        keepAlive: false,
       },
     },
     {
@@ -55,7 +51,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Angular',
         icon: 'blog-menu-angular',
         iframeUrl: 'https://angular.io/',
-        keepAlive: false,
       },
     },
     {
@@ -65,7 +60,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Pinia',
         icon: 'blog-menu-pinia',
         iframeUrl: 'https://pinia.vuejs.org/zh/',
-        keepAlive: false,
       },
     },
     {
@@ -75,7 +69,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'vueuse',
         icon: 'blog-menu-vueuse',
         iframeUrl: 'https://vueuse.pages.dev/',
-        keepAlive: false,
       },
     },
     {
@@ -85,7 +78,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Unocss',
         icon: 'blog-menu-unocss',
         iframeUrl: 'https://unocss-cn.pages.dev/',
-        keepAlive: false,
       },
     },
     {
@@ -95,7 +87,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'TailwindCss',
         icon: 'blog-menu-tailwindCss',
         iframeUrl: 'https://tailwindcss.com/docs/installation',
-        keepAlive: false,
       },
     },
     {
@@ -105,7 +96,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Eslint',
         icon: 'blog-menu-eslint',
         iframeUrl: 'https://eslint.org/docs/latest/',
-        keepAlive: false,
       },
     },
     {
@@ -115,7 +105,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Prettier',
         icon: 'blog-menu-prettier',
         iframeUrl: 'https://prettier.io/',
-        keepAlive: false,
       },
     },
     {
@@ -125,7 +114,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Docker',
         icon: 'blog-menu-docker',
         externalUrl: 'https://docs.docker.com/build-cloud/',
-        keepAlive: false,
       },
     },
     {
@@ -135,7 +123,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Echarts',
         icon: 'blog-menu-echarts',
         externalUrl: 'https://echarts.apache.org/zh/index.html',
-        keepAlive: false,
       },
     },
     {
@@ -145,7 +132,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Nginx',
         icon: 'blog-menu-nginx',
         iframeUrl: 'https://nginx.org/en/docs/',
-        keepAlive: false,
       },
     },
     {
@@ -155,7 +141,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Electron',
         icon: 'blog-menu-electron',
         iframeUrl: 'https://www.electronjs.org/zh/docs/latest/',
-        keepAlive: false,
       },
     },
     {
@@ -165,7 +150,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         title: 'NextJs',
         icon: 'blog-menu-nextJs',
         externalUrl: 'https://www.nextjs.cn/',
-        keepAlive: false,
       },
     },
   ],

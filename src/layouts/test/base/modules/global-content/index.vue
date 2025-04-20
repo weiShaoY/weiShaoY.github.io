@@ -33,6 +33,7 @@ watch(() => testStore.isRefresh, reload)
     <RouterView
       v-if="isRefresh"
       v-slot="{ Component, route }"
+      class="w-full"
       :style="{ minHeight: testStore.setting.container.minHeight }"
     >
       <!-- 路由动画 -->

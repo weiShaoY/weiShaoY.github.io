@@ -1,0 +1,43 @@
+const creativityRoute: RouterType.BlogRouteRecordRaw = {
+  path: 'creativity',
+  name: 'Creativity',
+  meta: {
+    title: '创意',
+    icon: 'blog-menu-creativity',
+    keepAlive: false,
+  },
+  children: [
+    {
+      path: 'clock',
+      name: 'Clock',
+      component: () => import('@/pages/test/creativity/clock/index.vue'),
+      meta: {
+        title: '时钟',
+        keepAlive: true,
+        icon: 'blog-menu-clock',
+      },
+    },
+    {
+      path: 'muYu',
+      name: 'MuYu',
+      component: () => import('@/pages/test/creativity/muYu/index.vue'),
+      meta: {
+        title: '木鱼',
+        keepAlive: true,
+        icon: 'blog-menu-muYu',
+      },
+    },
+    {
+      path: 'calendar',
+      name: 'Calendar',
+      component: () => import('@/pages/test/creativity/calendar/index.vue'),
+      meta: {
+        title: '日历',
+        keepAlive: true,
+        icon: 'blog-menu-calendar',
+      },
+    },
+  ],
+}
+
+export default creativityRoute
