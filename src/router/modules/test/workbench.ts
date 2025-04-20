@@ -5,7 +5,6 @@ const workbench: RouterType.BlogRouteRecordRaw = {
   meta: {
     title: '工作台',
     icon: 'blog-menu-workbench',
-    textBadge: 'a',
     order: 0,
   },
 

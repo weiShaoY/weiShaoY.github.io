@@ -106,5 +106,7 @@ declare module 'vue-router/auto-routes' {
     '/test/aaa/': RouteRecordInfo<'/test/aaa/', '/test/aaa', Record<never, never>, Record<never, never>>,
     '/test/home/': RouteRecordInfo<'/test/home/', '/test/home', Record<never, never>, Record<never, never>>,
     '/test/workbench/': RouteRecordInfo<'/test/workbench/', '/test/workbench', Record<never, never>, Record<never, never>>,
+    '/test/workbench/MapChart': RouteRecordInfo<'/test/workbench/MapChart', '/test/workbench/MapChart', Record<never, never>, Record<never, never>>,
+    '/test/workbench/MapChart copy': RouteRecordInfo<'/test/workbench/MapChart copy', '/test/workbench/MapChart copy', Record<never, never>, Record<never, never>>,
   }
 }

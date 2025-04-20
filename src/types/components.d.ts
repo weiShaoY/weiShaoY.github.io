@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
     BetterScroll: typeof import('./../components/BetterScroll/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
@@ -57,5 +58,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
     VideoPlayer: typeof import('./../components/VideoPlayer/index.vue')['default']
+    VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
   }
 }

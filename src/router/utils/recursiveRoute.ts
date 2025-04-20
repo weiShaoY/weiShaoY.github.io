@@ -1,3 +1,5 @@
+import { BLOG_IFRAME_LAYOUT } from '@/layouts'
+
 /**
  * 基础递归路由处理函数
  * @param routes 路由数组
@@ -85,6 +87,19 @@ export function recursiveSortRoutesByOrder(routes: any[]): any[] {
     return {
       ...route,
       children: recursiveSortRoutesByOrder(route.children),
+    }
+  })
+}
+
+/**
+ *  递归处理 iframe 路由
+ * @param routes 路由数组
+ * @returns 处理后的新路由数组
+ */
+export function recursiveHandleIframeRoutes(routes: any[]): any[] {
+  return recursiveWalkRoutes(routes, (route) => {
+    if (route.meta?.iframeUrl) {
+      route.component = BLOG_IFRAME_LAYOUT
     }
   })
 }

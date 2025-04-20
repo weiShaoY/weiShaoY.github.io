@@ -1,16 +1,17 @@
-<!------  2025-04-19---02:31---星期六  ------>
-<!------------------------------------    ------------------------------------------------->
-<script lang="ts" setup>
+<script setup lang="ts">
+
+const MapChart = defineAsyncComponent(() => import('./MapChart.vue'))
+
 </script>
 
 <template>
-  <div
-    class=""
-  >
-    11111111
+  <div>
+    <MapChart />
   </div>
 </template>
 
-<style lang="less" scoped>
-
+<style lang="scss" scoped>
+  .page-content {
+  height: 100%;
+}
 </style>

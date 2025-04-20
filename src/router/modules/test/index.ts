@@ -4,6 +4,7 @@ import { TEST_BASE_LAYOUT } from '@/layouts'
 
 import {
   formatModules,
+  recursiveHandleIframeRoutes,
   recursiveNormalizeRoutesPath,
   recursiveSortRoutesByOrder,
 } from '../../utils'
@@ -42,9 +43,11 @@ const normalizeRoutesWithFullPathList = recursiveNormalizeRoutesPath(
   '/test',
 )
 
-const testRouterList = recursiveSortRoutesByOrder(
+const aaa = recursiveSortRoutesByOrder(
   normalizeRoutesWithFullPathList,
 )
+
+const testRouterList = recursiveHandleIframeRoutes(aaa)
 
 /**
  *  testRouter (代码模块路由)

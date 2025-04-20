@@ -68,7 +68,7 @@ export const useTestStore = defineStore('test', () => {
   /**
    *  菜单列表
    */
-  const menuList = ref<RouterType.BlogRouteRecordRaw[]>(testRouterList)
+  const menuList = computed<RouterType.BlogRouteRecordRaw[]>(() => testRouterList)
 
   /**
    *  搜索历史列表

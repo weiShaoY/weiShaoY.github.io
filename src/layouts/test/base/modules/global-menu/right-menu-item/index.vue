@@ -38,13 +38,19 @@ const width = `${testStore.setting.menu.rightMenuWidth}px`
       />
     </div>
 
-    <el-menu
-      :default-active="route.path"
+    <el-scrollbar
+      :style="{
+        height: `calc(100% - ${testStore.setting.header.height}px)`,
+      }"
     >
-      <SubMenu
-        :menu-list="menuList"
-      />
-    </el-menu>
+      <el-menu
+        :default-active="route.path"
+      >
+        <SubMenu
+          :menu-list="menuList"
+        />
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 
