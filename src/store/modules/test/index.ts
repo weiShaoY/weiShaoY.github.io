@@ -24,7 +24,7 @@ export const useTestStore = defineStore('test', () => {
      *  菜单
      */
     menu: {
-      leftMenuWidth: 100,
+      leftMenuWidth: 80,
       rightMenuWidth: 252,
     },
 

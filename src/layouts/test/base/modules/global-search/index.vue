@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-
 import { useTestStore } from '@/store'
 
 import { blogMittBus } from '@/utils'
+
+import MenuItem from '../../components/menu-item.vue'
 
 const router = useRouter()
 
@@ -393,43 +394,9 @@ onUnmounted(() => {
             @mouseenter="highlightOnHover(index)"
           >
             <!-- 左侧 -->
-            <div
-              class="flex items-center gap-5"
-            >
-              <SvgIcon
-                v-if="item.meta.icon"
-                :icon="item.meta.icon"
-                :size="20"
-              />
-
-              <span
-                class="text-4"
-              >
-                {{ item.meta.title }}
-              </span>
-
-              <!-- 外链徽标 -->
-              <SvgIcon
-                v-if="item.meta.externalUrl"
-                icon="blog-menu-externalUrl"
-                :size="16"
-              />
-
-              <!-- 文本徽标 -->
-              <div
-                v-else-if="item.meta.textBadge"
-                class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
-              >
-                {{ item.meta.textBadge }}
-              </div>
-
-              <!-- 图标徽标 -->
-              <SvgIcon
-                v-else-if="item.meta.iconBadge"
-                :icon="item.meta.iconBadge"
-                :size="16"
-              />
-            </div>
+            <MenuItem
+              :menu="item"
+            />
 
             <!-- 右侧 -->
             <SvgIcon
@@ -470,43 +437,9 @@ onUnmounted(() => {
           >
 
             <!-- 左侧 -->
-            <div
-              class="flex items-center gap-5"
-            >
-              <SvgIcon
-                v-if="item.meta.icon"
-                :icon="item.meta.icon"
-                :size="20"
-              />
-
-              <span
-                class="text-4"
-              >
-                {{ item.meta.title }}
-              </span>
-
-              <!-- 外链徽标 -->
-              <SvgIcon
-                v-if="item.meta.externalUrl"
-                icon="blog-menu-externalUrl"
-                :size="16"
-              />
-
-              <!-- 文本徽标 -->
-              <div
-                v-else-if="item.meta.textBadge"
-                class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
-              >
-                {{ item.meta.textBadge }}
-              </div>
-
-              <!-- 图标徽标 -->
-              <SvgIcon
-                v-else-if="item.meta.iconBadge"
-                :icon="item.meta.iconBadge"
-                :size="16"
-              />
-            </div>
+            <MenuItem
+              :menu="item"
+            />
 
             <!-- 右侧 -->
             <SvgIcon
@@ -613,7 +546,7 @@ onUnmounted(() => {
       //   font-size: 18px;
       // }
 
-      &>div {
+      & > div {
         display: flex;
         align-items: center;
         justify-content: space-between;

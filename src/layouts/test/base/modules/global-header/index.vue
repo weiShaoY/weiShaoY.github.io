@@ -7,7 +7,6 @@ import { blogMittBus } from '@/utils'
 
 import { useFullscreen } from '@vueuse/core'
 
-
 import Breadcrumb from './breadcrumb.vue'
 
 import FastWidth from './fast-enter.vue'

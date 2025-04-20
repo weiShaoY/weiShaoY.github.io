@@ -2,6 +2,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
+import MenuItem from '../../../components/menu-item.vue'
+
 import { blogMenuJump } from '../utils'
 
 defineOptions({
@@ -69,47 +71,9 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
       <template
         #title
       >
-        <div
-          class="flex items-center gap-2"
-        >
-          <SvgIcon
-            v-if="item.meta?.icon"
-            :icon="item.meta.icon"
-            :size="20"
-          />
-
-          <div
-            class="flex items-center gap-2"
-          >
-            <span
-              class="text-4"
-            >
-              {{ item.meta.title }}
-            </span>
-
-            <!-- 外链徽标 -->
-            <SvgIcon
-              v-if="item.meta.externalUrl"
-              icon="blog-menu-externalUrl"
-              :size="16"
-            />
-
-            <!-- 文本徽标 -->
-            <div
-              v-else-if="item.meta.textBadge"
-              class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
-            >
-              {{ item.meta.textBadge }}
-            </div>
-
-            <!-- 图标徽标 -->
-            <SvgIcon
-              v-else-if="item.meta.iconBadge"
-              :icon="item.meta.iconBadge"
-              :size="16"
-            />
-          </div>
-        </div>
+        <MenuItem
+          :menu="item"
+        />
       </template>
 
       <Submenu
@@ -129,47 +93,9 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
       <template
         #title
       >
-        <div
-          class="flex items-center gap-2"
-        >
-          <SvgIcon
-            v-if="item.meta?.icon"
-            :icon="item.meta.icon"
-            :size="20"
-          />
-
-          <div
-            class="flex items-center gap-2"
-          >
-            <span
-              class="text-4"
-            >
-              {{ item.meta.title }}
-            </span>
-
-            <!-- 外链徽标 -->
-            <SvgIcon
-              v-if="item.meta.externalUrl"
-              icon="blog-menu-externalUrl"
-              :size="16"
-            />
-
-            <!-- 文本徽标 -->
-            <div
-              v-else-if="item.meta.textBadge"
-              class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
-            >
-              {{ item.meta.textBadge }}
-            </div>
-
-            <!-- 图标徽标 -->
-            <SvgIcon
-              v-else-if="item.meta.iconBadge"
-              :icon="item.meta.iconBadge"
-              :size="16"
-            />
-          </div>
-        </div>
+        <MenuItem
+          :menu="item"
+        />
       </template>
     </el-menu-item>
   </template>

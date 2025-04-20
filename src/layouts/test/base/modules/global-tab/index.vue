@@ -365,7 +365,6 @@ function handleSelect(item: MenuItemType) {
   closeWorkTab(key, clickedPath.value)
 }
 
-
 const topWidth = computed(() => {
   return `calc(100% - ${testStore.setting.menu.leftMenuWidth + testStore.setting.menu.rightMenuWidth}px`
 })
@@ -374,147 +373,146 @@ const topWidth = computed(() => {
 
 <template>
   <div
-    class="fixed right-0 top-0 z-100  select-none  border-b-[1px] border-[#eaebf1] bg-white transition-all duration-500"
+    class="fixed right-0 top-0 z-100 select-none border-b-[1px] border-[#eaebf1] bg-white transition-all duration-500"
     :style="{
       width: topWidth,
       height: `${testStore.setting.tab.height}px`,
       top: `${testStore.setting.header.height}px`,
     }"
   >
-  <div
-    class="workTab tab-google"
-  >
-    <!-- 标签页滚动区域 -->
     <div
-      ref="scrollRef"
-      class="scroll-view"
+      class="workTab tab-google"
     >
-      <ul
-        ref="tabsRef"
-        class="tabs"
-        :style="{
-          transform: `translateX(${translateX}px)`,
-          transition,
-        }"
+      <!-- 标签页滚动区域 -->
+      <div
+        ref="scrollRef"
+        class="scroll-view"
       >
-        <li
-          v-for="(item, index) in list"
-          :id="`scroll-li-${index}`"
-          :key="item.path"
-          class="art-custom-card"
-          :class="{ 'active-tab': item.path === activeTab }"
-          @click="clickTab(item)"
-          @contextmenu.prevent="(e: MouseEvent) => showMenu(e, item.path)"
+        <ul
+          ref="tabsRef"
+          class="tabs"
+          :style="{
+            transform: `translateX(${translateX}px)`,
+            transition,
+          }"
+        >
+          <li
+            v-for="(item, index) in list"
+            :id="`scroll-li-${index}`"
+            :key="item.path"
+            class="art-custom-card"
+            :class="{ 'active-tab': item.path === activeTab }"
+            @click="clickTab(item)"
+            @contextmenu.prevent="(e: MouseEvent) => showMenu(e, item.path)"
+          >
+            <div
+              class="flex items-center"
+            >
+              <span
+                class="mr-2"
+              >
+                {{ item.title }}
+              </span>
+
+              <SvgIcon
+                v-if="index !== 0"
+                :size="10"
+                icon="close"
+                @click.stop="closeWorkTab('current', item.path)"
+              />
+            </div>
+
+            <div
+              class="line"
+            />
+
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右侧操作菜单 -->
+      <div
+        class="right"
+      >
+        <el-dropdown
+          @command="closeWorkTab"
         >
           <div
-            class="flex items-center"
+            class=""
           >
-            <span
-              class="mr-2"
-            >
-              {{ item.title }}
-            </span>
-
-            <SvgIcon
-              v-if="index !== 0"
-              :size="10"
-              icon="close"
-              @click.stop="closeWorkTab('current', item.path)"
+            <ButtonIcon
+              icon="blog-tab-close-open"
             />
           </div>
 
-          <div
-            class="line"
-          />
+          <template
+            #dropdown
+          >
+            <el-dropdown-menu>
+              <el-dropdown-item
+                command="left"
+                :disabled="activeTabIndex === 0 || activeTabIndex === 1"
+              >
+                <SvgIcon
+                  class="mr-2"
+                  icon="blog-tab-close-left"
+                  :size="18"
+                />
 
-        </li>
-      </ul>
+                <span>关闭左侧</span>
+              </el-dropdown-item>
+
+              <el-dropdown-item
+                command="right"
+                :disabled="activeTabIndex === list.length - 1"
+              >
+                <SvgIcon
+                  class="mr-2"
+                  icon="blog-tab-close-right"
+                  :size="18"
+                />
+
+                <span>关闭右侧</span>
+              </el-dropdown-item>
+
+              <el-dropdown-item
+                command="other"
+                :disabled="list.length === 1 || (list.length === 2 && activeTabIndex === 1)"
+              >
+                <SvgIcon
+                  class="mr-2"
+                  icon="blog-tab-close-other"
+                  :size="18"
+                />
+
+                <span>关闭其他</span>
+              </el-dropdown-item>
+
+              <el-dropdown-item
+                command="all"
+                :disabled="list.length === 1"
+              >
+                <SvgIcon
+                  class="mr-2"
+                  icon="blog-tab-close-all"
+                  :size="18"
+                />
+
+                <span>关闭全部</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+
+      <!-- 右键菜单组件 -->
+      <MenuRight
+        ref="menuRef"
+        :menu-items="menuItems"
+        @select="handleSelect"
+      />
     </div>
-
-    <!-- 右侧操作菜单 -->
-    <div
-      class="right"
-    >
-      <el-dropdown
-        @command="closeWorkTab"
-      >
-        <div
-          class=""
-        >
-          <ButtonIcon
-            icon="blog-tab-close-open"
-          />
-        </div>
-
-        <template
-          #dropdown
-        >
-          <el-dropdown-menu>
-            <el-dropdown-item
-              command="left"
-              :disabled="activeTabIndex === 0 || activeTabIndex === 1"
-            >
-              <SvgIcon
-                class="mr-2"
-                icon="blog-tab-close-left"
-                :size="18"
-              />
-
-              <span>关闭左侧</span>
-            </el-dropdown-item>
-
-            <el-dropdown-item
-              command="right"
-              :disabled="activeTabIndex === list.length - 1"
-            >
-              <SvgIcon
-                class="mr-2"
-                icon="blog-tab-close-right"
-                :size="18"
-              />
-
-              <span>关闭右侧</span>
-            </el-dropdown-item>
-
-            <el-dropdown-item
-              command="other"
-              :disabled="list.length === 1 || (list.length === 2 && activeTabIndex === 1)"
-            >
-              <SvgIcon
-                class="mr-2"
-                icon="blog-tab-close-other"
-                :size="18"
-              />
-
-              <span>关闭其他</span>
-            </el-dropdown-item>
-
-            <el-dropdown-item
-              command="all"
-              :disabled="list.length === 1"
-            >
-              <SvgIcon
-                class="mr-2"
-                icon="blog-tab-close-all"
-                :size="18"
-              />
-
-              <span>关闭全部</span>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-
-    <!-- 右键菜单组件 -->
-    <MenuRight
-      ref="menuRef"
-      :menu-items="menuItems"
-      @select="handleSelect"
-    />
   </div>
-  </div>
-
 
 </template>
 
