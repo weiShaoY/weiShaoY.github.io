@@ -40,16 +40,17 @@ export const useTestStore = defineStore('test', () => {
      *  头部
      */
     header: {
-      height: 135,
+      height: 60,
     },
 
     // /**
     //  *  选项卡
     //  */
-    // tab: {
-    //   height: 139,
-    // },
+    tab: {
+      height: 45,
+    },
 
+    // 135
     /**
      *  容器
      */

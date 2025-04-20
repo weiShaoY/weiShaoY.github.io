@@ -613,7 +613,7 @@ onUnmounted(() => {
       //   font-size: 18px;
       // }
 
-      div {
+      &>div {
         display: flex;
         align-items: center;
         justify-content: space-between;

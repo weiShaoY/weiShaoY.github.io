@@ -365,9 +365,22 @@ function handleSelect(item: MenuItemType) {
   closeWorkTab(key, clickedPath.value)
 }
 
+
+const topWidth = computed(() => {
+  return `calc(100% - ${testStore.setting.menu.leftMenuWidth + testStore.setting.menu.rightMenuWidth}px`
+})
+
 </script>
 
 <template>
+  <div
+    class="fixed right-0 top-0 z-100  select-none  border-b-[1px] border-[#eaebf1] bg-white transition-all duration-500"
+    :style="{
+      width: topWidth,
+      height: `${testStore.setting.tab.height}px`,
+      top: `${testStore.setting.header.height}px`,
+    }"
+  >
   <div
     class="workTab tab-google"
   >
@@ -500,6 +513,9 @@ function handleSelect(item: MenuItemType) {
       @select="handleSelect"
     />
   </div>
+  </div>
+
+
 </template>
 
    <style lang="scss" scoped>
