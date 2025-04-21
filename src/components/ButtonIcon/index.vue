@@ -12,23 +12,23 @@ defineOptions({
 type Props = {
   /** 按钮的 class 类名 */
   class?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>;
+  | string
+  | Record<string, boolean>
+  | Array<string | Record<string, boolean>>;
 
   /** 图标名称 */
   icon?: string;
 
   /** 图标大小 */
-  iconSize?: number;
+  size?: number;
 
   /**
    *  图标 class
    */
   iconClass?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>;
+  | string
+  | Record<string, boolean>
+  | Array<string | Record<string, boolean>>;
 
   /** 提示框内容 */
   tooltipContent?: string;
@@ -41,16 +41,23 @@ type Props = {
 
   /** 行内样式 */
   style?: CSSProperties;
+
+  /**
+   *  加载loading
+   */
+  loading?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   class: "",
   icon: "",
-  iconSize: 24,
+  size: 40,
 
   tooltipContent: "",
   tooltipPlacement: "bottom",
   // zIndex: 98,
+
+  loading: false,
 });
 
 const DEFAULT_CLASS = "flex items-center justify-center";
@@ -78,8 +85,8 @@ const dynamicButtonClass = computed(() => {
 });
 
 const computedStyle = computed(() => ({
-  width: `${props.iconSize + 12}px`,
-  height: `${props.iconSize + 12}px`,
+  width: `${props.size}px`,
+  height: `${props.size}px`,
   ...props.style,
 }));
 
@@ -110,9 +117,22 @@ const computedIconClass = computed(() => {
           :class="[computedButtonClass, dynamicButtonClass]"
           :style="computedStyle"
         >
-          <slot>
-            <SvgIcon :icon="icon" :size="iconSize" :class="computedIconClass" />
-          </slot>
+          <template v-if="!loading">
+            <slot>
+              <SvgIcon
+                :icon="icon"
+                :size="size - 12"
+                :class="computedIconClass"
+              />
+            </slot>
+          </template>
+
+          <template v-else">
+            <SvgIcon
+              icon="loading"
+              class="animate-spin"
+            />
+          </template>
         </div>
       </ElButton>
     </ElTooltip>

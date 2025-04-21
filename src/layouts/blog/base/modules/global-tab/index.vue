@@ -428,7 +428,7 @@ const topWidth = computed(() => {
       <div class="right ml-5">
         <el-dropdown @command="closeWorkTab">
 
-          <ButtonIcon icon="blog-tab-close-open" :icon-size="16" />
+          <ButtonIcon icon="blog-tab-close-open" :size="30" />
 
           <template #dropdown>
             <el-dropdown-menu>

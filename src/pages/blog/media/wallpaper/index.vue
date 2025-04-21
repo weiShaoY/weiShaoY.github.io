@@ -154,7 +154,14 @@ onMounted(async () => {
         />
       </el-select>
 
-      <a-button
+
+      <ButtonIcon
+        icon="blog-refresh"
+        :loading="isLoading"
+        @click="getData"
+      />
+
+      <!-- <a-button
         :loading="isLoading"
         @click="getData"
       >
@@ -165,7 +172,7 @@ onMounted(async () => {
             icon="blog-refresh"
           />
         </template>
-      </a-button>
+      </a-button> -->
 
 
 
