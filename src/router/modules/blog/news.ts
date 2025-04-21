@@ -1,40 +1,31 @@
-import type { AppRouteRecordRaw } from '@/router/types'
-
-import {
-  BLOG_DEFAULT_LAYOUT,
-  BLOG_IFRAME_LAYOUT,
-} from '@/layouts'
-
-const News: AppRouteRecordRaw = {
+const News: RouterType.BlogRouteRecordRaw = {
   path: 'news',
   name: 'News',
   meta: {
-    locale: '资讯',
+    title: '资讯',
     icon: 'blog-menu-news',
     order: 10,
   },
   redirect: {
     name: 'DailyHotTopics',
   },
-  component: BLOG_DEFAULT_LAYOUT,
   children: [
 
     {
       path: 'dailyHotTopics',
       name: 'DailyHotTopics',
       meta: {
-        locale: '每日热点',
+        title: '每日热点',
         icon: 'blog-menu-dailyHotTopics',
         iframeUrl: 'https://today.lieme.cn/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
 
     {
       path: 'movie',
       name: 'Movie',
       meta: {
-        locale: '影视',
+        title: '影视',
         icon: 'blog-menu-movie',
       },
       component: () => import('@/pages/blog/news/movie/index.vue'),
@@ -43,7 +34,7 @@ const News: AppRouteRecordRaw = {
       path: 'weather',
       name: 'Weather',
       meta: {
-        locale: '天气',
+        title: '天气',
         icon: 'blog-menu-weather',
       },
       component: () => import('@/pages/blog/news/weather/index.vue'),
@@ -53,7 +44,7 @@ const News: AppRouteRecordRaw = {
       path: 'game',
       name: 'Game',
       meta: {
-        locale: '游戏',
+        title: '游戏',
         icon: 'blog-menu-game',
       },
       redirect: {
@@ -64,7 +55,7 @@ const News: AppRouteRecordRaw = {
           path: 'hok',
           name: 'Hok',
           meta: {
-            locale: '王者荣耀',
+            title: '王者荣耀',
             icon: 'blog-menu-hok',
           },
           component: () => import('@/pages/blog/news/game/hok/index.vue'),
@@ -75,7 +66,7 @@ const News: AppRouteRecordRaw = {
       path: 'price',
       name: 'Price',
       meta: {
-        locale: '价格',
+        title: '价格',
         icon: 'blog-menu-price',
       },
       redirect: {
@@ -86,7 +77,7 @@ const News: AppRouteRecordRaw = {
           path: 'gold',
           name: 'Gold',
           meta: {
-            locale: '黄金',
+            title: '黄金',
             icon: 'blog-menu-gold',
           },
           component: () => import('@/pages/blog/news/price/gold/index.vue'),
@@ -95,7 +86,7 @@ const News: AppRouteRecordRaw = {
           path: 'oil',
           name: 'Oil',
           meta: {
-            locale: '燃油',
+            title: '燃油',
             icon: 'blog-menu-oil',
           },
           component: () => import('@/pages/blog/news/price/oil/index.vue'),
@@ -104,7 +95,7 @@ const News: AppRouteRecordRaw = {
           path: 'cigarette',
           name: 'Cigarette',
           meta: {
-            locale: '香烟',
+            title: '香烟',
             icon: 'blog-menu-cigarette',
           },
           component: () => import('@/pages/blog/news/price/cigarette/index.vue'),
