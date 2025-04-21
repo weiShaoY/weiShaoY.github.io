@@ -89,25 +89,24 @@ onMounted(() => {
 
 <template>
   <!-- 左边 -->
-  <ElCard
-    class="h-full card-wrapper"
-    body-class="h-full flex  flex-col flex-grow"
+  <div
+    class="h-full w-2/3 flex flex-col p-5"
   >
-
     <!-- 日期选择和按钮行  -->
     <div
       class="h-10 flex items-center"
     >
-      <el-date-picker
+      <a-month-picker
         v-model="monthPicker"
-        type="month"
-        placeholder="请选择月份"
-        class="!w-30"
+        class="m-l-3 w-30"
+        size="mini"
+        value-format="Date"
         @change="handleMonthPickerChange"
       />
 
-      <el-button
+      <a-button
         class="m-l-3"
+        size="mini"
         @click="handlePreviousMonth"
       >
         <template
@@ -117,10 +116,11 @@ onMounted(() => {
             icon="arrow-left"
           />
         </template>
-      </el-button>
+      </a-button>
 
-      <el-button
+      <a-button
         class="m-l-3"
+        size="mini"
         @click="handleNextMonth"
       >
         <template
@@ -130,11 +130,12 @@ onMounted(() => {
             icon="arrow-right"
           />
         </template>
-      </el-button>
+      </a-button>
 
-      <el-button
+      <a-button
         v-if="state.isShowBackToday"
         class="m-l-3 !bg-primary !color-white"
+        size="mini"
         @click="handleToday"
       >
         <template
@@ -144,7 +145,7 @@ onMounted(() => {
             icon="blog-creativity-position"
           />
         </template>
-      </el-button>
+      </a-button>
     </div>
 
     <!-- 日历的星期数组 (日、一、二、三、四、五、六) -->
@@ -244,7 +245,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
-  </ElCard>
+  </div>
 </template>
 
 <style lang="less" scoped>

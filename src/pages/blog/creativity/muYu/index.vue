@@ -35,42 +35,49 @@ function handleMouseUp() {
 </script>
 
 <template>
-  <div
-    class="h-full w-full flex items-center justify-center"
+  <ElSpace
+    direction="vertical"
+    fill
+    :size="16"
   >
-    <div
-      class="relative h-120 w-120 flex items-center justify-between p-6 color-#C39557"
+    <ElCard
+      class="w-full card-wrapper"
+      body-class="h-full flex items-center justify-center"
     >
       <div
-        :class="[{ 'tips-active': isStartClick }]"
-        class="absolute left-[50%] top-[30%] translate-x-[-50%] text-center text-6 opacity-0"
+        class="relative h-120 w-full flex items-center justify-center p-6 color-[#C39557] !max-w-full"
       >
-        {{ tips }}
+        <div
+          :class="[{ 'tips-active': isStartClick }]"
+          class="absolute left-[50%] top-[30%] translate-x-[-50%] text-center text-6 opacity-0"
+        >
+          {{ tips }}
+        </div>
+
+        <div
+          class="text-center text-8"
+        >
+          功德: {{ meritNumber }}
+        </div>
+
+        <div
+          class="relative h-full max-w-[200px] w-[60%] cursor-pointer bg-cover bg-contain bg-center bg-no-repeat"
+          :class="{
+            img_click: isStartClick,
+          }"
+          :style="{
+            backgroundImage: `url(${muyuImage})`,
+          }"
+
+          @mousedown.prevent="handleMouseDown"
+          @mouseup.prevent="handleMouseUp"
+        />
       </div>
-
-      <div
-        class="text-center text-8"
-      >
-        功德: {{ meritNumber }}
-      </div>
-
-      <div
-        class="relative h-full w-[60%] cursor-pointer bg-cover bg-contain bg-center bg-no-repeat"
-        :class="{
-          img_click: isStartClick,
-        }"
-        :style="{
-          backgroundImage: `url(${muyuImage})`,
-        }"
-
-        @mousedown.prevent="handleMouseDown"
-        @mouseup.prevent="handleMouseUp"
-      />
-    </div>
-  </div>
+    </ElCard>
+  </ElSpace>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .img_click {
   transform: scale(0.8);
   transition: transform 0.1s ease-in-out;

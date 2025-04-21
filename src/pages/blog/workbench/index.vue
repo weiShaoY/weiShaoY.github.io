@@ -1,16 +1,17 @@
-<!------------------------------------    ------------------------------------------------->
-<script lang="ts" setup>
-import ChinaMap from './china-map.vue'
+<script setup lang="ts">
+
+const MapChart = defineAsyncComponent(() => import('./MapChart.vue'))
+
 </script>
 
 <template>
-  <div
-    class="h-full w-full"
-  >
-    <ChinaMap />
+  <div>
+    <MapChart />
   </div>
 </template>
 
-<style lang="less" scoped>
-
+<style lang="scss" scoped>
+  .page-content {
+  height: 100%;
+}
 </style>

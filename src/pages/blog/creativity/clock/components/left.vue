@@ -23,69 +23,50 @@ const secondHandStyle = computed(() => {
 </script>
 
 <template>
+
   <div
-    class="h-full w-full flex justify-center justify-between bg-#1e1f26"
+    class="relative aspect-square h-full flex items-center justify-center bg-[#1e1f26]"
   >
     <div
-      class="relative aspect-square h-full flex items-center justify-center bg-#1e1f26"
+      class="clock"
     >
       <div
-        class="clock"
+        v-for="num in 12"
+        :key="num"
+        class="absolute h-[90%] text-6 color-white font-bold"
+        :style="{
+          transform: `rotate(${num * 30}deg)`,
+        }"
       >
         <div
-          v-for="num in 12"
-          :key="num"
-          class="absolute h-90% text-6 color-white font-700"
           :style="{
-            transform: `rotate(${num * 30}deg)`,
+            transform: `rotate(${num * -30}deg)`,
           }"
         >
-          <div
-            :style="{
-              transform: `rotate(${num * -30}deg)`,
-            }"
-          >
-            {{ num }}
-          </div>
+          {{ num }}
         </div>
-
-        <div
-          :style="hourHandStyle"
-          class="absolute left-1/2 top-3/10 z-0 h-1/5 w-6px origin-bottom transform transform rounded-full bg-[#FFF] -m-l-4px"
-        />
-
-        <div
-          :style="minuteHandStyle"
-          class="absolute top-1/4 z-1 h-1/4 w-3px origin-bottom transform rounded-full bg-[#FFF]"
-        />
-
-        <div
-          :style="secondHandStyle"
-          class="absolute left-1/2 top-1/6 h-1/3 w-2px origin-bottom transform rounded-full bg-#FF0000"
-        />
       </div>
+
+      <div
+        :style="hourHandStyle"
+        class="absolute left-1/2 top-3/10 z-0 h-1/5 w-[6px] origin-bottom transform transform rounded-full bg-[#FFF] -m-l-[4px]"
+      />
+
+      <div
+        :style="minuteHandStyle"
+        class="absolute top-1/4 z-1 h-1/4 w-[3px] origin-bottom transform rounded-full bg-[#FFF]"
+      />
+
+      <div
+        :style="secondHandStyle"
+        class="absolute left-1/2 top-1/6 h-1/3 w-[2px] origin-bottom transform rounded-full bg-[#FF0000]"
+      />
     </div>
-
-    <!-- <div
-      class="flex flex-col flex-1 items-center justify-center text-6 text-white font-700"
-    >
-      <div>
-        星期{{ time.week }}
-      </div>
-
-      <div>
-        {{ time.hour24Formatted }} : {{ time.minuteFormatted }} : {{ time.secondFormatted }}
-      </div>
-
-      <div>
-        {{ time.year }} 年 {{ time.month }} 月 {{ time.day }}日
-      </div>
-
-    </div> -->
   </div>
+
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .clock {
   position: relative;
   background-color: #1e1f26;

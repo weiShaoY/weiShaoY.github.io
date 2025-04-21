@@ -1,264 +1,315 @@
-import type { RouteLocationNormalized } from 'vue-router'
+import { router } from '@/router'
 
-import config from '@/config'
-
-import { isString } from '@/utils'
+import { blogRouterList } from '@/router/modules/blog'
 
 import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
 
 /**
- * 禁止重定向的路由名称列表。
- * @default 包含重定向路由名称
+ *  Index模块
  */
-const BAN_LIST = [config.redirectRouteName]
+export const useBlogStore = defineStore('blog', () => {
+  /**
+   *  路由-博客模块首页路径
+   */
+  const BLOG_HOME = import.meta.env.VITE_ROUTER_BLOG_HOME_PATH
 
-/**
- * 格式化路由为标签
- * @param  route - 路由对象
- * @returns  格式化后的标签属性
- */
-function formatTag(route: RouteLocationNormalized): BlogType1111.TagProps {
-  const { name, meta, fullPath, query } = route
+  /**
+   *  index
+   */
+  const setting = ref({
+
+    /**
+     *  菜单
+     */
+    menu: {
+      leftMenuWidth: 80,
+      rightMenuWidth: 252,
+    },
+
+    /**
+     *  水印
+     */
+    watermark: {
+      isShow: false,
+      text: import.meta.env.VITE_APP_TITLE,
+    },
+
+    /**
+     *  头部
+     */
+    header: {
+      height: 60,
+    },
+
+    /**
+     *  选项卡
+     */
+    tab: {
+      height: 45,
+    },
+
+    // 135
+    /**
+     *  容器
+     */
+    container: {
+      maxWidth: '100%', //  100% 1200px
+      minHeight: `calc(100vh - 139px)`,
+    },
+  })
+
+  /**
+   *  是否刷新
+   */
+  const isRefresh = ref(true)
+
+  /**
+   *  菜单列表
+   */
+  const menuList = computed<RouterType.BlogRouteRecordRaw[]>(() => blogRouterList)
+
+  /**
+   *  搜索历史列表
+   */
+  const searchHistoryList = ref<RouterType.BlogRouteRecordRaw[]>([])
+
+  /**
+   *  已经打开的选项卡
+   */
+  const openedTabList = ref<BlogType.Tab[]>([])
+
+  /**
+   *  当前激活的选项卡
+   */
+  const currentTab = ref<Partial<BlogType.Tab>>({
+  })
+
+  /**
+   *  需要排除缓存的组件名称
+   */
+  const keepAliveExclude = ref<string[]>([])
+
+  /**
+   * 将指定选项卡添加到 keepAlive 排除列表中，只有当该选项卡的 keepAlive 为 true 时才进行添加
+   * @param tab 选项卡对象
+   */
+  const addKeepAliveExclude = (tab: BlogType.Tab) => {
+    if (tab.keepAlive && tab.name && !keepAliveExclude.value.includes(tab.name)) {
+      keepAliveExclude.value.push(tab.name)
+    }
+  }
+
+  /**
+   * 将传入的一组选项卡的组件名称标记为排除缓存
+   * @param tabs 需要标记的选项卡数组
+   */
+  const markTabsToRemove = (tabs: BlogType.Tab[]) => {
+    tabs.forEach((tab) => {
+      if (tab.name) {
+        addKeepAliveExclude(tab)
+      }
+    })
+  }
+
+  // 核心操作函数
+
+  /**
+   * 关闭指定的选项卡，并处理激活状态和路由跳转
+   * @param path 要关闭的路由路径
+   */
+  const removeTab = (path: string) => {
+    const noCurrentTab = openedTabList.value.find(tab => tab.path === path)
+
+    const index = openedTabList.value.findIndex(tab => tab.path === path)
+
+    if (index === -1) {
+      return
+    }
+
+    openedTabList.value.splice(index, 1)
+
+    // 若关闭后无选项卡，且关闭的不是首页，则跳转首页
+    if (!openedTabList.value.length && path !== BLOG_HOME) {
+      router.push(BLOG_HOME)
+      return
+    }
+
+    // 若关闭的是当前激活标签，则标记其为缓存排除，并激活相邻标签
+    if (currentTab.value.path === path) {
+      if (currentTab.value.name) {
+        addKeepAliveExclude(currentTab.value as BlogType.Tab)
+      }
+
+      const newIndex = index >= openedTabList.value.length ? openedTabList.value.length - 1 : index
+
+      currentTab.value = openedTabList.value[newIndex]
+      router.push(currentTab.value.path as string)
+    }
+    else if (noCurrentTab?.name) {
+      addKeepAliveExclude(noCurrentTab)
+    }
+  }
+
+  /**
+   * 关闭当前标签左侧（不包括首页）的所有选项卡
+   * @param path 当前选项卡的路由路径
+   */
+  const removeLeft = (path: string) => {
+    const index = openedTabList.value.findIndex(tab => tab.path === path)
+
+    if (index > 1) {
+      const tabsToRemove = openedTabList.value.slice(1, index)
+
+      markTabsToRemove(tabsToRemove)
+      openedTabList.value.splice(1, index - 1)
+    }
+  }
+
+  /**
+   * 关闭当前标签右侧的所有选项卡
+   * @param path 当前选项卡的路由路径
+   */
+  const removeRight = (path: string) => {
+    const index = openedTabList.value.findIndex(tab => tab.path === path)
+
+    if (index !== -1 && index < openedTabList.value.length - 1) {
+      const tabsToRemove = openedTabList.value.slice(index + 1)
+
+      markTabsToRemove(tabsToRemove)
+      openedTabList.value.splice(index + 1)
+    }
+  }
+
+  /**
+   * 关闭除当前标签和首页外的所有选项卡
+   * @param path 当前选项卡的路由路径
+   */
+  const removeOthers = (path: string) => {
+    const tabsToRemove = openedTabList.value.filter(
+      tab => tab.path !== path && tab.path !== BLOG_HOME,
+    )
+
+    markTabsToRemove(tabsToRemove)
+    openedTabList.value = openedTabList.value.filter(tab => tab.path === path || tab.path === BLOG_HOME)
+  }
+
+  /**
+   * 关闭所有选项卡（当传入的 path 不是首页时关闭全部；首页时只保留首页）
+   * @param path 当前选项卡的路由路径
+   */
+  const removeAll = (path: string) => {
+    if (path !== BLOG_HOME) {
+      markTabsToRemove(openedTabList.value)
+      currentTab.value = {
+      }
+      openedTabList.value = []
+      router.push(BLOG_HOME)
+    }
+    else {
+      const tabsToRemove = openedTabList.value.filter(tab => tab.path !== BLOG_HOME)
+
+      markTabsToRemove(tabsToRemove)
+      openedTabList.value = openedTabList.value.filter(tab => tab.path === BLOG_HOME)
+      if (openedTabList.value.length === 0) {
+        router.push(BLOG_HOME)
+      }
+    }
+  }
+
+  // 辅助函数
+  /**
+   * 辅助函数：比较两个查询参数是否相等
+   * @param query1 第一个查询参数
+   * @param query2 第二个查询参数
+   * @returns 是否相等
+   */
+  const areQueriesEqual = (query1: any, query2: any): boolean => {
+    return JSON.stringify(query1) === JSON.stringify(query2)
+  }
+
+  /**
+   * 从 keepAlive 排除列表中移除指定组件名称
+   * @param name 路由组件名称
+   */
+  const removeKeepAliveExclude = (name: string) => {
+    keepAliveExclude.value = keepAliveExclude.value.filter(item => item !== name)
+  }
+
+  /**
+   * 打开一个新的标签页或激活已存在的标签页
+   * @param tab - 要打开的路由标签页对象，类型为BlogRouteRecordRaw
+   */
+  const openTab = (tab: BlogType.Tab): void => {
+    console.log('%c Line:236 🥛 tab', 'color:#fca650', tab)
+    removeKeepAliveExclude(tab.name as string)
+
+    // 从keep-alive的排除列表中移除当前标签页名称
+    // 这样该组件可以被缓存
+    const index = openedTabList.value.findIndex(item => item.path === tab.path)
+
+    // 如果不存在相同路径的标签页(-1表示未找到)
+    if (index === -1) {
+      openedTabList.value.push({
+        ...tab,
+      })
+    }
+    else {
+      // 获取已存在的标签页对象
+      const existingTab = openedTabList.value[index]
+
+      if (!areQueriesEqual(existingTab.query, tab.query)) {
+        openedTabList.value[index] = {
+          ...existingTab,
+          query: tab.query,
+          title: tab.title || existingTab.title,
+        }
+      }
+    }
+
+    currentTab.value = openedTabList.value[index === -1 ? openedTabList.value.length - 1 : index]
+  }
+
+  // /**
+  //  * 检查第一个选项卡是否为首页，否则清空所有标签并跳转首页
+  //  */
+  const checkFirstHomePage = () => {
+    if (openedTabList.value.length && openedTabList.value[0].path !== BLOG_HOME) {
+      removeAll(BLOG_HOME)
+    }
+  }
+
+  function init() {
+    checkFirstHomePage()
+  }
+
+  init()
 
   return {
-    title: meta.locale as string || '',
-    name: String(name),
-    fullPath,
-    query,
-    ignoreCache: meta.ignoreCache as boolean,
+    setting,
+    isRefresh,
+
+    menuList,
+    searchHistoryList,
+
+    openedTabList,
+    currentTab,
+    keepAliveExclude,
+
+    openTab,
+    removeTab,
+    removeLeft,
+    removeRight,
+    removeOthers,
+    removeAll,
+
+    // checkFirstHomePage,
+    addKeepAliveExclude,
+    removeKeepAliveExclude,
+    markTabsToRemove,
+
   }
-}
-
-export const useBlogStore = defineStore(
-  'blog',
-  () => {
-    const state = ref({
-
-      /**
-       * 导航栏配置
-       * @property {object} navbar - 配置导航栏的可见性和样式
-       */
-      navbar: {
-        /**
-         * 是否显示导航栏
-         * @type {boolean}
-         * @default true
-         */
-        visible: true,
-
-        /**
-         * 导航栏高度（单位：像素）
-         * @type {number}
-         * @default 60
-         */
-        height: 60,
-      },
-
-      /**
-       * 菜单栏配置
-       * @property {object} menu - 控制侧边菜单的显示、位置和宽度
-       */
-      menu: {
-        /**
-         * 是否显示侧边菜单
-         * @type {boolean}
-         * @default true
-         */
-        visible: true,
-
-        /**
-         * 菜单栏显示位置
-         * @type {'left' | 'right'}
-         * @default 'left'
-         * @description 指定菜单栏的显示位置，可以是 "left" 或 "right"。
-         */
-        position: 'left',
-
-        /**
-         * 菜单栏是否折叠
-         * @type {boolean}
-         * @default false
-         */
-        collapsed: false,
-
-        /**
-         * 菜单栏折叠时的宽度（单位：像素）
-         * @type {number}
-         * @default 48
-         */
-        collapsedWidth: 48,
-
-        /**
-         * 菜单栏展开时的宽度（单位：像素）
-         * @type {number}
-         * @default 260
-         */
-        expandedWidth: 260,
-      },
-
-      /**
-       * 抽屉配置
-       * @property {object} drawer - 控制抽屉的显示
-       */
-      drawer: {
-        /**
-         * 是否显示抽屉
-         * @type {boolean}
-         * @default false
-         */
-        visible: false,
-      },
-
-      /**
-       *  标签栏配置
-       */
-      tabBar: {
-        /**
-         * 是否显示标签栏
-         * @type {boolean}
-         * @default true
-         */
-        visible: true,
-      },
-
-      /**
-       *  面包屑配置
-       *  @property {object} breadcrumb - 控制面包屑的显示
-       */
-      breadcrumb: {
-        /**
-         * 是否显示面包屑
-         * @type {boolean}
-         * @default true
-         */
-        visible: true,
-      },
-
-      /**
-       *  底部栏配置
-       *  @property {object} footer - 控制底部栏的显示
-       */
-      footer: {
-        /**
-         * 是否显示底部栏
-         * @type {boolean}
-         * @default true
-         */
-        visible: true,
-      },
-    })
-
-    // / /////////////////////// 标签栏 //////////////////////////////
-
-    /**
-     * 标签列表 包含当前打开的标签信息。
-     * @default  包含默认路由的标签信息
-     */
-    const tagList = ref<BlogType11.TagProps[]>([config.blog.defaultRoute])
-
-    /**
-     *  缓存标签列表 使用 Set 存储唯一的标签名称
-     *  @default  包含默认路由的标签名称
-     */
-    const cacheTabList = new Set([config.blog.defaultRouteName])
-
-    /**
-     * 获取标签列表
-     */
-    const getTabList = computed(() => tagList.value)
-
-    /**
-     * 获取缓存列表
-     */
-    const getCacheTabList = computed(() => Array.from(cacheTabList))
-
-    /**
-     * 更新标签列表
-     * @param  route - 路由对象
-     */
-    function updateTabList(route: RouteLocationNormalized) {
-      if (BAN_LIST.includes(route.name as string)) {
-        return
-      }
-
-      tagList.value.push(formatTag(route))
-
-      if (!route.meta.ignoreCache) {
-        cacheTabList.add(route.name as string)
-      }
-    }
-
-    /**
-     * 删除标签
-     * @param  idx - 标签索引
-     * @param  tag - 标签属性
-     */
-    function deleteTag(idx: number, tag: BlogType11.TagProps) {
-      tagList.value.splice(idx, 1)
-
-      cacheTabList.delete(tag.name)
-    }
-
-    /**
-     * 添加缓存
-     * @param  name - 标签名称
-     */
-    function addCache(name: string) {
-      if (isString(name) && name !== '') {
-        cacheTabList.add(name)
-      }
-    }
-
-    /**
-     * 删除缓存
-     * @param  tag - 标签属性
-     */
-    function deleteCache(tag: BlogType11.TagProps) {
-      cacheTabList.delete(tag.name)
-    }
-
-    /**
-     * 刷新标签列表
-     * @param  tags - 标签数组
-     */
-    function freshTabList(tags: BlogType11.TagProps[]) {
-      tagList.value = tags
-      cacheTabList.clear()
-
-      // 添加不忽略缓存的标签到缓存列表
-      tagList.value
-        .filter(el => !el.ignoreCache)
-        .map(el => el.name)
-        .forEach(x => cacheTabList.add(x))
-    }
-
-    /**
-     * 关闭全部标签
-     * 重置标签列表
-     */
-    function resetTabList() {
-      tagList.value = [config.blog.defaultRoute]
-      cacheTabList.clear()
-      cacheTabList.add(config.blog.defaultRouteName)
-    }
-
-    return {
-      state,
-      tagList,
-      getTabList,
-      cacheTabList,
-      getCacheTabList,
-      updateTabList,
-      deleteTag,
-      addCache,
-      deleteCache,
-      freshTabList,
-      resetTabList,
-    }
-  },
-  {
-    persist: true,
-  },
-)
+}, {
+  persist: true,
+})

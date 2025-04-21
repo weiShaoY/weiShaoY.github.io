@@ -1,40 +1,56 @@
-const devRoute: RouterType.BlogRouteRecordRaw = {
+import type { AppRouteRecordRaw } from '@/router/types'
+
+import {
+  BLOG_DEFAULT_LAYOUT,
+  BLOG_EXTERNAL_LAYOUT,
+  BLOG_IFRAME_LAYOUT,
+} from '@/layouts'
+
+const Dev: AppRouteRecordRaw = {
   path: 'dev',
   name: 'Dev',
   meta: {
-    title: '开发',
-    order: 2,
+    locale: '开发',
     icon: 'blog-menu-dev',
+    order: 10,
   },
+  redirect: {
+    name: 'Format',
+  },
+  component: BLOG_DEFAULT_LAYOUT,
   children: [
+
     {
       path: 'format',
       name: 'Format',
       meta: {
-        title: '代码格式化',
+        locale: '代码格式化',
         icon: 'blog-menu-format',
         iframeUrl: 'https://highlightjs.org/demo',
       },
+      component: BLOG_IFRAME_LAYOUT,
     },
     {
       path: 'image',
       name: 'Image',
       meta: {
-        title: '代码转图片',
+        locale: '代码转图片',
         icon: 'blog-menu-image',
         externalUrl: 'https://carbon.now.sh/',
       },
+      component: BLOG_EXTERNAL_LAYOUT,
     },
     {
       path: 'npm',
       name: 'Npm',
       meta: {
-        title: 'Npm可视化',
+        locale: 'Npm可视化',
         icon: 'blog-menu-npm',
         iframeUrl: 'https://pkg-graph.info/',
       },
+      component: BLOG_IFRAME_LAYOUT,
     },
   ],
 }
 
-export default devRoute
+export default Dev

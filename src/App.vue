@@ -7,7 +7,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 import { computed } from 'vue'
 
-import { useTestStore } from './store'
+import { useBlogStore } from './store'
 
 defineOptions({
   name: 'App',
@@ -22,11 +22,11 @@ useTitle(isDevelopment ? 'Vue-实现' : '代码改变世界')
 //   'color: orange;background:ivory;font-size:26px;border: 2px solid black;padding:10px;text-shadow:1px 1px grey;border-radius:11px;',
 // )
 
-const testStore = useTestStore()
+const blogStore = useBlogStore()
 
 const watermarkProps = computed<WatermarkProps>(() => {
   return {
-    content: testStore.setting.watermark.isShow ? testStore.setting.watermark.text : '',
+    content: blogStore.setting.watermark.isShow ? blogStore.setting.watermark.text : '',
     cross: true,
     fontSize: 16,
     lineHeight: 16,

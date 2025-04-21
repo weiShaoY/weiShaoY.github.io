@@ -1,12 +1,13 @@
-<!------------------------------------  日历  ------------------------------------------------->
+<!------  2025-04-05---05:04---星期六  ------>
+<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 import type { StateType } from './utils'
-
-import CalendarUtils from './utils'
 
 import Left from './left.vue'
 
 import Right from './right.vue'
+
+import CalendarUtils from './utils'
 
 /**
  *  存储日历的状态，如年份、月份等
@@ -14,28 +15,42 @@ import Right from './right.vue'
 const state = ref<StateType>(CalendarUtils.init())
 
 onMounted(() => {
+  // console.log('%c Line:18 🥓 onMounted', 'color:#ffdd4d', '日历')
   CalendarUtils.render(state.value)
 })
 </script>
 
 <template>
-  <div
-    class="h-full w-full flex items-center justify-center"
+  <ElSpace
+    direction="vertical"
+    fill
+    class="pb-0"
+    :size="16"
   >
-    <div
-      class="h-full w-full flex items-center justify-between bg-white p-3"
+
+    <ElRow
+      :gutter="16"
     >
-      <Left
-        v-model="state"
-      />
+      <ElCol
+        :lg="16"
+        :sm="24"
+        class="mb-[16px]"
+      >
+        <Left
+          v-model="state"
+        />
 
-      <Right
-        v-model="state"
-      />
-    </div>
-  </div>
+      </ElCol>
+
+      <ElCol
+        :lg="8"
+        :sm="24"
+        class="mb-[16px]"
+      >
+        <Right
+          v-model="state"
+        />
+      </ElCol>
+    </ElRow>
+  </ElSpace>
 </template>
-
-<style lang="less" scoped>
-
-</style>

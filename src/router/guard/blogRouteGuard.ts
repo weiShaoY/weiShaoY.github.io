@@ -1,6 +1,6 @@
 import type { RouteLocationNormalized, Router } from 'vue-router'
 
-import { useTestStore } from '@/store'
+import { useBlogStore } from '@/store'
 
 /**
  *  路由-博客模块路径
@@ -8,12 +8,12 @@ import { useTestStore } from '@/store'
 const VITE_ROUTER_BLOG_PATH = import.meta.env.VITE_ROUTER_BLOG_PATH
 
 function handleBlogWorkTabGuard(to: RouteLocationNormalized) {
-  const testStore = useTestStore()
+  const blogStore = useBlogStore()
 
   const { meta, path, name, params, query } = to
 
   if (!meta.isHideTab) {
-    testStore.openTab({
+    blogStore.openTab({
       title: meta.title as string,
       path,
       name: name as string,
