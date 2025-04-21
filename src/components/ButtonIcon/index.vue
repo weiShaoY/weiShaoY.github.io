@@ -127,14 +127,16 @@ const computedIconClass = computed(() => {
             </slot>
           </template>
 
-          <template v-else">
+          <template v-else>
             <SvgIcon
               icon="loading"
+              :size="size - 12"
               class="animate-spin"
             />
           </template>
         </div>
       </ElButton>
+
     </ElTooltip>
   </div>
 </template>

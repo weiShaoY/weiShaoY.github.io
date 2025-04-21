@@ -102,8 +102,8 @@ function toggleFullScreen() {
         :tooltip-content="isFullscreen ? '退出全屏' : '进入全屏'"
         :icon="
           !isFullscreen
-            ? 'blog-topBar-fullscreen'
-            : 'blog-topBar-exit-fullscreen'
+            ? 'blog-header-fullscreen'
+            : 'blog-header-exit-fullscreen'
         "
         :icon-class="[
           'transition-all duration-300',
@@ -119,7 +119,7 @@ function toggleFullScreen() {
       <!-- 刷新按钮 -->
       <ButtonIcon
         tooltip-content="刷新页面"
-        icon="blog-refresh"
+        icon="blog-header-refresh"
         :icon-class="[
           'transition-all duration-750',
           {
