@@ -115,7 +115,7 @@ async function getData() {
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 
@@ -129,7 +129,7 @@ onMounted(async() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <!-- <a-select
         v-model="category"
         :options="categoryOptions"
         class="w-40"
@@ -137,7 +137,22 @@ onMounted(async() => {
         allow-clear
         allow-search
         @change="getData"
-      />
+      /> -->
+
+      <el-select
+        v-model="category"
+        placeholder="请选择"
+        size="large"
+        style="width: 240px"
+        @change="getData"
+      >
+        <el-option
+          v-for="item in categoryOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item"
+        />
+      </el-select>
 
       <a-button
         :loading="isLoading"
@@ -150,8 +165,9 @@ onMounted(async() => {
             icon="blog-refresh"
           />
         </template>
-
       </a-button>
+
+
 
       <a-button
         @click="downloadImage(wallpaperUrl)"

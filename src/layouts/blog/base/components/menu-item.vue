@@ -1,6 +1,11 @@
 <!------  2025-04-21---01:08---星期一  ------>
 <!------------------------------------    ------------------------------------------------->
+
+
+
 <script lang="ts" setup>
+import { twMerge } from 'tailwind-merge';
+
 type Props = {
 
   /**
@@ -8,14 +13,46 @@ type Props = {
    */
   menu: RouterType.BlogRouteRecordRaw
 
+
+    /**
+   *  额外的 CSS 类名
+   */
+   class?:
+    | string
+    | Record<string, boolean>
+    | Array<string | Record<string, boolean>>;
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+
+/**
+ * 基础类名
+ */
+ const BASE_CLASSES = "flex items-center gap-2 text-4";
+
+/**
+ * 计算合并后的类名
+ * 现在支持字符串、对象和数组形式的class
+ */
+ const computedClass = computed(() => {
+  // 处理字符串形式的class
+  if (typeof props.class === 'string') {
+    return twMerge(BASE_CLASSES, props.class);
+  }
+
+  // 处理对象或数组形式的class
+  if (props.class) {
+    return [BASE_CLASSES, props.class];
+  }
+
+  return BASE_CLASSES;
+});
 </script>
 
 <template>
   <div
-    class="flex items-center gap-2"
+    :class="computedClass"
   >
     <SvgIcon
       v-if="menu.meta?.icon"
@@ -27,7 +64,7 @@ defineProps<Props>()
       class="flex items-center gap-2"
     >
       <span
-        class="text-4"
+        class=""
       >
         {{ menu.meta.title }}
       </span>

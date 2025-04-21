@@ -119,15 +119,7 @@ console.log('%c Line:48 🍎 blogStore.setting.menu.leftMenuWidth', 'color:#2eaf
       class="absolute bottom-3 left-0 right-0 flex items-center justify-center hover:cursor-pointer"
       @click="dualMenuShowText = !dualMenuShowText"
     >
-      <div
-        class="h-10 w-10 flex transform items-center justify-center rounded-1 transition-all duration-500 hover:cursor-pointer hover:bg-[#f1f1f4]"
-      >
-        <SvgIcon
-          icon="blog-switch"
-        />
-
-      </div>
-
+      <ButtonIcon icon="blog-switch"/>
     </div>
 
   </div>
