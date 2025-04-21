@@ -76,7 +76,6 @@ declare module 'vue-router/auto-routes' {
     '/老博客/tool/network/http/': RouteRecordInfo<'/老博客/tool/network/http/', '/老博客/tool/network/http', Record<never, never>, Record<never, never>>,
     '/老博客/workbench/': RouteRecordInfo<'/老博客/workbench/', '/老博客/workbench', Record<never, never>, Record<never, never>>,
     '/老博客/workbench/china-map': RouteRecordInfo<'/老博客/workbench/china-map', '/老博客/workbench/china-map', Record<never, never>, Record<never, never>>,
-    '/blog/aaa/': RouteRecordInfo<'/blog/aaa/', '/blog/aaa', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/': RouteRecordInfo<'/blog/creativity/calendar/', '/blog/creativity/calendar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/left': RouteRecordInfo<'/blog/creativity/calendar/left', '/blog/creativity/calendar/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/right': RouteRecordInfo<'/blog/creativity/calendar/right', '/blog/creativity/calendar/right', Record<never, never>, Record<never, never>>,
@@ -110,5 +109,6 @@ declare module 'vue-router/auto-routes' {
     '/home/work/': RouteRecordInfo<'/home/work/', '/home/work', Record<never, never>, Record<never, never>>,
     '/home/work/components/experience/': RouteRecordInfo<'/home/work/components/experience/', '/home/work/components/experience', Record<never, never>, Record<never, never>>,
     '/home/work/components/project/': RouteRecordInfo<'/home/work/components/project/', '/home/work/components/project', Record<never, never>, Record<never, never>>,
+    '/test/': RouteRecordInfo<'/test/', '/test', Record<never, never>, Record<never, never>>,
   }
 }

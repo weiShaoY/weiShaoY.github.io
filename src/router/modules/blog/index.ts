@@ -38,7 +38,7 @@ const modules = Object.fromEntries(
  */
 const formatModulesList = formatModules(modules, []) as any
 
-const withPath = recursiveNormalizeRoutesPath(formatModulesList, '/test')
+const withPath = recursiveNormalizeRoutesPath(formatModulesList, '/blog')
 
 const sorted = recursiveSortRoutesByOrder(withPath)
 

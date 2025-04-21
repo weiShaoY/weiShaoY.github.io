@@ -3,7 +3,6 @@
  * @description 管理多标签页的打开、关闭和导航功能，支持右键菜单操作
  -->
 <script setup lang="ts">
-
 import type { LocationQueryRaw } from 'vue-router'
 
 import type { MenuItemType } from './menu-right.vue'
@@ -17,10 +16,7 @@ import {
   watch,
 } from 'vue'
 
-import {
-  useRoute,
-  useRouter,
-} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import MenuRight from './menu-right.vue'
 
@@ -75,7 +71,9 @@ const activeTabIndex = computed(() =>
  * 获取当前激活标签页的DOM元素
  */
 function getCurTabEl() {
-  return document.getElementById(`scroll-li-${activeTabIndex.value}`) as HTMLElement
+  return document.getElementById(
+    `scroll-li-${activeTabIndex.value}`,
+  ) as HTMLElement
 }
 
 /**
@@ -248,11 +246,15 @@ function listenerScroll() {
 
       const xMin = scrollRef.value.offsetWidth - tabsRef.value.offsetWidth
 
-      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY)
-        ? event.deltaX
-        : event.deltaY
+      const delta
+        = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY
 
-      translateX.value = Math.min(Math.max(translateX.value - delta, xMin), xMax)
+      translateX.value = Math.min(
+        Math.max(translateX.value - delta, xMin),
+        xMax,
+      )
     },
     {
       passive: false,
@@ -304,7 +306,9 @@ function handleTouchEnd() {
  * 右键菜单选项配置
  */
 const menuItems = computed(() => {
-  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
+  const clickedIndex = list.value.findIndex(
+    tab => tab.path === clickedPath.value,
+  )
 
   const isLastTab = clickedIndex === list.value.length - 1
 
@@ -348,15 +352,19 @@ const menuItems = computed(() => {
 function handleSelect(item: MenuItemType) {
   const { key } = item
 
-  const activeIndex = list.value.findIndex(tab => tab.path === activeTab.value)
+  const activeIndex = list.value.findIndex(
+    tab => tab.path === activeTab.value,
+  )
 
-  const clickedIndex = list.value.findIndex(tab => tab.path === clickedPath.value)
+  const clickedIndex = list.value.findIndex(
+    tab => tab.path === clickedPath.value,
+  )
 
   // 处理标签跳转逻辑
   const shouldNavigate
-       = (key === 'left' && activeIndex < clickedIndex)
-         || (key === 'right' && activeIndex > clickedIndex)
-         || key === 'other'
+    = (key === 'left' && activeIndex < clickedIndex)
+      || (key === 'right' && activeIndex > clickedIndex)
+      || key === 'other'
 
   if (shouldNavigate) {
     router.push(clickedPath.value)
@@ -368,7 +376,6 @@ function handleSelect(item: MenuItemType) {
 const topWidth = computed(() => {
   return `calc(100% - ${blogStore.setting.menu.leftMenuWidth + blogStore.setting.menu.rightMenuWidth}px`
 })
-
 </script>
 
 <template>
@@ -425,7 +432,6 @@ const topWidth = computed(() => {
             <div
               class="line"
             />
-
           </li>
         </ul>
       </div>
@@ -477,7 +483,10 @@ const topWidth = computed(() => {
 
               <el-dropdown-item
                 command="other"
-                :disabled="list.length === 1 || (list.length === 2 && activeTabIndex === 1)"
+                :disabled="
+                  list.length === 1
+                    || (list.length === 2 && activeTabIndex === 1)
+                "
               >
                 <SvgIcon
                   class="mr-2"
@@ -513,9 +522,8 @@ const topWidth = computed(() => {
       />
     </div>
   </div>
-
 </template>
 
-   <style lang="scss" scoped>
-   @use './index.scss';
+<style lang="scss" scoped>
+@use './index.scss';
 </style>

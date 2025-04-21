@@ -6,7 +6,7 @@
   <div
     class="flex items-center justify-center bg-blue"
   >
-    222
+    test
   </div>
 </template>
 

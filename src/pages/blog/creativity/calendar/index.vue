@@ -15,7 +15,6 @@ import CalendarUtils from './utils'
 const state = ref<StateType>(CalendarUtils.init())
 
 onMounted(() => {
-  // console.log('%c Line:18 🥓 onMounted', 'color:#ffdd4d', '日历')
   CalendarUtils.render(state.value)
 })
 </script>
