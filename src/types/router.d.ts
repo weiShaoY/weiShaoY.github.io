@@ -6,6 +6,8 @@ declare namespace RouterType {
 
   import type { RouteRecordRedirectOption } from 'vue-router'
 
+  import type { LocationQueryRaw } from 'vue-router'
+
   /** 路由类型 */
   type RouteRecordRaw = {
 
@@ -88,9 +90,9 @@ declare namespace RouterType {
       /** 若设置，路由将在标签页中固定显示，其值表示固定标签页的顺序（首页是特殊的，它将自动保持fixed） */
       fixedTabIndex?: number
 
-      /** 路由查询参数，如果设置的话，点击菜单进入该路由时会自动携带的query参数 */
-      query?: { key: string, value: string }[] | null
     }
 
+    /** 路由查询参数，如果设置的话，点击菜单进入该路由时会自动携带的query参数 */
+    query?: LocationQueryRaw
   }
 }

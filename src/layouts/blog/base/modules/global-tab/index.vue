@@ -18,6 +18,8 @@ import {
 
 import { useRoute, useRouter } from 'vue-router'
 
+import MenuItem from '../../components/menu-item.vue'
+
 import MenuRight from './menu-right.vue'
 
 const blogStore = useBlogStore()
@@ -54,6 +56,8 @@ let currentX = 0 // 当前触摸X坐标
  * 计算属性
  */
 const list = computed(() => blogStore.openedTabList) // 已打开的标签页列表
+
+console.log('%c Line:59 🍪 list', 'color:#3f7cff', list)
 
 /**
  *  当前激活的标签路径
@@ -150,7 +154,8 @@ watch(
 /**
  * 点击标签页导航
  */
-function clickTab(item: BlogType.Tab) {
+function clickTab(item: RouterType.BlogRouteRecordRaw) {
+  console.log('%c Line:156 🍺 item', 'color:#ed9ec7', item)
   router.push({
     path: item.path,
     query: item.query as LocationQueryRaw,
@@ -412,18 +417,34 @@ const topWidth = computed(() => {
             @click="clickTab(item)"
             @contextmenu.prevent="(e: MouseEvent) => showMenu(e, item.path)"
           >
-            <div
+            <!-- <div
               class="flex items-center"
             >
               <span
                 class="mr-2"
               >
-                {{ item.title }}
+                {{ item.meta.title }}
               </span>
 
               <SvgIcon
                 v-if="index !== 0"
                 :size="10"
+                icon="close"
+                @click.stop="closeWorkTab('current', item.path)"
+              />
+            </div> -->
+
+            <div
+              class="flex items-center gap-3"
+            >
+              <MenuItem
+                :menu="item"
+              />
+
+              <!-- 关闭 -->
+              <SvgIcon
+                v-if="index !== 0"
+                :size="12"
                 icon="close"
                 @click.stop="closeWorkTab('current', item.path)"
               />

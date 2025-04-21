@@ -13,14 +13,21 @@ function handleBlogWorkTabGuard(to: RouteLocationNormalized) {
   const { meta, path, name, params, query } = to
 
   if (!meta.isHideTab) {
+    // blogStore.openTab({
+    //   title: meta.title as string,
+    //   path,
+    //   name: name as string,
+    //   keepAlive: meta.keepAlive as boolean,
+    //   params,
+    //   query,
+    // })
     blogStore.openTab({
-      title: meta.title as string,
+      meta,
       path,
-      name: name as string,
-      keepAlive: meta.keepAlive as boolean,
+      name,
       params,
       query,
-    })
+    } as any)
   }
 }
 
