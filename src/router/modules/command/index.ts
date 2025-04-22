@@ -6,10 +6,27 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/command',
     name: 'Command',
-    component: () => import('@/pages/command/index.vue'),
     meta: {
       title: '指挥台',
     },
+    children: [
+      {
+        path: 'command-login',
+        name: 'CommandLogin',
+        component: () => import('@/pages/command/login/index.vue'),
+        meta: {
+          title: '登录',
+        },
+      },
+      {
+        path: 'command-largeScreen',
+        name: 'CommandLargeScreen',
+        component: () => import('@/pages/command/largeScreen/index.vue'),
+        meta: {
+          title: '登录',
+        },
+      },
+    ],
   },
 ]
 
