@@ -52,6 +52,7 @@
     "three-custom-shader-material": "^6.3.5",
     "three-globe": "^2.42.1",
     "three-stdlib": "^2.35.14",
+    "typeit": "^8.8.7",
     "unocss-preset-scrollbar-hide": "^1.0.1",
     "vue": "^3.5.0",
     "vue-echarts": "^7.0.3",

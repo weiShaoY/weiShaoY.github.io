@@ -7,6 +7,12 @@
     class="flex items-center justify-center bg-blue"
   >
     test
+
+    <div>
+      <TypeIt
+        :values="['hello', 'world']"
+      />
+    </div>
   </div>
 </template>
 
