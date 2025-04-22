@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<GithubPropsType>(), {
 })
 
 function handleClick() {
-  openUrlInWindow('https://github.com/weiShaoY')
+  openUrlInWindow(import.meta.env.VITE_GITHUB_URL)
 }
 </script>
 

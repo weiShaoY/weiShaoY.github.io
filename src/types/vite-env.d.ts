@@ -45,6 +45,11 @@ declare namespace Env {
     readonly VITE_APP_FONT_FAMILY: string
 
     /**
+     *  Github仓库地址
+     */
+    readonly VITE_GITHUB_URL: string
+
+    /**
      * 路由-模式
      */
     readonly VITE_ROUTER_MODE: 'hash' | 'history'

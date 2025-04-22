@@ -27,7 +27,6 @@ import Header from './components/header/index.vue'
         <Loading />
       </template>
     </Suspense>
-
   </div>
 </template>
 

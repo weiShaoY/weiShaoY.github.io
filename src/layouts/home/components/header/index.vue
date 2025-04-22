@@ -1,4 +1,5 @@
-<script lang="ts" setup>
+<script setup lang="ts">
+import { openUrlInWindow } from '@/utils'
 
 import MobileMenu from './components/mobile-menu.vue'
 
@@ -65,7 +66,7 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
         />
 
         <!-- 仅开发环境显示  -->
-        <a-link
+        <!-- <a-link
           v-if="isDevelopment"
           href="https://weishaoy.github.io/"
           target="_blank"
@@ -74,7 +75,14 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
             :size="32"
             icon="home-navbar-demo"
           />
-        </a-link>
+        </a-link> -->
+        <ButtonIcon
+          v-if="isDevelopment"
+          tooltip-content="打开线上地址,此按钮仅开发环境显示"
+          icon="home-navbar-demo"
+          :size="34"
+          @click="openUrlInWindow('https://weishaoy.github.io/')"
+        />
       </div>
     </div>
   </nav>

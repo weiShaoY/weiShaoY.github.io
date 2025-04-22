@@ -1,19 +1,21 @@
-<script setup>
+<script setup lang="ts">
 
 import { ref } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
-defineProps({
+type PropsType = {
+
   /**
    *  菜单列表
    */
   menuList: {
-    type: Array,
-    required: true,
-    default: () => [],
-  },
-})
+    key: string
+    label: string
+  }[]
+}
+
+defineProps<PropsType>()
 
 // 路由导航
 const router = useRouter()
@@ -44,7 +46,7 @@ function closeMenu() {
  * 选择菜单项
  * @param {string} key - 路由路径
  */
-function handleSelect(key) {
+function handleSelect(key: string) {
   closeMenu()
 
   // 延迟跳转，确保动画完成
