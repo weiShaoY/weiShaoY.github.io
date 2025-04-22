@@ -16,6 +16,11 @@ declare namespace Env {
   /** import.meta 接口 */
   type ImportMeta = {
 
+    /**
+     *  当前环境
+     */
+    readonly VITE_APP_NODE_ENV: 'development' | 'production'
+
     /** 应用程序的基本 URL */
     readonly VITE_BASE_URL: string
 

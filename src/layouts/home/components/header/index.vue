@@ -35,7 +35,7 @@ const menuList = [
   },
 ]
 
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
+const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
 </script>
 
 <template>

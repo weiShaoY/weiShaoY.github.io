@@ -7,10 +7,6 @@ const homeRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Home',
-
-    // redirect: {
-    //   name: 'About',
-    // },
     component: HOME_DEFAULT_LAYOUT,
     children: [
       {

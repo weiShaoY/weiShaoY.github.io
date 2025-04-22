@@ -1,5 +1,7 @@
 import type { Router } from 'vue-router'
 
+import { useTitle } from '@vueuse/core'
+
 /**
  * 创建文档标题守卫
  *
@@ -12,14 +14,18 @@ export function documentTitleGuard(router: Router) {
      */
 
     if (to.meta.documentTitle) {
-    // 设置文档标题
       useTitle(to.meta.documentTitle as string)
     }
-    else {
+    else if (to.meta.title) {
       const documentTitle = `${to.meta.title} - ${import.meta.env.VITE_APP_TITLE}`
 
-      // 设置文档标题
       useTitle(documentTitle)
+    }
+    else if (import.meta.env.VITE_APP_NODE_ENV === 'development') {
+      useTitle('Vue-实现')
+    }
+    else {
+      useTitle(import.meta.env.VITE_APP_DESC)
     }
   })
 }

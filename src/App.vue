@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import type { WatermarkProps } from 'element-plus'
 
-import { useTitle } from '@vueuse/core'
-
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 import { computed } from 'vue'
@@ -12,10 +10,6 @@ import { useBlogStore } from './store'
 defineOptions({
   name: 'App',
 })
-
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV
-
-useTitle(isDevelopment ? 'Vue-实现' : '代码改变世界')
 
 // console.info(
 //   '%cNiceToMeetYou,我是weiShaoY',
