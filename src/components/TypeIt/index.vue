@@ -14,7 +14,6 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<Props>(), {
-  values: () => [],
   class: '',
   speed: 100,
   cursor: false,
@@ -23,30 +22,30 @@ const props = withDefaults(defineProps<Props>(), {
 
 type Props = {
 
-  /*
+  /**
    * 打印内容数组
    */
-  values: string[]
+  stringList: string[]
 
   /**
-   *  额外的 CSS 类名
+   * 额外的 CSS 类名
    */
   class?:
     | string
     | Record<string, boolean>
     | Array<string | Record<string, boolean>>
 
-  /*
+  /**
    * 打字速度（ms）
    */
   speed?: number
 
-  /*
+  /**
    * 是否显示光标
    */
   cursor?: boolean
 
-  /*
+  /**
    * 是否循环
    */
   loop?: boolean
@@ -83,7 +82,7 @@ function init() {
   }
 
   const options: Options = {
-    strings: props.values,
+    strings: props.stringList,
     speed: props.speed,
     cursor: props.cursor,
     loop: props.loop,

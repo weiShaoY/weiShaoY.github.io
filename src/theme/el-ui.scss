@@ -104,12 +104,12 @@
     left: 12px !important;
   }
 
-  .el-picker-panel *[slot='sidebar'],
+  .el-picker-panel *[slot="sidebar"],
   .el-picker-panel__sidebar {
     display: none;
   }
 
-  .el-picker-panel *[slot='sidebar'] + .el-picker-panel__body,
+  .el-picker-panel *[slot="sidebar"] + .el-picker-panel__body,
   .el-picker-panel__sidebar + .el-picker-panel__body {
     margin-left: 0;
   }
@@ -302,4 +302,11 @@
 .el-button > span {
   position: relative;
   z-index: 10;
+}
+
+//  loading
+.el-loading-spinner {
+  .el-loading-text {
+    color: #fc2f70;
+  }
 }

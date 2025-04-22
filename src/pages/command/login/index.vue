@@ -161,7 +161,9 @@ async function handleSubmit() {
             />
           </el-form-item>
 
-          <el-form-item>
+          <el-form-item
+            class="!m-0"
+          >
             <el-button
               class="mx-auto mt-6 w-40"
               type="primary"

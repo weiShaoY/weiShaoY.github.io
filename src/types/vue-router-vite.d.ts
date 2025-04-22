@@ -83,7 +83,6 @@ declare module 'vue-router/auto-routes' {
     '/blog/creativity/clock/components/left': RouteRecordInfo<'/blog/creativity/clock/components/left', '/blog/creativity/clock/components/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/clock/components/right': RouteRecordInfo<'/blog/creativity/clock/components/right', '/blog/creativity/clock/components/right', Record<never, never>, Record<never, never>>,
     '/blog/creativity/muYu/': RouteRecordInfo<'/blog/creativity/muYu/', '/blog/creativity/muYu', Record<never, never>, Record<never, never>>,
-    '/blog/home/': RouteRecordInfo<'/blog/home/', '/blog/home', Record<never, never>, Record<never, never>>,
     '/blog/media/music/': RouteRecordInfo<'/blog/media/music/', '/blog/media/music', Record<never, never>, Record<never, never>>,
     '/blog/media/video/': RouteRecordInfo<'/blog/media/video/', '/blog/media/video', Record<never, never>, Record<never, never>>,
     '/blog/media/voice/': RouteRecordInfo<'/blog/media/voice/', '/blog/media/voice', Record<never, never>, Record<never, never>>,

@@ -10,7 +10,7 @@
 
     <div>
       <TypeIt
-        :values="['hello', 'world']"
+        :string-list="['hello', 'world']"
       />
     </div>
   </div>

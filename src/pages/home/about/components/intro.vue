@@ -48,7 +48,7 @@
 
       <TypeIt
         class="xs:text-[18px] mt-2 select-none text-[16px] text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[22px] lg:leading-[40px]"
-        :values="['一个热爱编程的前端开发', '热爱计算机科学和IT互联网事业', '热爱编程、软路由、硬件、Diy等']"
+        :string-list="['一个热爱编程的前端开发', '热爱计算机科学和IT互联网事业', '热爱编程、软路由、硬件、Diy等']"
       />
     </div>
   </div>
