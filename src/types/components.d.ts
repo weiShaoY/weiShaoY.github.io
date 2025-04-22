@@ -62,6 +62,7 @@ declare module 'vue' {
     'Index copy': typeof import('./../components/ButtonIcon/index copy.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     Logo: typeof import('./../components/Logo/index.vue')['default']
+    MousePosition: typeof import('./../components/MousePosition/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']
     PreviewImg: typeof import('./../components/PreviewImg/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
