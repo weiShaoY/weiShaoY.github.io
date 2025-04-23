@@ -1,0 +1,63 @@
+<!------  2025-04-24---03:58---星期四  ------>
+<!------------------------------------    ------------------------------------------------->
+<script lang="ts" setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const searchVal = ref("");
+
+function search() {
+  if (searchVal.value) {
+    console.log(searchVal.value);
+    router.push({
+      name: "CommandIdentity",
+      query: {
+        search: searchVal.value,
+      },
+    });
+  }
+}
+</script>
+
+<template>
+  <div
+    class="h-full min-h-screen w-full flex items-center justify-center bg-[#103289]"
+  >
+    <el-input
+      v-model.trim="searchVal"
+      placeholder="请输入搜索内容"
+      clearable
+      size="large"
+      class="!w-100"
+      @keydown.enter.prevent="search"
+    >
+      <template #append>
+        <SvgIcon
+          class="cursor-pointer"
+          icon="search"
+          :size="24"
+          @click="search"
+        />
+      </template>
+    </el-input>
+
+    <div
+      class="fixed bottom-8 left-0 right-0 flex flex-col items-center justify-center gap-3 text-white"
+    >
+      <div class="flex items-center justify-center gap-5 text-6">
+        <span> 对党忠诚 </span>
+
+        <span> 服务人民 </span>
+
+        <span> 执法公正 </span>
+
+        <span> 纪律严明 </span>
+      </div>
+
+      <div class="">青安市公安局 (2016) 版权所有</div>
+    </div>
+  </div>
+</template>
+
+<style lang="less" scoped></style>

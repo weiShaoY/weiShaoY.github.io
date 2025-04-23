@@ -23,7 +23,7 @@ const menuList = [
     label: 'Blog',
   },
   {
-    key: '/command',
+    key: '/command-login',
     label: 'Command',
   },
   {
