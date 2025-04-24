@@ -41,9 +41,7 @@ const watermarkProps = computed<WatermarkProps>(() => {
         class="h-full"
         v-bind="watermarkProps"
       >
-        <RouterView
-          class="bg-layout"
-        />
+        <RouterView />
       </ElWatermark>
     </AppProvider>
   </ElConfigProvider>

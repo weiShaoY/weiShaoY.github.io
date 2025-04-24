@@ -15,19 +15,19 @@ const titleInfo = ref({
     {
       id: 1,
       name: '身 份 查 询',
-      url: 'CommandIdentity',
+      routeName: 'CommandIdentity',
       children: [],
     },
     {
       id: 2,
       name: '监 控 系 统',
-      url: 'evaluste',
+      routeName: 'evaluste',
       children: [],
     },
     {
       id: 3,
       name: '档 案 系 统',
-      url: 'spaceControl',
+      routeName: 'spaceControl',
       children: [],
     },
   ],
@@ -36,17 +36,17 @@ const titleInfo = ref({
     {
       id: 3,
       name: '统 计 分 析',
-      url: 'analyze', // analyze
+      routeName: 'analyze',
     },
     {
       id: 4,
       name: '空 间 管 控',
-      url: 'spaceControl',
+      routeName: 'spaceControl',
     },
     {
       id: 4,
       name: '退出登录',
-      url: 'CommandLogin',
+      routeName: 'CommandLogin',
     },
   ],
 })
@@ -54,7 +54,6 @@ const titleInfo = ref({
 const isShowLight = ref('home')
 
 watch(() => route.name, () => {
-  console.log('%c Line:57 🍤 route', 'color:#e41a6a', route)
   isShowLight.value = route.name as string
 }, {
   deep: true,
@@ -62,9 +61,15 @@ watch(() => route.name, () => {
 })
 
 function jumpPage(item: any) {
-  isShowLight.value = item.url
+  isShowLight.value = item.routeName
+  if (item.routeName === 'CommandIdentity') {
+    router.push({
+      name: 'CommandIdentitySearch',
+    })
+  }
+
   router.push({
-    name: item.url,
+    name: item.routeName,
   })
 }
 </script>
@@ -82,11 +87,10 @@ function jumpPage(item: any) {
     >
       <div
         v-for="(item, index) in titleInfo.leftTitle"
-        :id="isShowLight === item.url ? 'menu-click' : ''"
         :key="index"
         class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
         :style="{
-          backgroundImage: `url(${isShowLight === item.url ? buttonActiveBgImage : buttonBgImage})`,
+          backgroundImage: `url(${isShowLight.includes(item.routeName) ? buttonActiveBgImage : buttonBgImage})`,
         }"
         @click="jumpPage(item)"
       >
@@ -143,11 +147,11 @@ function jumpPage(item: any) {
     >
       <div
         v-for="(item, index) in titleInfo.rightTitle"
-        :id="isShowLight === item.url ? 'menu-click' : ''"
+        :id="isShowLight === item.routeName ? 'menu-click' : ''"
         :key="index"
         class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
         :style="{
-          backgroundImage: `url(${isShowLight === item.url ? buttonActiveBgImage : buttonBgImage})`,
+          backgroundImage: `url(${isShowLight === item.routeName ? buttonActiveBgImage : buttonBgImage})`,
         }"
         @click="jumpPage(item)"
       >

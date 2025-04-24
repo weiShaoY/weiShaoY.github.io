@@ -13,14 +13,6 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
     },
   },
   {
-    path: 'command-search',
-    name: 'CommandSearch',
-    component: () => import('@/pages/command/search/index.vue'),
-    meta: {
-      title: '搜索',
-    },
-  },
-  {
     path: '/command',
     name: 'Command',
     meta: {
@@ -28,14 +20,38 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
     },
     component: COMMAND_LAYOUT,
     children: [
-
       {
         path: 'command-identity',
         name: 'CommandIdentity',
-        component: () => import('@/pages/command/identity/index.vue'),
         meta: {
           title: '身份查询',
         },
+        children: [
+          {
+            path: 'command-identity-search',
+            name: 'CommandIdentitySearch',
+            component: () => import('@/pages/command/identity/search/index.vue'),
+            meta: {
+              title: '身份查询-搜索',
+            },
+          },
+          {
+            path: 'command-identity-result',
+            name: 'CommandIdentityResult',
+            component: () => import('@/pages/command/identity/result/index.vue'),
+            meta: {
+              title: '身份查询-详情',
+            },
+          },
+          {
+            path: 'command-identity-detail',
+            name: 'CommandIdentityDetail',
+            component: () => import('@/pages/command/identity/detail/index.vue'),
+            meta: {
+              title: '身份查询-详情',
+            },
+          },
+        ],
       },
     ],
   },

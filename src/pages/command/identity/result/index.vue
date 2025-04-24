@@ -1,5 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+const router = useRouter()
+
 const tableData = [
   {
     id: 1,
@@ -11,43 +13,82 @@ const tableData = [
   },
   {
     id: 3,
-    describe: '198年1.19腾飞金融集团债权债务纠纷案件',
+    describe: '1998年1.19腾飞金融集团债权债务纠纷案件',
   },
   {
     id: 4,
-    describe: '1998年5.28非法经营案件查看详情',
+    describe: '1999年5.28非法经营案件查看详情',
   },
   {
     id: 5,
     describe: '2000年10.4昌平路聚众闹事案件',
   },
   {
-    id: 5,
-    describe: '2000年10.4昌平路聚众闹事案件',
+    id: 6,
+    describe: '2001年10.4昌平路聚众闹事案件',
   },
   {
-    id: 5,
-    describe: '2000年10.4昌平路聚众闹事案件',
+    id: 7,
+    describe: '2002年10.4昌平路聚众闹事案件',
   },
   {
-    id: 5,
-    describe: '2000年10.4昌平路聚众闹事案件',
+    id: 8,
+    describe: '2003年10.4昌平路聚众闹事案件',
   },
   {
-    id: 5,
-    describe: '2000年10.4昌平路聚众闹事案件',
+    id: 8,
+    describe: '2004年10.4昌平路聚众闹事案件',
   },
   {
-    id: 5,
-    describe: '2000年10.4昌平路聚众闹事案件',
+    id: 9,
+    describe: '2005年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 10,
+    describe: '2006年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 11,
+    describe: '2007年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 12,
+    describe: '2008年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 13,
+    describe: '2009年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 14,
+    describe: '2010年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 15,
+    describe: '2011年10.4昌平路聚众闹事案件',
+  },
+  {
+    id: 16,
+    describe: '2012年10.4昌平路聚众闹事案件',
   },
 ]
+
+function handleClick(item: any) {
+  console.log('%c Line:75 🌭 item', 'color:#e41a6a', item)
+
+  router.push({
+    name: 'CommandIdentityDetail',
+    query: {
+      id: item.id,
+    },
+  })
+}
 </script>
 
 <template>
 
   <div
-    class="h-full flex-col"
+    class="h-full flex-col rounded-3 bg-white p-10"
   >
     <el-descriptions
       border
@@ -129,14 +170,14 @@ const tableData = [
     </div>
 
     <div
-      class="flex-col flex-1 justify-around"
+      class="flex-col flex-1 justify-between overflow-hidden"
     >
       <el-table
         :data="tableData"
         :show-header="false"
         style="width: 100%"
-        max-height="65%"
-        height="65%"
+        height="90%"
+        scrollbar-always-on
       >
         <el-table-column
           prop="describe"
@@ -148,11 +189,17 @@ const tableData = [
           fixed="right"
           :width="120"
         >
-          <el-button
-            type="primary"
+
+          <template
+            #default="{ row }"
           >
-            查看详情
-          </el-button>
+            <el-button
+              type="primary"
+              @click="handleClick(row)"
+            >
+              查看详情
+            </el-button>
+          </template>
 
         </el-table-column>
       </el-table>

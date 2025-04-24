@@ -27,11 +27,10 @@ import GlobalHeader from './modules/global-header/index.vue'
       class="h-[calc(100%-80px)] w-full p-10"
     >
       <div
-        class="h-full rounded-3 bg-white p-10"
+        class="h-full"
       >
         <RouterView />
       </div>
-
     </div>
   </div>
 </template>
