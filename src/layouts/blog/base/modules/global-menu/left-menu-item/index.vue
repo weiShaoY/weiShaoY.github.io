@@ -45,7 +45,6 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
   return findTopRouteByPath(route.path, menuList)
 })
 
-console.log('%c Line:48 🍎 blogStore.setting.menu.leftMenuWidth', 'color:#2eafb0', blogStore.setting.menu.leftMenuWidth)
 </script>
 
 <template>

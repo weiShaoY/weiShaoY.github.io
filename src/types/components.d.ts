@@ -15,6 +15,7 @@ declare module 'vue' {
     Chart: typeof import('./../components/Chart/index.vue')['default']
     copy: typeof import('./../components/ButtonIcon/index copy.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -81,5 +82,8 @@ declare module 'vue' {
     TypeIt: typeof import('./../components/TypeIt/index.vue')['default']
     VideoPlayer: typeof import('./../components/VideoPlayer/index.vue')['default']
     VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

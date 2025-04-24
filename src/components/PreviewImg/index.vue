@@ -16,7 +16,7 @@ type MyComponentProps = {
   /**
    *   是否显示加载中
    */
-  isLoading?: boolean
+  loading?: boolean
 
   /**
    *   style 样式
@@ -52,6 +52,11 @@ type MyComponentProps = {
    * 额外的 CSS 类名
    */
   class?: string
+
+  /**
+   *  图标大小 (loading图标 和 加载错误图标)
+   */
+  iconSize?: number
 }
 
 const props = withDefaults(defineProps<MyComponentProps>(), {
@@ -60,49 +65,95 @@ const props = withDefaults(defineProps<MyComponentProps>(), {
   width: '100%',
   height: '100%',
   avatar: false,
-  size: 30,
+  size: 40,
+  iconSize: 40,
 })
 
-/** 计算最终的样式 */
-const computedStyle = computed<CSSProperties>(() => ({
+/**
+ *  计算头像的类名
+ */
+const computedAvatarClass = computed(() => {
+  if (typeof props.class === 'string') {
+    return props.class
+  }
+
+  return props.class
+})
+
+/**
+ *  计算图片的类名
+ */
+const computedImageClass = computed(() => {
+  if (typeof props.class === 'string') {
+    return props.class
+  }
+
+  return props.class
+})
+
+/** 计算图片的样式 */
+const computedImageStyle = computed<CSSProperties>(() => ({
   ...props.style,
   height: props.height,
   width: props.width,
 }))
 
-const computedClass = computed(() => `${props.class} cursor-pointer`)
 </script>
 
 <template>
-  <a-spin
-    :loading="isLoading"
-    class="h-full w-full"
+  <div
+    class="h-full w-full flex items-center justify-center"
   >
-    <a-avatar
+    <el-avatar
       v-if="avatar"
-      :image-url="src"
       :size="size"
-      :class="computedClass"
-      :style="computedStyle"
-    />
-
-    <a-image
-      v-else
       :src="src"
-      class="border-radius h-full w-full flex items-center justify-center"
+      :class="`cursor-pointer ${computedAvatarClass}`"
+    >
+      <img
+        src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
+      >
+    </el-avatar>
+
+    <el-image
+      v-else
+      :class="`${computedImageClass}`"
+      :style="computedImageStyle"
+      :src="src"
+      :zoom-rate="1.2"
+      :max-scale="7"
+      :min-scale="0.2"
+      show-progress
+      hide-on-click-modal
+      lazy
       fit="contain"
-      show-loader
-      :height="height"
-      :width="width"
-      :preview="preview"
-      :class="computedClass"
-      :style="computedStyle"
-    />
-  </a-spin>
+      :initial-index="0"
+      :preview-src-list="preview ? [src] : []"
+    >
+      <template
+        #placeholder
+      >
+        <Loading
+          :size="iconSize"
+        />
+      </template>
+
+      <template
+        #error
+      >
+        <div
+          class="h-full w-full !flex-col !items-center !justify-center"
+        >
+          <SvgIcon
+            icon="image-error"
+            :size="iconSize"
+          />
+
+          <span>图片加载失败!</span>
+        </div>
+      </template>
+    </el-image>
+  </div>
 </template>
 
-<style lang="less" scoped>
-// .border-radius :deep(.arco-image-img) {
-//   border-radius: 10%;
-// }
-</style>
+<style lang="scss" scoped></style>

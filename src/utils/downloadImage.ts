@@ -1,50 +1,53 @@
-import { Notification } from '@arco-design/web-vue'
-
 /**
  * 使用 `<a>` 标签下载文件，并动态设置文件名和扩展名
  * @param url - 文件的 URL
  * @param [defaultName] - 默认文件名（无文件名时使用）
  */
 export function downloadImage(url: string, defaultName = 'downloaded_file') {
-  try {
-    // 从 URL 中解析文件名
-    const urlParts = url.split('/')
+  console.log('%c Line:9 🍕 url', 'color:#6ec1c2', url)
 
-    const fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName
+  // try {
+  //   // 从 URL 中解析文件名
+  const urlParts = url.split('/')
 
-    // 确保文件名具有有效扩展名
-    const validExtensions = ['.png', '.jpg', '.jpeg']
+  const fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName
 
-    const lowerCaseName = fileNameWithExtension.toLowerCase()
+  // 确保文件名具有有效扩展名
+  const validExtensions = ['.png', '.jpg', '.jpeg']
 
-    const hasValidExtension = validExtensions.some(ext =>
-      lowerCaseName.endsWith(ext),
-    )
+  const lowerCaseName = fileNameWithExtension.toLowerCase()
 
-    // 如果没有有效扩展名，添加默认扩展名 .jpg
-    const fileName = hasValidExtension
-      ? fileNameWithExtension
-      : `${fileNameWithExtension}.jpg`
+  const hasValidExtension = validExtensions.some(ext =>
+    lowerCaseName.endsWith(ext),
+  )
 
-    // 创建 a 标签并触发下载
-    const link = document.createElement('a')
+  // 如果没有有效扩展名，添加默认扩展名 .jpg
+  const filename = hasValidExtension
+    ? fileNameWithExtension
+    : `${fileNameWithExtension}.jpg`
 
-    console.log('%c Line:31 🥤 link', 'color:#2eafb0', link)
+  fetch(url)
+    .then(response => response.blob())
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(new Blob([blob]))
 
-    link.href = url
-    link.target = '_blank'
-    link.download = fileName // 动态设置文件名
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+      const link = document.createElement('a')
 
-    // 成功提示
-    Notification.success(`文件下载成功: ${fileName}`)
-  }
-  catch (err) {
-    console.error(err)
-
-    // 失败提示
-    Notification.error(`文件下载失败: ${url}`)
-  }
+      link.href = blobUrl
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      URL.revokeObjectURL(blobUrl)
+      link.remove()
+      window.$notification?.success({
+        title: '图片下载成功',
+        message: `下载文件为: ${filename}`,
+      })
+    })
+    .catch((err) => {
+      window.$notification?.error({
+        title: '文件下载失败',
+        message: `下载文件失败： ${err}`,
+      })
+    })
 }

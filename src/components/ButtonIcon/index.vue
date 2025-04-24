@@ -68,7 +68,7 @@ type Props = {
 const DEFAULT_CLASS = 'flex items-center justify-center'
 
 /**
- * 计算合并后的类名
+ * 计算合并后按钮的类名
  * 现在支持字符串、对象和数组形式的class
  */
 const computedButtonClass = computed(() => {
@@ -92,13 +92,18 @@ const dynamicButtonClass = computed(() => {
   }
 })
 
+/**
+ *  计算最终的样式
+ */
 const computedStyle = computed(() => ({
   width: `${props.size}px`,
   height: `${props.size}px`,
   ...props.style,
 }))
 
-// 处理图标的类名
+/**
+ *  计算图标的类名
+ */
 const computedIconClass = computed(() => {
   if (typeof props.iconClass === 'string') {
     return props.iconClass

@@ -1,126 +1,132 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { BlogApi } from "@/api";
+import { BlogApi } from '@/api'
 
-import { downloadImage } from "@/utils";
+import { downloadImage } from '@/utils'
 
-import { Notification } from "@arco-design/web-vue";
+import { Notification } from '@arco-design/web-vue'
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 /**
  *  分类
  */
-const category = ref("sg");
+const category = ref('sg')
 
 /**
  *  分类选项
  */
 const categoryOptions = [
   {
-    value: "fj",
-    label: "风景",
+    value: 'fj',
+    label: '风景',
   },
   {
-    value: "yx",
-    label: "游戏",
+    value: 'yx',
+    label: '游戏',
   },
   {
-    value: "mn",
-    label: "美女",
+    value: 'mn',
+    label: '美女',
   },
   {
-    value: "cy",
-    label: "视觉创意",
+    value: 'cy',
+    label: '视觉创意',
   },
   {
-    value: "mxys",
-    label: "明星影视",
+    value: 'mxys',
+    label: '明星影视',
   },
   {
-    value: "qc",
-    label: "汽车",
+    value: 'qc',
+    label: '汽车',
   },
   {
-    value: "dw",
-    label: "动物",
+    value: 'dw',
+    label: '动物',
   },
   {
-    value: "xqs",
-    label: "小清新",
+    value: 'xqs',
+    label: '小清新',
   },
   {
-    value: "ty",
-    label: "体育",
+    value: 'ty',
+    label: '体育',
   },
   {
-    value: "js",
-    label: "军事",
+    value: 'js',
+    label: '军事',
   },
   {
-    value: "dm",
-    label: "动漫",
+    value: 'dm',
+    label: '动漫',
   },
   {
-    value: "qg",
-    label: "情感",
+    value: 'qg',
+    label: '情感',
   },
   {
-    value: "wz",
-    label: "文字",
+    value: 'wz',
+    label: '文字',
   },
   {
-    value: "tui",
-    label: "腿",
+    value: 'tui',
+    label: '腿',
   },
   {
-    value: "sg",
-    label: "帅哥",
+    value: 'sg',
+    label: '帅哥',
   },
-];
+]
 
 /**
  *  关键字
  */
-const wallpaperUrl = ref("");
+const wallpaperUrl = ref('')
 
 /**
  * 获取壁纸数据
  */
 async function getData() {
   try {
-    isLoading.value = true;
+    isLoading.value = true
 
-    if (category.value === "tui") {
-      const response = await BlogApi.getTuiImage();
+    if (category.value === 'tui') {
+      const response = await BlogApi.getTuiImage()
 
-      wallpaperUrl.value = response.text;
-    } else if (category.value === "sg") {
-      const response = await BlogApi.getRandomManImage();
-
-      wallpaperUrl.value = response.img;
-    } else {
-      const response = await BlogApi.getWallpaper(category.value);
-
-      wallpaperUrl.value = response.img_url;
+      wallpaperUrl.value = response.text
     }
-  } catch (error: any) {
-    Notification.error(error.message || "获取数据失败，请稍后重试");
-  } finally {
-    isLoading.value = false;
+    else if (category.value === 'sg') {
+      const response = await BlogApi.getRandomManImage()
+
+      wallpaperUrl.value = response.img
+    }
+    else {
+      const response = await BlogApi.getWallpaper(category.value)
+
+      wallpaperUrl.value = response.img_url
+    }
+  }
+  catch (error: any) {
+    Notification.error(error.message || '获取数据失败，请稍后重试')
+  }
+  finally {
+    isLoading.value = false
   }
 }
 
 onMounted(async () => {
-  await getData();
-});
+  await getData()
+})
 </script>
 
 <template>
-  <div class="h-full w-full flex flex-col gap-5 overflow-hidden">
-    <div class="flex items-center gap-5">
-
-
+  <div
+    class="h-full w-full flex flex-col gap-5 overflow-hidden"
+  >
+    <div
+      class="flex items-center gap-5"
+    >
       <el-select
         v-model="category"
         placeholder="请选择"
@@ -136,14 +142,27 @@ onMounted(async () => {
         />
       </el-select>
 
-      <ButtonIcon tooltip-content="刷新壁纸" icon="blog-refresh" :loading="isLoading" @click="getData" />
+      <ButtonIcon
+        tooltip-content="刷新壁纸"
+        icon="blog-refresh"
+        :loading="isLoading"
+        @click="getData"
+      />
 
-      <ButtonIcon tooltip-content="下载壁纸" icon="blog-download" @click="downloadImage(wallpaperUrl)" />
-
+      <ButtonIcon
+        tooltip-content="下载壁纸"
+        icon="blog-download"
+        @click="downloadImage(wallpaperUrl)"
+      />
     </div>
 
-    <div class="h-[calc(100vh-240px)]">
-      <PreviewImg :src="wallpaperUrl" :is-loading="isLoading" />
+    <div
+      class="h-[calc(100vh-240px)]"
+    >
+      <PreviewImg
+        :src="wallpaperUrl"
+        :loading="isLoading"
+      />
     </div>
   </div>
 </template>
