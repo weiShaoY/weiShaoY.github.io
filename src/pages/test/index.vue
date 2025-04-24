@@ -1,18 +1,13 @@
+<!------  2025-04-24---13:23---星期四  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 </script>
 
 <template>
   <div
-    class="flex items-center justify-center bg-blue"
+    class=""
   >
-    test
-
-    <div>
-      <TypeIt
-        :string-list="['hello', 'world']"
-      />
-    </div>
+    1
   </div>
 </template>
 
