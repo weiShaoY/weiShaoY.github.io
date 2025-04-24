@@ -175,7 +175,7 @@ function handleClick(item: any) {
       <el-table
         :data="tableData"
         :show-header="false"
-        style="width: 100%"
+        class="!w-full"
         height="90%"
         scrollbar-always-on
       >

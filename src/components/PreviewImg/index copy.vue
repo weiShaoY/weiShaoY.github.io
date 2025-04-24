@@ -127,7 +127,6 @@ const computedImageStyle = computed<CSSProperties>(() => ({
       hide-on-click-modal
       fit="contain"
       :initial-index="0"
-      preview-teleported
       :preview-src-list="preview ? [src] : []"
       :z-index="102000"
     >

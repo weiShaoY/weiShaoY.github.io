@@ -254,22 +254,36 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <el-select
         v-model="province"
-        :options="provinceSelectOptions"
-        class="w-40"
-        placeholder="请选择大区"
+        placeholder="请选择"
+        size="large"
+        class="!w-60"
         @change="handleProvinceChange"
-      />
+      >
+        <el-option
+          v-for="item in provinceSelectOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
 
-      <a-select
+      <el-select
         v-model="city"
-        class="w-40"
-        placeholder="请选择英雄"
-        allow-search
-        :options="citySelectOptions"
+        placeholder="请选择大区"
+        size="large"
+        class="!w-60"
         @change="getData"
-      />
+      >
+        <el-option
+          v-for="item in citySelectOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+
 
       <div
         v-if="data.real && data.real.publish_time"
