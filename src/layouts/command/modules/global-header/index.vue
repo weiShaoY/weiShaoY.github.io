@@ -43,11 +43,12 @@ const titleInfo = ref({
       name: '空 间 管 控',
       routeName: 'spaceControl',
     },
-    {
-      id: 4,
-      name: '退出登录',
-      routeName: 'CommandLogin',
-    },
+
+    // {
+    //   id: 4,
+    //   name: '退出登录',
+    //   routeName: 'CommandLogin',
+    // },
   ],
 })
 
@@ -70,6 +71,15 @@ function jumpPage(item: any) {
 
   router.push({
     name: item.routeName,
+  })
+}
+
+/**
+ *   退出登录
+ */
+function logout() {
+  router.push({
+    name: 'CommandLogin',
   })
 }
 </script>
@@ -147,7 +157,6 @@ function jumpPage(item: any) {
     >
       <div
         v-for="(item, index) in titleInfo.rightTitle"
-        :id="isShowLight === item.routeName ? 'menu-click' : ''"
         :key="index"
         class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
         :style="{
@@ -161,6 +170,31 @@ function jumpPage(item: any) {
           {{ item.name }}
         </span>
       </div>
+
+      <!-- 退出登录 -->
+      <el-popconfirm
+        title="确认退出登录?"
+        placement="bottom-end"
+        theme="dark"
+        @confirm="logout"
+      >
+        <template
+          #reference
+        >
+          <div
+            class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
+            :style="{
+              backgroundImage: `url(${isShowLight === 'CommandLogin' ? buttonActiveBgImage : buttonBgImage})`,
+            }"
+          >
+            <span
+              class="from-[#00c8ff] to-[#ffffff] bg-gradient-to-b bg-clip-text text-transparent"
+            >
+              退 出 登 录
+            </span>
+          </div>
+        </template>
+      </el-popconfirm>
     </div>
 
   </div>
