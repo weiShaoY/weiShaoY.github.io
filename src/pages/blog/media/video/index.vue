@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { downloadImage } from '@/utils'
+import { downloadVideo } from '@/utils'
 
 import { Notification } from '@arco-design/web-vue'
 
@@ -13,8 +13,14 @@ const category = ref(1)
 
 const videoUrl = ref('')
 
+/**
+ *  是否自动播放
+ */
 const isAutoPlay = ref(false)
 
+/**
+ *  是否自动播放下一条
+ */
 const isAutoPlayNext = ref(true)
 
 const categoryOptions = [
@@ -64,7 +70,7 @@ function handlePlayNext() {
   getData()
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -76,67 +82,54 @@ onMounted(async() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <el-select
         v-model="category"
-        :options="categoryOptions"
-        class="w-40"
         placeholder="请选择"
-        allow-clear
-        allow-search
+        size="large"
+        class="!w-60"
         @change="getData"
-      />
+      >
+        <el-option
+          v-for="item in categoryOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
 
-      <a-button
+      <ButtonIcon
+        tooltip-content="刷新视频"
+        icon="blog-refresh"
         :loading="isLoading"
         @click="getData"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-refresh"
-          />
-        </template>
-      </a-button>
+      />
 
-      <a-button
-        @click="downloadImage(videoUrl)"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-download"
-          />
-        </template>
-      </a-button>
+      <ButtonIcon
+        tooltip-content="下载视频"
+        icon="blog-download"
+        @click="downloadVideo(videoUrl)"
+      />
 
-      <a-switch
+      <el-switch
         v-model="isAutoPlayNext"
-        checked-color="#7777FF"
-        unchecked-color="#BFBFBF"
-        size="medium"
-      >
-        <template
-          #checked
-        >
-          自动播放下一个视频
-        </template>
-
-        <template
-          #unchecked
-        >
-          手动播放下一个视频
-        </template>
-      </a-switch>
+        size="large"
+        inline-prompt
+        style="--el-switch-on-color: #F3B03D;"
+        active-text="自动播放下一个视频"
+        inactive-text="手动播放下一个视频"
+      />
     </div>
 
-    <VideoPlayer
-      :video-url="videoUrl"
-      :is-auto-play="isAutoPlay"
-      :is-auto-play-next="isAutoPlayNext"
-      @play-ended="handlePlayEnded"
-      @play-next="handlePlayNext"
-    />
+    <div
+      class="h-[calc(100vh-240px)]"
+    >
+      <VideoPlayer
+        :video-url="videoUrl"
+        :is-auto-play="isAutoPlay"
+        :is-auto-play-next="isAutoPlayNext"
+        @play-ended="handlePlayEnded"
+        @play-next="handlePlayNext"
+      />
+    </div>
   </div>
 </template>

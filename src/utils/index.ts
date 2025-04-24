@@ -6,7 +6,7 @@ export * from './copyImageToClipboard'
 
 export * from './copyText'
 
-export * from './downloadImage'
+export * from './download'
 
 export * from './event'
 

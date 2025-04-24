@@ -131,7 +131,7 @@ onMounted(async () => {
         v-model="category"
         placeholder="请选择"
         size="large"
-        style="width: 160px"
+        class="!w-50"
         @change="getData"
       >
         <el-option

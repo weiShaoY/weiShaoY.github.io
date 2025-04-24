@@ -113,7 +113,7 @@ onMounted(() => {
     /**
      *  下载
      */
-    download: true,
+    // download: true,
 
     /**
      *  动态背景高斯模糊渲染插件
