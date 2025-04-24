@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { downloadImage } from '@/utils'
-
 import { Notification } from '@arco-design/web-vue'
 
 const isLoading = ref(false)
@@ -131,7 +129,7 @@ onMounted(async () => {
         v-model="category"
         placeholder="请选择"
         size="large"
-        class="!w-50"
+        class="!w-60"
         @change="getData"
       >
         <el-option
@@ -143,16 +141,16 @@ onMounted(async () => {
       </el-select>
 
       <ButtonIcon
-        tooltip-content="刷新壁纸"
+        tooltip-content="刷新"
         icon="blog-refresh"
         :loading="isLoading"
         @click="getData"
       />
 
-      <ButtonIcon
+      <DownloadButton
         tooltip-content="下载壁纸"
-        icon="blog-download"
-        @click="downloadImage(wallpaperUrl)"
+        :url="wallpaperUrl"
+        type="image"
       />
     </div>
 

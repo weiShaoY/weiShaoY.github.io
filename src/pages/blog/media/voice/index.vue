@@ -68,7 +68,7 @@ function handlePlayNext() {
   getData()
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -80,55 +80,55 @@ onMounted(async() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
-        v-model="category"
-        :options="categoryOptions"
-        class="w-40"
-        placeholder="请选择"
-        allow-clear
-        allow-search
-        @change="getData"
-      />
 
-      <a-button
+      <el-select
+        v-model="category"
+        placeholder="请选择"
+        size="large"
+        class="!w-60"
+        @change="getData"
+      >
+        <el-option
+          v-for="item in categoryOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+
+      <ButtonIcon
+        tooltip-content="刷新"
+        icon="blog-refresh"
         :loading="isLoading"
         @click="getData"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-refresh"
-          />
-        </template>
-      </a-button>
+      />
 
-      <a-switch
+      <DownloadButton
+        tooltip-content="下载语音"
+        :url="musicUrl"
+        type="audio"
+      />
+
+      <el-switch
         v-model="isAutoPlayNext"
-        checked-color="#7777FF"
-        unchecked-color="#BFBFBF"
-        size="medium"
-      >
-        <template
-          #checked
-        >
-          自动播放下一个语音
-        </template>
-
-        <template
-          #unchecked
-        >
-          手动播放下一个语音
-        </template>
-      </a-switch>
+        size="large"
+        inline-prompt
+        style="--el-switch-on-color: #F3B03D;"
+        active-text="自动播放下一个语音"
+        inactive-text="手动播放下一个语音"
+      />
     </div>
 
-    <MusicPlayer
-      :music-url="musicUrl"
-      :is-auto-play="isAutoPlay"
-      :is-auto-play-next="isAutoPlayNext"
-      @play-ended="handlePlayEnded"
-      @play-next="handlePlayNext"
-    />
+    <div
+      class="h-[calc(100vh-240px)]"
+    >
+      <MusicPlayer
+        :music-url="musicUrl"
+        :is-auto-play="isAutoPlay"
+        :is-auto-play-next="isAutoPlayNext"
+        @play-ended="handlePlayEnded"
+        @play-next="handlePlayNext"
+      />
+    </div>
   </div>
 </template>

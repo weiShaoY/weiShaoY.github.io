@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { downloadVideo } from '@/utils'
-
 import { Notification } from '@arco-design/web-vue'
 
 import { ref } from 'vue'
@@ -98,16 +96,20 @@ onMounted(async () => {
       </el-select>
 
       <ButtonIcon
-        tooltip-content="刷新视频"
+        tooltip-content="刷新"
         icon="blog-refresh"
         :loading="isLoading"
         @click="getData"
       />
 
-      <ButtonIcon
+      <!-- <ButtonIcon
         tooltip-content="下载视频"
         icon="blog-download"
         @click="downloadVideo(videoUrl)"
+      /> -->
+      <DownloadButton
+        :url="videoUrl"
+        type="video"
       />
 
       <el-switch

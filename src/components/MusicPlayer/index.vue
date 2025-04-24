@@ -60,7 +60,7 @@ onMounted(() => {
     el: musicRef.value,
 
     // url: props.musicUrl,
-    url: 'https://zj.v.api.aa1.cn/api/qqmusic/demo.php?type=3&mid=001tPuED43HIPj&fid=001tPuED43HIPj&t=3',
+    url: 'https://api.pearktrue.cn/api/yujie/voice/53d06966dc493715bf5dce166c672437.mp3',
 
     autoplay: props.isAutoPlay,
 

@@ -14,6 +14,7 @@ declare module 'vue' {
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
     copy: typeof import('./../components/ButtonIcon/index copy.vue')['default']
+    DownloadButton: typeof import('./../components/DownloadButton/index.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
