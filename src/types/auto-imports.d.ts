@@ -36,7 +36,9 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const disposeScene: typeof import('../utils/threeJs')['disposeScene']
-  const downloadImage: typeof import('../utils/downloadImage')['downloadImage']
+  const downloadAudio: typeof import('../utils/download')['downloadAudio']
+  const downloadImage: typeof import('../utils/download')['downloadImage']
+  const downloadVideo: typeof import('../utils/download')['downloadVideo']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -374,7 +376,9 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly disposeScene: UnwrapRef<typeof import('../utils/threeJs')['disposeScene']>
-    readonly downloadImage: UnwrapRef<typeof import('../utils/downloadImage')['downloadImage']>
+    readonly downloadAudio: UnwrapRef<typeof import('../utils/download')['downloadAudio']>
+    readonly downloadImage: UnwrapRef<typeof import('../utils/download')['downloadImage']>
+    readonly downloadVideo: UnwrapRef<typeof import('../utils/download')['downloadVideo']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>

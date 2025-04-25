@@ -94,8 +94,8 @@ const computedImageClass = computed(() => {
 /** 计算图片的样式 */
 const computedImageStyle = computed<CSSProperties>(() => ({
   ...props.style,
-  height:typeof props.height === 'number' ? `${props.height}px` : props.height,
-  width:typeof props.width === 'number' ? `${props.width}px` : props.width,
+  height: typeof props.height === 'number' ? `${props.height}px` : props.height,
+  width: typeof props.width === 'number' ? `${props.width}px` : props.width,
 }))
 
 </script>
@@ -112,7 +112,7 @@ const computedImageStyle = computed<CSSProperties>(() => ({
     >
       <img
         :src="src"
-      />
+      >
     </el-avatar>
 
     <el-image
