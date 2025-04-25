@@ -82,16 +82,16 @@ const option = computed<EChartsOption>(() => {
 
         for (let i = 0, l = params.length; i < l; i++) {
           // 后缀
-          const suffix
-						= params[i].seriesName === '温度'
-						  ? '°C'
-						  : params[i].seriesName === '相对湿度'
-						    ? '%'
-						    : params[i].seriesName === '降水量'
-						      ? 'mm'
-						      : params[i].seriesName === '气压'
-						        ? 'hPa'
-						        : ''
+          // eslint-disable-next-line style/no-tabs
+          const suffix	= params[i].seriesName === '温度'
+            ? '°C'
+            : params[i].seriesName === '相对湿度'
+              ? '%'
+              : params[i].seriesName === '降水量'
+                ? 'mm'
+                : params[i].seriesName === '气压'
+                  ? 'hPa'
+                  : ''
 
           relVal += `<br/>${params[i].marker}${params[i].seriesName}     ${params[i].value}${suffix}`
         }
@@ -245,13 +245,10 @@ const option = computed<EChartsOption>(() => {
 </script>
 
 <template>
-  <div
-    class="h-[500px] w-full"
-  >
-    <Chart
-      :option="option"
-    />
-  </div>
+  <VueEcharts
+    :option="option"
+    :height="500"
+  />
 </template>
 
 <style lang="less" scoped></style>

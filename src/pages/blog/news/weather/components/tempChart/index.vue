@@ -144,12 +144,12 @@ const option = computed<EChartsOption>(() => {
   }
 
   // 示例使用，生成 day 和 night 的 rich 对象
-  const dayRichObject = createRichObject('day')
+  // const dayRichObject = createRichObject('day')
 
-  const nightRichObject = createRichObject('night')
+  // const nightRichObject = createRichObject('night')
 
-  console.log(dayRichObject)
-  console.log(nightRichObject)
+  // console.log(dayRichObject)
+  // console.log(nightRichObject)
 
   return {
     tooltip: {
@@ -322,13 +322,10 @@ const option = computed<EChartsOption>(() => {
 </script>
 
 <template>
-  <div
-    class="h-[500px] w-full"
-  >
-    <Chart
-      :option="option"
-    />
-  </div>
+  <VueEcharts
+    :option="option"
+    :height="500"
+  />
 </template>
 
 <style lang="less" scoped></style>

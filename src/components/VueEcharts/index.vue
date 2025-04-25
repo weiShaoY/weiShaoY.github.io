@@ -118,6 +118,7 @@ onMounted(() => {
     :style="computedStyle"
     :loading="loading"
     :loading-options="loadingOptions"
+    :manual-update="false"
     @click="emit('click', $event)"
   />
 </template>

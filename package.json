@@ -23,7 +23,8 @@
     "preview": "vite preview",
     "up": "taze major -I",
     "deploy": "bash d",
-    "build": "vite build"
+    "build": "vite build",
+    "clean": "rimraf node_modules"
   },
   "dependencies": {
     "@better-scroll/core": "2.5.1",

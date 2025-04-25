@@ -1,0 +1,11 @@
+1.用 rimraf 删除 node_modules
+https://www.npmjs.com/package/rimraf
+
+npm install rimraf -g
+rimraf node_modules
+
+
+
+
+2. 清理npm缓存
+npm cache clean --force
