@@ -9,6 +9,82 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
   },
   children: [
     {
+      path: 'ui',
+      name: 'UI',
+      meta: {
+        title: 'UI库',
+        icon: 'blog-menu-ui',
+      },
+      children: [
+        {
+          path: 'antd',
+          name: 'Antd',
+          meta: {
+            title: 'AntDesign',
+            icon: 'blog-menu-andDesign',
+            externalUrl: 'https://ant-design.antgroup.com/components/overview-cn/',
+          },
+        },
+        {
+          path: 'elementPlus',
+          name: 'ElementPlus',
+          meta: {
+            title: 'ElementPlus',
+            icon: 'blog-menu-elementPlus',
+            iframeUrl: 'https://element-plus.org/zh-CN/component/overview.html',
+          },
+        },
+        {
+          path: 'naiveUi',
+          name: 'NaiveUi',
+          meta: {
+            title: 'NaiveUi',
+            icon: 'blog-menu-naiveUi',
+            iframeUrl: 'https://www.naiveui.com/zh-CN/dark/docs/introduction',
+          },
+        },
+        {
+          path: 'blog-menu-arcoDesign',
+          name: 'Arco',
+          meta: {
+            title: 'ArcoDesign',
+            icon: 'blog-menu-arcoDesign',
+            iframeUrl: 'https://arco.design/vue/component/button',
+          },
+        },
+      ],
+    },
+    {
+      path: 'css',
+      name: 'Css',
+      meta: {
+        title: 'Css',
+        icon: 'blog-menu-css',
+      },
+      children: [
+        {
+          path: 'unocss',
+          name: 'Unocss',
+          meta: {
+            title: 'Unocss',
+            icon: 'blog-menu-unocss',
+            iframeUrl: 'https://unocss-cn.pages.dev/',
+          },
+        },
+
+        {
+          path: 'tailwindCss',
+          name: 'TailwindCss',
+          meta: {
+            title: 'TailwindCss',
+            icon: 'blog-menu-tailwindCss',
+            externalUrl: 'https://tailwind.nodejs.cn/docs/installation',
+          },
+        },
+      ],
+    },
+
+    {
       path: 'typescript',
       name: 'TypeScript',
       meta: {
@@ -71,24 +147,7 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
         iframeUrl: 'https://vueuse.pages.dev/',
       },
     },
-    {
-      path: 'unocss',
-      name: 'Unocss',
-      meta: {
-        title: 'Unocss',
-        icon: 'blog-menu-unocss',
-        iframeUrl: 'https://unocss-cn.pages.dev/',
-      },
-    },
-    {
-      path: 'tailwindCss',
-      name: 'TailwindCss',
-      meta: {
-        title: 'TailwindCss',
-        icon: 'blog-menu-tailwindCss',
-        iframeUrl: 'https://tailwindcss.com/docs/installation',
-      },
-    },
+
     {
       path: 'eslint',
       name: 'Eslint',

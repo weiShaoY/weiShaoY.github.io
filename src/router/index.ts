@@ -13,6 +13,7 @@ import { createRouterGuard } from './guard'
 import { fallbackRouter } from './modules/fallback'
 
 import {
+  checkDuplicateRoutes,
   formatModules,
   recursiveNormalizeRoutesPath,
   recursiveSetRoutesRedirect,
@@ -31,7 +32,16 @@ const normalizeRoutesWithFullPathList = recursiveNormalizeRoutesPath(formatModul
 
 const routeList = recursiveSetRoutesRedirect(normalizeRoutesWithFullPathList)
 
+// 检查路由路径和路由名称是否存在重复
+checkDuplicateRoutes(routeList)
+
 console.log('%c Line:33 🍕 routeList', 'color:#f5ce50', routeList)
+
+//  延迟3s
+setTimeout(() => {
+  console.log('%c Line:36 🍕 routeList', 'color:#f5ce50', routeList)
+  checkDuplicateRoutes(routeList)
+}, 3000)
 
 const routerMode = {
   hash: () => createWebHashHistory(),
