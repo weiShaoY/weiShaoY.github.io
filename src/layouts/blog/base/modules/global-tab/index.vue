@@ -57,7 +57,7 @@ let currentX = 0 // 当前触摸X坐标
  */
 const list = computed(() => blogStore.openedTabList) // 已打开的标签页列表
 
-console.log('%c Line:59 🍪 list', 'color:#3f7cff', list)
+// console.log('%c Line:59 🍪 list', 'color:#3f7cff', list)
 
 /**
  *  当前激活的标签路径

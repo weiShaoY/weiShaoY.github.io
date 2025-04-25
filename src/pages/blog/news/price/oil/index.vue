@@ -99,90 +99,75 @@ async function getData() {
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 
 </script>
 
 <template>
-  <a-tabs
-    class="w-full"
-    default-active-key="1"
+
+  <el-tabs
+    v-loading="isLoading"
+    class="h-full w-full"
   >
-    <a-tab-pane
-      key="1"
-      title="全国油价"
+    <el-tab-pane
+      label="全国油价"
     >
-      <a-table
-        :data="oilData"
-        :loading="isLoading"
-        scrollbar
-        :scroll="{
-          maxHeight: 'calc(100vh - 300px)',
-        }"
-        :pagination="false"
+      <div
+        class="h-[calc(100vh-200px)]"
       >
-        <template
-          #columns
+        <el-table
+          class="!w-full"
+          :data="oilData"
+          height="100%"
         >
-          <a-table-column
-            title="ID"
-            data-index="id"
+
+          <el-table-column
+            prop="id"
+            label="ID"
             align="center"
-            :width="100"
           />
 
-          <a-table-column
-            title="省份"
-            data-index="province"
+          <el-table-column
+            prop="province"
+            label="省份"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="92号"
-            data-index="92"
+          <el-table-column
+            prop="92"
+            label="92号"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="95号"
-            data-index="92"
+          <el-table-column
+            prop="95"
+            label="95号"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="98号"
-            data-index="92"
+          <el-table-column
+            prop="98"
+            label="98号"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="0号"
-            data-index="0"
+          <el-table-column
+            prop="0"
+            label="0号"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-        </template>
-      </a-table>
-    </a-tab-pane>
-
-  </a-tabs>
+        </el-table>
+      </div>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <style lang="less" scoped></style>

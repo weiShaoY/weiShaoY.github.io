@@ -36,10 +36,8 @@ function search() {
       <template
         #append
       >
-        <SvgIcon
-          class="cursor-pointer"
+        <ButtonIcon
           icon="search"
-          :size="24"
           @click="search"
         />
       </template>

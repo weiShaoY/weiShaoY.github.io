@@ -54,116 +54,93 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-input-search
-        v-model="cigaretteName"
-        class="w-[60%]"
-        allow-clear
-        search-button
+      <el-input
+        v-model.trim="cigaretteName"
+        clearable
+        size="large"
         placeholder="请输入香烟名称"
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          香烟搜索
-        </template>
-      </a-input-search>
+      </el-input>
     </div>
 
-    <a-table
-      :data="cigaretteData"
-      :loading="isLoading"
-      scrollbar
-      :scroll="{
-        maxHeight: 'calc(100vh - 300px)',
-      }"
-      :pagination="false"
+    <div
+      v-loading="isLoading"
+      class="h-[calc(100vh-200px)]"
     >
-      <template
-        #columns
+      <el-table
+        class="!w-full"
+        :data="cigaretteData"
+        height="100%"
       >
-        <a-table-column
-          title="ID"
-          data-index="id"
+
+        <el-table-column
+          prop="id"
+          label="ID"
           align="center"
-          :width="100"
         />
 
-        <a-table-column
-          title="香烟名称"
-          data-index="name"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+        <el-table-column
+          prop="name"
+          label="香烟名称"
+          align="center"
+          sortable
         />
 
-        <a-table-column
-          title="单盒参考价"
-          data-index="单盒参考价"
+        <el-table-column
+          prop="单盒参考价"
+          label="单盒参考价"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+          sortable
         />
 
-        <a-table-column
-          title="条盒参考价"
-          data-index="条盒参考价"
+        <el-table-column
+          prop="条盒参考价"
+          label="条盒参考价"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+          sortable
         />
 
-        <a-table-column
-          title="香烟类型"
-          data-index="香烟类型"
+        <el-table-column
+          prop="香烟类型"
+          label="香烟类型"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+          sortable
         />
 
-        <a-table-column
-          title="烟碱量"
-          data-index="烟碱量"
+        <el-table-column
+          prop="烟碱量"
+          label="烟碱量"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+          sortable
         />
 
-        <a-table-column
-          title="焦油量"
-          data-index="焦油量"
+        <el-table-column
+          prop="焦油量"
+          label="焦油量"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
+          sortable
         />
 
-        <a-table-column
-          title="烟支规格"
-          data-index="烟支规格"
+        <el-table-column
+          prop="烟支规格"
+          label="烟支规格"
           align="center"
-          :sortable="{
-            sortDirections: ['ascend', 'descend'],
-          }"
-          :width="240"
+          sortable
         />
-      </template>
-    </a-table>
+
+      </el-table>
+    </div>
   </div>
 </template>
 

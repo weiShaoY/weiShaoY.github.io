@@ -50,15 +50,18 @@ async function getData() {
 
       BlogApi.getMarketGoldPrice(),
 
-      BlogApi.getRealTimeGoldPrice(),
+      // BlogApi.getRealTimeGoldPrice(),
     ])
 
     goldData.value = {
       marketGold: marketGoldPrice,
-      domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
-      domesticGold: realTimeGoldPrice['国内黄金'],
-      internationalGold: realTimeGoldPrice['国际黄金'],
+
+      // domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
+      // domesticGold: realTimeGoldPrice['国内黄金'],
+      // internationalGold: realTimeGoldPrice['国际黄金'],
     }
+
+    console.log('%c Line:64 🍆 goldData.value', 'color:#7f2b82', goldData.value)
   }
   catch (error: any) {
     Notification.error(error.message || '获取数据失败，请稍后重试')
