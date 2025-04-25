@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { CascaderValue } from 'element-plus'
+
 import type { WeatherType } from './types'
 
 import { BlogApi } from '@/api'
@@ -93,33 +95,6 @@ const data = ref<WeatherType>({
     image: '',
     url: '',
   },
-})
-
-/**
- * 省份选项
- */
-const provinceSelectOptions = provinceCityData.map((item) => {
-  return {
-    value: item.code,
-    label: item.name,
-  }
-})
-
-/**
- * 城市选项
- * 根据当前选择的省份来动态生成城市列表
- */
-const citySelectOptions = computed(() => {
-  const selectedProvince = provinceCityData.find(
-    region => region.code === province.value,
-  )
-
-  return selectedProvince
-    ? selectedProvince.children.map(city => ({
-        value: city.code,
-        label: city.city,
-      }))
-    : []
 })
 
 /**
@@ -225,38 +200,6 @@ async function getData() {
   }
 }
 
-/**
- * 处理省份变更，更新城市的默认选项
- */
-async function handleProvinceChange() {
-  console.log(
-    '%c Line:237 🍋 handleProvinceChange',
-    'color:#b03734',
-    handleProvinceChange,
-  )
-
-  // 在省份改变时，设置城市的默认值为该省的第一个城市
-  // if (citySelectOptions.value.length > 0) {
-  //   city.value = citySelectOptions.value[0].value
-  // }
-
-  // await getData()
-
-  const newCity = citySelectOptions.value[0]?.value
-
-  if (city.value !== newCity) {
-    console.log('%c Line:247 🥥 city.value', 'color:#2eafb0', city.value)
-    city.value = newCity
-    await getData()
-  }
-}
-
-async function handleCityChange(e) {
-  city.value = e
-  console.log('%c Line:254 🌮 e', 'color:#3f7cff', e)
-  await getData()
-}
-
 onMounted(async () => {
   await getData()
 })
@@ -278,12 +221,24 @@ const props = {
   expandTrigger: 'hover' as const,
 }
 
-async function handleChange(value) {
-  console.log('%c Line:283 🍎 value', 'color:#ffdd4d', value)
-  province.value = value[0]
-  city.value = value[1]
+async function handleChange(value: CascaderValue) {
+  // 首先确保 value 是一个数组（非多选情况下）
+  if (!Array.isArray(value)) {
+    console.error('Cascader value should be an array in single-select mode')
+    return
+  }
+
+  // 使用类型断言明确 value 是 string[] 或 number[]
+  const selectedValues = value as string []
+
+  // 提供默认值防止 undefined 访问
+  province.value = selectedValues[0] ?? ''
+  city.value = selectedValues[1] ?? ''
+
   await getData()
 }
+
+const activeTab = ref('realtime')
 </script>
 
 <template>
@@ -293,35 +248,6 @@ async function handleChange(value) {
     <div
       class="flex items-center gap-5"
     >
-      <!-- <el-select
-        v-model="province"
-        placeholder="请选择省份"
-        size="large"
-        class="!w-60"
-        @change="handleProvinceChange"
-      >
-        <el-option
-          v-for="item in provinceSelectOptions"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-
-      <el-select
-        placeholder="请选择城市"
-        size="large"
-        class="!w-60"
-        @change="handleCityChange"
-      >
-        <el-option
-          v-for="item in citySelectOptions"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select> -->
-
       <el-cascader
         v-model="value"
         :options="options"
@@ -354,25 +280,34 @@ async function handleChange(value) {
         v-model="data"
       />
 
-      <!-- <el-tabs
+      <el-tabs
         class="w-full"
       >
         <el-tab-pane
           label="预报数据"
         >
-          <TempChart
-            v-if="data.tempchart.length"
-            v-model="data"
-          />
+          <div
+            class="h-[500px]"
+          >
+            <TempChart
+              v-if="data.tempchart.length"
+              v-model="data"
+            />
+          </div>
         </el-tab-pane>
 
         <el-tab-pane
           label="24小时实时天气"
+          lazy
         >
-          <PassedChart
-            v-if="data.passedchart.length"
-            v-model="data"
-          />
+          <div
+            class="h-[500px]"
+          >
+            <PassedChart
+              v-if="activeTab === 'realtime' && data.passedchart.length"
+              v-model="data"
+            />
+          </div>
         </el-tab-pane>
       </el-tabs>
 
@@ -381,7 +316,7 @@ async function handleChange(value) {
       <Climate
         v-if="data.tempchart.length"
         v-model="data"
-      /> -->
+      />
     </div>
   </div>
 </template>

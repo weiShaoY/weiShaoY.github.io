@@ -324,7 +324,6 @@ const option = computed<EChartsOption>(() => {
 <template>
   <VueEcharts
     :option="option"
-    :height="500"
   />
 </template>
 

@@ -142,6 +142,8 @@ const option = computed<EChartsOption>(() => {
         axisLabel: {
           formatter: '{value} °C', // 格式化 y 轴的标签，显示摄氏度符号
         },
+        interval: 5, // 根据温度范围调整
+
       },
       {
         id: 'precipitation',
@@ -157,6 +159,8 @@ const option = computed<EChartsOption>(() => {
         axisLabel: {
           formatter: '{value} mm', // y 轴标签的格式化（显示毫米）
         },
+        interval: 10, // 根据降水范围调整
+
       },
       {
         id: 'humidity',
@@ -176,6 +180,8 @@ const option = computed<EChartsOption>(() => {
         alignTicks: true, // 是否与坐标轴对齐
         min: 0, // 可选：设置最小刻度值为 0
         max: 100, // 设置最大刻度值为 100
+        interval: 20,
+
       },
       {
         id: 'pressure',
@@ -192,6 +198,8 @@ const option = computed<EChartsOption>(() => {
         axisLabel: {
           formatter: '{value} hPa', // y 轴标签的格式化（显示毫巴）
         },
+        interval: 200, // 根据气压范围调整
+
       },
     ],
     series: [
@@ -247,7 +255,6 @@ const option = computed<EChartsOption>(() => {
 <template>
   <VueEcharts
     :option="option"
-    :height="500"
   />
 </template>
 
