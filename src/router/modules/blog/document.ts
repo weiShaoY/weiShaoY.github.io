@@ -26,6 +26,24 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
           },
         },
         {
+          path: 'blog-menu-arcoDesign',
+          name: 'Arco',
+          meta: {
+            title: 'ArcoDesign',
+            icon: 'blog-menu-arcoDesign',
+            iframeUrl: 'https://arco.design/vue/component/button',
+          },
+        },
+        {
+          path: 'tDesign',
+          name: 'TDesign',
+          meta: {
+            title: 'TDesign',
+            icon: 'blog-menu-tDesign',
+            iframeUrl: 'https://tdesign.tencent.com/vue-next/getting-started',
+          },
+        },
+        {
           path: 'elementPlus',
           name: 'ElementPlus',
           meta: {
@@ -41,15 +59,6 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
             title: 'NaiveUi',
             icon: 'blog-menu-naiveUi',
             iframeUrl: 'https://www.naiveui.com/zh-CN/dark/docs/introduction',
-          },
-        },
-        {
-          path: 'blog-menu-arcoDesign',
-          name: 'Arco',
-          meta: {
-            title: 'ArcoDesign',
-            icon: 'blog-menu-arcoDesign',
-            iframeUrl: 'https://arco.design/vue/component/button',
           },
         },
       ],
