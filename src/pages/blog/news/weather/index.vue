@@ -73,9 +73,7 @@ const data = ref<WeatherType>({
       url: 'http://default.url',
     },
     publish_time: '2024-01-01T00:00:00Z',
-    detail: [
-
-    ],
+    detail: [],
   },
   air: {
     forecasttime: '2024-12-19 15:00',
@@ -84,14 +82,11 @@ const data = ref<WeatherType>({
     text: '良',
     aqiCode: '99031;99032;99033;99035;99037;99038;99039;99040',
   },
-  tempchart: [
-  ],
+  tempchart: [],
   passedchart: [],
   climate: {
     time: '',
-    month: [
-
-    ],
+    month: [],
   },
   radar: {
     title: '实时雷达数据',
@@ -234,7 +229,11 @@ async function getData() {
  * 处理省份变更，更新城市的默认选项
  */
 async function handleProvinceChange() {
-  console.log('%c Line:237 🍋 handleProvinceChange', 'color:#b03734', handleProvinceChange)
+  console.log(
+    '%c Line:237 🍋 handleProvinceChange',
+    'color:#b03734',
+    handleProvinceChange,
+  )
 
   // 在省份改变时，设置城市的默认值为该省的第一个城市
   // if (citySelectOptions.value.length > 0) {
@@ -285,7 +284,6 @@ async function handleChange(value) {
   city.value = value[1]
   await getData()
 }
-
 </script>
 
 <template>
@@ -387,3 +385,9 @@ async function handleChange(value) {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+:deep(.el-cascader-menu__wrap.el-scrollbar__wrap) {
+  height: 300px !important;
+}
+</style>
