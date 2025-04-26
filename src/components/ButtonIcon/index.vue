@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { Placement } from 'element-plus'
+
+import type { PopupPlacement } from 'tdesign-vue-next'
 
 import type { CSSProperties } from 'vue'
 
@@ -14,12 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
   class: '',
   icon: '',
   size: 40,
-
   tooltipContent: '',
   tooltipPlacement: 'bottom',
-
-  // zIndex: 98,
-
   loading: false,
 })
 
@@ -51,7 +48,7 @@ type Props = {
   tooltipContent?: string
 
   /** 提示框位置 */
-  tooltipPlacement?: Placement
+  tooltipPlacement?: PopupPlacement
 
   /** 层级 z-index 值 */
   zIndex?: number
@@ -117,45 +114,39 @@ const computedIconClass = computed(() => {
   <div
     class=""
   >
-    <ElTooltip
-      :placement="tooltipPlacement"
+    <t-tooltip
+      class=""
       :content="tooltipContent"
-      :z-index="zIndex"
-      :disabled="!tooltipContent"
+      :placement="tooltipPlacement"
+      show-arrow
     >
-      <ElButton
-        text
-        quaternary
-        class="!h-auto !p-0"
+      <t-button
+        variant="text"
+        shape="square"
+        class=""
+        :class="[computedButtonClass, dynamicButtonClass]"
+        :style="computedStyle"
         @click="$emit('click', $event)"
       >
-        <div
-          :class="[computedButtonClass, dynamicButtonClass]"
-          :style="computedStyle"
+        <template
+          #icon
         >
-          <template
-            v-if="!loading"
-          >
-            <slot>
-              <SvgIcon
-                :icon="icon"
-                :size="size - 14"
-                :class="computedIconClass"
-              />
-            </slot>
-          </template>
+          <slot>
+            <SvgIcon
+              v-if="!loading"
+              :icon="icon"
+              :size="size - 14"
+              :class="computedIconClass"
+            />
 
-          <template
-            v-else
-          >
             <Loading
+              v-else
               :size="size - 14"
             />
-          </template>
-        </div>
-      </ElButton>
-
-    </ElTooltip>
+          </slot>
+        </template>
+      </t-button>
+    </t-tooltip>
   </div>
 </template>
 

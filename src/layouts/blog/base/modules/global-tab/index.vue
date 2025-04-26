@@ -57,7 +57,7 @@ let currentX = 0 // 当前触摸X坐标
  */
 const list = computed(() => blogStore.openedTabList) // 已打开的标签页列表
 
-// console.log('%c Line:59 🍪 list', 'color:#3f7cff', list)
+//
 
 /**
  *  当前激活的标签路径
@@ -155,7 +155,6 @@ watch(
  * 点击标签页导航
  */
 function clickTab(item: RouterType.BlogRouteRecordRaw) {
-  console.log('%c Line:156 🍺 item', 'color:#ed9ec7', item)
   router.push({
     path: item.path,
     query: item.query as LocationQueryRaw,
@@ -167,7 +166,7 @@ function clickTab(item: RouterType.BlogRouteRecordRaw) {
  * @param type 关闭类型: current/left/right/other/all
  * @param tabPath 目标标签路径
  */
-function closeWorkTab(type: string, tabPath: string) {
+function closeWorkTab(type: string, tabPath?: string) {
   const path = typeof tabPath === 'string' ? tabPath : route.path
 
   switch (type) {
@@ -446,8 +445,8 @@ const topWidth = computed(() => {
       <div
         class="right ml-5"
       >
-        <el-dropdown
-          @command="closeWorkTab"
+        <t-dropdown
+          @click="(dropdownItem) => closeWorkTab(dropdownItem.value as string)"
         >
 
           <ButtonIcon
@@ -455,67 +454,65 @@ const topWidth = computed(() => {
             :size="30"
           />
 
-          <template
-            #dropdown
-          >
-            <el-dropdown-menu>
-              <el-dropdown-item
-                command="left"
-                :disabled="activeTabIndex === 0 || activeTabIndex === 1"
-              >
-                <SvgIcon
-                  class="mr-2"
-                  icon="blog-tab-close-left"
-                  :size="18"
-                />
+          <t-dropdown-menu>
 
-                <span>关闭左侧</span>
-              </el-dropdown-item>
+            <t-dropdown-item
+              value="left"
+              :disabled="activeTabIndex === 0 || activeTabIndex === 1"
+            >
+              <SvgIcon
+                class="mr-2"
+                icon="blog-tab-close-left"
+                :size="18"
+              />
 
-              <el-dropdown-item
-                command="right"
-                :disabled="activeTabIndex === list.length - 1"
-              >
-                <SvgIcon
-                  class="mr-2"
-                  icon="blog-tab-close-right"
-                  :size="18"
-                />
+              <span>关闭左侧</span>
+            </t-dropdown-item>
 
-                <span>关闭右侧</span>
-              </el-dropdown-item>
+            <t-dropdown-item
+              value="right"
+              :disabled="activeTabIndex === list.length - 1"
+            >
+              <SvgIcon
+                class="mr-2"
+                icon="blog-tab-close-right"
+                :size="18"
+              />
 
-              <el-dropdown-item
-                command="other"
-                :disabled="
-                  list.length === 1
-                    || (list.length === 2 && activeTabIndex === 1)
-                "
-              >
-                <SvgIcon
-                  class="mr-2"
-                  icon="blog-tab-close-other"
-                  :size="18"
-                />
+              <span>关闭右侧</span>
+            </t-dropdown-item>
 
-                <span>关闭其他</span>
-              </el-dropdown-item>
+            <t-dropdown-item
+              value="other"
+              :disabled="
+                list.length === 1
+                  || (list.length === 2 && activeTabIndex === 1)
+              "
+            >
+              <SvgIcon
+                class="mr-2"
+                icon="blog-tab-close-other"
+                :size="18"
+              />
 
-              <el-dropdown-item
-                command="all"
-                :disabled="list.length === 1"
-              >
-                <SvgIcon
-                  class="mr-2"
-                  icon="blog-tab-close-all"
-                  :size="18"
-                />
+              <span>关闭其他</span>
+            </t-dropdown-item>
 
-                <span>关闭全部</span>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+            <t-dropdown-item
+              value="all"
+              :disabled="list.length === 1"
+            >
+              <SvgIcon
+                class="mr-2"
+                icon="blog-tab-close-all"
+                :size="18"
+              />
+
+              <span>关闭全部</span>
+            </t-dropdown-item>
+          </t-dropdown-menu>
+
+        </t-dropdown>
       </div>
 
       <!-- 右键菜单组件 -->
