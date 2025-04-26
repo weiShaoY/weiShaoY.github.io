@@ -329,7 +329,157 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
+  <t-dialog
+    v-model:visible="isShowSearchDialog"
+    :close-btn="false"
+    :on-close="closeSearchDialog"
+  >
+    <el-input
+      ref="searchInputRef"
+      v-model.trim="searchVal"
+      placeholder="搜索页面"
+      clearable
+      @input="search"
+      @blur="searchBlur"
+      @keydown.up.prevent="highlightPrevious"
+      @keydown.down.prevent="highlightNext"
+      @keydown.enter.prevent="selectHighlighted"
+    >
+      <template
+        #prefix
+      >
+        <SvgIcon
+          icon="search"
+          :size="24"
+        />
+      </template>
+
+      <template
+        #suffix
+      >
+        <SvgIcon
+          icon="blog-search-esc"
+          :size="24"
+        />
+      </template>
+    </el-input>
+
+    <!-- 搜索结果 -->
+    <div
+      v-show="searchResult.length"
+      class="result"
+    >
+      <div
+        v-for="(item, index) in searchResult"
+        :key="index"
+        class="box"
+      >
+        <div
+          :class="{
+            highlighted: isHighlighted(index),
+          }"
+          @click="searchGoPage(item)"
+          @mouseenter="highlightOnHover(index)"
+        >
+          <!-- 左侧 -->
+          <MenuItem
+            :menu="item"
+          />
+
+          <!-- 右侧 -->
+          <SvgIcon
+            v-show="isHighlighted(index)"
+            icon="blog-search-enter"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- 搜索历史 -->
+    <div
+      v-show="
+        !searchVal
+          && searchResult.length === 0
+          && searchHistoryList.length > 0
+      "
+      class="history-box"
+    >
+      <p
+        class="title"
+      >
+        搜索历史
+      </p>
+
+      <div
+        class="history-result"
+      >
+        <div
+          v-for="(item, index) in searchHistoryList"
+          :key="index"
+          class="box"
+          :class="{
+            highlighted: historyHIndex === index,
+          }"
+          @click="searchGoPage(item)"
+          @mouseenter="historyHIndex = index"
+        >
+
+          <!-- 左侧 -->
+          <MenuItem
+            :menu="item"
+          />
+
+          <!-- 右侧 -->
+          <SvgIcon
+            icon="close"
+            :size="18"
+            @click.stop="deleteHistory(index)"
+          />
+        </div>
+      </div>
+    </div>
+
+    <template
+      #footer
+    >
+      <div
+        class="flex items-center gap-5 border-t-[1px] border-[#eaebf1] border-solid pt-3"
+      >
+        <div
+          class="flex items-center gap-1"
+        >
+          <SvgIcon
+            icon="blog-search-up"
+            :size="24"
+            color="#DCDFE8"
+          />
+
+          <SvgIcon
+            icon="blog-search-down"
+            :size="24"
+            color="#DCDFE8"
+          />
+
+          <span>切换</span>
+        </div>
+
+        <div
+          class="flex items-center gap-1"
+        >
+          <SvgIcon
+            icon="blog-search-enter"
+            :size="24"
+            color="#DCDFE8"
+          />
+
+          <span>选择</span>
+        </div>
+      </div>
+
+    </template>
+  </t-dialog>
+
+  <!-- <div
     class="search-widget"
   >
     <el-dialog
@@ -339,156 +489,12 @@ onUnmounted(() => {
       :lock-scroll="false"
       modal-class="search-modal"
       @close="closeSearchDialog"
-    >
-      <el-input
-        ref="searchInputRef"
-        v-model.trim="searchVal"
-        placeholder="搜索页面"
-        clearable
-        @input="search"
-        @blur="searchBlur"
-        @keydown.up.prevent="highlightPrevious"
-        @keydown.down.prevent="highlightNext"
-        @keydown.enter.prevent="selectHighlighted"
-      >
-        <template
-          #prefix
-        >
-          <SvgIcon
-            icon="search"
-            :size="24"
-          />
-        </template>
-
-        <template
-          #suffix
-        >
-          <SvgIcon
-            icon="blog-search-esc"
-            :size="24"
-          />
-        </template>
-      </el-input>
-
-      <!-- 搜索结果 -->
-      <div
-        v-show="searchResult.length"
-        class="result"
-      >
-        <div
-          v-for="(item, index) in searchResult"
-          :key="index"
-          class="box"
-        >
-          <div
-            :class="{
-              highlighted: isHighlighted(index),
-            }"
-            @click="searchGoPage(item)"
-            @mouseenter="highlightOnHover(index)"
-          >
-            <!-- 左侧 -->
-            <MenuItem
-              :menu="item"
-            />
-
-            <!-- 右侧 -->
-            <SvgIcon
-              v-show="isHighlighted(index)"
-              icon="blog-search-enter"
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- 搜索历史 -->
-      <div
-        v-show="
-          !searchVal
-            && searchResult.length === 0
-            && searchHistoryList.length > 0
-        "
-        class="history-box"
-      >
-        <p
-          class="title"
-        >
-          搜索历史
-        </p>
-
-        <div
-          class="history-result"
-        >
-          <div
-            v-for="(item, index) in searchHistoryList"
-            :key="index"
-            class="box"
-            :class="{
-              highlighted: historyHIndex === index,
-            }"
-            @click="searchGoPage(item)"
-            @mouseenter="historyHIndex = index"
-          >
-
-            <!-- 左侧 -->
-            <MenuItem
-              :menu="item"
-            />
-
-            <!-- 右侧 -->
-            <SvgIcon
-              icon="close"
-              :size="18"
-              @click.stop="deleteHistory(index)"
-            />
-          </div>
-        </div>
-      </div>
-
-      <template
-        #footer
-      >
-        <div
-          class="flex items-center gap-5 border-t-[1px] border-[#eaebf1] border-solid pt-3"
-        >
-          <div
-            class="flex items-center gap-1"
-          >
-            <SvgIcon
-              icon="blog-search-up"
-              :size="24"
-              color="#DCDFE8"
-            />
-
-            <SvgIcon
-              icon="blog-search-down"
-              :size="24"
-              color="#DCDFE8"
-            />
-
-            <span>切换</span>
-          </div>
-
-          <div
-            class="flex items-center gap-1"
-          >
-            <SvgIcon
-              icon="blog-search-enter"
-              :size="24"
-              color="#DCDFE8"
-            />
-
-            <span>选择</span>
-          </div>
-        </div>
-
-      </template>
-    </el-dialog>
-  </div>
+    />
+  </div> -->
 </template>
 
 <style lang="scss" scoped>
-.search-widget {
+// .search-widget {
   :deep(.search-modal) {
     background-color: #0003;
   }
@@ -594,5 +600,5 @@ onUnmounted(() => {
       }
     }
   }
-}
+// }
 </style>
