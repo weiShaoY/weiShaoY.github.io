@@ -2,6 +2,8 @@ import type { App } from 'vue'
 
 import ElementPlus, { ElCard, ElTable } from 'element-plus'
 
+import TDesign from 'tdesign-vue-next'
+
 /**
  * 全局配置表格列对齐方式
  * 默认所有 TableColumn 组件居中对齐
@@ -30,4 +32,7 @@ export function setupUI(app: App<Element>) {
 
   // 注意：这里使用的是全量导入
   // 如需按需导入，建议使用 unplugin-element-plus 等插件
+
+  // 全量引入 TDesign 组件
+  app.use(TDesign)
 }

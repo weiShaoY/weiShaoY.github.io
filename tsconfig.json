@@ -29,9 +29,11 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.vue",
+    "node_modules/tdesign-vue-next/global.d.ts"
+  ],
+  "exclude": ["dist", "node_modules"]
 }

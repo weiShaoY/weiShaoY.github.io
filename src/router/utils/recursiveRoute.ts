@@ -103,3 +103,122 @@ export function recursiveHandleIframeRoutes(routes: any[]): any[] {
     }
   })
 }
+
+/**
+ * 查找路由的父路由对象
+ * @param routes 路由配置数组
+ * @param currentPath 当前路由路径 (如 '/blog/document/ui/tDesign')
+ * @returns 父路由对象 | undefined (未找到时)
+ */
+export function findParentRoute(
+  routes: RouterType.BlogRouteRecordRaw[],
+  currentPath: string,
+): RouterType.BlogRouteRecordRaw | undefined {
+  // 标准化路径：移除末尾斜杠
+  const normalizedPath = currentPath.replace(/\/$/, '')
+
+  // 递归查找函数
+  function find(routes: RouterType.BlogRouteRecordRaw[], parent?: RouterType.BlogRouteRecordRaw): RouterType.BlogRouteRecordRaw | undefined {
+    for (const route of routes) {
+      // 检查当前路由是否匹配
+      if (route.path.replace(/\/$/, '') === normalizedPath) {
+        return parent // 返回父路由
+      }
+
+      // 检查子路由
+      if (route.children) {
+        const found = find(route.children, route)
+
+        if (found) {
+          return found
+        }
+      }
+    }
+
+    return undefined
+  }
+
+  return find(routes)
+}
+
+/**
+ * 查找包含目标路径的顶级路由项（优化版）
+ * @param path 要查找的完整路径
+ * @param routes 路由列表
+ * @returns 匹配到的顶级路由项
+ */
+// export function findTopRouteByPath(
+//   path: string,
+//   routes: RouterType.BlogRouteRecordRaw[],
+// ): RouterType.BlogRouteRecordRaw | undefined {
+//   const normalizedPath = path.replace(/\/$/, '')
+
+//   for (const route of routes) {
+//     // 检查当前路由是否匹配
+//     if (route.path.replace(/\/$/, '') === normalizedPath) {
+//       return route
+//     }
+
+//     // 检查子路由
+//     if (route.children?.length) {
+//       // 先检查直接子路由
+//       const directChild = route.children.find(
+//         child => child.path.replace(/\/$/, '') === normalizedPath,
+//       )
+
+//       if (directChild) {
+//         return route
+//       }
+
+//       // 递归查找更深层级
+//       const foundInChildren = findTopRouteByPath(normalizedPath, route.children)
+
+//       if (foundInChildren) {
+//         return route
+//       }
+//     }
+//   }
+
+//   return undefined
+// }
+
+/**
+ * 查找包含目标路径的顶级路由项（优化修正版）
+ * @param path 要查找的完整路径
+ * @param routes 路由列表
+ * @returns 匹配到的第一级父路由项
+ */
+export function findTopRouteByPath(
+  path: string,
+  routes: RouterType.BlogRouteRecordRaw[],
+): RouterType.BlogRouteRecordRaw | undefined {
+  const normalizedPath = path.replace(/\/$/, '')
+
+  // 使用栈来跟踪当前父路由
+  const stack: { route: RouterType.BlogRouteRecordRaw, parent?: RouterType.BlogRouteRecordRaw }[]
+    = routes.map(route => ({
+      route,
+    }))
+
+  while (stack.length > 0) {
+    const { route, parent } = stack.pop()!
+
+    // 检查当前路由是否匹配
+    if (route.path.replace(/\/$/, '') === normalizedPath) {
+      // 如果是顶级路由，返回自身；否则返回父路由
+      return parent || route
+    }
+
+    // 将子路由加入栈（反向加入以保证顺序）
+    if (route.children) {
+      for (let i = route.children.length - 1; i >= 0; i--) {
+        stack.push({
+          route: route.children[i],
+          parent: parent || route, // 第一个有children的route作为父级
+        })
+      }
+    }
+  }
+
+  return undefined
+}

@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import type { WatermarkProps } from 'element-plus'
 
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import type { GlobalConfigProvider } from 'tdesign-vue-next'
 
-import { computed } from 'vue'
+import { merge } from 'lodash-es'
+
+import zhConfig from 'tdesign-vue-next/es/locale/zh_CN'
 
 import { useBlogStore } from './store'
 
@@ -18,31 +19,42 @@ defineOptions({
 
 const blogStore = useBlogStore()
 
-const watermarkProps = computed<WatermarkProps>(() => {
-  return {
-    content: blogStore.setting.watermark.isShow ? blogStore.setting.watermark.text : '',
-    cross: true,
-    fontSize: 16,
-    lineHeight: 16,
-    gap: [100, 120],
-    rotate: -15,
-    zIndex: 9999,
-  }
-})
+const empty: GlobalConfigProvider = {
+}
+
+const customConfig: GlobalConfigProvider = {
+  // 可以在此处定义更多自定义配置，具体可配置内容参看 API 文档
+  calendar: {
+  },
+  table: {
+  },
+  pagination: {
+  },
+}
+
+const globalConfig: GlobalConfigProvider = merge(empty, zhConfig, customConfig)
 
 </script>
 
 <template>
-  <ElConfigProvider
-    :locale="zhCn"
+
+  <t-config-provider
+    :global-config="globalConfig"
   >
-    <AppProvider>
-      <ElWatermark
-        class="h-full"
-        v-bind="watermarkProps"
-      >
-        <RouterView />
-      </ElWatermark>
-    </AppProvider>
-  </ElConfigProvider>
+    <t-watermark
+      v-if="blogStore.setting.watermark.isShow"
+      class="h-full w-full"
+      :watermark-content="{ text: `${blogStore.setting.watermark.text}` }"
+      :y="120"
+      :x="80"
+      :width="120"
+      :height="60"
+    >
+      <RouterView />
+    </t-watermark>
+
+    <RouterView
+      v-else
+    />
+  </t-config-provider>
 </template>

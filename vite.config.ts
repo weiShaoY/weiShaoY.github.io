@@ -10,7 +10,7 @@ import UnoCSS from 'unocss/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver, TDesignResolver } from 'unplugin-vue-components/resolvers'
 
 import Components from 'unplugin-vue-components/vite'
 
@@ -24,7 +24,7 @@ import Glsl from 'vite-plugin-glsl'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-// import vueDevTools from 'vite-plugin-vue-devtools'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(
@@ -64,7 +64,7 @@ export default defineConfig((configEnv) => {
 
       vueJsx(),
 
-      // vueDevTools(),
+      vueDevTools(),
 
       VueMacros({
         /**
@@ -111,6 +111,15 @@ export default defineConfig((configEnv) => {
          *  启用 Vue 模板
          */
         vueTemplate: true,
+
+        /**
+         *  自动导入 TDesign 组件
+         */
+        resolvers: [
+          TDesignResolver({
+            library: 'vue-next',
+          }),
+        ],
       }),
 
       // https://github.com/antfu/vite-plugin-components
@@ -124,6 +133,10 @@ export default defineConfig((configEnv) => {
           // 自动导入 Element Plus 组件，完整导入可查看 /src/plugins/ui.ts
           ElementPlusResolver({
             importStyle: false, // 不自动导入样式，完整导入可查看 /theme/index.ts
+          }),
+
+          TDesignResolver({
+            library: 'vue-next',
           }),
         ],
       }),

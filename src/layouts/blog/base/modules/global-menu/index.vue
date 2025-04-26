@@ -98,13 +98,3 @@ const rightMenuList = computed(() => {
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-:deep(.el-scrollbar__bar.is-vertical) {
-  display: none;
-}
-</style>
-
-<style lang="scss">
-
-</style>

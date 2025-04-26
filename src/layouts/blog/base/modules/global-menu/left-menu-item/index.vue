@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { findTopRouteByPath } from '@/router/utils'
+
 import { useBlogStore } from '@/store'
 
 import { useRoute } from 'vue-router'
-
-import { findTopRouteByPath } from '../utils'
 
 const { menuList } = defineProps<Props>()
 
@@ -65,54 +65,50 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
       />
     </div>
 
-    <el-scrollbar
+    <ul
+      class="overflow-y-auto scrollbar-hide"
       :style="{
-        height: `calc(100% - ${blogStore.setting.header.height}px)`,
+        height: `calc(100% - ${blogStore.setting.header.height + blogStore.setting.tab.height}px)`,
       }"
     >
-      <ul
-        class=""
+      <li
+        v-for="menu in menuList"
+        :key="menu.path"
+        class="mb-1 flex items-center justify-center"
+        @click="emits('blogMenuJump', menu, true)"
       >
-        <li
-          v-for="menu in menuList"
-          :key="menu.path"
-          class="mb-1 flex items-center justify-center"
-          @click="emits('blogMenuJump', menu, true)"
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          :content="menu.meta.title"
+          placement="right"
+          :offset="25"
+          :hide-after="0"
+          :disabled="dualMenuShowText"
         >
-          <el-tooltip
-            class="box-item"
-            effect="dark"
-            :content="menu.meta.title"
-            placement="right"
-            :offset="25"
-            :hide-after="0"
-            :disabled="dualMenuShowText"
+          <div
+            class="aspect-square flex-col items-center justify-center rounded-1 text-center transition-all duration-300 hover:cursor-pointer"
+            :class="[
+              currentRoute?.path === menu.path ? 'bg-[#F3B03D] color-white' : '',
+              dualMenuShowText ? 'w-[80%]' : 'w-[70%]',
+            ]"
           >
-            <div
-              class="aspect-square flex-col items-center justify-center rounded-1 text-center transition-all duration-300 hover:cursor-pointer"
-              :class="[
-                currentRoute?.path === menu.path ? 'bg-[#F3B03D] color-white' : '',
-                dualMenuShowText ? 'w-[80%]' : 'w-[70%]',
-              ]"
+            <SvgIcon
+              v-if="menu.meta.icon"
+              :icon="menu.meta.icon"
+              :class="dualMenuShowText ? 'mb-1 ' : 'scale-130'"
+            />
+
+            <span
+              v-if="dualMenuShowText"
+              class="max-w-[90%] text-ellipsis"
             >
-              <SvgIcon
-                v-if="menu.meta.icon"
-                :icon="menu.meta.icon"
-                :class="dualMenuShowText ? 'mb-1 ' : 'scale-130'"
-              />
-
-              <span
-                v-if="dualMenuShowText"
-                class="max-w-[90%] text-ellipsis"
-              >
-                {{ menu.meta.title }}
-              </span>
-            </div>
-          </el-tooltip>
-        </li>
-      </ul>
-
-    </el-scrollbar>
+              {{ menu.meta.title }}
+            </span>
+          </div>
+        </el-tooltip>
+      </li>
+    </ul>
 
     <div
       class="absolute bottom-3 left-0 right-0 flex items-center justify-center hover:cursor-pointer"

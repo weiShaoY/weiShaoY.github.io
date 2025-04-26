@@ -20,3 +20,6 @@ import './element-plus'
 import './reset.scss'
 
 import './el-ui.scss' // 优化element样式
+
+// tDesign
+import 'tdesign-vue-next/es/style/index.css'
