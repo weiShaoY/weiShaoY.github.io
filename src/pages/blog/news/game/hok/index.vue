@@ -614,73 +614,69 @@ onMounted(async () => {
       </el-select>
     </div>
 
-    <div
-      class=""
+    <el-descriptions
+      v-loading="isLoading"
+      border
+      :column="3"
+      align="center"
     >
-      <el-descriptions
-        v-loading="isLoading"
-        border
-        :column="3"
+
+      <el-descriptions-item
+        label="头像"
         align="center"
       >
-
-        <el-descriptions-item
-          label="头像"
-          align="center"
+        <div
+          class="min-h-20"
         >
-          <div
-            class="min-h-20"
-          >
-            <PreviewImg
-              v-if="hokData.pic"
-              :src="hokData.pic"
-              :width="80"
-            />
-          </div>
-        </el-descriptions-item>
+          <PreviewImg
+            v-if="hokData.pic"
+            :src="hokData.pic"
+            :width="80"
+          />
+        </div>
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="英雄"
-          align="center"
-        >
-          {{ hokData.name }}
-        </el-descriptions-item>
+      <el-descriptions-item
+        label="英雄"
+        align="center"
+      >
+        {{ hokData.name }}
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="称号"
-          align="center"
-        >
-          {{ hokData.alias }}
-        </el-descriptions-item>
+      <el-descriptions-item
+        label="称号"
+        align="center"
+      >
+        {{ hokData.alias }}
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="省"
-          align="center"
-        >
-          {{ hokData.province }}
-        </el-descriptions-item>
+      <el-descriptions-item
+        label="省"
+        align="center"
+      >
+        {{ hokData.province }}
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="市"
-          align="center"
-        >
-          {{ hokData.city }}
-        </el-descriptions-item>
+      <el-descriptions-item
+        label="市"
+        align="center"
+      >
+        {{ hokData.city }}
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="区"
-          align="center"
-        >
-          {{ hokData.area }}
-        </el-descriptions-item>
+      <el-descriptions-item
+        label="区"
+        align="center"
+      >
+        {{ hokData.area }}
+      </el-descriptions-item>
 
-        <el-descriptions-item
-          label="战力值"
-          align="center"
-        >
-          {{ hokData.provincePower }}
-        </el-descriptions-item>
-      </el-descriptions>
-    </div>
+      <el-descriptions-item
+        label="战力值"
+        align="center"
+      >
+        {{ hokData.provincePower }}
+      </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>

@@ -56,31 +56,26 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-input-search
-        v-model="tracking"
-        class="w-[50%]"
-        allow-clear
-        search-button
+
+      <el-input
+        v-model.trim="tracking"
+        clearable
+        size="large"
         placeholder="请输入快递单号"
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          快递单号搜索
-        </template>
-      </a-input-search>
+      </el-input>
 
       <div
         v-if="trackingData.expressName"
@@ -108,40 +103,29 @@ onMounted(async () => {
 
     </div>
 
-    <a-spin
-      :loading="isLoading"
+    <el-timeline
+      v-loading="isLoading"
+      class="!ml-20 !w-200"
     >
-
-      <a-timeline
-        mode="left"
-        label-position="relative"
+      <el-timeline-item
+        v-for="(item, index) in trackingData.trackingDetails"
+        :key="index"
+        :timestamp="item.time"
+        placement="top"
       >
-        <a-timeline-item
-          v-for="(item, index) in trackingData.trackingDetails"
-          :key="index"
-          :label="item.time"
+        <template
+          v-if="index === 0"
+          #dot
         >
-          <template
-            v-if="index === 0"
-            #dot
-          >
-            <SvgIcon
-              :size="30"
-              icon="blog-tracking-new"
-            />
-          </template>
+          <SvgIcon
+            :size="30"
+            icon="blog-tracking-new"
+            class="relative left-[-10px]"
+          />
+        </template>
 
-          <a-row
-            :style="{ display: 'inline-flex', alignItems: 'center' }"
-          >
-            {{ item.description }}
-
-          </a-row>
-        </a-timeline-item>
-
-      </a-timeline>
-
-    </a-spin>
-
+        {{ item.description }}
+      </el-timeline-item>
+    </el-timeline>
   </div>
 </template>

@@ -1,54 +1,55 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { BlogApi } from "@/api";
+import { BlogApi } from '@/api'
 
-import { Notification } from "@arco-design/web-vue";
+import { Notification } from '@arco-design/web-vue'
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 /**
  *  数据
  */
 const goldData = ref<{
+
   /**
    *  大盘黄金
    */
-  marketGold: [];
+  marketGold: []
 
   /**
    *  国内十大金店
    */
-  domesticTopGoldStores: [];
+  domesticTopGoldStores: []
 
   /**
    *  国内黄金
    */
-  domesticGold: [];
+  domesticGold: []
 
   /**
    *  国际黄金
    */
-  internationalGold: [];
+  internationalGold: []
 }>({
   marketGold: [],
   domesticTopGoldStores: [],
   domesticGold: [],
   internationalGold: [],
-});
+})
 
 /**
  * 获取壁纸数据
  */
 async function getData() {
   try {
-    isLoading.value = true;
+    isLoading.value = true
 
     // 并行获取数据，提高性能
     const [marketGoldPrice, realTimeGoldPrice] = await Promise.all([
       BlogApi.getMarketGoldPrice(),
 
       // BlogApi.getRealTimeGoldPrice(),
-    ]);
+    ])
 
     goldData.value = {
       marketGold: marketGoldPrice,
@@ -56,31 +57,49 @@ async function getData() {
       // domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
       // domesticGold: realTimeGoldPrice['国内黄金'],
       // internationalGold: realTimeGoldPrice['国际黄金'],
-    };
+    }
 
     console.log(
-      "%c Line:64 🍆 goldData.value",
-      "color:#7f2b82",
+      '%c Line:64 🍆 goldData.value',
+      'color:#7f2b82',
       goldData.value,
-    );
-  } catch (error: any) {
-    Notification.error(error.message || "获取数据失败，请稍后重试");
-  } finally {
-    isLoading.value = false;
+    )
+  }
+  catch (error: any) {
+    Notification.error(error.message || '获取数据失败，请稍后重试')
+  }
+  finally {
+    isLoading.value = false
   }
 }
 
 onMounted(async () => {
-  await getData();
-});
+  await getData()
+})
 </script>
 
 <template>
-  <el-tabs v-loading="isLoading" class="h-full w-full">
-    <el-tab-pane key="1" label="大盘黄金">
-      <div class="h-[calc(100vh-200px)]">
-        <el-table class="!w-full" :data="goldData.marketGold" height="100%">
-          <el-table-column prop="id" label="ID" :width="100" />
+  <el-tabs
+    v-loading="isLoading"
+    class="h-full w-full"
+  >
+    <el-tab-pane
+      key="1"
+      label="大盘黄金"
+    >
+      <div
+        class="h-[calc(100vh-200px)]"
+      >
+        <el-table
+          class="!w-full"
+          :data="goldData.marketGold"
+          height="100%"
+        >
+          <el-table-column
+            prop="id"
+            label="ID"
+            :width="100"
+          />
 
           <el-table-column
             prop="dir"
@@ -130,6 +149,7 @@ onMounted(async () => {
             align="center"
             sortable
           />
+
           <el-table-column
             prop="lastclosingprice"
             label="收盘价"
@@ -140,14 +160,24 @@ onMounted(async () => {
       </div>
     </el-tab-pane>
 
-    <el-tab-pane key="2" label="国内十大金店">
-      <div class="h-[calc(100vh-200px)]">
+    <el-tab-pane
+      key="2"
+      label="国内十大金店"
+    >
+      <div
+        class="h-[calc(100vh-200px)]"
+      >
         <el-table
           class="!w-full"
           :data="goldData.domesticTopGoldStores"
           height="100%"
         >
-          <el-table-column prop="品牌" label="品牌" align="center" sortable />
+          <el-table-column
+            prop="品牌"
+            label="品牌"
+            align="center"
+            sortable
+          />
 
           <el-table-column
             prop="黄金价格"
@@ -170,7 +200,11 @@ onMounted(async () => {
             sortable
           />
 
-          <el-table-column prop="单位" label="单位" align="center" />
+          <el-table-column
+            prop="单位"
+            label="单位"
+            align="center"
+          />
 
           <el-table-column
             prop="报价时间"
@@ -182,10 +216,24 @@ onMounted(async () => {
       </div>
     </el-tab-pane>
 
-    <el-tab-pane key="3" label="国内黄金">
-      <div class="h-[calc(100vh-200px)]">
-        <el-table class="!w-full" :data="goldData.domesticGold" height="100%">
-          <el-table-column prop="品种" label="品种" align="center" sortable />
+    <el-tab-pane
+      key="3"
+      label="国内黄金"
+    >
+      <div
+        class="h-[calc(100vh-200px)]"
+      >
+        <el-table
+          class="!w-full"
+          :data="goldData.domesticGold"
+          height="100%"
+        >
+          <el-table-column
+            prop="品种"
+            label="品种"
+            align="center"
+            sortable
+          />
 
           <el-table-column
             prop="最新价"
@@ -208,9 +256,19 @@ onMounted(async () => {
             sortable
           />
 
-          <el-table-column prop="涨跌" label="涨跌" align="center" sortable />
+          <el-table-column
+            prop="涨跌"
+            label="涨跌"
+            align="center"
+            sortable
+          />
 
-          <el-table-column prop="幅度" label="幅度" align="center" sortable />
+          <el-table-column
+            prop="幅度"
+            label="幅度"
+            align="center"
+            sortable
+          />
 
           <el-table-column
             prop="报价时间"
@@ -222,10 +280,24 @@ onMounted(async () => {
       </div>
     </el-tab-pane>
 
-    <el-tab-pane key="4" label="国际黄金">
-      <div class="h-[calc(100vh-200px)]">
-        <el-table class="!w-full" :data="goldData.domesticGold" height="100%">
-          <el-table-column prop="品种" label="品种" align="center" sortable />
+    <el-tab-pane
+      key="4"
+      label="国际黄金"
+    >
+      <div
+        class="h-[calc(100vh-200px)]"
+      >
+        <el-table
+          class="!w-full"
+          :data="goldData.domesticGold"
+          height="100%"
+        >
+          <el-table-column
+            prop="品种"
+            label="品种"
+            align="center"
+            sortable
+          />
 
           <el-table-column
             prop="最新价"
@@ -248,9 +320,19 @@ onMounted(async () => {
             sortable
           />
 
-          <el-table-column prop="涨跌" label="涨跌" align="center" sortable />
+          <el-table-column
+            prop="涨跌"
+            label="涨跌"
+            align="center"
+            sortable
+          />
 
-          <el-table-column prop="幅度" label="幅度" align="center" sortable />
+          <el-table-column
+            prop="幅度"
+            label="幅度"
+            align="center"
+            sortable
+          />
 
           <el-table-column
             prop="报价时间"

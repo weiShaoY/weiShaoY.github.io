@@ -68,6 +68,7 @@ onMounted(async () => {
         >
           <ButtonIcon
             icon="search"
+            :loading="isLoading"
             @click="getData"
           />
         </template>

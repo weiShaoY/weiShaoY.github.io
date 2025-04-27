@@ -1,124 +1,60 @@
-<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { downloadImage } from '@/utils'
-
 import { Notification } from '@arco-design/web-vue'
+
+import { ref } from 'vue'
 
 const isLoading = ref(false)
 
-/**
- *  分类
- */
-const category = ref('mn')
+const licensePlate = ref('京A12345')
+
+const licensePlateData = ref<any>({
+})
 
 /**
- *  分类选项
+ *  清空数据
  */
-const categoryOptions = [
-  {
-    value: 'fj',
-    label: '风景',
-  },
-  {
-    value: 'yx',
-    label: '游戏',
-  },
-  {
-    value: 'mn',
-    label: '美女',
-  },
-  {
-    value: 'cy',
-    label: '视觉创意',
-  },
-  {
-    value: 'mxys',
-    label: '明星影视',
-  },
-  {
-    value: 'qc',
-    label: '汽车',
-  },
-  {
-    value: 'dw',
-    label: '动物',
-  },
-  {
-    value: 'xqs',
-    label: '小清新',
-  },
-  {
-    value: 'ty',
-    label: '体育',
-  },
-  {
-    value: 'js',
-    label: '军事',
-  },
-  {
-    value: 'dm',
-    label: '动漫',
-  },
-  {
-    value: 'qg',
-    label: '情感',
-  },
-  {
-    value: 'wz',
-    label: '文字',
-  },
-  {
-    value: 'tui',
-    label: '腿',
-  },
-  {
-    value: 'sg',
-    label: '帅哥',
-  },
-]
+function clearData() {
+  licensePlateData.value = {
+  }
+}
 
-/**
- *  关键字
- */
-const data = ref('')
-
-/**
- * 获取壁纸数据
- */
 async function getData() {
   try {
+    if (!licensePlate.value) {
+      throw new Error('请输入车牌')
+    }
+
+    clearData()
+
     isLoading.value = true
 
-    if (category.value === 'tui') {
-      const response = await BlogApi.getTuiImage()
+    const response = await BlogApi.getLicensePlateNumberInfo(licensePlate.value)
 
-      data.value = response.text
-    }
-    else if (category.value === 'sg') {
-      const response = await BlogApi.getRandomManImage()
-
-      data.value = response.img
-    }
-    else {
-      const response = await BlogApi.getWallpaper(category.value)
-
-      data.value = response.img_url
-    }
+    licensePlateData.value = response
+    console.log('%c Line:36 🥪 licensePlateData.value', 'color:#93c0a4', licensePlateData.value)
   }
   catch (error: any) {
     Notification.error(error.message || '获取数据失败，请稍后重试')
+
+    clearData()
   }
   finally {
     isLoading.value = false
   }
 }
 
-getData()
+const typeMap: Record<string, string> = {
+  10: '民用',
+  20: '军用',
+  30: '使馆',
+  40: '民航',
+  50: '武警',
+}
 
-watchEffect(() => {
-  console.log('%c Line:120 🥃 keyword.value', 'color:#3f7cff', data.value)
+onMounted(async () => {
+  await getData()
 })
 </script>
 
@@ -126,55 +62,69 @@ watchEffect(() => {
   <div
     class="h-full w-full flex flex-col gap-5 overflow-hidden"
   >
-
     <div
       class="flex items-center gap-5"
     >
-      <a-select
-        v-model="category"
-        :options="categoryOptions"
-        class="w-40"
-        placeholder="请选择"
-        allow-clear
-        @change="getData"
-      />
-
-      <a-button
-        :loading="isLoading"
-        @click="getData"
+      <el-input
+        v-model.trim="licensePlate"
+        clearable
+        size="large"
+        placeholder="请输入车牌"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
+        @clear="clearData"
       >
         <template
-          #icon
+          #append
         >
-          <SvgIcon
-            icon="blog-refresh"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-      </a-button>
-
-      <a-button
-        @click="downloadImage(data)"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-download"
-          />
-        </template>
-
-      </a-button>
+      </el-input>
     </div>
 
-    <PreviewImg
-      :src="data"
-      :is-loading="isLoading"
-    />
+    <el-descriptions
+      v-loading="isLoading"
+      :column="1"
+      border
+    >
+
+      <el-descriptions-item
+        :span="1"
+        label="省份"
+      >
+        {{ licensePlateData.province_name }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="城市"
+      >
+        {{ licensePlateData.city }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="机构名称"
+      >
+        {{ licensePlateData.organization }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="类型编码"
+      >
+        <span
+          v-if="licensePlateData.type"
+        >
+          {{ typeMap[licensePlateData.type] }}
+        </span>
+      </el-descriptions-item>
+
+    </el-descriptions>
 
   </div>
 </template>
-
-<style lang="less" scoped>
-
-</style>

@@ -79,90 +79,57 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-input-search
-        v-model="apiUrl"
-        class="w-[60%]"
-        allow-clear
-        search-button
+      <el-input
+        v-model.trim="apiUrl"
+        clearable
+        size="large"
         placeholder="请输入接口地址"
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          测试 API
-        </template>
-      </a-input-search>
-
+      </el-input>
     </div>
 
-    <a-card
+    <el-card
+      v-loading="isLoading"
       class="h-full w-full"
-      :loading="isLoading"
     >
 
       <template
-        #title
+        #header
       >
 
         <span>
           Http响应码
         </span>
 
-        <a-link
+        <el-link
           class="w-12"
+          :type="data.http.code === 200 ? 'success' : (data.http.code > 0 ? 'danger' : 'info')"
         >
-          <span
-            :class="`${data.http.code === 200 ? 'text-green' : (data.http.code > 0 ? 'text-red' : '')}`"
-            class="text-5"
-          >
-            {{ data.http.code ? data.http.code : '' }}
-          </span>
-        </a-link>
-
+          {{ data.http.code ? data.http.code : '' }}
+        </el-link>
       </template>
 
-      <template
-        #extra
-      >
-        <span>
-          Http响应信息
-        </span>
-
-        <a-link
-          class="w-12"
-        >
-          <span
-            class="text-xl font-bold"
-            :class="{
-              'text-green': data.http.message === 'OK',
-              'text-red': data.http.message !== 'OK' && data.http.code > 0,
-              '': data.http.message !== 'OK' && data.http.code <= 0,
-            }"
-          >
-            {{ data.http.message }}
-          </span>
-        </a-link>
-      </template>
-
-      <a-textarea
+      <el-input
         v-model="data.data"
-        class="h-full w-full"
+        :rows="30"
+        type="textarea"
         placeholder="接口数据"
+        :input-style="{ height: 'calc(100vh - 300px) !important' }"
       />
 
-    </a-card>
+    </el-card>
   </div>
 </template>
 

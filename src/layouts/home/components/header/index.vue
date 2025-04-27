@@ -66,16 +66,6 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
         />
 
         <!-- 仅开发环境显示  -->
-        <!-- <a-link
-          v-if="isDevelopment"
-          href="https://weishaoy.github.io/"
-          target="_blank"
-        >
-          <SvgIcon
-            :size="32"
-            icon="home-navbar-demo"
-          />
-        </a-link> -->
         <ButtonIcon
           v-if="isDevelopment"
           tooltip-content="打开线上地址,此按钮仅开发环境显示"

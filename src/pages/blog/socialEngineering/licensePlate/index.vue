@@ -33,6 +33,7 @@ async function getData() {
     const response = await BlogApi.getLicensePlateNumberInfo(licensePlate.value)
 
     licensePlateData.value = response
+    console.log('%c Line:36 🥪 licensePlateData.value', 'color:#93c0a4', licensePlateData.value)
   }
   catch (error: any) {
     Notification.error(error.message || '获取数据失败，请稍后重试')
@@ -64,76 +65,66 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-input-search
-        v-model="licensePlate"
-        class="w-[60%]"
-        allow-clear
-        search-button
+      <el-input
+        v-model.trim="licensePlate"
+        clearable
+        size="large"
         placeholder="请输入车牌"
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          车牌搜索
-        </template>
-      </a-input-search>
-
+      </el-input>
     </div>
 
-    <a-spin
-      :loading="isLoading"
+    <el-descriptions
+      v-loading="isLoading"
+      :column="1"
+      border
     >
-      <a-descriptions
-        :column="{ xs: 1, md: 1, lg: 1 }"
-        bordered
+
+      <el-descriptions-item
+        :span="1"
+        label="省份"
       >
+        {{ licensePlateData.province_name }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="省份"
+      <el-descriptions-item
+        :span="1"
+        label="城市"
+      >
+        {{ licensePlateData.city }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="机构名称"
+      >
+        {{ licensePlateData.organization }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="类型编码"
+      >
+        <span
+          v-if="licensePlateData.type"
         >
-          {{ licensePlateData.province_name }}
-        </a-descriptions-item>
+          {{ typeMap[licensePlateData.type] }}
+        </span>
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="城市"
-        >
-          {{ licensePlateData.city }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="机构名称"
-        >
-          {{ licensePlateData.organization }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="类型编码"
-        >
-          <span
-            v-if="licensePlateData.type"
-          >
-            {{ typeMap[licensePlateData.type] }}
-          </span>
-        </a-descriptions-item>
-      </a-descriptions>
-
-    </a-spin>
+    </el-descriptions>
 
   </div>
 </template>
