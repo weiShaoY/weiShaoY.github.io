@@ -5,8 +5,6 @@ import type { WeatherType } from './types'
 
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import Climate from './components/climate/index.vue'
 
 import Meter from './components/meter/index.vue'
@@ -191,8 +189,10 @@ async function getData() {
     data.value = response
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
-
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
     clearData()
   }
   finally {

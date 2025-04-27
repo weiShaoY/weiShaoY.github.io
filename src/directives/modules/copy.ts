@@ -6,23 +6,20 @@
 
 import type { Directive, DirectiveBinding } from 'vue'
 
-import { Notification } from '@arco-design/web-vue'
-
 type ElType = {
   copyData: string | number
 } & HTMLElement
 
 async function handleClick(this: any) {
   try {
-    console.log('%c Line:18 🍕 this.copyData', 'color:#93c0a4', this.copyData)
-
     if (!this.copyData) {
       return
     }
 
     await navigator.clipboard.writeText(this.copyData)
-    Notification.success({
-      content: '复制成功',
+
+    window.$notification?.success({
+      message: '复制成功',
     })
   }
   catch (err) {

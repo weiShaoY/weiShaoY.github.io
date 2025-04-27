@@ -1,7 +1,5 @@
 import path from 'node:path'
 
-import { vitePluginForArco } from '@arco-plugins/vite-vue'
-
 import Vue from '@vitejs/plugin-vue'
 
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -136,11 +134,6 @@ export default defineConfig((configEnv) => {
       // https://github.com/antfu/unocss
       // 查看 uno.config.ts 文件进行 Uno.css 配置
       UnoCSS(),
-
-      //  Arco 按需引入
-      vitePluginForArco({
-        style: 'css',
-      }),
 
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import dayjs from 'dayjs'
 
 import { ref } from 'vue'
@@ -230,7 +228,10 @@ async function getData() {
     domainData.value = response
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
 
     clearData()
   }

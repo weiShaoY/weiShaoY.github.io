@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 const isLoading = ref(false)
 
 /**
@@ -64,7 +62,10 @@ async function getData() {
     console.log('%c Line:64 🍆 goldData.value', 'color:#7f2b82', goldData.value)
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
   }
   finally {
     isLoading.value = false

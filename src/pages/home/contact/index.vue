@@ -4,8 +4,6 @@ import Moon from '@/canvas/moon/index.vue'
 
 import { sendContactEmail } from '@/utils'
 
-import { Notification } from '@arco-design/web-vue'
-
 type FormType = {
 
   /**
@@ -40,19 +38,18 @@ async function handleSubmit(e: Event) {
   try {
     await sendContactEmail(form.value)
 
-    Notification.success({
+    window.$notification?.error({
       title: '邮件发送成功',
-      content: '感谢您的留言😃!',
+      message: '感谢您的留言😃!',
     })
-
     formRef.value?.reset()
   }
   catch (error) {
     console.error('邮件发送失败:', error)
 
-    Notification.error({
+    window.$notification?.error({
       title: '邮件发送失败',
-      content: '我没有收到你的信息😢!',
+      message: '我没有收到你的信息😢!',
     })
   }
   finally {

@@ -27,7 +27,6 @@
     "clean": "rimraf node_modules"
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.57.0",
     "@better-scroll/core": "2.5.1",
     "@emailjs/browser": "^4.4.1",
     "@sa/utils": "workspace:*",
@@ -62,7 +61,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",
-    "@arco-plugins/vite-vue": "^1.4.5",
     "@sa/uno-preset": "workspace:*",
     "@types/color": "^4.2.0",
     "@types/lodash": "^4.17.16",

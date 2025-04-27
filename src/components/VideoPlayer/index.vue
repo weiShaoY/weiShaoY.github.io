@@ -3,8 +3,6 @@ import type { CSSProperties } from 'vue'
 
 import { copyImageToClipboard } from '@/utils'
 
-import { Notification } from '@arco-design/web-vue'
-
 import {
   onBeforeUnmount,
   onMounted,
@@ -150,7 +148,9 @@ onMounted(() => {
 
   // 监听截图
   player.value.on(Player.Events.SCREEN_SHOT, (url: string) => {
-    Notification.success('截图下载成功')
+    window.$notification?.success({
+      message: '截图下载成功',
+    })
 
     copyImageToClipboard(url)
   })

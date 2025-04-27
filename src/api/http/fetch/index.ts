@@ -1,5 +1,3 @@
-import { Notification } from '@arco-design/web-vue'
-
 /**
  * 检查接口响应码是否有效
  * @param {any} result - 接口返回的结果
@@ -43,9 +41,11 @@ export async function fetchHttp(
     // 检查接口响应码是否有效
     if (!isValidResponseCode(result)) {
       const errorMessage
-				= result.message || `接口响应码错误: ${result.code || '未知'}`
+        = result.message || `接口响应码错误: ${result.code || '未知'}`
 
-      Notification.error(errorMessage)
+      window.$notification?.error({
+        message: errorMessage,
+      })
       throw new Error(errorMessage)
     }
 

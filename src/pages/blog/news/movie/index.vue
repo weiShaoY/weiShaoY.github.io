@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import { onMounted, ref } from 'vue'
 
 import Parse from './components/parse/index.vue'
@@ -119,7 +117,10 @@ async function getData() {
     // await nextTick();
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
   }
   finally {
     isLoading.value = false

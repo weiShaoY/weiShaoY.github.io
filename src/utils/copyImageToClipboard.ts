@@ -1,5 +1,3 @@
-import { Notification } from '@arco-design/web-vue'
-
 /**
  * 将指定图片 URL 复制到剪贴板
  * @param {string} url - 图片的 URL 地址
@@ -12,7 +10,10 @@ export function copyImageToClipboard(url: string): void {
       if (!response.ok) {
         const errorMsg = `图片获取失败，状态码: ${response.status}`
 
-        Notification.error(errorMsg)
+        window.$notification?.error({
+          message: errorMsg,
+        })
+
         throw new Error(errorMsg)
       }
 
@@ -32,14 +33,17 @@ export function copyImageToClipboard(url: string): void {
     })
     .then(() => {
       // 提示用户操作成功
-      Notification.success('图片已成功复制到剪贴板！')
+      window.$notification?.success({
+        message: '图片已成功复制到剪贴板！',
+      })
     })
     .catch((err) => {
       // 捕获错误并显示提示
       const errorMsg = `复制图片到剪贴板失败: ${(err as Error).message}`
 
-      Notification.error(errorMsg)
-
+      window.$notification?.error({
+        message: errorMsg,
+      })
       throw new Error(errorMsg)
     })
 }
