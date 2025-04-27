@@ -42,11 +42,17 @@ function base64Decode(base64Str: string) {
 }
 
 watchEffect(() => {
-  if (type.value === 'code') {
-    encodedText.value = base64Encode(inputText.value)
+  try {
+    if (type.value === 'code') {
+      encodedText.value = base64Encode(inputText.value)
+    }
+    else {
+      encodedText.value = base64Decode(inputText.value)
+    }
   }
-  else {
-    encodedText.value = base64Decode(inputText.value)
+  catch {
+    encodedText.value = ''
+    window.$notification?.error('请输入正确的格式!')
   }
 })
 
@@ -65,61 +71,56 @@ watchEffect(() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <el-select
         v-model="type"
-        class="w-40"
-        placeholder="请选择查询类型"
+        placeholder="请选择"
+        size="large"
+        class="!w-60"
         @change="handleSelectChange"
       >
-        <a-option
+        <el-option
           value="code"
-        >
-          Base64-编码
-        </a-option>
+          label="Base64-编码"
+        />
 
-        <a-option
+        <el-option
           value="doCode"
-        >
-          Base64-解码
-        </a-option>
+          label="Base64-解码"
+        />
+      </el-select>
 
-      </a-select>
-
-      <a-button
+      <el-button
         type="primary"
         @click="isShowModel = true"
       >
         Base64编码对照表
-      </a-button>
+      </el-button>
     </div>
 
-    <a-textarea
+    <el-input
       v-model="inputText"
-      class="h-[40%] w-full"
-      allow-clear
+      :rows="3"
+      type="textarea"
       :placeholder="type === 'code' ? '请输入要编码的内容' : '请输入要解码的内容'"
     />
 
-    <a-divider />
+    <el-divider />
+
+    <div
+      class="text-4 font-bold"
+    >
+      {{ type === "code" ? "编码结果" : "解码结果" }}
+    </div>
 
     <div
       v-copy="encodedText"
-      class="h-[40%] flex cursor-pointer border p-2"
+      class="h-[40%] min-h-25 flex flex-col cursor-pointer border p-2"
     >
-
-      <span
+      <div
         v-if="encodedText"
       >
         {{ encodedText }}
-      </span>
-
-      <span
-        v-else
-        class="m-auto text-6"
-      >
-        {{ type === 'code' ? '编码结果' : '解码结果' }}
-      </span>
-
+      </div>
     </div>
   </div>
 </template>
