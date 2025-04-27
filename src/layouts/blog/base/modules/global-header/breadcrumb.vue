@@ -88,8 +88,7 @@ watch(() => route.path, getBreadcrumb, {
             <t-dropdown-item
               v-for="sub in item.children"
               :key="sub.path"
-              :divider="Array.isArray(sub?.children) && sub.children.length > 0"
-              @click="blogMenuJump(sub)"
+              :divider="Array.isArray(sub?.children) && sub.children.length > 0"              @click="blogMenuJump(sub)"
             >
               <MenuItem
                 :menu="sub"

@@ -1,100 +1,93 @@
 <script lang="ts" setup>
-import { BlogApi } from '@/api'
+import { BlogApi } from "@/api";
 
-import { Notification } from '@arco-design/web-vue'
+import { Notification } from "@arco-design/web-vue";
 
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const isLoading = ref(false)
+const isLoading = ref(false);
 
-const category = ref(0)
+const category = ref(0);
 
-const musicUrl = ref('')
+const musicUrl = ref("");
 
-const isAutoPlay = ref(false)
+const isAutoPlay = ref(false);
 
-const isAutoPlayNext = ref(true)
+const isAutoPlayNext = ref(true);
 
 const categoryOptions = [
   {
     value: 0,
-    label: '绿茶',
+    label: "绿茶",
   },
   {
     value: 1,
-    label: '怼人',
+    label: "怼人",
   },
   {
     value: 2,
-    label: '御姐撒娇',
+    label: "御姐撒娇",
   },
-]
+];
 
 const categoryApiMap: Record<number, () => Promise<string>> = {
   0: BlogApi.getRandomGreenTeaVoice,
   1: BlogApi.getRandomDuiRenVoice,
   2: BlogApi.getRandomYujieVoice,
-}
+};
 
 async function getData() {
   try {
-    isLoading.value = true
-    const fetchData = categoryApiMap[category.value]
+    isLoading.value = true;
+    const fetchData = categoryApiMap[category.value];
 
-    const response = await fetchData()
+    const response = await fetchData();
 
-    musicUrl.value = response || ''
+    musicUrl.value = response || "";
 
     if (!response) {
-      throw new Error('未获取到视频资源')
+      throw new Error("未获取到视频资源");
     }
-  }
-  catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
-  }
-  finally {
-    isLoading.value = false
+  } catch (error: any) {
+    Notification.error(error.message || "获取数据失败，请稍后重试");
+  } finally {
+    isLoading.value = false;
   }
 }
 
 function handlePlayEnded() {
   if (isAutoPlayNext.value) {
-    isAutoPlay.value = true
-    getData()
+    isAutoPlay.value = true;
+    getData();
   }
 }
 
 function handlePlayNext() {
-  getData()
+  getData();
 }
 
 onMounted(async () => {
-  await getData()
-})
+  await getData();
+});
 </script>
 
 <template>
-  <div
-    class="h-full w-full flex flex-col gap-5 overflow-hidden"
-  >
-    <div
-      class="flex items-center gap-5"
-    >
-
-      <el-select
+  <div class="h-full w-full flex flex-col gap-5 overflow-hidden">
+    <div class="flex items-center gap-5">
+      <t-select
         v-model="category"
         placeholder="请选择"
-        size="large"
         class="!w-60"
+        size="large"
         @change="getData"
       >
-        <el-option
+        <t-option
           v-for="item in categoryOptions"
           :key="item.value"
           :label="item.label"
           :value="item.value"
         />
-      </el-select>
+      </t-select>
 
       <ButtonIcon
         tooltip-content="刷新"
@@ -103,25 +96,16 @@ onMounted(async () => {
         @click="getData"
       />
 
-      <DownloadButton
-        tooltip-content="下载语音"
-        :url="musicUrl"
-        type="audio"
-      />
+      <DownloadButton tooltip-content="下载语音" :url="musicUrl" type="audio" />
 
-      <el-switch
-        v-model="isAutoPlayNext"
-        size="large"
-        inline-prompt
-        style="--el-switch-on-color: #F3B03D;"
-        active-text="自动播放下一个语音"
-        inactive-text="手动播放下一个语音"
-      />
+      <t-switch v-model="isAutoPlayNext" size="large">
+        <template #label="slotProps">
+          {{ slotProps.value ? "自动播放下一个语音" : "手动播放下一个语音" }}
+        </template>
+      </t-switch>
     </div>
 
-    <div
-      class="h-[calc(100vh-240px)]"
-    >
+    <div class="h-[calc(100vh-240px)]">
       <MusicPlayer
         :music-url="musicUrl"
         :is-auto-play="isAutoPlay"

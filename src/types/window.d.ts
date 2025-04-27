@@ -16,6 +16,6 @@ declare global {
     $message?: import('element-plus').Message
 
     /** Notification 实例 */
-    $notification?: import('element-plus').Notify
+    $notify?: import('tdesign-vue-next').NotificationPluginType
   }
 }

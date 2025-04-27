@@ -2,20 +2,21 @@
 import {
   ElMessage,
   ElMessageBox,
-  ElNotification,
 } from 'element-plus'
 
 import { createTextVNode, defineComponent } from 'vue'
 
+import { NotifyPlugin} from 'tdesign-vue-next'
+
 defineOptions({
   name: 'AppProvider',
 })
-
+NotifyPlugin
 const ContextHolder = defineComponent({
   name: 'ContextHolder',
   setup() {
     function register() {
-      window.$notification = ElNotification
+      window.$notify = NotifyPlugin
       window.$messageBox = ElMessageBox
       window.$message = ElMessage
     }
