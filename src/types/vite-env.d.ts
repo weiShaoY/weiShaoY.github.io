@@ -50,6 +50,11 @@ declare namespace Env {
     readonly VITE_GITHUB_URL: string
 
     /**
+     *  邮箱地址
+     */
+    readonly VITE_EMAIL_URL: string
+
+    /**
      * 路由-模式
      */
     readonly VITE_ROUTER_MODE: 'hash' | 'history'

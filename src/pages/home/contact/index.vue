@@ -38,7 +38,7 @@ async function handleSubmit(e: Event) {
   try {
     await sendContactEmail(form.value)
 
-    window.$notification?.error({
+    window.$notification?.success({
       title: '邮件发送成功',
       message: '感谢您的留言😃!',
     })
