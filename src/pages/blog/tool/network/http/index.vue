@@ -243,58 +243,40 @@ const data = [
   <div
     class="grid grid-cols-2 h-full w-full gap-5 overflow-hidden"
   >
-    <a-card
+    <el-card
       v-for="item in data"
       :key="item.key"
-      class=""
+      :header="`${item.key}---${item.title}`"
     >
-      <template
-        #title
-      >
-        {{ item.title }}
-
-      </template>
-
-      <template
-        #extra
-      >
-        {{ item.key }}
-      </template>
-
-      <a-table
+      <el-table
         :data="item.list"
-        :pagination="false"
       >
-        <template
-          #columns
+        <el-table-column
+          label="响应状态码"
+          prop="code"
+          align="center"
+          :width="120"
         >
-          <a-table-column
-            title="响应状态码"
-            data-index="code"
-            align="center"
-            :width="120"
+          <template
+            #default="{ row }"
           >
-            <template
-              #cell="{ record }"
-            >
-              <a-link>
-                {{ record.code }}
-              </a-link>
-            </template>
-          </a-table-column>
+            <el-link>
+              {{ row.code }}
+            </el-link>
+          </template>
+        </el-table-column>
 
-          <a-table-column
-            title="响应状态码英文名称"
-            data-index="name"
-            :width="300"
-          />
+        <el-table-column
+          prop="name"
+          label="响应状态码英文名称"
+          :width="300"
+        />
 
-          <a-table-column
-            title="响应状态码中文描述"
-            data-index="description"
-          />
-        </template>
-      </a-table>
-    </a-card>
+        <el-table-column
+          prop="description"
+          label="响应状态码中文描述"
+        />
+      </el-table>
+    </el-card>
   </div>
 </template>
