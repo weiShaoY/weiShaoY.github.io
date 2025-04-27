@@ -45,6 +45,15 @@ const Media: RouterType.BlogRouteRecordRaw = {
       },
       component: () => import('@/pages/blog/media/music/index.vue'),
     },
+    {
+      path: 'av',
+      name: 'Av',
+      meta: {
+        title: '教育片',
+        icon: 'blog-menu-av',
+      },
+      component: () => import('@/pages/blog/media/av/index.vue'),
+    },
   ],
 }
 

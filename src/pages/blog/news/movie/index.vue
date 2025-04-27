@@ -133,12 +133,12 @@ onMounted(async () => {
 
 <template>
   <el-tabs
+    v-loading="isLoading"
     class="h-full w-full"
   >
     <el-tab-pane
       v-for="(movies, key) in movieData"
       :key="key"
-      v-loading="isLoading"
       :label="key === 'comingSoon' ? '即将上映' : '院线热播'"
     >
       <div

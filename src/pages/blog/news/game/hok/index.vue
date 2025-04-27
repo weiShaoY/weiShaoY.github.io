@@ -617,69 +617,6 @@ onMounted(async () => {
     <div
       class=""
     >
-      <!-- <a-descriptions
-        :column="{ xs: 1, md: 2, lg: 3 }"
-        bordered
-      >
-        <a-descriptions-item
-          :span="1"
-          label="头像"
-        >
-
-          <div
-            class="min-h-20"
-          >
-            <PreviewImg
-              v-if="hokData.pic"
-              :src="hokData.pic"
-              :width="80"
-            />
-          </div>
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="英雄"
-        >
-          {{ hokData.name }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="称号"
-        >
-          {{ hokData.alias }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="省"
-        >
-          {{ hokData.province }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="市"
-        >
-          {{ hokData.city }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="区"
-        >
-          {{ hokData.area }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="战力值"
-        >
-          {{ hokData.provincePower }}
-        </a-descriptions-item>
-      </a-descriptions> -->
-
       <el-descriptions
         v-loading="isLoading"
         border
