@@ -34,8 +34,8 @@ h5 {
 body {
   color: var(--art-text-gray-700);
   text-align: left;
-  font-family: Inter, 'Helvetica Neue', Helvetica, 'PingFang SC',
-  'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-family: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 select {
@@ -148,7 +148,15 @@ blockquote:after {
   }
 }
 
-
 :focus-visible {
   outline: 0;
+}
+
+#app {
+  height: 100vh;
+}
+
+body {
+  font-family: "gaiLiangShouJinTi", "Fira Code VF", "Microsoft YaHei",
+    "微软雅黑";
 }

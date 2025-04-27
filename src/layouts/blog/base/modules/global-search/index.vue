@@ -310,7 +310,7 @@ onUnmounted(() => {
       width="600"
       :show-close="false"
       :lock-scroll="false"
-      modal-class="search-modal"
+      modal-class=""
       @close="closeSearchDialog"
     >
       <el-input

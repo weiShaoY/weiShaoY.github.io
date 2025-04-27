@@ -217,5 +217,3 @@ onMounted(async () => {
     </el-tab-pane>
   </el-tabs>
 </template>
-
-<style lang="less" scoped></style>

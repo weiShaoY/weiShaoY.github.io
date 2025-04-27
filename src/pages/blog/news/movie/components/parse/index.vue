@@ -71,7 +71,7 @@ function handleClick(url: string) {
     >
       <el-input
         v-model="searchValue"
-        class="!w-[60%]"
+        class=""
         placeholder="请输入影视链接"
         clearable
         size="large"
@@ -79,12 +79,15 @@ function handleClick(url: string) {
     </div>
 
     <div
-      class="grid grid-cols-4 gap-10"
+      class="grid grid-cols-3 gap-10"
     >
       <el-button
         v-for="(item, index) in websiteSelectOptions"
         :key="index"
-        class="m-0"
+        size="large"
+        type="info"
+        plain
+        class="!m-0"
         :disabled="!searchValue"
         @click="handleClick(item.value + searchValue)"
       >

@@ -322,7 +322,7 @@ const activeTab = ref('realtime')
 </template>
 
 <style lang="scss" scoped>
-:deep(.el-cascader-menu__wrap.el-scrollbar__wrap) {
-  height: 300px !important;
-}
+// :deep(.el-cascader-menu__wrap.el-scrollbar__wrap) {
+//   height: 300px !important;
+// }
 </style>

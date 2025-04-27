@@ -8,11 +8,11 @@ import { useBlogStore } from '@/store'
 
 import { useRoute } from 'vue-router'
 
+import { findTopRouteByPath } from '../utils'
+
 import LeftMenuItem from './left-menu-item/index.vue'
 
 import RightMenuItem from './right-menu-item/index.vue'
-
-import { findTopRouteByPath } from '../utils'
 
 const route = useRoute()
 

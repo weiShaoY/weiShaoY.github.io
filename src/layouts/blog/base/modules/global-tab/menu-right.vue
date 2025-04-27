@@ -135,7 +135,7 @@ function handleMenuClick(item: MenuItemType) {
  * @param  el - 菜单DOM元素
  */
 function onBeforeEnter(el: Element) {
-  ;(el as HTMLElement).style.transformOrigin = 'top left' // 设置动画变换原点
+  (el as HTMLElement).style.transformOrigin = 'top left' // 设置动画变换原点
 }
 
 /**
@@ -158,88 +158,42 @@ defineExpose({
     class="menu-right"
   >
     <Transition
-      name="context-menu"
+      name="context-menu "
       @before-enter="onBeforeEnter"
       @after-leave="onAfterLeave"
     >
       <div
         v-show="visible"
         :style="menuStyle"
-        class="context-menu"
+        class="context-menu 1 min-w-30 rounded-2 bg-[#fff] shadow-[0,0,0,0.12]"
       >
         <ul
-          class="menu-list"
+          class="menu-list 1 m-0 list-none p-2"
         >
           <template
             v-for="item in menuItems"
             :key="item.key"
           >
-
             <!-- 普通菜单项 -->
             <li
               v-if="!item.children"
-              class="menu-item"
-              :class="{ 'is-disabled': item.disabled }"
+              class="menu-item relative h-8 flex cursor-pointer items-center rounded-1 px-2 color-[#303133] hover:bg-[rgba(241,241,244,0.7)]"
+              :class="{ 'is-disabled cursor-not-allowed !bg-transparent color-[#c0c4cc]': item.disabled }"
               @click="handleMenuClick(item)"
             >
               <svgIcon
                 v-if="item.icon"
                 :icon="item.icon"
+                :class="item.disabled ? 'color-[#c0c4cc]' : 'color-[#252f4a]'"
               />
 
               <span
-                class="menu-label"
+                :class="item.disabled ? 'color-[#c0c4cc]' : 'color-[#252f4a]'"
               >
                 {{ item.label }}
               </span>
             </li>
 
-            <!-- 子菜单 -->
-            <li
-              v-else
-              class="menu-item submenu"
-            >
-              <div
-                class="submenu-title"
-              >
-                <svgIcon
-                  v-if="item.icon"
-                  :icon="item.icon"
-                />>
-
-                <span
-                  class="menu-label"
-                >{{ item.label }}</span>
-
-                <el-icon>
-                  <!-- <ArrowRight /> -->
-                </el-icon>
-              </div>
-
-              <ul
-                class="submenu-list"
-              >
-                <li
-                  v-for="child in item.children"
-                  :key="child.key"
-                  class="menu-item"
-                  :class="{ 'is-disabled': child.disabled }"
-                  @click="handleMenuClick(child)"
-                >
-                  <el-icon
-                    v-if="child.icon"
-                  >
-                    <component
-                      :is="child.icon"
-                    />
-                  </el-icon>
-
-                  <span
-                    class="menu-label"
-                  >{{ child.label }}</span>
-                </li>
-              </ul>
-            </li>
           </template>
         </ul>
       </div>
@@ -248,118 +202,5 @@ defineExpose({
 </template>
 
 <style lang="scss" scoped>
-  .menu-right {
-  .context-menu {
-    min-width: 120px;
-    padding: 4px 0;
-    background: var(--el-bg-color);
-    border-radius: var(--el-border-radius-base);
-    box-shadow: var(--el-box-shadow-light);
 
-    .menu-list {
-      padding: 0;
-      padding: 5px;
-      margin: 0;
-      list-style: none;
-
-      .menu-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: 32px;
-        padding: 0 16px;
-        font-size: 13px;
-        color: var(--el-text-color-primary);
-        cursor: pointer;
-        border-radius: 4px;
-
-        &:hover {
-          background-color: rgba(var(--art-gray-200-rgb), 0.7);
-        }
-
-        .el-icon {
-          margin-right: 8px;
-          font-size: 16px;
-          color: var(--art-gray-800);
-        }
-
-        .menu-label {
-          color: var(--art-gray-800);
-        }
-
-        &.is-disabled {
-          color: var(--el-text-color-disabled);
-          cursor: not-allowed;
-          background-color: transparent !important;
-
-          .el-icon {
-            color: var(--el-text-color-disabled) !important;
-          }
-
-          .menu-label {
-            color: var(--el-text-color-disabled) !important;
-          }
-        }
-
-        &.submenu {
-          position: relative;
-
-          &:hover {
-            .submenu-list {
-              display: block;
-            }
-          }
-
-          .submenu-title {
-            display: flex;
-            align-items: center;
-            width: 100%;
-
-            .el-icon:last-child {
-              margin-left: auto;
-              font-size: 12px;
-            }
-          }
-
-          .submenu-list {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            display: none;
-            min-width: 150px;
-            padding: 4px 0;
-            list-style: none;
-            background: var(--el-bg-color);
-            border-radius: var(--el-border-radius-base);
-            box-shadow: var(--el-box-shadow-light);
-
-            .menu-item {
-              &:hover {
-                background-color: var(--el-menu-hover-bg-color);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // 添加动画相关样式
-  .context-menu-enter-active,
-  .context-menu-leave-active {
-    transition: all 0.1s ease-out;
-  }
-
-  .context-menu-enter-from,
-  .context-menu-leave-to {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  .context-menu-enter-to,
-  .context-menu-leave-from {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 </style>

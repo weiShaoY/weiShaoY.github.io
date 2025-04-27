@@ -414,5 +414,3 @@ onMounted(async () => {
     </a-tab-pane>
   </a-tabs>
 </template>
-
-<style lang="less" scoped></style>

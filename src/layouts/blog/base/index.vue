@@ -24,7 +24,7 @@ const layoutStyle = computed(() => ({
 
 <template>
   <div
-    class="h-full min-h-[100vh] w-full overflow-hidden bg-[#F7FAFC] transition-all duration-300"
+    class="h-full min-h-[100vh] w-full bg-[#F7FAFC] transition-all duration-300"
     :style="layoutStyle"
   >
 

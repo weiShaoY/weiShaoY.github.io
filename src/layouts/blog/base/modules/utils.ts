@@ -52,8 +52,6 @@ export function blogMenuJump(
   item: RouterType.BlogRouteRecordRaw,
   jumpToFirst: boolean = false,
 ) {
-  console.log('%c Line:52 🍕 item', 'color:#33a5ff', item)
-
   // 处理外部链接
   const { externalUrl } = item.meta
 
@@ -63,7 +61,6 @@ export function blogMenuJump(
 
   // 如果不需要跳转到第一个子菜单，或者没有子菜单，直接跳转当前路径
   if (!jumpToFirst || !item.children?.length) {
-    console.log('%c Line:61 🍖 jumpToFirst', 'color:#f5ce50', jumpToFirst)
     return router.push(item.path)
   }
 

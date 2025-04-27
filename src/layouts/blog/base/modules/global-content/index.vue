@@ -22,9 +22,13 @@ function reload() {
 }
 
 watch(() => blogStore.isRefresh, reload)
+
+console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03734', blogStore.setting.container.minHeight)
+
 </script>
 
 <template>
+  <!-- 页面容器 -->
   <div
     class="layout-content m-auto w-[calc(100%-40px)]"
     :style="containerStyle"

@@ -143,9 +143,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-:deep(.arco-card-body) {
-  height: calc(100% - 60px);
-}
-</style>

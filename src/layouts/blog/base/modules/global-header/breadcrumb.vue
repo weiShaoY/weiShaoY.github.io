@@ -4,9 +4,11 @@ import { ref, watch } from 'vue'
 /**
  *  导入路由相关API
  */
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import MenuItem from '../../components/menu-item.vue'
+
+import { blogMenuJump } from '../utils'
 
 /**
  *  面包屑项类型定义
@@ -22,8 +24,6 @@ type BreadcrumbItem = {
  *  路由实例
  */
 const route = useRoute()
-
-const router = useRouter()
 
 /**
  *  面包屑数据
@@ -82,7 +82,6 @@ watch(() => route.path, getBreadcrumb, {
       <el-dropdown
         v-else
       >
-
         <MenuItem
           :menu="item"
         />
@@ -94,7 +93,9 @@ watch(() => route.path, getBreadcrumb, {
             <el-dropdown-item
               v-for="sub in item.children"
               :key="sub.path"
-              @click="router.push(sub.path)"
+              :divided="Array.isArray(sub?.children) && sub.children.length > 0"
+              class="!mb-1 !px-4 !py-3"
+              @click="blogMenuJump(sub)"
             >
               <MenuItem
                 :menu="sub"
@@ -109,8 +110,4 @@ watch(() => route.path, getBreadcrumb, {
 
 <style lang="scss">
 
-:deep(.el-dropdown-menu__item) {
-  min-width: 100px;
-  padding: 10px 20px;
-}
 </style>

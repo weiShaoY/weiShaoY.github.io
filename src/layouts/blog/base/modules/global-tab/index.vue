@@ -393,16 +393,16 @@ const topWidth = computed(() => {
     }"
   >
     <div
-      class="workTab tab-google"
+      class="w-full flex items-center justify-between px-5 pt-1"
     >
       <!-- 标签页滚动区域 -->
       <div
         ref="scrollRef"
-        class="scroll-view"
+        class="w-full overflow-hidden"
       >
         <ul
           ref="tabsRef"
-          class="tabs"
+          class="float-left whitespace-nowrap pl-1 !bg-transparent"
           :style="{
             transform: `translateX(${translateX}px)`,
             transition,
@@ -412,7 +412,7 @@ const topWidth = computed(() => {
             v-for="(item, index) in list"
             :id="`scroll-li-${index}`"
             :key="item.path"
-            class="art-custom-card"
+            class="mr-2 inline-block h-8 cursor-pointer pl-3 pr-2 color-[#78829d] leading-8"
             :class="{ 'active-tab': item.path === activeTab }"
             @click="clickTab(item)"
             @contextmenu.prevent="(e: MouseEvent) => showMenu(e, item.path)"
@@ -444,7 +444,7 @@ const topWidth = computed(() => {
 
       <!-- 右侧操作菜单 -->
       <div
-        class="right ml-5"
+        class="ml-5"
       >
         <el-dropdown
           @command="closeWorkTab"
@@ -529,11 +529,90 @@ const topWidth = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@use './index.scss';
 
-.el-tooltip__trigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+li {
+  position: relative;
+  height: 37px !important;
+  line-height: 37px !important;
+  border: none !important;
+  border-radius: 10px !important;
+
+  .line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    height: 16px;
+    margin: auto;
+    background: var(--art-border-dashed-color);
+    transition: opacity 0.15s;
+  }
+
+  &:first-child {
+    .line {
+      opacity: 0;
+    }
+  }
+
+  $tab-radius-size: 20px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    bottom: 0;
+    width: $tab-radius-size;
+    height: $tab-radius-size;
+    content: '';
+    border-radius: 50%;
+    box-shadow: 0 0 0 30px transparent;
+  }
+
+  &::before {
+    left: -$tab-radius-size;
+    clip-path: inset(50% -10px 0 50%);
+  }
+
+  &::after {
+    right: -$tab-radius-size;
+    clip-path: inset(50% 50% 0 -10px);
+  }
+
+  &:hover {
+    box-sizing: border-box;
+    color: #808290 !important;
+    background-color: #f1f1f4 !important;
+    border-bottom: 1px solid #fff !important;
+    border-radius: 10px !important;
+
+    .line {
+      opacity: 0;
+    }
+  }
+
+  &:hover + li .line {
+    opacity: 0;
+  }
+
+  &.active-tab {
+    color: #f3b03d !important;
+    background-color: #fef3e8 !important;
+    border-bottom: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+
+    &::before,
+    &::after {
+      box-shadow: 0 0 0 30px #fef3e8;
+    }
+
+    .line {
+      opacity: 0;
+    }
+  }
+
+  &.active-tab + li .line {
+    opacity: 0;
+  }
 }
 </style>

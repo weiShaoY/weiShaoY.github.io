@@ -56,11 +56,3 @@ const width = `${blogStore.setting.menu.rightMenuWidth}px`
     </el-scrollbar>
   </div>
 </template>
-
-<style lang="scss">
-
-// 展开的宽度
-// .el-menu:not(.el-menu--collapse) {
-//   width: v-bind(width);
-// }
-</style>
