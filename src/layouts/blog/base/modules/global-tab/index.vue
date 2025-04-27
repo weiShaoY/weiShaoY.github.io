@@ -446,7 +446,7 @@ const topWidth = computed(() => {
         class="right ml-5"
       >
         <t-dropdown
-          @click="(dropdownItem) => closeWorkTab(dropdownItem.value as string)"
+          @click="(dropdownItem :any) => closeWorkTab(dropdownItem.value as string)"
         >
 
           <ButtonIcon
