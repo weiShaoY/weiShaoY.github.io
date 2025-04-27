@@ -4,9 +4,11 @@ import { ref, watch } from 'vue'
 /**
  *  导入路由相关API
  */
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import MenuItem from '../../components/menu-item.vue'
+
+import { blogMenuJump } from '../utils'
 
 /**
  *  面包屑项类型定义
@@ -23,8 +25,6 @@ type BreadcrumbItem = {
  */
 const route = useRoute()
 
-const router = useRouter()
-
 /**
  *  面包屑数据
  */
@@ -38,9 +38,7 @@ function getBreadcrumb() {
   const { matched } = route
 
   if (matched.length === 2) {
-    breadList.value = [
-      matched[1],
-    ] as any[]
+    breadList.value = [matched[1]] as any[]
   }
 
   breadList.value = matched.slice(1).map(({ name, path, meta, children }) => ({
@@ -50,10 +48,6 @@ function getBreadcrumb() {
     children,
   })) as BreadcrumbItem[]
 }
-
-// watchEffect(() => {
-//   console.log('%c Line:57 🥒 breadList.value', 'color:#ea7e5c', breadList.value)
-// })
 
 /**
  *  监听路由变化
@@ -65,50 +59,60 @@ watch(() => route.path, getBreadcrumb, {
 </script>
 
 <template>
-  <el-breadcrumb
-    separator="/"
-  >
-    <el-breadcrumb-item
-      v-for="item in breadList"
-      :key="item.path"
-      :to="{ path: item.path }"
+
+  <t-breadcrumb>
+    <template
+      #default
     >
-
-      <MenuItem
-        v-if="item.children?.length === 0"
-        :menu="item "
-      />
-
-      <el-dropdown
-        v-else
+      <!-- 第一个面包屑，有下拉菜单 -->
+      <t-breadcrumb-item
+        v-for="item in breadList"
+        :key="item.path"
+        :to="{ path: item.path }"
       >
-
         <MenuItem
+          v-if="item.children?.length === 0"
           :menu="item"
         />
 
-        <template
-          #dropdown
+        <t-dropdown
+          v-else
+          placement="bottom"
+          :min-column-width="160"
         >
-          <el-dropdown-menu>
-            <el-dropdown-item
+          <MenuItem
+            :menu="item"
+          />
+
+          <t-dropdown-menu>
+            <t-dropdown-item
               v-for="sub in item.children"
               :key="sub.path"
-              @click="router.push(sub.path)"
+              :divider="Array.isArray(sub?.children) && sub.children.length > 0"
+              @click="blogMenuJump(sub)"
             >
               <MenuItem
                 :menu="sub"
               />
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+            </t-dropdown-item>
+
+          </t-dropdown-menu>
+        </t-dropdown>
+      </t-breadcrumb-item>
+    </template>
+
+    <template
+      #separator
+    >
+      <SvgIcon
+        icon="arrow-right"
+        :size="16"
+      />
+    </template>
+  </t-breadcrumb>
 </template>
 
 <style lang="scss">
-
 :deep(.el-dropdown-menu__item) {
   min-width: 100px;
   padding: 10px 20px;

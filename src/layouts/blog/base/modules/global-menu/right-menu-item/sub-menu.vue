@@ -4,7 +4,7 @@
 
 import MenuItem from '../../../components/menu-item.vue'
 
-import { blogMenuJump } from '../utils'
+import { blogMenuJump } from '../../utils'
 
 defineOptions({
   name: 'Submenu',

@@ -25,7 +25,7 @@ const props = defineProps<Props>()
 /**
  * 基础类名
  */
-const BASE_CLASSES = 'flex items-center gap-2 text-4'
+const BASE_CLASSES = 'flex items-center gap-3 text-4'
 
 /**
  * 计算合并后的类名
@@ -54,6 +54,7 @@ const computedClass = computed(() => {
       v-if="menu.meta?.icon"
       :icon="menu.meta.icon"
       :size="20"
+      class=""
     />
 
     <div

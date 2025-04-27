@@ -52,8 +52,6 @@ export function blogMenuJump(
   item: RouterType.BlogRouteRecordRaw,
   jumpToFirst: boolean = false,
 ) {
-  console.log('%c Line:52 🍕 item', 'color:#33a5ff', item)
-
   // 处理外部链接
   const { externalUrl } = item.meta
 
