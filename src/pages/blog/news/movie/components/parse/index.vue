@@ -84,6 +84,7 @@ function handleClick(url: string) {
       <el-button
         v-for="(item, index) in websiteSelectOptions"
         :key="index"
+        class="m-0"
         :disabled="!searchValue"
         @click="handleClick(item.value + searchValue)"
       >

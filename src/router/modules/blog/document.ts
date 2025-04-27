@@ -17,21 +17,21 @@ const documentRoute: RouterType.BlogRouteRecordRaw = {
       },
       children: [
         {
+          path: 'arcoDesign',
+          name: 'Arco',
+          meta: {
+            title: 'ArcoDesign',
+            icon: 'blog-menu-arcoDesign',
+            iframeUrl: 'https://arco.design/vue/component/button',
+          },
+        },
+        {
           path: 'antd',
           name: 'Antd',
           meta: {
             title: 'AntDesign',
             icon: 'blog-menu-andDesign',
             externalUrl: 'https://ant-design.antgroup.com/components/overview-cn/',
-          },
-        },
-        {
-          path: 'blog-menu-arcoDesign',
-          name: 'Arco',
-          meta: {
-            title: 'ArcoDesign',
-            icon: 'blog-menu-arcoDesign',
-            iframeUrl: 'https://arco.design/vue/component/button',
           },
         },
         {

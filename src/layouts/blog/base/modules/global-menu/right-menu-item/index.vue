@@ -45,6 +45,9 @@ const width = `${blogStore.setting.menu.rightMenuWidth}px`
     >
       <el-menu
         :default-active="route.path"
+        :style="{
+          width,
+        }"
       >
         <SubMenu
           :menu-list="menuList"
@@ -57,7 +60,7 @@ const width = `${blogStore.setting.menu.rightMenuWidth}px`
 <style lang="scss">
 
 // 展开的宽度
-.el-menu:not(.el-menu--collapse) {
-  width: v-bind(width);
-}
+// .el-menu:not(.el-menu--collapse) {
+//   width: v-bind(width);
+// }
 </style>

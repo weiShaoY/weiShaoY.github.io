@@ -12,7 +12,7 @@ import LeftMenuItem from './left-menu-item/index.vue'
 
 import RightMenuItem from './right-menu-item/index.vue'
 
-import { findTopRouteByPath } from './utils'
+import { findTopRouteByPath } from '../utils'
 
 const route = useRoute()
 

@@ -3,7 +3,7 @@ import { useBlogStore } from '@/store'
 
 import { useRoute } from 'vue-router'
 
-import { findTopRouteByPath } from '../utils'
+import { findTopRouteByPath } from '../../utils'
 
 const { menuList } = defineProps<Props>()
 

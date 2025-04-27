@@ -12,7 +12,7 @@ const blogStore = useBlogStore()
 /**
  *   搜索历史记录最大存储数量
  */
-const HISTORY_MAX_LENGTH = 5
+const HISTORY_MAX_LENGTH = 10
 
 /**
  *  菜单列表
@@ -65,9 +65,54 @@ function focusInput() {
 }
 
 /**
+ * 模糊查询菜单列表
+ * @param  arr - 菜单列表
+ * @param  val - 搜索关键字
+ * @returns - 所有匹配的项（包括匹配的父级和单独匹配的子级）
+ */
+function fuzzyQueryList(
+  arr: RouterType.BlogRouteRecordRaw[],
+  val: string,
+): RouterType.BlogRouteRecordRaw[] {
+  const lowerVal = val.toLowerCase()
+
+  const result: RouterType.BlogRouteRecordRaw[] = []
+
+  const searchItem = (item: RouterType.BlogRouteRecordRaw) => {
+    if (item.meta.isHideInMenu) {
+      return
+    }
+
+    const lowerItemTitle = item.meta.title.toLowerCase()
+
+    const isSelfMatch = lowerItemTitle.includes(lowerVal)
+
+    if (item.children) {
+      for (const child of item.children) {
+        searchItem(child) // 递归处理子项
+      }
+    }
+
+    // 如果当前项匹配，添加到结果中
+    if (isSelfMatch) {
+      result.push({
+        ...item,
+        children: item.children ? fuzzyQueryList(item.children, val) : [],
+      })
+    }
+  }
+
+  // 遍历所有项
+  for (const item of arr) {
+    searchItem(item)
+  }
+
+  return result
+}
+
+/**
  * 执行搜索操作
  * @param  val - 搜索关键词
- * @desc 根据输入值进行模糊搜索并更新搜索结果列表
  */
 function search(val: string) {
   if (!val) {
@@ -75,83 +120,10 @@ function search(val: string) {
     return
   }
 
-  /**
-   * 递归处理菜单项扁平化
-   * @param items 要处理的菜单项数组
-   * @returns 扁平化后的菜单项数组
-   */
-  const flattenItems = (
-    items: RouterType.BlogRouteRecordRaw[],
-  ): RouterType.BlogRouteRecordRaw[] => {
-    return items.flatMap((item) => {
-      // 包含在主体容器中的项直接保留
-      // if (item.meta.isInMainContainer) {
-      //   return [item]
-      // }
-
-      // 不包含在主体容器中的项需要展开自身及其子项
-      const children = item.children ? flattenItems(item.children) : []
-
-      return [item, ...children]
-    })
-  }
-
   // 执行模糊查询
   const filteredList = fuzzyQueryList(menuList.value, val)
 
-  // 处理结果扁平化
-  searchResult.value = filteredList.flatMap((category) => {
-    // 分类下没有子项时直接返回空数组
-    if (!category.children?.length) {
-      return [category]
-    }
-
-    // 处理当前分类的扁平化
-    return flattenItems([category])
-  })
-}
-
-/**
- * 模糊查询菜单列表
- * @param  arr - 菜单列表
- * @param  val - 搜索关键字
- * @returns  - 查询结果
- */ function fuzzyQueryList(
-  arr: RouterType.BlogRouteRecordRaw[],
-  val: string,
-): RouterType.BlogRouteRecordRaw[] {
-  const lowerVal = val.toLowerCase() // 将查询值转换为小写
-
-  const searchItem = (
-    item: RouterType.BlogRouteRecordRaw,
-  ): RouterType.BlogRouteRecordRaw | null => {
-    // 如果当前项有 isHide: true，直接过滤掉
-    if (item.meta.isHideInMenu) {
-      return null
-    }
-
-    // 将 item.meta.title 转换为小写进行比较
-    const lowerItemTitle = item.meta.title.toLowerCase()
-
-    // 查找子项并过滤符合条件的子项
-    const children = item.children ? fuzzyQueryList(item.children, val) : []
-
-    // 如果子项符合条件或当前项标题包含查询值，返回该项
-    if (children.length || lowerItemTitle.includes(lowerVal)) {
-      return {
-        ...item,
-        children,
-      }
-    }
-
-    // 否则过滤掉
-    return null
-  }
-
-  // 使用 map 和 filter 来优化处理逻辑，排除 null 结果
-  return arr
-    .map(searchItem)
-    .filter((item): item is RouterType.BlogRouteRecordRaw => item !== null)
+  searchResult.value = filteredList
 }
 
 // 搜索框键盘向上切换
@@ -251,7 +223,8 @@ function cleanItem(item: RouterType.BlogRouteRecordRaw) {
  */
 function addHistory(item: RouterType.BlogRouteRecordRaw) {
   const hasItemIndex = searchHistoryList.value.findIndex(
-    (historyItem: RouterType.BlogRouteRecordRaw) => historyItem.path === item.path,
+    (historyItem: RouterType.BlogRouteRecordRaw) =>
+      historyItem.path === item.path,
   )
 
   if (hasItemIndex !== -1) {
@@ -343,6 +316,7 @@ onUnmounted(() => {
       <el-input
         ref="searchInputRef"
         v-model.trim="searchVal"
+        size="large"
         placeholder="搜索页面"
         clearable
         @input="search"
@@ -373,26 +347,39 @@ onUnmounted(() => {
       <!-- 搜索结果 -->
       <div
         v-show="searchResult.length"
-        class="result"
+        class="mt-5"
       >
+        <p
+          class="text-4 color-[#78829d] font-bold"
+        >
+          <span>
+            搜索
+          </span>
+
+          <span
+            class="text-5 color-violet"
+          >
+            结果
+          </span>
+        </p>
+
         <div
-          v-for="(item, index) in searchResult"
-          :key="index"
-          class="box"
+          class="max-h-[50vh] w-full overflow-auto"
         >
           <div
+            v-for="(item, index) in searchResult"
+            :key="index"
+            class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#4b5675] leading-none"
             :class="{
-              highlighted: isHighlighted(index),
+              '!bg-primary !color-white': isHighlighted(index),
             }"
             @click="searchGoPage(item)"
             @mouseenter="highlightOnHover(index)"
           >
-            <!-- 左侧 -->
             <MenuItem
               :menu="item"
             />
 
-            <!-- 右侧 -->
             <SvgIcon
               v-show="isHighlighted(index)"
               icon="blog-search-enter"
@@ -408,23 +395,31 @@ onUnmounted(() => {
             && searchResult.length === 0
             && searchHistoryList.length > 0
         "
-        class="history-box"
+        class="mt-5"
       >
         <p
-          class="title"
+          class="text-4 color-[#78829d] font-bold"
         >
-          搜索历史
+          <span>
+            搜索
+          </span>
+
+          <span
+            class="text-5 color-emerald"
+          >
+            历史
+          </span>
         </p>
 
         <div
-          class="history-result"
+          class="max-h-[50vh] w-full overflow-auto"
         >
           <div
             v-for="(item, index) in searchHistoryList"
             :key="index"
-            class="box"
+            class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#252f4a] leading-none"
             :class="{
-              highlighted: historyHIndex === index,
+              '!bg-primary !color-white': historyHIndex === index,
             }"
             @click="searchGoPage(item)"
             @mouseenter="historyHIndex = index"
@@ -481,118 +476,7 @@ onUnmounted(() => {
             <span>选择</span>
           </div>
         </div>
-
       </template>
     </el-dialog>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.search-widget {
-  :deep(.search-modal) {
-    background-color: #0003;
-  }
-
-  :deep(.el-dialog__header) {
-    padding: 5px 0;
-  }
-
-  :deep(.el-dialog) {
-    padding: 0 15px;
-    border-radius: 10px !important;
-  }
-  :deep(.el-dialog__body) {
-    padding: 25px 10px !important;
-  }
-
-  :deep(.el-dialog__footer) {
-    padding: 10px !important;
-  }
-
-  .el-input {
-    height: 48px;
-
-    :deep(.el-input__wrapper) {
-      background-color: rgba(241, 241, 244, 0.8);
-      border: 1px solid #dbdfe9;
-      border-radius: 10px !important;
-      box-shadow: none;
-    }
-
-    :deep(.el-input__inner) {
-      color: #808290 !important;
-    }
-  }
-
-  .result {
-    width: 100%;
-    margin-top: 30px;
-
-    .box {
-      margin-top: 0 !important;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1;
-      cursor: pointer;
-
-      // .menu-icon {
-      //   margin-right: 5px;
-      //   font-size: 18px;
-      // }
-
-      & > div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 50px;
-        padding: 0 16px;
-        margin-top: 8px;
-        font-size: 15px;
-        font-weight: 400;
-        color: #4b5675;
-        background: #f9f9f9;
-        border-radius: 10px !important;
-
-        &.highlighted {
-          color: #fff !important;
-          background-color: #e9b354 !important;
-        }
-      }
-    }
-  }
-
-  .history-box {
-    margin-top: 20px;
-
-    .title {
-      font-size: 13px;
-      color: #78829d;
-    }
-
-    .history-result {
-      width: 100%;
-      margin-top: 5px;
-
-      .box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 50px;
-        padding: 0 16px;
-        margin-top: 8px;
-        font-size: 15px;
-        font-weight: 400;
-        color: #252f4a;
-        cursor: pointer;
-        background: #f9f9f9;
-        border-radius: 10px !important;
-
-        &.highlighted {
-          color: #fff !important;
-          background-color: #e9b354 !important;
-        }
-      }
-    }
-  }
-}
-</style>
