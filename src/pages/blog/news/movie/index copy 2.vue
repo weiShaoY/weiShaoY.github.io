@@ -131,30 +131,55 @@ const columns = ref<TableProps['columns']>([
     title: 'ID',
     colKey: 'id',
     width: 100,
+
+    // sorter: true,
+
+    sorter: (a, b) => a.id - b.id,
   },
   {
     title: '海报',
     colKey: 'img',
     width: 100,
+
+    //    sorter: true,
   },
   {
     title: '电影名称',
     colKey: 'nm',
+
+    //    sorter: true,
   },
   {
     title: '上映日期',
     colKey: 'rt',
+
+    //    sorter: true,
   },
   {
     title: '期待值',
     colKey: 'wish',
+
+    //    sorter: true,
   },
   {
     title: '评分',
     colKey: 'sc',
+
+    //    sorter: true,
   },
 
 ])
+
+const sort = ref({
+  sortBy: 'id',
+
+  descending: true,
+})
+
+function sortChange(sortVal, options) {
+  sort.value = sortVal
+  movieData.value.comingSoon = options.currentDataSource
+}
 
 onMounted(async () => {
   await getData()
@@ -178,7 +203,8 @@ onMounted(async () => {
         :columns="columns"
         lazy-load
         :loading="isLoading"
-        max-height="calc(100vh - 200px)"
+        :sort="sort"
+        @sort-change="sortChange"
       >
         <template
           #img="{ row }"

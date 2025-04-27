@@ -90,6 +90,7 @@ declare module 'vue-router/auto-routes' {
     '/blog/news/game/hok/': RouteRecordInfo<'/blog/news/game/hok/', '/blog/news/game/hok', Record<never, never>, Record<never, never>>,
     '/blog/news/movie/': RouteRecordInfo<'/blog/news/movie/', '/blog/news/movie', Record<never, never>, Record<never, never>>,
     '/blog/news/movie/components/parse/': RouteRecordInfo<'/blog/news/movie/components/parse/', '/blog/news/movie/components/parse', Record<never, never>, Record<never, never>>,
+    '/blog/news/movie/index copy 2': RouteRecordInfo<'/blog/news/movie/index copy 2', '/blog/news/movie/index copy 2', Record<never, never>, Record<never, never>>,
     '/blog/news/price/cigarette/': RouteRecordInfo<'/blog/news/price/cigarette/', '/blog/news/price/cigarette', Record<never, never>, Record<never, never>>,
     '/blog/news/price/gold/': RouteRecordInfo<'/blog/news/price/gold/', '/blog/news/price/gold', Record<never, never>, Record<never, never>>,
     '/blog/news/price/oil/': RouteRecordInfo<'/blog/news/price/oil/', '/blog/news/price/oil', Record<never, never>, Record<never, never>>,

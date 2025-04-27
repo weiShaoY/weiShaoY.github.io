@@ -64,31 +64,34 @@ function handleClick(url: string) {
 
 <template>
   <div
-    class="h-full w-full flex flex-col gap-5 overflow-hidden"
+    class="h-full w-full flex flex-col gap-5 overflow-hidden p-5"
   >
     <div
       class="flex items-center gap-5"
     >
-      <el-input
+      <t-input
         v-model="searchValue"
         class="!w-[60%]"
         placeholder="请输入影视链接"
         clearable
         size="large"
       />
+
     </div>
 
     <div
       class="grid grid-cols-4 gap-10"
     >
-      <el-button
+      <t-button
         v-for="(item, index) in websiteSelectOptions"
         :key="index"
+        variant="text"
+        size="large"
         :disabled="!searchValue"
         @click="handleClick(item.value + searchValue)"
       >
         {{ item.label }}
-      </el-button>
+      </t-button>
     </div>
   </div>
 </template>

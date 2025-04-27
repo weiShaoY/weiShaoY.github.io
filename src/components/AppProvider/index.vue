@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import {
-  ElMessage,
-  ElMessageBox,
-} from 'element-plus'
 
 import { createTextVNode, defineComponent } from 'vue'
 
-import { NotifyPlugin} from 'tdesign-vue-next'
+import { NotifyPlugin,MessagePlugin } from 'tdesign-vue-next'
 
 defineOptions({
   name: 'AppProvider',
@@ -17,8 +13,7 @@ const ContextHolder = defineComponent({
   setup() {
     function register() {
       window.$notify = NotifyPlugin
-      window.$messageBox = ElMessageBox
-      window.$message = ElMessage
+      window.$message = MessagePlugin
     }
 
     register()
