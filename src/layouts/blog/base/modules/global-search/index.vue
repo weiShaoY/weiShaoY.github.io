@@ -115,6 +115,7 @@ function fuzzyQueryList(
  * @param  val - 搜索关键词
  */
 function search(val: string) {
+  console.log('%c Line:118 🥓 val', 'color:#93c0a4', val)
   if (!val) {
     searchResult.value = []
     return
@@ -298,6 +299,26 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('keydown', handleKeydown)
 })
+
+/**
+ * 处理键盘按下事件（只关心事件对象）
+ * @param _value 当前输入框值（不使用）
+ * @param context 键盘事件上下文
+ * @param context.e - 键盘事件对象
+ */
+function onKeydown(_value: string, context: { e: KeyboardEvent }) {
+  const { e } = context
+
+  // 上箭头
+  if (e.key === 'ArrowUp') {
+    highlightPrevious()
+    e.preventDefault()
+  }
+  else if (e.key === 'ArrowDown') {
+    highlightNext()
+    e.preventDefault()
+  }
+}
 </script>
 
 <template>
@@ -305,20 +326,23 @@ onUnmounted(() => {
     v-model:visible="isShowSearchDialog"
     :close-btn="false"
     :on-close="closeSearchDialog"
+    :width="600"
   >
-    <el-input
+    <t-input
       ref="searchInputRef"
       v-model.trim="searchVal"
+      input-class="!bg-[#F4F4F6] rounded-2 !border-[#DCDFE8] !focus:border-[#DCDFE8] shadow-none"
+      size="large"
       placeholder="搜索页面"
       clearable
-      @input="search"
+      autofocus
+      @change="search"
       @blur="searchBlur"
-      @keydown.up.prevent="highlightPrevious"
-      @keydown.down.prevent="highlightNext"
-      @keydown.enter.prevent="selectHighlighted"
+      @enter="selectHighlighted"
+      @keydown="onKeydown"
     >
       <template
-        #prefix
+        #prefixIcon
       >
         <SvgIcon
           icon="search"
@@ -327,38 +351,51 @@ onUnmounted(() => {
       </template>
 
       <template
-        #suffix
+        #suffixIcon
       >
         <SvgIcon
           icon="blog-search-esc"
           :size="24"
         />
       </template>
-    </el-input>
 
+    </t-input>
     <!-- 搜索结果 -->
     <div
       v-show="searchResult.length"
-      class="result"
+      class="mt-5"
     >
+      <p
+        class="text-4 color-[#78829d] font-bold"
+      >
+        <span>
+          搜索
+        </span>
+
+        <span
+          class="text-5 color-violet"
+        >
+          结果
+        </span>
+      </p>
+
       <div
-        v-for="(item, index) in searchResult"
-        :key="index"
-        class="box"
+        class="max-h-[50vh] w-full overflow-auto"
       >
         <div
+          v-for="(item, index) in searchResult"
+          :key="index"
+          class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#4b5675] leading-none"
           :class="{
-            highlighted: isHighlighted(index),
+            '!bg-primary !color-white': isHighlighted(index),
           }"
           @click="searchGoPage(item)"
           @mouseenter="highlightOnHover(index)"
         >
-          <!-- 左侧 -->
           <MenuItem
             :menu="item"
           />
 
-          <!-- 右侧 -->
           <SvgIcon
             v-show="isHighlighted(index)"
             icon="blog-search-enter"
@@ -374,23 +411,31 @@ onUnmounted(() => {
           && searchResult.length === 0
           && searchHistoryList.length > 0
       "
-      class="history-box"
+      class="mt-5"
     >
       <p
-        class="title"
+        class="text-4 color-[#78829d] font-bold"
       >
-        搜索历史
+        <span>
+          搜索
+        </span>
+
+        <span
+          class="text-5 color-emerald"
+        >
+          历史
+        </span>
       </p>
 
       <div
-        class="history-result"
+        class="max-h-[50vh] w-full overflow-auto"
       >
         <div
           v-for="(item, index) in searchHistoryList"
           :key="index"
-          class="box"
+          class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#252f4a] leading-none"
           :class="{
-            highlighted: historyHIndex === index,
+            '!bg-primary !color-white': historyHIndex === index,
           }"
           @click="searchGoPage(item)"
           @mouseenter="historyHIndex = index"
@@ -451,126 +496,4 @@ onUnmounted(() => {
     </template>
   </t-dialog>
 
-  <!-- <div
-    class="search-widget"
-  >
-    <el-dialog
-      v-model="isShowSearchDialog"
-      width="600"
-      :show-close="false"
-      :lock-scroll="false"
-      modal-class="search-modal"
-      @close="closeSearchDialog"
-    />
-  </div> -->
 </template>
-
-<style lang="scss" scoped>
-// .search-widget {
-:deep(.search-modal) {
-  background-color: #0003;
-}
-
-:deep(.el-dialog__header) {
-  padding: 5px 0;
-}
-
-:deep(.el-dialog) {
-  padding: 0 15px;
-  border-radius: 10px !important;
-}
-:deep(.el-dialog__body) {
-  padding: 25px 10px !important;
-}
-
-:deep(.el-dialog__footer) {
-  padding: 10px !important;
-}
-
-.el-input {
-  height: 48px;
-
-  :deep(.el-input__wrapper) {
-    background-color: rgba(241, 241, 244, 0.8);
-    border: 1px solid #dbdfe9;
-    border-radius: 10px !important;
-    box-shadow: none;
-  }
-
-  :deep(.el-input__inner) {
-    color: #808290 !important;
-  }
-}
-
-.result {
-  width: 100%;
-  margin-top: 30px;
-
-  .box {
-    margin-top: 0 !important;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1;
-    cursor: pointer;
-
-    // .menu-icon {
-    //   margin-right: 5px;
-    //   font-size: 18px;
-    // }
-
-    & > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 50px;
-      padding: 0 16px;
-      margin-top: 8px;
-      font-size: 15px;
-      font-weight: 400;
-      color: #4b5675;
-      background: #f9f9f9;
-      border-radius: 10px !important;
-
-      &.highlighted {
-        color: #fff !important;
-        background-color: #e9b354 !important;
-      }
-    }
-  }
-}
-
-.history-box {
-  margin-top: 20px;
-
-  .title {
-    font-size: 13px;
-    color: #78829d;
-  }
-
-  .history-result {
-    width: 100%;
-    margin-top: 5px;
-
-    .box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 50px;
-      padding: 0 16px;
-      margin-top: 8px;
-      font-size: 15px;
-      font-weight: 400;
-      color: #252f4a;
-      cursor: pointer;
-      background: #f9f9f9;
-      border-radius: 10px !important;
-
-      &.highlighted {
-        color: #fff !important;
-        background-color: #e9b354 !important;
-      }
-    }
-  }
-}
-// }
-</style>
