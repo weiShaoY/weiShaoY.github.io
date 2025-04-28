@@ -13,7 +13,6 @@ import Header from './components/header/index.vue'
     <!-- 顶部导航栏 -->
     <Header />
 
-    <!-- <RouterView /> -->
     <Suspense>
       <template
         #default
@@ -27,7 +26,6 @@ import Header from './components/header/index.vue'
         <Loading />
       </template>
     </Suspense>
-
   </div>
 </template>
 

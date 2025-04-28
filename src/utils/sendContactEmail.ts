@@ -50,7 +50,7 @@ export async function sendContactEmail(formData: FormDataType): Promise<void> {
       from_name: formData.name,
       to_name: '少爷',
       from_email: formData.email,
-      to_email: '1604705673@qq.com',
+      to_email: import.meta.env.VITE_EMAIL_URL,
       message: formData.message,
     }
 

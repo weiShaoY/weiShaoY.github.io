@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import { ref } from 'vue'
 
 const isLoading = ref(false)
@@ -13,6 +11,28 @@ const hero = ref('百里守约')
 
 const hokData = ref<any>({
 })
+
+/**
+ *  大区选项
+ */
+const regionSelectOptions = [
+  {
+    value: 'ios_qq',
+    label: '苹果QQ区',
+  },
+  {
+    value: 'ios_wx',
+    label: '苹果微信区',
+  },
+  {
+    value: 'qq',
+    label: '安卓QQ区',
+  },
+  {
+    value: 'wx',
+    label: '安卓微信区',
+  },
+]
 
 /**
  *  英雄选项
@@ -536,8 +556,10 @@ async function getData() {
     hokData.value = response
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
-
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
     clearData()
   }
   finally {
@@ -557,118 +579,104 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <el-select
         v-model="region"
-        class="w-40"
         placeholder="请选择大区"
-        allow-clear
+        size="large"
+        class="!w-60"
+        clearable
         @clear="clearData"
         @change="getData"
       >
-        <a-option
-          value="ios_qq"
-        >
-          苹果QQ区
-        </a-option>
+        <el-option
+          v-for="item in regionSelectOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
 
-        <a-option
-          value="ios_wx"
-        >
-          苹果微信区
-        </a-option>
-
-        <a-option
-          value="qq"
-        >
-          安卓QQ区
-        </a-option>
-
-        <a-option
-          value="wx"
-        >
-          安卓微信区
-        </a-option>
-      </a-select>
-
-      <a-select
+      <el-select
         v-model="hero"
-        class="w-40"
         placeholder="请选择英雄"
-        allow-clear
-        allow-search
-        :options="heroSelectOptions"
+        size="large"
+        class="!w-60"
+        clearable
         @clear="clearData"
         @change="getData"
-      />
+      >
+        <el-option
+          v-for="item in heroSelectOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
     </div>
 
-    <a-spin
-      :loading="isLoading"
+    <el-descriptions
+      v-loading="isLoading"
+      border
+      :column="3"
+      align="center"
     >
-      <a-descriptions
-        :column="{ xs: 1, md: 2, lg: 3 }"
-        bordered
+
+      <el-descriptions-item
+        label="头像"
+        align="center"
       >
-        <a-descriptions-item
-          :span="1"
-          label="头像"
+        <div
+          class="min-h-20"
         >
+          <PreviewImg
+            v-if="hokData.pic"
+            :src="hokData.pic"
+            :width="80"
+          />
+        </div>
+      </el-descriptions-item>
 
-          <div
-            class="min-h-20"
-          >
-            <PreviewImg
-              v-if="hokData.pic"
-              :src="hokData.pic"
-              :width="80"
-            />
-          </div>
-        </a-descriptions-item>
+      <el-descriptions-item
+        label="英雄"
+        align="center"
+      >
+        {{ hokData.name }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="英雄"
-        >
-          {{ hokData.name }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        label="称号"
+        align="center"
+      >
+        {{ hokData.alias }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="称号"
-        >
-          {{ hokData.alias }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        label="省"
+        align="center"
+      >
+        {{ hokData.province }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="省"
-        >
-          {{ hokData.province }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        label="市"
+        align="center"
+      >
+        {{ hokData.city }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="市"
-        >
-          {{ hokData.city }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        label="区"
+        align="center"
+      >
+        {{ hokData.area }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="区"
-        >
-          {{ hokData.area }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="战力值"
-        >
-          {{ hokData.provincePower }}
-        </a-descriptions-item>
-      </a-descriptions>
-
-    </a-spin>
-
+      <el-descriptions-item
+        label="战力值"
+        align="center"
+      >
+        {{ hokData.provincePower }}
+      </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>

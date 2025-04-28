@@ -69,25 +69,30 @@ function handleClick(url: string) {
     <div
       class="flex items-center gap-5"
     >
-      <a-input
+      <el-input
         v-model="searchValue"
-        class="w-[60%]"
-        allow-clear
+        class=""
         placeholder="请输入影视链接"
+        clearable
+        size="large"
       />
     </div>
 
     <div
-      class="grid grid-cols-4 gap-10"
+      class="grid grid-cols-3 gap-10"
     >
-      <a-button
+      <el-button
         v-for="(item, index) in websiteSelectOptions"
         :key="index"
+        size="large"
+        type="info"
+        plain
+        class="!m-0"
         :disabled="!searchValue"
         @click="handleClick(item.value + searchValue)"
       >
         {{ item.label }}
-      </a-button>
+      </el-button>
     </div>
   </div>
 </template>

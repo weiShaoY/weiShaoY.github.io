@@ -53,6 +53,7 @@ import Intro from './components/intro.vue'
       class="relative mx-auto max-w-7xl min-h-screen"
     >
       <Info />
+
     </div>
   </div>
 </template>

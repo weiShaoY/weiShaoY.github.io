@@ -1,18 +1,18 @@
-<script setup>
-import { ref } from 'vue'
-
+<script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 
-defineProps({
+type PropsType = {
+
   /**
    *  菜单列表
    */
   menuList: {
-    type: Array,
-    required: true,
-    default: () => [],
-  },
-})
+    key: string
+    label: string
+  }[]
+}
+
+defineProps<PropsType>()
 
 const route = useRoute()
 
@@ -22,7 +22,7 @@ const router = useRouter()
  * 选择菜单项
  * @param {string} key - 路由路径
  */
-function handleSelect(key) {
+function handleSelect(key: string) {
   router.push(key) // 使用 Vue Router 跳转
 }
 </script>

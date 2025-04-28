@@ -1,17 +1,20 @@
+<!------  2025-04-24---13:23---星期四  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import Lynk from '@/canvas/lynk/index.vue'
 </script>
 
 <template>
   <div
-    class="h-screen flex items-center justify-center bg-white"
+    class="h-30"
   >
-    <div
-      class="h-200 w-200"
-    >
-      <Lynk />
-    </div>
+    <!-- <img
+      src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=react-dark"
+    > -->
+    <GithubActivityGraph />
+
+    <ButtonIcon
+      icon="blog-menu-vue"
+    />
   </div>
 </template>
 

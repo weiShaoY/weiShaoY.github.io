@@ -1,104 +1,43 @@
-import type { AppRouteRecordRaw } from "@/router/types";
-
-import { BLOG_DEFAULT_LAYOUT } from "@/layouts";
-
-const Creativity: AppRouteRecordRaw = {
-  path: "creativity",
-  name: "Creativity",
+const creativityRoute: RouterType.BlogRouteRecordRaw = {
+  path: 'creativity',
+  name: 'Creativity',
   meta: {
-    locale: "创意",
-    icon: "blog-menu-creativity",
-    order: 10,
+    title: '创意',
+    icon: 'blog-menu-creativity',
+    keepAlive: false,
   },
-  redirect: {
-    name: "Clock",
-  },
-  component: BLOG_DEFAULT_LAYOUT,
   children: [
     {
-      path: "clock",
-      name: "Clock",
+      path: 'clock',
+      name: 'Clock',
+      component: () => import('@/pages/blog/creativity/clock/index.vue'),
       meta: {
-        locale: "时钟",
-        icon: "blog-menu-clock",
+        title: '时钟',
+        keepAlive: true,
+        icon: 'blog-menu-clock',
       },
-      component: () => import("@/pages/blog/creativity/clock/index.vue"),
     },
     {
-      path: "muYu",
-      name: "MuYu",
+      path: 'muYu',
+      name: 'MuYu',
+      component: () => import('@/pages/blog/creativity/muYu/index.vue'),
       meta: {
-        locale: "木鱼",
-        icon: "blog-menu-muYu",
+        title: '木鱼',
+        keepAlive: true,
+        icon: 'blog-menu-muYu',
       },
-      component: () => import("@/pages/blog/creativity/muYu/index.vue"),
     },
     {
-      path: "calendar",
-      name: "Calendar",
+      path: 'calendar',
+      name: 'Calendar',
+      component: () => import('@/pages/blog/creativity/calendar/index.vue'),
       meta: {
-        locale: "日历",
-        icon: "blog-menu-calendar",
+        title: '日历',
+        keepAlive: true,
+        icon: 'blog-menu-calendar',
       },
-      component: () => import("@/pages/blog/creativity/calendar/index.vue"),
-    },
-    {
-      path: "screensaver",
-      name: "Screensaver",
-      meta: {
-        locale: "屏保",
-        icon: "blog-menu-screensaver",
-      },
-      component: () => import("@/pages/blog/creativity/screensaver/index.vue"),
-    },
-
-    {
-      path: "time",
-      name: "Time",
-      meta: {
-        locale: "时间",
-        icon: "blog-menu-time",
-      },
-      component: () => import("@/pages/blog/creativity/time/index.vue"),
-    },
-    {
-      path: "ripple",
-      name: "Ripple",
-      meta: {
-        locale: "水波",
-        icon: "blog-menu-ripple",
-      },
-      component: () => import("@/pages/blog/creativity/ripple/index.vue"),
-    },
-
-    {
-      path: "text",
-      name: "Text",
-      meta: {
-        locale: "文字",
-        icon: "blog-menu-text",
-      },
-      component: () => import("@/pages/blog/creativity/text/index.vue"),
-    },
-    {
-      path: "charge",
-      name: "Charge",
-      meta: {
-        locale: "充电",
-        icon: "blog-menu-charge",
-      },
-      component: () => import("@/pages/blog/creativity/charge/index.vue"),
-    },
-    {
-      path: "codeWall",
-      name: "CodeWall",
-      meta: {
-        locale: "代码墙",
-        icon: "blog-menu-codeWall",
-      },
-      component: () => import("@/pages/blog/creativity/codeWall/index.vue"),
     },
   ],
-};
+}
 
-export default Creativity;
+export default creativityRoute

@@ -265,48 +265,55 @@ const base64Data = [
 </script>
 
 <template>
-  <a-modal
-    v-model:visible="visible"
+  <el-dialog
+    v-model="visible"
+    title="Base64编码对照表"
     :footer="false"
+    :show-close="false"
+    :lock-scroll="false"
     :width="1000"
   >
-    <template
-      #title
-    >
-      Base64编码对照表
-    </template>
 
-    <a-descriptions
-      :column="{ xs: 4, md: 4, lg: 4 }"
-      bordered
-      align="center"
+    <el-descriptions
+      class="margin-top"
+      :column="4"
+      border
     >
-      <a-descriptions-item
+      <el-descriptions-item
         v-for="item in 4"
         :key="item"
         :span="1"
         label="码值"
+        align="center"
       >
         字符
-      </a-descriptions-item>
+      </el-descriptions-item>
 
-      <a-descriptions-item
+      <el-descriptions-item
         v-for="item in base64Data"
         :key="item.value"
         :span="1"
-        :label="item.value.toString()"
+        align="center"
       >
-        <a-link
+        <template
+          #label
+        >
+          <el-link
+            v-copy="item.value"
+            type="info"
+          >
+            {{ item.value }}
+          </el-link>
+        </template>
+
+        <el-link
           v-copy="item.label"
+          type="primary"
         >
           {{ item.label }}
-        </a-link>
-      </a-descriptions-item>
+        </el-link>
+      </el-descriptions-item>
 
-    </a-descriptions>
-  </a-modal>
+    </el-descriptions>
+  </el-dialog>
 </template>
-
-<style lang="less" scoped>
-
-</style>

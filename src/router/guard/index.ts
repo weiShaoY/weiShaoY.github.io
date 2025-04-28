@@ -1,82 +1,18 @@
 import type { Router } from 'vue-router'
 
-import BlogGuard from './blogGuard'
+import { blogRouteGuard } from './blogRouteGuard'
 
-/**
- * 创建进度条守卫
- *
- * @param router - 路由实例
- */
-function progressGuard(router: Router) {
-  /**
-   *  @description 路由跳转前
-   */
-  router.beforeEach(async (to) => {
-    /**
-     *  开始进度条
-     */
-    window.NProgress?.start?.()
+import { documentTitleGuard } from './documentTitleGuard'
 
-    /**
-     *  代码模块触发路由变更事件
-     */
-    BlogGuard.emitRouteChange(to)
-  })
+import { progressGuard } from './progressGuard'
 
-  /**
-   *  @description 路由跳转结束
-   */
-  router.afterEach(() => {
-    /**
-     *  结束进度条
-     */
-    window.NProgress?.done()
-  })
-
-  /**
-   *  @description 路由跳转错误
-   */
-  router.onError(() => {
-    // 错误时也结束进度条
-    window.NProgress?.done()
-  })
-}
-
-/**
- * 创建文档标题守卫
- *
- * @param router - 路由实例
- */
-export function documentTitleGuard(router: Router) {
-  router.afterEach((to) => {
-    /**
-     * 路由元信息中的文档标题
-     */
-    const { documentTitle } = to.meta
-
-    if (documentTitle) {
-    // 设置文档标题
-      useTitle(documentTitle as string)
-    }
-  })
-}
-
-/**
- * 创建并设置路由守卫
- * @param router - 路由器实例
- */
-export function createRouteGuard(router: Router) {
+export function createRouterGuard(router: Router) {
   // 创建进度条守卫
   progressGuard(router)
 
   // 创建文档标题守卫
   documentTitleGuard(router)
-}
 
-export {
-
-  /**
-   *  @description 博客模块路由发射器
-   */
-  BlogGuard,
+  // 创建博客路由守卫
+  blogRouteGuard(router)
 }

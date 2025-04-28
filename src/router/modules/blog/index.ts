@@ -1,8 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import config from '@/config'
+import { BLOG_BASE_LAYOUT } from '@/layouts'
 
-import { formatModules } from '../../utils/index'
+import {
+  formatModules,
+  recursiveHandleIframeRoutes,
+  recursiveNormalizeRoutesPath,
+  recursiveSortRoutesByOrder,
+} from '../../utils'
 
 /**
  *  获取当前文件名
@@ -31,24 +36,32 @@ const modules = Object.fromEntries(
  * @constant
  * @description 通过调用 `formatModules` 函数格式化模块化路由，并排除当前文件，以便生成代码模块的子路由列表。
  */
-const blogChildRouterList = formatModules(modules, [])
+const formatModulesList = formatModules(modules, []) as any
+
+const withPath = recursiveNormalizeRoutesPath(formatModulesList, '/blog')
+
+const sorted = recursiveSortRoutesByOrder(withPath)
+
+const blogRouterList = recursiveHandleIframeRoutes(sorted)
 
 /**
- *  blogRouter (代码模块路由)
+ *  testRouter (代码模块路由)
  */
-const blogRouter: RouteRecordRaw[] = [
+const testRouter: RouteRecordRaw[] = [
   {
     path: '/blog',
     name: 'Blog',
-    redirect: {
-      name: config.blog.defaultRouteName,
-    },
-    children: [...blogChildRouterList],
+
+    // redirect: import.meta.env.VITE_ROUTER_BLOG_HOME_PATH,
+    component: BLOG_BASE_LAYOUT,
+    children: [...blogRouterList],
   },
 ]
 
-export default blogRouter
+export default testRouter
 
 export {
-  blogChildRouterList,
+  blogRouterList,
 }
+
+console.table(blogRouterList)

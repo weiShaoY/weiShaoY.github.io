@@ -1,203 +1,226 @@
-import type { AppRouteRecordRaw } from '@/router/types'
-
-import {
-  BLOG_DEFAULT_LAYOUT,
-  BLOG_EXTERNAL_LAYOUT,
-  BLOG_IFRAME_LAYOUT,
-} from '@/layouts'
-
-const document: AppRouteRecordRaw = {
+const documentRoute: RouterType.BlogRouteRecordRaw = {
   path: 'document',
   name: 'Document',
   meta: {
-    locale: '文档',
-    icon: 'blog-menu-document',
+    title: '文档',
+    keepAlive: false,
     order: 1,
+    icon: 'blog-menu-document',
   },
-  redirect: {
-    name: 'TypeScript',
-  },
-  component: BLOG_DEFAULT_LAYOUT,
   children: [
+    {
+      path: 'ui',
+      name: 'UI',
+      meta: {
+        title: 'UI库',
+        icon: 'blog-menu-ui',
+      },
+      children: [
+        {
+          path: 'arcoDesign',
+          name: 'Arco',
+          meta: {
+            title: 'ArcoDesign',
+            icon: 'blog-menu-arcoDesign',
+            iframeUrl: 'https://arco.design/vue/component/button',
+          },
+        },
+        {
+          path: 'antd',
+          name: 'Antd',
+          meta: {
+            title: 'AntDesign',
+            icon: 'blog-menu-andDesign',
+            externalUrl: 'https://ant-design.antgroup.com/components/overview-cn/',
+          },
+        },
+        {
+          path: 'tDesign',
+          name: 'TDesign',
+          meta: {
+            title: 'TDesign',
+            icon: 'blog-menu-tDesign',
+            iframeUrl: 'https://tdesign.tencent.com/vue-next/getting-started',
+          },
+        },
+        {
+          path: 'elementPlus',
+          name: 'ElementPlus',
+          meta: {
+            title: 'ElementPlus',
+            icon: 'blog-menu-elementPlus',
+            iframeUrl: 'https://element-plus.org/zh-CN/component/overview.html',
+          },
+        },
+        {
+          path: 'naiveUi',
+          name: 'NaiveUi',
+          meta: {
+            title: 'NaiveUi',
+            icon: 'blog-menu-naiveUi',
+            iframeUrl: 'https://www.naiveui.com/zh-CN/dark/docs/introduction',
+          },
+        },
+      ],
+    },
+    {
+      path: 'css',
+      name: 'Css',
+      meta: {
+        title: 'Css',
+        icon: 'blog-menu-css',
+      },
+      children: [
+        {
+          path: 'unocss',
+          name: 'Unocss',
+          meta: {
+            title: 'Unocss',
+            icon: 'blog-menu-unocss',
+            iframeUrl: 'https://unocss-cn.pages.dev/',
+          },
+        },
+
+        {
+          path: 'tailwindCss',
+          name: 'TailwindCss',
+          meta: {
+            title: 'TailwindCss',
+            icon: 'blog-menu-tailwindCss',
+            externalUrl: 'https://tailwind.nodejs.cn/docs/installation',
+          },
+        },
+      ],
+    },
+
     {
       path: 'typescript',
       name: 'TypeScript',
       meta: {
-        locale: 'TypeScript',
+        title: 'TypeScript',
         icon: 'blog-menu-typeScript',
         iframeUrl: 'https://www.typescriptlang.org/zh/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
-
     {
       path: 'vite',
       name: 'Vite',
       meta: {
-        locale: 'Vite',
+        title: 'Vite',
         icon: 'blog-menu-vite',
         iframeUrl: 'https://cn.vitejs.dev/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
-
     {
       path: 'react',
       name: 'React',
       meta: {
-        locale: 'React',
+        title: 'React',
         icon: 'blog-menu-react',
         iframeUrl: 'https://zh-hans.react.dev/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
-
     {
       path: 'vue',
       name: 'Vue',
       meta: {
-        locale: 'Vue',
+        title: 'Vue',
         icon: 'blog-menu-vue',
         externalUrl: 'https://cn.vuejs.org/',
       },
-      component: BLOG_EXTERNAL_LAYOUT,
     },
-
     {
       path: 'angular',
       name: 'Angular',
       meta: {
-        locale: 'Angular',
+        title: 'Angular',
         icon: 'blog-menu-angular',
-        externalUrl: 'https://angular.io/',
+        iframeUrl: 'https://angular.io/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
-
     {
       path: 'pinia',
       name: 'Pinia',
       meta: {
-        locale: 'Pinia',
+        title: 'Pinia',
         icon: 'blog-menu-pinia',
         iframeUrl: 'https://pinia.vuejs.org/zh/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
-
     {
       path: 'vueuse',
       name: 'VueUse',
       meta: {
-        locale: 'VueUse',
+        title: 'vueuse',
         icon: 'blog-menu-vueuse',
         iframeUrl: 'https://vueuse.pages.dev/',
       },
-      component: BLOG_IFRAME_LAYOUT,
-    },
-    {
-      path: 'vueRouter',
-      name: 'VueRouter',
-      meta: {
-        locale: 'VueRouter',
-        icon: 'blog-menu-vue',
-        iframeUrl: 'https://router.vuejs.org/zh/',
-      },
-      component: BLOG_IFRAME_LAYOUT,
-    },
-    {
-      path: 'unocss',
-      name: 'Unocss',
-      meta: {
-        locale: 'Unocss',
-        icon: 'blog-menu-unocss',
-        iframeUrl: 'https://unocss-cn.pages.dev/',
-      },
-      component: BLOG_IFRAME_LAYOUT,
-    },
-
-    {
-      path: 'tailwindCss',
-      name: 'TailwindCss',
-      meta: {
-        locale: 'TailwindCss',
-        icon: 'blog-menu-tailwindCss',
-        iframeUrl: 'https://tailwindcss.com/docs/installation',
-      },
-      component: BLOG_IFRAME_LAYOUT,
     },
 
     {
       path: 'eslint',
       name: 'Eslint',
       meta: {
-        locale: 'Eslint',
+        title: 'Eslint',
         icon: 'blog-menu-eslint',
         iframeUrl: 'https://eslint.org/docs/latest/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
     {
-      path: 'biomejs',
-      name: 'Biomejs',
+      path: 'prettier',
+      name: 'Prettier',
       meta: {
-        locale: 'Biomejs',
-        icon: 'blog-menu-biomejs',
-        iframeUrl: 'https://biomejs.dev/zh-cn/guides/getting-started/',
+        title: 'Prettier',
+        icon: 'blog-menu-prettier',
+        iframeUrl: 'https://prettier.io/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
     {
       path: 'docker',
       name: 'Docker',
       meta: {
-        locale: 'Docker',
+        title: 'Docker',
         icon: 'blog-menu-docker',
         externalUrl: 'https://docs.docker.com/build-cloud/',
       },
-      component: BLOG_EXTERNAL_LAYOUT,
     },
     {
       path: 'echarts',
       name: 'Echarts',
       meta: {
-        locale: 'Echarts',
+        title: 'Echarts',
         icon: 'blog-menu-echarts',
         externalUrl: 'https://echarts.apache.org/zh/index.html',
       },
-      component: BLOG_EXTERNAL_LAYOUT,
     },
     {
       path: 'nginx',
       name: 'Nginx',
       meta: {
-        locale: 'Nginx',
+        title: 'Nginx',
         icon: 'blog-menu-nginx',
         iframeUrl: 'https://nginx.org/en/docs/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
     {
       path: 'electron',
       name: 'Electron',
       meta: {
-        locale: 'Electron',
+        title: 'Electron',
         icon: 'blog-menu-electron',
         iframeUrl: 'https://www.electronjs.org/zh/docs/latest/',
       },
-      component: BLOG_IFRAME_LAYOUT,
     },
     {
       path: 'nextJs',
       name: 'NextJs',
       meta: {
-        locale: 'NextJs',
+        title: 'NextJs',
         icon: 'blog-menu-nextJs',
         externalUrl: 'https://www.nextjs.cn/',
       },
-      component: BLOG_EXTERNAL_LAYOUT,
     },
   ],
 }
 
-export default document
+export default documentRoute

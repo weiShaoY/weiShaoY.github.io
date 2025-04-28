@@ -1,11 +1,9 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 import { SIMPLE_Layout } from '@/layouts'
 
 /**
  *  错误页面路由
  */
-const errorRouter: RouteRecordRaw[] = [
+const errorRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/403',
     component: SIMPLE_Layout,

@@ -1,84 +1,75 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { ElLoading } from 'element-plus'
+
+import { onMounted, ref } from 'vue'
 
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-/**
- *  是否加载完成
- */
-const isLoaded = ref(false)
+const iframeRef = ref<HTMLIFrameElement | null>(null)
 
-/**
- *  监听 route.meta.iframeUrl 的变化
- */
-const iframeUrl = computed(() => (route.meta.iframeUrl as string) ?? '')
+const isLoading = ref(true)
 
-function handleClick() {
-  if (iframeUrl.value) {
-    window.open(iframeUrl.value, '_blank', 'noopener,noreferrer')
+const iframeUrl = ref('')
+
+const iframeContainer = ref<HTMLDivElement | null>(null)
+
+let loadingInstance: any = null // 存储 loading 实例
+
+onMounted(() => {
+  if (route.meta.iframeUrl) {
+    iframeUrl.value = route.meta.iframeUrl as string
+
+    // 显示 loading
+    loadingInstance = ElLoading.service({
+      lock: true,
+      text: '加载中',
+      background: 'rgba(0, 0, 0, 0.7)',
+      target: iframeContainer.value as HTMLDivElement,
+    })
   }
   else {
     console.warn('iframeUrl 未找到，请确保 meta 中包含 iframeUrl')
   }
-}
-
-onMounted(() => {
-  if (!iframeUrl.value) {
-    console.warn('iframeUrl 未找到，请确保 meta 中包含 iframeUrl')
-  }
 })
+
+function handleIframeLoad() {
+  isLoading.value = false
+
+  // 关闭 loading
+  if (loadingInstance) {
+    loadingInstance.close()
+    loadingInstance = null
+  }
+}
 </script>
 
 <template>
   <div
-    className="h-full w-full relative flex flex-col"
+    ref="iframeContainer"
+    class="iframe-container"
   >
-
-    <div
-      v-if="!isLoaded"
-      class="absolute inset-0 z-10 flex items-center justify-center bg-white"
-    >
-      <!-- 这里是加载动画的具体内容 -->
-      <a-spin
-        :size="50"
-      />
-    </div>
-
-    <div
-      class="absolute left-0 top-0 z-10"
-    >
-      <a-tooltip
-        content="在新标签页打开"
-        position="top"
-      >
-        <a-button
-          shape="circle"
-          class="!bg-white"
-          @click="handleClick"
-        >
-
-          <SvgIcon
-            icon="arrow-top-right"
-          />
-        </a-button>
-      </a-tooltip>
-    </div>
-
     <iframe
       v-if="iframeUrl"
+      ref="iframeRef"
       :src="iframeUrl"
       frameborder="0"
-      class="h-full w-full"
-      @load="isLoaded = true"
+      class="iframe-content"
+      @load="handleIframeLoad"
     />
-
   </div>
 </template>
 
 <style scoped>
-iframe {
+.iframe-container {
+  height: 100%;
+  display: flex;
+}
+
+.iframe-content {
+  flex: 1;
+  width: 100%;
   border: none;
 }
 </style>

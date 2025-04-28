@@ -9,37 +9,44 @@ const state = defineModel<StateType>({
 
 <template>
   <!-- 右边 -->
-  <div
-    class="h-full flex-1 rounded-5 bg-[#F5F5F5] p-5 text-center"
+
+  <ElCard
+    class="h-full card-wrapper"
+    body-class="h-full max-h-full flex items-start flex-col "
   >
-    <div
-      class="m-x-auto h-20 w-20 flex items-center justify-center rounded-3 bg-primary text-12 color-white"
-    >
-      {{ state.selectedDay.day }}
-    </div>
 
     <div
-      class=""
+      class="w-full flex flex-col items-center justify-center"
     >
-      <span>
-        {{ state.selectedDay.ymd }}
-      </span>
+      <div
+        class="m-x-auto h-20 w-20 flex items-center justify-center rounded-3 bg-primary text-12 color-white"
+      >
+        {{ state.selectedDay.day }}
+      </div>
 
-      <span
+      <div
         class=""
       >
-        周{{ state.selectedDay.dayOfWeek }}
-      </span>
-    </div>
+        <span>
+          {{ state.selectedDay.ymd }}
+        </span>
 
-    <div>
-      <span>
-        {{ state.selectedDay.lunarMonth }}月
-      </span>
+        <span
+          class=""
+        >
+          周{{ state.selectedDay.dayOfWeek }}
+        </span>
+      </div>
 
-      <span>
-        {{ state.selectedDay.lunarDay }}
-      </span>
+      <div>
+        <span>
+          {{ state.selectedDay.lunarMonth }}月
+        </span>
+
+        <span>
+          {{ state.selectedDay.lunarDay }}
+        </span>
+      </div>
     </div>
 
     <!-- 生肖 -->
@@ -78,9 +85,7 @@ const state = defineModel<StateType>({
     <template
       v-if="!state.selectedDay.isToday"
     >
-      <a-divider
-        :margin="10"
-      />
+      <el-divider />
 
       <div
         class="flex"
@@ -103,8 +108,8 @@ const state = defineModel<StateType>({
       </div>
     </template>
 
-    <a-divider
-      :margin="10"
+    <el-divider
+      :margin="5"
     />
 
     <div
@@ -121,8 +126,8 @@ const state = defineModel<StateType>({
       </div>
     </div>
 
-    <a-divider
-      :margin="10"
+    <el-divider
+      :margin="5"
     />
 
     <div
@@ -139,8 +144,8 @@ const state = defineModel<StateType>({
       </div>
     </div>
 
-    <a-divider
-      :margin="10"
+    <el-divider
+      :margin="5"
     />
 
     <template
@@ -168,9 +173,7 @@ const state = defineModel<StateType>({
         </div>
       </div>
 
-      <a-divider
-        :margin="10"
-      />
+      <el-divider />
     </template>
 
     <div
@@ -194,8 +197,8 @@ const state = defineModel<StateType>({
       </div>
     </div>
 
-    <a-divider
-      :margin="10"
+    <el-divider
+      :margin="5"
     />
 
     <div
@@ -219,8 +222,8 @@ const state = defineModel<StateType>({
       </div>
     </div>
 
-    <a-divider
-      :margin="10"
+    <el-divider
+      :margin="5"
     />
 
     <div
@@ -282,9 +285,5 @@ const state = defineModel<StateType>({
         </div>
       </div>
     </div>
-  </div>
+  </ElCard>
 </template>
-
-<style lang="less" scoped>
-
-</style>

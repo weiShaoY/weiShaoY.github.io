@@ -163,13 +163,10 @@ const option = computed<EChartsOption>(() => {
 </script>
 
 <template>
-  <div
-    class="h-[500px] w-full"
-  >
-    <Chart
-      :option="option"
-    />
-  </div>
+  <VueEcharts
+    :option="option"
+    :height="500"
+  />
 </template>
 
 <style lang="less" scoped></style>

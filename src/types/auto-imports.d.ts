@@ -10,6 +10,7 @@ declare global {
   const addEventListen: typeof import('../utils/event')['addEventListen']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const blogMittBus: typeof import('../utils/blogMittBus')['blogMittBus']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -35,7 +36,9 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const disposeScene: typeof import('../utils/threeJs')['disposeScene']
-  const downloadImage: typeof import('../utils/downloadImage')['downloadImage']
+  const downloadAudio: typeof import('../utils/download')['downloadAudio']
+  const downloadImage: typeof import('../utils/download')['downloadImage']
+  const downloadVideo: typeof import('../utils/download')['downloadVideo']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -61,6 +64,7 @@ declare global {
   const isNullOrUnDef: typeof import('../utils/is')['isNullOrUnDef']
   const isNumber: typeof import('../utils/is')['isNumber']
   const isObject: typeof import('../utils/is')['isObject']
+  const isPC: typeof import('../utils/isPC')['isPC']
   const isPromise: typeof import('../utils/is')['isPromise']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
@@ -131,6 +135,9 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
+  const toggleHtmlClass: typeof import('../utils/common')['toggleHtmlClass']
+  const transformRecordToOption: typeof import('../utils/common')['transformRecordToOption']
+  const translateOptions: typeof import('../utils/common')['translateOptions']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
@@ -343,6 +350,7 @@ declare module 'vue' {
     readonly addEventListen: UnwrapRef<typeof import('../utils/event')['addEventListen']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly blogMittBus: UnwrapRef<typeof import('../utils/blogMittBus')['blogMittBus']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -368,11 +376,12 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly disposeScene: UnwrapRef<typeof import('../utils/threeJs')['disposeScene']>
-    readonly downloadImage: UnwrapRef<typeof import('../utils/downloadImage')['downloadImage']>
+    readonly downloadAudio: UnwrapRef<typeof import('../utils/download')['downloadAudio']>
+    readonly downloadImage: UnwrapRef<typeof import('../utils/download')['downloadImage']>
+    readonly downloadVideo: UnwrapRef<typeof import('../utils/download')['downloadVideo']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly externalLinkRegex: UnwrapRef<typeof import('../utils/externalLinkRegex')['externalLinkRegex']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -394,6 +403,7 @@ declare module 'vue' {
     readonly isNullOrUnDef: UnwrapRef<typeof import('../utils/is')['isNullOrUnDef']>
     readonly isNumber: UnwrapRef<typeof import('../utils/is')['isNumber']>
     readonly isObject: UnwrapRef<typeof import('../utils/is')['isObject']>
+    readonly isPC: UnwrapRef<typeof import('../utils/isPC')['isPC']>
     readonly isPromise: UnwrapRef<typeof import('../utils/is')['isPromise']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -464,6 +474,9 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
+    readonly toggleHtmlClass: UnwrapRef<typeof import('../utils/common')['toggleHtmlClass']>
+    readonly transformRecordToOption: UnwrapRef<typeof import('../utils/common')['transformRecordToOption']>
+    readonly translateOptions: UnwrapRef<typeof import('../utils/common')['translateOptions']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>

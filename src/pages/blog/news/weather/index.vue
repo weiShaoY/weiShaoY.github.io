@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import type { CascaderValue } from 'element-plus'
+
 import type { WeatherType } from './types'
 
 import { BlogApi } from '@/api'
-
-import { Notification } from '@arco-design/web-vue'
 
 import Climate from './components/climate/index.vue'
 
@@ -73,9 +73,7 @@ const data = ref<WeatherType>({
       url: 'http://default.url',
     },
     publish_time: '2024-01-01T00:00:00Z',
-    detail: [
-
-    ],
+    detail: [],
   },
   air: {
     forecasttime: '2024-12-19 15:00',
@@ -84,47 +82,17 @@ const data = ref<WeatherType>({
     text: '良',
     aqiCode: '99031;99032;99033;99035;99037;99038;99039;99040',
   },
-  tempchart: [
-  ],
+  tempchart: [],
   passedchart: [],
   climate: {
     time: '',
-    month: [
-
-    ],
+    month: [],
   },
   radar: {
     title: '实时雷达数据',
     image: '',
     url: '',
   },
-})
-
-/**
- * 省份选项
- */
-const provinceSelectOptions = provinceCityData.map((item) => {
-  return {
-    value: item.code,
-    label: item.name,
-  }
-})
-
-/**
- * 城市选项
- * 根据当前选择的省份来动态生成城市列表
- */
-const citySelectOptions = computed(() => {
-  const selectedProvince = provinceCityData.find(
-    region => region.code === province.value,
-  )
-
-  return selectedProvince
-    ? selectedProvince.children.map(city => ({
-        value: city.code,
-        label: city.city,
-      }))
-    : []
 })
 
 /**
@@ -221,8 +189,10 @@ async function getData() {
     data.value = response
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
-
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
     clearData()
   }
   finally {
@@ -230,45 +200,60 @@ async function getData() {
   }
 }
 
-/**
- * 处理省份变更，更新城市的默认选项
- */
-async function handleProvinceChange() {
-  // 在省份改变时，设置城市的默认值为该省的第一个城市
-  if (citySelectOptions.value.length > 0) {
-    city.value = citySelectOptions.value[0].value
+onMounted(async () => {
+  await getData()
+})
+
+const options = provinceCityData.map((item) => {
+  return {
+    value: item.code,
+    label: item.name,
+    children: item.children.map(city => ({
+      value: city.code,
+      label: city.city,
+    })),
   }
+})
+
+const value = ref(['AHN', 'zOenJ'])
+
+const props = {
+  expandTrigger: 'hover' as const,
+}
+
+async function handleChange(value: CascaderValue) {
+  // 首先确保 value 是一个数组（非多选情况下）
+  if (!Array.isArray(value)) {
+    console.error('Cascader value should be an array in single-select mode')
+    return
+  }
+
+  // 使用类型断言明确 value 是 string[] 或 number[]
+  const selectedValues = value as string []
+
+  // 提供默认值防止 undefined 访问
+  province.value = selectedValues[0] ?? ''
+  city.value = selectedValues[1] ?? ''
 
   await getData()
 }
 
-onMounted(async () => {
-  await getData()
-})
+const activeTab = ref('realtime')
 </script>
 
 <template>
   <div
-    class="h-full w-full flex flex-col gap-5 overflow-hidden"
+    class="h-full w-full flex flex-col"
   >
     <div
       class="flex items-center gap-5"
     >
-      <a-select
-        v-model="province"
-        :options="provinceSelectOptions"
-        class="w-40"
-        placeholder="请选择大区"
-        @change="handleProvinceChange"
-      />
-
-      <a-select
-        v-model="city"
-        class="w-40"
-        placeholder="请选择英雄"
-        allow-search
-        :options="citySelectOptions"
-        @change="getData"
+      <el-cascader
+        v-model="value"
+        :options="options"
+        :props="props"
+        size="large"
+        @change="handleChange"
       />
 
       <div
@@ -286,39 +271,47 @@ onMounted(async () => {
     </div>
 
     <div
-      class=""
+      v-loading="isLoading"
+      class="flex flex-col flex-1"
     >
+
       <Meter
         v-if="data.tempchart.length && !isLoading"
         v-model="data"
       />
 
-      <a-tabs
+      <el-tabs
         class="w-full"
-        default-active-key="2"
       >
-        <a-tab-pane
-          key="1"
-          title="预报数据"
+        <el-tab-pane
+          label="预报数据"
         >
-          <TempChart
-            v-if="data.tempchart.length"
-            v-model="data"
-          />
-        </a-tab-pane>
+          <div
+            class="h-[500px]"
+          >
+            <TempChart
+              v-if="data.tempchart.length"
+              v-model="data"
+            />
+          </div>
+        </el-tab-pane>
 
-        <a-tab-pane
-          key="2"
-          title="24小时实时天气"
+        <el-tab-pane
+          label="24小时实时天气"
+          lazy
         >
-          <PassedChart
-            v-if="data.passedchart.length"
-            v-model="data"
-          />
-        </a-tab-pane>
-      </a-tabs>
+          <div
+            class="h-[500px]"
+          >
+            <PassedChart
+              v-if="activeTab === 'realtime' && data.passedchart.length"
+              v-model="data"
+            />
+          </div>
+        </el-tab-pane>
+      </el-tabs>
 
-      <a-divider />
+      <el-divider />
 
       <Climate
         v-if="data.tempchart.length"
@@ -327,3 +320,9 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+// :deep(.el-cascader-menu__wrap.el-scrollbar__wrap) {
+//   height: 300px !important;
+// }
+</style>

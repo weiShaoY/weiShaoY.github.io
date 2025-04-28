@@ -1,11 +1,12 @@
 import type { defineComponent } from 'vue'
 
-import type { NavigationGuard, RouteMeta } from 'vue-router'
+// export type Component<T = any> =
+//   | ReturnType<typeof defineComponent>
+//   | (() => Promise<typeof import('*.vue')>)
+//   | (() => Promise<T>)
+import type { Component } from 'vue'
 
-export type Component<T = any> =
-  | ReturnType<typeof defineComponent>
-  | (() => Promise<typeof import('*.vue')>)
-  | (() => Promise<T>)
+import type { NavigationGuard, RouteMeta } from 'vue-router'
 
 export type AppRouteRecordRaw = {
 
@@ -93,7 +94,8 @@ export type AppRouteRecordRaw = {
   /**
    *   路由组件
    */
-  component?: Component | string
+  // component?: Component | string
+  component?: Component | (() => Promise<Component>)
 
   /**
    *   子路由

@@ -582,91 +582,65 @@ const data = [
     ],
   },
 ]
-
 </script>
 
 <template>
   <div
     class="grid grid-cols-2 h-full w-full gap-5 overflow-hidden"
   >
-    <a-card
+    <el-card
       v-for="item in data"
       :key="item.key"
+      :header="`${item.key}---${item.category}`"
       class=""
     >
-      <template
-        #title
-      >
-        {{ item.category }}
 
-      </template>
-
-      <template
-        #extra
-      >
-        {{ item.key }}
-      </template>
-
-      <a-table
+      <el-table
         :data="item.list"
-        :pagination="false"
       >
-        <template
-          #columns
+        <el-table-column
+          prop="name"
+          title="电话名称"
+          align="center"
+        />
+
+        <el-table-column
+          prop="number"
+          title="电话号码"
+          align="center"
         >
-          <a-table-column
-            title="电话名称"
-            data-index="name"
-            align="center"
-          />
-
-          <a-table-column
-            title="电话号码"
-            data-index="number"
-            align="center"
+          <template
+            #default="{ row }"
           >
-
-            <template
-              #cell="{ record }"
+            <el-link
+              v-copy="row.number"
+              target="_blank"
+              type="primary"
             >
-              <a-link
-                v-copy="record.number"
-                target="_blank"
-              >
-                {{ record.number }}
-              </a-link>
+              {{ row.number }}
+            </el-link>
+          </template>
+        </el-table-column>
 
-            </template>
+        <el-table-column
+          prop="website"
+          title="电话官网"
 
-          </a-table-column>
-
-          <a-table-column
-            title="电话官网"
-            data-index="website"
-            align="center"
+          align="center"
+        >
+          <template
+            #default="{ row }"
           >
-
-            <template
-              #cell="{ record }"
+            <el-link
+              :href="row.website"
+              target="_blank"
+              type="primary"
             >
-              <a-link
-                :href="record.website"
-                target="_blank"
-              >
-                {{ record.website }}
-              </a-link>
-            </template>
-
-          </a-table-column>
-        </template>
-      </a-table>
-
-    </a-card>
+              {{ row.website }}
+            </el-link>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
-
-<style lang="less" scoped>
-// :deep(.arco-card-body) {
-//   height: 300px;
-// }
-</style>

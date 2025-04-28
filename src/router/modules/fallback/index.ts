@@ -1,9 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 /**
  *  未找到和重定向路由
  */
-const fallbackRouter: RouteRecordRaw[] = [
+export const fallbackRouter: RouterType.RouteRecordRaw[] = [
   {
     // 重定向
     path: '/redirect/:path(.*)',
@@ -16,5 +14,3 @@ const fallbackRouter: RouteRecordRaw[] = [
     redirect: '/404',
   },
 ]
-
-export default fallbackRouter

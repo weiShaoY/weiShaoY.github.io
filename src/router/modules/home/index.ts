@@ -1,17 +1,12 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 import { HOME_DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  首页路由
  */
-const homeRouter: RouteRecordRaw[] = [
+const homeRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Home',
-    redirect: {
-      name: 'About',
-    },
     component: HOME_DEFAULT_LAYOUT,
     children: [
       {

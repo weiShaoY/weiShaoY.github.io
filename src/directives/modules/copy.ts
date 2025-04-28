@@ -1,12 +1,6 @@
-/**
- * v-copy
- * 复制某个值至剪贴板
- * 接收参数：string类型/Ref<string>类型/Reactive<string>类型
- */
-
 import type { Directive, DirectiveBinding } from 'vue'
 
-import { Notification } from '@arco-design/web-vue'
+import { copyText } from '@/utils'
 
 type ElType = {
   copyData: string | number
@@ -14,16 +8,11 @@ type ElType = {
 
 async function handleClick(this: any) {
   try {
-    console.log('%c Line:18 🍕 this.copyData', 'color:#93c0a4', this.copyData)
-
     if (!this.copyData) {
       return
     }
 
-    await navigator.clipboard.writeText(this.copyData)
-    Notification.success({
-      content: '复制成功',
-    })
+    copyText(this.copyData.toString() as string)
   }
   catch (err) {
     console.error('复制操作不被支持或失败: ', err)
@@ -35,6 +24,11 @@ async function handleClick(this: any) {
  */
 export type UseCopyParamsType = string | number
 
+/**
+ * v-copy
+ * 复制某个值至剪贴板
+ * 接收参数：string类型/Ref<string>类型/Reactive<string>类型
+ */
 const useCopy: Directive = {
   mounted(el: ElType, binding: DirectiveBinding<UseCopyParamsType>) {
     el.copyData = binding.value

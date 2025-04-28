@@ -10,7 +10,6 @@ type CanvasLoaderPropsType = {
 }
 
 withDefaults(defineProps<CanvasLoaderPropsType>(), {
-  isLoading: false,
 })
 
 </script>
@@ -20,10 +19,10 @@ withDefaults(defineProps<CanvasLoaderPropsType>(), {
   <div
     class="relative !h-full !w-full"
   >
-    <a-spin
+
+    <Loading
       v-if="!isLoading"
-      :size="50"
-      class="absolute left-1/2 top-1/2 z-1 color-[#F3B03D] -translate-x-1/2 -translate-y-1/2"
+      class="absolute left-1/2 top-1/2 z-1 -translate-x-1/2 -translate-y-1/2"
     />
 
     <div

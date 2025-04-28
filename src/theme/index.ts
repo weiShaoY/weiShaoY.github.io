@@ -1,9 +1,5 @@
 import 'virtual:svg-icons-register'
 
-import 'element-plus/dist/index.css'
-
-import 'element-plus/theme-chalk/dark/css-vars.css'
-
 import '@unocss/reset/tailwind.css'
 
 import 'uno.css'
@@ -14,8 +10,13 @@ import './fonts.less'
 
 import './nprogress.less'
 
-import './arco.less'
+// import './base.less'
 
-import './theme.less'
+import './element-plus'
 
-import './base.less'
+// / /////////////////////// ////////////////////////  2025-04-17---22:32---星期四  ////////////////////////
+
+// 重置HTML样式
+import './reset.scss'
+
+import './el-ui.scss' // 优化element样式

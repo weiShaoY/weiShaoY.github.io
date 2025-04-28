@@ -165,19 +165,11 @@ onUnmounted(() => {
 
 <template>
   <div
-    :style="{
-      boxSizing: 'border-box',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundImage: 'linear-gradient(135deg, #224141, #162a2a)',
-      position: 'relative',
-    }"
+    class="relative aspect-square h-full flex justify-center justify-between bg-[#224141]"
   >
     <canvas
       ref="canvasRef"
+      class="absolute left-0 top-0 h-full w-full"
     >
       您的浏览器版本过低，请更新浏览器
     </canvas>

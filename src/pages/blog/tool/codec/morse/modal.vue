@@ -1,7 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 const visible = defineModel({
-  type : Boolean,
+  type: Boolean,
 })
 
 const morseCodeData = [
@@ -186,52 +186,50 @@ const morseCodeData = [
     code: '-----',
   },
 ]
+
 </script>
 
 <template>
-  <a-modal
-    v-model:visible="visible"
+
+  <el-dialog
+    v-model="visible"
+    title="摩斯密码表"
     :footer="false"
+    :show-close="false"
+    :lock-scroll="false"
     :width="1000"
   >
-    <template
-      #title
-    >
-      摩斯密码表
 
-    </template>
-
-    <a-descriptions
-      :column="{ xs: 4, md: 4, lg: 4 }"
-      bordered
-      align="center"
+    <el-descriptions
+      class="margin-top"
+      :column="4"
+      border
     >
-      <a-descriptions-item
+      <el-descriptions-item
         v-for="item in 4"
         :key="item"
         :span="1"
         label="码值"
+        align="center"
       >
         字符
-      </a-descriptions-item>
+      </el-descriptions-item>
 
-      <a-descriptions-item
+      <el-descriptions-item
         v-for="item in morseCodeData"
         :key="item.key"
         :span="1"
         :label="item.char"
+        align="center"
       >
-        <a-link
+        <el-link
           v-copy="item.code"
+          type="primary"
         >
           {{ item.code }}
-        </a-link>
-      </a-descriptions-item>
+        </el-link>
+      </el-descriptions-item>
 
-    </a-descriptions>
-  </a-modal>
+    </el-descriptions>
+  </el-dialog>
 </template>
-
-<style lang="less" scoped>
-
-</style>

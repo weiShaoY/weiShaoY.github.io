@@ -27,44 +27,44 @@ watchEffect(() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+
+      <el-select
         v-model="type"
-        class="w-40"
-        placeholder="请选择查询类型"
+        placeholder="请选择"
+        size="large"
+        class="!w-60"
       >
-        <a-option
+        <el-option
           value="code"
-        >
-          Md5-加密
-        </a-option>
-      </a-select>
+          label="Md5-加密"
+        />
+      </el-select>
     </div>
 
-    <a-textarea
+    <el-input
       v-model="inputText"
-      class="h-[40%] w-full"
-      allow-clear
+      :rows="3"
+      type="textarea"
       placeholder="请输入要加密的内容"
     />
 
-    <a-divider />
+    <el-divider />
+
+    <div
+      class="text-4 font-bold"
+    >
+      加密结果
+    </div>
 
     <div
       v-copy="encodedText"
-      class="h-[40%] flex cursor-pointer border p-2"
+      class="h-[40%] min-h-25 flex flex-col cursor-pointer border p-2"
     >
 
       <span
         v-if="encodedText"
       >
         {{ encodedText }}
-      </span>
-
-      <span
-        v-else
-        class="m-auto text-6"
-      >
-        加密结果
       </span>
 
     </div>

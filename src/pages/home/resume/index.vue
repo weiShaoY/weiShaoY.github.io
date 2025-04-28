@@ -1,6 +1,6 @@
 <!------------------------------------  resume  ------------------------------------------------->
 <script lang="ts" setup>
-const current = ref(1)
+
 </script>
 
 <template>
@@ -9,23 +9,7 @@ const current = ref(1)
   >
     <!-- <VideoPlay /> -->
 
-    <a-steps
-      :current="current"
-      direction="vertical"
-      class="m-x-auto"
-    >
-      <a-step>
-        Succeeded
-      </a-step>
-
-      <a-step>
-        Processing
-      </a-step>
-
-      <a-step>
-        Pending
-      </a-step>
-    </a-steps>
+    111
   </div>
 </template>
 

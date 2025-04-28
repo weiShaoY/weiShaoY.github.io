@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import { ref } from 'vue'
 
 const isLoading = ref(false)
@@ -216,6 +214,7 @@ async function getData() {
   try {
     if (!type.value || !searchValue.value) {
       // throw new Error('请输入香烟名称')
+      window.$notification?.error('请输入!')
       return
     }
 
@@ -274,7 +273,7 @@ async function getData() {
     }
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error(error.message || '获取数据失败，请稍后重试')
 
     clearData()
   }
@@ -288,7 +287,7 @@ function handleSelectChange() {
   clearData()
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
 </script>
@@ -300,42 +299,40 @@ onMounted(async() => {
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+
+      <el-select
         v-model="type"
-        class="w-40"
-        placeholder="请选择查询类型"
+        placeholder="请选择"
+        size="large"
+        class="!w-60"
         @change="handleSelectChange"
       >
-        <a-option
+        <el-option
           value="qq"
-        >
-          QQ号查询
-        </a-option>
+          label="QQ号查询"
+        />
 
-        <a-option
+        <el-option
           value="phone"
-        >
-          手机号查询
-        </a-option>
+          label="手机号查询"
+        />
 
-        <a-option
+        <el-option
           value="lol"
-        >
-          LOL查询
-        </a-option>
+          label="LOL查询"
+        />
 
-        <a-option
+        <el-option
           value="weiBo"
-        >
-          微博ID查询
-        </a-option>
-      </a-select>
+          label="微博ID查询"
+        />
 
-      <a-input-search
-        v-model="searchValue"
-        class="w-[60%]"
-        allow-clear
-        search-button
+      </el-select>
+
+      <el-input
+        v-model.trim="searchValue"
+        clearable
+        size="large"
         :placeholder="
           type === 'qq'
             ? '请输入QQ号'
@@ -347,141 +344,133 @@ onMounted(async() => {
                   ? '请输入微博ID'
                   : ''
         "
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          搜索
-        </template>
-      </a-input-search>
+      </el-input>
     </div>
 
-    <a-spin
-      :loading="isLoading"
+    <el-descriptions
+      v-loading="isLoading"
+      :column="1"
+      border
     >
-      <a-descriptions
-        :column="{ xs: 1, md: 1, lg: 1 }"
-        bordered
+      <template
+        v-if="type === 'qq'"
       >
-        <template
-          v-if="type === 'qq'"
+        <el-descriptions-item
+          :span="1"
+          label="手机号"
         >
-          <a-descriptions-item
-            :span="1"
-            label="手机号"
-          >
-            {{ data?.qq?.phone.phone }}
-          </a-descriptions-item>
+          {{ data?.qq?.phone.phone }}
+        </el-descriptions-item>
 
-          <a-descriptions-item
-            :span="1"
-            label="手机号归属地"
-          >
-            {{ data?.qq?.phone.phonediqu }}
-          </a-descriptions-item>
-
-          <a-descriptions-item
-            :span="1"
-            label="LOL名称"
-          >
-            {{ data?.qq?.lol.name }}
-          </a-descriptions-item>
-
-          <a-descriptions-item
-            :span="1"
-            label="LOL所在大区"
-          >
-            {{ data?.qq?.lol.daqu }}
-          </a-descriptions-item>
-
-          <a-descriptions-item
-            :span="1"
-            label="QQ老密码"
-          >
-            {{ data?.qq?.oldPassword.qqlm }}
-          </a-descriptions-item>
-        </template>
-
-        <template
-          v-if="type === 'phone'"
+        <el-descriptions-item
+          :span="1"
+          label="手机号归属地"
         >
-          <a-descriptions-item
-            :span="1"
-            label="QQ号"
-          >
-            {{ data?.phone?.qq.qq }}
-          </a-descriptions-item>
+          {{ data?.qq?.phone.phonediqu }}
+        </el-descriptions-item>
 
-          <a-descriptions-item
-            :span="1"
-            label="手机号地区"
-          >
-            {{ data?.phone?.qq.phonediqu }}
-          </a-descriptions-item>
-
-          <a-descriptions-item
-            :span="1"
-            label="微博ID"
-          >
-            {{ data?.phone?.weiBo.id }}
-          </a-descriptions-item>
-        </template>
-
-        <template
-          v-if="type === 'lol'"
+        <el-descriptions-item
+          :span="1"
+          label="LOL名称"
         >
-          <a-descriptions-item
-            :span="1"
-            label="QQ号"
-          >
-            {{ data?.lol?.qq.qq }}
-          </a-descriptions-item>
+          {{ data?.qq?.lol.name }}
+        </el-descriptions-item>
 
-          <a-descriptions-item
-            :span="1"
-            label="手机号地区"
-          >
-            {{ data?.lol?.qq.name }}
-          </a-descriptions-item>
-
-          <a-descriptions-item
-            :span="1"
-            label="微博ID"
-          >
-            {{ data?.lol?.qq.daqu }}
-          </a-descriptions-item>
-        </template>
-
-        <template
-          v-if="type === 'weiBo'"
+        <el-descriptions-item
+          :span="1"
+          label="LOL所在大区"
         >
-          <a-descriptions-item
-            :span="1"
-            label="手机号"
-          >
-            {{ data?.weiBo?.phone.phone }}
-          </a-descriptions-item>
+          {{ data?.qq?.lol.daqu }}
+        </el-descriptions-item>
 
-          <a-descriptions-item
-            :span="1"
-            label="手机号地区"
-          >
-            {{ data?.weiBo?.phone.phonediqu }}
-          </a-descriptions-item>
-        </template>
-      </a-descriptions>
-    </a-spin>
+        <el-descriptions-item
+          :span="1"
+          label="QQ老密码"
+        >
+          {{ data?.qq?.oldPassword.qqlm }}
+        </el-descriptions-item>
+      </template>
+
+      <template
+        v-if="type === 'phone'"
+      >
+        <el-descriptions-item
+          :span="1"
+          label="QQ号"
+        >
+          {{ data?.phone?.qq.qq }}
+        </el-descriptions-item>
+
+        <el-descriptions-item
+          :span="1"
+          label="手机号地区"
+        >
+          {{ data?.phone?.qq.phonediqu }}
+        </el-descriptions-item>
+
+        <el-descriptions-item
+          :span="1"
+          label="微博ID"
+        >
+          {{ data?.phone?.weiBo.id }}
+        </el-descriptions-item>
+      </template>
+
+      <template
+        v-if="type === 'lol'"
+      >
+        <el-descriptions-item
+          :span="1"
+          label="QQ号"
+        >
+          {{ data?.lol?.qq.qq }}
+        </el-descriptions-item>
+
+        <el-descriptions-item
+          :span="1"
+          label="手机号地区"
+        >
+          {{ data?.lol?.qq.name }}
+        </el-descriptions-item>
+
+        <el-descriptions-item
+          :span="1"
+          label="微博ID"
+        >
+          {{ data?.lol?.qq.daqu }}
+        </el-descriptions-item>
+      </template>
+
+      <template
+        v-if="type === 'weiBo'"
+      >
+        <el-descriptions-item
+          :span="1"
+          label="手机号"
+        >
+          {{ data?.weiBo?.phone.phone }}
+        </el-descriptions-item>
+
+        <el-descriptions-item
+          :span="1"
+          label="手机号地区"
+        >
+          {{ data?.weiBo?.phone.phonediqu }}
+        </el-descriptions-item>
+      </template>
+    </el-descriptions>
   </div>
 </template>

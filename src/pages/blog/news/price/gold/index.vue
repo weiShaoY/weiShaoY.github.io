@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 const isLoading = ref(false)
 
 /**
@@ -30,7 +28,6 @@ const goldData = ref<{
    *  国际黄金
    */
   internationalGold: []
-
 }>({
   marketGold: [],
   domesticTopGoldStores: [],
@@ -47,21 +44,30 @@ async function getData() {
 
     // 并行获取数据，提高性能
     const [marketGoldPrice, realTimeGoldPrice] = await Promise.all([
-
       BlogApi.getMarketGoldPrice(),
 
-      BlogApi.getRealTimeGoldPrice(),
+      // BlogApi.getRealTimeGoldPrice(),
     ])
 
     goldData.value = {
       marketGold: marketGoldPrice,
-      domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
-      domesticGold: realTimeGoldPrice['国内黄金'],
-      internationalGold: realTimeGoldPrice['国际黄金'],
+
+      // domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
+      // domesticGold: realTimeGoldPrice['国内黄金'],
+      // internationalGold: realTimeGoldPrice['国际黄金'],
     }
+
+    console.log(
+      '%c Line:64 🍆 goldData.value',
+      'color:#7f2b82',
+      goldData.value,
+    )
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
   }
   finally {
     isLoading.value = false
@@ -74,342 +80,269 @@ onMounted(async () => {
 </script>
 
 <template>
-  <a-tabs
-    class="w-full"
-    default-active-key="1"
+  <el-tabs
+    v-loading="isLoading"
+    class="h-full w-full"
   >
-    <a-tab-pane
+    <el-tab-pane
       key="1"
-      title="大盘黄金"
+      label="大盘黄金"
     >
-      <a-table
-        :data="goldData.marketGold"
-        :loading="isLoading"
-        scrollbar
-        :scroll="{
-          maxHeight: 'calc(100vh - 300px)',
-        }"
-        :pagination="false"
+      <div
+        class="h-[calc(100vh-200px)]"
       >
-        <template
-          #columns
+        <el-table
+          class="!w-full"
+          :data="goldData.marketGold"
+          height="100%"
         >
-          <a-table-column
-            title="ID"
-            data-index="id"
-            align="center"
+          <el-table-column
+            prop="id"
+            label="ID"
             :width="100"
           />
 
-          <a-table-column
-            title="商品目录"
-            data-index="dir"
+          <el-table-column
+            prop="dir"
+            label="商品目录"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="商品名称"
-            data-index="title"
+          <el-table-column
+            prop="title"
+            label="商品名称"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="当前价格"
-            data-index="price"
+          <el-table-column
+            prop="price"
+            label="当前价格"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="涨跌幅"
-            data-index="changepercent"
+          <el-table-column
+            prop="changepercent"
+            label="涨跌幅"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最高价"
-            data-index="maxprice"
+          <el-table-column
+            prop="maxprice"
+            label="最高价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最低价"
-            data-index="minprice"
+          <el-table-column
+            prop="minprice"
+            label="最低价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="开盘价"
-            data-index="openingprice"
+          <el-table-column
+            prop="openingprice"
+            label="开盘价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="收盘价"
-            data-index="lastclosingprice"
+          <el-table-column
+            prop="lastclosingprice"
+            label="收盘价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
+        </el-table>
+      </div>
+    </el-tab-pane>
 
-          <a-table-column
-            title="日期"
-            data-index="date"
-            align="center"
-          />
-        </template>
-      </a-table>
-    </a-tab-pane>
-
-    <a-tab-pane
+    <el-tab-pane
       key="2"
-      title="国内十大金店"
+      label="国内十大金店"
     >
-      <a-table
-        :data="goldData.domesticTopGoldStores"
-        :loading="isLoading"
-        scrollbar
-        :scroll="{
-          maxHeight: 'calc(100vh - 300px)',
-        }"
-        :pagination="false"
+      <div
+        class="h-[calc(100vh-200px)]"
       >
-        <template
-          #columns
+        <el-table
+          class="!w-full"
+          :data="goldData.domesticTopGoldStores"
+          height="100%"
         >
-
-          <a-table-column
-            title="品牌"
-            data-index="品牌"
+          <el-table-column
+            prop="品牌"
+            label="品牌"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="黄金价格"
-            data-index="黄金价格"
+          <el-table-column
+            prop="黄金价格"
+            label="黄金价格"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="铂金价格"
-            data-index="铂金价格"
+          <el-table-column
+            prop="铂金价格"
+            label="铂金价格"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="金条价格"
-            data-index="金条价格"
+          <el-table-column
+            prop="金条价格"
+            label="金条价格"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="单位"
-            data-index="单位"
+          <el-table-column
+            prop="单位"
+            label="单位"
             align="center"
           />
 
-          <a-table-column
-            title="报价时间"
-            data-index="报价时间"
+          <el-table-column
+            prop="报价时间"
+            label="报价时间"
             align="center"
+            sortable
           />
-        </template>
-      </a-table>
-    </a-tab-pane>
+        </el-table>
+      </div>
+    </el-tab-pane>
 
-    <a-tab-pane
+    <el-tab-pane
       key="3"
-      title="国内黄金"
+      label="国内黄金"
     >
-      <a-table
-        :data="goldData.domesticGold"
-        :loading="isLoading"
-        scrollbar
-        :scroll="{
-          maxHeight: 'calc(100vh - 300px)',
-        }"
-        :pagination="false"
+      <div
+        class="h-[calc(100vh-200px)]"
       >
-        <template
-          #columns
+        <el-table
+          class="!w-full"
+          :data="goldData.domesticGold"
+          height="100%"
         >
-
-          <a-table-column
-            title="品种"
-            data-index="品种"
+          <el-table-column
+            prop="品种"
+            label="品种"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最新价"
-            data-index="最新价"
+          <el-table-column
+            prop="最新价"
+            label="最新价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最低价"
-            data-index="最低价"
+          <el-table-column
+            prop="最低价"
+            label="最低价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最高价"
-            data-index="最高价"
+          <el-table-column
+            prop="最高价"
+            label="最高价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="涨跌"
-            data-index="涨跌"
+          <el-table-column
+            prop="涨跌"
+            label="涨跌"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="幅度"
-            data-index="幅度"
+          <el-table-column
+            prop="幅度"
+            label="幅度"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="报价时间"
-            data-index="报价时间"
+          <el-table-column
+            prop="报价时间"
+            label="报价时间"
             align="center"
+            sortable
           />
-        </template>
-      </a-table>
-    </a-tab-pane>
+        </el-table>
+      </div>
+    </el-tab-pane>
 
-    <a-tab-pane
+    <el-tab-pane
       key="4"
-      title="国际黄金"
+      label="国际黄金"
     >
-      <a-table
-        :data="goldData.internationalGold"
-        :loading="isLoading"
-        scrollbar
-        :scroll="{
-          maxHeight: 'calc(100vh - 300px)',
-        }"
-        :pagination="false"
+      <div
+        class="h-[calc(100vh-200px)]"
       >
-        <template
-          #columns
+        <el-table
+          class="!w-full"
+          :data="goldData.domesticGold"
+          height="100%"
         >
-
-          <a-table-column
-            title="品种"
-            data-index="品种"
+          <el-table-column
+            prop="品种"
+            label="品种"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最新价"
-            data-index="最新价"
+          <el-table-column
+            prop="最新价"
+            label="最新价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最低价"
-            data-index="最低价"
+          <el-table-column
+            prop="最低价"
+            label="最低价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="最高价"
-            data-index="最高价"
+          <el-table-column
+            prop="最高价"
+            label="最高价"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="涨跌"
-            data-index="涨跌"
+          <el-table-column
+            prop="涨跌"
+            label="涨跌"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="幅度"
-            data-index="幅度"
+          <el-table-column
+            prop="幅度"
+            label="幅度"
             align="center"
-            :sortable="{
-              sortDirections: ['ascend', 'descend'],
-            }"
+            sortable
           />
 
-          <a-table-column
-            title="报价时间"
-            data-index="报价时间"
+          <el-table-column
+            prop="报价时间"
+            label="报价时间"
             align="center"
+            sortable
           />
-        </template>
-      </a-table>
-    </a-tab-pane>
-  </a-tabs>
+        </el-table>
+      </div>
+    </el-tab-pane>
+  </el-tabs>
 </template>
-
-<style lang="less" scoped></style>

@@ -1,3 +1,5 @@
+import type { App } from 'vue'
+
 import type { RouteRecordNormalized } from 'vue-router'
 
 import {
@@ -6,7 +8,16 @@ import {
   createWebHistory,
 } from 'vue-router'
 
-import { createRouterGuard, formatModules } from './utils/index'
+import { createRouterGuard } from './guard'
+
+import { fallbackRouter } from './modules/fallback'
+
+import {
+  checkDuplicateRoutes,
+  formatModules,
+  recursiveNormalizeRoutesPath,
+  recursiveSetRoutesRedirect,
+} from './utils'
 
 const appModules = import.meta.glob('./modules/*/index.ts', {
   eager: true,
@@ -15,7 +26,22 @@ const appModules = import.meta.glob('./modules/*/index.ts', {
 /**
  *  获取路由列表
  */
-export const routeList: RouteRecordNormalized[] = formatModules(appModules, [])
+export const formatModulesList: RouteRecordNormalized[] = formatModules(appModules, [])
+
+const normalizeRoutesWithFullPathList = recursiveNormalizeRoutesPath(formatModulesList)
+
+const routeList = recursiveSetRoutesRedirect(normalizeRoutesWithFullPathList)
+
+// 检查路由路径和路由名称是否存在重复
+checkDuplicateRoutes(routeList)
+
+console.log('%c Line:33 🍕 routeList', 'color:#f5ce50', routeList)
+
+//  延迟3s
+setTimeout(() => {
+  console.log('%c Line:36 🍕 routeList', 'color:#f5ce50', routeList)
+  checkDuplicateRoutes(routeList)
+}, 3000)
 
 const routerMode = {
   hash: () => createWebHashHistory(),
@@ -25,27 +51,22 @@ const routerMode = {
 /**
  * 创建并配置路由器
  */
-const router = createRouter({
+export const router = createRouter({
   /**
    *    路由模式
    */
-  history: routerMode[import.meta.env.VITE_APP_ROUTER_MODE](),
+  history: routerMode[import.meta.env.VITE_ROUTER_MODE](),
 
   routes: [
     {
       name: 'Root',
       path: '/',
-      redirect: {
-        name: 'Home',
-      },
+      redirect: import.meta.env.VITE_ROUTER_ROOT_PATH || routeList[0].path,
     },
 
     ...routeList,
 
-    {
-      path: '/test',
-      component: () => import('@/pages/test/index.vue'),
-    },
+    ...fallbackRouter,
   ],
 })
 
@@ -60,7 +81,4 @@ export async function setupRouter(app: App) {
 
   // 创建并应用路由守卫
   createRouterGuard(router)
-
-  // 等待路由准备就绪
-  await router.isReady()
 }

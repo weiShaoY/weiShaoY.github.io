@@ -44,11 +44,11 @@ const dnsList = [
   <div
     class=""
   >
-    <a-descriptions
-      :column="{ xs: 1, md: 1, lg: 1 }"
-      bordered
+    <el-descriptions
+      :column="1"
+      border
     >
-      <a-descriptions-item
+      <el-descriptions-item
         v-for="item in dnsList"
         :key="item.value"
         :span="1"
@@ -57,21 +57,26 @@ const dnsList = [
         <div
           class="flex items-center justify-between"
         >
-          <span>
-            {{ item.value }}
-          </span>
 
-          <a-link
+          <el-link
+            v-copy="item.value"
+            type="primary"
+          >
+            {{ item.value }}
+
+          </el-link>
+
+          <el-link
             :href="`https://dns.google.com/resolve?name=${item.value}`"
             target="_blank"
             class="ml-2"
+            type="primary"
           >
             查看
-          </a-link>
+          </el-link>
         </div>
-
-      </a-descriptions-item>
-    </a-descriptions>
+      </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>
 

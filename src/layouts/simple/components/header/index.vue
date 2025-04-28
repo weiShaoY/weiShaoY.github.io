@@ -17,7 +17,6 @@
         class="flex items-center gap-5"
       >
         <Github />
-
       </div>
     </div>
   </nav>

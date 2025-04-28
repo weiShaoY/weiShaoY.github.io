@@ -2,10 +2,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { downloadImage } from '@/utils'
-
-import { Notification } from '@arco-design/web-vue'
-
 const isLoading = ref(false)
 
 /**
@@ -108,63 +104,55 @@ async function getData() {
     }
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
   }
   finally {
     isLoading.value = false
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getData()
 })
-
 </script>
 
 <template>
   <div
     class="h-full w-full flex flex-col gap-5 overflow-hidden"
   >
-
     <div
       class="flex items-center gap-5"
     >
-      <a-select
+      <el-select
         v-model="category"
-        :options="categoryOptions"
-        class="w-40"
         placeholder="请选择"
-        allow-clear
-        allow-search
+        size="large"
+        class="!w-60"
         @change="getData"
-      />
+      >
+        <el-option
+          v-for="item in categoryOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
 
-      <a-button
+      <ButtonIcon
+        tooltip-content="刷新"
+        icon="blog-refresh"
         :loading="isLoading"
         @click="getData"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-refresh"
-          />
-        </template>
+      />
 
-      </a-button>
-
-      <a-button
-        @click="downloadImage(wallpaperUrl)"
-      >
-        <template
-          #icon
-        >
-          <SvgIcon
-            icon="blog-download"
-          />
-        </template>
-
-      </a-button>
+      <DownloadButton
+        tooltip-content="下载壁纸"
+        :url="wallpaperUrl"
+        type="image"
+      />
     </div>
 
     <div
@@ -172,13 +160,10 @@ onMounted(async() => {
     >
       <PreviewImg
         :src="wallpaperUrl"
-        :is-loading="isLoading"
+        :loading="isLoading"
       />
     </div>
-
   </div>
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

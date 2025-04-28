@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { BlogApi } from '@/api'
 
-import { Notification } from '@arco-design/web-vue'
-
 import dayjs from 'dayjs'
 
 import { ref } from 'vue'
@@ -230,7 +228,10 @@ async function getData() {
     domainData.value = response
   }
   catch (error: any) {
-    Notification.error(error.message || '获取数据失败，请稍后重试')
+    window.$notification?.error({
+      title: '获取数据失败，请稍后重试',
+      message: error.message,
+    })
 
     clearData()
   }
@@ -268,195 +269,188 @@ onMounted(async () => {
     <div
       class="flex items-center gap-5"
     >
-      <a-input-search
-        v-model="domain"
-        class="w-[60%]"
-        allow-clear
-        search-button
+      <el-input
+        v-model.trim="domain"
+        clearable
+        size="large"
         placeholder="请输入域名"
-        :loading="isLoading"
-        @search="getData"
-        @press-enter="getData"
+        class="!max-w-[30%] !overflow-hidden"
+        @keydown.enter.prevent="getData"
         @clear="clearData"
       >
         <template
-          #button-icon
+          #append
         >
-          <SvgIcon
-            icon="blog-search"
+          <ButtonIcon
+            icon="search"
+            :loading="isLoading"
+            @click="getData"
           />
         </template>
-
-        <template
-          #button-default
-        >
-          域名搜索
-        </template>
-      </a-input-search>
+      </el-input>
     </div>
 
-    <a-spin
-      :loading="isLoading"
+    <el-descriptions
+      v-loading="isLoading"
+      :column="1"
+      border
     >
-      <a-descriptions
-        :column="{ xs: 1, md: 1, lg: 3 }"
-        bordered
+      <el-descriptions-item
+        :span="2"
+        label="单位名称"
       >
-        <a-descriptions-item
-          :span="2"
-          label="单位名称"
-        >
-          {{ domainData.icp.subject.name }}
-        </a-descriptions-item>
+        {{ domainData.icp.subject.name }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="单位性质"
-        >
-          {{ domainData.icp.subject.nature }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        :span="1"
+        label="单位性质"
+      >
+        {{ domainData.icp.subject.nature }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="备案许可证编号"
-        >
-          {{ domainData.icp.subject.license }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        :span="1"
+        label="备案许可证编号"
+      >
+        {{ domainData.icp.subject.license }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="信息更新时间"
-        >
-          {{ domainData.icp.subject.updateTime }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        :span="1"
+        label="信息更新时间"
+      >
+        {{ domainData.icp.subject.updateTime }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="备案网站域名"
-        >
-          {{ domainData.icp.website.domain }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        :span="1"
+        label="备案网站域名"
+      >
+        {{ domainData.icp.website.domain }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="备案许可证编号"
-        >
-          {{ domainData.icp.website.license }}
-        </a-descriptions-item>
+      <el-descriptions-item
+        :span="1"
+        label="备案许可证编号"
+      >
+        {{ domainData.icp.website.license }}
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="域名状态"
+      <el-descriptions-item
+        :span="1"
+        label="域名状态"
+      >
+        <div
+          class="flex flex-col items-start gap-2"
         >
-          <div
-            class="flex flex-col items-start gap-2"
-          >
-            <a-link
-              v-for="item in domainData.whois['Domain Status']"
-              :key="item"
-              :href="handleStatus(item).url"
-              target="_blank"
-            >
-              {{ handleStatus(item).text }}
-            </a-link>
-          </div>
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="域名 DNS 服务器列表"
-        >
-          <div
-            class="flex flex-col items-start gap-2"
-          >
-            <a-link
-              v-for="item in domainData.whois['Name Server']"
-              :key="item"
-              :href="handleStatus(item).url"
-              target="_blank"
-            >
-              {{ handleStatus(item).text }}
-            </a-link>
-          </div>
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="域名创建时间"
-        >
-          {{ handleDate(domainData.whois["Created Date"]) }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="域名更新时间"
-        >
-          {{ handleDate(domainData.whois["Updated Date"]) }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="域名到期时间"
-        >
-          {{ handleDate(domainData.whois["Expiry Date"]) }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="注册商名称"
-        >
-          {{ domainData.whois.Registrar }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="DNS A 记录"
-        >
-          <span
-            v-for="item in domainData.dns.A"
+          <el-link
+            v-for="item in domainData.whois['Domain Status']"
             :key="item"
+            :href="handleStatus(item).url"
+            target="_blank"
+            type="primary"
           >
-            {{ item }}<br>
-          </span>
-        </a-descriptions-item>
+            {{ handleStatus(item).text }}
+          </el-link>
+        </div>
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="DNS AAAA 记录"
+      <el-descriptions-item
+        :span="1"
+        label="域名 DNS 服务器列表"
+      >
+        <div
+          class="flex flex-col items-start gap-2"
         >
-          {{ domainData.dns.AAAA?.join(", ") }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="DNS CNAME 记录"
-        >
-          {{ domainData.dns.CNAME?.join(", ") }}
-        </a-descriptions-item>
-
-        <a-descriptions-item
-          :span="1"
-          label="DNS NS 记录"
-        >
-          <span
-            v-for="item in domainData.dns.NS"
+          <el-link
+            v-for="item in domainData.whois['Name Server']"
             :key="item"
+            :href="handleStatus(item).url"
+            target="_blank"
+            type="primary"
           >
-            {{ item }}<br>
-          </span>
-        </a-descriptions-item>
+            {{ handleStatus(item).text }}
+          </el-link>
+        </div>
+      </el-descriptions-item>
 
-        <a-descriptions-item
-          :span="1"
-          label="ISP和区域"
+      <el-descriptions-item
+        :span="1"
+        label="域名创建时间"
+      >
+        {{ handleDate(domainData.whois["Created Date"]) }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="域名更新时间"
+      >
+        {{ handleDate(domainData.whois["Updated Date"]) }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="域名到期时间"
+      >
+        {{ handleDate(domainData.whois["Expiry Date"]) }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="注册商名称"
+      >
+        {{ domainData.whois.Registrar }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="DNS A 记录"
+      >
+        <span
+          v-for="item in domainData.dns.A"
+          :key="item"
         >
-          {{
-            domainData.dns.GEO.isp && domainData.dns.GEO.area
-              ? `${domainData.dns.GEO.isp} - ${domainData.dns.GEO.area}`
-              : ""
-          }}
-        </a-descriptions-item>
-      </a-descriptions>
-    </a-spin>
+          {{ item }}<br>
+        </span>
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="DNS AAAA 记录"
+      >
+        {{ domainData.dns.AAAA?.join(", ") }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="DNS CNAME 记录"
+      >
+        {{ domainData.dns.CNAME?.join(", ") }}
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="DNS NS 记录"
+      >
+        <span
+          v-for="item in domainData.dns.NS"
+          :key="item"
+        >
+          {{ item }}<br>
+        </span>
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="1"
+        label="ISP和区域"
+      >
+        {{
+          domainData.dns.GEO.isp && domainData.dns.GEO.area
+            ? `${domainData.dns.GEO.isp} - ${domainData.dns.GEO.area}`
+            : ""
+        }}
+      </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>

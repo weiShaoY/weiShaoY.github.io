@@ -9,21 +9,24 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import { presetScrollbarHide } from 'unocss-preset-scrollbar-hide'
+
+// import { themeVars } from './src/theme/unocss-var'
+
 /**
  *  @description UnoCSS 配置文件
  */
 export default defineConfig({
-
   /**
    *  @description 定义全局主题设置，供规则或组件之间共享
    */
   theme: {
+    // ...themeVars,
 
     /**
      *  @description 主题颜色
      */
     colors: {
-
       /**
        *  @description 主题色
        */
@@ -33,7 +36,13 @@ export default defineConfig({
        *  @description 红色
        */
       red: '#E43961',
-
+    },
+    fontSize: {
+      'icon-xs': '0.875rem',
+      'icon-small': '1rem',
+      'icon': '1.125rem',
+      'icon-large': '1.5rem',
+      'icon-xl': '2rem',
     },
 
     /**
@@ -47,25 +56,26 @@ export default defineConfig({
     //   gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
 
     // },
-
   },
 
   /**
    *  @description 预定义的样式快捷方式，可直接在模板中通过类名使用
    */
-  shortcuts: [
+  shortcuts: {
     // 宽高 100%
-    ['wh-full', 'w-full h-full'],
+    'wh-full': 'w-full h-full',
 
     // Flex 布局居中
-    ['flex-center', 'flex justify-center items-center'],
+    'flex-center': 'flex justify-center items-center',
 
     // Flex 列布局
-    ['flex-col', 'flex flex-col'],
+    'flex-col': 'flex flex-col',
 
     // 文本溢出显示省略号
-    ['text-ellipsis', 'truncate'],
-  ],
+    'text-ellipsis': 'truncate',
+
+    'card-wrapper': 'rd-8px shadow-sm',
+  },
 
   /**
    *  @description 自定义生成 CSS 工具的规则，后定义的规则优先级更高
@@ -73,9 +83,12 @@ export default defineConfig({
    */
   rules: [
     //  将 `bc-颜色值` 转换为对应的 border-color 样式
-    [/^bc-(.+)$/, ([, color]) => ({
-      'border-color': `#${color}`,
-    })],
+    [
+      /^bc-(.+)$/,
+      ([, color]) => ({
+        'border-color': `#${color}`,
+      }),
+    ],
   ],
 
   /**
@@ -99,11 +112,15 @@ export default defineConfig({
    *  @description UnoCSS 使用的预设
    */
   presets: [
+    // presetSoybeanAdmin(),
+
     /**
      *  @description UnoCSS 的核心预设
      *  @see https://github.com/unocss/unocss#preset-uno
      */
-    presetUno(),
+    presetUno({
+      dark: 'class',
+    }),
 
     /**
      *  @description 属性化预设，允许通过 HTML 属性直接应用样式
@@ -136,25 +153,25 @@ export default defineConfig({
      *  @description Google Web Fonts 预设，自动生成 Web 字体相关的 CSS
      *  @see https://github.com/unocss/unocss#preset-webfonts
      */
-    presetWebFonts(
-      {
-        provider: 'none',
+    presetWebFonts({
+      provider: 'none',
 
+      /**
+       *  @description 定义字体家族
+       */
+      fonts: {
         /**
-         *  @description 定义字体家族
+         *  @description 中文字体
+         *  @default '改良瘦金体'
          */
-        fonts: {
-
-          /**
-           *  @description 中文字体
-           *  @default '改良瘦金体'
-           */
-          theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
-
-        },
+        theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
       },
-    ),
+    }),
 
+    /**
+     *  @description 隐藏滚动条的预设
+     *  @see https://github.com/reslear/unocss-preset-scrollbar-hide
+     */
+    presetScrollbarHide(),
   ],
-
 })

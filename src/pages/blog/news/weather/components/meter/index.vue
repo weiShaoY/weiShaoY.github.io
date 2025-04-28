@@ -92,8 +92,9 @@ const option = computed<EChartsOption>(() => {
       class="aspect-square h-full"
     >
       <!-- 仪表盘图表容器 -->
-      <Chart
+      <VueEcharts
         :option="option"
+        :height="200"
       />
     </div>
 
