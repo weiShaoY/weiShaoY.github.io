@@ -55,6 +55,7 @@ declare module 'vue-router/auto-routes' {
     '/blog/tool/codec/md5/': RouteRecordInfo<'/blog/tool/codec/md5/', '/blog/tool/codec/md5', Record<never, never>, Record<never, never>>,
     '/blog/tool/codec/morse/': RouteRecordInfo<'/blog/tool/codec/morse/', '/blog/tool/codec/morse', Record<never, never>, Record<never, never>>,
     '/blog/tool/codec/morse/modal': RouteRecordInfo<'/blog/tool/codec/morse/modal', '/blog/tool/codec/morse/modal', Record<never, never>, Record<never, never>>,
+    '/blog/tool/jsonFormatter/': RouteRecordInfo<'/blog/tool/jsonFormatter/', '/blog/tool/jsonFormatter', Record<never, never>, Record<never, never>>,
     '/blog/tool/network/dns/': RouteRecordInfo<'/blog/tool/network/dns/', '/blog/tool/network/dns', Record<never, never>, Record<never, never>>,
     '/blog/tool/network/http/': RouteRecordInfo<'/blog/tool/network/http/', '/blog/tool/network/http', Record<never, never>, Record<never, never>>,
     '/blog/workbench/': RouteRecordInfo<'/blog/workbench/', '/blog/workbench', Record<never, never>, Record<never, never>>,

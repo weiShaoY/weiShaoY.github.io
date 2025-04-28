@@ -74,6 +74,15 @@ const Tool: RouterType.BlogRouteRecordRaw = {
 
       ],
     },
+    {
+      path: 'jsonFormatter',
+      name: 'JsonFormatter',
+      meta: {
+        title: 'Json格式化',
+        icon: 'blog-menu-jsonFormatter',
+      },
+      component: () => import('@/pages/blog/tool/jsonFormatter/index.vue'),
+    },
   ],
 }
 

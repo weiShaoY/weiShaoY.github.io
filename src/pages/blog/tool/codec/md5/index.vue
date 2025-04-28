@@ -33,6 +33,7 @@ watchEffect(() => {
         placeholder="请选择"
         size="large"
         class="!w-60"
+        disabled
       >
         <el-option
           value="code"
