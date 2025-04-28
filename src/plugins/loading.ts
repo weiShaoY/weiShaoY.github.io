@@ -38,6 +38,9 @@ export function setupLoading() {
 
   const loading = ElLoading.service({
     lock: true,
+
+    // text: '',
+
     text: import.meta.env.VITE_APP_DESC,
     background: 'rgba(0, 0, 0, 0)',
     svg: loadingSvg,

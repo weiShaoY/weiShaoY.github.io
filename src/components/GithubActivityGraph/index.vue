@@ -42,24 +42,29 @@ const props = withDefaults(defineProps<PropsType>(), {
 /** Github 活动图 API 地址 */
 const GITHUB_ACTIVITY_GRAPH_URL = 'https://github-readme-activity-graph.vercel.app/graph'
 
-/** 使用的主题 */
-const THEME = 'react-dark'
-
 /**
  * Github 活动图配置项
  * @see https://github.com/Ashutosh00710/github-readme-activity-graph#options
  */
 const options = {
-  username: 'weiShaoY',
-  theme: THEME,
+  username: import.meta.env.VITE_APP_TITLE,
+  theme: 'high-contrast',
+  hide_border: true,
+  custom_title: import.meta.env.VITE_APP_DESC,
 }
 
 /**
  * 生成 Github 活动图的完整 URL
- * @returns {string} 图片地址
+ * @returns {import('vue').ComputedRef<string>} 图片地址
  */
 const imageUrl = computed(() => {
-  return `${GITHUB_ACTIVITY_GRAPH_URL}?${new URLSearchParams(options).toString()}`
+  const params = new URLSearchParams(
+    Object.fromEntries(
+      Object.entries(options).map(([key, value]) => [key, String(value)]),
+    ),
+  )
+
+  return `${GITHUB_ACTIVITY_GRAPH_URL}?${params.toString()}`
 })
 
 /**

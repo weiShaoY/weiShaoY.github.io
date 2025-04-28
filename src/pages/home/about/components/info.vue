@@ -209,6 +209,11 @@ function handleCopy() {
           </div>
         </div>
       </div>
+
+      <!-- Github活动图 -->
+      <GithubActivityGraph
+        class="xl:col-span-3 xl:row-span-2"
+      />
     </div>
   </section>
 </template>
