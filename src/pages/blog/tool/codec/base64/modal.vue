@@ -293,11 +293,21 @@ const base64Data = [
         v-for="item in base64Data"
         :key="item.value"
         :span="1"
-        :label="item.value.toString()"
         align="center"
       >
+        <template
+          #label
+        >
+          <el-link
+            v-copy="item.value"
+            type="info"
+          >
+            {{ item.value }}
+          </el-link>
+        </template>
+
         <el-link
-          v-copy="item.value"
+          v-copy="item.label"
           type="primary"
         >
           {{ item.label }}
