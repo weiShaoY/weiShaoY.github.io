@@ -17,6 +17,8 @@ import UiContainer from './uiContainer/index.vue'
     <!-- 3D场景层 -->
     <ThreeContainer />
 
+    <!-- 回到首页按钮 -->
+    <GoHomeButton />
   </div>
 </template>
 

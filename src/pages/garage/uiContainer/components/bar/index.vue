@@ -8,8 +8,6 @@ import { useGarageStore } from '@/store'
 
 import { gsap } from 'gsap'
 
-import { useRouter } from 'vue-router'
-
 import b1 from './images/b1.webp'
 
 import b2 from './images/b2.webp'
@@ -27,8 +25,6 @@ import b7 from './images/b7.webp'
 import b8 from './images/b8.webp'
 
 import b9 from './images/b9.webp'
-
-const router = useRouter()
 
 const res = [
   {
@@ -163,13 +159,6 @@ watch(() => garageStore.state.isMute, (isMute) => {
     ref="controlRef"
     class="absolute bottom-5 left-1/2 flex transform items-center gap-6 rounded-5 bg-[#ccc3] p-4 -translate-x-1/2"
   >
-    <button
-      class="flex transform cursor-pointer items-center justify-center whitespace-nowrap rounded-2 bg-[#D9D9D9] p-1 text-sm font-bold transition-transform duration-500 hover:scale-110"
-      @click="router.push('/')"
-    >
-      返回首页
-    </button>
-
     <div
       v-for="(item, index) in res"
       :key="index"

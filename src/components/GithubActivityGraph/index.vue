@@ -51,6 +51,7 @@ const options = {
   theme: 'high-contrast',
   hide_border: true,
   custom_title: import.meta.env.VITE_APP_DESC,
+  radius: 8,
 }
 
 /**
