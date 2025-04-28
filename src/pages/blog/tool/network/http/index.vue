@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const data = [
   {
-    key: '1xx',
+    key: 1,
     title: '表示接收的请求正在处理',
     list: [
       {
@@ -17,7 +17,7 @@ const data = [
     ],
   },
   {
-    key: '2xx',
+    key: 2,
     title: '表示请求正常处理完毕',
     list: [
       {
@@ -58,7 +58,7 @@ const data = [
     ],
   },
   {
-    key: '3xx',
+    key: 3,
     title: '需要后续操作才能完成这一请求',
     list: [
       {
@@ -104,7 +104,7 @@ const data = [
     ],
   },
   {
-    key: '4xx',
+    key: 4,
     title: '表示请求包含语法错误或无法完成',
     list: [
       {
@@ -200,7 +200,7 @@ const data = [
     ],
   },
   {
-    key: '5xx',
+    key: 5,
     title: '服务器在处理请求的过程中发生了错误',
     list: [
       {
@@ -240,43 +240,78 @@ const data = [
 </script>
 
 <template>
-  <div
-    class="grid grid-cols-2 h-full w-full gap-5 overflow-hidden"
+  <el-table
+    :data="data"
+    class="h-full w-full"
+    default-expand-all
   >
-    <el-card
-      v-for="item in data"
-      :key="item.key"
-      :header="`${item.key}---${item.title}`"
+    <el-table-column
+      type="expand"
     >
-      <el-table
-        :data="item.list"
+      <template
+        #default="props"
       >
-        <el-table-column
-          label="响应状态码"
-          prop="code"
-          align="center"
-          :width="120"
+
+        <el-table
+          :data="props.row.list"
         >
-          <template
-            #default="{ row }"
+          <el-table-column
+            prop="code"
+            label="响应状态码"
+            sortable
+          />
+
+          <el-table-column
+            prop="name"
+            label="响应状态码英文名称"
+            align="left"
+          />
+
+          <el-table-column
+            label="响应状态码中文描述"
+            prop="description"
+            align="left"
+          />
+        </el-table>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      prop="key"
+      label=""
+      align="left"
+    >
+      <template
+        #default="{ row }"
+      >
+        <div
+          class="flex items-center gap-2 font-bold"
+        >
+          <span
+            class="text-5"
+            :class="
+              {
+                'text-[#D9D9D9]': row.key === 1,
+                'text-[#84F867]': row.key === 2,
+                'text-[#548EDF]': row.key === 3,
+                'text-[#F0BE67]': row.key === 4,
+                'text-[#C53127]': row.key === 5,
+              }
+            "
           >
-            <el-link>
-              {{ row.code }}
-            </el-link>
-          </template>
-        </el-table-column>
+            <span>
+              {{ row.key }}
+            </span>
 
-        <el-table-column
-          prop="name"
-          label="响应状态码英文名称"
-          :width="300"
-        />
+            <span>xx</span>
+          </span>
 
-        <el-table-column
-          prop="description"
-          label="响应状态码中文描述"
-        />
-      </el-table>
-    </el-card>
-  </div>
+          <span>
+            {{ row.title }}
+          </span>
+        </div>
+      </template>
+
+    </el-table-column>
+  </el-table>
 </template>

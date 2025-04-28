@@ -57,9 +57,14 @@ const dnsList = [
         <div
           class="flex items-center justify-between"
         >
-          <span>
+
+          <el-link
+            v-copy="item.value"
+            type="primary"
+          >
             {{ item.value }}
-          </span>
+
+          </el-link>
 
           <el-link
             :href="`https://dns.google.com/resolve?name=${item.value}`"
