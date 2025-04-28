@@ -2,6 +2,8 @@
 import type { CSSProperties } from 'vue'
 
 import {
+  computed,
+
   onBeforeUnmount,
   onMounted,
   ref,
@@ -12,27 +14,32 @@ import Player from 'xgplayer'
 
 import 'xgplayer/dist/index.min.css'
 
+/**
+ * 组件参数类型定义
+ */
 type VideoPlayerPropsType = {
 
   /**
-   * 视频 URL
+   * 音频播放地址
    */
   musicUrl: string
 
   /**
-   *  是否自动播放
+   * 是否自动播放
+   * @default false
    */
   isAutoPlay?: boolean
 
   /**
-   *  是否自动播放下一个视频
+   * 是否自动播放下一个
+   * @default true
    */
   isAutoPlayNext?: boolean
 
   /**
-   *  额外的 CSS 类名
+   * 自定义 class，支持 string | string[] | Record<string, boolean>
    */
-  class?: string
+  class?: string | string[] | Record<string, boolean>
 
   /**
    * 行内样式
@@ -45,105 +52,65 @@ const props = withDefaults(defineProps<VideoPlayerPropsType>(), {
   isAutoPlayNext: true,
 })
 
-const emit = defineEmits(['playEnded', 'playNext'])
+/**
+ * 组件发出的事件
+ */
+const emit = defineEmits<{
+  (e: 'playEnded'): void
+  (e: 'playNext'): void
+}>()
 
+/**
+ * 音频容器 DOM 引用
+ */
 const musicRef = ref<HTMLElement | null>(null)
 
+/**
+ * 音频播放器实例
+ */
 const player = ref<Player | null>(null)
 
-onMounted(() => {
+/**
+ * 计算容器的 class，统一处理传入的三种格式
+ */
+const wrapperClass = computed(() => props.class)
+
+/**
+ * 初始化播放器
+ */
+function initPlayer() {
   if (!musicRef.value) {
     return
   }
 
   player.value = new Player({
     el: musicRef.value,
-
-    // url: props.musicUrl,
-    url: 'https://api.pearktrue.cn/api/yujie/voice/53d06966dc493715bf5dce166c672437.mp3',
-
+    url: props.musicUrl,
     autoplay: props.isAutoPlay,
-
     height: '100%',
-
     width: '100%',
-
-    /**
-     *  媒体类型
-     */
     mediaType: 'audio',
-
-    /**
-     *  播放器初始显示语言
-     */
     lang: 'zh',
-
-    /**
-     *  是否自动静音自动播放
-     */
-    // autoplayMuted: true,
-
     ignores: ['playbackrate'],
     controls: {
       initShow: true,
       mode: 'flex',
     },
-
-    /**
-     *  开启画面和控制栏分离模式
-     */
     marginControls: true,
-
-    /**
-     *  截图
-     */
-    // screenShot: {
-
-    //   /**
-    //    *  是否保存截图
-    //    */
-    //   saveImg: false,
-    //   quality: 1,
-    // },
-
-    /**
-     *  video扩展属性
-     */
     videoAttributes: {
       crossOrigin: 'anonymous',
     },
-
-    /**
-     *  播放器区域是否允许右键功能菜单
-     */
     enableContextmenu: true,
-
-    /**
-     *  下载
-     */
     download: true,
-
-    /**
-     *  动态背景高斯模糊渲染插件
-     */
     dynamicBg: {
       disable: false,
     },
-
-    /**
-     *  控制栏播放下一个视频按钮插件
-     */
     playnext: {
       urlList: [props.musicUrl],
     },
-
-    /**
-     *  播放器旋转控件
-     */
     rotate: {
       disable: false,
     },
-
   })
 
   // 监听播放结束
@@ -155,8 +122,27 @@ onMounted(() => {
   player.value.on(Player.Events.PLAYNEXT, () => {
     emit('playNext')
   })
+}
+
+/**
+ * 销毁播放器
+ */
+function destroyPlayer() {
+  player.value?.destroy()
+  player.value = null
+}
+
+// 组件挂载时初始化播放器
+onMounted(() => {
+  initPlayer()
 })
 
+// 组件卸载时销毁播放器
+onBeforeUnmount(() => {
+  destroyPlayer()
+})
+
+// 监听音频地址变化，切换音频
 watch(
   () => props.musicUrl,
   (newUrl) => {
@@ -167,6 +153,7 @@ watch(
   },
 )
 
+// 监听是否自动播放变化
 watch(
   () => props.isAutoPlay,
   (newAutoPlay) => {
@@ -175,17 +162,12 @@ watch(
     }
   },
 )
-
-onBeforeUnmount(() => {
-  if (player.value) {
-    player.value.destroy()
-    player.value = null
-  }
-})
 </script>
 
 <template>
   <div
     ref="musicRef"
+    :class="wrapperClass"
+    :style="props.style"
   />
 </template>

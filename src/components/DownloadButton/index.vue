@@ -27,37 +27,34 @@ const props = withDefaults(defineProps<Props>(), {
 
 defineEmits(['click'])
 
+/**
+ * 组件传参
+ */
 type Props = {
 
-  /**
-   * 下载地址
-   */
+  /** 下载地址 */
   url: string
 
-  /**
-   * 文件类型
-   */
+  /** 文件类型 */
   type?: 'image' | 'video' | 'audio'
-
-  /** 按钮的 class 类名 */
-  class?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>
-
-  /** 图标名称 */
-  icon?: string
 
   /** 图标大小 */
   size?: number
 
   /**
-   *  图标 class
+   * 按钮的 class 类名
+   * 支持 string、对象、数组的格式
    */
-  iconClass?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>
+  class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
+
+  /** 图标名称 */
+  icon?: string
+
+  /**
+   * 图标的额外 class
+   * 支持 string、对象、数组的格式
+   */
+  iconClass?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /** 提示框内容 */
   tooltipContent?: string
@@ -65,47 +62,63 @@ type Props = {
   /** 提示框位置 */
   tooltipPlacement?: Placement
 
-  /** 层级 z-index 值 */
+  /** 层级 z-index */
   zIndex?: number
 
   /** 行内样式 */
   style?: CSSProperties
 
-  /**
-   *  是否隐藏 tooltip
-   */
+  /** 是否隐藏 tooltip */
   hideTooltip?: boolean
 }
 
+/**
+ * 默认按钮类名
+ */
 const DEFAULT_CLASS = 'flex items-center justify-center'
 
 /**
- * 计算合并后按钮的类名
- * 现在支持字符串、对象和数组形式的class
+ * 处理 class，兼容 string | Record<string, boolean> | Array
+ * @param input 输入的类
+ * @returns 拼接后的类字符串
+ */
+function stringifyClass(input?: string | Record<string, boolean> | Array<string | Record<string, boolean>>): string {
+  if (!input) {
+    return ''
+  }
+
+  if (typeof input === 'string') {
+    return input
+  }
+
+  if (Array.isArray(input)) {
+    return input.map(item => stringifyClass(item))
+      .filter(Boolean)
+      .join(' ')
+  }
+
+  return Object.entries(input)
+    .filter(([_, value]) => value)
+    .map(([key]) => key)
+    .join(' ')
+}
+
+/**
+ * 计算按钮的最终 class
  */
 const computedButtonClass = computed(() => {
-  // 处理对象或数组形式的class
-  if (typeof props.class !== 'string') {
-    return twMerge(DEFAULT_CLASS)
-  }
-
-  return twMerge(DEFAULT_CLASS, props.class)
+  return twMerge(DEFAULT_CLASS, stringifyClass(props.class))
 })
 
 /**
- *  处理动态class对象
+ * 计算图标的最终 class
  */
-const dynamicButtonClass = computed(() => {
-  if (typeof props.class === 'object') {
-    return props.class
-  }
-
-  return {
-  }
+const computedIconClass = computed(() => {
+  return stringifyClass(props.iconClass)
 })
 
 /**
- *  计算最终的样式
+ * 计算按钮样式
  */
 const computedStyle = computed(() => ({
   width: `${props.size}px`,
@@ -114,23 +127,14 @@ const computedStyle = computed(() => ({
 }))
 
 /**
- *  计算图标的类名
- */
-const computedIconClass = computed(() => {
-  if (typeof props.iconClass === 'string') {
-    return props.iconClass
-  }
-
-  return props.iconClass
-})
-
-/**
- *  下载 loading
+ * 是否正在下载
  */
 const downloading = ref(false)
 
+/**
+ * 处理下载逻辑
+ */
 async function handleDownload() {
-  // 如果正在下载中，直接返回
   if (downloading.value) {
     return
   }
@@ -138,7 +142,6 @@ async function handleDownload() {
   downloading.value = true
 
   try {
-    // 验证必要的参数
     if (!props.url) {
       throw new Error('下载URL不能为空')
     }
@@ -147,50 +150,37 @@ async function handleDownload() {
       throw new Error('文件类型不能为空')
     }
 
-    // 使用映射对象代替switch/if-else链
     const downloadHandlers = {
       image: downloadImage,
       video: downloadVideo,
       audio: downloadAudio,
     }
 
-    // 检查类型是否有效
     if (!(props.type in downloadHandlers)) {
       throw new Error(`不支持的文件类型: ${props.type}`)
     }
 
-    // 执行下载
-    await downloadHandlers[props.type as keyof typeof downloadHandlers](
-      props.url,
-    )
+    await downloadHandlers[props.type as keyof typeof downloadHandlers](props.url)
   }
   catch (error) {
     console.error('下载失败:', error)
 
-    // 显示更友好的错误提示
-    const errorMessage
-      = error instanceof Error ? error.message : '下载过程中发生未知错误'
+    const errorMessage = error instanceof Error ? error.message : '下载过程中发生未知错误'
 
     window.$notification?.error({
       title: '下载失败',
       message: errorMessage,
       duration: 3000,
     })
-
-    // 可以在这里添加错误上报逻辑
-    // trackError(error);
   }
   finally {
     downloading.value = false
   }
 }
-
 </script>
 
 <template>
-  <div
-    class=""
-  >
+  <div>
     <ElTooltip
       :placement="tooltipPlacement"
       :content="tooltipContent || `下载${type === 'image' ? '图片' : type === 'video' ? '视频' : '音频'}`"
@@ -204,7 +194,7 @@ async function handleDownload() {
         @click="handleDownload"
       >
         <div
-          :class="[computedButtonClass, dynamicButtonClass]"
+          :class="computedButtonClass"
           :style="computedStyle"
         >
           <template

@@ -104,11 +104,6 @@ onMounted(async () => {
         @click="getData"
       />
 
-      <!-- <ButtonIcon
-        tooltip-content="下载视频"
-        icon="blog-download"
-        @click="downloadVideo(videoUrl)"
-      /> -->
       <DownloadButton
         :url="videoUrl"
         type="video"

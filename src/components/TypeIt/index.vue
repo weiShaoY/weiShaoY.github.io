@@ -7,12 +7,17 @@ import { twMerge } from 'tailwind-merge'
 
 import TypeIt from 'typeit'
 
-import { onMounted, shallowRef } from 'vue'
+import {
+  computed,
+  onMounted,
+  shallowRef,
+} from 'vue'
 
 defineOptions({
   name: 'TypeIt',
 })
 
+/** 组件 props，带默认值 */
 const props = withDefaults(defineProps<Props>(), {
   class: '',
   speed: 100,
@@ -20,33 +25,34 @@ const props = withDefaults(defineProps<Props>(), {
   loop: false,
 })
 
+/**
+ * 组件 Props 定义
+ */
 type Props = {
 
   /**
-   * 打印内容数组
+   * 打印内容字符串数组
    */
   stringList: string[]
 
   /**
-   * 额外的 CSS 类名
+   * 附加的 CSS 类名
+   * 支持 string、对象、数组的格式
    */
-  class?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>
+  class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /**
-   * 打字速度（ms）
+   * 打字速度（毫秒/每字符），默认 100ms
    */
   speed?: number
 
   /**
-   * 是否显示光标
+   * 是否显示光标，默认 false
    */
   cursor?: boolean
 
   /**
-   * 是否循环
+   * 是否循环播放，默认 false
    */
   loop?: boolean
 }
@@ -57,25 +63,49 @@ type Props = {
 const BASE_CLASSES = ''
 
 /**
- * 计算合并后的类名
- * 现在支持字符串、对象和数组形式的class
+ * 合并后的类名
+ * 支持字符串、对象、数组形式
  */
 const computedClass = computed(() => {
-  // 处理字符串形式的class
   if (typeof props.class === 'string') {
     return twMerge(BASE_CLASSES, props.class)
   }
 
-  // 处理对象或数组形式的class
-  if (props.class) {
-    return [BASE_CLASSES, props.class]
+  if (Array.isArray(props.class)) {
+    const merged = props.class
+      .map((item) => {
+        if (typeof item === 'string') {
+          return item
+        }
+
+        return Object.entries(item)
+          .filter(([, active]) => active)
+          .map(([key]) => key)
+          .join(' ')
+      })
+      .join(' ')
+
+    return twMerge(BASE_CLASSES, merged)
+  }
+
+  if (typeof props.class === 'object' && props.class !== null) {
+    const merged = Object.entries(props.class)
+      .filter(([, active]) => active)
+      .map(([key]) => key)
+      .join(' ')
+
+    return twMerge(BASE_CLASSES, merged)
   }
 
   return BASE_CLASSES
 })
 
+/** 文本容器 DOM 引用 */
 const textRef = shallowRef<El>()
 
+/**
+ * 初始化 TypeIt 打字机效果
+ */
 function init() {
   if (!textRef.value) {
     return
@@ -88,11 +118,12 @@ function init() {
     loop: props.loop,
   }
 
-  const initTypeIt = new TypeIt(textRef.value, options)
+  const typeitInstance = new TypeIt(textRef.value, options)
 
-  initTypeIt.go()
+  typeitInstance.go()
 }
 
+// 生命周期钩子：挂载后初始化
 onMounted(() => {
   init()
 })

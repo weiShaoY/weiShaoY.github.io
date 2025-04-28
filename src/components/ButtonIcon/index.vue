@@ -14,24 +14,20 @@ const props = withDefaults(defineProps<Props>(), {
   class: '',
   icon: '',
   size: 40,
-
   tooltipContent: '',
   tooltipPlacement: 'bottom',
-
-  // zIndex: 98,
-
   loading: false,
 })
 
 defineEmits(['click'])
 
+/**
+ * 组件传参
+ */
 type Props = {
 
   /** 按钮的 class 类名 */
-  class?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>
+  class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /** 图标名称 */
   icon?: string
@@ -39,13 +35,8 @@ type Props = {
   /** 图标大小 */
   size?: number
 
-  /**
-   *  图标 class
-   */
-  iconClass?:
-    | string
-    | Record<string, boolean>
-    | Array<string | Record<string, boolean>>
+  /** 图标额外的 class */
+  iconClass?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /** 提示框内容 */
   tooltipContent?: string
@@ -53,70 +44,73 @@ type Props = {
   /** 提示框位置 */
   tooltipPlacement?: Placement
 
-  /** 层级 z-index 值 */
+  /** 层级 z-index */
   zIndex?: number
 
   /** 行内样式 */
   style?: CSSProperties
 
-  /**
-   *  加载loading
-   */
+  /** 是否显示加载中 */
   loading?: boolean
 }
 
+/**
+ * 默认按钮类
+ */
 const DEFAULT_CLASS = 'flex items-center justify-center'
 
 /**
- * 计算合并后按钮的类名
- * 现在支持字符串、对象和数组形式的class
+ * 处理 class，兼容 string | object | array
+ * @param input 输入的类
+ * @returns 拼接后的类字符串
+ */
+function stringifyClass(input?: string | Record<string, boolean> | Array<string | Record<string, boolean>>): string {
+  if (!input) {
+    return ''
+  }
+
+  if (typeof input === 'string') {
+    return input
+  }
+
+  if (Array.isArray(input)) {
+    return input.map(item => stringifyClass(item))
+      .filter(Boolean)
+      .join(' ')
+  }
+
+  return Object.entries(input)
+    .filter(([_, value]) => value)
+    .map(([key]) => key)
+    .join(' ')
+}
+
+/**
+ * 计算按钮的最终类名
  */
 const computedButtonClass = computed(() => {
-  // 处理对象或数组形式的class
-  if (typeof props.class !== 'string') {
-    return twMerge(DEFAULT_CLASS)
-  }
-
-  return twMerge(DEFAULT_CLASS, props.class)
+  return twMerge(DEFAULT_CLASS, stringifyClass(props.class))
 })
 
 /**
- *  处理动态class对象
+ * 计算图标的最终类名
  */
-const dynamicButtonClass = computed(() => {
-  if (typeof props.class === 'object') {
-    return props.class
-  }
-
-  return {
-  }
+const computedIconClass = computed(() => {
+  return stringifyClass(props.iconClass)
 })
 
 /**
- *  计算最终的样式
+ * 计算按钮的行内样式
  */
 const computedStyle = computed(() => ({
   width: `${props.size}px`,
   height: `${props.size}px`,
   ...props.style,
 }))
-
-/**
- *  计算图标的类名
- */
-const computedIconClass = computed(() => {
-  if (typeof props.iconClass === 'string') {
-    return props.iconClass
-  }
-
-  return props.iconClass
-})
 </script>
 
 <template>
-  <div
-    class=""
-  >
+  <div>
     <ElTooltip
       :placement="tooltipPlacement"
       :content="tooltipContent"
@@ -130,7 +124,7 @@ const computedIconClass = computed(() => {
         @click="$emit('click', $event)"
       >
         <div
-          :class="[computedButtonClass, dynamicButtonClass]"
+          :class="computedButtonClass"
           :style="computedStyle"
         >
           <template
@@ -154,9 +148,6 @@ const computedIconClass = computed(() => {
           </template>
         </div>
       </ElButton>
-
     </ElTooltip>
   </div>
 </template>
-
-<style scoped></style>

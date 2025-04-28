@@ -5,9 +5,16 @@
 
 <template>
   <div
-    class=""
+    class="h-30"
   >
-    1
+    <!-- <img
+      src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=react-dark"
+    > -->
+    <GithubActivityGraph />
+
+    <ButtonIcon
+      icon="blog-menu-vue"
+    />
   </div>
 </template>
 

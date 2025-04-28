@@ -67,6 +67,7 @@ declare module 'vue' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElWatermark: typeof import('element-plus/es')['ElWatermark']
     Github: typeof import('./../components/Github/index.vue')['default']
+    GithubActivityGraph: typeof import('./../components/GithubActivityGraph/index.vue')['default']
     GlobalSetting: typeof import('./../components/GlobalSetting/index.vue')['default']
     GoHomeButton: typeof import('./../components/GoHomeButton/index.vue')['default']
     IconAntDesignEnterOutlined: typeof import('~icons/ant-design/enter-outlined')['default']

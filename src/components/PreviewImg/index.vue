@@ -9,56 +9,59 @@ import { computed } from 'vue'
 type MyComponentProps = {
 
   /**
-   *   图片地址
+   * 图片地址
    */
   src: string
 
   /**
-   *   是否显示加载中
+   * 是否显示加载中动画
    */
   loading?: boolean
 
   /**
-   *   style 样式
-   */
-  style?: CSSProperties
-
-  /**
-   *   是否激活点击预览
+   * 是否开启点击预览大图
    */
   preview?: boolean
 
   /**
-   *   高度
-   */
-  height?: number | string
-
-  /**
-   *   宽度
+   * 图片宽度
    */
   width?: number | string
 
   /**
-   *   是否显示头像
+   * 图片高度
+   */
+  height?: number | string
+
+  /**
+   * 是否显示为头像组件
    */
   avatar?: boolean
 
   /**
-   *   头像大小
+   * 头像大小，仅在 avatar 模式下生效
    */
   size?: number
 
   /**
-   * 额外的 CSS 类名
-   */
-  class?: string
-
-  /**
-   *  图标大小 (loading图标 和 加载错误图标)
+   * 图标大小（loading 图标和加载失败图标）
    */
   iconSize?: number
+
+  /**
+   * 附加的 class 类名
+   * 支持 string、对象、数组的格式
+   */
+  class?: string | string[] | Record<string, boolean>
+
+  /**
+   * 自定义图片样式
+   */
+  style?: CSSProperties
+
 }
 
+/** 组件默认 props */
 const props = withDefaults(defineProps<MyComponentProps>(), {
   loading: false,
   preview: true,
@@ -70,54 +73,35 @@ const props = withDefaults(defineProps<MyComponentProps>(), {
 })
 
 /**
- *  计算头像的类名
+ * 计算图片样式
  */
-const computedAvatarClass = computed(() => {
-  if (typeof props.class === 'string') {
-    return props.class
-  }
-
-  return props.class
-})
-
-/**
- *  计算图片的类名
- */
-const computedImageClass = computed(() => {
-  if (typeof props.class === 'string') {
-    return props.class
-  }
-
-  return props.class
-})
-
-/** 计算图片的样式 */
 const computedImageStyle = computed<CSSProperties>(() => ({
   ...props.style,
   height: typeof props.height === 'number' ? `${props.height}px` : props.height,
   width: typeof props.width === 'number' ? `${props.width}px` : props.width,
 }))
-
 </script>
 
 <template>
   <div
     class="h-full w-full flex items-center justify-center"
   >
+    <!-- 头像模式 -->
     <el-avatar
       v-if="avatar"
       :size="size"
       :src="src"
-      :class="`cursor-pointer ${computedAvatarClass}`"
+      :class="props.class"
     >
       <img
         :src="src"
       >
     </el-avatar>
 
+    <!-- 普通图片模式 -->
     <el-image
       v-else
-      :class="`${computedImageClass}`"
+      :class="props.class"
       :style="computedImageStyle"
       :src="src"
       :zoom-rate="1.2"
