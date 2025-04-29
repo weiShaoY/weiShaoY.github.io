@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import md5 from 'md5-ts'
 
+const type = ref('code')
+
 const inputText = ref('Hello Word! 代码改变世界！')
 
 const encodedText = ref('')
@@ -28,12 +30,14 @@ watchEffect(() => {
       <div
         class="flex items-center gap-5"
       >
-        <el-select
-          placeholder="Md5-加密"
-          size="large"
-          class="!w-60"
-          disabled
-        />
+        <el-radio-group
+          v-model="type"
+        >
+          <el-radio-button
+            value="code"
+            label="Md5-加密"
+          />
+        </el-radio-group>
       </div>
 
       <ButtonIcon

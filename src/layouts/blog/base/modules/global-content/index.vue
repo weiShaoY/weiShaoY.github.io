@@ -44,7 +44,7 @@ watch(() => blogStore.isRefresh, reload)
         appear
       >
         <KeepAlive
-          :max="10"
+          :max="20"
           :exclude="blogStore.keepAliveExclude"
         >
           <component

@@ -5,6 +5,8 @@ import VueJsonPretty from 'vue-json-pretty'
 
 import 'vue-json-pretty/lib/styles.css'
 
+const type = ref('code')
+
 /**
  *  是否格式错误
  */
@@ -65,12 +67,15 @@ watch(inputJson, (newVal) => {
       <div
         class="flex items-center gap-5"
       >
-        <el-select
-          placeholder="JSON 格式化"
-          size="large"
-          class="!w-60"
-          disabled
-        />
+
+        <el-radio-group
+          v-model="type"
+        >
+          <el-radio-button
+            value="code"
+            label="JSON 格式化"
+          />
+        </el-radio-group>
       </div>
 
       <ButtonIcon

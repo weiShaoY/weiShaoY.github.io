@@ -53,26 +53,26 @@ watchEffect(() => {
       <div
         class="flex items-center gap-5"
       >
-        <el-select
+
+        <el-radio-group
           v-model="type"
-          placeholder="请选择"
-          size="large"
-          class="!w-60"
           @change="handleSelectChange"
         >
-          <el-option
+          <el-radio-button
             value="code"
             label="摩斯电码-编码"
           />
 
-          <el-option
+          <el-radio-button
             value="doCode"
             label="摩斯电码-解码"
           />
-        </el-select>
+
+        </el-radio-group>
 
         <el-button
           type="primary"
+          plain
           @click="isShowModel = true"
         >
           摩斯密码表
