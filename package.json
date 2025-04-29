@@ -47,6 +47,7 @@
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "prismjs": "^1.30.0",
+    "qrcode.vue": "^3.6.0",
     "three": "^0.176.0",
     "three-custom-shader-material": "^6.3.5",
     "three-globe": "^2.42.4",
