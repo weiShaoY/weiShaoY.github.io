@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import { ref, watch } from 'vue'
 
 import VueJsonPretty from 'vue-json-pretty'
@@ -54,7 +53,6 @@ watch(inputJson, (newVal) => {
     formatJson()
   }
 })
-
 </script>
 
 <template>
@@ -62,20 +60,35 @@ watch(inputJson, (newVal) => {
     class="h-full w-full flex flex-col gap-5 overflow-hidden"
   >
     <div
-      class="flex items-center gap-10"
+      class="flex items-center justify-between"
     >
-      <el-select
-        placeholder="JSON 格式化"
-        size="large"
-        class="!w-60"
-        disabled
-      />
+      <div
+        class="flex items-center gap-5"
+      >
+        <el-select
+          placeholder="JSON 格式化"
+          size="large"
+          class="!w-60"
+          disabled
+        />
+      </div>
 
+      <ButtonIcon
+        v-if="!isError"
+        v-copy="{
+          text: formattedJson,
+          message: '格式化后的 JSON 数据 已经复制到剪切板',
+        }"
+        :size="40"
+        icon="copy"
+        tooltip-content="点击复制"
+      />
     </div>
 
     <div
       class="h-[calc(100vh-200px)] flex items-center justify-center gap-15"
     >
+
       <el-input
         v-model="inputJson"
         type="textarea"
@@ -87,21 +100,6 @@ watch(inputJson, (newVal) => {
       <div
         class="h-full flex flex-1 items-center justify-center !relative"
       >
-
-        <div
-          v-if="!isError"
-          class="z-100 !absolute !right-2 !top-2"
-        >
-          <ButtonIcon
-            v-copy="{
-              text: formattedJson,
-              message: '格式化后的 JSON 数据 已经复制到剪切板',
-            }"
-            :size="40"
-            icon="copy"
-            tooltip-content="点击复制"
-          />
-        </div>
 
         <el-alert
           v-if="isError && inputJson.length > 0"
@@ -121,7 +119,6 @@ watch(inputJson, (newVal) => {
           :editable="true"
           class="overflow-auto border rounded-2 bg-white p-3 !h-full !w-full"
         />
-
       </div>
     </div>
   </div>

@@ -48,32 +48,47 @@ watchEffect(() => {
     />
 
     <div
-      class="flex items-center gap-5"
+      class="flex items-center justify-between"
     >
-      <el-select
-        v-model="type"
-        placeholder="请选择"
-        size="large"
-        class="!w-60"
-        @change="handleSelectChange"
+      <div
+        class="flex items-center gap-5"
       >
-        <el-option
-          value="code"
-          label="摩斯电码-编码"
-        />
+        <el-select
+          v-model="type"
+          placeholder="请选择"
+          size="large"
+          class="!w-60"
+          @change="handleSelectChange"
+        >
+          <el-option
+            value="code"
+            label="摩斯电码-编码"
+          />
 
-        <el-option
-          value="doCode"
-          label="摩斯电码-解码"
-        />
-      </el-select>
+          <el-option
+            value="doCode"
+            label="摩斯电码-解码"
+          />
+        </el-select>
 
-      <el-button
-        type="primary"
-        @click="isShowModel = true"
-      >
-        摩斯密码表
-      </el-button>
+        <el-button
+          type="primary"
+          @click="isShowModel = true"
+        >
+          摩斯密码表
+        </el-button>
+      </div>
+
+      <ButtonIcon
+        v-if="!isError && encodedText.length > 0"
+        v-copy="{
+          text: encodedText,
+          message: `${type === 'code' ? '摩斯密码编码结果' : '摩斯密码解码结果'} 已经复制到剪切板`,
+        }"
+        :size="40"
+        icon="copy"
+        tooltip-content="点击复制"
+      />
     </div>
 
     <div
@@ -91,21 +106,6 @@ watchEffect(() => {
       <div
         class="h-full flex flex-1 items-center justify-center rounded-2 bg-white !relative"
       >
-        <div
-          v-if="!isError"
-          class="z-100 !absolute !right-2 !top-2"
-        >
-          <ButtonIcon
-            v-copy="{
-              text: encodedText,
-              message: `${type === 'code' ? '摩斯密码编码结果' : '摩斯密码解码结果'} 已经复制到剪切板`,
-            }"
-            :size="40"
-            icon="copy"
-            tooltip-content="点击复制"
-          />
-        </div>
-
         <el-alert
           v-if="isError && inputText.length > 0"
           title=" 格式错误，请检查输入"

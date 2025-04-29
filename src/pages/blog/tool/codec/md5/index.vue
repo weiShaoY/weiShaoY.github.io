@@ -23,13 +23,28 @@ watchEffect(() => {
   >
 
     <div
-      class="flex items-center gap-5"
+      class="flex items-center justify-between"
     >
-      <el-select
-        placeholder="Md5-加密"
-        size="large"
-        class="!w-60"
-        disabled
+      <div
+        class="flex items-center gap-5"
+      >
+        <el-select
+          placeholder="Md5-加密"
+          size="large"
+          class="!w-60"
+          disabled
+        />
+      </div>
+
+      <ButtonIcon
+        v-if="encodedText.length > 0"
+        v-copy="{
+          text: encodedText,
+          message: `Md5 加密数据 已经复制到剪切板`,
+        }"
+        :size="40"
+        icon="copy"
+        tooltip-content="点击复制"
       />
     </div>
 
@@ -47,20 +62,6 @@ watchEffect(() => {
       <div
         class="h-full flex flex-1 items-center justify-center rounded-2 bg-white !relative"
       >
-        <div
-          class="z-100 !absolute !right-2 !top-2"
-        >
-          <ButtonIcon
-            v-if="encodedText.length > 0"
-            v-copy="{
-              text: encodedText,
-              message: `Md5 加密数据 已经复制到剪切板`,
-            }"
-            :size="40"
-            icon="copy"
-            tooltip-content="点击复制"
-          />
-        </div>
 
         <div
           class="overflow-y-auto break-words break-all border rounded-2 bg-white p-3 !h-full !w-full"
