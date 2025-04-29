@@ -20,8 +20,6 @@ import { defineConfig, loadEnv } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
 
-import { prismjsPlugin } from 'vite-plugin-prismjs'
-
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
@@ -144,13 +142,6 @@ export default defineConfig((configEnv) => {
         symbolId: `${viteEnv.VITE_APP_ICON_PREFIX}-[dir]-[name]`,
       }),
 
-      // 代码高亮
-      prismjsPlugin({
-        languages: 'all', // 语言
-        plugins: ['line-numbers', 'copy-to-clipboard'],
-        theme: 'solarizedlight',
-        css: true,
-      }),
     ],
   }
 })
