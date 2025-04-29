@@ -20,6 +20,8 @@ import { defineConfig, loadEnv } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
 
+import { prismjsPlugin } from 'vite-plugin-prismjs'
+
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
@@ -135,10 +137,19 @@ export default defineConfig((configEnv) => {
       // 查看 uno.config.ts 文件进行 Uno.css 配置
       UnoCSS(),
 
+      //  本地svg
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
         symbolId: `${viteEnv.VITE_APP_ICON_PREFIX}-[dir]-[name]`,
+      }),
+
+      // 代码高亮
+      prismjsPlugin({
+        languages: 'all', // 语言
+        plugins: ['line-numbers', 'copy-to-clipboard'],
+        theme: 'solarizedlight',
+        css: true,
       }),
     ],
   }

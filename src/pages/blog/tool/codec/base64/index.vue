@@ -10,6 +10,11 @@ const inputText = ref('Hello Word! 代码改变世界！')
 
 const encodedText = ref('')
 
+/**
+ *  是否格式错误
+ */
+const isError = ref<boolean>(false)
+
 function handleSelectChange() {
   inputText.value = ''
 }
@@ -42,6 +47,7 @@ function base64Decode(base64Str: string) {
 }
 
 watchEffect(() => {
+  isError.value = false
   try {
     if (type.value === 'code') {
       encodedText.value = base64Encode(inputText.value)
@@ -52,7 +58,7 @@ watchEffect(() => {
   }
   catch {
     encodedText.value = ''
-    window.$notification?.error('请输入正确的格式!')
+    isError.value = true
   }
 })
 
@@ -69,58 +75,83 @@ watchEffect(() => {
     />
 
     <div
-      class="flex items-center gap-5"
+      class="flex items-center justify-between"
     >
-      <el-select
-        v-model="type"
-        placeholder="请选择"
-        size="large"
-        class="!w-60"
-        @change="handleSelectChange"
-      >
-        <el-option
-          value="code"
-          label="Base64-编码"
-        />
 
-        <el-option
-          value="doCode"
-          label="Base64-解码"
-        />
-      </el-select>
-
-      <el-button
-        type="primary"
-        @click="isShowModel = true"
-      >
-        Base64编码对照表
-      </el-button>
-    </div>
-
-    <el-input
-      v-model="inputText"
-      :rows="3"
-      type="textarea"
-      :placeholder="type === 'code' ? '请输入要编码的内容' : '请输入要解码的内容'"
-    />
-
-    <el-divider />
-
-    <div
-      class="text-4 font-bold"
-    >
-      {{ type === "code" ? "编码结果" : "解码结果" }}
-    </div>
-
-    <div
-      v-copy="encodedText"
-      class="h-[40%] min-h-25 flex flex-col cursor-pointer border p-2"
-    >
       <div
-        v-if="encodedText"
+        class="flex items-center gap-5"
       >
-        {{ encodedText }}
+
+        <el-radio-group
+          v-model="type"
+          @change="handleSelectChange"
+        >
+          <el-radio-button
+            value="code"
+            label="Base64-编码"
+          />
+
+          <el-radio-button
+            value="doCode"
+            label="Base64-解码"
+          />
+
+        </el-radio-group>
+
+        <el-button
+          type="primary"
+          plain
+          @click="isShowModel = true"
+        >
+          Base64编码对照表
+        </el-button>
+      </div>
+
+      <ButtonIcon
+        v-if="!isError && encodedText.length > 0"
+        v-copy="{
+          text: encodedText,
+          message: `${type === 'code' ? 'Base64 编码结果' : 'Base64 解码结果'} 已经复制到剪切板`,
+        }"
+        :size="40"
+        icon="copy"
+        tooltip-content="点击复制"
+      />
+    </div>
+
+    <div
+      class="h-[calc(100vh-200px)] flex items-center justify-center gap-15"
+    >
+      <el-input
+        v-model="inputText"
+        type="textarea"
+        placeholder="请输入 base64 数据"
+        class="!h-full !flex-1"
+        :input-style="{ height: '100%' }"
+        clearable
+      />
+
+      <div
+        class="h-full flex flex-1 items-center justify-center rounded-2 bg-white !relative"
+      >
+
+        <el-alert
+          v-if="isError && inputText.length > 0"
+          title=" 格式错误，请检查输入"
+          type="error"
+          class="!w-1/2"
+        />
+
+        <div
+          v-else
+          class="overflow-y-auto break-words break-all border rounded-2 bg-white p-3 !h-full !w-full"
+        >
+          {{ encodedText }}
+
+        </div>
+
       </div>
     </div>
+
   </div>
 </template>

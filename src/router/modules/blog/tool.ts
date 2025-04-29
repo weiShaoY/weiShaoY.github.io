@@ -74,6 +74,17 @@ const Tool: RouterType.BlogRouteRecordRaw = {
 
       ],
     },
+
+    {
+      path: 'qrcode',
+      name: 'Qrcode',
+      meta: {
+        title: '二维码生成',
+        icon: 'blog-menu-qrcode',
+      },
+      component: () => import('@/pages/blog/tool/qrcode/index.vue'),
+
+    },
   ],
 }
 

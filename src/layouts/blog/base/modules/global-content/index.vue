@@ -23,8 +23,6 @@ function reload() {
 
 watch(() => blogStore.isRefresh, reload)
 
-console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03734', blogStore.setting.container.minHeight)
-
 </script>
 
 <template>
@@ -40,14 +38,13 @@ console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03
       class="w-full"
       :style="{ minHeight: blogStore.setting.container.minHeight }"
     >
-      <!-- 路由动画 -->
       <Transition
         name="slide-right"
         mode="out-in"
         appear
       >
         <KeepAlive
-          :max="10"
+          :max="20"
           :exclude="blogStore.keepAliveExclude"
         >
           <component

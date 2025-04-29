@@ -1,20 +1,48 @@
 <!------  2025-04-24---13:23---星期四  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import VCodeBlock from '@wdns/vue-code-block'
+
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+
+import 'prismjs/themes/prism-coy.css'
+
+const codes = `
+
+
+<template>
+  <div class="">
+
+  </div>
+</template>
+
+<style lang="less" scoped>
+
+</style>`
 </script>
 
 <template>
   <div
-    class="h-30"
+    class="h-full bg-red"
   >
-    <!-- <img
-      src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=react-dark"
-    > -->
-    <GithubActivityGraph />
+    <div
+      class="mx-auto h-100 w-100"
+    >
 
-    <ButtonIcon
-      icon="blog-menu-vue"
-    />
+      <VCodeBlock
+        :code="codes"
+        class="line-numbers"
+        browser-window
+        lang="html"
+        prism-plugin
+        prismjs
+        theme="coy"
+      />
+
+    </div>
+
   </div>
 </template>
 

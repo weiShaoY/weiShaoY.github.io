@@ -223,7 +223,9 @@ const morseCodeData = [
         align="center"
       >
         <el-link
-          v-copy="item.code"
+          v-copy="{
+            text: item.code,
+          }"
           type="primary"
         >
           {{ item.code }}

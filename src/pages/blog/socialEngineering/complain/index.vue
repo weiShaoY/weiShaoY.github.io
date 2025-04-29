@@ -613,7 +613,9 @@ const data = [
             #default="{ row }"
           >
             <el-link
-              v-copy="row.number"
+              v-copy="{
+                text: row.number,
+              }"
               target="_blank"
               type="primary"
             >
