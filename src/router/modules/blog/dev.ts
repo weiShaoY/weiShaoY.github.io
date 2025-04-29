@@ -52,6 +52,15 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       },
       component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
     },
+    {
+      path: 'codeHighlighting',
+      name: ' CodeHighlighting',
+      meta: {
+        title: '代码高亮',
+        icon: 'blog-menu-codeHighlighting',
+      },
+      component: () => import('@/pages/blog/dev/codeHighlighting/index.vue'),
+    },
   ],
 }
 
