@@ -84,13 +84,13 @@ const Tool: RouterType.BlogRouteRecordRaw = {
       component: () => import('@/pages/blog/tool/jsonFormatter/index.vue'),
     },
     {
-      path: 'jsonToClass',
-      name: 'JsonToClass',
+      path: 'jsonToTypeScript',
+      name: 'JsonToTypeScript',
       meta: {
-        title: 'Json转类型',
-        icon: 'blog-menu-jsonToClass',
+        title: 'JSON转TS',
+        icon: 'blog-menu-jsonToTypeScript',
       },
-      component: () => import('@/pages/blog/tool/jsonToClass/index.vue'),
+      component: () => import('@/pages/blog/tool/jsonToTypeScript/index.vue'),
     },
     {
       path: 'qrcode',

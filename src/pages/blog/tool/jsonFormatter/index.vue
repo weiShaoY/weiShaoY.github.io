@@ -18,11 +18,6 @@ const isError = ref<boolean>(false)
 const inputJson = ref<string>('')
 
 /**
- * 格式化后的 JSON 字符串
- */
-const formattedJson = ref<string>('')
-
-/**
  * 解析后的 JSON 对象
  */
 const parsedJson = ref<Record<string, any>>({
@@ -37,7 +32,6 @@ function formatJson() {
     const parsed = JSON.parse(inputJson.value)
 
     parsedJson.value = parsed
-    formattedJson.value = JSON.stringify(parsed, null, 2)
   }
   catch {
     isError.value = true
@@ -53,6 +47,11 @@ formatJson()
 watch(inputJson, (newVal) => {
   if (newVal.trim().length > 0) {
     formatJson()
+  }
+  else {
+    // formattedJson.value = ''
+    parsedJson.value = {
+    }
   }
 })
 </script>
@@ -81,7 +80,7 @@ watch(inputJson, (newVal) => {
       <ButtonIcon
         v-if="!isError"
         v-copy="{
-          text: formattedJson,
+          text: JSON.stringify(parsedJson, null, 2),
           message: '格式化后的 JSON 数据 已经复制到剪切板',
         }"
         :size="40"
@@ -103,7 +102,7 @@ watch(inputJson, (newVal) => {
       />
 
       <div
-        class="h-full flex flex-1 items-center justify-center !relative"
+        class="h-full flex flex-1 items-center justify-center border rounded-2 bg-white !relative"
       >
 
         <el-alert
@@ -114,7 +113,7 @@ watch(inputJson, (newVal) => {
         />
 
         <VueJsonPretty
-          v-else
+          v-else-if="parsedJson"
           :data="parsedJson"
           :deep="3"
           show-line
@@ -122,7 +121,7 @@ watch(inputJson, (newVal) => {
           show-line-number
           :collapsed-on-click-bracket="true"
           :editable="true"
-          class="overflow-auto border rounded-2 bg-white p-3 !h-full !w-full"
+          class="overflow-auto p-3 !h-full !w-full"
         />
       </div>
     </div>

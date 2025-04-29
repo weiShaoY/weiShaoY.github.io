@@ -37,6 +37,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const disposeScene: typeof import('../utils/threeJs')['disposeScene']
   const downloadAudio: typeof import('../utils/download')['downloadAudio']
+  const downloadCanvasAsImage: typeof import('../utils/download')['downloadCanvasAsImage']
   const downloadImage: typeof import('../utils/download')['downloadImage']
   const downloadVideo: typeof import('../utils/download')['downloadVideo']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
@@ -377,6 +378,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly disposeScene: UnwrapRef<typeof import('../utils/threeJs')['disposeScene']>
     readonly downloadAudio: UnwrapRef<typeof import('../utils/download')['downloadAudio']>
+    readonly downloadCanvasAsImage: UnwrapRef<typeof import('../utils/download')['downloadCanvasAsImage']>
     readonly downloadImage: UnwrapRef<typeof import('../utils/download')['downloadImage']>
     readonly downloadVideo: UnwrapRef<typeof import('../utils/download')['downloadVideo']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
