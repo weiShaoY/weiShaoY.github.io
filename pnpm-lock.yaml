@@ -29,6 +29,9 @@ importers:
       '@vueuse/motion':
         specifier: ^3.0.3
         version: 3.0.3(rollup@4.40.0)(vue@3.5.13(typescript@5.6.3))
+      '@wdns/vue-code-block':
+        specifier: ^2.3.5
+        version: 2.3.5(typescript@5.6.3)
       color:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2288,6 +2291,9 @@ packages:
 
   '@vueuse/shared@9.13.0':
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
+
+  '@wdns/vue-code-block@2.3.5':
+    resolution: {integrity: sha512-09TguXcFZEA/9Fyx4c/3Jp4XUK82OKiT1TwH8cBeGg6Nj1E1R16nuABq1yJSvq/GZCxXtOJWw9i3TdxV4MctOw==}
 
   '@webgpu/types@0.1.51':
     resolution: {integrity: sha512-ktR3u64NPjwIViNCck+z9QeyN0iPkQCUOQ07ZCV1RzlkfP+olLTeEZ95O1QHS+v4w9vJeY9xj/uJuSphsHy5rQ==}
@@ -5368,6 +5374,10 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  ua-parser-js@1.0.40:
+    resolution: {integrity: sha512-z6PJ8Lml+v3ichVojCiB8toQJBuwR42ySM4ezjXIqXK3M0HczmKQ3LF4rhU55PfD99KEEXQG6yb7iOMyvYuHew==}
+    hasBin: true
+
   ufo@1.5.4:
     resolution: {integrity: sha512-UsUk3byDzKd04EyoZ7U4DOlxQaD14JUKQl6/P7wiX4FNvUfm3XL246n9W5AmqwW5RSFJ27NAuM0iLscAOYUiGQ==}
 
@@ -8071,6 +8081,15 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@wdns/vue-code-block@2.3.5(typescript@5.6.3)':
+    dependencies:
+      highlight.js: 11.11.1
+      prismjs: 1.30.0
+      ua-parser-js: 1.0.40
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
 
   '@webgpu/types@0.1.51': {}
 
@@ -11625,6 +11644,8 @@ snapshots:
       '@types/web-animations-js': 2.2.16
 
   typescript@5.6.3: {}
+
+  ua-parser-js@1.0.40: {}
 
   ufo@1.5.4: {}
 
