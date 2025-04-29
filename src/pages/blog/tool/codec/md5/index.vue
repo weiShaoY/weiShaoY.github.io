@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import md5 from 'md5-ts'
 
-const type = ref('code')
-
 const inputText = ref('Hello Word! 代码改变世界！')
 
 const encodedText = ref('')
@@ -29,17 +27,11 @@ watchEffect(() => {
     >
 
       <el-select
-        v-model="type"
-        placeholder="请选择"
+        placeholder="Md5-加密"
         size="large"
         class="!w-60"
         disabled
-      >
-        <el-option
-          value="code"
-          label="Md5-加密"
-        />
-      </el-select>
+      />
     </div>
 
     <el-input

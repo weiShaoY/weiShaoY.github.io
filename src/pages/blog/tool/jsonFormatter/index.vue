@@ -8,88 +8,14 @@ import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
 
 /**
- * 用户输入的 JSON 字符串
- */
-const inputJson = ref<string>(`
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "jsx": "preserve",
-    "lib": ["DOM", "ESNext"],
-    "baseUrl": ".",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "resolveJsonModule": true,
-    "types": [
-      "vite/client",
-      "unplugin-vue-macros/macros-global",
-      "vite-plugin-svg-icons/client",
-      "vite-plugin-glsl/ext"
-    ],
-    "allowJs": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules1": true,
-    "isolatedModules2": true,
-    "isolatedModules3": true,
-    "isolatedModules4": true,
-    "isolatedModules5": true,
-    "isolatedModules6": true,
-    "isolatedModules7": true,
-    "isolatedModules8": true,
-    "isolatedModules9": true,
-    "isolatedModules11": true,
-    "isolatedModules12": true,
-    "isolatedModules13": true,
-    "isolatedModules111": true,
-    "isolatedModules11111": true,
-    "isolatedModules1111": true,
-    "isolatedModules1111": true,
-    "isolatedModules111": true,
-    "isolatedModules": true,
-    "isolatedModuleoduls": true,
-    "isolodulatedModules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolodulodulodulatedModules": true,
-    "isolatedModules": true,
-    "isolatedodulodulodulModules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolaodulodulodultedModules": true,
-    "isolatedModules": true,
-    "isolatoduloduloduledModules": true,
-    "isolatedModules": true,
-    "isolatoduloduloduloduloduledModules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolatedMooduloduloduloduloduldules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolatedMteteoduodulodulodulles": true,
-    "isolatedModules": true,
-    "isolatetedModules": true,
-    "isolatedMotetedules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "isolatedModules": true,
-    "skipLibCheck": true
-  }
-}
-`)
-
-/**
  *  是否格式错误
  */
 const isError = ref<boolean>(false)
+
+/**
+ * 用户输入的 JSON 字符串
+ */
+const inputJson = ref<string>('')
 
 /**
  * 格式化后的 JSON 字符串
@@ -191,8 +117,15 @@ function handleCopy() {
           />
         </div>
 
+        <el-alert
+          v-if="isError && inputJson.length > 0"
+          title="JSON 格式错误，请检查输入"
+          type="error"
+          class="!w-1/2"
+        />
+
         <VueJsonPretty
-          v-if="!isError"
+          v-else
           :data="parsedJson"
           :deep="3"
           show-line
@@ -203,12 +136,6 @@ function handleCopy() {
           class="overflow-auto border rounded-2 bg-white p-3 !h-full !w-full"
         />
 
-        <el-alert
-          v-else
-          title="JSON 格式错误，请检查输入"
-          type="error"
-          class="!w-1/2"
-        />
       </div>
     </div>
   </div>
