@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { copyText } from '@/utils'
 
 import { ref, watch } from 'vue'
 
@@ -56,22 +55,6 @@ watch(inputJson, (newVal) => {
   }
 })
 
-function handleCopy() {
-  copyText(formattedJson.value, false)
-
-  try {
-    window.$notification?.success({
-      title: '复制成功',
-      message: 'JSON 数据已复制到剪贴板',
-    })
-  }
-  catch {
-    window.$notification?.error({
-      title: '复制失败',
-      message: '请手动复制 JSON 数据',
-    })
-  }
-}
 </script>
 
 <template>
@@ -110,10 +93,13 @@ function handleCopy() {
           class="z-100 !absolute !right-2 !top-2"
         >
           <ButtonIcon
+            v-copy="{
+              text: formattedJson,
+              message: '格式化后的 JSON 数据 已经复制到剪切板',
+            }"
             :size="40"
             icon="copy"
             tooltip-content="点击复制"
-            @click="handleCopy"
           />
         </div>
 

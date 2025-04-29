@@ -299,7 +299,9 @@ const base64Data = [
           #label
         >
           <el-link
-            v-copy="item.value"
+            v-copy="{
+              text: item.value.toString(),
+            }"
             type="info"
           >
             {{ item.value }}
@@ -307,7 +309,9 @@ const base64Data = [
         </template>
 
         <el-link
-          v-copy="item.label"
+          v-copy="{
+            text: item.label,
+          }"
           type="primary"
         >
           {{ item.label }}
