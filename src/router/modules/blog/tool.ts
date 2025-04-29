@@ -74,24 +74,7 @@ const Tool: RouterType.BlogRouteRecordRaw = {
 
       ],
     },
-    {
-      path: 'jsonFormatter',
-      name: 'JsonFormatter',
-      meta: {
-        title: 'Json格式化',
-        icon: 'blog-menu-jsonFormatter',
-      },
-      component: () => import('@/pages/blog/tool/jsonFormatter/index.vue'),
-    },
-    {
-      path: 'jsonToTypeScript',
-      name: 'JsonToTypeScript',
-      meta: {
-        title: 'JSON转TS',
-        icon: 'blog-menu-jsonToTypeScript',
-      },
-      component: () => import('@/pages/blog/tool/jsonToTypeScript/index.vue'),
-    },
+
     {
       path: 'qrcode',
       name: 'Qrcode',

@@ -34,6 +34,24 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
         iframeUrl: 'https://pkg-graph.info/',
       },
     },
+    {
+      path: 'jsonFormatter',
+      name: 'JsonFormatter',
+      meta: {
+        title: 'Json格式化',
+        icon: 'blog-menu-jsonFormatter',
+      },
+      component: () => import('@/pages/blog/dev/jsonFormatter/index.vue'),
+    },
+    {
+      path: 'jsonToTypeScript',
+      name: 'JsonToTypeScript',
+      meta: {
+        title: 'Json转Ts',
+        icon: 'blog-menu-jsonToTypeScript',
+      },
+      component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
+    },
   ],
 }
 

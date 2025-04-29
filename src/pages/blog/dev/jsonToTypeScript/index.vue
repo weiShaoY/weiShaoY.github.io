@@ -169,7 +169,7 @@ watch(inputJson, (newVal) => {
         >
           <el-radio-button
             value="code"
-            label="JSON转TS"
+            label="JSON 转TS"
           />
         </el-radio-group>
       </div>
