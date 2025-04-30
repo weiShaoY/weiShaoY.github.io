@@ -6,11 +6,9 @@ import 'uno.css'
 
 // ////////////
 
-import './fonts.less'
+import './fonts.scss'
 
-import './nprogress.less'
-
-// import './base.less'
+import './nprogress.scss'
 
 import './element-plus'
 
@@ -20,3 +18,5 @@ import './element-plus'
 import './reset.scss'
 
 import './el-ui.scss' // 优化element样式
+
+import './transition.scss'

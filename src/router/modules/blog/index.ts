@@ -63,5 +63,3 @@ export default testRouter
 export {
   blogRouterList,
 }
-
-console.table(blogRouterList)

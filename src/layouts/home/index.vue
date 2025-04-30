@@ -3,7 +3,6 @@
 import Loading from '@/components/Loading/index.vue'
 
 import Header from './components/header/index.vue'
-
 </script>
 
 <template>
@@ -13,11 +12,24 @@ import Header from './components/header/index.vue'
     <!-- 顶部导航栏 -->
     <Header />
 
+    <!-- 路由切换动画 -->
     <Suspense>
       <template
         #default
       >
-        <router-view />
+        <router-view
+          v-slot="{ Component }"
+        >
+          <Transition
+            name="fade-slide"
+            mode="out-in"
+            appear
+          >
+            <component
+              :is="Component"
+            />
+          </Transition>
+        </router-view>
       </template>
 
       <template
@@ -29,6 +41,20 @@ import Header from './components/header/index.vue'
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+/* 淡入淡出 + 滑动动画 */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.5s ease;
+}
 
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-60px);
+}
 </style>
