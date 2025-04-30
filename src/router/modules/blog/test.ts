@@ -4,7 +4,7 @@ const Test: RouterType.BlogRouteRecordRaw = {
   meta: {
     title: '测试',
     icon: 'blog-menu-test',
-    order: 99,
+    order: 999,
   },
 
   children: [

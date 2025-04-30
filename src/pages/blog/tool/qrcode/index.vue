@@ -1,68 +1,72 @@
 <script lang="ts" setup>
 
-import QrcodeVue from "qrcode.vue";
+import QrcodeVue from 'qrcode.vue'
 
-const type = ref("code");
+const type = ref('code')
 
-const inputText = ref("Hello Word! 代码改变世界！");
+const inputText = ref('Hello Word! 代码改变世界！')
 
-const encodedText = ref("");
+const encodedText = ref('')
 
-const qrcodeImageSize = ref(100);
+const qrcodeImageSize = ref(100)
 
 /**
  *  前景色
  */
-const qrcodeImageForegroundColor = ref("#E9B354");
+const qrcodeImageForegroundColor = ref('#E9B354')
 
 /**
  *  背景色
  */
-const qrcodeImageBackgroundColor = ref("#ffffff");
+const qrcodeImageBackgroundColor = ref('#ffffff')
 
 /**
  *  二维码填充
  */
-const qrcodeImageGradient = ref(false);
+const qrcodeImageGradient = ref(false)
 
 /**
  *  二维码边距
  */
-const qrcodeImageMargin = ref(5);
+const qrcodeImageMargin = ref(5)
 
-const qrcodeContainerRef = ref();
+const qrcodeContainerRef = ref()
 
 /**
  * 下载二维码 canvas 为图片
  */
- async function handleDownload() {
+async function handleDownload() {
   try {
-    const container = qrcodeContainerRef.value;
+    const container = qrcodeContainerRef.value
+
     if (!container) {
-      throw new Error("未找到二维码容器");
+      throw new Error('未找到二维码容器')
     }
 
-    const canvas = container.querySelector("canvas") as HTMLCanvasElement | null;
+    const canvas = container.querySelector('canvas') as HTMLCanvasElement | null
+
     if (!canvas) {
-      throw new Error("容器中未找到 canvas 元素");
+      throw new Error('容器中未找到 canvas 元素')
     }
 
-    const link = document.createElement("a");
-    link.download = "qr-code.png";
-    link.href = canvas.toDataURL("image/png");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const link = document.createElement('a')
+
+    link.download = 'qr-code.png'
+    link.href = canvas.toDataURL('image/png')
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
 
     window.$notification?.success({
-      title: "下载成功",
-      message: "二维码已下载到本地",
-    });
-  } catch (err) {
+      title: '下载成功',
+      message: '二维码已下载到本地',
+    })
+  }
+  catch (err) {
     window.$notification?.error({
-      title: "下载失败",
+      title: '下载失败',
       message: err instanceof Error ? err.message : String(err),
-    });
+    })
   }
 }
 
@@ -72,47 +76,62 @@ const qrcodeContainerRef = ref();
  */
 async function handleDownloadCanvas(): Promise<void> {
   try {
-    const container = qrcodeContainerRef.value;
+    const container = qrcodeContainerRef.value
+
     if (!container) {
-      throw new Error("未找到二维码容器，请确认组件是否正确渲染");
+      throw new Error('未找到二维码容器，请确认组件是否正确渲染')
     }
 
-    const canvas = container.querySelector('canvas');
+    const canvas = container.querySelector('canvas')
+
     if (!(canvas instanceof HTMLCanvasElement)) {
-      throw new Error('容器中未找到有效的 Canvas 元素');
+      throw new TypeError('容器中未找到有效的 Canvas 元素')
     }
 
     const blob = await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob((b) => {
         if (b) {
-          resolve(b);
-        } else {
-          reject(new Error('Canvas 转换 Blob 失败'));
+          resolve(b)
         }
-      }, 'image/png');
-    });
+        else {
+          reject(new Error('Canvas 转换 Blob 失败'))
+        }
+      }, 'image/png')
+    })
 
-    const clipboardItem = new ClipboardItem({ 'image/png': blob });
-    await navigator.clipboard.write([clipboardItem]);
+    const clipboardItem = new ClipboardItem({
+      'image/png': blob,
+    })
+
+    await navigator.clipboard.write([clipboardItem])
 
     window.$notification?.success({
       title: '复制成功',
       message: '二维码已复制到剪切板，可以直接粘贴使用',
-    });
-  } catch (err) {
+    })
+  }
+  catch (err) {
     window.$notification?.error({
       title: '复制失败',
       message: err instanceof Error ? err.message : String(err),
-    });
+    })
   }
 }
 </script>
 
 <template>
-  <div class="h-full w-full flex flex-col gap-5 overflow-hidden">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-5">
-        <el-radio-group v-model="type">
+  <div
+    class="h-full w-full flex flex-col gap-5 overflow-hidden"
+  >
+    <div
+      class="flex items-center justify-between"
+    >
+      <div
+        class="flex items-center gap-5"
+      >
+        <el-radio-group
+          v-model="type"
+        >
           <el-radio-button
             value="code"
             label="二维码生成"
@@ -132,7 +151,9 @@ async function handleDownloadCanvas(): Promise<void> {
       />
     </div>
 
-    <div class="h-[calc(100vh-200px)] flex items-center justify-center gap-15">
+    <div
+      class="h-[calc(100vh-200px)] flex items-center justify-center gap-15"
+    >
       <el-input
         v-model="inputText"
         type="textarea"
@@ -141,9 +162,15 @@ async function handleDownloadCanvas(): Promise<void> {
         :input-style="{ height: '100%' }"
       />
 
-      <div class="h-full flex-col flex-1 rounded-2 bg-white !relative">
-        <div class="flex-col gap-5 p-10">
-          <div class="flex items-center gap-5">
+      <div
+        class="h-full flex-col flex-1 rounded-2 bg-white !relative"
+      >
+        <div
+          class="flex-col gap-5 p-10"
+        >
+          <div
+            class="flex items-center gap-5"
+          >
             <span>二维码填充</span>
 
             <el-switch
@@ -155,7 +182,9 @@ async function handleDownloadCanvas(): Promise<void> {
             />
           </div>
 
-          <div class="flex items-center gap-5">
+          <div
+            class="flex items-center gap-5"
+          >
             <span>二维码前景色</span>
 
             <el-color-picker
@@ -165,7 +194,9 @@ async function handleDownloadCanvas(): Promise<void> {
             />
           </div>
 
-          <div class="flex items-center gap-5">
+          <div
+            class="flex items-center gap-5"
+          >
             <span>二维码背景色</span>
 
             <el-color-picker
@@ -174,7 +205,9 @@ async function handleDownloadCanvas(): Promise<void> {
             />
           </div>
 
-          <div class="flex items-center gap-5">
+          <div
+            class="flex items-center gap-5"
+          >
             <span>二维码大小</span>
 
             <el-slider
@@ -187,7 +220,9 @@ async function handleDownloadCanvas(): Promise<void> {
             />
           </div>
 
-          <div class="flex items-center gap-5">
+          <div
+            class="flex items-center gap-5"
+          >
             <span>二维码边距</span>
 
             <el-slider
@@ -201,7 +236,7 @@ async function handleDownloadCanvas(): Promise<void> {
           </div>
 
           <el-button
-            class="w-1/2 mx-auto"
+            class="mx-auto w-1/2"
             size="large"
             @click="handleDownload()"
           >
@@ -209,10 +244,12 @@ async function handleDownloadCanvas(): Promise<void> {
           </el-button>
         </div>
 
-        <div class="flex flex-1 items-center justify-center">
+        <div
+          class="flex flex-1 items-center justify-center"
+        >
           <div
-            class="border bg-[#FCF3E9] cursor-pointer"
             ref="qrcodeContainerRef"
+            class="cursor-pointer border bg-[#FCF3E9]"
             @click="handleDownloadCanvas"
           >
             <QrcodeVue
