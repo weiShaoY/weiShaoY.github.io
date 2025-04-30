@@ -25,7 +25,6 @@ declare module 'vue-router/auto-routes' {
     '/blog/creativity/clock/components/left': RouteRecordInfo<'/blog/creativity/clock/components/left', '/blog/creativity/clock/components/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/clock/components/right': RouteRecordInfo<'/blog/creativity/clock/components/right', '/blog/creativity/clock/components/right', Record<never, never>, Record<never, never>>,
     '/blog/creativity/muYu/': RouteRecordInfo<'/blog/creativity/muYu/', '/blog/creativity/muYu', Record<never, never>, Record<never, never>>,
-    '/blog/dev/codeHighlighting/': RouteRecordInfo<'/blog/dev/codeHighlighting/', '/blog/dev/codeHighlighting', Record<never, never>, Record<never, never>>,
     '/blog/dev/jsonFormatter/': RouteRecordInfo<'/blog/dev/jsonFormatter/', '/blog/dev/jsonFormatter', Record<never, never>, Record<never, never>>,
     '/blog/dev/jsonToTypeScript/': RouteRecordInfo<'/blog/dev/jsonToTypeScript/', '/blog/dev/jsonToTypeScript', Record<never, never>, Record<never, never>>,
     '/blog/media/av/': RouteRecordInfo<'/blog/media/av/', '/blog/media/av', Record<never, never>, Record<never, never>>,

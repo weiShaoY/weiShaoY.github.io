@@ -1,12 +1,9 @@
 /** 路由类型 */
 
 declare namespace RouterType {
-
   import type { Component } from 'vue'
 
   import type { RouteRecordRedirectOption } from 'vue-router'
-
-  import type { LocationQueryRaw } from 'vue-router'
 
   /** 路由类型 */
   type RouteRecordRaw = {
@@ -48,9 +45,6 @@ declare namespace RouterType {
     /** 组件路径的异步导入 */
     component?: Component | (() => Promise<Component>)
 
-    /** 子路由配置 */
-    children?: BlogRouteRecordRaw[]
-
     /** 路由元信息 */
     meta: {
 
@@ -72,12 +66,6 @@ declare namespace RouterType {
       /** 菜单排序（越小越靠前） */
       order?: number
 
-      /** 外链跳转地址 */
-      externalUrl?: string
-
-      /** 内嵌iframe地址 */
-      iframeUrl?: string
-
       /** 文本徽标内容 */
       textBadge?: string
 
@@ -89,10 +77,47 @@ declare namespace RouterType {
 
       /** 若设置，路由将在标签页中固定显示，其值表示固定标签页的顺序（首页是特殊的，它将自动保持fixed） */
       fixedTabIndex?: number
+    } & (
+      | {
 
+        /** 外链跳转地址 */
+        externalUrl: string
+
+        /** 内嵌iframe地址（禁止同时存在） */
+        iframeUrl?: never
+      }
+      | {
+
+        /** 内嵌iframe地址 */
+        iframeUrl: string
+
+        /** 外链跳转地址（禁止同时存在） */
+        externalUrl?: never
+      }
+      | {
+
+        /** 外链跳转地址（禁止同时存在） */
+        externalUrl?: never
+
+        /** 内嵌iframe地址（禁止同时存在） */
+        iframeUrl?: never
+      }
+    )
+
+    /** 子路由配置（如果存在 externalUrl 或 iframeUrl，则禁止 children） */
+    children?: BlogRouteRecordRaw[]
+  } & (
+    | {
+      meta: { externalUrl: string } | { iframeUrl: string }
+
+      /** 如果 meta 有 externalUrl 或 iframeUrl，则禁止 children */
+      children?: never
     }
+    | {
+      meta: { externalUrl?: never, iframeUrl?: never }
 
-    /** 路由查询参数，如果设置的话，点击菜单进入该路由时会自动携带的query参数 */
-    query?: LocationQueryRaw
-  }
+      /** 如果 meta 没有 externalUrl 或 iframeUrl，则允许 children */
+      children?: BlogRouteRecordRaw[]
+    }
+  )
 }

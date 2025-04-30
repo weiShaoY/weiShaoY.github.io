@@ -8,23 +8,34 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
   },
   children: [
     {
-      path: 'format',
-      name: 'Format',
+      path: 'codeHighlighting',
+      name: 'CodeHighlighting',
       meta: {
-        title: '代码格式化',
-        icon: 'blog-menu-format',
-        iframeUrl: 'https://highlightjs.org/demo',
+        title: '代码高亮',
+        icon: 'blog-menu-codeHighlighting',
       },
+      children: [
+        {
+          path: 'highlightJs',
+          name: 'HighlightJs',
+          meta: {
+            title: 'HighlightJs',
+            icon: 'blog-menu-highlightJs',
+            iframeUrl: 'https://highlightjs.org/demo',
+          },
+        },
+        {
+          path: 'carbon',
+          name: 'Carbon',
+          meta: {
+            title: 'Carbon',
+            icon: 'blog-menu-carbon',
+            externalUrl: 'https://carbon.now.sh/',
+          },
+        },
+      ],
     },
-    {
-      path: 'image',
-      name: 'Image',
-      meta: {
-        title: '代码转图片',
-        icon: 'blog-menu-image',
-        externalUrl: 'https://carbon.now.sh/',
-      },
-    },
+
     {
       path: 'npm',
       name: 'Npm',
@@ -51,15 +62,6 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
         icon: 'blog-menu-jsonToTypeScript',
       },
       component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
-    },
-    {
-      path: 'codeHighlighting',
-      name: ' CodeHighlighting',
-      meta: {
-        title: '代码高亮',
-        icon: 'blog-menu-codeHighlighting',
-      },
-      component: () => import('@/pages/blog/dev/codeHighlighting/index.vue'),
     },
   ],
 }
