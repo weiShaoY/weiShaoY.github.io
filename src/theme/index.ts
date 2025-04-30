@@ -19,4 +19,4 @@ import './reset.scss'
 
 import './el-ui.scss' // 优化element样式
 
-import './transition.scss'
+import './layout-animations.scss'

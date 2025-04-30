@@ -21,6 +21,7 @@ const Tool: RouterType.BlogRouteRecordRaw = {
           meta: {
             title: '摩斯电码',
             icon: 'blog-menu-morse',
+            keepAlive: true,
           },
           component: () => import('@/pages/blog/tool/codec/morse/index.vue'),
         },

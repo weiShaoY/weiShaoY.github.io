@@ -21,7 +21,7 @@ import Header from './components/header/index.vue'
           v-slot="{ Component }"
         >
           <Transition
-            name="fade-slide"
+            name="slide-left"
             mode="out-in"
             appear
           >
@@ -36,25 +36,8 @@ import Header from './components/header/index.vue'
         #fallback
       >
         <Loading />
+
       </template>
     </Suspense>
   </div>
 </template>
-
-<style lang="scss" scoped>
-/* 淡入淡出 + 滑动动画 */
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: all 0.5s ease;
-}
-
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateX(60px);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateX(-60px);
-}
-</style>

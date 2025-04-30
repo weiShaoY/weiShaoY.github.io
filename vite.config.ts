@@ -22,7 +22,7 @@ import Glsl from 'vite-plugin-glsl'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-// import vueDevTools from 'vite-plugin-vue-devtools'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(
@@ -62,7 +62,7 @@ export default defineConfig((configEnv) => {
 
       vueJsx(),
 
-      // vueDevTools(),
+      vueDevTools(),
 
       VueMacros({
         /**
