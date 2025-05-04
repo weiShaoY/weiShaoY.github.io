@@ -21,8 +21,15 @@ declare namespace Env {
      */
     readonly VITE_APP_NODE_ENV: 'development' | 'production'
 
-    /** 应用程序的基本 URL */
-    readonly VITE_BASE_URL: string
+    /**
+     *  应用的端口号
+     */
+    readonly VITE_APP_PORT: number
+
+    /**
+     * 应用的基本 URL，用于构建和部署应用时的路径
+     */
+    readonly VITE_APP_BASE_URL: string
 
     /**
      *  应用的标题，用于页面标题显示

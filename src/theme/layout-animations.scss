@@ -1,4 +1,5 @@
 // ////////////////////////  页面切换动画  ////////////////////////
+@use "sass:map"; // 引入 Dart Sass 的 map 模块
 
 /// 通用过渡动画配置
 /// @prop {Duration} duration [0.3s] - 动画时长
@@ -13,10 +14,10 @@ $transition-config: (
 );
 
 // 提取变量方便使用
-$duration: map-get($transition-config, duration);
-$slide-distance: map-get($transition-config, slide-distance);
-$vertical-distance: map-get($transition-config, vertical-distance);
-$easing: map-get($transition-config, easing);
+$duration: map.get($transition-config, duration);
+$slide-distance: map.get($transition-config, slide-distance);
+$vertical-distance: map.get($transition-config, vertical-distance);
+$easing: map.get($transition-config, easing);
 
 /// 基础 fade 淡入淡出动画
 .fade {
