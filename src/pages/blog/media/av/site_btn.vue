@@ -1,12 +1,6 @@
 <!-- eslint-disable vue/require-prop-comment -->
 <script setup lang="ts">
 
-import duoJieGuo from './svg/tag/duoJieGuo.svg'
-
-import wuMaSvg from './svg/tag/wuMa.svg'
-
-import ziMuSvg from './svg/tag/ziMu.svg'
-
 import { fetcher } from './utils/xhr'
 
 type Props = {
@@ -126,23 +120,24 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
       }"
       @click="go"
     >
-      <img
+
+      <SvgIcon
         v-if="tag === '字幕'"
-        :src="ziMuSvg"
-        class="h-10 w-10"
-      >
+        icon="blog-av-tag-ziMu"
+        :size="36"
+      />
 
-      <img
+      <SvgIcon
         v-if="tag === '无码'"
-        :src="wuMaSvg"
-        class="h-10 w-10"
-      >
+        icon="blog-av-tag-wuMa"
+        :size="36"
+      />
 
-      <img
+      <SvgIcon
         v-if="tag === '多结果'"
-        :src="duoJieGuo"
-        class="h-10 w-10"
-      >
+        icon="blog-av-tag-duoJieGuo"
+        :size="36"
+      />
 
       <div
         class="m-x-2 w-auto text-dark font-semibold"
