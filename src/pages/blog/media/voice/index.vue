@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 const isLoading = ref(false)
 
-const category = ref(0)
+const category = ref(1)
 
 const musicUrl = ref('')
 
@@ -121,7 +121,7 @@ onMounted(async () => {
     </div>
 
     <div
-      class="h-[calc(100vh-240px)]"
+      class="h-[calc(100vh-240px)] flex items-center justify-center"
     >
       <MusicPlayer
         :music-url="musicUrl"
