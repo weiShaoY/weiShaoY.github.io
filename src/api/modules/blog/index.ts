@@ -191,7 +191,7 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=282
    */
   async getOilPrices() {
-    return fetchHttp('https://api.pearktrue.cn/api/oil/')
+    return fetchHttp(`https://api.pearktrue.cn/api/oil/`)
   }
 
   /**
@@ -347,7 +347,7 @@ class BlogApi {
 
     async function getData() {
       const response = await fetch(
-        `https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
+        `${proxyUrl}https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
       )
 
       if (!response.ok) {
