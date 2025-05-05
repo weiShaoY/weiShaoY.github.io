@@ -81,5 +81,31 @@ declare namespace Env {
      */
     readonly VITE_ROUTER_BLOG_HOME_PATH: string
 
+    /**
+     * 第三方代理服务配置（ThingProxy）
+     *
+     * @constant {string}
+     * @default ''
+     *
+     * @description
+     * ThingProxy 是一个免费的跨域代理服务，用于解决前端开发中的 CORS 限制问题。
+     * 特性：
+     * - 无需后端配置 CORS 头
+     * - 支持 GET/POST 等常见 HTTP 方法
+     * - 免费且响应速度较快
+     *
+     * @example
+     * // 在 vite 环境变量中配置
+     * VITE_API_PROXY_URL='https://thingproxy.freeboard.io/fetch/'
+     *
+     * // 使用示例
+     * fetch(`${import.meta.env.VITE_API_PROXY_URL}https://target-api.com/data`)
+     *
+     * @see [ThingProxy 官网](https://thingproxy.freeboard.io/)
+     * @warning 仅限开发环境使用，生产环境应配置正式代理服务
+     * @security 注意代理可能记录请求数据，敏感信息需加密
+     */
+    readonly VITE_API_PROXY_URL: string
+
   } & ImportMetaEnv
 }

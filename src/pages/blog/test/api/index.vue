@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 
-import { ref } from 'vue'
-
 const isLoading = ref(false)
 
 const apiUrl = ref('https://api.pearktrue.cn/api/goldprice/')
+
+/**
+ *  是否启动三方代理
+ */
+const isProxy = ref(false)
 
 const data = ref({
   http: {
@@ -37,7 +40,12 @@ async function getData() {
 
     isLoading.value = true
 
-    const response = await fetch(apiUrl.value)
+    // 构建请求URL
+    const requestUrl = isProxy.value
+      ? `${import.meta.env.VITE_API_PROXY_URL}${apiUrl.value}`
+      : apiUrl.value
+
+    const response = await fetch(requestUrl)
 
     if (!response.ok) {
       throw new Error(
@@ -84,7 +92,7 @@ onMounted(async () => {
         clearable
         size="large"
         placeholder="请输入接口地址"
-        class="!max-w-[30%] !overflow-hidden"
+        class="!max-w-[70%] !overflow-hidden"
         @keydown.enter.prevent="getData"
         @clear="clearData"
       >
@@ -98,6 +106,15 @@ onMounted(async () => {
           />
         </template>
       </el-input>
+
+      <el-switch
+        v-model="isProxy"
+        size="large"
+        inline-prompt
+        style="--el-switch-on-color: #F3B03D;"
+        active-text="启用三方代理"
+        inactive-text="不启用三方代理"
+      />
     </div>
 
     <el-card
@@ -114,11 +131,18 @@ onMounted(async () => {
         </span>
 
         <el-link
-          class="w-12"
+          class="w-12 font-bold"
           :type="data.http.code === 200 ? 'success' : (data.http.code > 0 ? 'danger' : 'info')"
         >
           {{ data.http.code ? data.http.code : '' }}
         </el-link>
+
+        <span
+          v-if="!!isProxy"
+          class="color-red font-bold"
+        >
+          已启用代理
+        </span>
       </template>
 
       <el-input

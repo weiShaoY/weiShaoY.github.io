@@ -4,14 +4,14 @@ import { fetchHttp } from '../../http'
  *  ThingProxy  (最快)
  *  @description  ThingProxy 是一个免费的跨域代理服务，它可以让你在浏览器中访问其他网站的资源，而无需设置 CORS 头。
  */
-const proxyUrl = `https://thingproxy.freeboard.io/fetch/`
+const proxyUrl = import.meta.env.VITE_API_PROXY_URL
 
 class BlogApi {
   /**
    *  测试接口
    */
-  test() {
-    return fetchHttp('https://v2.api-m.com/api/weather?city=枣庄滕州')
+  apiTest(url: string = 'https://v2.api-m.com/api/weather?city=枣庄滕州', isProxy: boolean = false) {
+    return fetchHttp(isProxy ? proxyUrl + url : url)
   }
 
   /**

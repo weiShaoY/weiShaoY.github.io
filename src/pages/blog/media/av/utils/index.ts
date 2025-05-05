@@ -169,12 +169,14 @@ export async function gmGet({ url }: { url: string }): Promise<TResponse> {
   /**
    *  AllOrigins
    */
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+  // const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
 
   /**
    *  ThingProxy  (最快)
    */
   // const proxyUrl = `https://thingproxy.freeboard.io/fetch/${url}`
+
+  const proxyUrl = import.meta.env.VITE_API_PROXY_URL + url
 
   return await axios.get(proxyUrl, config)
     .then(transformAxiosResponse)
