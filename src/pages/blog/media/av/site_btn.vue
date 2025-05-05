@@ -51,17 +51,29 @@ const resultLink = computed(() => {
   return multipleFlag.value ? originLink.value : fetchRes.value?.resultLink
 })
 
-// 定义一个异步函数来获取数据
+const isLoading = ref(false)
+
+// 定义更清晰的异步数据获取函数
 async function fetchData() {
-  fetcher({
-    siteItem: props.siteItem,
-    targetLink: originLink.value,
-    CODE: formatCode.value,
-  }).then(
-    (res) => {
-      fetchRes.value = res
-    },
-  )
+  try {
+    isLoading.value = true
+    const res = await fetcher({
+      siteItem: props.siteItem,
+      targetLink: originLink.value,
+      CODE: formatCode.value,
+    })
+
+    fetchRes.value = res
+  }
+  catch (error) {
+    console.error('数据获取失败:', error)
+
+    // 可以在这里添加错误处理逻辑，例如：
+    // showErrorToast('加载数据失败，请重试')
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 
 onMounted(() => {
@@ -106,6 +118,7 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
     class="group relative flex cursor-pointer items-center justify-center rounded-2"
   >
     <div
+      v-loading="isLoading"
       class="aspect-square flex items-center gap-1 rounded-2 bg-white p-x-1"
 
       :style="{
