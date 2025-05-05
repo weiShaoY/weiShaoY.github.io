@@ -87,8 +87,6 @@ type TResponse = {
  * 转换 axios 响应为 GM_xmlhttpRequest 格式
  */
 function transformAxiosResponse(axiosResponse: AxiosResponse): TResponse {
-  console.log('%c Line:58 🍑 axiosResponse', 'color:#2eafb0', axiosResponse)
-
   // 尝试解析 XML（如果响应内容是 XML）
   const parseXML = (text: string): Document | null => {
     if (typeof DOMParser === 'undefined' || !text || !text.trim().startsWith('<')) {

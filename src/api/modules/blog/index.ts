@@ -1,5 +1,11 @@
 import { fetchHttp } from '../../http'
 
+/**
+ *  ThingProxy  (最快)
+ *  @description  ThingProxy 是一个免费的跨域代理服务，它可以让你在浏览器中访问其他网站的资源，而无需设置 CORS 头。
+ */
+const proxyUrl = `https://thingproxy.freeboard.io/fetch/`
+
 class BlogApi {
   /**
    *  测试接口
@@ -22,7 +28,7 @@ class BlogApi {
    *  获取 黄金价格实时查询
    */
   getRealTimeGoldPrice() {
-    return fetchHttp('https://api.lolimi.cn/API/huangj/api.php')
+    return fetchHttp(`${proxyUrl}https://api.lolimi.cn/API/huangj/api.php`)
   }
 
   /**
