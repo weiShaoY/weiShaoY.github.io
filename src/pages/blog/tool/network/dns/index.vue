@@ -59,7 +59,9 @@ const dnsList = [
         >
 
           <el-link
-            v-copy="item.value"
+            v-copy="{
+              text: item.value,
+            }"
             type="primary"
           >
             {{ item.value }}

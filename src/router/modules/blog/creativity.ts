@@ -5,6 +5,7 @@ const creativityRoute: RouterType.BlogRouteRecordRaw = {
     title: '创意',
     icon: 'blog-menu-creativity',
     keepAlive: false,
+    order: 10,
   },
   children: [
     {

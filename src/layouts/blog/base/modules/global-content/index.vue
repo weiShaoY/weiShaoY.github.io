@@ -23,8 +23,6 @@ function reload() {
 
 watch(() => blogStore.isRefresh, reload)
 
-console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03734', blogStore.setting.container.minHeight)
-
 </script>
 
 <template>
@@ -34,20 +32,27 @@ console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03
     :style="containerStyle"
   >
 
+    <!-- 路由视图容器 -->
+    <!-- v-if控制是否渲染，可用于强制刷新 -->
+    <!-- v-slot获取当前路由对应的组件和路由信息 -->
+    <!-- 设置宽度100%和动态最小高度 -->
     <RouterView
       v-if="isRefresh"
       v-slot="{ Component, route }"
       class="w-full"
       :style="{ minHeight: blogStore.setting.container.minHeight }"
     >
-      <!-- 路由动画 -->
+
+      <!-- 需要缓存的页面部分 -->
+      <!-- 缓存组件渲染 -->
       <Transition
-        name="slide-right"
+        name="slide-bottom"
         mode="out-in"
         appear
       >
+        <!-- KeepAlive缓存组件，最多20个，排除不缓存的组件 -->
         <KeepAlive
-          :max="10"
+          :max="20"
           :exclude="blogStore.keepAliveExclude"
         >
           <component
@@ -58,11 +63,14 @@ console.log('%c Line:27 🍎 blogStore.setting.container.minHeight', 'color:#b03
         </KeepAlive>
       </Transition>
 
+      <!-- 非缓存组件渲染 -->
       <Transition
-        name="slide-right"
+        name="slide-bottom"
         mode="out-in"
         appear
       >
+        <!-- 动态渲染组件 -->
+        <!-- 当路由meta中keepAlive为false时渲染 -->
         <component
           :is="Component"
           v-if="!route.meta.keepAlive"

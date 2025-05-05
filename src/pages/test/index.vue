@@ -1,20 +1,13 @@
-<!------  2025-04-24---13:23---星期四  ------>
+<!------  2025-04-30---09:52---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 </script>
 
 <template>
   <div
-    class="h-30"
+    class=""
   >
-    <!-- <img
-      src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=react-dark"
-    > -->
-    <GithubActivityGraph />
-
-    <ButtonIcon
-      icon="blog-menu-vue"
-    />
+    11
   </div>
 </template>
 

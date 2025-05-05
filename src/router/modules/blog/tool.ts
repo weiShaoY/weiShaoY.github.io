@@ -21,6 +21,7 @@ const Tool: RouterType.BlogRouteRecordRaw = {
           meta: {
             title: '摩斯电码',
             icon: 'blog-menu-morse',
+            keepAlive: true,
           },
           component: () => import('@/pages/blog/tool/codec/morse/index.vue'),
         },
@@ -73,6 +74,17 @@ const Tool: RouterType.BlogRouteRecordRaw = {
         },
 
       ],
+    },
+
+    {
+      path: 'qrcode',
+      name: 'Qrcode',
+      meta: {
+        title: '二维码生成',
+        icon: 'blog-menu-qrcode',
+      },
+      component: () => import('@/pages/blog/tool/qrcode/index.vue'),
+
     },
   ],
 }

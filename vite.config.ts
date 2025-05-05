@@ -12,8 +12,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 import Components from 'unplugin-vue-components/vite'
 
-import VueMacros from 'unplugin-vue-macros/vite'
-
 import VueRouter from 'unplugin-vue-router/vite'
 
 import { defineConfig, loadEnv } from 'vite'
@@ -22,24 +20,32 @@ import Glsl from 'vite-plugin-glsl'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-// import vueDevTools from 'vite-plugin-vue-devtools'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
-export default defineConfig((configEnv) => {
-  const viteEnv = loadEnv(
-    configEnv.mode,
-    process.cwd(),
-  ) as unknown as Env.ImportMeta
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd()) as Env.ImportMeta
 
   return {
+    // 基础配置
+    base: env.VITE_APP_BASE_URL || '/',
+
+    // 环境变量的前缀，只有以该前缀开头的变量才会被载入
+    envPrefix: 'VITE_',
+
+    // 解析配置
     resolve: {
-      /**
-       *  设置路径别名
-       */
       alias: {
-        '@/': `${path.resolve(__dirname, 'src')}/`,
+        '@': path.resolve(__dirname, 'src'),
       },
+
+      // 指定在解析模块路径时需要尝试的文件扩展名的顺序
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
+
+    // CSS 相关配置
     css: {
+      // 启用开发模式下的 CSS Source Map，方便调试
+      devSourcemap: true,
       preprocessorOptions: {
         scss: {
           // 使用现代编译器 API (Sass 新特性支持)
@@ -50,95 +56,105 @@ export default defineConfig((configEnv) => {
            * @use 指令引入全局样式文件
            * as * 表示将所有 mixin/variables 导入全局命名空间
            */
-          additionalData: `@use "@/theme/variables.scss" as *;`,
+          additionalData: `
+            @use "@/theme/variables.scss" as *;
+          `,
 
-          // 注意：实际路径请根据项目结构调整
-          // @/ 别名通常指向 src 目录
+          // 禁用在生成的 CSS 文件中加入 @charset 声明
+          charset: false,
         },
       },
     },
-    plugins: [
-      Glsl(),
 
+    // 开发服务器配置
+    server: {
+      // 开发服务器监听所有主机地址
+      // host: true,
+
+      // 开发服务器端口，默认 3000
+      port: Number(env.VITE_APP_PORT) || 3000,
+
+      // 自动在浏览器中打开应用
+      open: true,
+    },
+
+    // 插件配置
+    plugins: [
+
+      Vue(),
+
+      // Vue 相关插件
+      VueRouter({
+        // 生成 TypeScript 路由声明文件
+        dts: 'src/types/vue-router-vite.d.ts',
+      }),
+
+      // 支持 Vue 的 JSX 语法
       vueJsx(),
 
-      // vueDevTools(),
+      // 启用 Vue 开发者工具
+      vueDevTools(),
 
-      VueMacros({
-        /**
-         *  禁用宏选项定义
-         */
-        defineOptions: false,
+      // 自动导入
+      AutoImport({
+        imports: [
+          'vue', // 自动导入 Vue 的 API
+          'vue-router', // 自动导入 Vue Router 的 API
+          'pinia', // 自动导入 Pinia 的 API
+          '@vueuse/core', // 自动导入 VueUse 的 API
+          {
+            from: 'vue-router',
+            imports: ['RouteLocationRaw'], // 单独导入类型
+            type: true, // 启用类型导入
+          },
+        ],
 
-        /**
-         *  禁用宏模型定义
-         */
-        defineModels: false,
-        plugins: {
-          vue: Vue({
-            script: {
-              /**
-               *  启用属性解构
-               */
-              propsDestructure: true,
+        // 生成 TypeScript 自动导入声明文件
+        dts: 'src/types/auto-imports.d.ts',
 
-              /**
-               *  启用模型定义
-               */
-              defineModel: true,
-            },
+        // 自动导入的目录
+        dirs: [
+          'src/composables',
+          'src/stores',
+          'src/utils',
+        ],
+
+        resolvers: [
+          // 自动导入 Element Plus 的组件// 自动导入 Element Plus 的组件
+          ElementPlusResolver({
+            importStyle: false, // 禁用自动导入样式
           }),
+        ],
+
+        // 在 Vue 模板中支持自动导入
+        vueTemplate: true,
+
+        // 自动生成 ESLint 配置
+        eslintrc: {
+          enabled: true,
         },
       }),
 
-      // https://github.com/antfu/unplugin-auto-import
-      AutoImport({
-        imports: ['vue', 'vue-router', '@vueuse/core'],
-
-        /**
-         *  生成类型定义文件
-         */
-        dts: 'src/types/auto-imports.d.ts',
-
-        /**
-         *  自动导入的目录
-         */
-        dirs: ['./src/composables', './src/utils'],
-
-        /**
-         *  启用 Vue 模板
-         */
-        vueTemplate: true,
-      }),
-
-      // https://github.com/antfu/vite-plugin-components
       Components({
-        /**
-         *  生成类型定义文件
-         */
-        dts: 'src/types/components.d.ts', // 生成的组件类型声明文件
-
+        // 生成 TypeScript 组件声明文件
+        dts: 'src/types/components.d.ts',
         resolvers: [
-          // 自动导入 Element Plus 组件，完整导入可查看 /src/plugins/ui.ts
+          // 使用 Sass 引入 Element Plus 样式
           ElementPlusResolver({
-            importStyle: false, // 不自动导入样式，完整导入可查看 /theme/index.ts
+            importStyle: 'sass',
           }),
         ],
       }),
 
-      VueRouter({
-        // 生成路由类型声明文件
-        dts: 'src/types/vue-router-vite.d.ts',
-      }),
-
-      // https://github.com/antfu/unocss
-      // 查看 uno.config.ts 文件进行 Uno.css 配置
       UnoCSS(),
 
+      Glsl(),
+
+      //  本地svg
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
-        symbolId: `${viteEnv.VITE_APP_ICON_PREFIX}-[dir]-[name]`,
+        symbolId: `${env.VITE_APP_ICON_PREFIX || 'icon'}-[dir]-[name]`,
       }),
     ],
   }

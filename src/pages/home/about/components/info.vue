@@ -196,7 +196,7 @@ function handleCopy() {
               @click="handleCopy"
             >
               <SvgIcon
-                :icon="hasCopied ? 'tick' : 'home-about-copy'"
+                :icon="hasCopied ? 'home-about-tick' : 'home-about-copy'"
                 class="!h-8 !w-8"
               />
 

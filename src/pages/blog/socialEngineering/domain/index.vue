@@ -223,9 +223,17 @@ async function getData() {
 
     const response = await BlogApi.getWebsiteDetails(domain.value)
 
-    // console.log('%c Line:225 🍎 response', 'color:#42b983', response)
+    if (response.icp) {
+      domainData.value = response
+    }
+    else {
+      isLoading.value = false
+      window.$notification?.error({
+        title: '获取数据失败，请稍后重试',
+      })
 
-    domainData.value = response
+      clearData()
+    }
   }
   catch (error: any) {
     window.$notification?.error({

@@ -25,48 +25,56 @@ watchEffect(() => {
   >
 
     <div
-      class="flex items-center gap-5"
+      class="flex items-center justify-between"
     >
-
-      <el-select
-        v-model="type"
-        placeholder="请选择"
-        size="large"
-        class="!w-60"
+      <div
+        class="flex items-center gap-5"
       >
-        <el-option
-          value="code"
-          label="Md5-加密"
-        />
-      </el-select>
-    </div>
+        <el-radio-group
+          v-model="type"
+        >
+          <el-radio-button
+            value="code"
+            label="Md5-加密"
+          />
+        </el-radio-group>
+      </div>
 
-    <el-input
-      v-model="inputText"
-      :rows="3"
-      type="textarea"
-      placeholder="请输入要加密的内容"
-    />
-
-    <el-divider />
-
-    <div
-      class="text-4 font-bold"
-    >
-      加密结果
+      <ButtonIcon
+        v-if="encodedText.length > 0"
+        v-copy="{
+          text: encodedText,
+          message: `Md5 加密数据 已经复制到剪切板`,
+        }"
+        :size="40"
+        icon="copy"
+        tooltip-content="点击复制"
+      />
     </div>
 
     <div
-      v-copy="encodedText"
-      class="h-[40%] min-h-25 flex flex-col cursor-pointer border p-2"
+      class="h-[calc(100vh-200px)] flex items-center justify-center gap-15"
     >
+      <el-input
+        v-model="inputText"
+        type="textarea"
+        placeholder="请输入要Md5 加密的内容"
+        class="!h-full !flex-1"
+        :input-style="{ height: '100%' }"
+      />
 
-      <span
-        v-if="encodedText"
+      <div
+        class="h-full flex flex-1 items-center justify-center rounded-2 bg-white !relative"
       >
-        {{ encodedText }}
-      </span>
 
+        <div
+          class="overflow-y-auto break-words break-all border rounded-2 bg-white p-3 !h-full !w-full"
+        >
+          {{ encodedText }}
+
+        </div>
+
+      </div>
     </div>
   </div>
 </template>

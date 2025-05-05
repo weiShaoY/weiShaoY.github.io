@@ -34,9 +34,9 @@ function handleSelect(key: string) {
     <div
       v-for="item in menuList"
       :key="item.key"
-      class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-white"
+      class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-primary"
       :class="{
-        'text-white': route.path === item.key,
+        'text-primary': route.path === item.key,
       }"
       @click="handleSelect(item.key)"
     >

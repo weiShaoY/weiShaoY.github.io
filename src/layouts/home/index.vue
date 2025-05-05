@@ -3,7 +3,6 @@
 import Loading from '@/components/Loading/index.vue'
 
 import Header from './components/header/index.vue'
-
 </script>
 
 <template>
@@ -13,22 +12,32 @@ import Header from './components/header/index.vue'
     <!-- 顶部导航栏 -->
     <Header />
 
+    <!-- 路由切换动画 -->
     <Suspense>
       <template
         #default
       >
-        <router-view />
+        <router-view
+          v-slot="{ Component }"
+        >
+          <Transition
+            name="slide-left"
+            mode="out-in"
+            appear
+          >
+            <component
+              :is="Component"
+            />
+          </Transition>
+        </router-view>
       </template>
 
       <template
         #fallback
       >
         <Loading />
+
       </template>
     </Suspense>
   </div>
 </template>
-
-<style lang="less" scoped>
-
-</style>

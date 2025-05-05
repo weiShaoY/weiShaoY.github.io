@@ -1,0 +1,109 @@
+// ////////////////////////  页面切换动画  ////////////////////////
+@use "sass:map"; // 引入 Dart Sass 的 map 模块
+
+/// 通用过渡动画配置
+/// @prop {Duration} duration [0.3s] - 动画时长
+/// @prop {Length} slide-distance [30px] - 水平滑动距离
+/// @prop {Length} vertical-distance [20px] - 垂直滑动距离
+/// @prop {Function} easing [cubic-bezier] - 过渡曲线
+$transition-config: (
+  duration: 0.3s,
+  slide-distance: 30px,
+  vertical-distance: 20px,
+  easing: cubic-bezier(0.4, 0, 0.2, 1),
+);
+
+// 提取变量方便使用
+$duration: map.get($transition-config, duration);
+$slide-distance: map.get($transition-config, slide-distance);
+$vertical-distance: map.get($transition-config, vertical-distance);
+$easing: map.get($transition-config, easing);
+
+/// 基础 fade 淡入淡出动画
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity $duration ease;
+    will-change: opacity;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-to,
+  &-leave-from {
+    opacity: 1;
+  }
+}
+
+/// @mixin 水平滑动动画
+/// @param {Length} $enter-x - 进入动画的水平位移
+/// @param {Length} $leave-x - 离开动画的水平位移
+@mixin horizontal-slide($enter-x, $leave-x) {
+  &-enter-active,
+  &-leave-active {
+    transition:
+      opacity $duration $easing,
+      transform $duration $easing;
+    will-change: opacity, transform;
+  }
+
+  &-enter-from {
+    opacity: 0;
+    transform: translate3d($enter-x, 0, 0);
+  }
+
+  &-enter-to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-leave-to {
+    opacity: 0;
+    transform: translate3d($leave-x, 0, 0);
+  }
+}
+
+/// @mixin 垂直滑动动画
+/// @param {Length} $enter-y - 进入动画的垂直位移
+/// @param {Length} $leave-y - 离开动画的垂直位移
+@mixin vertical-slide($enter-y, $leave-y) {
+  &-enter-active,
+  &-leave-active {
+    transition:
+      opacity $duration $easing,
+      transform $duration $easing;
+    will-change: opacity, transform;
+  }
+
+  &-enter-from {
+    opacity: 0;
+    transform: translateY($enter-y);
+  }
+
+  &-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &-leave-to {
+    opacity: 0;
+    transform: translateY($leave-y);
+  }
+}
+
+// 应用具体方向
+.slide-right {
+  @include horizontal-slide(-$slide-distance, $slide-distance);
+}
+.slide-left {
+  @include horizontal-slide($slide-distance, -$slide-distance);
+}
+.slide-top {
+  @include vertical-slide($vertical-distance, -$vertical-distance);
+}
+.slide-bottom {
+  @include vertical-slide(-$vertical-distance, $vertical-distance);
+}
