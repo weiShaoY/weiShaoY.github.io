@@ -20,6 +20,15 @@ const News: RouterType.BlogRouteRecordRaw = {
         iframeUrl: 'https://today.lieme.cn/',
       },
     },
+    {
+      path: 'itNews',
+      name: 'ItNews',
+      meta: {
+        title: 'IT资讯',
+        icon: 'blog-menu-itNews',
+      },
+      component: () => import('@/pages/blog/news/itNews/index.vue'),
+    },
 
     {
       path: 'movie',

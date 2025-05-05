@@ -95,6 +95,7 @@ onMounted(async () => {
         class="!max-w-[70%] !overflow-hidden"
         @keydown.enter.prevent="getData"
         @clear="clearData"
+        @blur="getData"
       >
         <template
           #append

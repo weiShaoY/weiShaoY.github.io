@@ -498,6 +498,16 @@ class BlogApi {
       'https://api.vvhan.com/api/text/dog?type=json',
     )
   }
+
+  /**
+   *  IT资讯热榜API
+   *  @see https://api.vvhan.com/article/itNews.html
+   */
+  getItNews() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/hotlist/itNews',
+    )
+  }
 }
 
 export default new BlogApi()
