@@ -49,7 +49,7 @@ onMounted(async () => {
     <el-link
       v-for="(item, index) in data"
       :key="index"
-      class="my-3 flex items-center gap-3"
+      class="my-3 flex items-center gap-3 !color-black"
       :href="item.url"
       target="_blank"
     >

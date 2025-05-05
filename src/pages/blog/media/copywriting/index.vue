@@ -15,11 +15,11 @@ const category = ref(0)
 const categoryOptions = [
   {
     value: 0,
-    label: ' 一言句子',
+    label: '骚话',
   },
   {
     value: 1,
-    label: '骚话',
+    label: '笑话',
   },
   {
     value: 2,
@@ -27,11 +27,15 @@ const categoryOptions = [
   },
   {
     value: 3,
-    label: '笑话',
+    label: '一言句子',
   },
   {
     value: 4,
     label: '舔狗日记',
+  },
+  {
+    value: 5,
+    label: '励志英语',
   },
 ]
 
@@ -48,34 +52,40 @@ async function getData() {
     isLoading.value = true
 
     if (category.value === 0) {
-      const response = await BlogApi.getOneSentence()
-
-      data.value.content = response.content
-      data.value.form = response.form
-    }
-    else if (category.value === 1) {
       const response = await BlogApi.getSexySentence()
 
-      data.value.content = response.content
       data.value.form = response.form
+      data.value.content = response.content
+    }
+    else if (category.value === 1) {
+      const response = await BlogApi.getJokeSentence()
+
+      data.value.form = response.form
+      data.value.content = response.content
     }
     else if (category.value === 2) {
       const response = await BlogApi.getLoveSentence()
 
-      data.value.content = response.content
       data.value.form = response.form
+      data.value.content = response.content
     }
     else if (category.value === 3) {
-      const response = await BlogApi.getJokeSentence()
+      const response = await BlogApi.getOneSentence()
 
-      data.value.content = response.content
       data.value.form = response.form
+      data.value.content = response.content
     }
     else if (category.value === 4) {
       const response = await BlogApi.getDogSentence()
 
-      data.value.content = response.content
       data.value.form = response.form
+      data.value.content = response.content
+    }
+    else if (category.value === 5) {
+      const response = await BlogApi.getEnglishSentence()
+
+      data.value.form = response.zh
+      data.value.content = response.en
     }
   }
   catch (error: any) {
@@ -129,7 +139,7 @@ onMounted(async () => {
     >
 
       <div
-        class="absolute z-50 max-w-120 w-3/4 flex overflow-hidden rounded-xl bg-white p-3 shadow-lg"
+        class="absolute z-50 max-w-180 w-3/4 flex overflow-hidden rounded-xl bg-white p-3 shadow-lg"
       >
 
         <div

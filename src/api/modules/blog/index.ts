@@ -500,6 +500,16 @@ class BlogApi {
   }
 
   /**
+   *  每日一句励志英语API接口
+   *  @see https://api.vvhan.com/article/en.html
+   */
+  getEnglishSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/dailyEnglish?type=sj',
+    )
+  }
+
+  /**
    *  IT资讯热榜API
    *  @see https://api.vvhan.com/article/itNews.html
    */
