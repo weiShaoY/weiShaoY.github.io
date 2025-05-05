@@ -121,7 +121,9 @@ export default defineConfig(({ mode }) => {
 
         resolvers: [
           // 自动导入 Element Plus 的组件// 自动导入 Element Plus 的组件
-          ElementPlusResolver(),
+          ElementPlusResolver({
+            importStyle: false, // 禁用自动导入样式
+          }),
         ],
 
         // 在 Vue 模板中支持自动导入
