@@ -143,11 +143,11 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
         class="m-x-2 w-auto text-dark font-semibold"
       >
 
-        <img
+        <SvgIcon
           v-if="siteItem.icon"
-          :src="siteItem.icon"
-          class="!h-10 !min-h-10 !min-w-10 !w-10"
-        >
+          :icon="siteItem.icon"
+          :size="40"
+        />
 
         <span
           v-else
