@@ -5,12 +5,6 @@ import {
   tagsQuery,
 } from './' // 导入辅助函数和正则枚举
 
-/**
- * 针对视频播放页进行解析，寻找字幕等信息
- * @param  responseText - 页面响应文本
- * @param {DomQuery_parser} queries - 包含字幕、泄露、视频查询选择器的对象
- * @returns  - 包含是否成功、是否有字幕、是否有码泄露的对象
- */
 function videoPageParser(responseText: string, { subQuery, leakQuery, videoQuery }: OnlinePlayType.DomQuery_get) {
   const doc = new DOMParser().parseFromString(responseText, 'text/html')
 
