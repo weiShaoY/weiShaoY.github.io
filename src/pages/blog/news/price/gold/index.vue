@@ -46,15 +46,15 @@ async function getData() {
     const [marketGoldPrice, realTimeGoldPrice] = await Promise.all([
       BlogApi.getMarketGoldPrice(),
 
-      // BlogApi.getRealTimeGoldPrice(),
+      BlogApi.getRealTimeGoldPrice(),
     ])
 
     goldData.value = {
       marketGold: marketGoldPrice,
 
-      // domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
-      // domesticGold: realTimeGoldPrice['国内黄金'],
-      // internationalGold: realTimeGoldPrice['国际黄金'],
+      domesticTopGoldStores: realTimeGoldPrice['国内十大金店'],
+      domesticGold: realTimeGoldPrice['国内黄金'],
+      internationalGold: realTimeGoldPrice['国际黄金'],
     }
 
     console.log(
