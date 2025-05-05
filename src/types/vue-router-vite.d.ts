@@ -29,6 +29,7 @@ declare module 'vue-router/auto-routes' {
     '/blog/dev/jsonToTypeScript/': RouteRecordInfo<'/blog/dev/jsonToTypeScript/', '/blog/dev/jsonToTypeScript', Record<never, never>, Record<never, never>>,
     '/blog/media/av/': RouteRecordInfo<'/blog/media/av/', '/blog/media/av', Record<never, never>, Record<never, never>>,
     '/blog/media/av/site_btn': RouteRecordInfo<'/blog/media/av/site_btn', '/blog/media/av/site_btn', Record<never, never>, Record<never, never>>,
+    '/blog/media/copywriting/': RouteRecordInfo<'/blog/media/copywriting/', '/blog/media/copywriting', Record<never, never>, Record<never, never>>,
     '/blog/media/music/': RouteRecordInfo<'/blog/media/music/', '/blog/media/music', Record<never, never>, Record<never, never>>,
     '/blog/media/video/': RouteRecordInfo<'/blog/media/video/', '/blog/media/video', Record<never, never>, Record<never, never>>,
     '/blog/media/voice/': RouteRecordInfo<'/blog/media/voice/', '/blog/media/voice', Record<never, never>, Record<never, never>>,

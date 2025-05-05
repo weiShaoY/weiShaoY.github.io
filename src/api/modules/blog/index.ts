@@ -448,6 +448,56 @@ class BlogApi {
       `https://api.songzixian.com/api/express/tracking?dataSource=nationwide_express&trackingNumber=${tracking}`,
     )
   }
+
+  /**
+   *  一言句子API接口
+   *  @see https://api.vvhan.com/article/yiyan.html
+   */
+  getOneSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/ian/rand?type=json',
+    )
+  }
+
+  /**
+   *  骚话API接口
+   *  @see https://api.vvhan.com/article/sexy.html
+   */
+  getSexySentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/sexy?type=json',
+    )
+  }
+
+  /**
+   *  情话API接口
+   *  @see https://api.vvhan.com/article/love.html
+   */
+  getLoveSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/love?type=json',
+    )
+  }
+
+  /**
+   *  笑话API接口
+   *  @see https://api.vvhan.com/article/joke.html
+   */
+  getJokeSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/joke?type=json',
+    )
+  }
+
+  /**
+   *  舔狗日记API接口
+   *  @see https://api.vvhan.com/article/dog.html
+   */
+  getDogSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/dog?type=json',
+    )
+  }
 }
 
 export default new BlogApi()

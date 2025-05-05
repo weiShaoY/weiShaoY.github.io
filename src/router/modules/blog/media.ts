@@ -46,6 +46,15 @@ const Media: RouterType.BlogRouteRecordRaw = {
       component: () => import('@/pages/blog/media/music/index.vue'),
     },
     {
+      path: 'copywriting',
+      name: 'Copywriting',
+      meta: {
+        title: '文案',
+        icon: 'blog-menu-copywriting',
+      },
+      component: () => import('@/pages/blog/media/copywriting/index.vue'),
+    },
+    {
       path: 'av',
       name: 'Av',
       meta: {

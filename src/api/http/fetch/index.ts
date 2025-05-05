@@ -3,17 +3,17 @@
  * @param {any} result - 接口返回的结果
  * @returns {boolean} 是否为有效响应码
  */
-function isValidResponseCode(result: any): boolean {
-  const validCodes = [200, '200', 1, 0] // 可扩展的有效响应码
+// function isValidResponseCode(result: any): boolean {
+//   const validCodes = [200, '200', 1, 0] // 可扩展的有效响应码
 
-  const errorCodes = [500] // 特殊允许的错误响应码
+//   const errorCodes = [500] // 特殊允许的错误响应码
 
-  return (
-    validCodes.includes(result?.code)
-    || validCodes.includes(result?.status)
-    || errorCodes.includes(result?.status)
-  )
-}
+//   return (
+//     validCodes.includes(result?.code)
+//     || validCodes.includes(result?.status)
+//     || errorCodes.includes(result?.status)
+//   )
+// }
 
 /**
  * 通用 fetch 请求封装
@@ -39,15 +39,15 @@ export async function fetchHttp(
     const result = await response.json().catch(() => response)
 
     // 检查接口响应码是否有效
-    if (!isValidResponseCode(result)) {
-      const errorMessage
-        = result.message || `接口响应码错误: ${result.code || '未知'}`
+    // if (!isValidResponseCode(result)) {
+    //   const errorMessage
+    //     = result.message || `接口响应码错误: ${result.code || '未知'}`
 
-      window.$notification?.error({
-        message: errorMessage,
-      })
-      throw new Error(errorMessage)
-    }
+    //   window.$notification?.error({
+    //     message: errorMessage,
+    //   })
+    //   throw new Error(errorMessage)
+    // }
 
     // 返回数据
     return result?.data || result

@@ -30,8 +30,5 @@
     "skipLibCheck": true
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "proxy.js"],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
