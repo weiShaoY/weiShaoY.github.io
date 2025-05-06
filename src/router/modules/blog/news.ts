@@ -31,13 +31,13 @@ const News: RouterType.BlogRouteRecordRaw = {
     },
 
     {
-      path: 'movie',
-      name: 'Movie',
+      path: 'boxOffice',
+      name: 'BoxOffice',
       meta: {
-        title: '影视',
-        icon: 'blog-menu-movie',
+        title: '票房',
+        icon: 'blog-menu-boxOffice',
       },
-      component: () => import('@/pages/blog/news/movie/index.vue'),
+      component: () => import('@/pages/blog/news/boxOffice/index.vue'),
     },
     {
       path: 'weather',

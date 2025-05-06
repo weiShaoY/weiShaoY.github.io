@@ -23,7 +23,6 @@ async function getData() {
     const response = await BlogApi.getItNews()
 
     data.value = response
-    console.log('%c Line:26 🍓 data.value', 'color:#e41a6a', data.value)
   }
   catch (error: any) {
     window.$notification?.error({

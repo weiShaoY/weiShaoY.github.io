@@ -55,6 +55,15 @@ const Media: RouterType.BlogRouteRecordRaw = {
       component: () => import('@/pages/blog/media/copywriting/index.vue'),
     },
     {
+      path: 'videoAnalysis',
+      name: 'VideoAnalysis',
+      meta: {
+        title: '影视解析',
+        icon: 'blog-menu-videoAnalysis',
+        iframeUrl: 'https://jx.xmflv.com/jx.html',
+      },
+    },
+    {
       path: 'av',
       name: 'Av',
       meta: {
