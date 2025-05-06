@@ -49,7 +49,7 @@ onMounted(async () => {
     <el-link
       v-for="(item, index) in data"
       :key="index"
-      class="my-3 flex items-center gap-3 !color-black"
+      class="my-3 !color-black"
       :href="item.url"
       target="_blank"
     >
@@ -60,7 +60,7 @@ onMounted(async () => {
       </span>
 
       <span
-        class="w-18"
+        class="mx-5 w-20"
       >
         {{ item.hot }}
       </span>
