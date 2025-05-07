@@ -1,41 +1,82 @@
+import type { NProgressOptions } from 'nprogress'
+
 import NProgress from 'nprogress'
 
-/** 配置并初始化 NProgress 进度条插件 */
-export function setupNProgress() {
-  // 配置进度条的动画效果和速度
-
-  NProgress.configure({
+/**
+ * NProgress 配置选项
+ */
+const NPROGRESS_CONFIG: NProgressOptions = {
   /**
-   *  动画方式
+   * 动画方式
    */
-    easing: 'ease',
+  easing: 'ease',
 
-    /**
-     *  递增进度条的速度
-     */
-    speed: 500,
+  /**
+   * 递增进度条的速度
+   */
+  speed: 500,
 
-    /**
-     *  进度环显示隐藏
-     */
-    showSpinner: false,
+  /**
+   * 是否显示进度环
+   */
+  showSpinner: false,
 
-    /**
-     *  自动递增间隔
-     */
-    trickleSpeed: 200,
+  /**
+   * 自动递增间隔
+   */
+  trickleSpeed: 200,
 
-    /**
-     *  更改启动时使用的最小百分比
-     */
-    minimum: 0.3,
+  /**
+   * 启动时使用的最小百分比
+   */
+  minimum: 0.3,
 
-    /**
-     *  指定进度条的父容器
-     */
-    parent: 'body',
-  })
+  /**
+   * 进度条的父容器
+   */
+  parent: 'body',
 
-  // 将 NProgress 挂载到全局 window 对象，方便在其他地方调用
-  window.NProgress = NProgress
+  /**
+   * 进度条的 HTML 模板
+   */
+  template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>',
+
+  /**
+   * 是否启用自动递增
+   */
+  trickle: true,
+
+  /**
+   * 定位方式
+   */
+  positionUsing: '',
+
+  /**
+   * 进度条选择器
+   */
+  barSelector: '[role="bar"]',
+
+  /**
+   * 加载动画选择器
+   */
+  spinnerSelector: '[role="spinner"]',
+}
+
+/**
+ * 配置并初始化 NProgress 进度条插件
+ * @description 设置进度条的样式和行为，并将其挂载到全局 window 对象
+ * @throws {Error} 当初始化失败时抛出错误
+ */
+export function setupNProgress(): void {
+  try {
+    // 配置进度条
+    NProgress.configure(NPROGRESS_CONFIG)
+
+    // 将 NProgress 挂载到全局 window 对象
+    window.NProgress = NProgress
+  }
+  catch (error) {
+    console.error('NProgress 初始化失败:', error)
+    throw error
+  }
 }
