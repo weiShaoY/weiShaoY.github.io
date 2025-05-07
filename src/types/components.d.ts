@@ -8,7 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    2: typeof import('./../components/ButtonIcon/index copy 2.vue')['default']
+    2: typeof import('./../components/BaseButton/index copy 2.vue')['default']
     AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
     BaseButton: typeof import('./../components/BaseButton/index.vue')['default']
     BetterScroll: typeof import('./../components/BetterScroll/better-scroll.vue')['default']

@@ -66,7 +66,7 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
         />
 
         <!-- 仅开发环境显示  -->
-        <ButtonIcon
+        <BaseButton
           v-if="isDevelopment"
           tooltip-content="打开线上地址,此按钮仅开发环境显示"
           icon="home-navbar-demo"

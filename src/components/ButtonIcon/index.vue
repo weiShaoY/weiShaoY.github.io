@@ -5,7 +5,7 @@ import type { CSSProperties } from 'vue'
 
 // 定义组件选项
 defineOptions({
-  name: 'ButtonIcon',
+  name: 'BaseButton',
   inheritAttrs: false,
 })
 

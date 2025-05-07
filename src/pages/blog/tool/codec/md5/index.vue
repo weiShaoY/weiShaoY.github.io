@@ -40,7 +40,7 @@ watchEffect(() => {
         </el-radio-group>
       </div>
 
-      <ButtonIcon
+      <BaseButton
         v-if="encodedText.length > 0"
         v-copy="{
           text: encodedText,

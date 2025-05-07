@@ -124,7 +124,7 @@ function handleAppClick(path: string) {
     <template
       #reference
     >
-      <ButtonIcon
+      <BaseButton
         class="fast-enter-trigger"
         icon="blog-topBar-fast"
       />

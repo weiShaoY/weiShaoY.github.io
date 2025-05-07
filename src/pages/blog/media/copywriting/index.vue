@@ -126,7 +126,7 @@ onMounted(async () => {
         />
       </el-select>
 
-      <ButtonIcon
+      <BaseButton
         tooltip-content="刷新"
         icon="blog-refresh"
         :loading="isLoading"

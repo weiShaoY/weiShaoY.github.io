@@ -114,7 +114,7 @@ function toggleFullScreen() {
       />
 
       <!-- 全屏按钮 -->
-      <ButtonIcon
+      <BaseButton
         :tooltip-content="isFullscreen ? '退出全屏' : '进入全屏'"
         :icon="
           !isFullscreen
@@ -132,7 +132,7 @@ function toggleFullScreen() {
       />
 
       <!-- 刷新按钮 -->
-      <ButtonIcon
+      <BaseButton
         tooltip-content="刷新页面"
         icon="blog-header-refresh"
         :icon-class="[

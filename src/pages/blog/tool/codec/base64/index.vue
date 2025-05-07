@@ -107,7 +107,7 @@ watchEffect(() => {
         </el-button>
       </div>
 
-      <ButtonIcon
+      <BaseButton
         v-if="!isError && encodedText.length > 0"
         v-copy="{
           text: encodedText,

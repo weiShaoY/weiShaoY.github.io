@@ -118,7 +118,7 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
       class="absolute bottom-3 left-0 right-0 flex items-center justify-center hover:cursor-pointer"
       @click="dualMenuShowText = !dualMenuShowText"
     >
-      <ButtonIcon
+      <BaseButton
         icon="blog-switch"
       />
     </div>

@@ -450,7 +450,7 @@ const topWidth = computed(() => {
           @command="closeWorkTab"
         >
 
-          <ButtonIcon
+          <BaseButton
             icon="blog-tab-close-open"
             :size="30"
           />
