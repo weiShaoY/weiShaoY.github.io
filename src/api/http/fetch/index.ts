@@ -1,61 +1,91 @@
 /**
+ * 接口响应类型
+ */
+type ApiResponse<T = any> = {
+  code?: number | string
+  status?: number
+  message?: string
+  data?: T
+}
+
+/**
+ * 请求配置类型
+ */
+type RequestOptions = {
+
+  /**
+   * 是否显示错误提示
+   */
+  showError?: boolean
+} & RequestInit
+
+/**
  * 检查接口响应码是否有效
- * @param {any} result - 接口返回的结果
+ * @param {ApiResponse} result - 接口返回的结果
  * @returns {boolean} 是否为有效响应码
  */
-// function isValidResponseCode(result: any): boolean {
-//   const validCodes = [200, '200', 1, 0] // 可扩展的有效响应码
+// function isValidResponseCode(result: ApiResponse): boolean {
+//   const validCodes = [200, '200', 1, 0]
 
-//   const errorCodes = [500] // 特殊允许的错误响应码
+//   const errorCodes = [500]
+
+//   const code = result?.code
+
+//   const status = result?.status
 
 //   return (
-//     validCodes.includes(result?.code)
-//     || validCodes.includes(result?.status)
-//     || errorCodes.includes(result?.status)
+//     (code !== undefined && validCodes.includes(code))
+//     || (status !== undefined && (validCodes.includes(status) || errorCodes.includes(status)))
 //   )
 // }
 
 /**
  * 通用 fetch 请求封装
  * @param {string} url - 请求的 URL
- * @param {RequestInit} [options] - 可选的 fetch 配置选项
- * @returns {Promise<any>} 返回解析后的数据
- * @throws 如果发生 HTTP 错误或接口响应码无效
+ * @param {RequestOptions} [options] - 可选的请求配置
+ * @returns {Promise<T>} 返回解析后的数据
+ * @throws {Error} 当请求失败或响应无效时抛出错误
  */
-export async function fetchHttp(
+export async function fetchHttp<T = any>(
   url: string,
-  options: RequestInit = {
+  options: RequestOptions = {
   },
-): Promise<any> {
-  try {
-    const response = await fetch(url, options)
+): Promise<T> {
+  const { showError = true, ...fetchOptions } = options
 
-    // 检查响应状态是否正常
+  try {
+    // 发起请求
+    const response = await fetch(url, fetchOptions)
+
+    // 检查响应状态
     if (!response.ok) {
       throw new Error(`HTTP 错误！状态码: ${response.status}`)
     }
 
-    // 解析 JSON 数据（如果无法解析则返回原始内容）
-    const result = await response.json().catch(() => response)
+    // 解析响应数据
+    const result = await response.json().catch(() => response) as ApiResponse<T>
 
-    // 检查接口响应码是否有效
+    // 检查响应码
     // if (!isValidResponseCode(result)) {
-    //   const errorMessage
-    //     = result.message || `接口响应码错误: ${result.code || '未知'}`
+    //   const errorMessage = result.message || `接口响应码错误: ${result.code || '未知'}`
 
-    //   window.$notification?.error({
-    //     message: errorMessage,
-    //   })
+    //   if (showError) {
+    //     window.$notification.error(errorMessage)
+    //   }
+
     //   throw new Error(errorMessage)
     // }
 
     // 返回数据
-    return result?.data || result
+    return (result.data || result) as T
   }
-  catch (error: any) {
+  catch (error) {
     console.error('接口请求错误:', error)
 
-    // toast.error(`接口请求失败: ${error.message || "未知错误"}`);
-    throw error // 确保调用方可以捕获到错误
+    if (showError && error instanceof Error) {
+      window.$notification.error(`请求失败: ${error.message || error}`)
+    }
+
+    throw error
   }
 }
