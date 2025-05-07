@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { openUrlInWindow } from '@/utils'
-
 import MobileMenu from './components/mobile-menu.vue'
 
 import PcMenu from './components/pc-menu.vue'
@@ -37,6 +35,11 @@ const menuList = [
 ]
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
+
+const websiteUrl = import.meta.env.VITE_WEBSITE_URL
+
+console.log('%c Line:40 🍻 websiteUrl', 'color:#4fff4B', websiteUrl)
+
 </script>
 
 <template>
@@ -66,12 +69,11 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
         />
 
         <!-- 仅开发环境显示  -->
-        <BaseButton
+        <LinkButton
           v-if="isDevelopment"
-          tooltip-content="打开线上地址,此按钮仅开发环境显示"
           icon="home-navbar-demo"
           :size="34"
-          @click="openUrlInWindow('https://weishaoy.github.io/')"
+          :url="websiteUrl"
         />
       </div>
     </div>
