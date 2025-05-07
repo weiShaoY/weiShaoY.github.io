@@ -240,13 +240,13 @@ const options: EChartsOption = {
         // 风里雨里,长沙等你
         formatter: () => '惟楚有材，于斯为盛',
         textStyle: {
-          color: '#E43961',
+          color: '#00D2FF',
           fontSize: 20,
           fontWeight: 700,
         },
 
         // 提示框背景色
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        backgroundColor: 'rgba(255,255,255,0.9)',
       },
 
       label: {
@@ -265,7 +265,7 @@ const options: EChartsOption = {
          */
         show: true,
 
-        color: '#E43961',
+        color: '#00D2FF',
 
         fontWeight: 700,
 
@@ -276,7 +276,7 @@ const options: EChartsOption = {
         /**
          *  散点颜色
          */
-        color: '#E43961',
+        color: '#00D2FF',
 
         /**
          *  阴影模糊程度
