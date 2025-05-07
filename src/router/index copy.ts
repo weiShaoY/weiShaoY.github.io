@@ -10,6 +10,8 @@ import {
 
 import { createRouterGuard } from './guard'
 
+import { fallbackRouter } from './modules/fallback'
+
 import {
   checkDuplicateRoutes,
   formatModules,
@@ -63,25 +65,21 @@ setTimeout(() => {
 export const router = createRouter({
   history: routerMode[import.meta.env.VITE_ROUTER_MODE as keyof typeof routerMode](),
   routes: [
-    // 根路由
     {
       name: 'Root',
       path: '/',
       redirect: import.meta.env.VITE_ROUTER_ROOT_PATH || routeList[0]?.path || '/home',
     },
-
-    // 业务路由
     ...routeList,
 
-    // 重定向路由
     {
+      // 重定向
       path: '/redirect/:path(.*)',
       name: 'Redirect',
       component: () => import('@/pages/error/redirect/index.vue'),
     },
-
-    // 404 路由
     {
+      // 未找到路由
       path: '/:pathMatch(.*)*',
       redirect: '/404',
     },

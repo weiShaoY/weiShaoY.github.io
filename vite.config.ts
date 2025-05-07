@@ -173,13 +173,13 @@ export default defineConfig(({ mode }) => {
       },
 
       // API 代理配置，用于开发环境下的接口转发
-      proxy: {
-        '/api': {
-          target: env.VITE_API_URL,
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
+      // proxy: {
+      //   '/api': {
+      //     target: env.VITE_API_URL,
+      //     changeOrigin: true,
+      //     rewrite: path => path.replace(/^\/api/, ''),
+      //   },
+      // },
     },
 
     // 生产环境构建配置
