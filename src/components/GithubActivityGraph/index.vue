@@ -58,6 +58,7 @@ const options = {
  * 生成 Github 活动图的完整 URL
  * @returns {import('vue').ComputedRef<string>} 图片地址
  */
+// eslint-disable-next-line unused-imports/no-unused-vars
 const imageUrl = computed(() => {
   const params = new URLSearchParams(
     Object.fromEntries(
@@ -77,13 +78,27 @@ const computedImageStyle = computed<CSSProperties>(() => ({
   height: typeof props.height === 'number' ? `${props.height}px` : props.height,
   width: typeof props.width === 'number' ? `${props.width}px` : props.width,
 }))
+
+// //////////////////
+/**
+ * @see https://github-profile-summary-cards.vercel.app/demo.html
+ */
+const githubProfileSummaryCardsUrl = `http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${import.meta.env.VITE_APP_TITLE}&theme=highcontrast`
 </script>
 
 <template>
-  <img
+  <!-- <img
     :class="props.class"
     :style="computedImageStyle"
     :src="imageUrl"
     alt="GitHub 活动图"
+  > -->
+
+  <img
+    :class="props.class"
+    :style="computedImageStyle"
+    alt="github-snake"
+    :src="githubProfileSummaryCardsUrl"
   >
+
 </template>
