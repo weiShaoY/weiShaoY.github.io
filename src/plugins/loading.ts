@@ -19,13 +19,17 @@ const LOADING_SIZE = 50
  */
 export function setupLoading() {
   try {
-    // 设置加载图标大小
+    /**
+     * 设置加载图标大小
+     */
     const sizedSvg = loadingSvg.replace(
       '<svg',
       `<svg width="${LOADING_SIZE}" height="${LOADING_SIZE}"`,
     )
 
-    // 创建加载实例
+    /**
+     * 加载实例
+     */
     const loading = ElLoading.service({
       /**
        * 加载图标 SVG
