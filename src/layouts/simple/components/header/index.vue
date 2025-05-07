@@ -21,7 +21,3 @@
     </div>
   </nav>
 </template>
-
-<style lang="less" scoped>
-
-</style>
