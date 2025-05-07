@@ -8,12 +8,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    2: typeof import('./../components/ButtonIcon/index copy 2.vue')['default']
     AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
+    BaseButton: typeof import('./../components/BaseButton/index.vue')['default']
     BetterScroll: typeof import('./../components/BetterScroll/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
-    copy: typeof import('./../components/ButtonIcon/index copy.vue')['default']
+    copy: typeof import('./../components/MusicPlayer/index copy.vue')['default']
     DownloadButton: typeof import('./../components/DownloadButton/index.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAlert: typeof import('element-plus/es')['ElAlert']
@@ -83,7 +85,7 @@ declare module 'vue' {
     IconMdiKeyboardEsc: typeof import('~icons/mdi/keyboard-esc')['default']
     IconMdiKeyboardReturn: typeof import('~icons/mdi/keyboard-return')['default']
     Inddex: typeof import('./../components/BetterScroll/inddex.vue')['default']
-    'Index copy': typeof import('./../components/ButtonIcon/index copy.vue')['default']
+    'Index copy': typeof import('./../components/MusicPlayer/index copy.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     Logo: typeof import('./../components/Logo/index.vue')['default']
     MousePosition: typeof import('./../components/MousePosition/index.vue')['default']

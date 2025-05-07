@@ -9,13 +9,17 @@ import {
   downloadVideo,
 } from '@/utils'
 
-import { twMerge } from 'tailwind-merge'
-
+/**
+ * 组件名称
+ */
 defineOptions({
   name: 'DownloadButton',
   inheritAttrs: false,
 })
 
+/**
+ * 组件属性默认值
+ */
 const props = withDefaults(defineProps<Props>(), {
   type: 'image',
   class: '',
@@ -25,10 +29,20 @@ const props = withDefaults(defineProps<Props>(), {
   tooltipPlacement: 'bottom',
 })
 
-defineEmits(['click'])
+/**
+ * 组件事件
+ */
+const emit = defineEmits<{
+  (e: 'click'): void
+}>()
 
 /**
- * 组件传参
+ * 文件类型
+ */
+type FileType = 'image' | 'video' | 'audio'
+
+/**
+ * 组件属性类型
  */
 type Props = {
 
@@ -36,24 +50,18 @@ type Props = {
   url: string
 
   /** 文件类型 */
-  type?: 'image' | 'video' | 'audio'
+  type?: FileType
 
   /** 图标大小 */
   size?: number
 
-  /**
-   * 按钮的 class 类名
-   * 支持 string、对象、数组的格式
-   */
+  /** 按钮的 class 类名 */
   class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /** 图标名称 */
   icon?: string
 
-  /**
-   * 图标的额外 class
-   * 支持 string、对象、数组的格式
-   */
+  /** 图标的额外 class */
   iconClass?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
   /** 提示框内容 */
@@ -73,68 +81,23 @@ type Props = {
 }
 
 /**
- * 默认按钮类名
- */
-const DEFAULT_CLASS = 'flex items-center justify-center'
-
-/**
- * 处理 class，兼容 string | Record<string, boolean> | Array
- * @param input 输入的类
- * @returns 拼接后的类字符串
- */
-function stringifyClass(input?: string | Record<string, boolean> | Array<string | Record<string, boolean>>): string {
-  if (!input) {
-    return ''
-  }
-
-  if (typeof input === 'string') {
-    return input
-  }
-
-  if (Array.isArray(input)) {
-    return input.map(item => stringifyClass(item))
-      .filter(Boolean)
-      .join(' ')
-  }
-
-  return Object.entries(input)
-    .filter(([_, value]) => value)
-    .map(([key]) => key)
-    .join(' ')
-}
-
-/**
- * 计算按钮的最终 class
- */
-const computedButtonClass = computed(() => {
-  return twMerge(DEFAULT_CLASS, stringifyClass(props.class))
-})
-
-/**
- * 计算图标的最终 class
- */
-const computedIconClass = computed(() => {
-  return stringifyClass(props.iconClass)
-})
-
-/**
- * 计算按钮样式
- */
-const computedStyle = computed(() => ({
-  width: `${props.size}px`,
-  height: `${props.size}px`,
-  ...props.style,
-}))
-
-/**
  * 是否正在下载
  */
 const downloading = ref(false)
 
 /**
+ * 下载处理器映射
+ */
+const downloadHandlers = {
+  image: downloadImage,
+  video: downloadVideo,
+  audio: downloadAudio,
+} as const
+
+/**
  * 处理下载逻辑
  */
-async function handleDownload() {
+async function handleDownload(_event: MouseEvent): Promise<void> {
   if (downloading.value) {
     return
   }
@@ -146,28 +109,20 @@ async function handleDownload() {
       throw new Error('下载URL不能为空')
     }
 
-    if (!props.type) {
-      throw new Error('文件类型不能为空')
-    }
+    const handler = downloadHandlers[props.type]
 
-    const downloadHandlers = {
-      image: downloadImage,
-      video: downloadVideo,
-      audio: downloadAudio,
-    }
-
-    if (!(props.type in downloadHandlers)) {
+    if (!handler) {
       throw new Error(`不支持的文件类型: ${props.type}`)
     }
 
-    await downloadHandlers[props.type as keyof typeof downloadHandlers](props.url)
+    await handler(props.url)
+    emit('click')
   }
   catch (error) {
     console.error('下载失败:', error)
-
     const errorMessage = error instanceof Error ? error.message : '下载过程中发生未知错误'
 
-    window.$notification?.error({
+    window.$notification.error({
       title: '下载失败',
       message: errorMessage,
       duration: 3000,
@@ -177,49 +132,38 @@ async function handleDownload() {
     downloading.value = false
   }
 }
+
+/**
+ * 获取提示文本
+ */
+const tooltipText = computed(() => {
+  if (props.tooltipContent) {
+    return props.tooltipContent
+  }
+
+  const typeMap: Record<FileType, string> = {
+    image: '图片',
+    video: '视频',
+    audio: '音频',
+  }
+
+  return `下载${typeMap[props.type]}`
+})
 </script>
 
 <template>
-  <div>
-    <ElTooltip
-      :placement="tooltipPlacement"
-      :content="tooltipContent || `下载${type === 'image' ? '图片' : type === 'video' ? '视频' : '音频'}`"
-      :z-index="zIndex"
-      :disabled="hideTooltip"
-    >
-      <ElButton
-        text
-        quaternary
-        class="!h-auto !p-0"
-        @click="handleDownload"
-      >
-        <div
-          :class="computedButtonClass"
-          :style="computedStyle"
-        >
-          <template
-            v-if="!downloading"
-          >
-            <slot>
-              <SvgIcon
-                :icon="icon"
-                :size="size - 14"
-                :class="computedIconClass"
-              />
-            </slot>
-          </template>
-
-          <template
-            v-else
-          >
-            <Loading
-              :size="size - 14"
-            />
-          </template>
-        </div>
-      </ElButton>
-    </ElTooltip>
-  </div>
+  <BaseButton
+    v-bind="$attrs"
+    :class="props.class"
+    :icon="props.icon"
+    :size="props.size"
+    :tooltip-content="tooltipText"
+    :tooltip-placement="props.tooltipPlacement"
+    :z-index="props.zIndex"
+    :style="props.style"
+    :loading="downloading"
+    @click="handleDownload"
+  />
 </template>
 
 <style scoped></style>

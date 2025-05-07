@@ -1,16 +1,16 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { Placement } from 'element-plus'
 
 import type { CSSProperties } from 'vue'
 
-import { twMerge } from 'tailwind-merge'
-
+// 定义组件选项
 defineOptions({
   name: 'ButtonIcon',
   inheritAttrs: false,
 })
 
-const props = withDefaults(defineProps<Props>(), {
+// 定义 Props 并设置默认值
+const props = withDefaults(defineProps<PropsType>(), {
   class: '',
   icon: '',
   size: 40,
@@ -19,135 +19,74 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
 })
 
-defineEmits(['click'])
+// 定义组件事件
+defineEmits<{
+  (e: 'click', event: MouseEvent): void
+}>()
 
-/**
- * 组件传参
- */
-type Props = {
+// 定义组件的 Props 类型
+type PropsType = {
 
-  /** 按钮的 class 类名 */
+  /**
+   * 按钮的 class 类名
+   */
   class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
-  /** 图标名称 */
+  /**
+   * 图标名称
+   */
   icon?: string
 
-  /** 图标大小 */
+  /**
+   * 图标大小
+   */
   size?: number
 
-  /** 图标额外的 class */
+  /**
+   * 图标额外的 class
+   */
   iconClass?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
-  /** 提示框内容 */
+  /**
+   * 提示框内容
+   */
   tooltipContent?: string
 
-  /** 提示框位置 */
+  /**
+   * 提示框位置
+   */
   tooltipPlacement?: Placement
 
-  /** 层级 z-index */
+  /**
+   * 层级 z-index
+   */
   zIndex?: number
 
-  /** 行内样式 */
+  /**
+   * 行内样式
+   */
   style?: CSSProperties
 
-  /** 是否显示加载中 */
+  /**
+   * 是否显示加载中
+   */
   loading?: boolean
 }
 
-/**
- * 默认按钮类
- */
-const DEFAULT_CLASS = 'flex items-center justify-center'
-
-/**
- * 处理 class，兼容 string | object | array
- * @param input 输入的类
- * @returns 拼接后的类字符串
- */
-function stringifyClass(input?: string | Record<string, boolean> | Array<string | Record<string, boolean>>): string {
-  if (!input) {
-    return ''
-  }
-
-  if (typeof input === 'string') {
-    return input
-  }
-
-  if (Array.isArray(input)) {
-    return input.map(item => stringifyClass(item))
-      .filter(Boolean)
-      .join(' ')
-  }
-
-  return Object.entries(input)
-    .filter(([_, value]) => value)
-    .map(([key]) => key)
-    .join(' ')
-}
-
-/**
- * 计算按钮的最终类名
- */
-const computedButtonClass = computed(() => {
-  return twMerge(DEFAULT_CLASS, stringifyClass(props.class))
-})
-
-/**
- * 计算图标的最终类名
- */
-const computedIconClass = computed(() => {
-  return stringifyClass(props.iconClass)
-})
-
-/**
- * 计算按钮的行内样式
- */
-const computedStyle = computed(() => ({
-  width: `${props.size}px`,
-  height: `${props.size}px`,
-  ...props.style,
-}))
 </script>
 
 <template>
-  <div>
-    <ElTooltip
-      :placement="tooltipPlacement"
-      :content="tooltipContent"
-      :z-index="zIndex"
-      :disabled="!tooltipContent"
-    >
-      <ElButton
-        text
-        quaternary
-        class="!h-auto !p-0"
-        @click="$emit('click', $event)"
-      >
-        <div
-          :class="computedButtonClass"
-          :style="computedStyle"
-        >
-          <template
-            v-if="!loading"
-          >
-            <slot>
-              <SvgIcon
-                :icon="icon"
-                :size="size - 14"
-                :class="computedIconClass"
-              />
-            </slot>
-          </template>
-
-          <template
-            v-else
-          >
-            <Loading
-              :size="size - 14"
-            />
-          </template>
-        </div>
-      </ElButton>
-    </ElTooltip>
-  </div>
+  <BaseButton
+    v-bind="$attrs"
+    :class="props.class"
+    :icon="props.icon"
+    :icon-class="props.iconClass"
+    :size="props.size"
+    :tooltip-content="props.tooltipContent"
+    :tooltip-placement="props.tooltipPlacement"
+    :z-index="props.zIndex"
+    :style="props.style"
+    :loading="props.loading"
+    @click="$emit('click', $event)"
+  />
 </template>
