@@ -61,6 +61,7 @@ const Media: RouterType.BlogRouteRecordRaw = {
         title: '影视解析',
         icon: 'blog-menu-videoAnalysis',
         iframeUrl: 'https://jx.xmflv.com/jx.html',
+        isShowInFastMenu: true,
       },
     },
     {
@@ -69,6 +70,8 @@ const Media: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: '教育片',
         icon: 'blog-menu-av',
+        isShowInFastMenu: true,
+
       },
       component: () => import('@/pages/blog/media/av/index.vue'),
     },

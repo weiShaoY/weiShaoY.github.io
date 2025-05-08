@@ -18,6 +18,7 @@ const News: RouterType.BlogRouteRecordRaw = {
         title: '每日热点',
         icon: 'blog-menu-dailyHotTopics',
         iframeUrl: 'https://today.lieme.cn/',
+        isShowInFastMenu: true,
       },
     },
     {
@@ -45,6 +46,7 @@ const News: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: '天气',
         icon: 'blog-menu-weather',
+        isShowInFastMenu: true,
       },
       component: () => import('@/pages/blog/news/weather/index.vue'),
     },
@@ -88,6 +90,7 @@ const News: RouterType.BlogRouteRecordRaw = {
           meta: {
             title: '黄金',
             icon: 'blog-menu-gold',
+            isShowInFastMenu: true,
           },
           component: () => import('@/pages/blog/news/price/gold/index.vue'),
         },

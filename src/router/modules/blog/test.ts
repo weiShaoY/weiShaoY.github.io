@@ -14,6 +14,7 @@ const Test: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: '接口',
         icon: 'blog-menu-api',
+        isShowInFastMenu: true,
       },
       component: () => import('@/pages/blog/test/api/index.vue'),
     },

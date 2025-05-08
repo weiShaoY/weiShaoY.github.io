@@ -8,136 +8,136 @@
  */
 export function downloadImage(
   url: string,
-  defaultName = "downloaded_image",
-  options: { forceDownload?: boolean; checkImageType?: boolean } = {
+  defaultName = 'downloaded_image',
+  options: { forceDownload?: boolean, checkImageType?: boolean } = {
     checkImageType: true,
   },
 ): Promise<void> {
   return new Promise((resolve, reject) => {
-    console.log("%c Line:9 🖼️ image url", "color:#6ec1c2", url);
-
     // 从 URL 中解析文件名
-    const urlParts = url.split("/");
+    const urlParts = url.split('/')
 
-    let fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName;
+    let fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName
 
     // 去除查询参数和哈希
-    fileNameWithExtension = fileNameWithExtension.split("?")[0].split("#")[0];
+    fileNameWithExtension = fileNameWithExtension.split('?')[0].split('#')[0]
 
     // 支持的图片扩展名
     const validExtensions = [
-      ".png",
-      ".jpg",
-      ".jpeg",
-      ".webp",
-      ".gif",
-      ".bmp",
-      ".svg",
-    ];
+      '.png',
+      '.jpg',
+      '.jpeg',
+      '.webp',
+      '.gif',
+      '.bmp',
+      '.svg',
+    ]
 
-    const lowerCaseName = fileNameWithExtension.toLowerCase();
+    const lowerCaseName = fileNameWithExtension.toLowerCase()
 
     // 检查是否有有效扩展名
-    const hasValidExtension = validExtensions.some((ext) =>
+    const hasValidExtension = validExtensions.some(ext =>
       lowerCaseName.endsWith(ext),
-    );
+    )
 
     // 如果没有有效扩展名，添加默认扩展名 .jpg
     const filename = hasValidExtension
       ? fileNameWithExtension
-      : `${fileNameWithExtension}.jpg`;
+      : `${fileNameWithExtension}.jpg`
 
     // 处理CORS问题的备用方案
     const handleCorsFallback = () => {
       if (options.forceDownload) {
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = url;
-        link.download = filename;
-        link.target = "_blank";
-        document.body.appendChild(link);
-        link.click();
+        link.href = url
+        link.download = filename
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
         setTimeout(() => {
-          document.body.removeChild(link);
-        }, 100);
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "图片下载已尝试",
-          message: "由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表",
-        });
-        resolve();
-      } else {
-        const error = new Error("跨域资源无法直接下载，请联系管理员配置CORS");
+          title: '图片下载已尝试',
+          message: '由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表',
+        })
+        resolve()
+      }
+      else {
+        const error = new Error('跨域资源无法直接下载，请联系管理员配置CORS')
 
         window.$notification?.error({
-          title: "图片下载失败",
+          title: '图片下载失败',
           message: error.message,
-        });
-        reject(error);
+        })
+        reject(error)
       }
-    };
+    }
 
     // 尝试通过fetch获取
     fetch(url, {
-      mode: "cors",
+      mode: 'cors',
       headers: {
-        Accept: "image/*", // 明确请求图片类型
+        Accept: 'image/*', // 明确请求图片类型
       },
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
 
-        return response.blob();
+        return response.blob()
       })
       .then((blob) => {
         // 检查blob类型是否为图片
         if (
-          options.checkImageType !== false &&
-          !blob.type.startsWith("image/") &&
-          !blob.type.startsWith("application/octet-stream")
+          options.checkImageType !== false
+          && !blob.type.startsWith('image/')
+          && !blob.type.startsWith('application/octet-stream')
         ) {
-          throw new Error("下载的内容不是图片文件");
+          throw new Error('下载的内容不是图片文件')
         }
 
-        const blobUrl = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(blob)
 
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = blobUrl;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
+        link.href = blobUrl
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
 
         // 清理
         setTimeout(() => {
-          URL.revokeObjectURL(blobUrl);
-          document.body.removeChild(link);
-        }, 100);
+          URL.revokeObjectURL(blobUrl)
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "图片下载成功",
+          title: '图片下载成功',
           message: `下载文件为: ${filename}`,
-        });
-        resolve();
+        })
+        resolve()
       })
       .catch((err) => {
-        console.error("图片下载错误:", err);
+        console.error('图片下载错误:', err)
         if (
-          err.message.includes("Failed to fetch") ||
-          err.message.includes("CORS")
+          err.message.includes('Failed to fetch')
+          || err.message.includes('CORS')
         ) {
-          handleCorsFallback();
-        } else {
-          window.$notification?.error({
-            title: "图片下载失败",
-            message: `下载文件失败：${err.message}`,
-          });
-          reject(err);
+          handleCorsFallback()
         }
-      });
-  });
+        else {
+          window.$notification?.error({
+            title: '图片下载失败',
+            message: `下载文件失败：${err.message}`,
+          })
+          reject(err)
+        }
+      })
+  })
 }
 
 /**
@@ -149,118 +149,121 @@ export function downloadImage(
  */
 export function downloadVideo(
   url: string,
-  defaultName = "downloaded_video",
-  options: { forceDownload?: boolean } = {},
+  defaultName = 'downloaded_video',
+  options: { forceDownload?: boolean } = {
+  },
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     // 从 URL 中解析文件名
-    const urlParts = url.split("/");
+    const urlParts = url.split('/')
 
-    const fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName;
+    const fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName
 
     // 支持的视频扩展名
-    const validExtensions = [".mp4", ".webm", ".mov", ".avi", ".mkv"];
+    const validExtensions = ['.mp4', '.webm', '.mov', '.avi', '.mkv']
 
-    const lowerCaseName = fileNameWithExtension.toLowerCase();
+    const lowerCaseName = fileNameWithExtension.toLowerCase()
 
     // 检查是否有有效扩展名
-    const hasValidExtension = validExtensions.some((ext) =>
+    const hasValidExtension = validExtensions.some(ext =>
       lowerCaseName.endsWith(ext),
-    );
+    )
 
     // 如果没有有效扩展名，添加默认扩展名 .mp4
     const filename = hasValidExtension
       ? fileNameWithExtension
-      : `${fileNameWithExtension.split("?")[0]}.mp4`;
+      : `${fileNameWithExtension.split('?')[0]}.mp4`
 
     // 处理CORS问题的备用方案
     const handleCorsFallback = () => {
       if (options.forceDownload) {
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = url;
-        link.download = filename;
-        link.target = "_blank";
-        document.body.appendChild(link);
-        link.click();
+        link.href = url
+        link.download = filename
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
         setTimeout(() => {
-          document.body.removeChild(link);
-        }, 100);
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "视频下载已尝试",
-          message: "由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表",
-        });
-        resolve();
-      } else {
-        const error = new Error("跨域资源无法直接下载，请联系管理员配置CORS");
+          title: '视频下载已尝试',
+          message: '由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表',
+        })
+        resolve()
+      }
+      else {
+        const error = new Error('跨域资源无法直接下载，请联系管理员配置CORS')
 
         window.$notification?.error({
-          title: "视频下载失败",
+          title: '视频下载失败',
           message: error.message,
-        });
-        reject(error);
+        })
+        reject(error)
       }
-    };
+    }
 
     // 尝试通过fetch获取
     fetch(url, {
-      mode: "cors",
+      mode: 'cors',
       headers: {
-        Range: "bytes=0-",
+        Range: 'bytes=0-',
       },
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
 
-        return response.blob();
+        return response.blob()
       })
       .then((blob) => {
         if (
-          !blob.type.startsWith("video/") &&
-          !blob.type.startsWith("application/octet-stream")
+          !blob.type.startsWith('video/')
+          && !blob.type.startsWith('application/octet-stream')
         ) {
-          throw new Error("下载的内容不是视频文件");
+          throw new Error('下载的内容不是视频文件')
         }
 
-        const blobUrl = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(blob)
 
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = blobUrl;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
+        link.href = blobUrl
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
 
         setTimeout(() => {
-          URL.revokeObjectURL(blobUrl);
-          document.body.removeChild(link);
-        }, 100);
+          URL.revokeObjectURL(blobUrl)
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "视频下载成功",
+          title: '视频下载成功',
           message: `下载文件为: ${filename}`,
-        });
-        resolve();
+        })
+        resolve()
       })
       .catch((err) => {
-        console.error("视频下载错误:", err);
+        console.error('视频下载错误:', err)
         if (
-          err.message.includes("Failed to fetch") ||
-          err.message.includes("CORS")
+          err.message.includes('Failed to fetch')
+          || err.message.includes('CORS')
         ) {
-          handleCorsFallback();
-        } else {
-          window.$notification?.error({
-            title: "视频下载失败",
-            message: `下载文件失败：${err.message}`,
-          });
-          reject(err);
+          handleCorsFallback()
         }
-      });
-  });
+        else {
+          window.$notification?.error({
+            title: '视频下载失败',
+            message: `下载文件失败：${err.message}`,
+          })
+          reject(err)
+        }
+      })
+  })
 }
 
 /**
@@ -273,128 +276,129 @@ export function downloadVideo(
  */
 export function downloadAudio(
   url: string,
-  defaultName = "downloaded_audio",
-  options: { forceDownload?: boolean; checkAudioType?: boolean } = {
+  defaultName = 'downloaded_audio',
+  options: { forceDownload?: boolean, checkAudioType?: boolean } = {
     checkAudioType: true,
   },
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     // 从 URL 中解析文件名
-    const urlParts = url.split("/");
+    const urlParts = url.split('/')
 
-    let fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName;
+    let fileNameWithExtension = urlParts[urlParts.length - 1] || defaultName
 
     // 去除查询参数和哈希
-    fileNameWithExtension = fileNameWithExtension.split("?")[0].split("#")[0];
+    fileNameWithExtension = fileNameWithExtension.split('?')[0].split('#')[0]
 
     // 支持的音频扩展名
-    const validExtensions = [".mp3", ".wav", ".ogg", ".m4a", ".aac", ".flac"];
+    const validExtensions = ['.mp3', '.wav', '.ogg', '.m4a', '.aac', '.flac']
 
-    const lowerCaseName = fileNameWithExtension.toLowerCase();
+    const lowerCaseName = fileNameWithExtension.toLowerCase()
 
     // 检查是否有有效扩展名
-    const hasValidExtension = validExtensions.some((ext) =>
+    const hasValidExtension = validExtensions.some(ext =>
       lowerCaseName.endsWith(ext),
-    );
+    )
 
     // 如果没有有效扩展名，添加默认扩展名 .mp3
     const filename = hasValidExtension
       ? fileNameWithExtension
-      : `${fileNameWithExtension}.mp3`;
+      : `${fileNameWithExtension}.mp3`
 
     // 处理CORS问题的备用方案
     const handleCorsFallback = () => {
       if (options.forceDownload) {
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = url;
-        link.download = filename;
-        link.target = "_blank";
-        document.body.appendChild(link);
-        link.click();
+        link.href = url
+        link.download = filename
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
         setTimeout(() => {
-          document.body.removeChild(link);
-        }, 100);
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "音频下载已尝试",
-          message: "由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表",
-        });
-        resolve();
-      } else {
-        const error = new Error("跨域资源无法直接下载，请联系管理员配置CORS");
+          title: '音频下载已尝试',
+          message: '由于CORS限制，浏览器可能阻止了直接下载，请检查下载列表',
+        })
+        resolve()
+      }
+      else {
+        const error = new Error('跨域资源无法直接下载，请联系管理员配置CORS')
 
         window.$notification?.error({
-          title: "音频下载失败",
+          title: '音频下载失败',
           message: error.message,
-        });
-        reject(error);
+        })
+        reject(error)
       }
-    };
+    }
 
     // 尝试通过fetch获取
     fetch(url, {
-      mode: "cors",
+      mode: 'cors',
       headers: {
-        Range: "bytes=0-", // 尝试获取部分内容
+        Range: 'bytes=0-', // 尝试获取部分内容
       },
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
 
-        return response.blob();
+        return response.blob()
       })
       .then((blob) => {
         // 检查blob类型是否为音频
         if (
-          options.checkAudioType !== false &&
-          !blob.type.startsWith("audio/") &&
-          !blob.type.startsWith("application/octet-stream")
+          options.checkAudioType !== false
+          && !blob.type.startsWith('audio/')
+          && !blob.type.startsWith('application/octet-stream')
         ) {
-          throw new Error("下载的内容不是音频文件");
+          throw new Error('下载的内容不是音频文件')
         }
 
-        const blobUrl = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(blob)
 
-        const link = document.createElement("a");
+        const link = document.createElement('a')
 
-        link.href = blobUrl;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
+        link.href = blobUrl
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
 
         // 清理
         setTimeout(() => {
-          URL.revokeObjectURL(blobUrl);
-          document.body.removeChild(link);
-        }, 100);
+          URL.revokeObjectURL(blobUrl)
+          document.body.removeChild(link)
+        }, 100)
 
         window.$notification?.success({
-          title: "音频下载成功",
+          title: '音频下载成功',
           message: `下载文件为: ${filename}`,
-        });
-        resolve();
+        })
+        resolve()
       })
       .catch((err) => {
-        console.error("音频下载错误:", err);
+        console.error('音频下载错误:', err)
         if (
-          err.message.includes("Failed to fetch") ||
-          err.message.includes("CORS")
+          err.message.includes('Failed to fetch')
+          || err.message.includes('CORS')
         ) {
-          handleCorsFallback();
-        } else {
-          window.$notification?.error({
-            title: "音频下载失败",
-            message: `下载文件失败：${err.message}`,
-          });
-          reject(err);
+          handleCorsFallback()
         }
-      });
-  });
+        else {
+          window.$notification?.error({
+            title: '音频下载失败',
+            message: `下载文件失败：${err.message}`,
+          })
+          reject(err)
+        }
+      })
+  })
 }
-
 
 /**
  * 将 canvas 元素导出为图片并下载
@@ -403,29 +407,31 @@ export function downloadAudio(
  */
 export function downloadCanvasAsImage(
   canvas: HTMLCanvasElement,
-  filename = "downloaded_image.png",
+  filename = 'downloaded_image.png',
 ) {
   if (!(canvas instanceof HTMLCanvasElement)) {
-    console.error("传入的对象不是 HTMLCanvasElement！");
-    return;
+    console.error('传入的对象不是 HTMLCanvasElement！')
+    return
   }
 
   try {
-    const link = document.createElement("a");
-    link.href = canvas.toDataURL("image/png");
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const link = document.createElement('a')
+
+    link.href = canvas.toDataURL('image/png')
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
 
     window.$notification?.success({
-      title: "图片下载成功",
+      title: '图片下载成功',
       message: `下载文件为: ${filename}`,
-    });
-  } catch (err) {
+    })
+  }
+  catch (err) {
     window.$notification?.error({
-      title: "图片下载失败",
+      title: '图片下载失败',
       message: `下载文件失败：${(err as Error).message}`,
-    });
+    })
   }
 }

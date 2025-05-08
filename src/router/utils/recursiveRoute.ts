@@ -103,3 +103,49 @@ export function recursiveHandleIframeRoutes(routes: any[]): any[] {
     }
   })
 }
+
+/**
+ * 递归查找匹配指定属性值的路由
+ * @param routes 路由数组
+ * @param property 要匹配的属性名（支持嵌套属性，如 'meta.isHideInMenu'）
+ * @param value 要匹配的属性值
+ * @returns 匹配的路由数组
+ * @example
+ * // 查找所有 meta.isHideInMenu 为 true 的路由
+ * const hiddenRoutes = recursiveFindRoutesByProperty(routes, 'meta.isHideInMenu', true)
+ *
+ * // 查找所有 path 为 '/about' 的路由
+ * const aboutRoutes = recursiveFindRoutesByProperty(routes, 'path', '/about')
+ *
+ * // 查找所有 meta.title 为 '首页' 的路由
+ * const homeRoutes = recursiveFindRoutesByProperty(routes, 'meta.title', '首页')
+ */
+export function recursiveFindRoutesByProperty(
+  routes: any[],
+  property: string,
+  value: any,
+): any[] {
+  const result: any[] = []
+
+  // 获取嵌套属性的值
+  const getNestedValue = (obj: any, path: string) => {
+    return path.split('.').reduce((current, key) => current?.[key], obj)
+  }
+
+  const findRoutes = (routeList: any[]) => {
+    for (const route of routeList) {
+      // 检查当前路由是否匹配
+      if (getNestedValue(route, property) === value) {
+        result.push(route)
+      }
+
+      // 递归检查子路由
+      if (route.children?.length) {
+        findRoutes(route.children)
+      }
+    }
+  }
+
+  findRoutes(routes)
+  return result
+}

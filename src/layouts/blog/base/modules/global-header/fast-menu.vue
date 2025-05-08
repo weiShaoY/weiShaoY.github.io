@@ -1,6 +1,8 @@
 <!-- 快速入口 -->
 
 <script setup lang="ts">
+import { blogFastMenuList } from '@/router/modules/blog'
+
 import { ref } from 'vue'
 
 import { useRouter } from 'vue-router'
@@ -9,93 +11,15 @@ const router = useRouter()
 
 const popoverRef = ref()
 
-type Application = {
-  name: string
-  description: string
-  icon: string
-  path: string
-}
-
 type QuickLink = {
   name: string
   path: string
 }
 
-const applications: Application[] = [
-  {
-    name: '工作台',
-    description: '系统概览与数据统计',
-    icon: 'blog-menu-workbench',
-    path: '/blog/workbench',
-  },
-  {
-    name: 'ArcoDesign',
-    description: '数据分析与可视化',
-    icon: 'blog-menu-arcoDesign',
-    path: '/blog/document/ui/arcoDesign',
-  },
-  {
-    name: '代码格式化',
-    description: '动画特效展示',
-    icon: 'blog-menu-format',
-    path: '/blog/dev/format',
-  },
-  {
-    name: 'Npm可视化',
-    description: '即时通讯功能',
-    icon: 'blog-menu-npm',
-    path: '/blog/dev/npm',
-  },
-  {
-    name: '壁纸',
-    description: '使用指南与开发文档',
-    icon: 'blog-menu-wallpaper',
-    path: '/blog/media/wallpaper',
-  },
-  {
-    name: '视频',
-    description: '技术支持与问题反馈',
-    icon: 'blog-menu-video',
-    path: '/blog/media/video',
-  },
-  {
-    name: '语音',
-    description: '版本更新与变更记录',
-    icon: 'blog-menu-voice',
-    path: '/blog/media/voice',
-  },
-  {
-    name: '影视',
-    description: '技术分享与交流',
-    icon: 'blog-menu-movie',
-    path: '/blog/news/movie',
-  },
-]
-
 const quickLinks: QuickLink[] = [
   {
-    name: '登录',
-    path: '/blog/news/movie',
-  },
-  {
-    name: '注册',
-    path: '/blog/news/movie',
-  },
-  {
-    name: '忘记密码',
-    path: '/blog/news/movie',
-  },
-  {
-    name: '定价',
-    path: '/blog/news/movie',
-  },
-  {
-    name: '个人中心',
-    path: '/blog/news/movie',
-  },
-  {
-    name: '留言管理',
-    path: '/blog/news/movie',
+    name: '返回首页',
+    path: '/',
   },
 ]
 
@@ -134,20 +58,21 @@ function handleAppClick(path: string) {
       class="grid grid-cols-[2fr_0.8fr]"
     >
       <div
-        class="grid grid-cols-2 gap-1"
+        class="grid grid-cols-2 gap-1 grid-content-start"
       >
         <!-- 左侧应用列表 -->
         <div
-          v-for="app in applications"
-          :key="app.name"
-          class="app-item mr-3 flex cursor-pointer items-center gap-3 rounded-2 px-3 py-2 hover:bg-[rgba(241,241,244,0.7)]"
-          @click="handleAppClick(app.path)"
+          v-for="item in blogFastMenuList"
+          :key="item.name"
+          class="mr-3 max-h-15 flex cursor-pointer items-center gap-3 rounded-2 px-3 py-2 hover:bg-[rgba(241,241,244,0.7)]"
+          @click="handleAppClick(item.path)"
         >
           <div
             class="h-12 w-12 flex items-center justify-center rounded-2 bg-[rgba(241,241,244,0.7)]"
           >
             <SvgIcon
-              :icon="app.icon"
+              v-if="item.meta.icon"
+              :icon="item.meta.icon"
               :size="26"
               class="rounded-2"
             />
@@ -159,13 +84,13 @@ function handleAppClick(path: string) {
             <h3
               class="m-0 color-[#252f4a] font-bold"
             >
-              {{ app.name }}
+              {{ item.name }}
             </h3>
 
             <p
               class="mt-1 text-3 color-[#99a1b7]"
             >
-              {{ app.description }}
+              {{ item.meta.title }}
             </p>
           </div>
         </div>
