@@ -72,9 +72,6 @@ declare namespace RouterType {
       /** 图标徽标组件（优先级高于textBadge） */
       iconBadge?: string
 
-      /** 是否显示默认徽标 */
-      defaultBadge?: boolean
-
       /** 若设置，路由将在标签页中固定显示，其值表示固定标签页的顺序（首页是特殊的，它将自动保持fixed） */
       fixedTabIndex?: number
 

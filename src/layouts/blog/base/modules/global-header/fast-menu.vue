@@ -7,6 +7,8 @@ import { ref } from 'vue'
 
 import { useRouter } from 'vue-router'
 
+import { blogMenuJump } from '../utils'
+
 const router = useRouter()
 
 const popoverRef = ref()
@@ -23,14 +25,8 @@ const quickLinks: QuickLink[] = [
   },
 ]
 
-function handleAppClick(path: string) {
-  if (path.startsWith('http')) {
-    window.open(path, '_blank')
-  }
-  else {
-    router.push(path)
-  }
-
+function handleAppClick(item: RouterType.BlogRouteRecordRaw) {
+  blogMenuJump(item)
   popoverRef.value?.hide()
 }
 </script>
@@ -65,7 +61,7 @@ function handleAppClick(path: string) {
           v-for="item in blogFastMenuList"
           :key="item.name"
           class="mr-3 max-h-15 flex cursor-pointer items-center gap-3 rounded-2 px-3 py-2 hover:bg-[rgba(241,241,244,0.7)]"
-          @click="handleAppClick(item.path)"
+          @click="handleAppClick(item)"
         >
           <div
             class="h-12 w-12 flex items-center justify-center rounded-2 bg-[rgba(241,241,244,0.7)]"
@@ -76,22 +72,40 @@ function handleAppClick(path: string) {
               :size="26"
               class="rounded-2"
             />
+
           </div>
 
-          <div
-            class=""
+          <h3
+            class="m-0 color-[#252f4a] font-bold"
           >
-            <h3
-              class="m-0 color-[#252f4a] font-bold"
-            >
-              {{ item.name }}
-            </h3>
+            {{ item.meta.title }}
+          </h3>
 
-            <p
-              class="mt-1 text-3 color-[#99a1b7]"
+          <div
+            class="flex items-center gap-2"
+          >
+
+            <!-- 外链徽标 -->
+            <SvgIcon
+              v-if="item.meta.externalUrl"
+              icon="blog-menu-externalUrl"
+              :size="16"
+            />
+
+            <!-- 文本徽标 -->
+            <div
+              v-else-if="item.meta.textBadge"
+              class="m-auto h-[16px] min-w-5 flex items-center justify-center rounded-[5px] bg-[#fd4e4e] p-x-1 text-center text-[10px] text-white leading-5"
             >
-              {{ item.meta.title }}
-            </p>
+              {{ item.meta.textBadge }}
+            </div>
+
+            <!-- 图标徽标 -->
+            <SvgIcon
+              v-else-if="item.meta.iconBadge"
+              :icon="item.meta.iconBadge"
+              :size="16"
+            />
           </div>
         </div>
       </div>
@@ -110,7 +124,7 @@ function handleAppClick(path: string) {
             v-for="link in quickLinks"
             :key="link.name"
             class="cursor-pointer py-2 hover:[&>span]:text-primary"
-            @click="handleAppClick(link.path)"
+            @click="router.push(link.path)"
           >
             <span>{{ link.name }}</span>
           </li>
