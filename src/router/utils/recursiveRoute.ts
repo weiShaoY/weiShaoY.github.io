@@ -6,6 +6,16 @@ import { BLOG_IFRAME_LAYOUT } from '@/layouts'
  * @param handler 路由处理回调
  * @param parentPath 父路径（用于路径处理）
  * @returns 处理后的新路由数组
+ * @example
+ * // 为所有路由添加前缀
+ * const routes = recursiveWalkRoutes(routes, (route, parentPath) => {
+ *   route.path = `/prefix${route.path}`
+ * })
+ *
+ * // 为所有路由添加 meta 信息
+ * const routes = recursiveWalkRoutes(routes, (route) => {
+ *   route.meta = { ...route.meta, isNew: true }
+ * })
  */
 function recursiveWalkRoutes<T extends { path: string, children?: T[] }>(
   routes: T[],
@@ -36,6 +46,18 @@ function recursiveWalkRoutes<T extends { path: string, children?: T[] }>(
  * 递归规范化路由完整路径
  * @param routes 路由配置数组
  * @returns 带完整路径的新路由数组
+ * @example
+ * // 规范化路由路径
+ * const routes = [
+ *   { path: 'home', children: [{ path: 'about' }] },
+ *   { path: 'user', children: [{ path: 'profile' }] }
+ * ]
+ * const normalizedRoutes = recursiveNormalizeRoutesPath(routes, '/app')
+ * // 结果:
+ * // [
+ * //   { path: '/app/home', children: [{ path: '/app/home/about' }] },
+ * //   { path: '/app/user', children: [{ path: '/app/user/profile' }] }
+ * // ]
  */
 export function recursiveNormalizeRoutesPath(routes: any[], parentPath = ''): any[] {
   return recursiveWalkRoutes(routes, (route, _parentPath = parentPath) => {
@@ -50,6 +72,18 @@ export function recursiveNormalizeRoutesPath(routes: any[], parentPath = ''): an
  * 递归设置路由默认重定向
  * @param routes 路由数组
  * @returns 带默认重定向的新路由数组
+ * @example
+ * // 设置默认重定向
+ * const routes = [
+ *   { path: '/admin', children: [{ path: 'dashboard' }, { path: 'users' }] },
+ *   { path: '/blog', children: [{ path: 'posts' }, { path: 'categories' }] }
+ * ]
+ * const routesWithRedirect = recursiveSetRoutesRedirect(routes)
+ * // 结果:
+ * // [
+ * //   { path: '/admin', redirect: '/admin/dashboard', children: [...] },
+ * //   { path: '/blog', redirect: '/blog/posts', children: [...] }
+ * // ]
  */
 export function recursiveSetRoutesRedirect(routes: any[]): any[] {
   return recursiveWalkRoutes(routes, (route) => {
@@ -67,6 +101,20 @@ export function recursiveSetRoutesRedirect(routes: any[]): any[] {
  * 递归按order排序路由（修复版）
  * @param routes 路由数组
  * @returns 排序后的新路由数组
+ * @example
+ * // 按 order 排序路由
+ * const routes = [
+ *   { path: '/c', meta: { order: 3 } },
+ *   { path: '/a', meta: { order: 1 } },
+ *   { path: '/b', meta: { order: 2 } }
+ * ]
+ * const sortedRoutes = recursiveSortRoutesByOrder(routes)
+ * // 结果:
+ * // [
+ * //   { path: '/a', meta: { order: 1 } },
+ * //   { path: '/b', meta: { order: 2 } },
+ * //   { path: '/c', meta: { order: 3 } }
+ * // ]
  */
 export function recursiveSortRoutesByOrder(routes: any[]): any[] {
   // 1. 对当前层级路由排序
@@ -92,9 +140,21 @@ export function recursiveSortRoutesByOrder(routes: any[]): any[] {
 }
 
 /**
- *  递归处理 iframe 路由
+ * 递归处理 iframe 路由
  * @param routes 路由数组
  * @returns 处理后的新路由数组
+ * @example
+ * // 处理 iframe 路由
+ * const routes = [
+ *   { path: '/normal', component: 'NormalComponent' },
+ *   { path: '/iframe', meta: { iframeUrl: 'https://example.com' } }
+ * ]
+ * const processedRoutes = recursiveHandleIframeRoutes(routes)
+ * // 结果:
+ * // [
+ * //   { path: '/normal', component: 'NormalComponent' },
+ * //   { path: '/iframe', meta: { iframeUrl: 'https://example.com' }, component: BLOG_IFRAME_LAYOUT }
+ * // ]
  */
 export function recursiveHandleIframeRoutes(routes: any[]): any[] {
   return recursiveWalkRoutes(routes, (route) => {
