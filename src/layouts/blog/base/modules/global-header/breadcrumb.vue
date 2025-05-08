@@ -11,16 +11,6 @@ import MenuItem from '../../components/menu-item.vue'
 import { blogMenuJump } from '../utils'
 
 /**
- *  面包屑项类型定义
- */
-type BreadcrumbItem = {
-  name: string
-  path: string
-  meta: RouterType.BlogRouteRecordRaw['meta']
-  children?: BreadcrumbItem[]
-}
-
-/**
  *  路由实例
  */
 const route = useRoute()
@@ -28,7 +18,7 @@ const route = useRoute()
 /**
  *  面包屑数据
  */
-const breadList = ref<BreadcrumbItem[]>([])
+const breadList = ref<RouterType.BlogRouteRecordRaw[]>([])
 
 /**
  *  获取面包屑数据
@@ -43,12 +33,9 @@ function getBreadcrumb() {
     ] as any[]
   }
 
-  breadList.value = matched.slice(1).map(({ name, path, meta, children }) => ({
-    name,
-    path,
-    meta,
-    children,
-  })) as BreadcrumbItem[]
+  breadList.value = matched.slice(1).map(item => ({
+    ...item,
+  })) as unknown as RouterType.BlogRouteRecordRaw[]
 }
 
 // watchEffect(() => {
@@ -107,7 +94,3 @@ watch(() => route.path, getBreadcrumb, {
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
-
-<style lang="scss">
-
-</style>

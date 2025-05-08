@@ -131,52 +131,48 @@ function handleAppClick(path: string) {
     </template>
 
     <div
-      class="fast-enter grid grid-cols-[2fr_0.8fr]"
+      class="grid grid-cols-[2fr_0.8fr]"
     >
       <div
-        class="apps-section"
+        class="grid grid-cols-2 gap-1"
       >
+        <!-- 左侧应用列表 -->
         <div
-          class="apps-grid grid grid-cols-2 gap-1"
+          v-for="app in applications"
+          :key="app.name"
+          class="app-item mr-3 flex cursor-pointer items-center gap-3 rounded-2 px-3 py-2 hover:bg-[rgba(241,241,244,0.7)]"
+          @click="handleAppClick(app.path)"
         >
-          <!-- 左侧应用列表 -->
           <div
-            v-for="app in applications"
-            :key="app.name"
-            class="app-item mr-3 flex cursor-pointer items-center gap-3 rounded-2 px-3 py-2 hover:bg-[rgba(241,241,244,0.7)]"
-            @click="handleAppClick(app.path)"
+            class="h-12 w-12 flex items-center justify-center rounded-2 bg-[rgba(241,241,244,0.7)]"
           >
-            <div
-              class="h-12 w-12 flex items-center justify-center rounded-2 bg-[rgba(241,241,244,0.7)]"
-            >
-              <SvgIcon
-                :icon="app.icon"
-                :size="26"
-                class="rounded-2"
-              />
-            </div>
+            <SvgIcon
+              :icon="app.icon"
+              :size="26"
+              class="rounded-2"
+            />
+          </div>
 
-            <div
-              class=""
+          <div
+            class=""
+          >
+            <h3
+              class="m-0 color-[#252f4a] font-bold"
             >
-              <h3
-                class="m-0 color-[#252f4a] font-bold"
-              >
-                {{ app.name }}
-              </h3>
+              {{ app.name }}
+            </h3>
 
-              <p
-                class="mt-1 text-3 color-[#99a1b7]"
-              >
-                {{ app.description }}
-              </p>
-            </div>
+            <p
+              class="mt-1 text-3 color-[#99a1b7]"
+            >
+              {{ app.description }}
+            </p>
           </div>
         </div>
       </div>
 
       <div
-        class="quick-links border-l-[1px] border-l-[#ebeef5] border-solid pl-6 pt-2"
+        class="border-l-[1px] border-l-[#ebeef5] border-solid pl-6 pt-2"
       >
         <h3
           class="m-0 mb-2.5 text-base text-[#b5b7c8] font-medium"

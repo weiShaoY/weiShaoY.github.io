@@ -146,5 +146,3 @@ function toggleFullScreen() {
     </div>
   </div>
 </template>
-
-<style lang="less" scoped></style>
