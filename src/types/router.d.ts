@@ -78,8 +78,12 @@ declare namespace RouterType {
       /** 若设置，路由将在标签页中固定显示，其值表示固定标签页的顺序（首页是特殊的，它将自动保持fixed） */
       fixedTabIndex?: number
 
-      /** 是否显示在快速菜单中 */
-      isShowInFastMenu?: boolean
+      /**
+       * 在快速菜单中的排序（数字越小越靠前）
+       * - 如果未定义，则不会出现在快速菜单
+       * - 如果定义，则按升序排列
+       */
+      fastMenuOrder?: number
     } & (
       | {
 

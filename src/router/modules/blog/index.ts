@@ -2,6 +2,8 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import { BLOG_BASE_LAYOUT } from '@/layouts'
 
+import ts from 'typescript'
+
 import {
   formatModules,
   recursiveFindRoutesByProperty,
@@ -63,9 +65,18 @@ const testRouter: RouteRecordRaw[] = [
 
 export default testRouter
 
-const blogFastMenuList: RouterType.BlogRouteRecordRaw[] = recursiveFindRoutesByProperty(blogRouterList, 'meta.isShowInFastMenu', true)
-
-console.log('%c Line:66 🥪 blogFastMenuList', 'color:#7f2b82', blogFastMenuList)
+/**
+ *  获取快速菜单列表
+ */
+const blogFastMenuList: RouterType.BlogRouteRecordRaw[] = recursiveFindRoutesByProperty(
+  blogRouterList,
+  'meta.fastMenuOrder',
+  undefined,
+  {
+    sortBy: 'meta.fastMenuOrder',
+    sortOrder: 'asc',
+  },
+)
 
 export {
   blogFastMenuList,
