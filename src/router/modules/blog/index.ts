@@ -2,8 +2,6 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import { BLOG_BASE_LAYOUT } from '@/layouts'
 
-import ts from 'typescript'
-
 import {
   formatModules,
   recursiveFindRoutesByProperty,
