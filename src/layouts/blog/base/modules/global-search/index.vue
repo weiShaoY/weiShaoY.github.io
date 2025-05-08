@@ -5,6 +5,8 @@ import { blogMittBus } from '@/utils'
 
 import MenuItem from '../../components/menu-item.vue'
 
+import { blogMenuJump } from '../utils'
+
 const router = useRouter()
 
 const blogStore = useBlogStore()
@@ -89,23 +91,39 @@ function fuzzyQueryList(
 
     if (item.children) {
       for (const child of item.children) {
-        searchItem(child) // 递归处理子项
+        searchItem(child)
       }
     }
 
-    // 如果当前项匹配，添加到结果中
     if (isSelfMatch) {
-      result.push({
-        ...item,
-        children: item.children ? fuzzyQueryList(item.children, val) : [],
-      })
+      const { meta, ...rest } = item
+
+      if ('externalUrl' in meta || 'iframeUrl' in meta) {
+        result.push({
+          ...rest,
+          meta,
+          children: undefined,
+        } as RouterType.BlogRouteRecordRaw)
+      }
+      else {
+        result.push({
+          ...rest,
+          meta: {
+            ...meta,
+            externalUrl: undefined,
+            iframeUrl: undefined,
+          },
+          children: item.children ? fuzzyQueryList(item.children, val) : undefined,
+        } as RouterType.BlogRouteRecordRaw)
+      }
     }
   }
 
-  // 遍历所有项
   for (const item of arr) {
     searchItem(item)
   }
+
+  console.log('%c Line:125 🌰 result', 'color:#ffdd4d', result)
 
   return result
 }
@@ -191,13 +209,11 @@ function searchBlur() {
  * @param {RouterType.BlogMenuListType} item - 搜索结果项
  */
 function searchGoPage(item: RouterType.BlogRouteRecordRaw) {
-  isShowSearchDialog.value = false
-
+  blogMenuJump(item)
   addHistory(item)
-
-  router.push(item.path)
   searchVal.value = ''
   searchResult.value = []
+  isShowSearchDialog.value = false
 }
 
 /**

@@ -9,7 +9,7 @@ import { useFullscreen } from '@vueuse/core'
 
 import Breadcrumb from './breadcrumb.vue'
 
-import FastWidth from './fast-enter.vue'
+import FastMenu from './fast-menu.vue'
 
 const { width } = useWindowSize()
 
@@ -109,7 +109,7 @@ function toggleFullScreen() {
       </div>
 
       <!-- 快速入口 -->
-      <FastWidth
+      <FastMenu
         v-if="width >= 1200"
       />
 
