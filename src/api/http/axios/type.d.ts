@@ -7,7 +7,7 @@ export type Result<T = any> = {
   /**
    * 状态码
    */
-  status: number
+  status: ResultEnum
 
   /**
    * 响应消息
@@ -18,6 +18,8 @@ export type Result<T = any> = {
    * 响应数据（可选）
    */
   data?: T
+
+  code: number | string
 }
 
 /**
