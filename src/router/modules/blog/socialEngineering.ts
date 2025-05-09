@@ -65,6 +65,15 @@ const SocialEngineering: AppRouteRecordRaw = {
       },
       component: () => import('@/pages/blog/socialEngineering/complain/index.vue'),
     },
+    {
+      path: 'wxChat',
+      name: 'WxChat',
+      meta: {
+        title: '微信对话生成器',
+        icon: 'blog-menu-wxChat',
+      },
+      component: () => import('@/pages/blog/socialEngineering/wxChat/index.vue'),
+    },
   ],
 }
 

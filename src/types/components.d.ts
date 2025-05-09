@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     2: typeof import('./../components/BaseButton/index copy 2.vue')['default']
+    AppearanceSetting: typeof import('./../components/AppearanceSetting/index.vue')['default']
     AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
     BaseButton: typeof import('./../components/BaseButton/index.vue')['default']
     BetterScroll: typeof import('./../components/BetterScroll/better-scroll.vue')['default']
@@ -123,6 +124,7 @@ declare module 'vue' {
     TypeIt: typeof import('./../components/TypeIt/index.vue')['default']
     VideoPlayer: typeof import('./../components/VideoPlayer/index.vue')['default']
     VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
+    WxChat: typeof import('./../components/WxChat/index.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
