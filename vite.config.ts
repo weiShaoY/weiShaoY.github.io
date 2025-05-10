@@ -183,37 +183,37 @@ export default defineConfig(({ mode }) => {
     },
 
     // 生产环境构建配置
-    build: {
-      // 设置构建目标为 ES2015，确保更好的浏览器兼容性
-      target: 'es2015',
+    // build: {
+    //   // 设置构建目标为 ES2015，确保更好的浏览器兼容性
+    //   target: 'es2015',
 
-      // 使用 terser 进行代码压缩
-      minify: 'terser',
+    //   // 使用 terser 进行代码压缩
+    //   minify: 'terser',
 
-      // terser 压缩配置
-      terserOptions: {
-        compress: {
-          // 生产环境下移除 console 和 debugger
-          drop_console: mode === 'production',
-          drop_debugger: mode === 'production',
-        },
-      },
+    //   // terser 压缩配置
+    //   terserOptions: {
+    //     compress: {
+    //       // 生产环境下移除 console 和 debugger
+    //       drop_console: mode === 'production',
+    //       drop_debugger: mode === 'production',
+    //     },
+    //   },
 
-      // Rollup 打包配置
-      rollupOptions: {
-        output: {
-          // 自定义代码分割策略
-          manualChunks: {
-            'element-plus': ['element-plus'], // Element Plus 相关代码
-            'vue-vendor': ['vue', 'vue-router', 'pinia'], // Vue 核心库
-            'echarts': ['echarts'], // ECharts 图表库
-          },
-        },
-      },
+    //   // Rollup 打包配置
+    //   rollupOptions: {
+    //     output: {
+    //       // 自定义代码分割策略
+    //       manualChunks: {
+    //         'element-plus': ['element-plus'], // Element Plus 相关代码
+    //         'vue-vendor': ['vue', 'vue-router', 'pinia'], // Vue 核心库
+    //         'echarts': ['echarts'], // ECharts 图表库
+    //       },
+    //     },
+    //   },
 
-      // 调整 chunk 大小警告限制
-      chunkSizeWarningLimit: 1500,
-    },
+    //   // 调整 chunk 大小警告限制
+    //   chunkSizeWarningLimit: 1500,
+    // },
 
     // 插件配置
     plugins: [
