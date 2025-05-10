@@ -1,13 +1,10 @@
 <script setup lang="ts">
-
-// import type { EChartsOption } from 'echarts'
+import type { EChartsOption } from 'echarts'
 
 import chinaMapJson from '@/assets/jsons/chinaMap.json'
 
-/**
- *  构造 ECharts 配置项
- */
-const options = {
+// 地图配置
+const options: EChartsOption = {
   /**
    *  文字样式配置
    */
@@ -54,10 +51,7 @@ const options = {
       fontWeight: 700,
     },
 
-    formatter: (params: any) => {
-      // 仅显示省份名称
-      return params.name
-    },
+    formatter: (params: any) => params.name,
   },
 
   /**
@@ -75,12 +69,28 @@ const options = {
       },
     },
     itemStyle: {
-      borderColor: 'rgba(147,235,248,1)', // 边框颜色
-      borderWidth: 2, // 边框宽度
-      shadowColor: 'rgba(128,217,248,1)', // 阴影颜色
-      shadowOffsetX: 2, // 阴影 X 偏移
-      shadowOffsetY: 15, // 阴影 Y 偏移
-      shadowBlur: 15, // 阴影模糊程度
+      borderColor: 'rgba(255,255,255,0.5)',
+      borderWidth: 1,
+      areaColor: {
+        type: 'linear',
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [
+          {
+            offset: 0,
+            color: 'rgba(0,210,255,0.3)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(0,120,255,0.8)',
+          },
+        ],
+      },
+      shadowColor: 'rgba(0,120,255,0.5)',
+      shadowOffsetY: 10,
+      shadowBlur: 15,
     },
   },
 
@@ -102,8 +112,8 @@ const options = {
         fontSize: 10, // 标签字体大小
       },
       itemStyle: {
-        borderColor: 'rgba(147,235,248,0.8)', // 边框颜色
-        borderWidth: 2, // 边框宽度
+        borderColor: 'rgba(255,255,255,0.5)',
+        borderWidth: 1,
         areaColor: {
           type: 'linear',
           x: 0,
@@ -113,56 +123,30 @@ const options = {
           colorStops: [
             {
               offset: 0,
-              color: 'rgba(147,235,248,0.3)', // 渐变起始颜色
+              color: 'rgba(0,210,255,0.3)',
             },
             {
               offset: 1,
-              color: 'rgba(32,120,207,0.9)', // 渐变结束颜色
+              color: 'rgba(0,120,255,0.8)',
             },
           ],
         },
-        shadowColor: 'rgba(32,120,207,1)', // 阴影颜色
-        shadowOffsetY: 15, // 阴影 Y 偏移
-        shadowBlur: 20, // 阴影模糊程度
+        shadowColor: 'rgba(0,120,255,0.5)',
+        shadowOffsetY: 10,
+        shadowBlur: 15,
       },
 
       //  高亮时
       emphasis: {
         label: {
-          show: true, // 高亮时是否显示标签
-          color: '#fff', // 标签颜色
+          show: true,
+          color: '#fff',
         },
         itemStyle: {
-          areaColor: 'rgba(82,180,255,0.9)', // 高亮时区域颜色
-          borderColor: '#fff', // 高亮时边框颜色
-          borderWidth: 3, // 高亮时边框宽度
+          areaColor: 'rgba(0,210,255,0.9)',
+          borderColor: '#fff',
+          borderWidth: 2,
         },
-      },
-
-      /**
-       *  增强光照与 3D 效果
-       */
-      light: {
-        main: {
-          intensity: 1.5, // 主光源强度
-          shadow: true, // 是否显示阴影
-          alpha: 40, // 光源角度（俯仰）
-          beta: 45, // 光源角度（左右旋转）
-        },
-        ambient: {
-          intensity: 0.3, // 环境光强度
-        },
-      },
-
-      /**
-       *  视角控制
-       */
-      viewControl: {
-        distance: 120, // 观察距离
-        alpha: 30, // 俯仰角
-        beta: 5, // 旋转角度
-        center: [104, 36], // 视角中心点
-        pitch: 10, // 俯仰角
       },
 
       /**
@@ -170,13 +154,13 @@ const options = {
        */
       select: {
         label: {
-          show: true, // 选中时是否显示标签
-          color: '#fff', // 标签颜色
+          show: true,
+          color: '#fff',
         },
         itemStyle: {
-          areaColor: '#4FAEFB', // 选中区域颜色
-          borderColor: '#fff', // 选中区域边框颜色
-          borderWidth: 2, // 选中区域边框宽度
+          areaColor: 'rgba(0,210,255,1)',
+          borderColor: '#fff',
+          borderWidth: 2,
         },
       },
     },
@@ -254,9 +238,7 @@ const options = {
 
       tooltip: {
         // 风里雨里,长沙等你
-        formatter() {
-          return `惟楚有材，于斯为盛`
-        },
+        formatter: () => '惟楚有材，于斯为盛',
         textStyle: {
           color: '#E43961',
           fontSize: 20,
@@ -264,16 +246,14 @@ const options = {
         },
 
         // 提示框背景色
-        backgroundColor: 'rgba(255,255,255,0.9)',
+        backgroundColor: 'rgba(255,255,255,0.5)',
       },
 
       label: {
         /**
          *  标注的名称   长沙
          */
-        formatter: (params: any) => {
-          return `${params.name}`
-        },
+        formatter: (params: any) => params.name,
 
         /**
          *  标注位置
@@ -306,7 +286,7 @@ const options = {
         /**
          *  阴影颜色
          */
-        shadowColor: '#333',
+        shadowColor: 'rgba(0,120,255,0.5)',
       },
 
       /**
@@ -318,8 +298,6 @@ const options = {
 }
 
 function handleClick(params: any) {
-  console.log('%c Line:321 🍏 params', 'color:#3f7cff', params.name)
-  console.log('%c Line:322 🌶 params.name', 'color:#f5ce50', params.name)
   if (params.name === '长沙') {
     window.$notification?.success('风里雨里，长沙等你')
   }
@@ -339,3 +317,10 @@ function handleClick(params: any) {
     />
   </div>
 </template>
+
+<style lang="scss" scoped>
+:deep(.echarts) {
+  width: 100%;
+  height: 100%;
+}
+</style>

@@ -7,7 +7,7 @@ import Header from './components/header/index.vue'
 
 <template>
   <div
-    class="h-full min-h-screen w-full bg-[#212224]"
+    class="min-h-screen w-full bg-[#212224]"
   >
     <!-- 顶部导航栏 -->
     <Header />
@@ -36,7 +36,6 @@ import Header from './components/header/index.vue'
         #fallback
       >
         <Loading />
-
       </template>
     </Suspense>
   </div>

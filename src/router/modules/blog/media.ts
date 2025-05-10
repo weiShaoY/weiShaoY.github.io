@@ -46,11 +46,32 @@ const Media: RouterType.BlogRouteRecordRaw = {
       component: () => import('@/pages/blog/media/music/index.vue'),
     },
     {
+      path: 'copywriting',
+      name: 'Copywriting',
+      meta: {
+        title: '文案',
+        icon: 'blog-menu-copywriting',
+      },
+      component: () => import('@/pages/blog/media/copywriting/index.vue'),
+    },
+    {
+      path: 'videoAnalysis',
+      name: 'VideoAnalysis',
+      meta: {
+        title: '影视解析',
+        icon: 'blog-menu-videoAnalysis',
+        iframeUrl: 'https://jx.xmflv.com/jx.html',
+        fastMenuOrder: 5,
+      },
+    },
+    {
       path: 'av',
       name: 'Av',
       meta: {
         title: '教育片',
         icon: 'blog-menu-av',
+        fastMenuOrder: 0,
+
       },
       component: () => import('@/pages/blog/media/av/index.vue'),
     },

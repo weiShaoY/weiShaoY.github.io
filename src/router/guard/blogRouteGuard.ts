@@ -7,27 +7,28 @@ import { useBlogStore } from '@/store'
  */
 const VITE_ROUTER_BLOG_PATH = import.meta.env.VITE_ROUTER_BLOG_PATH
 
-function handleBlogWorkTabGuard(to: RouteLocationNormalized) {
-  const blogStore = useBlogStore()
+/**
+ * 处理博客工作标签守卫
+ * @param to - 目标路由信息
+ */
+function handleBlogWorkTabGuard(to: RouteLocationNormalized): void {
+  try {
+    const blogStore = useBlogStore()
 
-  const { meta, path, name, params, query } = to
+    const { meta, path, name, params, query } = to
 
-  if (!meta.isHideTab) {
-    // blogStore.openTab({
-    //   title: meta.title as string,
-    //   path,
-    //   name: name as string,
-    //   keepAlive: meta.keepAlive as boolean,
-    //   params,
-    //   query,
-    // })
-    blogStore.openTab({
-      meta,
-      path,
-      name,
-      params,
-      query,
-    } as any)
+    if (!meta.isHideTab) {
+      blogStore.openTab({
+        meta,
+        path,
+        name,
+        params,
+        query,
+      } as any)
+    }
+  }
+  catch (error) {
+    console.error('打开博客工作选项卡失败:', error)
   }
 }
 

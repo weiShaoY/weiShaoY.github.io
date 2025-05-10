@@ -9,7 +9,7 @@ import { useFullscreen } from '@vueuse/core'
 
 import Breadcrumb from './breadcrumb.vue'
 
-import FastWidth from './fast-enter.vue'
+import FastMenu from './fast-menu.vue'
 
 const { width } = useWindowSize()
 
@@ -109,12 +109,12 @@ function toggleFullScreen() {
       </div>
 
       <!-- 快速入口 -->
-      <FastWidth
+      <FastMenu
         v-if="width >= 1200"
       />
 
       <!-- 全屏按钮 -->
-      <ButtonIcon
+      <BaseButton
         :tooltip-content="isFullscreen ? '退出全屏' : '进入全屏'"
         :icon="
           !isFullscreen
@@ -132,7 +132,7 @@ function toggleFullScreen() {
       />
 
       <!-- 刷新按钮 -->
-      <ButtonIcon
+      <BaseButton
         tooltip-content="刷新页面"
         icon="blog-header-refresh"
         :icon-class="[
@@ -146,5 +146,3 @@ function toggleFullScreen() {
     </div>
   </div>
 </template>
-
-<style lang="less" scoped></style>

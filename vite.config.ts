@@ -22,6 +22,80 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 import vueDevTools from 'vite-plugin-vue-devtools'
 
+// Element Plus 组件列表 - 用于预加载和按需加载
+const elementPlusComponents = [
+  'form',
+  'form-item',
+  'button',
+  'input',
+  'input-number',
+  'switch',
+  'upload',
+  'menu',
+  'col',
+  'icon',
+  'row',
+  'tag',
+  'dialog',
+  'loading',
+  'radio',
+  'radio-group',
+  'popover',
+  'scrollbar',
+  'tooltip',
+  'dropdown',
+  'dropdown-menu',
+  'dropdown-item',
+  'sub-menu',
+  'menu-item',
+  'divider',
+  'card',
+  'link',
+  'breadcrumb',
+  'breadcrumb-item',
+  'table',
+  'tree-select',
+  'table-column',
+  'select',
+  'option',
+  'pagination',
+  'tree',
+  'alert',
+  'radio-button',
+  'checkbox-group',
+  'checkbox',
+  'tabs',
+  'tab-pane',
+  'rate',
+  'date-picker',
+  'notification',
+  'image',
+  'statistic',
+  'watermark',
+  'config-provider',
+  'text',
+  'drawer',
+  'color-picker',
+  'backtop',
+  'message-box',
+  'skeleton',
+  'skeleton-item',
+  'badge',
+  'steps',
+  'step',
+  'avatar',
+  'descriptions',
+  'descriptions-item',
+  'progress',
+  'image-viewer',
+  'empty',
+  'segmented',
+  'calendar',
+  'message',
+  'timeline',
+  'timeline-item',
+].map(component => `element-plus/es/components/${component}/style/css`)
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd()) as Env.ImportMeta
 
@@ -66,6 +140,19 @@ export default defineConfig(({ mode }) => {
       },
     },
 
+    // 预加载项目必需的组件
+    optimizeDeps: {
+      include: [
+        'vue',
+        'vue-router',
+        'pinia',
+        'axios',
+        '@vueuse/core',
+        'echarts',
+        ...elementPlusComponents,
+      ],
+    },
+
     // 开发服务器配置
     server: {
       // 开发服务器监听所有主机地址
@@ -76,14 +163,64 @@ export default defineConfig(({ mode }) => {
 
       // 自动在浏览器中打开应用
       open: true,
+
+      // 启用 CORS 支持，解决跨域问题
+      cors: true,
+
+      // 热更新配置
+      hmr: {
+        overlay: true, // 在浏览器中显示错误覆盖层
+      },
+
+      // API 代理配置，用于开发环境下的接口转发
+      // proxy: {
+      //   '/api': {
+      //     target: env.VITE_API_URL,
+      //     changeOrigin: true,
+      //     rewrite: path => path.replace(/^\/api/, ''),
+      //   },
+      // },
+    },
+
+    // 生产环境构建配置
+    build: {
+      // 设置构建目标为 ES2015，确保更好的浏览器兼容性
+      target: 'es2015',
+
+      // 使用 terser 进行代码压缩
+      minify: 'terser',
+
+      // terser 压缩配置
+      terserOptions: {
+        compress: {
+          // 生产环境下移除 console 和 debugger
+          drop_console: mode === 'production',
+          drop_debugger: mode === 'production',
+        },
+      },
+
+      // Rollup 打包配置
+      rollupOptions: {
+        output: {
+          // 自定义代码分割策略
+          manualChunks: {
+            'element-plus': ['element-plus'], // Element Plus 相关代码
+            'vue-vendor': ['vue', 'vue-router', 'pinia'], // Vue 核心库
+            'echarts': ['echarts'], // ECharts 图表库
+          },
+        },
+      },
+
+      // 调整 chunk 大小警告限制
+      chunkSizeWarningLimit: 1500,
     },
 
     // 插件配置
     plugins: [
-
+      // Vue 3 支持
       Vue(),
 
-      // Vue 相关插件
+      // Vue Router 配置
       VueRouter({
         // 生成 TypeScript 路由声明文件
         dts: 'src/types/vue-router-vite.d.ts',
@@ -95,7 +232,7 @@ export default defineConfig(({ mode }) => {
       // 启用 Vue 开发者工具
       vueDevTools(),
 
-      // 自动导入
+      // 自动导入配置
       AutoImport({
         imports: [
           'vue', // 自动导入 Vue 的 API
@@ -120,7 +257,7 @@ export default defineConfig(({ mode }) => {
         ],
 
         resolvers: [
-          // 自动导入 Element Plus 的组件// 自动导入 Element Plus 的组件
+          // 自动导入 Element Plus 的组件
           ElementPlusResolver({
             importStyle: false, // 禁用自动导入样式
           }),
@@ -135,6 +272,7 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
+      // 组件自动导入配置
       Components({
         // 生成 TypeScript 组件声明文件
         dts: 'src/types/components.d.ts',
@@ -146,11 +284,13 @@ export default defineConfig(({ mode }) => {
         ],
       }),
 
+      // UnoCSS 原子化 CSS 引擎
       UnoCSS(),
 
+      // GLSL 着色器支持
       Glsl(),
 
-      //  本地svg
+      // SVG 图标插件配置
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],

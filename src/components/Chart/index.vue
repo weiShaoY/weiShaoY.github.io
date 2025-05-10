@@ -68,6 +68,3 @@ const computedStyle = computed<CSSProperties>(() => ({
     :loading-options="loadingOptions"
   />
 </template>
-
-<style scoped lang="less"></style>
-

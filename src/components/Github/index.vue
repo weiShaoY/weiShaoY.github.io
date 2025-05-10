@@ -1,7 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
-import { openUrlInWindow } from '@/utils'
 
 type GithubPropsType = {
 
@@ -17,28 +14,20 @@ type GithubPropsType = {
 
 }
 
-const props = withDefaults(defineProps<GithubPropsType>(), {
+withDefaults(defineProps<GithubPropsType>(), {
   color: 'white',
   size: 34,
 })
 
-function handleClick() {
-  openUrlInWindow(import.meta.env.VITE_GITHUB_URL)
-}
+const githubUrl = import.meta.env.VITE_GITHUB_URL
+
 </script>
 
 <template>
-  <SvgIcon
-    class="transform cursor-pointer transition-transform duration-500 hover:-translate-y-1"
+  <LinkButton
     icon="github"
-    :size="props.size"
-    :style="{
-      color: props.color,
-    }"
-    @click="handleClick"
+    :size="34"
+    :color="color"
+    :url="githubUrl"
   />
 </template>
-
-<style lang="less" scoped>
-
-</style>

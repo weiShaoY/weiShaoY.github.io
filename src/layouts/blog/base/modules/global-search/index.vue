@@ -5,70 +5,92 @@ import { blogMittBus } from '@/utils'
 
 import MenuItem from '../../components/menu-item.vue'
 
-const router = useRouter()
+import { blogMenuJump } from '../utils'
 
 const blogStore = useBlogStore()
 
-/**
- *   搜索历史记录最大存储数量
- */
+/** 搜索历史记录最大存储数量 */
 const HISTORY_MAX_LENGTH = 10
 
-/**
- *  菜单列表
- */
+/** 菜单列表 */
 const menuList = computed(() => blogStore.menuList)
 
-/**
- *  是否显示搜索弹窗
- */
+/** 是否显示搜索弹窗 */
 const isShowSearchDialog = ref(false)
 
-/**
- *   搜索输入框Ref
- */
+/** 搜索输入框Ref */
 const searchInputRef = ref<HTMLInputElement | null>(null)
 
-/**
- *   搜索关键词
- */
-const searchVal = ref()
+/** 搜索关键词 */
+const searchVal = ref('')
 
-/**
- *   搜索结果列表
- */
-const searchResult: any = ref([])
+/** 搜索结果列表 */
+const searchResult = ref<RouterType.BlogRouteRecordRaw[]>([])
 
-/**
- *  搜索历史记录列表的高亮索引
- */
+/** 搜索历史记录列表的高亮索引 */
 const historyHIndex = ref(0)
 
-/**
- *   搜索历史记录列表
- */
+/** 搜索历史记录列表 */
 const searchHistoryList = computed(() => blogStore.searchHistoryList)
 
-/**
- * 当前高亮选项的索引位置
- */
+/** 当前高亮选项的索引位置 */
 const highlightedIndex = ref(0)
 
 /**
  * 聚焦搜索输入框
- * @desc 使用setTimeout确保弹窗打开后再执行聚焦操作
  */
 function focusInput() {
-  setTimeout(() => {
-    searchInputRef.value?.focus()
-  }, 100)
+  nextTick(() => {
+    if (searchInputRef.value) {
+      searchInputRef.value.focus()
+    }
+  })
+}
+
+/**
+ * 处理键盘导航事件
+ */
+function handleKeyboardNavigation(event: KeyboardEvent) {
+  if (!isShowSearchDialog.value) {
+    return
+  }
+
+  switch (event.key) {
+    case 'ArrowUp':
+      event.preventDefault()
+      highlightPrevious()
+      break
+    case 'ArrowDown':
+      event.preventDefault()
+      highlightNext()
+      break
+    case 'Enter':
+      event.preventDefault()
+      selectHighlighted()
+      break
+    case 'Escape':
+      event.preventDefault()
+      closeSearchDialog()
+      break
+  }
+}
+
+/**
+ * 处理全局快捷键
+ */
+function handleGlobalShortcut(event: KeyboardEvent) {
+  const isMac = navigator.platform.toUpperCase().includes('MAC')
+
+  const isCommandKey = isMac ? event.metaKey : event.ctrlKey
+
+  if (isCommandKey && event.key.toLowerCase() === 'k') {
+    event.preventDefault()
+    openSearchDialog()
+  }
 }
 
 /**
  * 模糊查询菜单列表
- * @param  arr - 菜单列表
- * @param  val - 搜索关键字
- * @returns - 所有匹配的项（包括匹配的父级和单独匹配的子级）
  */
 function fuzzyQueryList(
   arr: RouterType.BlogRouteRecordRaw[],
@@ -89,20 +111,34 @@ function fuzzyQueryList(
 
     if (item.children) {
       for (const child of item.children) {
-        searchItem(child) // 递归处理子项
+        searchItem(child)
       }
     }
 
-    // 如果当前项匹配，添加到结果中
     if (isSelfMatch) {
-      result.push({
-        ...item,
-        children: item.children ? fuzzyQueryList(item.children, val) : [],
-      })
+      const { meta, ...rest } = item
+
+      if ('externalUrl' in meta || 'iframeUrl' in meta) {
+        result.push({
+          ...rest,
+          meta,
+          children: undefined,
+        } as RouterType.BlogRouteRecordRaw)
+      }
+      else {
+        result.push({
+          ...rest,
+          meta: {
+            ...meta,
+            externalUrl: undefined,
+            iframeUrl: undefined,
+          },
+          children: item.children ? fuzzyQueryList(item.children, val) : undefined,
+        } as RouterType.BlogRouteRecordRaw)
+      }
     }
   }
 
-  // 遍历所有项
   for (const item of arr) {
     searchItem(item)
   }
@@ -112,7 +148,6 @@ function fuzzyQueryList(
 
 /**
  * 执行搜索操作
- * @param  val - 搜索关键词
  */
 function search(val: string) {
   if (!val) {
@@ -120,23 +155,19 @@ function search(val: string) {
     return
   }
 
-  // 执行模糊查询
-  const filteredList = fuzzyQueryList(menuList.value, val)
-
-  searchResult.value = filteredList
+  searchResult.value = fuzzyQueryList(menuList.value, val)
+  console.log('%c Line:117 🍭 searchResult.value', 'color:#6ec1c2', searchResult.value)
 }
 
-// 搜索框键盘向上切换
+/**
+ * 搜索框键盘向上切换
+ */
 function highlightPrevious() {
   if (searchVal.value) {
-    highlightedIndex.value
-      = (highlightedIndex.value - 1 + searchResult.value.length)
-        % searchResult.value.length
+    highlightedIndex.value = (highlightedIndex.value - 1 + searchResult.value.length) % searchResult.value.length
   }
   else {
-    historyHIndex.value
-      = (historyHIndex.value - 1 + searchHistoryList.value.length)
-        % searchHistoryList.value.length
+    historyHIndex.value = (historyHIndex.value - 1 + searchHistoryList.value.length) % searchHistoryList.value.length
   }
 }
 
@@ -145,12 +176,10 @@ function highlightPrevious() {
  */
 function highlightNext() {
   if (searchVal.value) {
-    highlightedIndex.value
-      = (highlightedIndex.value + 1) % searchResult.value.length
+    highlightedIndex.value = (highlightedIndex.value + 1) % searchResult.value.length
   }
   else {
-    historyHIndex.value
-      = (historyHIndex.value + 1) % searchHistoryList.value.length
+    historyHIndex.value = (historyHIndex.value + 1) % searchHistoryList.value.length
   }
 }
 
@@ -161,19 +190,13 @@ function selectHighlighted() {
   if (searchVal.value) {
     searchGoPage(searchResult.value[highlightedIndex.value])
   }
-  else {
-    if (!searchVal.value && searchHistoryList.value.length === 0) {
-      return
-    }
-
+  else if (searchHistoryList.value.length > 0) {
     searchGoPage(searchHistoryList.value[historyHIndex.value])
   }
 }
 
 /**
  * 判断是否高亮
- * @param  index - 索引
- * @returns  - 是否高亮
  */
 function isHighlighted(index: number) {
   return highlightedIndex.value === index
@@ -188,16 +211,13 @@ function searchBlur() {
 
 /**
  * 跳转到搜索结果页面
- * @param {RouterType.BlogMenuListType} item - 搜索结果项
  */
 function searchGoPage(item: RouterType.BlogRouteRecordRaw) {
-  isShowSearchDialog.value = false
-
+  blogMenuJump(item)
   addHistory(item)
-
-  router.push(item.path)
   searchVal.value = ''
   searchResult.value = []
+  isShowSearchDialog.value = false
 }
 
 /**
@@ -211,7 +231,6 @@ function updateHistory() {
 
 /**
  * 清理搜索项
- * @param  item - 搜索结果项
  */
 function cleanItem(item: RouterType.BlogRouteRecordRaw) {
   delete item.children
@@ -219,29 +238,26 @@ function cleanItem(item: RouterType.BlogRouteRecordRaw) {
 
 /**
  * 添加搜索历史
- * @param  item - 搜索结果项
  */
 function addHistory(item: RouterType.BlogRouteRecordRaw) {
   const hasItemIndex = searchHistoryList.value.findIndex(
-    (historyItem: RouterType.BlogRouteRecordRaw) =>
-      historyItem.path === item.path,
+    historyItem => historyItem.path === item.path,
   )
 
   if (hasItemIndex !== -1) {
-    searchHistoryList.value.splice(hasItemIndex, 1) // 如果存在则删除
+    searchHistoryList.value.splice(hasItemIndex, 1)
   }
   else if (searchHistoryList.value.length >= HISTORY_MAX_LENGTH) {
-    searchHistoryList.value.pop() // 超过最大记录数则删除最后一个
+    searchHistoryList.value.pop()
   }
 
   cleanItem(item)
-  searchHistoryList.value.unshift(item) // 添加新的 item 到头部
+  searchHistoryList.value.unshift(item)
   updateHistory()
 }
 
 /**
  * 删除搜索历史
- * @param  index - 历史记录索引
  */
 function deleteHistory(index: number) {
   searchHistoryList.value.splice(index, 1)
@@ -260,7 +276,6 @@ function closeSearchDialog() {
 
 /**
  * 鼠标悬停高亮
- * @param  index - 索引
  */
 function highlightOnHover(index: number) {
   highlightedIndex.value = index
@@ -271,33 +286,21 @@ function highlightOnHover(index: number) {
  */
 function openSearchDialog() {
   isShowSearchDialog.value = true
-  focusInput()
-}
-
-/**
- * 处理全局键盘事件
- * @param  event - 键盘事件对象
- * @desc 监听 Command/Ctrl + K 组合键打开搜索弹窗
- */
-function handleKeydown(event: KeyboardEvent) {
-  const isMac = navigator.platform.toUpperCase().includes('MAC')
-
-  const isCommandKey = isMac ? event.metaKey : event.ctrlKey
-
-  if (isCommandKey && event.key.toLowerCase() === 'k') {
-    event.preventDefault()
-    isShowSearchDialog.value = true
+  setTimeout(() => {
     focusInput()
-  }
+  }, 100)
 }
 
 onMounted(() => {
   blogMittBus.on('openSearchDialog', openSearchDialog)
-  document.addEventListener('keydown', handleKeydown)
+  document.addEventListener('keydown', handleGlobalShortcut)
+  document.addEventListener('keydown', handleKeyboardNavigation)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown)
+  blogMittBus.off('openSearchDialog', openSearchDialog)
+  document.removeEventListener('keydown', handleGlobalShortcut)
+  document.removeEventListener('keydown', handleKeyboardNavigation)
 })
 </script>
 
@@ -309,8 +312,10 @@ onUnmounted(() => {
       v-model="isShowSearchDialog"
       width="600"
       :show-close="false"
-      :lock-scroll="false"
-      modal-class=""
+      :lock-scroll="true"
+      :close-on-click-modal="true"
+      :close-on-press-escape="true"
+      @opened="focusInput"
       @close="closeSearchDialog"
     >
       <el-input
@@ -321,9 +326,6 @@ onUnmounted(() => {
         clearable
         @input="search"
         @blur="searchBlur"
-        @keydown.up.prevent="highlightPrevious"
-        @keydown.down.prevent="highlightNext"
-        @keydown.enter.prevent="selectHighlighted"
       >
         <template
           #prefix
@@ -352,15 +354,11 @@ onUnmounted(() => {
         <p
           class="text-4 color-[#78829d] font-bold"
         >
-          <span>
-            搜索
-          </span>
+          <span>搜索</span>
 
           <span
             class="text-5 color-violet"
-          >
-            结果
-          </span>
+          >结果</span>
         </p>
 
         <div
@@ -370,9 +368,7 @@ onUnmounted(() => {
             v-for="(item, index) in searchResult"
             :key="index"
             class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#4b5675] leading-none"
-            :class="{
-              '!bg-primary !color-white': isHighlighted(index),
-            }"
+            :class="{ '!bg-primary !color-white': isHighlighted(index) }"
             @click="searchGoPage(item)"
             @mouseenter="highlightOnHover(index)"
           >
@@ -390,25 +386,17 @@ onUnmounted(() => {
 
       <!-- 搜索历史 -->
       <div
-        v-show="
-          !searchVal
-            && searchResult.length === 0
-            && searchHistoryList.length > 0
-        "
+        v-show="!searchVal && searchResult.length === 0 && searchHistoryList.length > 0"
         class="mt-5"
       >
         <p
           class="text-4 color-[#78829d] font-bold"
         >
-          <span>
-            搜索
-          </span>
+          <span>搜索</span>
 
           <span
             class="text-5 color-emerald"
-          >
-            历史
-          </span>
+          >历史</span>
         </p>
 
         <div
@@ -418,19 +406,14 @@ onUnmounted(() => {
             v-for="(item, index) in searchHistoryList"
             :key="index"
             class="mt-2 h-12 flex cursor-pointer items-center justify-between rounded-3 bg-[#F9F9F9] px-4 text-4 color-[#252f4a] leading-none"
-            :class="{
-              '!bg-primary !color-white': historyHIndex === index,
-            }"
+            :class="{ '!bg-primary !color-white': historyHIndex === index }"
             @click="searchGoPage(item)"
             @mouseenter="historyHIndex = index"
           >
-
-            <!-- 左侧 -->
             <MenuItem
               :menu="item"
             />
 
-            <!-- 右侧 -->
             <SvgIcon
               icon="close"
               :size="18"

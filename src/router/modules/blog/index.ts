@@ -4,6 +4,7 @@ import { BLOG_BASE_LAYOUT } from '@/layouts'
 
 import {
   formatModules,
+  recursiveFindRoutesByProperty,
   recursiveHandleIframeRoutes,
   recursiveNormalizeRoutesPath,
   recursiveSortRoutesByOrder,
@@ -44,6 +45,8 @@ const sorted = recursiveSortRoutesByOrder(withPath)
 
 const blogRouterList = recursiveHandleIframeRoutes(sorted)
 
+console.log('%c Line:47 🍌 blogRouterList', 'color:#4fff4B', blogRouterList)
+
 /**
  *  testRouter (代码模块路由)
  */
@@ -60,6 +63,20 @@ const testRouter: RouteRecordRaw[] = [
 
 export default testRouter
 
+/**
+ *  获取快速菜单列表
+ */
+const blogFastMenuList: RouterType.BlogRouteRecordRaw[] = recursiveFindRoutesByProperty(
+  blogRouterList,
+  'meta.fastMenuOrder',
+  undefined,
+  {
+    sortBy: 'meta.fastMenuOrder',
+    sortOrder: 'asc',
+  },
+)
+
 export {
+  blogFastMenuList,
   blogRouterList,
 }

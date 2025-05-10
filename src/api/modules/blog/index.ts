@@ -4,14 +4,14 @@ import { fetchHttp } from '../../http'
  *  ThingProxy  (最快)
  *  @description  ThingProxy 是一个免费的跨域代理服务，它可以让你在浏览器中访问其他网站的资源，而无需设置 CORS 头。
  */
-const proxyUrl = `https://thingproxy.freeboard.io/fetch/`
+const proxyUrl = import.meta.env.VITE_API_PROXY_URL
 
 class BlogApi {
   /**
    *  测试接口
    */
-  test() {
-    return fetchHttp('https://v2.api-m.com/api/weather?city=枣庄滕州')
+  apiTest(url: string = 'https://v2.api-m.com/api/weather?city=枣庄滕州', isProxy: boolean = false) {
+    return fetchHttp(isProxy ? proxyUrl + url : url)
   }
 
   /**
@@ -191,7 +191,7 @@ class BlogApi {
    *  @see https://api.pearktrue.cn/info?id=282
    */
   async getOilPrices() {
-    return fetchHttp('https://api.pearktrue.cn/api/oil/')
+    return fetchHttp(`https://api.pearktrue.cn/api/oil/`)
   }
 
   /**
@@ -347,7 +347,7 @@ class BlogApi {
 
     async function getData() {
       const response = await fetch(
-        `https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
+        `${proxyUrl}https://api.lolimi.cn/API/xyan/api.php?msg=${cigarette}`,
       )
 
       if (!response.ok) {
@@ -446,6 +446,76 @@ class BlogApi {
   getExpressTracking(tracking: string) {
     return fetchHttp(
       `https://api.songzixian.com/api/express/tracking?dataSource=nationwide_express&trackingNumber=${tracking}`,
+    )
+  }
+
+  /**
+   *  一言句子API接口
+   *  @see https://api.vvhan.com/article/yiyan.html
+   */
+  getOneSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/ian/rand?type=json',
+    )
+  }
+
+  /**
+   *  骚话API接口
+   *  @see https://api.vvhan.com/article/sexy.html
+   */
+  getSexySentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/sexy?type=json',
+    )
+  }
+
+  /**
+   *  情话API接口
+   *  @see https://api.vvhan.com/article/love.html
+   */
+  getLoveSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/love?type=json',
+    )
+  }
+
+  /**
+   *  笑话API接口
+   *  @see https://api.vvhan.com/article/joke.html
+   */
+  getJokeSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/joke?type=json',
+    )
+  }
+
+  /**
+   *  舔狗日记API接口
+   *  @see https://api.vvhan.com/article/dog.html
+   */
+  getDogSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/text/dog?type=json',
+    )
+  }
+
+  /**
+   *  每日一句励志英语API接口
+   *  @see https://api.vvhan.com/article/en.html
+   */
+  getEnglishSentence() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/dailyEnglish?type=sj',
+    )
+  }
+
+  /**
+   *  IT资讯热榜API
+   *  @see https://api.vvhan.com/article/itNews.html
+   */
+  getItNews() {
+    return fetchHttp(
+      'https://api.vvhan.com/api/hotlist/itNews',
     )
   }
 }

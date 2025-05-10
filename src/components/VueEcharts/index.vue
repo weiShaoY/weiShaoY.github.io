@@ -79,11 +79,8 @@ const props = withDefaults(defineProps<ChartPropsType>(), {
 const emit = defineEmits(['click'])
 
 const loadingOptions = {
-  text: '加载中...',
   fontSize: 20,
   fontFamily: 'gaiLiangShouJinTi',
-  color: '#E43961',
-  textColor: '#000',
 }
 
 const computedStyle = computed<CSSProperties>(() => ({

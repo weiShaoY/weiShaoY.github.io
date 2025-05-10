@@ -77,7 +77,7 @@ watch(inputJson, (newVal) => {
         </el-radio-group>
       </div>
 
-      <ButtonIcon
+      <BaseButton
         v-if="!isError"
         v-copy="{
           text: JSON.stringify(parsedJson, null, 2),

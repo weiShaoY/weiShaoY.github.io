@@ -36,7 +36,7 @@ function search() {
       <template
         #append
       >
-        <ButtonIcon
+        <BaseButton
           icon="search"
           @click="search"
         />

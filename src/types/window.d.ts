@@ -2,20 +2,35 @@ export {}
 
 declare global {
 
-  /** 全局 Window 对象类型 */
+  /**
+   * 全局 Window 对象类型扩展
+   * @description 为 Window 对象添加全局插件和工具的类型定义
+   */
   // eslint-disable-next-line ts/consistent-type-definitions
   export interface Window {
 
-    /** NProgress 实例 */
-    NProgress?: import('nprogress').NProgress
+    /**
+     * NProgress 进度条实例
+     * @description 用于显示页面加载进度
+     */
+    NProgress: import('nprogress').NProgress
 
-    /** MessageBox 实例 */
-    $messageBox?: import('element-plus').IElMessageBox
+    /**
+     * Element Plus 消息弹框实例
+     * @description 用于显示确认框、提示框等
+     */
+    $messageBox: import('element-plus').IElMessageBox
 
-    /** Message 实例 */
-    $message?: import('element-plus').Message
+    /**
+     * Element Plus 消息提示实例
+     * @description 用于显示轻量级的消息提示
+     */
+    $message: import('element-plus').Message
 
-    /** Notification 实例 */
-    $notification?: import('element-plus').Notify
+    /**
+     * Element Plus 通知实例
+     * @description 用于显示系统通知
+     */
+    $notification: import('element-plus').Notify
   }
 }

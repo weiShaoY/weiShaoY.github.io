@@ -89,7 +89,3 @@ const computedClass = computed(() => {
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-
-</style>

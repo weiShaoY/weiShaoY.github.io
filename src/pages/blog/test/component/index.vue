@@ -77,7 +77,7 @@ onMounted(async () => {
         <template
           #append
         >
-          <ButtonIcon
+          <BaseButton
             icon="search"
             :loading="isLoading"
             @click="getData"

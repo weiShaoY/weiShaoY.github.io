@@ -290,7 +290,7 @@ onMounted(async () => {
       >
         <el-table
           class="!w-full"
-          :data="goldData.domesticGold"
+          :data="goldData.internationalGold"
           height="100%"
         >
           <el-table-column

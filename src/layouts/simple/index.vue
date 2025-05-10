@@ -13,7 +13,19 @@ import Header from './components/header/index.vue'
       <template
         #default
       >
-        <router-view />
+        <router-view
+          v-slot="{ Component }"
+        >
+          <Transition
+            name="slide-left"
+            mode="out-in"
+            appear
+          >
+            <component
+              :is="Component"
+            />
+          </Transition>
+        </router-view>
       </template>
 
       <template
@@ -24,7 +36,3 @@ import Header from './components/header/index.vue'
     </Suspense>
   </div>
 </template>
-
-<style lang="less" scoped>
-
-</style>

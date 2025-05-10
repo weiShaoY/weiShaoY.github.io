@@ -31,6 +31,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
             title: 'Carbon',
             icon: 'blog-menu-carbon',
             externalUrl: 'https://carbon.now.sh/',
+            fastMenuOrder: 3,
           },
         },
       ],
@@ -60,6 +61,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: 'Json转Ts',
         icon: 'blog-menu-jsonToTypeScript',
+        fastMenuOrder: 4,
       },
       component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
     },

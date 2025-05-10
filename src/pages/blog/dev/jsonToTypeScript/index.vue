@@ -174,7 +174,7 @@ watch(inputJson, (newVal) => {
         </el-radio-group>
       </div>
 
-      <ButtonIcon
+      <BaseButton
         v-if="!isError && inputJson.length > 0"
         v-copy="{
           text: outputClass,

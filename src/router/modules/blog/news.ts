@@ -18,17 +18,27 @@ const News: RouterType.BlogRouteRecordRaw = {
         title: '每日热点',
         icon: 'blog-menu-dailyHotTopics',
         iframeUrl: 'https://today.lieme.cn/',
+        fastMenuOrder: 1,
       },
+    },
+    {
+      path: 'itNews',
+      name: 'ItNews',
+      meta: {
+        title: 'IT资讯',
+        icon: 'blog-menu-itNews',
+      },
+      component: () => import('@/pages/blog/news/itNews/index.vue'),
     },
 
     {
-      path: 'movie',
-      name: 'Movie',
+      path: 'boxOffice',
+      name: 'BoxOffice',
       meta: {
-        title: '影视',
-        icon: 'blog-menu-movie',
+        title: '票房',
+        icon: 'blog-menu-boxOffice',
       },
-      component: () => import('@/pages/blog/news/movie/index.vue'),
+      component: () => import('@/pages/blog/news/boxOffice/index.vue'),
     },
     {
       path: 'weather',
@@ -36,6 +46,7 @@ const News: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: '天气',
         icon: 'blog-menu-weather',
+        fastMenuOrder: 2,
       },
       component: () => import('@/pages/blog/news/weather/index.vue'),
     },
@@ -79,6 +90,7 @@ const News: RouterType.BlogRouteRecordRaw = {
           meta: {
             title: '黄金',
             icon: 'blog-menu-gold',
+            fastMenuOrder: 7,
           },
           component: () => import('@/pages/blog/news/price/gold/index.vue'),
         },

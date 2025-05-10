@@ -1,19 +1,18 @@
 <!-- 内容布局 -->
 <script setup lang="ts">
-
 import { useBlogStore } from '@/store'
 
 const blogStore = useBlogStore()
 
-const containerStyle = computed(() => {
-  return {
-    maxWidth: blogStore.setting.container.maxWidth,
-  }
-})
+// 容器样式
+const containerStyle = computed(() => ({
+  maxWidth: blogStore.setting.container.maxWidth,
+}))
 
+// 刷新状态
 const isRefresh = ref(true)
 
-// Methods
+// 强制刷新组件
 function reload() {
   isRefresh.value = false
   nextTick(() => {
@@ -21,36 +20,32 @@ function reload() {
   })
 }
 
+// 监听全局刷新状态
 watch(() => blogStore.isRefresh, reload)
 
+// 过渡动画配置
+const transitionProps = {
+  name: 'slide-bottom',
+  mode: 'out-in',
+  appear: true,
+} as const
 </script>
 
 <template>
-  <!-- 页面容器 -->
   <div
     class="layout-content m-auto w-[calc(100%-40px)]"
     :style="containerStyle"
   >
-
-    <!-- 路由视图容器 -->
-    <!-- v-if控制是否渲染，可用于强制刷新 -->
-    <!-- v-slot获取当前路由对应的组件和路由信息 -->
-    <!-- 设置宽度100%和动态最小高度 -->
     <RouterView
       v-if="isRefresh"
       v-slot="{ Component, route }"
       class="w-full"
       :style="{ minHeight: blogStore.setting.container.minHeight }"
     >
-
-      <!-- 需要缓存的页面部分 -->
-      <!-- 缓存组件渲染 -->
+      <!-- 需要缓存的页面 -->
       <Transition
-        name="slide-bottom"
-        mode="out-in"
-        appear
+        v-bind="transitionProps"
       >
-        <!-- KeepAlive缓存组件，最多20个，排除不缓存的组件 -->
         <KeepAlive
           :max="20"
           :exclude="blogStore.keepAliveExclude"
@@ -63,14 +58,10 @@ watch(() => blogStore.isRefresh, reload)
         </KeepAlive>
       </Transition>
 
-      <!-- 非缓存组件渲染 -->
+      <!-- 不需要缓存的页面 -->
       <Transition
-        name="slide-bottom"
-        mode="out-in"
-        appear
+        v-bind="transitionProps"
       >
-        <!-- 动态渲染组件 -->
-        <!-- 当路由meta中keepAlive为false时渲染 -->
         <component
           :is="Component"
           v-if="!route.meta.keepAlive"
@@ -78,6 +69,11 @@ watch(() => blogStore.isRefresh, reload)
         />
       </Transition>
     </RouterView>
-
   </div>
 </template>
+
+<style scoped>
+.layout-content {
+  transition: max-width 0.3s ease-in-out;
+}
+</style>
