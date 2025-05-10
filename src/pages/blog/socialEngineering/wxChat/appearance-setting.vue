@@ -1,8 +1,50 @@
 <script setup lang="ts">
 import type { AppearanceSettings } from '@/types/wxChat'
 
+import type { UploadFile } from 'element-plus'
+
+import {
+  computed,
+  ref,
+  watch,
+} from 'vue'
+
 // 使用 defineModel 实现双向绑定
 const model = defineModel<AppearanceSettings>()
+
+// 文件列表
+const fileList = ref<UploadFile[]>([])
+
+// 创建计算属性的工厂函数
+function createComputed<K extends keyof AppearanceSettings>(key: K) {
+  return computed({
+    get: () => getModelValue(key),
+    set: value => updateSetting(key, value),
+  })
+}
+
+// 计算属性
+const phoneSignal = createComputed('phoneSignal')
+
+const networkSignal = createComputed('networkSignal')
+
+const wifiSignal = createComputed('wifiSignal')
+
+const phoneTime = createComputed('phoneTime')
+
+const phoneBattery = createComputed('phoneBattery')
+
+const isEarpieceMode = createComputed('isEarpieceMode')
+
+const isCharging = createComputed('isCharging')
+
+const isVoiceMode = createComputed('isVoiceMode')
+
+const messageCount = createComputed('messageCount')
+
+const chatTitle = createComputed('chatTitle')
+
+const chatBackgroundImage = createComputed('chatBackgroundImage')
 
 // 更新单个属性
 function updateSetting<K extends keyof AppearanceSettings>(key: K, value: AppearanceSettings[K]) {
@@ -16,366 +58,215 @@ function updateSetting<K extends keyof AppearanceSettings>(key: K, value: Appear
   }
 }
 
-// 获取信号值
-function getSignalValue(value: number | undefined): number {
-  return value ?? 0
-}
-
 // 获取模型值
 function getModelValue<K extends keyof AppearanceSettings>(key: K): AppearanceSettings[K] {
   return model.value?.[key] as AppearanceSettings[K]
 }
 
-// 处理输入事件
-function handleInput(e: Event, key: keyof AppearanceSettings) {
-  const target = e.target as HTMLInputElement
+// 处理图片变化
+function handleImageChange(file: UploadFile) {
+  if (!file.raw) {
+    return
+  }
 
-  if (target.type === 'number') {
-    updateSetting(key, Number(target.value))
-  }
-  else {
-    updateSetting(key, target.value as AppearanceSettings[typeof key])
-  }
+  const localUrl = URL.createObjectURL(file.raw)
+
+  chatBackgroundImage.value = localUrl
 }
 
-// 处理复选框事件
-function handleCheckbox(e: Event, key: keyof AppearanceSettings) {
-  const target = e.target as HTMLInputElement
-
-  updateSetting(key, target.checked as AppearanceSettings[typeof key])
-}
+// 监听手机时间变化
+watch(phoneTime, (value) => {
+  console.log('手机时间更新:', value)
+})
 </script>
 
 <template>
   <div
-    class="appearance-setting"
+    class="appearance-setting p-5"
   >
-    <!-- 手机信号 -->
-    <div
-      class="setting-item"
+    <el-form
+      label-width="auto"
+      style="width: 100%"
+      size="small"
     >
-      <span
-        class="label"
-      >手机信号</span>
-
-      <div
-        class="signal-bars"
+      <el-form-item
+        label="手机信号"
       >
-        <div
-          v-for="i in 4"
-          :key="i"
-          class="bar"
-          :class="{ active: i <= getSignalValue(getModelValue('phoneSignal')) }"
-          @click="updateSetting('phoneSignal', i)"
+        <el-slider
+          v-model="phoneSignal"
+          :step="1"
+          :min="1"
+          :max="4"
+          show-stops
+          :format-tooltip="value => `${value}格`"
+          :marks="{
+            1: '1格',
+            2: '2格',
+            3: '3格',
+            4: '4格',
+          }"
         />
-      </div>
-    </div>
+      </el-form-item>
 
-    <!-- 手机时间 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >手机时间</span>
-
-      <input
-        :value="getModelValue('phoneTime')"
-        type="time"
-        @input="handleInput($event, 'phoneTime')"
+      <el-form-item
+        label="网络信号"
       >
-    </div>
-
-    <!-- 手机电量 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >手机电量</span>
-
-      <div
-        class="battery-level"
-      >
-        <div
-          v-for="i in 5"
-          :key="i"
-          class="level"
-          :class="{ active: i <= getSignalValue(getModelValue('phoneBattery')) }"
-          @click="updateSetting('phoneBattery', i)"
-        />
-      </div>
-    </div>
-
-    <!-- 网络信号 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >网络信号</span>
-
-      <div
-        class="signal-bars"
-      >
-        <div
-          v-for="i in 4"
-          :key="i"
-          class="bar"
-          :class="{ active: i <= getSignalValue(getModelValue('networkSignal')) }"
-          @click="updateSetting('networkSignal', i)"
-        />
-      </div>
-    </div>
-
-    <!-- WiFi信号 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >WiFi信号</span>
-
-      <div
-        class="signal-bars"
-      >
-        <div
-          v-for="i in 4"
-          :key="i"
-          class="bar"
-          :class="{ active: i <= getSignalValue(getModelValue('wifiSignal')) }"
-          @click="updateSetting('wifiSignal', i)"
-        />
-      </div>
-    </div>
-
-    <!-- 充电状态 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >充电状态</span>
-
-      <label
-        class="switch"
-      >
-        <input
-          :checked="getModelValue('isCharging')"
-          type="checkbox"
-          @change="handleCheckbox($event, 'isCharging')"
+        <el-select
+          v-model="networkSignal"
+          size="small"
         >
+          <el-option
+            label="WiFi"
+            :value="1"
+          />
 
-        <span
-          class="slider"
-        />
-      </label>
-    </div>
+          <el-option
+            label="3G"
+            :value="2"
+          />
 
-    <!-- 听筒模式 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >听筒模式</span>
+          <el-option
+            label="4G"
+            :value="3"
+          />
 
-      <label
-        class="switch"
+          <el-option
+            label="5G"
+            :value="4"
+          />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item
+        label="WiFi信号"
       >
-        <input
-          :checked="getModelValue('isEarpieceMode')"
-          type="checkbox"
-          @change="handleCheckbox($event, 'isEarpieceMode')"
+        <el-select
+          v-model="wifiSignal"
+          size="small"
         >
+          <el-option
+            label="1格"
+            :value="1"
+          />
 
-        <span
-          class="slider"
-        />
-      </label>
-    </div>
+          <el-option
+            label="2格"
+            :value="2"
+          />
 
-    <!-- 语音模式 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >语音模式</span>
+          <el-option
+            label="3格"
+            :value="3"
+          />
+        </el-select>
+      </el-form-item>
 
-      <label
-        class="switch"
+      <el-form-item
+        label="手机时间"
       >
-        <input
-          :checked="getModelValue('isVoiceMode')"
-          type="checkbox"
-          @change="handleCheckbox($event, 'isVoiceMode')"
+        <el-time-picker
+          v-model="phoneTime"
+          format="HH:mm"
+          value-format="HH:mm"
+          :picker-options="{ showConfirm: false }"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="手机电量"
+      >
+        <el-slider
+          v-model="phoneBattery"
+          :min="0"
+          :max="100"
+          :step="1"
+          :show-stops="true"
+          :format-tooltip="value => `${value}%`"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="充电状态"
+      >
+        <el-switch
+          v-model="isCharging"
+          inline-prompt
+          active-text="充电中"
+          inactive-text="未充电"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="听筒模式"
+      >
+        <el-switch
+          v-model="isEarpieceMode"
+          inline-prompt
+          active-text="听筒模式"
+          inactive-text="扬声器模式"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="语音模式"
+      >
+        <el-switch
+          v-model="isVoiceMode"
+          inline-prompt
+          active-text="语音模式"
+          inactive-text="文字模式"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="消息数量"
+      >
+        <el-input
+          v-model="messageCount"
+          type="number"
+          :min="0"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="聊天标题"
+      >
+        <el-input
+          v-model.trim="chatTitle"
+        />
+      </el-form-item>
+
+      <el-form-item
+        label="聊天背景图"
+      >
+        <el-upload
+          v-model:file-list="fileList"
+          :show-file-list="false"
+          :auto-upload="false"
+          accept="image/*"
         >
+          <template
+            #trigger
+          >
+            <div
+              class="border- h-32 w-18 flex items-center justify-center border border-gray-300 rounded-md border-dashed"
+            >
+              选择图片
+            </div>
+          </template>
 
-        <span
-          class="slider"
-        />
-      </label>
-    </div>
+          <template
+            #tip
+          >
+            <div
+              class="el-upload__tip"
+            >
+              请选择一张图片作为聊天背景
+            </div>
+          </template>
+        </el-upload>
+      </el-form-item>
+    </el-form>
 
-    <!-- 消息数量 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >消息数量</span>
-
-      <input
-        :value="getModelValue('messageCount')"
-        type="number"
-        @input="handleInput($event, 'messageCount')"
-      >
-    </div>
-
-    <!-- 聊天标题 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >聊天标题</span>
-
-      <input
-        :value="getModelValue('chatTitle')"
-        type="text"
-        @input="handleInput($event, 'chatTitle')"
-      >
-    </div>
-
-    <!-- 聊天背景图 -->
-    <div
-      class="setting-item"
-    >
-      <span
-        class="label"
-      >聊天背景图</span>
-
-      <input
-        :value="getModelValue('chatBackgroundImage')"
-        type="text"
-        @input="handleInput($event, 'chatBackgroundImage')"
-      >
-    </div>
   </div>
 </template>
-
-<style scoped>
-.appearance-setting {
-  padding: 20px;
-}
-
-.setting-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.label {
-  width: 100px;
-  font-size: 14px;
-  color: #333;
-}
-
-/* 信号条样式 */
-.signal-bars {
-  display: flex;
-  gap: 2px;
-}
-
-.bar {
-  width: 20px;
-  height: 10px;
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-.bar.active {
-  background-color: #07c160;
-}
-
-/* 电池电量样式 */
-.battery-level {
-  display: flex;
-  gap: 2px;
-}
-
-.level {
-  width: 15px;
-  height: 20px;
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-.level.active {
-  background-color: #07c160;
-}
-
-/* 开关样式 */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 24px;
-}
-
-.slider:before {
-  position: absolute;
-  content: '';
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #07c160;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-/* 输入框样式 */
-input[type='text'],
-input[type='number'],
-input[type='time'] {
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-input[type='text']:focus,
-input[type='number']:focus,
-input[type='time']:focus {
-  outline: none;
-  border-color: #07c160;
-}
-</style>`

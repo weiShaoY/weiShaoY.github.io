@@ -282,7 +282,9 @@
                       信号333333333333
                     </div>
                     <div
-                      :class="['phone-wifi', {'phone-wifi-v2':phone.wifi > 1}, phone.wifi == 1 ? 'phone-wifi-s' + phone.wifi_single : '']"
+                      :class="[
+                      'phone-wifi',
+                       {'phone-wifi-v2':phone.wifi > 1}, phone.wifi == 1 ? 'phone-wifi-s' + phone.wifi_single : '']"
                     >
                       <template v-if="phone.wifi == 1"> wifi </template>
                       <template v-else-if="phone.wifi == 2"> 3G </template>

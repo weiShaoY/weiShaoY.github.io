@@ -2,6 +2,8 @@
 <script lang="ts" setup>
 import type { SettingType } from './index.vue'
 
+import { computed } from 'vue'
+
 const props = defineProps<{
 
   /**
@@ -9,6 +11,13 @@ const props = defineProps<{
    */
   setting: SettingType
 }>()
+
+const signalImageUrl = computed(() => {
+  return new URL(
+    `./images/bar/ios-single-${props.setting.appearance.phoneSignal}-dark.png`,
+    import.meta.url,
+  ).href
+})
 </script>
 
 <template>
@@ -38,14 +47,43 @@ const props = defineProps<{
             <!-- 手机信号 -->
             <div
               class="phone-sigle phone-sigle mr-[6px] h-[36px] h-[36px] w-[54px] w-[54px] bg-no-repeat indent--9999px"
+              :style="{
+                backgroundImage: `url(${signalImageUrl})`,
+              }"
+            >
+              <!-- 手机信号 -->
+            </div>
+
+            <div
+              class="phone-wifi"
               :class="[
-                { 'phone-sigle-v1': setting.appearance.phoneSignal === 1 },
-                { 'phone-sigle-v2': setting.appearance.phoneSignal === 2 },
-                { 'phone-sigle-v3': setting.appearance.phoneSignal === 3 },
-                { 'phone-sigle-v4': setting.appearance.phoneSignal === 4 },
+                { 'phone-wifi-v2': setting.appearance.networkSignal > 1 },
+                setting.appearance.networkSignal === 1 ? `phone-wifi-s${setting.appearance.wifiSignal}` : '',
               ]"
             >
-              信号333333333333
+              <template
+                v-if=" setting.appearance.networkSignal === 1"
+              >
+                wifi
+              </template>
+
+              <template
+                v-else-if=" setting.appearance.networkSignal === 2"
+              >
+                3G
+              </template>
+
+              <template
+                v-else-if=" setting.appearance.networkSignal === 3"
+              >
+                4G
+              </template>
+
+              <template
+                v-else-if=" setting.appearance.networkSignal === 4"
+              >
+                5G
+              </template>
             </div>
           </div>
         </div>
@@ -55,27 +93,28 @@ const props = defineProps<{
 </template>
 
 <style lang="less" scoped>
-// .phone-sigle {
-//   width: 54px;
-//   height: 36px;
-//   background: url(./images/bar/ios-single-4-dark.png) no-repeat;
-//   margin-right: 6px;
-//   text-indent: -9999px;
-// }
-
-.phone-sigle-v1 {
-  background-image: url(./images/bar/ios-single-1-dark.png);
+.phone-wifi {
+  width: 63px;
+  height: 45px;
+  background: url(./images/bar/ios-wifi-3-dark.png) no-repeat;
+  margin-right: 6px;
+  text-indent: -9999px;
 }
 
-.phone-sigle-v2 {
-  background-image: url(./images/bar/ios-single-2-dark.png);
+.phone-wifi-s1 {
+  background-image: url(./images/bar/ios-wifi-1-dark.png);
 }
 
-.phone-sigle-v3 {
-  background-image: url(./images/bar/ios-single-3-dark.png);
+.phone-wifi-s2 {
+  background-image: url(./images/bar/ios-wifi-2-dark.png);
 }
 
-.phone-sigle-v4 {
-  background-image: url(./images/bar/ios-single-4-dark.png);
+.phone-wifi-v2 {
+  text-indent: 0;
+  background-image: none;
+  font-size: 36px;
+  font-weight: 500;
+  text-align: center;
+  height: auto;
 }
 </style>

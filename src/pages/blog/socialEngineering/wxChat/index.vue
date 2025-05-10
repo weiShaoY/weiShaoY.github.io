@@ -174,7 +174,7 @@ const setting = ref<SettingType>({
     /**
      *  聊天标题
      */
-    chatTitle: '条',
+    chatTitle: '微信对话',
 
     /**
      *  聊天背景图
