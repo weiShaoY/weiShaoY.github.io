@@ -80,6 +80,8 @@ declare module 'vue' {
     GithubActivityGraph: typeof import('./../components/GithubActivityGraph/index.vue')['default']
     GlobalSetting: typeof import('./../components/GlobalSetting/index.vue')['default']
     GoHomeButton: typeof import('./../components/GoHomeButton/index.vue')['default']
+    HeartAnimation: typeof import('./../components/HeartAnimation/index.vue')['default']
+    HeartClick: typeof import('./../components/HeartClick/index.vue')['default']
     IconAntDesignEnterOutlined: typeof import('~icons/ant-design/enter-outlined')['default']
     IconLink: typeof import('./../components/IconLink/index.vue')['default']
     IconMdiArrowDownThin: typeof import('~icons/mdi/arrow-down-thin')['default']
