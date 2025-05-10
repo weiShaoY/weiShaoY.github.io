@@ -94,6 +94,7 @@ declare module 'vue-router/auto-routes' {
     '/home/work/': RouteRecordInfo<'/home/work/', '/home/work', Record<never, never>, Record<never, never>>,
     '/home/work/components/experience/': RouteRecordInfo<'/home/work/components/experience/', '/home/work/components/experience', Record<never, never>, Record<never, never>>,
     '/home/work/components/project/': RouteRecordInfo<'/home/work/components/project/', '/home/work/components/project', Record<never, never>, Record<never, never>>,
+    '/love/': RouteRecordInfo<'/love/', '/love', Record<never, never>, Record<never, never>>,
     '/test/': RouteRecordInfo<'/test/', '/test', Record<never, never>, Record<never, never>>,
   }
 }
