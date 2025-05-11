@@ -3,17 +3,10 @@ import type { AppearanceSettings } from '@/types/wxChat'
 
 import type { UploadFile } from 'element-plus'
 
-import {
-  computed,
-  ref,
-  watch,
-} from 'vue'
+import { computed, watch } from 'vue'
 
 // 使用 defineModel 实现双向绑定
 const model = defineModel<AppearanceSettings>()
-
-// 文件列表
-const fileList = ref<UploadFile[]>([])
 
 // 创建计算属性的工厂函数
 function createComputed<K extends keyof AppearanceSettings>(key: K) {
@@ -64,18 +57,20 @@ function getModelValue<K extends keyof AppearanceSettings>(key: K): AppearanceSe
 }
 
 // 处理图片变化
-function handleImageChange(file: UploadFile) {
-  if (!file.raw) {
-    return
+function handleChange(uploadFile: UploadFile) {
+  if (!uploadFile.raw) {
+    return false
   }
 
-  const localUrl = URL.createObjectURL(file.raw)
+  const localUrl = URL.createObjectURL(uploadFile.raw)
 
   chatBackgroundImage.value = localUrl
+
+  return false
 }
 
 // 监听手机时间变化
-watch(phoneTime, (value) => {
+watch(chatBackgroundImage, (value) => {
   console.log('手机时间更新:', value)
 })
 </script>
@@ -87,7 +82,6 @@ watch(phoneTime, (value) => {
     <el-form
       label-width="auto"
       style="width: 100%"
-      size="small"
     >
       <el-form-item
         label="手机信号"
@@ -240,33 +234,30 @@ watch(phoneTime, (value) => {
         label="聊天背景图"
       >
         <el-upload
-          v-model:file-list="fileList"
+          class=""
           :show-file-list="false"
           :auto-upload="false"
           accept="image/*"
+          :on-change="handleChange"
         >
-          <template
-            #trigger
+          <img
+            v-if="chatBackgroundImage"
+            :src="chatBackgroundImage"
+            class="h-40 w-30 flex items-center justify-center border border-gray-300 rounded-md border-dashed text-8 font-bold"
           >
-            <div
-              class="border- h-32 w-18 flex items-center justify-center border border-gray-300 rounded-md border-dashed"
-            >
-              选择图片
-            </div>
-          </template>
 
-          <template
-            #tip
+          <div
+            v-else
+            class="h-40 w-30 flex items-center justify-center border border-gray-300 rounded-md border-dashed text-8 font-bold"
           >
-            <div
-              class="el-upload__tip"
-            >
-              请选择一张图片作为聊天背景
-            </div>
-          </template>
+            +
+          </div>
         </el-upload>
       </el-form-item>
     </el-form>
-
   </div>
 </template>
+
+<style lang="scss" scoped>
+
+</style>
