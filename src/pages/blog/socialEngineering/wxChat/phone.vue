@@ -54,6 +54,7 @@ const signalImageUrl = computed(() => {
               <!-- 手机信号 -->
             </div>
 
+            <!-- wifi -->
             <div
               class="phone-wifi"
               :class="[
