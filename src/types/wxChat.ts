@@ -22,7 +22,6 @@ export type AppearanceSettings = {
   phoneSignal: number
   phoneTime: string
   phoneBattery: number
-  networkSignal: number
   wifiSignal: number
   isCharging: boolean
   isEarpieceMode: boolean

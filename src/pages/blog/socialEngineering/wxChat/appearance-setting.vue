@@ -19,8 +19,6 @@ function createComputed<K extends keyof AppearanceSettings>(key: K) {
 // 计算属性
 const phoneSignal = createComputed('phoneSignal')
 
-const networkSignal = createComputed('networkSignal')
-
 const wifiSignal = createComputed('wifiSignal')
 
 const phoneTime = createComputed('phoneTime')
@@ -99,60 +97,27 @@ watch(chatBackgroundImage, (value) => {
             3: '3格',
             4: '4格',
           }"
+          class="mb-5"
         />
-      </el-form-item>
-
-      <el-form-item
-        label="网络信号"
-      >
-        <el-select
-          v-model="networkSignal"
-          size="small"
-        >
-          <el-option
-            label="WiFi"
-            :value="1"
-          />
-
-          <el-option
-            label="3G"
-            :value="2"
-          />
-
-          <el-option
-            label="4G"
-            :value="3"
-          />
-
-          <el-option
-            label="5G"
-            :value="4"
-          />
-        </el-select>
       </el-form-item>
 
       <el-form-item
         label="WiFi信号"
       >
-        <el-select
+        <el-slider
           v-model="wifiSignal"
-          size="small"
-        >
-          <el-option
-            label="1格"
-            :value="1"
-          />
-
-          <el-option
-            label="2格"
-            :value="2"
-          />
-
-          <el-option
-            label="3格"
-            :value="3"
-          />
-        </el-select>
+          :step="1"
+          :min="1"
+          :max="3"
+          show-stops
+          :format-tooltip="value => `${value}格`"
+          :marks="{
+            1: '1格',
+            2: '2格',
+            3: '3格',
+          }"
+          class="mb-5"
+        />
       </el-form-item>
 
       <el-form-item

@@ -30,11 +30,6 @@ export type AppearanceType = {
   phoneBattery: number
 
   /**
-   *  网络信号
-   */
-  networkSignal: number
-
-  /**
    *  wifi信号
    */
   wifiSignal: number
@@ -117,7 +112,15 @@ export type DialogueType = {
 }
 
 export type SettingType = {
+
+  /**
+   *  外观设置
+   */
   appearance: AppearanceType
+
+  /**
+   *  对话设置
+   */
   dialogue: DialogueType
 }
 
@@ -142,11 +145,6 @@ const setting = ref<SettingType>({
     phoneBattery: 3,
 
     /**
-     *  网络信号
-     */
-    networkSignal: 3,
-
-    /**
      *  wifi信号
      */
     wifiSignal: 3,
@@ -169,7 +167,7 @@ const setting = ref<SettingType>({
     /**
      *  消息数量
      */
-    messageCount: 0,
+    messageCount: 1,
 
     /**
      *  聊天标题
