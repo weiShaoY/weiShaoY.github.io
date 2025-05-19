@@ -1,8 +1,6 @@
 <!------------------------------------  微信对话生成器  ------------------------------------------------->
 <script lang="ts" setup>
 
-import type { SettingType } from './type'
-
 import AppearanceSetting from './appearance-setting.vue'
 
 import DialogueSetting from './dialogue-setting.vue'
@@ -11,16 +9,126 @@ import Phone from './phone.vue'
 
 const activeTabsName = ref('外观设置')
 
+/**
+ *  外观设置类型
+ */
+export type AppearanceType = {
+
+  /**
+   *  手机信号
+   */
+  phoneSignal: number
+
+  /**
+   *  手机时间
+   */
+  phoneTime: string
+
+  /**
+   *  手机电量
+   */
+  phoneBattery: number
+
+  /**
+   *  wifi信号
+   */
+  wifiSignal: number
+
+  /**
+   *  是否充电中
+   */
+  isCharging: boolean
+
+  /**
+   *  是否听筒模式
+   */
+  isEarpieceMode: boolean
+
+  /**
+   *  是否语音模式
+   */
+  isVoiceMode: boolean
+
+  /**
+   *  消息数量
+   */
+  messageCount: number
+
+  /**
+   *  聊天标题
+   */
+  chatTitle: string
+
+  /**
+   *  聊天背景图
+   */
+  chatBackgroundImage: string
+}
+
+/**
+ *  对话设置类型
+ */
+export type DialogueType = {
+
+  /**
+   *  用户列表
+   */
+  userList: []
+
+  /**
+   *  对话内容
+   */
+  dialogueContent: string
+
+  /**
+   *  红包或转账金额
+   */
+  redPacketOrTransferAmount: number
+
+  /**
+   *  添加聊天时间
+   */
+  addChatTime: string
+
+  /**
+   *  语音时间时长
+   */
+  voiceTime: number
+
+  /**
+   *  是否已读
+   */
+  isRead: boolean
+
+  /**
+   *  红包备注
+   */
+  redPacketRemark: string
+
+  /**
+   *  转账备注
+   */
+  transferRemark: string
+}
+
+export type SettingType = {
+
+  /**
+   *  外观设置
+   */
+  appearance: AppearanceType
+
+  /**
+   *  对话设置
+   */
+  dialogue: DialogueType
+}
+
 const setting = ref<SettingType>({
   /**
    *  外观设置
    */
   appearance: {
-    /**
-     *  手机型号
-     */
-    phoneModel: 'iphone',
-
     /**
      *  手机信号
      */
@@ -42,11 +150,6 @@ const setting = ref<SettingType>({
     wifiSignal: 3,
 
     /**
-     *  是否跟随系统时间
-     */
-    isFollowSystemTime: false,
-
-    /**
      *  是否充电中
      */
     isCharging: false,
@@ -62,19 +165,9 @@ const setting = ref<SettingType>({
     isVoiceMode: false,
 
     /**
-     *  是否显示用户名
-     */
-    isShowUserName: true,
-
-    /**
-     *  是否深色模式
-     */
-    isDarkMode: false,
-
-    /**
      *  消息数量
      */
-    unreadMessageCount: 1,
+    messageCount: 1,
 
     /**
      *  聊天标题
@@ -137,15 +230,6 @@ const setting = ref<SettingType>({
 watchEffect(() => {
   console.log(setting.value.appearance)
 })
-
-function reset() {
-  setting.value = {
-    ...setting.value,
-    appearance: {
-      ...setting.value.appearance,
-    },
-  }
-}
 </script>
 
 <template>
@@ -166,7 +250,6 @@ function reset() {
         >
           <AppearanceSetting
             v-model="setting.appearance"
-            @reset="reset"
           />
         </el-tab-pane>
 

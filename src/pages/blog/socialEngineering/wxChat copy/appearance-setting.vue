@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import type { UploadFile } from 'element-plus'
+import type { AppearanceSettings } from '@/types/wxChat'
 
-import type { AppearanceType } from './type'
+import type { UploadFile } from 'element-plus'
 
 import { computed, watch } from 'vue'
 
-// 定义 emit
-const emit = defineEmits<{
-  (e: 'reset'): void
-}>()
-
 // 使用 defineModel 实现双向绑定
-const model = defineModel<AppearanceType>()
+const model = defineModel<AppearanceSettings>()
 
 // 创建计算属性的工厂函数
-function createComputed<K extends keyof AppearanceType>(key: K) {
+function createComputed<K extends keyof AppearanceSettings>(key: K) {
   return computed({
     get: () => getModelValue(key),
     set: value => updateSetting(key, value),
@@ -22,8 +17,6 @@ function createComputed<K extends keyof AppearanceType>(key: K) {
 }
 
 // 计算属性
-const phoneModel = createComputed('phoneModel')
-
 const phoneSignal = createComputed('phoneSignal')
 
 const wifiSignal = createComputed('wifiSignal')
@@ -32,26 +25,20 @@ const phoneTime = createComputed('phoneTime')
 
 const phoneBattery = createComputed('phoneBattery')
 
-const isFollowSystemTime = createComputed('isFollowSystemTime')
-
 const isEarpieceMode = createComputed('isEarpieceMode')
 
 const isCharging = createComputed('isCharging')
 
 const isVoiceMode = createComputed('isVoiceMode')
 
-const isShowUserName = createComputed('isShowUserName')
-
-const isDarkMode = createComputed('isDarkMode')
-
-const unreadMessageCount = createComputed('unreadMessageCount')
+const messageCount = createComputed('messageCount')
 
 const chatTitle = createComputed('chatTitle')
 
 const chatBackgroundImage = createComputed('chatBackgroundImage')
 
 // 更新单个属性
-function updateSetting<K extends keyof AppearanceType>(key: K, value: AppearanceType[K]) {
+function updateSetting<K extends keyof AppearanceSettings>(key: K, value: AppearanceSettings[K]) {
   if (!model.value) {
     return
   }
@@ -63,8 +50,8 @@ function updateSetting<K extends keyof AppearanceType>(key: K, value: Appearance
 }
 
 // 获取模型值
-function getModelValue<K extends keyof AppearanceType>(key: K): AppearanceType[K] {
-  return model.value?.[key] as AppearanceType[K]
+function getModelValue<K extends keyof AppearanceSettings>(key: K): AppearanceSettings[K] {
+  return model.value?.[key] as AppearanceSettings[K]
 }
 
 // 处理图片变化
@@ -84,12 +71,6 @@ function handleChange(uploadFile: UploadFile) {
 watch(chatBackgroundImage, (value) => {
   console.log('手机时间更新:', value)
 })
-
-// 重置系统
-function reset() {
-  console.log('重置系统')
-  emit('reset')
-}
 </script>
 
 <template>
@@ -99,91 +80,43 @@ function reset() {
     <el-form
       label-width="auto"
       style="width: 100%"
-      label-position="left"
     >
-      <el-form-item
-        label="手机型号"
-      >
-        <el-select
-          v-model="phoneModel"
-          class="!w-60"
-          disabled
-        />
-      </el-form-item>
-
-      <el-form-item
-        label="深色模式"
-      >
-        <el-switch
-          v-model="isDarkMode"
-          inline-prompt
-          active-text="开启"
-          inactive-text="关闭"
-        />
-      </el-form-item>
-
       <el-form-item
         label="手机信号"
       >
-        <el-select
+        <el-slider
           v-model="phoneSignal"
-          class="!w-60"
-        >
-          <el-option
-            v-for="item in 4"
-            :key="item"
-            :label="`${item}格`"
-            :value="item"
-          />
-        </el-select>
+          :step="1"
+          :min="1"
+          :max="4"
+          show-stops
+          :format-tooltip="value => `${value}格`"
+          :marks="{
+            1: '1格',
+            2: '2格',
+            3: '3格',
+            4: '4格',
+          }"
+          class="mb-5"
+        />
       </el-form-item>
 
       <el-form-item
         label="WiFi信号"
       >
-        <el-select
-          v-model="wifiSignal"
-          class="!w-60"
-        >
-          <el-option
-            v-for="item in 3"
-            :key="item"
-            :label="`${item}格`"
-            :value="item"
-          />
-        </el-select>
-      </el-form-item>
-
-      <el-form-item
-        label="手机电量"
-      >
         <el-slider
-          v-model="phoneBattery"
-          :min="0"
-          :max="100"
+          v-model="wifiSignal"
           :step="1"
-          :format-tooltip="value => `${value}%`"
-          class="!w-60"
-        />
-
-        <el-input-number
-          v-model="phoneBattery"
-          class="ml-5"
-          :min="0"
-          :max="100"
-          :step="1"
-          controls-position="right"
-        />
-      </el-form-item>
-
-      <el-form-item
-        label="手机充电状态"
-      >
-        <el-switch
-          v-model="isCharging"
-          inline-prompt
-          active-text="充电中"
-          inactive-text="未充电"
+          :min="1"
+          :max="3"
+          show-stops
+          :format-tooltip="value => `${value}格`"
+          :marks="{
+            1: '1格',
+            2: '2格',
+            3: '3格',
+          }"
+          class="mb-5"
         />
       </el-form-item>
 
@@ -195,38 +128,30 @@ function reset() {
           format="HH:mm"
           value-format="HH:mm"
           :picker-options="{ showConfirm: false }"
-          class="!w-60"
-        />
-
-        <el-switch
-          v-model="isFollowSystemTime"
-          inline-prompt
-          active-text="跟随系统"
-          inactive-text="自定义"
-          class="ml-5"
-          size="large"
         />
       </el-form-item>
 
       <el-form-item
-        label="未读消息数"
+        label="手机电量"
       >
-        <el-input-number
-          v-model="unreadMessageCount"
-          type="number"
+        <el-slider
+          v-model="phoneBattery"
           :min="0"
-          class="w-60"
+          :max="100"
+          :step="1"
+          :show-stops="true"
+          :format-tooltip="value => `${value}%`"
         />
       </el-form-item>
 
       <el-form-item
-        label="显示用户名"
+        label="充电状态"
       >
         <el-switch
-          v-model="isShowUserName"
+          v-model="isCharging"
           inline-prompt
-          active-text="显示"
-          inactive-text="隐藏"
+          active-text="充电中"
+          inactive-text="未充电"
         />
       </el-form-item>
 
@@ -237,7 +162,7 @@ function reset() {
           v-model="isEarpieceMode"
           inline-prompt
           active-text="听筒模式"
-          inactive-text="扬声器"
+          inactive-text="扬声器模式"
         />
       </el-form-item>
 
@@ -253,12 +178,20 @@ function reset() {
       </el-form-item>
 
       <el-form-item
+        label="消息数量"
+      >
+        <el-input
+          v-model="messageCount"
+          type="number"
+          :min="0"
+        />
+      </el-form-item>
+
+      <el-form-item
         label="聊天标题"
       >
         <el-input
           v-model.trim="chatTitle"
-          class="!w-60"
-          clearable
         />
       </el-form-item>
 
@@ -285,18 +218,6 @@ function reset() {
             +
           </div>
         </el-upload>
-      </el-form-item>
-
-      <el-form-item
-        label="重置"
-      >
-        <el-button
-          type="primary"
-          size="large"
-          @click="reset"
-        >
-          重置系统
-        </el-button>
       </el-form-item>
     </el-form>
   </div>

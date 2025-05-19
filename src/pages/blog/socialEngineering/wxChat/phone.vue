@@ -1,6 +1,6 @@
 <!------------------------------------  手机展示  ------------------------------------------------->
 <script lang="ts" setup>
-import type { SettingType } from './index.vue'
+import type { SettingType } from './type'
 
 import { computed } from 'vue'
 
@@ -35,6 +35,7 @@ const wifiImageUrl = computed(() => {
     import.meta.url,
   ).href
 })
+
 </script>
 
 <template>
@@ -134,10 +135,10 @@ const wifiImageUrl = computed(() => {
               </div>
 
               <span
-                v-if="setting.appearance.messageCount > 0"
+                v-if="setting.appearance.unreadMessageCount > 0"
                 class="absolute left-[45px] top-1/2 h-[72px] min-w-[72px] rounded-[36px] bg-[#d5d5d5] px-[24px] text-center text-[36px] leading-[72px] font-[600] -mt-[36px]"
               >
-                {{ setting.appearance.messageCount }}
+                {{ setting.appearance.unreadMessageCount }}
               </span>
             </div>
 
@@ -189,8 +190,7 @@ const wifiImageUrl = computed(() => {
         <div
           class="phone-body"
         >
-
-          >12
+          22
         </div>
 
       </div>
