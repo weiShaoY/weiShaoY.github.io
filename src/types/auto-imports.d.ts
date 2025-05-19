@@ -47,6 +47,7 @@ declare global {
   const downloadVideo: typeof import('../utils/download')['downloadVideo']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
+  const emojiBase64: typeof import('../utils/emojiBase64')['default']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const externalLinkRegex: typeof import('../utils/externalLinkRegex')['externalLinkRegex']
   const getActivePinia: typeof import('pinia')['getActivePinia']
@@ -403,6 +404,7 @@ declare module 'vue' {
     readonly downloadVideo: UnwrapRef<typeof import('../utils/download')['downloadVideo']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly emojiBase64: UnwrapRef<typeof import('../utils/emojiBase64')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>

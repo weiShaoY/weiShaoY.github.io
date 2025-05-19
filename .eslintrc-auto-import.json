@@ -353,6 +353,7 @@
     "watchWithFilter": true,
     "whenever": true,
     "ElWatermark": true,
-    "ElMessage": true
+    "ElMessage": true,
+    "emojiBase64": true
   }
 }

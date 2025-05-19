@@ -14,7 +14,7 @@ function handleEmojiClick(emoji: string) {
 
 <template>
   <div
-    class=" mt-3 flex flex-wrap pl-2"
+    class="mt-3 flex flex-wrap pl-2"
   >
     <a
       v-for="(emoji, index) in emojiList"
@@ -32,7 +32,7 @@ function handleEmojiClick(emoji: string) {
       <p
         class="indent-[-9999px] color-red"
       >
-      {{ emoji }}
+        {{ emoji }}
       </p>
     </a>
   </div>
