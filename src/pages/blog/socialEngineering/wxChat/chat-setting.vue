@@ -8,32 +8,33 @@ import GenerateForm from "./components/generate-form.vue";
 
 import { addTypes } from "./data";
 
-const SYSTEM_TYPES = ["time", "system"] as const;
 
 const wxChatStore = useWxChatStore();
 
+/**
+ *  添加类型名称
+ */
 const addTypeName = ref("");
 
-// 监听器
 watch(
   () => [wxChatStore.activeChatType, wxChatStore],
   () => {
-    const sendRole = !SYSTEM_TYPES.includes(
-      wxChatStore.activeChatType as (typeof SYSTEM_TYPES)[number],
-    )
-      ? wxChatStore.activeUserId === wxChatStore.DEFAULT_USER.id
-        ? "你自己："
-        : `${wxChatStore.activeUser?.nickname}："''`
-      : "";
+    let sendRole = "";
+    if (!["time", "system"].includes(wxChatStore.activeChatType)) {
+      sendRole =
+        wxChatStore.activeUserId === "user-0"
+          ? "你自己："
+          : `${wxChatStore.activeUser.nickname}：`;
+    }
 
-    const type = addTypes.find(
+    const foundType = addTypes.find(
       (item) => item.value === wxChatStore.activeChatType,
     );
-
-    addTypeName.value = sendRole + (type?.label ?? "");
+    addTypeName.value = sendRole + (foundType?.label ?? "未知类型");
   },
   {
     immediate: true,
+    deep: true,
   },
 );
 </script>
