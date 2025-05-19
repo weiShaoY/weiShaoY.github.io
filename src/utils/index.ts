@@ -8,6 +8,8 @@ export * from './copyText'
 
 export * from './download'
 
+export * from './emojiBase64'
+
 export * from './event'
 
 export * from './is'

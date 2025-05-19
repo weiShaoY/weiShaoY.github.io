@@ -105,6 +105,11 @@ export const useWxChatStore = defineStore('wxChat', () => {
     activeUserId.value = id
   }
 
+  /**
+   * 输入文本
+   */
+  const inputText = ref('')
+
   // ==================== 返回值 ====================
   return {
     // 状态
@@ -122,5 +127,7 @@ export const useWxChatStore = defineStore('wxChat', () => {
     addUser,
     deleteUser,
     selectUser,
+
+    inputText,
   }
 })

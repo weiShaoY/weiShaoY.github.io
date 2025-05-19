@@ -55,6 +55,7 @@ declare module 'vue-router/auto-routes' {
     '/blog/socialEngineering/wxChat/': RouteRecordInfo<'/blog/socialEngineering/wxChat/', '/blog/socialEngineering/wxChat', Record<never, never>, Record<never, never>>,
     '/blog/socialEngineering/wxChat/appearance-setting': RouteRecordInfo<'/blog/socialEngineering/wxChat/appearance-setting', '/blog/socialEngineering/wxChat/appearance-setting', Record<never, never>, Record<never, never>>,
     '/blog/socialEngineering/wxChat/chat-setting': RouteRecordInfo<'/blog/socialEngineering/wxChat/chat-setting', '/blog/socialEngineering/wxChat/chat-setting', Record<never, never>, Record<never, never>>,
+    '/blog/socialEngineering/wxChat/components/emoji': RouteRecordInfo<'/blog/socialEngineering/wxChat/components/emoji', '/blog/socialEngineering/wxChat/components/emoji', Record<never, never>, Record<never, never>>,
     '/blog/socialEngineering/wxChat/components/generate-form': RouteRecordInfo<'/blog/socialEngineering/wxChat/components/generate-form', '/blog/socialEngineering/wxChat/components/generate-form', Record<never, never>, Record<never, never>>,
     '/blog/socialEngineering/wxChat/phone': RouteRecordInfo<'/blog/socialEngineering/wxChat/phone', '/blog/socialEngineering/wxChat/phone', Record<never, never>, Record<never, never>>,
     '/blog/socialEngineering/wxChat copy/': RouteRecordInfo<'/blog/socialEngineering/wxChat copy/', '/blog/socialEngineering/wxChat copy', Record<never, never>, Record<never, never>>,

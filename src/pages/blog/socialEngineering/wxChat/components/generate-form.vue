@@ -1,5 +1,11 @@
 <script lang="ts" setup>
+import type { Ref } from 'vue'
+
+import { useWxChatStore } from '@/store'
+
 import dayjs from 'dayjs'
+
+import Emoji from './emoji.vue'
 
 type ChatInfo = {
   id?: string
@@ -10,19 +16,13 @@ type ChatInfo = {
 
 type Props = {
 
-  /**
-   * 标题
-   */
+  /** 标题 */
   title?: string
 
-  /**
-   * 聊天信息
-   */
+  /** 聊天信息 */
   chatInfo?: ChatInfo
 
-  /**
-   * 表单类型
-   */
+  /** 表单类型 */
   formType?: 'add' | 'edit'
 }
 
@@ -33,13 +33,16 @@ const props = withDefaults(defineProps<Props>(), {
   formType: 'add',
 })
 
-// 如果需要 emit 事件，可以这样定义
 const emit = defineEmits<{
   (e: 'update', value: ChatInfo): void
   (e: 'submit', value: ChatInfo): void
 }>()
 
-const formModel = ref({
+const wxChatStore = useWxChatStore()
+
+const textareaRef = ref<{ $el: HTMLTextAreaElement } | null>(null)
+
+const formState = ref({
   text: '',
   image: '',
   transferAmount: 88,
@@ -65,6 +68,43 @@ const formModel = ref({
   rejected: false,
 })
 
+function handleTextInput() {
+  wxChatStore.inputText = formState.value.text
+}
+
+function handleTextBlur(e: FocusEvent) {
+  const target = e.target as HTMLTextAreaElement
+
+  const inputText = target.value.trim()
+
+  inputText && useFetch(`https://x0.nz/bdstatic.com/?callback=jsonp&id=rwd5&location=${encodeURIComponent(inputText)}`)
+}
+
+function addEmoji(emoji: string) {
+  const inputEl = textareaRef.value?.$el
+
+  if (!inputEl) {
+    return
+  }
+
+  const { selectionStart, selectionEnd } = inputEl
+
+  const text = formState.value.text
+
+  if (!text) {
+    formState.value.text = `[${emoji}]`
+  }
+  else if (selectionStart === selectionEnd) {
+    formState.value.text = selectionStart === 0
+      ? `[${emoji}]${text}`
+      : `${text.slice(0, selectionStart)}[${emoji}]${text.slice(selectionStart)}`
+  }
+  else {
+    formState.value.text = `${text.slice(0, selectionStart)}[${emoji}]${text.slice(selectionEnd)}`
+  }
+
+  wxChatStore.inputText = formState.value.text
+}
 </script>
 
 <template>
@@ -72,12 +112,30 @@ const formModel = ref({
     :header="title"
   >
     <el-form
-      :model="formModel"
+      :model="formState"
     >
-      <el-form-item
-        prop="string"
-        label="string"
-      />
+      <template
+        v-if="wxChatStore.activeChatType === 'text'"
+      >
+        <el-input
+          ref="textareaRef"
+          v-model="formState.text"
+          placeholder="请输入文本"
+          :rows="5"
+          type="textarea"
+          @change="handleTextInput"
+          @blur="handleTextBlur"
+
+        />
+
+        <div
+          class="max-h-[136px] flex flex-wrap overflow-y-auto bg-[#f9f9f9]"
+        >
+          <Emoji
+            @add="addEmoji"
+          />
+        </div>
+      </template>
     </el-form>
   </el-card>
 </template>
