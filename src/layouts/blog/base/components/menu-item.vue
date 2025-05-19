@@ -9,7 +9,7 @@ type Props = {
   /**
    *  菜单项
    */
-  menu: RouterType.BlogRouteRecordRaw
+  menu: WxChatType.BlogRouteRecordRaw
 
   /**
    *  额外的 CSS 类名

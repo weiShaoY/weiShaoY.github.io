@@ -20,7 +20,7 @@ type Props = {
   /**
    *  菜单
    */
-  menuList?: RouterType.BlogRouteRecordRaw[]
+  menuList?: WxChatType.BlogRouteRecordRaw[]
 
   /**
    *  菜单等级
@@ -29,14 +29,14 @@ type Props = {
 }
 
 // 判断是否有子菜单
-function hasChildren(item: RouterType.BlogRouteRecordRaw): boolean {
+function hasChildren(item: WxChatType.BlogRouteRecordRaw): boolean {
   return Boolean(item.children?.length)
 }
 
 // 过滤菜单项
 function filterRoutes(
-  items: RouterType.BlogRouteRecordRaw[],
-): RouterType.BlogRouteRecordRaw[] {
+  items: WxChatType.BlogRouteRecordRaw[],
+): WxChatType.BlogRouteRecordRaw[] {
   return items
     .filter(item => !item.meta.isHideInMenu)
     .map(item => ({
@@ -51,7 +51,7 @@ const filteredMenuItems = computed(() => filterRoutes(props.menuList))
 /**
  *  跳转页面
  */
-function goPage(item: RouterType.BlogRouteRecordRaw) {
+function goPage(item: WxChatType.BlogRouteRecordRaw) {
   blogMenuJump(item)
 }
 

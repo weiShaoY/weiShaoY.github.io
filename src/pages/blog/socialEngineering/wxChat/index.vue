@@ -5,11 +5,11 @@ import type { SettingType } from './type'
 
 import AppearanceSetting from './appearance-setting.vue'
 
-import DialogueSetting from './dialogue-setting.vue'
+import ChatSetting from './chat-setting.vue'
 
 import Phone from './phone.vue'
 
-const activeTabsName = ref('外观设置')
+const activeTabsName = ref('对话设置')
 
 const setting = ref<SettingType>({
   /**
@@ -91,7 +91,7 @@ const setting = ref<SettingType>({
   /**
    *  对话设置
    */
-  dialogue: {
+  chat: {
     /**
      *  用户列表
      */
@@ -174,8 +174,8 @@ function reset() {
           label="对话设置"
           name="对话设置"
         >
-          <DialogueSetting
-            :dialogue="setting.dialogue"
+          <ChatSetting
+            :dialogue="setting.chat"
           />
         </el-tab-pane>
       </el-tabs>

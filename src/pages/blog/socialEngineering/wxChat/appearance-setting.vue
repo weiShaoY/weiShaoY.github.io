@@ -94,7 +94,7 @@ function reset() {
 
 <template>
   <div
-    class="appearance-setting p-5"
+    class="p-5"
   >
     <el-form
       label-width="auto"

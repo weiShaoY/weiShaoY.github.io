@@ -25,7 +25,7 @@ const searchInputRef = ref<HTMLInputElement | null>(null)
 const searchVal = ref('')
 
 /** 搜索结果列表 */
-const searchResult = ref<RouterType.BlogRouteRecordRaw[]>([])
+const searchResult = ref<WxChatType.BlogRouteRecordRaw[]>([])
 
 /** 搜索历史记录列表的高亮索引 */
 const historyHIndex = ref(0)
@@ -93,14 +93,14 @@ function handleGlobalShortcut(event: KeyboardEvent) {
  * 模糊查询菜单列表
  */
 function fuzzyQueryList(
-  arr: RouterType.BlogRouteRecordRaw[],
+  arr: WxChatType.BlogRouteRecordRaw[],
   val: string,
-): RouterType.BlogRouteRecordRaw[] {
+): WxChatType.BlogRouteRecordRaw[] {
   const lowerVal = val.toLowerCase()
 
-  const result: RouterType.BlogRouteRecordRaw[] = []
+  const result: WxChatType.BlogRouteRecordRaw[] = []
 
-  const searchItem = (item: RouterType.BlogRouteRecordRaw) => {
+  const searchItem = (item: WxChatType.BlogRouteRecordRaw) => {
     if (item.meta.isHideInMenu) {
       return
     }
@@ -123,7 +123,7 @@ function fuzzyQueryList(
           ...rest,
           meta,
           children: undefined,
-        } as RouterType.BlogRouteRecordRaw)
+        } as WxChatType.BlogRouteRecordRaw)
       }
       else {
         result.push({
@@ -134,7 +134,7 @@ function fuzzyQueryList(
             iframeUrl: undefined,
           },
           children: item.children ? fuzzyQueryList(item.children, val) : undefined,
-        } as RouterType.BlogRouteRecordRaw)
+        } as WxChatType.BlogRouteRecordRaw)
       }
     }
   }
@@ -212,7 +212,7 @@ function searchBlur() {
 /**
  * 跳转到搜索结果页面
  */
-function searchGoPage(item: RouterType.BlogRouteRecordRaw) {
+function searchGoPage(item: WxChatType.BlogRouteRecordRaw) {
   blogMenuJump(item)
   addHistory(item)
   searchVal.value = ''
@@ -232,14 +232,14 @@ function updateHistory() {
 /**
  * 清理搜索项
  */
-function cleanItem(item: RouterType.BlogRouteRecordRaw) {
+function cleanItem(item: WxChatType.BlogRouteRecordRaw) {
   delete item.children
 }
 
 /**
  * 添加搜索历史
  */
-function addHistory(item: RouterType.BlogRouteRecordRaw) {
+function addHistory(item: WxChatType.BlogRouteRecordRaw) {
   const hasItemIndex = searchHistoryList.value.findIndex(
     historyItem => historyItem.path === item.path,
   )

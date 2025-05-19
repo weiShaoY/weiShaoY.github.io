@@ -25,7 +25,7 @@ export function formatModules(_modules: any, result: RouteRecordNormalized[]) {
       ? [...defaultModule]
       : [defaultModule]
 
-    const processedRoutes: RouterType.RouteRecordRaw[] = moduleList
+    const processedRoutes: WxChatType.RouteRecordRaw[] = moduleList
 
     // 将所有模块添加到result数组中
     result.push(...processedRoutes as any)

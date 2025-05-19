@@ -1,7 +1,7 @@
 /**
  *  测试页面路由
  */
-const loveRouter: RouterType.RouteRecordRaw[] = [
+const loveRouter: WxChatType.RouteRecordRaw[] = [
 
   {
     path: '/love',

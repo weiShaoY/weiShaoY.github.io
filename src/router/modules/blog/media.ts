@@ -1,4 +1,4 @@
-const Media: RouterType.BlogRouteRecordRaw = {
+const Media: WxChatType.BlogRouteRecordRaw = {
   path: 'media',
   name: 'Media',
   meta: {

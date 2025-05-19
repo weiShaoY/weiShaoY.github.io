@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const ElMessage: typeof import('element-plus/es')['ElMessage']
   const ElWatermark: typeof import('element-plus/es')['ElWatermark']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addEventListen: typeof import('../utils/event')['addEventListen']

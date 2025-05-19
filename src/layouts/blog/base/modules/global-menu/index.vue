@@ -32,7 +32,7 @@ function openExternalLink(link: string) {
  * @param item 菜单项
  * @param jumpToFirst 是否跳转到第一个子菜单
  */
-function blogMenuJump(item: RouterType.BlogRouteRecordRaw, jumpToFirst: boolean = false) {
+function blogMenuJump(item: WxChatType.BlogRouteRecordRaw, jumpToFirst: boolean = false) {
   // 处理外部链接
   const { externalUrl } = item.meta
 

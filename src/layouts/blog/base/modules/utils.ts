@@ -3,15 +3,15 @@ import { router } from '@/router'
 /**
  * 递归查找包含目标路径的第一级父路由项
  * @param {string} path - 要查找的完整路径
- * @param {RouterType.BlogRouteRecordRaw[]} routes - 路由列表
- * @returns {RouterType.BlogRouteRecordRaw | undefined} 匹配到的第一级路由项
+ * @param {WxChatType.BlogRouteRecordRaw[]} routes - 路由列表
+ * @returns {WxChatType.BlogRouteRecordRaw | undefined} 匹配到的第一级路由项
  */
 export function findTopRouteByPath(
   path: string,
-  routes: RouterType.BlogRouteRecordRaw[],
-): RouterType.BlogRouteRecordRaw | undefined {
+  routes: WxChatType.BlogRouteRecordRaw[],
+): WxChatType.BlogRouteRecordRaw | undefined {
   // 使用 Map 缓存已查找的路由，避免重复查找
-  const routeCache = new Map<string, RouterType.BlogRouteRecordRaw>()
+  const routeCache = new Map<string, WxChatType.BlogRouteRecordRaw>()
 
   for (const route of routes) {
     // 检查缓存
@@ -50,12 +50,12 @@ export function findTopRouteByPath(
 
 /**
  * 博客模块菜单跳转
- * @param {RouterType.BlogRouteRecordRaw} item - 菜单项
+ * @param {WxChatType.BlogRouteRecordRaw} item - 菜单项
  * @param {boolean} jumpToFirst - 是否跳转到第一个子菜单
  * @returns {Promise<void>}
  */
 export async function blogMenuJump(
-  item: RouterType.BlogRouteRecordRaw,
+  item: WxChatType.BlogRouteRecordRaw,
   jumpToFirst: boolean = false,
 ): Promise<void> {
   if (!item?.path) {

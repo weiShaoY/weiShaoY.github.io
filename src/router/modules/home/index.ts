@@ -3,7 +3,7 @@ import { HOME_DEFAULT_LAYOUT } from '@/layouts'
 /**
  *  首页路由
  */
-const homeRouter: RouterType.RouteRecordRaw[] = [
+const homeRouter: WxChatType.RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Home',

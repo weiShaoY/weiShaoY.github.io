@@ -352,6 +352,7 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "ElWatermark": true
+    "ElWatermark": true,
+    "ElMessage": true
   }
 }

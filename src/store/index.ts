@@ -10,6 +10,8 @@ export * from './modules/command'
 
 export * from './modules/garage'
 
+export * from './modules/wxChat'
+
 const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)

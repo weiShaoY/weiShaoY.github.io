@@ -82,7 +82,7 @@ export type AppearanceType = {
 /**
  *  对话设置类型
  */
-export type DialogueType = {
+export type ChatType = {
 
   /**
    *  用户列表
@@ -135,5 +135,5 @@ export type SettingType = {
   /**
    *  对话设置
    */
-  dialogue: DialogueType
+  chat: ChatType
 }
