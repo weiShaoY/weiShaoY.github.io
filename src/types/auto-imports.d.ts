@@ -50,6 +50,7 @@ declare global {
   const emojiBase64: typeof import('../utils/emojiBase64')['default']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const externalLinkRegex: typeof import('../utils/externalLinkRegex')['externalLinkRegex']
+  const fileToBase64: typeof import('../utils/base64')['fileToBase64']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -163,6 +164,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const unrefElement: typeof import('@vueuse/core')['unrefElement']
   const until: typeof import('@vueuse/core')['until']
+  const urlToBase64: typeof import('../utils/base64')['urlToBase64']
   const useActiveElement: typeof import('@vueuse/core')['useActiveElement']
   const useAnimate: typeof import('@vueuse/core')['useAnimate']
   const useArrayDifference: typeof import('@vueuse/core')['useArrayDifference']
@@ -406,6 +408,7 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly emojiBase64: UnwrapRef<typeof import('../utils/emojiBase64')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly fileToBase64: UnwrapRef<typeof import('../utils/base64')['fileToBase64']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -519,6 +522,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly urlToBase64: UnwrapRef<typeof import('../utils/base64')['urlToBase64']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>

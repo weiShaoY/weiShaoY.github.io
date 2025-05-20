@@ -354,6 +354,8 @@
     "whenever": true,
     "ElWatermark": true,
     "ElMessage": true,
-    "emojiBase64": true
+    "emojiBase64": true,
+    "fileToBase64": true,
+    "urlToBase64": true
   }
 }
