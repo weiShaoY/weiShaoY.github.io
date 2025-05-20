@@ -36,5 +36,19 @@ declare namespace WxChatType {
       | 'time' // 时间
       | 'revoke' // 撤回
       | 'system' // 系统消息
+
+    /**
+     *  聊天信息类型
+     */
+    type ChatInfoType = {
+      id: string
+      type: ChatType
+      user: User.UserType
+      content: string
+      role: User.UserRole
+      editTime: number
+      duration?: string
+      money?: number
+    }
   }
 }

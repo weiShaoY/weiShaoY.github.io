@@ -71,8 +71,11 @@ const SocialEngineering: AppRouteRecordRaw = {
       meta: {
         title: '微信对话生成器',
         icon: 'blog-menu-wxChat',
+        iframeUrl: 'https://vjietu.pro/wechat/chat',
       },
-      component: () => import('@/pages/blog/socialEngineering/wxChat/index.vue'),
+
+      // component: () => import('@/pages/blog/socialEngineering/wxChat/index.vue'),
+
     },
   ],
 }

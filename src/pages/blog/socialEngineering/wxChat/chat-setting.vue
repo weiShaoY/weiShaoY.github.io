@@ -1,49 +1,58 @@
 <!------------------------------------  对话设置  ------------------------------------------------->
 <script lang="ts" setup>
-import { useWxChatStore } from "@/store";
+import { useWxChatStore } from '@/store'
 
-import { Close, Plus } from "@element-plus/icons-vue";
+import { Close, Plus } from '@element-plus/icons-vue'
 
-import GenerateForm from "./components/generate-form.vue";
+import GenerateForm from './components/generate-form.vue'
 
-import { addTypes } from "./data";
+import { addTypes } from './data'
 
-
-const wxChatStore = useWxChatStore();
+const wxChatStore = useWxChatStore()
 
 /**
  *  添加类型名称
  */
-const addTypeName = ref("");
+const addTypeName = ref('')
 
 watch(
   () => [wxChatStore.activeChatType, wxChatStore],
   () => {
-    let sendRole = "";
-    if (!["time", "system"].includes(wxChatStore.activeChatType)) {
-      sendRole =
-        wxChatStore.activeUserId === "user-0"
-          ? "你自己："
-          : `${wxChatStore.activeUser.nickname}：`;
+    let sendRole = ''
+
+    if (!['time', 'system'].includes(wxChatStore.activeChatType)) {
+      sendRole
+        = wxChatStore.activeUserId === 'user-0'
+          ? '你自己：'
+          : `${wxChatStore.activeUser.nickname}：`
     }
 
     const foundType = addTypes.find(
-      (item) => item.value === wxChatStore.activeChatType,
-    );
-    addTypeName.value = sendRole + (foundType?.label ?? "未知类型");
+      item => item.value === wxChatStore.activeChatType,
+    )
+
+    addTypeName.value = sendRole + (foundType?.label ?? '未知类型')
   },
   {
     immediate: true,
     deep: true,
   },
-);
+)
 </script>
 
 <template>
-  <div class="p-5">
-    <el-form label-width="auto" class="w-full" label-position="top">
+  <div
+    class="p-5"
+  >
+    <el-form
+      label-width="auto"
+      class="w-full"
+      label-position="top"
+    >
       <!-- 用户选择区域 -->
-      <el-form-item label="编辑和选择用户（第一个用户默认是自己）">
+      <el-form-item
+        label="编辑和选择用户（第一个用户默认是自己）"
+      >
         <el-radio-group
           v-model="wxChatStore.activeUserId"
           class="w-full flex flex-wrap items-center gap-3 rounded bg-gray-100 p-3"
@@ -56,24 +65,33 @@ watch(
               class="relative h-22 w-22 flex flex-col cursor-pointer items-center justify-between rounded"
             >
               <!-- 头像区域 -->
-              <div class="relative h-15 w-15">
+              <div
+                class="relative h-15 w-15"
+              >
                 <ImageEditor
                   class="h-full w-full object-cover"
-                  :imageInfo="{
+                  :image-info="{
                     url: user.avatar as string,
                     width: 60,
                     height: 60,
                   }"
-                  :aspectRatio="1"
+                  :aspect-ratio="1"
                   @use="(url) => (user.avatar = url)"
                 />
 
-                <el-radio class="absolute bottom-6 left-0" :value="user.id" />
+                <el-radio
+                  class="absolute bottom-6 left-0"
+                  :value="user.id"
+                />
               </div>
 
               <!-- 昵称区域 -->
-              <template v-if="index === 0">
-                <p class="max-w-[80%] truncate text-sm">
+              <template
+                v-if="index === 0"
+              >
+                <p
+                  class="max-w-[80%] truncate text-sm"
+                >
                   {{ user.nickname }}
                 </p>
               </template>
@@ -92,7 +110,9 @@ watch(
                 title="确认移除这个用户？"
                 @confirm="wxChatStore.deleteUser(user.id)"
               >
-                <template #reference>
+                <template
+                  #reference
+                >
                   <div
                     class="bg-red-500 hover:bg-red-600 absolute right-1.5 z-999 h-4.5 w-4.5 flex items-center justify-center rounded-full text-xs text-white transition-colors -top-1.5"
                   >
@@ -120,7 +140,9 @@ watch(
       <el-divider />
 
       <!-- 消息类型选择 -->
-      <el-tabs v-model="wxChatStore.activeChatType">
+      <el-tabs
+        v-model="wxChatStore.activeChatType"
+      >
         <el-tab-pane
           v-for="item in addTypes"
           :key="item.value"
@@ -130,7 +152,9 @@ watch(
       </el-tabs>
 
       <!-- 消息生成表单 -->
-      <GenerateForm :title="addTypeName" />
+      <GenerateForm
+        :title="addTypeName"
+      />
     </el-form>
   </div>
 </template>
