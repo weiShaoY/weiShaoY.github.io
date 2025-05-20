@@ -78,7 +78,7 @@ const SocialEngineering: AppRouteRecordRaw = {
           name: 'Chat',
           meta: {
             title: '对话生成器',
-            icon: 'blog-menu-wxChat',
+            icon: 'blog-menu-chat',
             iframeUrl: 'https://vjietu.pro/wechat/chat',
           },
         },
@@ -88,7 +88,7 @@ const SocialEngineering: AppRouteRecordRaw = {
           name: 'TransferBill',
           meta: {
             title: '转账账单详情生成器',
-            icon: 'blog-menu-wxChat',
+            icon: 'blog-menu-transferBill',
             iframeUrl: 'https://vjietu.pro/wechat/bill/transfer',
           },
         },
@@ -97,7 +97,7 @@ const SocialEngineering: AppRouteRecordRaw = {
           name: 'TransferSuccess',
           meta: {
             title: '账单生成器',
-            icon: 'blog-menu-wxChat',
+            icon: 'blog-menu-transferSuccess',
             iframeUrl: 'https://vjietu.pro/wechat/transfer/success',
           },
         },
@@ -106,7 +106,7 @@ const SocialEngineering: AppRouteRecordRaw = {
           name: 'Balance',
           meta: {
             title: '我的零钱生成器',
-            icon: 'blog-menu-wxChat',
+            icon: 'blog-menu-balance',
             iframeUrl: 'https://vjietu.pro/wechat/balance',
           },
         },
