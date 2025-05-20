@@ -69,13 +69,48 @@ const SocialEngineering: AppRouteRecordRaw = {
       path: 'wxChat',
       name: 'WxChat',
       meta: {
-        title: '微信对话生成器',
+        title: '微信',
         icon: 'blog-menu-wxChat',
-        iframeUrl: 'https://vjietu.pro/wechat/chat',
       },
+      children: [
+        {
+          path: 'chat',
+          name: 'Chat',
+          meta: {
+            title: '对话生成器',
+            icon: 'blog-menu-wxChat',
+            iframeUrl: 'https://vjietu.pro/wechat/chat',
+          },
+        },
 
-      // component: () => import('@/pages/blog/socialEngineering/wxChat/index.vue'),
-
+        {
+          path: 'transferBill',
+          name: 'TransferBill',
+          meta: {
+            title: '转账账单详情生成器',
+            icon: 'blog-menu-wxChat',
+            iframeUrl: 'https://vjietu.pro/wechat/bill/transfer',
+          },
+        },
+        {
+          path: 'transferSuccess',
+          name: 'TransferSuccess',
+          meta: {
+            title: '账单生成器',
+            icon: 'blog-menu-wxChat',
+            iframeUrl: 'https://vjietu.pro/wechat/transfer/success',
+          },
+        },
+        {
+          path: 'balance',
+          name: 'Balance',
+          meta: {
+            title: '我的零钱生成器',
+            icon: 'blog-menu-wxChat',
+            iframeUrl: 'https://vjietu.pro/wechat/balance',
+          },
+        },
+      ],
     },
   ],
 }
