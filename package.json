@@ -42,7 +42,7 @@
     "highlight.js": "^11.11.1",
     "lodash": "^4.17.21",
     "lunar-typescript": "^1.7.9",
-    "lygia": "^1.3.2",
+    "lygia": "1.3.0",
     "md5-ts": "^0.1.6",
     "meshopt-decoder": "^1.0.2",
     "nprogress": "^0.2.0",
