@@ -1,3 +1,5 @@
 {
-  "unot.switchMagic": true
+  "unot.switchMagic": true,
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.orientation": "vertical"
 }
