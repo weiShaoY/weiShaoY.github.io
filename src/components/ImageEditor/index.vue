@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { UploadFile } from 'element-plus'
 
-import { fileToBase64 } from '@/utils'
+import { imageFileToBase64 } from '@/utils'
 
 import {
   Close,
@@ -152,7 +152,7 @@ function handleChange(uploadFile: UploadFile) {
     return
   }
 
-  fileToBase64(uploadFile.raw)
+  imageFileToBase64(uploadFile.raw)
     .then((base64Data) => {
       initImage.value = base64Data as string
     })

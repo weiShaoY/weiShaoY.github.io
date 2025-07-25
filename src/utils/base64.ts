@@ -3,7 +3,7 @@
  * @param  file - 图片文件对象
  * @returns  返回 Promise 对象
  */
-export function fileToBase64(file: File) {
+export function imageFileToBase64(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -18,7 +18,7 @@ export function fileToBase64(file: File) {
  * @param  url - 图片 URL
  * @returns  返回 Promise 对象
  */
-export async function urlToBase64(url: string): Promise<string> {
+export async function imageUrlToBase64(url: string): Promise<string> {
   try {
     const response = await fetch(url)
 

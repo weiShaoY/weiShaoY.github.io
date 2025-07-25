@@ -3,7 +3,7 @@ import type { UploadFile } from 'element-plus'
 
 import { useWxChatStore } from '@/store'
 
-import { blogMittBus, fileToBase64 } from '@/utils'
+import { blogMittBus, imageFileToBase64 } from '@/utils'
 
 import dayjs from 'dayjs'
 
@@ -476,7 +476,7 @@ function handleChange(uploadFile: UploadFile) {
   console.log('%c Line:413 🍻 uploadFile', 'color:#e41a6a', uploadFile.raw)
 
   if (uploadFile.raw) {
-    fileToBase64(uploadFile.raw).then((base64Data) => {
+    imageFileToBase64(uploadFile.raw).then((base64Data) => {
       formState.value.image = base64Data as string
     })
   }
