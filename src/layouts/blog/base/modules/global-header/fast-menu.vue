@@ -25,7 +25,7 @@ const quickLinks: QuickLink[] = [
   },
 ]
 
-function handleAppClick(item: WxChatType.BlogRouteRecordRaw) {
+function handleAppClick(item: RouterType.BlogRouteRecordRaw) {
   blogMenuJump(item)
   popoverRef.value?.hide()
 }

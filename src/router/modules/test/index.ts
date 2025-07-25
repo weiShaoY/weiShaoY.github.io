@@ -1,7 +1,7 @@
 /**
  *  测试页面路由
  */
-const testRouter: WxChatType.RouteRecordRaw[] = [
+const testRouter: RouterType.RouteRecordRaw[] = [
 
   {
     path: '/test',

@@ -1,4 +1,4 @@
-const workbench: WxChatType.BlogRouteRecordRaw = {
+const workbench: RouterType.BlogRouteRecordRaw = {
   path: 'workbench',
   name: 'Workbench',
   component: () => import('@/pages/blog/workbench/index.vue'),

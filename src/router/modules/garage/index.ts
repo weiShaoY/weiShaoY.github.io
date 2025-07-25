@@ -1,7 +1,7 @@
 /**
  *  错误页面路由
  */
-const garageRouter: WxChatType.RouteRecordRaw[] = [
+const garageRouter: RouterType.RouteRecordRaw[] = [
 
   {
     path: '/garage',

@@ -1,6 +1,6 @@
 /** 路由类型 */
 
-declare namespace WxChatType {
+declare namespace RouterType {
   import type { Component } from 'vue'
 
   import type { RouteRecordRedirectOption } from 'vue-router'

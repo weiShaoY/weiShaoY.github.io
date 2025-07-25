@@ -356,6 +356,9 @@
     "ElMessage": true,
     "emojiBase64": true,
     "fileToBase64": true,
-    "urlToBase64": true
+    "urlToBase64": true,
+    "imageFileToBase64": true,
+    "imageUrlToBase64": true,
+    "ElMessageBox": true
   }
 }

@@ -14,7 +14,7 @@ type Props = {
   /**
    *  菜单
    */
-  menuList: WxChatType.BlogRouteRecordRaw[]
+  menuList: RouterType.BlogRouteRecordRaw[]
 }
 
 const blogStore = useBlogStore()

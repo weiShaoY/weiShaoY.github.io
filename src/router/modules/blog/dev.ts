@@ -1,4 +1,4 @@
-const devRoute: WxChatType.BlogRouteRecordRaw = {
+const devRoute: RouterType.BlogRouteRecordRaw = {
   path: 'dev',
   name: 'Dev',
   meta: {

@@ -8,6 +8,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const ElMessage: typeof import('element-plus/es')['ElMessage']
+  const ElMessageBox: typeof import('element-plus/es')['ElMessageBox']
   const ElWatermark: typeof import('element-plus/es')['ElWatermark']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addEventListen: typeof import('../utils/event')['addEventListen']
@@ -56,6 +57,8 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const imageFileToBase64: typeof import('../utils/base64')['imageFileToBase64']
+  const imageUrlToBase64: typeof import('../utils/base64')['imageUrlToBase64']
   const inject: typeof import('vue')['inject']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const is: typeof import('../utils/is')['is']
@@ -368,6 +371,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly ElMessageBox: UnwrapRef<typeof import('element-plus/es')['ElMessageBox']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../utils/event')['addEventListen']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -408,12 +412,13 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly emojiBase64: UnwrapRef<typeof import('../utils/emojiBase64')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly fileToBase64: UnwrapRef<typeof import('../utils/base64')['fileToBase64']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly imageFileToBase64: UnwrapRef<typeof import('../utils/base64')['imageFileToBase64']>
+    readonly imageUrlToBase64: UnwrapRef<typeof import('../utils/base64')['imageUrlToBase64']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly is: UnwrapRef<typeof import('../utils/is')['is']>
@@ -522,7 +527,6 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
-    readonly urlToBase64: UnwrapRef<typeof import('../utils/base64')['urlToBase64']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>

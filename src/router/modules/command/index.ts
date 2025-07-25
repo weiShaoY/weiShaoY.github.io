@@ -3,7 +3,7 @@ import { COMMAND_LAYOUT } from '@/layouts'
 /**
  *  指挥台路由
  */
-const commandRouter: WxChatType.RouteRecordRaw[] = [
+const commandRouter: RouterType.RouteRecordRaw[] = [
   {
     path: 'command-login',
     name: 'CommandLogin',

@@ -66,7 +66,7 @@ export default testRouter
 /**
  *  获取快速菜单列表
  */
-const blogFastMenuList: WxChatType.BlogRouteRecordRaw[] = recursiveFindRoutesByProperty(
+const blogFastMenuList: RouterType.BlogRouteRecordRaw[] = recursiveFindRoutesByProperty(
   blogRouterList,
   'meta.fastMenuOrder',
   undefined,
