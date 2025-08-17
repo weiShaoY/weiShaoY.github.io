@@ -13,7 +13,6 @@ declare module 'vue' {
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
-    copy: typeof import('./../components/MusicPlayer/index copy.vue')['default']
     DownloadButton: typeof import('./../components/DownloadButton/index.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
