@@ -8,13 +8,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppearanceSetting: typeof import('./../components/AppearanceSetting/index.vue')['default']
     AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
     BaseButton: typeof import('./../components/BaseButton/index.vue')['default']
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
-    copy: typeof import('./../components/MusicPlayer/index copy.vue')['default']
     DownloadButton: typeof import('./../components/DownloadButton/index.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -37,12 +35,9 @@ declare module 'vue' {
     ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
-    ElList: typeof import('element-plus/es')['ElList']
-    ElListItem: typeof import('element-plus/es')['ElListItem']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
@@ -65,8 +60,6 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
-    ElTag: typeof import('element-plus/es')['ElTag']
-    ElText: typeof import('element-plus/es')['ElText']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
@@ -74,7 +67,6 @@ declare module 'vue' {
     Github: typeof import('./../components/Github/index.vue')['default']
     GithubActivityGraph: typeof import('./../components/GithubActivityGraph/index.vue')['default']
     GoHomeButton: typeof import('./../components/GoHomeButton/index.vue')['default']
-    ImageEditor: typeof import('./../components/ImageEditor/index.vue')['default']
     'Index copy': typeof import('./../components/MusicPlayer/index copy.vue')['default']
     LinkButton: typeof import('./../components/LinkButton/index.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
@@ -88,6 +80,8 @@ declare module 'vue' {
     TypeIt: typeof import('./../components/TypeIt/index.vue')['default']
     VideoPlayer: typeof import('./../components/VideoPlayer/index.vue')['default']
     VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
-    WxChat: typeof import('./../components/WxChat/index.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
