@@ -86,7 +86,7 @@ let carGltf: GLTF | null = null
 /**
  *  加速模型
  */
-let speedupGltf: GLTF | null = null
+// let _speedupGltf: GLTF | null = null
 
 /**
  *  起始房间模型
@@ -365,7 +365,7 @@ async function addModels(): Promise<void> {
   })
 
   const loadSpeedupModel = () => loadModel('/models/garage/models/sm_speedup.gltf', (gltf) => {
-    speedupGltf = gltf
+    // _speedupGltf = gltf
 
     const mat = new CustomShaderMaterial({
       baseMaterial: Three.MeshPhysicalMaterial,

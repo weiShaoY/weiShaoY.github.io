@@ -1,12 +1,12 @@
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
-
 import { gsap } from 'gsap'
 
 import * as three from 'three'
 
 import { watch } from 'vue'
+
+import { useGarageStore } from '@/store'
 
 /**
  * 封装的函数，用于根据车身颜色的变化来动画化车身的颜色变化。
