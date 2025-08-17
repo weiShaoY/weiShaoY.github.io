@@ -74,9 +74,6 @@ importers:
       typeit:
         specifier: ^8.8.7
         version: 8.8.7
-      unocss-preset-scrollbar-hide:
-        specifier: ^1.0.1
-        version: 1.0.1(unocss@66.4.2(postcss@5.2.18)(vite@7.1.2(@types/node@24.3.0)(jiti@2.4.2)(less@4.3.0)(sass@1.87.0)(tsx@4.19.2)(yaml@2.8.1)))
       vue:
         specifier: ^3.5.18
         version: 3.5.18(typescript@5.6.3)
@@ -162,6 +159,9 @@ importers:
       unocss:
         specifier: ^66.4.2
         version: 66.4.2(postcss@5.2.18)(vite@7.1.2(@types/node@24.3.0)(jiti@2.4.2)(less@4.3.0)(sass@1.87.0)(tsx@4.19.2)(yaml@2.8.1))
+      unocss-preset-scrollbar-hide:
+        specifier: ^1.0.1
+        version: 1.0.1(unocss@66.4.2(postcss@5.2.18)(vite@7.1.2(@types/node@24.3.0)(jiti@2.4.2)(less@4.3.0)(sass@1.87.0)(tsx@4.19.2)(yaml@2.8.1)))
       unplugin-auto-import:
         specifier: ^20.0.0
         version: 20.0.0(@vueuse/core@13.6.0(vue@3.5.18(typescript@5.6.3)))
