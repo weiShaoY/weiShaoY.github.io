@@ -3,9 +3,9 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 
-import { BlogApi } from '@/api'
-
 import { onMounted, ref } from 'vue'
+
+import { BlogApi } from '@/apis'
 
 type NewsItem = {
   index: number

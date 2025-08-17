@@ -2,9 +2,9 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
 
-import { CommandApi } from '@/api'
-
 import { useRouter } from 'vue-router'
+
+import { CommandApi } from '@/apis'
 
 const router = useRouter()
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { BlogApi } from '@/api'
-
 import { ref } from 'vue'
+
+import { BlogApi } from '@/apis'
 
 const isLoading = ref(false)
 

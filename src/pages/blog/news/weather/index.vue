@@ -3,7 +3,7 @@ import type { CascaderValue } from 'element-plus'
 
 import type { WeatherType } from './types'
 
-import { BlogApi } from '@/api'
+import { BlogApi } from '@/apis'
 
 import Climate from './components/climate/index.vue'
 

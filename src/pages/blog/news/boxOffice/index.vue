@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { BlogApi } from '@/api'
-
 import { onMounted, ref } from 'vue'
+
+import { BlogApi } from '@/apis'
 
 import Parse from './components/parse/index.vue'
 

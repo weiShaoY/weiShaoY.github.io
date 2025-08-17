@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { BlogApi } from '@/api'
-
 import dayjs from 'dayjs'
 
 import { ref } from 'vue'
+
+import { BlogApi } from '@/apis'
 
 /**
  * 表示完整的域名信息结构

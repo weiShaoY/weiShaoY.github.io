@@ -1,6 +1,6 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { BlogApi } from '@/api'
+import { BlogApi } from '@/apis'
 
 const isLoading = ref(false)
 
