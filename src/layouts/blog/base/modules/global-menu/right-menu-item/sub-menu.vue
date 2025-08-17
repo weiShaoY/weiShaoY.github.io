@@ -102,7 +102,7 @@ function goPage(item: RouterType.BlogRouteRecordRaw) {
 </template>
 
 <style lang="scss">
-@use '@/theme/variables.scss' as *;
+@use '@/themes/variables.scss' as *;
 
 .el-sub-menu__title {
   margin: 0 auto !important;
