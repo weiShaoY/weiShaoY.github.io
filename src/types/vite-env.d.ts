@@ -22,14 +22,16 @@ declare namespace Env {
     readonly VITE_APP_NODE_ENV: 'development' | 'production'
 
     /**
-     *  应用的端口号
-     */
-    readonly VITE_APP_PORT: number
-
-    /**
      * 应用的基本 URL，用于构建和部署应用时的路径
+     * @default /
      */
     readonly VITE_APP_BASE_URL: string
+
+    /**
+     * 应用的端口号
+     * @default 1819
+     */
+    readonly VITE_APP_PORT: number
 
     /**
      *  应用的标题，用于页面标题显示
@@ -42,14 +44,36 @@ declare namespace Env {
     readonly VITE_APP_DESC: string
 
     /**
+     *  应用字体家族
+     */
+    readonly VITE_APP_FONT_FAMILY: string
+
+    /**
      *  图标名称的前缀，用于统一应用内的图标命名规则
      */
     readonly VITE_APP_ICON_PREFIX: string
 
     /**
-     *  应用字体家族
+     * 路由-模式
+     * @default history
      */
-    readonly VITE_APP_FONT_FAMILY: string
+    readonly VITE_ROUTER_MODE: 'hash' | 'history'
+
+    /**
+     * 路由-根路径
+     * @default /
+     */
+    readonly VITE_ROUTER_ROOT_PATH: string
+
+    /**
+     * 路由-博客模块路径
+     */
+    readonly VITE_ROUTER_BLOG_PATH: string
+
+    /**
+     * 路由-博客模块首页路径
+     */
+    readonly VITE_ROUTER_BLOG_HOME_PATH: string
 
     /**
      *  Github仓库地址
@@ -65,26 +89,6 @@ declare namespace Env {
      *  邮箱地址
      */
     readonly VITE_EMAIL_URL: string
-
-    /**
-     * 路由-模式
-     */
-    readonly VITE_ROUTER_MODE: 'hash' | 'history'
-
-    /**
-     * 路由-根路径
-     */
-    readonly VITE_ROUTER_ROOT_PATH: string
-
-    /**
-     * 路由-博客模块路径
-     */
-    readonly VITE_ROUTER_BLOG_PATH: string
-
-    /**
-     *  路由-博客模块首页路径
-     */
-    readonly VITE_ROUTER_BLOG_HOME_PATH: string
 
     /**
      * 第三方代理服务配置（ThingProxy）
