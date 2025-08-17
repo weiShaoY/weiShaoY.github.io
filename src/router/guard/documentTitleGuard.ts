@@ -34,8 +34,8 @@ export function documentTitleGuard(router: Router): void {
 
       useTitle(title)
     }
-    catch (error) {
-      console.error('Failed to set document title:', error)
+    catch {
+      window.$notification.error('Failed to set document title:')
       useTitle(import.meta.env.VITE_APP_DESC)
     }
   })

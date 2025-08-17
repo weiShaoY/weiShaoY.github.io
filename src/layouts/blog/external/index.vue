@@ -17,10 +17,18 @@ onMounted(() => {
     console.warn('iframeUrl 未找到，请确保 meta 中包含 iframeUrl')
   }
 
-  window.open(externalUrl.value, '_black')
+  try {
+    // 使用 _blank 而不是 _black（拼写错误）
+    window.open(externalUrl.value, '_blank')
 
-  // 返回上一页
-  router.back()
+    // 延迟返回，避免路由冲突
+    setTimeout(() => {
+      router.back()
+    }, 100)
+  }
+  catch {
+    window.$notification.error('打开外部链接失败')
+  }
 })
 </script>
 

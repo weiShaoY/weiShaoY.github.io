@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-import { isMobile } from '@/utils'
-
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+import { isMobile } from '@/utils'
 
 const imageUrl = 'https://api.lolimi.cn/API/dmtx/api.php' // 替换为实际的纹理 URL
 
@@ -175,7 +175,7 @@ function addModel() {
     },
     undefined,
     (error) => {
-      console.error('模型加载失败:', error)
+      window.$notification.error('模型加载失败:')
     },
   )
 }

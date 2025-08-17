@@ -439,7 +439,7 @@ async function addModels(): Promise<void> {
     garageStore.state.isLoaded = true // 设置加载完成状态
   }
   catch (error) {
-    console.error('加载模型时出错:', error)
+    window.$notification.error('加载模型时出错:')
     throw error // 抛出错误供调用方处理
   }
 }

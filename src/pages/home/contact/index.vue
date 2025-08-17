@@ -44,8 +44,8 @@ async function handleSubmit(e: Event) {
     })
     formRef.value?.reset()
   }
-  catch (error) {
-    console.error('邮件发送失败:', error)
+  catch {
+    window.$notification.error('邮件发送失败')
 
     window.$notification?.error({
       title: '邮件发送失败',

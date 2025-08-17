@@ -78,7 +78,7 @@ export function setupUI(app: App<Element>): void {
     app.use(ElementPlus)
   }
   catch (error) {
-    console.error('Element Plus 初始化失败:', error)
+    window.$notification.error('Element Plus 初始化失败:')
     throw error
   }
 }

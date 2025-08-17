@@ -6,9 +6,9 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
-
 import * as Three from 'three'
+
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -22,7 +22,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
-import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
+import { useGarageStore } from '@/store'
 
 import floorFrag from './shaders/sketch/floorfrag.glsl'
 
@@ -35,7 +35,6 @@ import vertexShader from './shaders/sketch/vertex.glsl'
 import {
   flatModel,
   useModifyCSM,
-  useReflect,
 } from './utils'
 
 import { watchColorChange } from './watchColorChange'
@@ -94,9 +93,9 @@ let speedupGltf: GLTF | null = null
  */
 let startRommGltf: GLTF | null = null
 
-const matrix: THREE.Matrix4 | null = null
+// const matrix: THREE.Matrix4 | null = null
 
-const renderTarget: THREE.WebGLRenderTarget<THREE.Texture> | null = null
+// const renderTarget: THREE.WebGLRenderTarget<THREE.Texture> | null = null
 
 /**
  *  主模型
@@ -430,7 +429,7 @@ async function addModels(): Promise<void> {
     garageStore.state.isLoaded = true // 设置加载完成状态
   }
   catch (error) {
-    console.error('加载模型时出错:', error)
+    window.$notification.error('加载模型时出错:')
     throw error // 抛出错误供调用方处理
   }
 }

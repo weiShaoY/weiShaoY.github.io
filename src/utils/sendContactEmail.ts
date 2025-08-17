@@ -59,7 +59,7 @@ export async function sendContactEmail(formData: FormDataType): Promise<void> {
     console.log('邮件发送成功！')
   }
   catch (error) {
-    console.error('发送邮件失败:', error)
+    window.$notification.error('发送邮件失败')
     throw error // 将错误抛出以便调用方处理
   }
 }

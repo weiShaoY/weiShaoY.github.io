@@ -120,7 +120,7 @@ async function handleDownload(_event: MouseEvent): Promise<void> {
     emit('click')
   }
   catch (error) {
-    console.error('下载失败:', error)
+    window.$notification.error('下载失败:')
     const errorMessage = error instanceof Error ? error.message : '下载过程中发生未知错误'
 
     window.$notification.error({

@@ -7,8 +7,8 @@ function startProgress(): void {
   try {
     window.NProgress?.start?.()
   }
-  catch (error) {
-    console.error('Failed to start progress:', error)
+  catch {
+    window.$notification.error('Failed to start progress:')
   }
 }
 
@@ -19,8 +19,8 @@ function doneProgress(): void {
   try {
     window.NProgress?.done()
   }
-  catch (error) {
-    console.error('Failed to end progress:', error)
+  catch {
+    window.$notification.error('Failed to end progress:')
   }
 }
 

@@ -76,7 +76,7 @@ export function setupNProgress(): void {
     window.NProgress = NProgress
   }
   catch (error) {
-    console.error('NProgress 初始化失败:', error)
+    window.$notification.error('NProgress 初始化失败:')
     throw error
   }
 }

@@ -48,7 +48,7 @@ export async function imageUrlToBase64(url: string): Promise<string> {
     })
   }
   catch (error) {
-    console.error('urlToBase64 错误:', error)
+    window.$notification.error('图片转换失败')
     throw error // Re-throw the error to allow calling code to handle it
   }
 }

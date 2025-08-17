@@ -80,7 +80,7 @@ export async function fetchHttp<T = any>(
     return (result.data || result) as T
   }
   catch (error) {
-    console.error('接口请求错误:', error)
+    window.$notification.error('接口请求错误:')
 
     if (showError && error instanceof Error) {
       window.$notification.error(`请求失败: ${error.message || error}`)

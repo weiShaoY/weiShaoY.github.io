@@ -27,8 +27,8 @@ function handleBlogWorkTabGuard(to: RouteLocationNormalized): void {
       } as any)
     }
   }
-  catch (error) {
-    console.error('打开博客工作选项卡失败:', error)
+  catch {
+    window.$notification.error('打开博客工作选项卡失败')
   }
 }
 

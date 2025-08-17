@@ -59,8 +59,8 @@ async function fetchData() {
 
     fetchRes.value = res
   }
-  catch (error) {
-    console.error('数据获取失败:', error)
+  catch {
+    window.$notification.error('数据获取失败')
 
     // 可以在这里添加错误处理逻辑，例如：
     // showErrorToast('加载数据失败，请重试')

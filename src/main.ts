@@ -51,7 +51,7 @@ async function setupApp(): Promise<void> {
     app.mount('#app')
   }
   catch (error) {
-    console.error('应用初始化或挂载失败:', error)
+    window.$notification.error('应用初始化或挂载失败:')
     throw error
   }
 }

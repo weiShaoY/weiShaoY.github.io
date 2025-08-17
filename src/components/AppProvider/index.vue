@@ -37,7 +37,7 @@ const ContextHolder = defineComponent({
         window.$message = ElMessage
       }
       catch (error) {
-        console.error('注册全局组件失败:', error)
+        window.$notification.error('注册全局组件失败:')
       }
     }
 

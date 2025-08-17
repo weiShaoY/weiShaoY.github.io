@@ -52,7 +52,7 @@ setTimeout(() => {
       checkDuplicateRoutes(routeList)
     }
     catch (error) {
-      console.error('Route check failed:', error)
+      window.$notification.error('Route check failed:')
     }
   })
 }, 3000)
@@ -126,7 +126,7 @@ export async function setupRouter(app: App) {
     createRouterGuard(router)
   }
   catch (error) {
-    console.error('Router setup failed:', error)
+    window.$notification.error('Router setup failed:')
     throw error
   }
 }

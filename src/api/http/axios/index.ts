@@ -173,7 +173,7 @@ function createAxiosInstance(): AxiosInstance {
       return config
     },
     (error: AxiosError) => {
-      console.error('Request Error:', error)
+      window.$notification.error('Request Error:')
       return Promise.reject(error)
     },
   )

@@ -95,7 +95,7 @@ export async function blogMenuJump(
     // 跳转到子菜单路径
     await router.push(firstChild.path)
   }
-  catch (error) {
-    console.error('Menu jump failed:', error)
+  catch {
+    window.$notification.error('Menu jump failed:')
   }
 }

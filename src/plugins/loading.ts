@@ -1,6 +1,6 @@
-import loadingSvg from '@/assets/svgs/loading.svg?raw'
-
 import { ElLoading } from 'element-plus'
+
+import loadingSvg from '@/assets/svgs/loading.svg?raw'
 
 /**
  * 加载持续时间（毫秒）
@@ -64,7 +64,7 @@ export function setupLoading() {
     return loading
   }
   catch (error) {
-    console.error('加载状态设置失败:', error)
+    window.$notification.error('加载状态设置失败:')
     throw error
   }
 }
