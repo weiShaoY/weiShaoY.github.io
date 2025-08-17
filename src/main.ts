@@ -16,7 +16,7 @@ import { setupRouter } from './router'
 
 import pinia from './store'
 
-import './theme/index'
+import './themes/index'
 
 /**
  * 初始化应用程序

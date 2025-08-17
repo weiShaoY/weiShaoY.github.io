@@ -131,7 +131,7 @@ export default defineConfig(({ mode }) => {
            * as * 表示将所有 mixin/variables 导入全局命名空间
            */
           additionalData: `
-            @use "@/theme/variables.scss" as *;
+            @use "@/themes/variables.scss" as *;
           `,
 
           // 禁用在生成的 CSS 文件中加入 @charset 声明
