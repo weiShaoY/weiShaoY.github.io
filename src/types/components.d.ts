@@ -90,7 +90,4 @@ declare module 'vue' {
     VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
     WxChat: typeof import('./../components/WxChat/index.vue')['default']
   }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
-  }
 }

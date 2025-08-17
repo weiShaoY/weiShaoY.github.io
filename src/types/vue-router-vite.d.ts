@@ -63,8 +63,8 @@ declare module 'vue-router/auto-routes' {
     '/blog/tool/network/http/': RouteRecordInfo<'/blog/tool/network/http/', '/blog/tool/network/http', Record<never, never>, Record<never, never>>,
     '/blog/tool/qrcode/': RouteRecordInfo<'/blog/tool/qrcode/', '/blog/tool/qrcode', Record<never, never>, Record<never, never>>,
     '/blog/workbench/': RouteRecordInfo<'/blog/workbench/', '/blog/workbench', Record<never, never>, Record<never, never>>,
-    '/blog/workbench/测试/MapChart copy 3': RouteRecordInfo<'/blog/workbench/测试/MapChart copy 3', '/blog/workbench/测试/MapChart copy 3', Record<never, never>, Record<never, never>>,
     '/blog/workbench/MapChart': RouteRecordInfo<'/blog/workbench/MapChart', '/blog/workbench/MapChart', Record<never, never>, Record<never, never>>,
+    '/blog/workbench/测试/MapChart copy 3': RouteRecordInfo<'/blog/workbench/测试/MapChart copy 3', '/blog/workbench/测试/MapChart copy 3', Record<never, never>, Record<never, never>>,
     '/command/identity/detail/': RouteRecordInfo<'/command/identity/detail/', '/command/identity/detail', Record<never, never>, Record<never, never>>,
     '/command/identity/result/': RouteRecordInfo<'/command/identity/result/', '/command/identity/result', Record<never, never>, Record<never, never>>,
     '/command/identity/search/': RouteRecordInfo<'/command/identity/search/', '/command/identity/search', Record<never, never>, Record<never, never>>,
@@ -93,4 +93,324 @@ declare module 'vue-router/auto-routes' {
     '/love/': RouteRecordInfo<'/love/', '/love', Record<never, never>, Record<never, never>>,
     '/test/': RouteRecordInfo<'/test/', '/test', Record<never, never>, Record<never, never>>,
   }
+
+  /**
+   * Route file to route info map by unplugin-vue-router.
+   * Used by the volar plugin to automatically type useRoute()
+   *
+   * Each key is a file path relative to the project root with 2 properties:
+   * - routes: union of route names of the possible routes when in this page (passed to useRoute<...>())
+   * - views: names of nested views (can be passed to <RouterView name="...">)
+   *
+   * @internal
+   */
+  export interface _RouteFileInfoMap {
+    'src/pages/blog/creativity/calendar/index.vue': {
+      routes: '/blog/creativity/calendar/'
+      views: never
+    }
+    'src/pages/blog/creativity/calendar/left.vue': {
+      routes: '/blog/creativity/calendar/left'
+      views: never
+    }
+    'src/pages/blog/creativity/calendar/right.vue': {
+      routes: '/blog/creativity/calendar/right'
+      views: never
+    }
+    'src/pages/blog/creativity/clock/index.vue': {
+      routes: '/blog/creativity/clock/'
+      views: never
+    }
+    'src/pages/blog/creativity/clock/components/left.vue': {
+      routes: '/blog/creativity/clock/components/left'
+      views: never
+    }
+    'src/pages/blog/creativity/clock/components/right.vue': {
+      routes: '/blog/creativity/clock/components/right'
+      views: never
+    }
+    'src/pages/blog/creativity/muYu/index.vue': {
+      routes: '/blog/creativity/muYu/'
+      views: never
+    }
+    'src/pages/blog/dev/jsonFormatter/index.vue': {
+      routes: '/blog/dev/jsonFormatter/'
+      views: never
+    }
+    'src/pages/blog/dev/jsonToTypeScript/index.vue': {
+      routes: '/blog/dev/jsonToTypeScript/'
+      views: never
+    }
+    'src/pages/blog/media/av/index.vue': {
+      routes: '/blog/media/av/'
+      views: never
+    }
+    'src/pages/blog/media/av/site_btn.vue': {
+      routes: '/blog/media/av/site_btn'
+      views: never
+    }
+    'src/pages/blog/media/copywriting/index.vue': {
+      routes: '/blog/media/copywriting/'
+      views: never
+    }
+    'src/pages/blog/media/music/index.vue': {
+      routes: '/blog/media/music/'
+      views: never
+    }
+    'src/pages/blog/media/video/index.vue': {
+      routes: '/blog/media/video/'
+      views: never
+    }
+    'src/pages/blog/media/voice/index.vue': {
+      routes: '/blog/media/voice/'
+      views: never
+    }
+    'src/pages/blog/media/wallpaper/index.vue': {
+      routes: '/blog/media/wallpaper/'
+      views: never
+    }
+    'src/pages/blog/news/boxOffice/index.vue': {
+      routes: '/blog/news/boxOffice/'
+      views: never
+    }
+    'src/pages/blog/news/boxOffice/components/parse/index.vue': {
+      routes: '/blog/news/boxOffice/components/parse/'
+      views: never
+    }
+    'src/pages/blog/news/game/hok/index.vue': {
+      routes: '/blog/news/game/hok/'
+      views: never
+    }
+    'src/pages/blog/news/itNews/index.vue': {
+      routes: '/blog/news/itNews/'
+      views: never
+    }
+    'src/pages/blog/news/price/cigarette/index.vue': {
+      routes: '/blog/news/price/cigarette/'
+      views: never
+    }
+    'src/pages/blog/news/price/gold/index.vue': {
+      routes: '/blog/news/price/gold/'
+      views: never
+    }
+    'src/pages/blog/news/price/oil/index.vue': {
+      routes: '/blog/news/price/oil/'
+      views: never
+    }
+    'src/pages/blog/news/weather/index.vue': {
+      routes: '/blog/news/weather/'
+      views: never
+    }
+    'src/pages/blog/news/weather/components/climate/index.vue': {
+      routes: '/blog/news/weather/components/climate/'
+      views: never
+    }
+    'src/pages/blog/news/weather/components/meter/index.vue': {
+      routes: '/blog/news/weather/components/meter/'
+      views: never
+    }
+    'src/pages/blog/news/weather/components/passedChart/index.vue': {
+      routes: '/blog/news/weather/components/passedChart/'
+      views: never
+    }
+    'src/pages/blog/news/weather/components/tempChart/index.vue': {
+      routes: '/blog/news/weather/components/tempChart/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/account/index.vue': {
+      routes: '/blog/socialEngineering/account/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/complain/index.vue': {
+      routes: '/blog/socialEngineering/complain/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/domain/index.vue': {
+      routes: '/blog/socialEngineering/domain/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/licensePlate/index.vue': {
+      routes: '/blog/socialEngineering/licensePlate/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/logistic/index.vue': {
+      routes: '/blog/socialEngineering/logistic/'
+      views: never
+    }
+    'src/pages/blog/socialEngineering/loveSpeech/index.vue': {
+      routes: '/blog/socialEngineering/loveSpeech/'
+      views: never
+    }
+    'src/pages/blog/test/api/index.vue': {
+      routes: '/blog/test/api/'
+      views: never
+    }
+    'src/pages/blog/test/component/index.vue': {
+      routes: '/blog/test/component/'
+      views: never
+    }
+    'src/pages/blog/tool/codec/base64/index.vue': {
+      routes: '/blog/tool/codec/base64/'
+      views: never
+    }
+    'src/pages/blog/tool/codec/base64/modal.vue': {
+      routes: '/blog/tool/codec/base64/modal'
+      views: never
+    }
+    'src/pages/blog/tool/codec/md5/index.vue': {
+      routes: '/blog/tool/codec/md5/'
+      views: never
+    }
+    'src/pages/blog/tool/codec/morse/index.vue': {
+      routes: '/blog/tool/codec/morse/'
+      views: never
+    }
+    'src/pages/blog/tool/codec/morse/modal.vue': {
+      routes: '/blog/tool/codec/morse/modal'
+      views: never
+    }
+    'src/pages/blog/tool/network/dns/index.vue': {
+      routes: '/blog/tool/network/dns/'
+      views: never
+    }
+    'src/pages/blog/tool/network/http/index.vue': {
+      routes: '/blog/tool/network/http/'
+      views: never
+    }
+    'src/pages/blog/tool/qrcode/index.vue': {
+      routes: '/blog/tool/qrcode/'
+      views: never
+    }
+    'src/pages/blog/workbench/index.vue': {
+      routes: '/blog/workbench/'
+      views: never
+    }
+    'src/pages/blog/workbench/MapChart.vue': {
+      routes: '/blog/workbench/MapChart'
+      views: never
+    }
+    'src/pages/blog/workbench/测试/MapChart copy 3.vue': {
+      routes: '/blog/workbench/测试/MapChart copy 3'
+      views: never
+    }
+    'src/pages/command/identity/detail/index.vue': {
+      routes: '/command/identity/detail/'
+      views: never
+    }
+    'src/pages/command/identity/result/index.vue': {
+      routes: '/command/identity/result/'
+      views: never
+    }
+    'src/pages/command/identity/search/index.vue': {
+      routes: '/command/identity/search/'
+      views: never
+    }
+    'src/pages/command/login/index.vue': {
+      routes: '/command/login/'
+      views: never
+    }
+    'src/pages/error/403/index.vue': {
+      routes: '/error/403/'
+      views: never
+    }
+    'src/pages/error/404/index.vue': {
+      routes: '/error/404/'
+      views: never
+    }
+    'src/pages/error/500/index.vue': {
+      routes: '/error/500/'
+      views: never
+    }
+    'src/pages/error/redirect/index.vue': {
+      routes: '/error/redirect/'
+      views: never
+    }
+    'src/pages/garage/index.vue': {
+      routes: '/garage/'
+      views: never
+    }
+    'src/pages/garage/threeContainer/index.vue': {
+      routes: '/garage/threeContainer/'
+      views: never
+    }
+    'src/pages/garage/threeContainer/index copy.vue': {
+      routes: '/garage/threeContainer/index copy'
+      views: never
+    }
+    'src/pages/garage/threeContainer/index copy 2.vue': {
+      routes: '/garage/threeContainer/index copy 2'
+      views: never
+    }
+    'src/pages/garage/threeContainer copy 2/index.vue': {
+      routes: '/garage/threeContainer copy 2/'
+      views: never
+    }
+    'src/pages/garage/uiContainer/index.vue': {
+      routes: '/garage/uiContainer/'
+      views: never
+    }
+    'src/pages/garage/uiContainer/components/bar/index.vue': {
+      routes: '/garage/uiContainer/components/bar/'
+      views: never
+    }
+    'src/pages/garage/uiContainer/components/loading/index.vue': {
+      routes: '/garage/uiContainer/components/loading/'
+      views: never
+    }
+    'src/pages/home/about/index.vue': {
+      routes: '/home/about/'
+      views: never
+    }
+    'src/pages/home/about/components/info.vue': {
+      routes: '/home/about/components/info'
+      views: never
+    }
+    'src/pages/home/about/components/intro.vue': {
+      routes: '/home/about/components/intro'
+      views: never
+    }
+    'src/pages/home/about/components/map.vue': {
+      routes: '/home/about/components/map'
+      views: never
+    }
+    'src/pages/home/contact/index.vue': {
+      routes: '/home/contact/'
+      views: never
+    }
+    'src/pages/home/resume/index.vue': {
+      routes: '/home/resume/'
+      views: never
+    }
+    'src/pages/home/work/index.vue': {
+      routes: '/home/work/'
+      views: never
+    }
+    'src/pages/home/work/components/experience/index.vue': {
+      routes: '/home/work/components/experience/'
+      views: never
+    }
+    'src/pages/home/work/components/project/index.vue': {
+      routes: '/home/work/components/project/'
+      views: never
+    }
+    'src/pages/love/index.vue': {
+      routes: '/love/'
+      views: never
+    }
+    'src/pages/test/index.vue': {
+      routes: '/test/'
+      views: never
+    }
+  }
+
+  /**
+   * Get a union of possible route names in a certain route component file.
+   * Used by the volar plugin to automatically type useRoute()
+   *
+   * @internal
+   */
+  export type _RouteNamesForFilePath<FilePath extends string> =
+    _RouteFileInfoMap extends Record<FilePath, infer Info>
+      ? Info['routes']
+      : keyof RouteNamedMap
 }
