@@ -4,7 +4,7 @@ import type { ThreeContainerType } from './types'
 
 import { gsap } from 'gsap'
 
-import { useGarageStore } from '@/store'
+import { useGarageStore } from '@/stores'
 
 /**
  * 封装的动画函数，用于根据触摸状态来执行不同的动画。

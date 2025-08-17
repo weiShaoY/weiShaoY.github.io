@@ -6,7 +6,7 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
+import { useGarageStore } from '@/stores'
 
 import * as Three from 'three'
 

@@ -6,11 +6,11 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
-
 import * as three from 'three'
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+
+import { useGarageStore } from '@/stores'
 
 import { addLights } from './addLights'
 

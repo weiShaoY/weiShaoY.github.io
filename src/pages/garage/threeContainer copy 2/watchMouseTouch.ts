@@ -2,9 +2,9 @@ import type * as THREE from 'three'
 
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
-
 import { gsap } from 'gsap'
+
+import { useGarageStore } from '@/stores'
 
 /**
  * 封装的动画函数，用于根据触摸状态来执行不同的动画。
@@ -19,7 +19,6 @@ export function watchMouseTouch(
 
   //  监听交互
   watch(() => garageStore.interact.touch, () => {
-
     /**
      *  获取当前参数
      */

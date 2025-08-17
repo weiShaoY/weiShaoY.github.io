@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useBlogStore } from '@/store'
+import { useBlogStore } from '@/stores'
 
 import { blogMittBus } from '@/utils'
 

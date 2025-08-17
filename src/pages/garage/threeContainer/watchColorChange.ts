@@ -6,7 +6,7 @@ import * as three from 'three'
 
 import { watch } from 'vue'
 
-import { useGarageStore } from '@/store'
+import { useGarageStore } from '@/stores'
 
 /**
  * 封装的函数，用于根据车身颜色的变化来动画化车身的颜色变化。

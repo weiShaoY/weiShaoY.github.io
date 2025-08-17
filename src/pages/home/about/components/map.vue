@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
 
+import { registerMap } from 'echarts/core'
+
 import chinaMap from '@/assets/jsons/china.json'
 
-import { useAppStore } from '@/store'
-
-import { registerMap } from 'echarts/core'
+import { useAppStore } from '@/stores'
 
 const appStore = useAppStore()
 

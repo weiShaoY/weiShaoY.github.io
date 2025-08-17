@@ -1,7 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
-import { useGarageStore } from '@/store'
+import { useGarageStore } from '@/stores'
 
 import Bar from './components/bar/index.vue'
 

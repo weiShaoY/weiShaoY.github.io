@@ -7,8 +7,6 @@ import type { LocationQueryRaw } from 'vue-router'
 
 import type { MenuItemType } from './menu-right.vue'
 
-import { useBlogStore } from '@/store'
-
 import {
   computed,
   onMounted,
@@ -17,6 +15,8 @@ import {
 } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
+
+import { useBlogStore } from '@/stores'
 
 import MenuItem from '../../components/menu-item.vue'
 

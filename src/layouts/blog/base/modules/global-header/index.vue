@@ -1,11 +1,11 @@
 <!------  2025-04-16---18:18---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { useBlogStore } from '@/store'
+import { useFullscreen } from '@vueuse/core'
+
+import { useBlogStore } from '@/stores'
 
 import { blogMittBus } from '@/utils'
-
-import { useFullscreen } from '@vueuse/core'
 
 import Breadcrumb from './breadcrumb.vue'
 

@@ -1,7 +1,5 @@
 import type * as THREE from 'three'
 
-import { useGarageStore } from '@/store'
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
@@ -9,6 +7,8 @@ import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+
+import { useGarageStore } from '@/stores'
 
 export function addOrbitControls(scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, composer: EffectComposer) {
   const garageStore = useGarageStore()

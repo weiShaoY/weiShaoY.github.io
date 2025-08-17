@@ -1,12 +1,12 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import { gsap } from 'gsap'
+
 import bgmAudioSrc from '@/assets/musics/garage-bgm.mp3'
 
 import changeAudioSrc from '@/assets/musics/garage-change.mp3'
 
-import { useGarageStore } from '@/store'
-
-import { gsap } from 'gsap'
+import { useGarageStore } from '@/stores'
 
 import b1 from './images/b1.webp'
 

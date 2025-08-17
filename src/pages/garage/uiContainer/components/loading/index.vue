@@ -1,9 +1,9 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
-import { useGarageStore } from '@/store'
-
 import { gsap } from 'gsap'
+
+import { useGarageStore } from '@/stores'
 
 const garageStore = useGarageStore()
 

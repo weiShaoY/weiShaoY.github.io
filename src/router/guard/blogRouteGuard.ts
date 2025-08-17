@@ -1,6 +1,6 @@
 import type { RouteLocationNormalized, Router } from 'vue-router'
 
-import { useBlogStore } from '@/store'
+import { useBlogStore } from '@/stores'
 
 /**
  *  路由-博客模块路径

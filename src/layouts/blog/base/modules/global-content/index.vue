@@ -1,6 +1,6 @@
 <!-- 内容布局 -->
 <script setup lang="ts">
-import { useBlogStore } from '@/store'
+import { useBlogStore } from '@/stores'
 
 const blogStore = useBlogStore()
 

@@ -14,7 +14,7 @@ import {
 
 import { setupRouter } from './router'
 
-import pinia from './store'
+import pinia from './stores'
 
 import './themes/index'
 

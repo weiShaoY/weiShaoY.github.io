@@ -2,11 +2,11 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
+import { useRoute } from 'vue-router'
+
 import { router } from '@/router'
 
-import { useBlogStore } from '@/store'
-
-import { useRoute } from 'vue-router'
+import { useBlogStore } from '@/stores'
 
 import { findTopRouteByPath } from '../utils'
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useBlogStore } from '@/store'
-
 import { useRoute } from 'vue-router'
+
+import { useBlogStore } from '@/stores'
 
 import { findTopRouteByPath } from '../../utils'
 

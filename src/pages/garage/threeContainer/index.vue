@@ -22,7 +22,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
-import { useGarageStore } from '@/store'
+import { useGarageStore } from '@/stores'
 
 import floorFrag from './shaders/sketch/floorfrag.glsl'
 

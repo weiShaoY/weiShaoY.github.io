@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useBlogStore } from '@/store'
-
 import { useRoute } from 'vue-router'
+
+import { useBlogStore } from '@/stores'
 
 import SubMenu from './sub-menu.vue'
 

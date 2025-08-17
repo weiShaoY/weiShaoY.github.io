@@ -6,9 +6,9 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import type { ThreeContainerType } from './types'
 
-import { useGarageStore } from '@/store'
-
 import * as Three from 'three'
+
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -22,7 +22,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
-import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
+import { useGarageStore } from '@/stores'
 
 import floorFrag from './shaders/sketch/floorfrag.glsl'
 

@@ -5,7 +5,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 import { computed } from 'vue'
 
-import { useBlogStore } from './store'
+import { useBlogStore } from './stores'
 
 /**
  * 组件名称
@@ -13,8 +13,6 @@ import { useBlogStore } from './store'
 defineOptions({
   name: 'App',
 })
-
-
 
 /**
  * 博客状态管理
