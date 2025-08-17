@@ -22,7 +22,6 @@
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "up": "taze major -I",
-    "deploy": "bash d",
     "build": "vite build",
     "clean": "rimraf node_modules"
   },
