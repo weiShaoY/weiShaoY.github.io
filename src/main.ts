@@ -6,11 +6,7 @@ import App from './App.vue'
 
 import directives from './directives'
 
-import {
-  setupLoading,
-  setupNProgress,
-  setupUI,
-} from './plugins'
+import { setupPlugins } from './plugins'
 
 import { setupRouter } from './router'
 
@@ -26,12 +22,6 @@ import './themes/index'
  */
 async function setupApp(): Promise<void> {
   try {
-    // 初始化基础功能
-    setupLoading()
-
-    // 设置顶部进度条
-    setupNProgress()
-
     // 创建应用实例
     const app: VueApp = createApp(App)
 
@@ -41,8 +31,8 @@ async function setupApp(): Promise<void> {
     // 注册状态管理
     app.use(pinia)
 
-    // 设置 UI 框架
-    setupUI(app)
+    // 设置插件
+    setupPlugins(app)
 
     // 设置路由
     await setupRouter(app)

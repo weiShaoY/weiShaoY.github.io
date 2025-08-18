@@ -1,4 +1,4 @@
-import 'virtual:svg-icons/register'
+// import 'virtual:svg-icons/register'
 
 import '@unocss/reset/tailwind.css'
 

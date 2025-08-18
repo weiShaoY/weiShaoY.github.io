@@ -69,7 +69,7 @@ function setupComponentDefaults(): void {
  * @param app - Vue 应用实例
  * @throws {Error} 当初始化失败时抛出错误
  */
-export function setupUI(app: App<Element>): void {
+export function setElementPlus(app: App<Element>): void {
   try {
     // 设置组件默认配置
     setupComponentDefaults()
