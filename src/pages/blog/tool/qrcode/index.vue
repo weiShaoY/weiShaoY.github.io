@@ -2,35 +2,19 @@
 
 import QrcodeVue from 'qrcode.vue'
 
-const type = ref('code')
+import { nextTick } from 'vue'
 
-const inputText = ref('Hello Word! 代码改变世界！')
+const state = ref({
+  type: 'code',
+  inputText: 'Hello Word! 代码改变世界！',
+  qrcodeImageSize: 100,
+  qrcodeImageForegroundColor: '#E9B354',
+  qrcodeImageBackgroundColor: '#ffffff',
+  qrcodeImageGradient: false,
+  qrcodeImageMargin: 5,
+})
 
-const encodedText = ref('')
-
-const qrcodeImageSize = ref(100)
-
-/**
- *  前景色
- */
-const qrcodeImageForegroundColor = ref('#E9B354')
-
-/**
- *  背景色
- */
-const qrcodeImageBackgroundColor = ref('#ffffff')
-
-/**
- *  二维码填充
- */
-const qrcodeImageGradient = ref(false)
-
-/**
- *  二维码边距
- */
-const qrcodeImageMargin = ref(5)
-
-const qrcodeContainerRef = ref()
+const qrcodeContainerRef = ref<HTMLDivElement | null>(null)
 
 /**
  * 下载二维码 canvas 为图片
@@ -42,6 +26,9 @@ async function handleDownload() {
     if (!container) {
       throw new Error('未找到二维码容器')
     }
+
+    // 确保二维码已渲染
+    await nextTick()
 
     const canvas = container.querySelector('canvas') as HTMLCanvasElement | null
 
@@ -57,13 +44,13 @@ async function handleDownload() {
     link.click()
     document.body.removeChild(link)
 
-    window.$notification?.success({
+    window.$notification?.success?.({
       title: '下载成功',
       message: '二维码已下载到本地',
     })
   }
   catch (err) {
-    window.$notification?.error({
+    window.$notification?.error?.({
       title: '下载失败',
       message: err instanceof Error ? err.message : String(err),
     })
@@ -81,6 +68,9 @@ async function handleDownloadCanvas(): Promise<void> {
     if (!container) {
       throw new Error('未找到二维码容器，请确认组件是否正确渲染')
     }
+
+    // 确保二维码已渲染
+    await nextTick()
 
     const canvas = container.querySelector('canvas')
 
@@ -105,13 +95,13 @@ async function handleDownloadCanvas(): Promise<void> {
 
     await navigator.clipboard.write([clipboardItem])
 
-    window.$notification?.success({
+    window.$notification?.success?.({
       title: '复制成功',
       message: '二维码已复制到剪切板，可以直接粘贴使用',
     })
   }
   catch (err) {
-    window.$notification?.error({
+    window.$notification?.error?.({
       title: '复制失败',
       message: err instanceof Error ? err.message : String(err),
     })
@@ -130,7 +120,7 @@ async function handleDownloadCanvas(): Promise<void> {
         class="flex items-center gap-5"
       >
         <el-radio-group
-          v-model="type"
+          v-model="state.type"
         >
           <el-radio-button
             value="code"
@@ -140,14 +130,14 @@ async function handleDownloadCanvas(): Promise<void> {
       </div>
 
       <BaseButton
-        v-if="encodedText.length > 0"
+        v-if="state.inputText.length > 0"
         v-copy="{
-          text: encodedText,
-          message: `Md5 加密数据 已经复制到剪切板`,
+          text: state.inputText,
+          message: '二维码文本已复制到剪切板',
         }"
         :size="40"
         icon="copy"
-        tooltip-content="点击复制"
+        tooltip-content="复制文本"
       />
     </div>
 
@@ -155,9 +145,9 @@ async function handleDownloadCanvas(): Promise<void> {
       class="h-[calc(100vh-200px)] flex items-center justify-center gap-15"
     >
       <el-input
-        v-model="inputText"
+        v-model="state.inputText"
         type="textarea"
-        placeholder="请输入要Md5 加密的内容"
+        placeholder="请输入要生成二维码的内容"
         class="!h-full !flex-1"
         :input-style="{ height: '100%' }"
       />
@@ -174,7 +164,7 @@ async function handleDownloadCanvas(): Promise<void> {
             <span>二维码填充</span>
 
             <el-switch
-              v-model="qrcodeImageGradient"
+              v-model="state.qrcodeImageGradient"
               size="large"
               active-text="是"
               inactive-text="否"
@@ -188,7 +178,7 @@ async function handleDownloadCanvas(): Promise<void> {
             <span>二维码前景色</span>
 
             <el-color-picker
-              v-model="qrcodeImageForegroundColor"
+              v-model="state.qrcodeImageForegroundColor"
               :show-alpha="false"
               size="large"
             />
@@ -200,7 +190,7 @@ async function handleDownloadCanvas(): Promise<void> {
             <span>二维码背景色</span>
 
             <el-color-picker
-              v-model="qrcodeImageBackgroundColor"
+              v-model="state.qrcodeImageBackgroundColor"
               :show-alpha="false"
             />
           </div>
@@ -211,7 +201,7 @@ async function handleDownloadCanvas(): Promise<void> {
             <span>二维码大小</span>
 
             <el-slider
-              v-model="qrcodeImageSize"
+              v-model="state.qrcodeImageSize"
               class="!w-1/2"
               size="large"
               :min="100"
@@ -226,7 +216,7 @@ async function handleDownloadCanvas(): Promise<void> {
             <span>二维码边距</span>
 
             <el-slider
-              v-model="qrcodeImageMargin"
+              v-model="state.qrcodeImageMargin"
               class="!w-1/2"
               size="large"
               :min="0"
@@ -253,12 +243,12 @@ async function handleDownloadCanvas(): Promise<void> {
             @click="handleDownloadCanvas"
           >
             <QrcodeVue
-              :value="inputText"
-              :size="qrcodeImageSize"
-              :foreground="qrcodeImageForegroundColor"
-              :background="qrcodeImageBackgroundColor"
-              :gradient="qrcodeImageGradient"
-              :margin="qrcodeImageMargin"
+              :value="state.inputText"
+              :size="state.qrcodeImageSize"
+              :foreground="state.qrcodeImageForegroundColor"
+              :background="state.qrcodeImageBackgroundColor"
+              :gradient="state.qrcodeImageGradient"
+              :margin="state.qrcodeImageMargin"
             />
           </div>
         </div>

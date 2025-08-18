@@ -8,11 +8,13 @@ import copy from './modules/copy'
 
 import debounce from './modules/debounce'
 
+import highlight from './modules/highlight'
+
 import light from './modules/light'
 
 import throttle from './modules/throttle'
 
-import vWaterMarker from './modules/waterMarker'
+import waterMarker from './modules/waterMarker'
 
 const directivesList: { [key: string]: Directive } = {
   animatedText,
@@ -21,7 +23,8 @@ const directivesList: { [key: string]: Directive } = {
   debounce,
   light,
   throttle,
-  vWaterMarker,
+  waterMarker,
+  highlight,
 }
 
 export default {

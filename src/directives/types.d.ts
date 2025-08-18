@@ -51,4 +51,9 @@ export type DirectivesType = {
    *  水印指令
    */
   vWaterMarker: Directive<HTMLElement, WaterMarkerParamsType>
+
+  /**
+   *  代码高亮指令
+   */
+  vHighlight: Directive<HTMLElement>
 }
