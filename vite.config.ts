@@ -18,7 +18,7 @@ import { defineConfig, loadEnv } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
 
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng'
 
 import vueDevTools from 'vite-plugin-vue-devtools'
 
