@@ -37,15 +37,15 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       ],
     },
 
-    {
-      path: 'npm',
-      name: 'Npm',
-      meta: {
-        title: 'Npm可视化',
-        icon: 'blog-menu-npm',
-        iframeUrl: 'https://pkg-graph.info/',
-      },
-    },
+    // {
+    //   path: 'npm',
+    //   name: 'Npm',
+    //   meta: {
+    //     title: 'Npm可视化',
+    //     icon: 'blog-menu-npm',
+    //     iframeUrl: 'https://pkg-graph.info/',
+    //   },
+    // },
     {
       path: 'jsonFormatter',
       name: 'JsonFormatter',
@@ -65,6 +65,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       },
       component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
     },
+
   ],
 }
 

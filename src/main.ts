@@ -31,14 +31,14 @@ async function setupApp(): Promise<void> {
     // 注册状态管理
     app.use(pinia)
 
-    // 设置插件
-    setupPlugins(app)
-
     // 设置路由
     await setupRouter(app)
 
     // 挂载应用
     app.mount('#app')
+
+    // 设置插件
+    setupPlugins(app)
   }
   catch (error) {
     window.$notification.error('应用初始化或挂载失败:')

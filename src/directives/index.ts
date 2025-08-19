@@ -8,8 +8,6 @@ import copy from './modules/copy'
 
 import debounce from './modules/debounce'
 
-import highlight from './modules/highlight'
-
 import light from './modules/light'
 
 import throttle from './modules/throttle'
@@ -24,7 +22,6 @@ const directivesList: { [key: string]: Directive } = {
   light,
   throttle,
   waterMarker,
-  highlight,
 }
 
 export default {
