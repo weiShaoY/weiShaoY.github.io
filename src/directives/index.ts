@@ -17,7 +17,7 @@ import { waterMarker } from './modules/waterMarker'
 /**
  * 指令映射表
  */
-const directivesMap: DirectiveType.DirectivesMapType = {
+const directivesMap: { [key: string]: Directive } = {
   animatedText,
   canvasLoading,
   copy,
@@ -28,10 +28,7 @@ const directivesMap: DirectiveType.DirectivesMapType = {
 }
 
 export function setDirective(app: App<Element>) {
-  ;(Object.keys(directivesMap) as Array<keyof DirectiveType.DirectivesMapType>).forEach((name) => {
-    const directive = directivesMap[name]
-
-    // 不同指令的绑定值类型不同，统一按 Directive 注册
-    app.directive(name as string, directive as Directive)
+  Object.keys(directivesMap).forEach((name) => {
+    app.directive(name, directivesMap[name])
   })
 }

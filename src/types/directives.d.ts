@@ -1,6 +1,5 @@
 /* 全局指令类型命名空间 */
-
-declare namespace DirectiveType {
+namespace DirectiveType {
 
   /**
    * 基础指令类型
@@ -110,15 +109,15 @@ declare namespace DirectiveType {
 
   /**
    * 指令映射类型
+   * @description 必须使用 v- 前缀
    */
   type DirectivesMapType = {
-    animatedText: BaseDirectiveType
-    canvasLoading: import('vue').Directive<HTMLElement, CanvasLoadingParamsType>
-    copy: import('vue').Directive<HTMLElement, CopyParamsType>
-    debounce: import('vue').Directive<HTMLElement, DebounceParamsType>
-    light: import('vue').Directive<HTMLElement, LightParamsType>
-    throttle: import('vue').Directive<HTMLElement, ThrottleParamsType>
-    waterMarker: import('vue').Directive<HTMLElement, WaterMarkerParamsType>
+    vAnimatedText: BaseDirectiveType
+    vCanvasLoading: import('vue').Directive<HTMLElement, CanvasLoadingParamsType>
+    vCopy: import('vue').Directive<HTMLElement, CopyParamsType>
+    vDebounce: import('vue').Directive<HTMLElement, DebounceParamsType>
+    vLight: import('vue').Directive<HTMLElement, LightParamsType>
+    vThrottle: import('vue').Directive<HTMLElement, ThrottleParamsType>
+    vWaterMarker: import('vue').Directive<HTMLElement, WaterMarkerParamsType>
   }
-
 }
