@@ -17,6 +17,7 @@ function handleBlogWorkTabGuard(to: RouteLocationNormalized): void {
 
     const { meta, path, name, params, query } = to
 
+    // 优化：只在真正需要时才更新状态
     if (!meta.isHideTab) {
       blogStore.openTab({
         meta,
@@ -37,21 +38,10 @@ function handleBlogWorkTabGuard(to: RouteLocationNormalized): void {
  * @param router - Vue Router 实例
  */
 export function blogRouteGuard(router: Router): void {
-  // 全局前置守卫
-  // router.beforeEach(async (to, from, next) => {
-  //   // 如果目标路径包含博客路径，执行博客菜单守卫逻辑
-  //   // if (to.path.includes(BLOG_PATH)) {
-  //   //   await handleBlogMenuGuard(to, from, next, router)
-  //   // }
-  //   // else {
-  //   //   // 否则，直接放行
-  //   //   next()
-  //   // }
-  // })
   // 全局后置守卫
-  router.afterEach((to) => {
-    // 如果目标路径包含博客路径，执行工作标签和主题守卫逻辑
-    if (to.path.includes(VITE_ROUTER_BLOG_PATH)) {
+  router.afterEach((to, from) => {
+    // 优化：只在真正需要时才执行守卫逻辑
+    if (to.path.includes(VITE_ROUTER_BLOG_PATH) && to.path !== from.path) {
       handleBlogWorkTabGuard(to)
     }
   })

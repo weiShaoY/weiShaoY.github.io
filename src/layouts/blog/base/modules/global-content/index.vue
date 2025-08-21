@@ -9,26 +9,13 @@ const containerStyle = computed(() => ({
   maxWidth: blogStore.setting.container.maxWidth,
 }))
 
-// 刷新状态
-const isRefresh = ref(true)
-
-// 强制刷新组件
-function reload() {
-  isRefresh.value = false
-  nextTick(() => {
-    isRefresh.value = true
-  })
-}
-
-// 监听全局刷新状态
-watch(() => blogStore.isRefresh, reload)
-
 // 过渡动画配置
 const transitionProps = {
   name: 'slide-bottom',
   mode: 'out-in',
   appear: true,
 } as const
+
 </script>
 
 <template>
@@ -37,7 +24,6 @@ const transitionProps = {
     :style="containerStyle"
   >
     <RouterView
-      v-if="isRefresh"
       v-slot="{ Component, route }"
       class="w-full"
       :style="{ minHeight: blogStore.setting.container.minHeight }"

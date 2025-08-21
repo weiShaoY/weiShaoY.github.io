@@ -4,7 +4,7 @@ const aiRoute: RouterType.BlogRouteRecordRaw = {
   meta: {
     title: 'Ai',
     icon: 'blog-menu-ai',
-    keepAlive: false,
+    keepAlive: true, // 修复：父级路由也需要缓存
     order: 10,
   },
   children: [

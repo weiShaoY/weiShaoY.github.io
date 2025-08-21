@@ -5,6 +5,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
     title: '开发',
     order: 2,
     icon: 'blog-menu-dev',
+    keepAlive: true, // 添加：确保父级路由被缓存
   },
   children: [
     {
@@ -13,6 +14,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: '代码高亮',
         icon: 'blog-menu-codeHighlighting',
+        keepAlive: true, // 添加：确保子路由被缓存
       },
       children: [
         {
@@ -22,6 +24,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
             title: 'HighlightJs',
             icon: 'blog-menu-highlightJs',
             iframeUrl: 'https://highlightjs.org/demo',
+            keepAlive: true, // 添加：确保子路由被缓存
           },
         },
         {
@@ -32,6 +35,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
             icon: 'blog-menu-carbon',
             externalUrl: 'https://carbon.now.sh/',
             fastMenuOrder: 3,
+            keepAlive: true, // 添加：确保子路由被缓存
           },
         },
       ],
@@ -52,6 +56,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
       meta: {
         title: 'Json格式化',
         icon: 'blog-menu-jsonFormatter',
+        keepAlive: true, // 添加：确保路由被缓存
       },
       component: () => import('@/pages/blog/dev/jsonFormatter/index.vue'),
     },
@@ -62,6 +67,7 @@ const devRoute: RouterType.BlogRouteRecordRaw = {
         title: 'Json转Ts',
         icon: 'blog-menu-jsonToTypeScript',
         fastMenuOrder: 4,
+        keepAlive: true, // 添加：确保路由被缓存
       },
       component: () => import('@/pages/blog/dev/jsonToTypeScript/index.vue'),
     },
