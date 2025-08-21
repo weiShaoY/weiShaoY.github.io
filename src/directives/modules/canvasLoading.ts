@@ -1,52 +1,8 @@
-import type {
-  Directive,
-  DirectiveBinding,
-} from 'vue'
+import type { Directive, DirectiveBinding } from 'vue'
 
 import directivesLoadingErrorSvg from '@/assets/svgs/directives-loading-error.svg'
 
 import directivesLoadingSvg from '@/assets/svgs/directives-loading.svg'
-
-/**
- * CanvasLoading指令的参数类型
- */
-export type UseCanvasLoadingParamsType = {
-
-  /**
-   * 是否处于加载状态
-   */
-  isLoading: boolean
-
-  /**
-   * 加载loading svg和错误 svg的大小
-   * @default 20
-   */
-  size?: number
-
-  /**
-   * 错误信息的选项
-   */
-  error?: {
-
-    /**
-     * 是否显示错误文本
-     * @default false
-     */
-    isShow: boolean
-
-    /**
-     * 错误文本
-     * @default '模型加载失败'
-     */
-    text?: string
-
-    /**
-     * 错误超时时间 (ms)
-     * @default 10000
-     */
-    timeout?: number
-  } | boolean
-} | boolean
 
 /**
  * CanvasLoading内部标准化参数
@@ -77,10 +33,10 @@ let isSpinAnimationInjected = false
 
 /**
  * 标准化指令绑定值
- * @param {UseCanvasLoadingParamsType} bindingValue - 指令绑定的值
+ * @param {DirectiveType.CanvasLoadingParamsType} bindingValue - 指令绑定的值
  * @returns {NormalizedOptions} - 标准化后的参数
  */
-function normalizeBinding(bindingValue: UseCanvasLoadingParamsType): NormalizedOptions {
+function normalizeBinding(bindingValue: DirectiveType.CanvasLoadingParamsType): NormalizedOptions {
   if (typeof bindingValue === 'boolean') {
     return {
       isLoading: bindingValue,
@@ -202,7 +158,7 @@ export const canvasLoading: Directive = {
   /**
    * 元素挂载时调用
    */
-  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
+  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<DirectiveType.CanvasLoadingParamsType>) {
     const parent = el.parentNode as HTMLElement | null
 
     const normalizedOptions = normalizeBinding(binding.value)
@@ -252,7 +208,7 @@ export const canvasLoading: Directive = {
   /**
    * 元素更新时调用
    */
-  updated(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
+  updated(el: CustomHTMLElementType, binding: DirectiveBinding<DirectiveType.CanvasLoadingParamsType>) {
     const normalizedOptions = normalizeBinding(binding.value)
 
     setLoadingState(el, normalizedOptions)

@@ -1,39 +1,13 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
-export type UseLightParamsType = {
-
-  /**
-   *  宽
-   */
-  width?: number
-
-  /**
-   *  高
-   */
-  height?: number
-
-  /**
-   *  颜色
-   */
-  color?: string
-
-  /**
-   *   模糊
-   */
-  blur?: number
-
-  /**
-   *  是否旋转
-   */
-  rotate?: boolean
-}
+// 类型已迁移至 `src/directives/types/index.ts`
 
 /**
  * 光源卡片指令，用于在绑定元素上添加光源效果
  * @param {HTMLElement} lightDom - 绑定的元素
  * @param {DirectiveBinding} option - 指令绑定的参数对象
  */
-function setLightStyle(lightDom: HTMLElement, option: UseLightParamsType) {
+function setLightStyle(lightDom: HTMLElement, option: DirectiveType.LightParamsType) {
   const { width = 60, height = 60, color = '#ffffff', blur = 40 } = option ?? {
   }
 
@@ -131,7 +105,7 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement, rota
  *  @description 用于在绑定元素上添加光源效果
  */
 export const light: Directive = {
-  mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<UseLightParamsType>) {
+  mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<DirectiveType.LightParamsType>) {
     const lightDom = document.createElement('div')
 
     setLightStyle(lightDom, binding.value ?? {

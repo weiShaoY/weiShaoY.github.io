@@ -1,5 +1,10 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
+/**
+ * 逐行文字加载动画
+ * @param el - 目标元素
+ * @param binding - 指令绑定值
+ */
 function animateLines(el: HTMLElement, binding: DirectiveBinding) {
   // 获取文本内容，按换行符分割成多行
   const lines: string[] = (binding.value || el.textContent || '').split('\n')
@@ -32,6 +37,7 @@ function animateLines(el: HTMLElement, binding: DirectiveBinding) {
 
 /**
  * 逐行文字加载动画指令
+ * @description 用于在目标元素上添加逐行文字加载动画
  */
 export const animatedText: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {

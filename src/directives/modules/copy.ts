@@ -10,21 +10,7 @@ type ElType = HTMLElement & {
   copyMessage?: string
 }
 
-/**
- * v-copy 指令参数类型
- */
-export type UseCopyParamsType = {
-
-  /**
-   * 要复制的文本
-   */
-  text: string
-
-  /**
-   * 复制成功后的提示消息
-   */
-  message?: string
-}
+// 类型已迁移至 `src/directives/types/index.ts`
 
 /**
  * 点击事件处理器
@@ -46,7 +32,7 @@ async function handleClick(this: ElType) {
 /**
  *  点击复制指令
  */
-export const copy: Directive<ElType, UseCopyParamsType> = {
+export const copy: Directive<ElType, DirectiveType.CopyParamsType> = {
   mounted(el, binding) {
     el.copyText = binding.value.text || ''
     el.copyMessage = binding.value?.message || ''

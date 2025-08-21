@@ -1,25 +1,6 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
-/**
- * 水印指令的参数类型
- */
-export type WaterMarkerParamsType = {
-
-  /**
-   * 水印文字
-   */
-  text: string
-
-  /**
-   * 文字颜色
-   */
-  textColor?: string
-
-  /**
-   * 字体样式
-   */
-  font?: string
-}
+// 类型已迁移至 `src/directives/types/index.ts`
 
 /**
  * 全局默认配置
@@ -70,7 +51,7 @@ function addWaterMarker(str: string, parentNode: HTMLElement, font: string, text
  *  @description 用于在绑定元素上添加水印效果
  */
 export const waterMarker: Directive = {
-  mounted(el: HTMLElement, binding: DirectiveBinding<WaterMarkerParamsType>) {
+  mounted(el: HTMLElement, binding: DirectiveBinding<DirectiveType.WaterMarkerParamsType>) {
     /**
      *  解构参数，并提供默认值
      */

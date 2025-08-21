@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 
-import directives from './directives'
+import { setDirective } from './directives'
 
 import { setupPlugins } from './plugins'
 
@@ -25,20 +25,20 @@ async function setupApp(): Promise<void> {
     // 创建应用实例
     const app: VueApp = createApp(App)
 
-    // 注册指令
-    app.use(directives)
-
     // 注册状态管理
     app.use(pinia)
 
     // 设置路由
     await setupRouter(app)
 
-    // 挂载应用
-    app.mount('#app')
+    // 注册指令
+    setDirective(app)
 
     // 设置插件
     setupPlugins(app)
+
+    // 挂载应用
+    app.mount('#app')
   }
   catch (error) {
     window.$notification.error('应用初始化或挂载失败:')

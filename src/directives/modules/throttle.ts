@@ -1,22 +1,6 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
-type ThrottleHandlerType = (...args: any[]) => void
-
-/**
- * 节流指令的参数类型
- */
-export type ThrottleParamsType = {
-
-  /**
-   * 节流时间（毫秒）
-   */
-  delay?: number
-
-  /**
-   * 回调函数
-   */
-  handler: ThrottleHandlerType
-}
+// 类型已迁移至 `src/directives/types/index.ts`
 
 type ElType = {
   __handleClick__: () => any
@@ -27,7 +11,7 @@ type ElType = {
  *  @description 节流指令，用于限制函数在一定时间内的执行次数
  */
 export const throttle: Directive = {
-  mounted(el: ElType, binding: DirectiveBinding<ThrottleParamsType>) {
+  mounted(el: ElType, binding: DirectiveBinding<DirectiveType.ThrottleParamsType>) {
     const { delay = 500, handler } = binding.value
 
     if (typeof handler !== 'function') {
