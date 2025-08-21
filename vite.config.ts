@@ -254,6 +254,7 @@ export default defineConfig(({ mode }) => {
           'src/composables',
           'src/stores',
           'src/utils',
+          'src/directives',
         ],
 
         resolvers: [
