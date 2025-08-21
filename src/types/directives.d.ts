@@ -8,7 +8,7 @@ declare namespace DirectiveType {
   type BaseDirectiveType = import('vue').Directive<HTMLElement>
 
   /**
-   * CanvasLoading指令的参数类型
+   * v-canvasLoading 指令的参数类型
    */
   type CanvasLoadingParamsType = {
 
@@ -45,7 +45,8 @@ declare namespace DirectiveType {
   }
 
   /**
-   * 防抖指令的参数类型
+   * v-debounce 指令的参数类型
+   * @description 防抖指令的参数类型
    */
   type DebounceParamsType = {
 
@@ -57,7 +58,8 @@ declare namespace DirectiveType {
   }
 
   /**
-   * 光源卡片指令参数
+   * v-light 指令的参数类型
+   * @description 光源卡片指令参数
    */
   type LightParamsType = {
 
@@ -78,7 +80,8 @@ declare namespace DirectiveType {
   }
 
   /**
-   * 节流指令的参数类型
+   * v-throttle 指令的参数类型
+   * @description 节流指令的参数类型
    */
   type ThrottleParamsType = {
 
@@ -90,7 +93,8 @@ declare namespace DirectiveType {
   }
 
   /**
-   * 水印指令的参数类型
+   * v-waterMarker 指令的参数类型
+   * @description 水印指令的参数类型
    */
   type WaterMarkerParamsType = {
 
@@ -103,8 +107,6 @@ declare namespace DirectiveType {
     /** 字体样式 */
     font?: string
   }
-
-  // 指令映射类型
 
   /**
    * 指令映射类型
