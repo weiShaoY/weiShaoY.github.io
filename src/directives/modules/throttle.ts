@@ -22,7 +22,11 @@ type ElType = {
   __handleClick__: () => any
 } & HTMLElement
 
-const throttle: Directive = {
+/**
+ *  节流指令
+ *  @description 节流指令，用于限制函数在一定时间内的执行次数
+ */
+export const throttle: Directive = {
   mounted(el: ElType, binding: DirectiveBinding<ThrottleParamsType>) {
     const { delay = 500, handler } = binding.value
 
@@ -60,5 +64,3 @@ const throttle: Directive = {
     el.removeEventListener('click', el.__handleClick__)
   },
 }
-
-export default throttle

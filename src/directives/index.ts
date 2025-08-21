@@ -1,18 +1,18 @@
 import type { App, Directive } from 'vue'
 
-import animatedText from './modules/animated-text'
+import { animatedText } from './modules/animatedText'
 
-import canvasLoading from './modules/canvas-loading'
+import { canvasLoading } from './modules/canvasLoading'
 
-import copy from './modules/copy'
+import { copy } from './modules/copy'
 
 import debounce from './modules/debounce'
 
-import light from './modules/light'
+import { light } from './modules/light'
 
-import throttle from './modules/throttle'
+import { throttle } from './modules/throttle'
 
-import waterMarker from './modules/waterMarker'
+import { waterMarker } from './modules/waterMarker'
 
 const directivesList: { [key: string]: Directive } = {
   animatedText,

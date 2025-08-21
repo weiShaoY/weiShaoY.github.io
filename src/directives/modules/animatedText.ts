@@ -33,7 +33,7 @@ function animateLines(el: HTMLElement, binding: DirectiveBinding) {
 /**
  * 逐行文字加载动画指令
  */
-const useAnimatedText: Directive = {
+export const animatedText: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     animateLines(el, binding)
   },
@@ -41,5 +41,3 @@ const useAnimatedText: Directive = {
     animateLines(el, binding)
   },
 }
-
-export default useAnimatedText

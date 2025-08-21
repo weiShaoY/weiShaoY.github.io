@@ -24,6 +24,7 @@ type ElType = {
 
 /**
  *  防抖指令
+ *  @description 防抖指令，用于防止按钮重复点击
  */
 const debounce: Directive = {
   mounted(el: ElType, binding: DirectiveBinding<DebounceParamsType>) {

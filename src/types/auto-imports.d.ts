@@ -415,7 +415,6 @@ declare module 'vue' {
     readonly downloadVideo: UnwrapRef<typeof import('../utils/download')['downloadVideo']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
-    readonly emojiBase64: UnwrapRef<typeof import('../utils/emojiBase64')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>

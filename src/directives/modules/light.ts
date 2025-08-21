@@ -127,9 +127,10 @@ function onMouseMove(e: MouseEvent, el: HTMLElement, lightDom: HTMLElement, rota
 }
 
 /**
- * 光源卡片指令，用于在绑定元素上添加光源效果
+ *  光源卡片指令
+ *  @description 用于在绑定元素上添加光源效果
  */
-const useLight: Directive = {
+export const light: Directive = {
   mounted<T extends HTMLElement>(el: T, binding: DirectiveBinding<UseLightParamsType>) {
     const lightDom = document.createElement('div')
 
@@ -172,5 +173,3 @@ const useLight: Directive = {
     (el as any)._lightCardCleanup?.()
   },
 }
-
-export default useLight

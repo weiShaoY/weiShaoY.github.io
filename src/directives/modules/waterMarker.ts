@@ -66,9 +66,10 @@ function addWaterMarker(str: string, parentNode: HTMLElement, font: string, text
 }
 
 /**
- * 水印指令
+ *  水印指令
+ *  @description 用于在绑定元素上添加水印效果
  */
-const waterMarker: Directive = {
+export const waterMarker: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding<WaterMarkerParamsType>) {
     /**
      *  解构参数，并提供默认值
@@ -83,5 +84,3 @@ const waterMarker: Directive = {
     el.style.backgroundImage = ''
   },
 }
-
-export default waterMarker

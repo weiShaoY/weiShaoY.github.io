@@ -44,11 +44,9 @@ async function handleClick(this: ElType) {
 }
 
 /**
- * v-copy
- * 复制某个值至剪贴板
- * 接收参数：{ text: string, message: string }
+ *  点击复制指令
  */
-const useCopy: Directive<ElType, UseCopyParamsType> = {
+export const copy: Directive<ElType, UseCopyParamsType> = {
   mounted(el, binding) {
     el.copyText = binding.value.text || ''
     el.copyMessage = binding.value?.message || ''
@@ -62,5 +60,3 @@ const useCopy: Directive<ElType, UseCopyParamsType> = {
     el.removeEventListener('click', handleClick)
   },
 }
-
-export default useCopy

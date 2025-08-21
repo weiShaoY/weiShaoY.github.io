@@ -58,7 +58,6 @@
     "downloadVideo": true,
     "eagerComputed": true,
     "effectScope": true,
-    "emojiBase64": true,
     "extendRef": true,
     "getActivePinia": true,
     "getCurrentInstance": true,

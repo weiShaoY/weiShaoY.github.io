@@ -76,85 +76,6 @@ type CustomHTMLElementType = {
 let isSpinAnimationInjected = false
 
 /**
- * CanvasLoading指令
- */
-const useCanvasLoading: Directive = {
-  /**
-   * 元素挂载时调用
-   */
-  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
-    const parent = el.parentNode as HTMLElement | null
-
-    const normalizedOptions = normalizeBinding(binding.value)
-
-    if (!parent) {
-      console.warn('CanvasLoading：未找到元素的父节点。')
-      return
-    }
-
-    if (getComputedStyle(parent).position === 'static') {
-      parent.style.position = 'relative'
-    }
-
-    injectSpinAnimationOnce()
-
-    const container = document.createElement('div')
-
-    Object.assign(container.style, {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: '10',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-    })
-
-    const loadingSvg = document.createElement('img')
-
-    loadingSvg.src = directivesLoadingSvg
-    Object.assign(loadingSvg.style, {
-      width: `${normalizedOptions.size}px`,
-      height: `${normalizedOptions.size}px`,
-      animation: 'spin 2s linear infinite',
-    })
-
-    container.appendChild(loadingSvg)
-    parent.appendChild(container)
-
-    el._loadingSpinner = container
-
-    setLoadingState(el, normalizedOptions)
-  },
-
-  /**
-   * 元素更新时调用
-   */
-  updated(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
-    const normalizedOptions = normalizeBinding(binding.value)
-
-    setLoadingState(el, normalizedOptions)
-  },
-
-  /**
-   * 元素卸载时调用
-   */
-  unmounted(el: CustomHTMLElementType) {
-    el._loadingSpinner?.remove()
-    el._errorContainer?.remove()
-    if (el._timeoutId) {
-      clearTimeout(Number(el._timeoutId))
-    }
-
-    el._loadingSpinner = undefined
-    el._timeoutId = undefined
-    el._errorContainer = undefined
-  },
-}
-
-/**
  * 标准化指令绑定值
  * @param {UseCanvasLoadingParamsType} bindingValue - 指令绑定的值
  * @returns {NormalizedOptions} - 标准化后的参数
@@ -274,4 +195,81 @@ function injectSpinAnimationOnce() {
   isSpinAnimationInjected = true
 }
 
-export default useCanvasLoading
+/**
+ * Canvas加载动画指令
+ */
+export const canvasLoading: Directive = {
+  /**
+   * 元素挂载时调用
+   */
+  mounted(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
+    const parent = el.parentNode as HTMLElement | null
+
+    const normalizedOptions = normalizeBinding(binding.value)
+
+    if (!parent) {
+      console.warn('CanvasLoading：未找到元素的父节点。')
+      return
+    }
+
+    if (getComputedStyle(parent).position === 'static') {
+      parent.style.position = 'relative'
+    }
+
+    injectSpinAnimationOnce()
+
+    const container = document.createElement('div')
+
+    Object.assign(container.style, {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '10',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    })
+
+    const loadingSvg = document.createElement('img')
+
+    loadingSvg.src = directivesLoadingSvg
+    Object.assign(loadingSvg.style, {
+      width: `${normalizedOptions.size}px`,
+      height: `${normalizedOptions.size}px`,
+      animation: 'spin 2s linear infinite',
+    })
+
+    container.appendChild(loadingSvg)
+    parent.appendChild(container)
+
+    el._loadingSpinner = container
+
+    setLoadingState(el, normalizedOptions)
+  },
+
+  /**
+   * 元素更新时调用
+   */
+  updated(el: CustomHTMLElementType, binding: DirectiveBinding<UseCanvasLoadingParamsType>) {
+    const normalizedOptions = normalizeBinding(binding.value)
+
+    setLoadingState(el, normalizedOptions)
+  },
+
+  /**
+   * 元素卸载时调用
+   */
+  unmounted(el: CustomHTMLElementType) {
+    el._loadingSpinner?.remove()
+    el._errorContainer?.remove()
+    if (el._timeoutId) {
+      clearTimeout(Number(el._timeoutId))
+    }
+
+    el._loadingSpinner = undefined
+    el._timeoutId = undefined
+    el._errorContainer = undefined
+  },
+}
