@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 
-import { setDirective } from './directives'
+import { setDirectives } from './directives'
 
 import { setupPlugins } from './plugins'
 
@@ -25,19 +25,19 @@ async function setupApp(): Promise<void> {
     // 创建应用实例
     const app: VueApp = createApp(App)
 
-    // 注册状态管理
-    app.use(pinia)
-
-    // 设置路由
-    await setupRouter(app)
-
-    // 注册指令
-    setDirective(app)
-
-    // 设置插件
+    // 1. 设置插件 (同步操作)
     setupPlugins(app)
 
-    // 挂载应用
+    // 2. 注册状态管理 (Pinia)
+    app.use(pinia)
+
+    // 3. 设置路由 (异步操作，但尽快初始化)
+    await setupRouter(app)
+
+    // 4. 注册指令 (尽可能在挂载前注册)
+    setDirectives(app)
+
+    // 5. 挂载应用
     app.mount('#app')
   }
   catch (error) {

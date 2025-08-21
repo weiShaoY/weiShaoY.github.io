@@ -4,6 +4,7 @@ import type { RouteRecordRaw } from 'vue-router'
  * 检查路由配置中的重复 name 和 path
  * @param routes 路由配置数组
  * @returns 检查结果 { hasDuplicate: boolean, duplicates: { names: string[], paths: string[] } }
+ * @description 检查路由配置中的重复 name 和 path，并生成警告信息
  */
 export function checkDuplicateRoutes(routes: RouteRecordRaw[]): {
   hasDuplicate: boolean

@@ -27,7 +27,7 @@ const directivesMap: { [key: string]: Directive } = {
   waterMarker,
 }
 
-export function setDirective(app: App<Element>) {
+export function setDirectives(app: App<Element>) {
   Object.keys(directivesMap).forEach((name) => {
     app.directive(name, directivesMap[name])
   })

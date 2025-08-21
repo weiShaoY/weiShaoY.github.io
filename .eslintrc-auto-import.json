@@ -148,7 +148,7 @@
     "resolveUnref": true,
     "sendContactEmail": true,
     "setActivePinia": true,
-    "setDirective": true,
+    "setDirectives": true,
     "setMapStoreSuffix": true,
     "shallowReactive": true,
     "shallowReadonly": true,

@@ -142,6 +142,7 @@ declare global {
   const sendContactEmail: typeof import('../utils/sendContactEmail')['sendContactEmail']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setDirective: typeof import('../directives/index')['setDirective']
+  const setDirectives: typeof import('../directives/index')['setDirectives']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
@@ -506,7 +507,7 @@ declare module 'vue' {
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly sendContactEmail: UnwrapRef<typeof import('../utils/sendContactEmail')['sendContactEmail']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
-    readonly setDirective: UnwrapRef<typeof import('../directives/index')['setDirective']>
+    readonly setDirectives: UnwrapRef<typeof import('../directives/index')['setDirectives']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>

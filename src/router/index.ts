@@ -51,8 +51,8 @@ setTimeout(() => {
     try {
       checkDuplicateRoutes(routeList)
     }
-    catch (error) {
-      window.$notification.error('Route check failed:')
+    catch {
+      window.$notification.error('路由检查失败')
     }
   })
 }, 3000)
