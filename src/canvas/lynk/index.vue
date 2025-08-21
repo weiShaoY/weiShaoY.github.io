@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as TWEEN from '@tweenjs/tween.js'
 
 import * as THREE from 'three'
@@ -12,6 +10,8 @@ import {
   onUnmounted,
   ref,
 } from 'vue'
+
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import { addMaterialAndAction } from './materialAndAction'
 
