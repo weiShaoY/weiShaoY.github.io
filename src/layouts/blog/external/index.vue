@@ -14,7 +14,8 @@ const externalUrl = computed(() => route.meta.externalUrl as string)
 
 onMounted(() => {
   if (!externalUrl.value) {
-    console.warn('iframeUrl 未找到，请确保 meta 中包含 iframeUrl')
+    window.$notification.error('externalUrl 未找到，请确保 meta 中包含 externalUrl')
+    return
   }
 
   try {
