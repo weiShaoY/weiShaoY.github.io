@@ -1,5 +1,5 @@
 <!------  2025-08-23---00:02---星期六  ------>
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  水印效果  ------------------------------------------------->
 <script lang="ts" setup>
 type PropsType = {
 
@@ -70,6 +70,6 @@ const watermarkVisible = computed(() => props.visible)
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>
