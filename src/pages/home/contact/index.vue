@@ -64,22 +64,22 @@ async function handleSubmit(e: Event) {
   >
     <section
       id="contact"
-      class="px-5 py-20 text-[#afb0b6] sm:px-10"
+      class="px-10 py-20 text-[#afb0b6] max-sm:px-5"
     >
 
       <p
-        class="text-3xl font-semibold sm:text-4xl"
+        class="text-4xl font-semibold max-sm:text-3xl"
       >
         联系我
       </p>
 
       <div
-        class="grid grid-cols-1 mt-12 w-full gap-5 lg:grid-cols-2"
+        class="grid grid-cols-2 mt-12 w-full gap-5 max-sm:grid-cols-1"
       >
         <!-- 左侧 -->
         <div
           v-light
-          class="relative flex flex-col gap-5 rounded-lg px-5 py-10 shadow-[#0e0e10] shadow-2xl sm:p-10"
+          class="relative flex flex-col gap-5 rounded-lg p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
         >
           <form
             ref="formRef"
