@@ -6,30 +6,33 @@ type LogoPropsType = {
 
   /**
    *  颜色
+   *  @default white
    */
-  textColor?: string
+  color?: string
 
   /**
-   *  是否隐藏logo
+   *  大小
+   *  @default 120
    */
-  isHideLogo?: boolean
+  size?: number
 
   /**
-   *  是否隐藏文字
+   *  跳转路径
+   *  @default /
    */
-  isHideText?: boolean
+  url?: string
 }
 
 const props = withDefaults(defineProps<LogoPropsType>(), {
-  textColor: 'white',
-  isHideLogo: false,
-  isHideText: false,
+  color: 'white',
+  size: 120,
+  url: '/',
 })
 
 const router = useRouter()
 
 function handleClick() {
-  router.push('/')
+  router.push(props.url)
 }
 </script>
 
@@ -38,18 +41,12 @@ function handleClick() {
     class="flex items-center gap-2 hover:cursor-pointer"
     @click="handleClick"
   >
-    <SvgIcon
-      v-if="!props.isHideLogo"
-      icon="logo"
-      size="60"
-    />
 
     <SvgIcon
-      v-if="!props.isHideText"
       icon="weiShaoY"
-      size="120"
+      :size="props.size"
       :style="{
-        color: props.textColor,
+        color: props.color,
       }"
     />
 

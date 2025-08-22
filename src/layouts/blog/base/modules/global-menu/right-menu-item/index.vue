@@ -21,6 +21,8 @@ const blogStore = useBlogStore()
 
 const width = `${blogStore.setting.menu.rightMenuWidth}px`
 
+const homePath = import.meta.env.VITE_ROUTER_BLOG_HOME_PATH
+
 </script>
 
 <template>
@@ -32,9 +34,10 @@ const width = `${blogStore.setting.menu.rightMenuWidth}px`
     >
       <!-- 如果是双列菜单 则隐藏 logo  -->
       <!-- 如果是双列菜单 则不隐藏文字  -->
-      <Logo
-        :is-hide-logo="true"
-        text-color="dark"
+      <TextLogo
+        :size="120"
+        color="dark"
+        :url="homePath"
       />
     </div>
 

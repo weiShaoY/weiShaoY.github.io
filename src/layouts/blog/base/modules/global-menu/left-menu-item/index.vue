@@ -60,8 +60,9 @@ const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
     <div
       class="h-15 w-full flex items-center justify-center"
     >
-      <Logo
-        :is-hide-text="true"
+
+      <IconLogo
+        :size="40"
       />
     </div>
 

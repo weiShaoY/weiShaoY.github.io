@@ -1,5 +1,4 @@
-<!------  2025-04-16---18:18---星期三  ------>
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------   全局头部  ------------------------------------------------->
 <script lang="ts" setup>
 import { useFullscreen } from '@vueuse/core'
 
@@ -53,7 +52,6 @@ function toggleFullScreen() {
 </script>
 
 <template>
-  <!-- 上部 -->
   <div
     class="fixed right-0 top-0 z-100 flex select-none items-center justify-between border-b-[1px] border-[#eaebf1] bg-white transition-all duration-500"
     :style="{
