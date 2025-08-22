@@ -1,9 +1,6 @@
-@import 'nprogress/nprogress.css';
+@import "nprogress/nprogress.css";
 
 #nprogress .bar {
-  /* 自定义颜色 */
-  background: #fec451 !important;
-
-  /* 顶部进度条高度 */
-  height: 3px !important;
+  background-color: #00ff00 !important;
+  height: 0.25rem;
 }

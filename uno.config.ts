@@ -1,3 +1,5 @@
+import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
+
 import {
   defineConfig,
   presetAttributify,
@@ -11,8 +13,6 @@ import {
 
 import { presetScrollbarHide } from 'unocss-preset-scrollbar-hide'
 
-// import { themeVars } from './src/theme/unocss-var'
-
 /**
  *  @description UnoCSS 配置文件
  */
@@ -21,8 +21,6 @@ export default defineConfig({
    *  @description 定义全局主题设置，供规则或组件之间共享
    */
   theme: {
-    // ...themeVars,
-
     /**
      *  @description 主题颜色
      */
@@ -31,6 +29,11 @@ export default defineConfig({
        *  @description 主题色
        */
       primary: '#00ff00',
+
+      /**
+       *  @description 次要颜色
+       */
+      secondary: '#BFFFBF',
 
       /**
        *  @description 红色
@@ -44,18 +47,6 @@ export default defineConfig({
       'icon-large': '1.5rem',
       'icon-xl': '2rem',
     },
-
-    /**
-     *  twind写法的字体配置
-     *  @description 字体相关的配置
-     */
-    // fontFamily: {
-    //   /**
-    //    *  @description 改良瘦金体
-    //    */
-    //   gaiLiangShouJinTi: ['gaiLiangShouJinTi', 'sans-serif'],
-
-    // },
   },
 
   /**
@@ -166,6 +157,11 @@ export default defineConfig({
          */
         theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
       },
+
+      /**
+       *  @description 处理本地字体
+       */
+      processors: createLocalFontProcessor(),
     }),
 
     /**

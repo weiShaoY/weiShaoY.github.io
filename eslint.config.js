@@ -4,13 +4,13 @@ import antfu from '@antfu/eslint-config'
 export default antfu({
   unocss: true,
   formatters: true,
+  pnpm: true,
   ignores: [
     '**/components.d.ts',
     '**/dist/**',
     '**/iconFont.js',
     '**/assets/**',
   ],
-
   vue: {
     overrides: {
       // 强制执行第一个属性的位置
