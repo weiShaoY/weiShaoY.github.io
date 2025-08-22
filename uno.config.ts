@@ -30,7 +30,7 @@ export default defineConfig({
       /**
        *  @description 主题色
        */
-      primary: '#FEC451',
+      primary: '#00ff00',
 
       /**
        *  @description 红色

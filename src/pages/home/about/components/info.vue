@@ -1,9 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
 <script setup lang="ts">
 
-// import contactImage from '@/assets/images/home-about-info-contact.png'
-
-// import passionImage from '@/assets/images/home-about-info-passion.png'
+import { useRouter } from 'vue-router'
 
 import Earth from '@/canvas/earth/index.vue'
 
@@ -14,8 +12,6 @@ import Mail from '@/canvas/mail/index.vue'
 import Tech from '@/canvas/tech/index.vue'
 
 import { copyText } from '@/utils'
-
-import { useRouter } from 'vue-router'
 
 const hasCopied = ref(false)
 
