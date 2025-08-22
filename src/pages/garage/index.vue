@@ -1,19 +1,16 @@
 <!------------------------------------  车库  ------------------------------------------------->
 <script lang="ts" setup>
 
+import { isMobile } from '@/utils'
+
 import ThreeContainer from './threeContainer/index.vue'
 
 import UiContainer from './uiContainer/index.vue'
-
 </script>
 
 <template>
   <div
-    class="aaa relative h-screen"
-    :style="{
-      transformOrigin: 'top left',
-      transform: 'rotate(90deg) translateY(-100%)',
-    }"
+    :class="isMobile ? 'aaa relative h-screen' : 'relative h-screen'"
   >
     <!-- UI界面层 -->
     <UiContainer />
@@ -28,13 +25,9 @@ import UiContainer from './uiContainer/index.vue'
 
 <style lang="scss" scoped>
 .aaa {
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
   width: 100vh;
-  height: 100vh;
-  /*去掉overflow 微信显示正常，但是浏览器有问题，竖屏时强制横屏缩小*/
-  overflow: hidden;
+  height: 100vw;
+  transform-origin: top left;
+  transform: rotate(90deg) translateY(-100%);
 }
 </style>

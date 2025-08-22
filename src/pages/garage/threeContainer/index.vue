@@ -468,8 +468,11 @@ onMounted(async () => {
   }
 
   scene = new Three.Scene()
+
   camera = new Three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500)
-  camera.position.set(0, 1, 5)
+
+  // camera.position.set(0, 1, 5)
+  camera.position.set(0, 2, 8) // 移动端修改后的位置 (Y 增加, Z 增加)
 
   renderer = new Three.WebGLRenderer({
     canvas: threeContainerRef.value,
@@ -509,7 +512,9 @@ onMounted(async () => {
   })
 
   cubeCamera = new Three.CubeCamera(1, 1000, cubeRenderTarget)
+
   fbo = cubeRenderTarget
+
   scene.environment = fbo.texture
 
   animate()
@@ -531,7 +536,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="threeContainerRef"
-    class="h-screen w-full"
+    class="h-screen w-full !max-sm:w-full"
     @pointerdown="garageStore.state.isTouch = true"
     @pointerup="garageStore.state.isTouch = false"
   />
