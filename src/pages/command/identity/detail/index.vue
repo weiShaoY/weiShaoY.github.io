@@ -21,6 +21,6 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>

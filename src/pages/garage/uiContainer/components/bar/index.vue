@@ -172,7 +172,7 @@ watch(() => garageStore.state.isMute, (isMute) => {
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .color-item::after {
   content: '';
   display: block;

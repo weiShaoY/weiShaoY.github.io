@@ -5,9 +5,7 @@ import { registerMap } from 'echarts/core'
 
 import chinaMap from '@/assets/jsons/china.json'
 
-import { useAppStore } from '@/stores'
-
-const appStore = useAppStore()
+import { isMobile } from '@/utils'
 
 /**
  *  定义数据和地理坐标
@@ -109,7 +107,7 @@ const option = computed<EChartsOption>(() => ({
     /**
      *  地图缩放级别
      */
-    zoom: appStore.isMobile ? 0.8 : 1,
+    zoom: isMobile.value ? 0.8 : 1,
 
     /**
      *  地图距顶部的距离
@@ -333,5 +331,5 @@ registerMap('china', chinaMap as any)
   />
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 </style>

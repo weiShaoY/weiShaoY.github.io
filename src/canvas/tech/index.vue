@@ -1,11 +1,4 @@
 <script lang="ts" setup>
-import {
-  disposeScene,
-  isMobile,
-  loadTexture,
-  techStack,
-} from '@/utils'
-
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -17,6 +10,13 @@ import {
   onUnmounted,
   ref,
 } from 'vue'
+
+import {
+  disposeScene,
+  isMobile,
+  loadTexture,
+  techStack,
+} from '@/utils'
 
 // 定义技术栈数据
 const technologies = [
@@ -121,7 +121,7 @@ async function addIcosahedrons() {
   /**
    *  每行的列数
    */
-  const numColumns = isMobile ? 4 : 6
+  const numColumns = isMobile.value ? 4 : 6
 
   const numRows = Math.ceil(technologies.length / numColumns) // 行数
 
@@ -275,7 +275,7 @@ function handleDoubleClick(event: MouseEvent) {
   }
 }
 
-const d = isMobile ? 6 : 5 // 设置视锥体的大小
+const d = isMobile.value ? 6 : 5 // 设置视锥体的大小
 
 // 响应窗口大小调整
 function handleResize() {

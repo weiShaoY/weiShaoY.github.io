@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 // const imageUrl = 'https://api.lolimi.cn/API/dmtx/api.php' // 替换为实际的纹理 URL
 
@@ -97,9 +97,9 @@ async function addModel() {
     model = gltf.scene
 
     // 根据设备调整模型属性
-    const position: [number, number, number] = isMobile ? [-2.5, -3, -1.5] : [0, -5, -1.5]
+    const position: [number, number, number] = isMobile.value ? [-2.5, -3, -1.5] : [0, -5, -1.5]
 
-    const scale = isMobile ? 0.4 : 1
+    const scale = isMobile.value ? 0.4 : 1
 
     model.position.set(...position)
 

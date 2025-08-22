@@ -189,4 +189,4 @@ const option = computed<EChartsOption>(() => {
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

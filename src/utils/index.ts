@@ -16,8 +16,6 @@ export * from './is'
 
 export * from './isMobile'
 
-export * from './isPC'
-
 export * from './openUrlInWindow'
 
 export * from './sendContactEmail'

@@ -113,7 +113,7 @@ function close() {
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 @keyframes fade {
   0% {
     opacity: 1;

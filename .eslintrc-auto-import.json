@@ -84,7 +84,6 @@
     "isNullOrUnDef": true,
     "isNumber": true,
     "isObject": true,
-    "isPC": true,
     "isPromise": true,
     "isProxy": true,
     "isReactive": true,

@@ -23,12 +23,12 @@ import Intro from './components/intro.vue'
     <!-- 第一页 -->
     <div
       class="relative w-full"
-      :class=" isMobile ? 'h-[40vh]' : 'min-h-screen'"
+      :class=" isMobile ? 'h-[22vh]' : 'min-h-screen'"
     >
 
       <!-- 太阳 -->
       <div
-        className="z-2 absolute right-0 top-20 !w-60  aspect-square sm:flex hidden"
+        class="absolute right-0 top-20 z-2 hidden aspect-square !w-60 sm:flex"
       >
         <Sun />
       </div>
@@ -58,6 +58,6 @@ import Intro from './components/intro.vue'
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>

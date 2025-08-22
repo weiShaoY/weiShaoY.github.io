@@ -158,9 +158,9 @@ function addModel() {
       model = gltf.scene
 
       // 根据设备调整模型属性
-      const position: [number, number, number] = isMobile ? [-2.5, -3, -1.5] : [0, -5, -1.5]
+      const position: [number, number, number] = isMobile.value ? [-2.5, -3, -1.5] : [0, -5, -1.5]
 
-      const scale = isMobile ? 0.4 : 1
+      const scale = isMobile.value ? 0.4 : 1
 
       model.position.set(...position)
 
@@ -174,8 +174,8 @@ function addModel() {
       scene.add(model)
     },
     undefined,
-    (error) => {
-      window.$notification.error('模型加载失败:')
+    () => {
+      window.$notification.error('模型加载失败')
     },
   )
 }

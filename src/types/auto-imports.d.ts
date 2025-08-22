@@ -443,7 +443,6 @@ declare module 'vue' {
     readonly isNullOrUnDef: UnwrapRef<typeof import('../utils/is')['isNullOrUnDef']>
     readonly isNumber: UnwrapRef<typeof import('../utils/is')['isNumber']>
     readonly isObject: UnwrapRef<typeof import('../utils/is')['isObject']>
-    readonly isPC: UnwrapRef<typeof import('../utils/isPC')['isPC']>
     readonly isPromise: UnwrapRef<typeof import('../utils/is')['isPromise']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>

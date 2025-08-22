@@ -1,5 +1,7 @@
 <!------------------------------------    ------------------------------------------------->
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+
+</script>
 
 <template>
   <div
@@ -21,7 +23,7 @@
     <!-- 右侧标题和描述 -->
     <div>
       <h1
-        class="xs:text-[50px] mt-2 select-none text-[40px] text-white font-black lg:text-[80px] sm:text-[60px] lg:leading-[98px]"
+        class="mt-2 select-none text-[80px] text-white font-black leading-[120px] max-sm:text-[30px] max-sm:leading-[50px]"
       >
         <span>Hi,I'm</span>
 
@@ -32,26 +34,12 @@
         </span>
       </h1>
 
-      <!-- <p
-        class="xs:text-[18px] mt-2 select-none text-[16px] text-[#BFFFBF] font-medium lg:text-[30px] sm:text-[22px] lg:leading-[40px]"
-      >
-        一个热爱编程的前端开发
-        <br
-          class="hidden sm:block"
-        >
-        热爱计算机科学和IT互联网事业
-        <br
-          class="hidden sm:block"
-        >
-        热爱编程、软路由、硬件、Diy等
-      </p> -->
-
       <TypeIt
-        class="xs:text-[18px] mt-2 select-none text-[16px] text-[#BFFFBF] font-medium lg:text-[30px] sm:text-[22px] lg:leading-[40px]"
+        class="mt-2 select-none text-[40px] text-[#BFFFBF] font-medium max-sm:text-[20px]"
         :string-list="['一个热爱编程的前端开发', '热爱计算机科学和IT互联网事业', '热爱编程、软路由、硬件、Diy等']"
       />
     </div>
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

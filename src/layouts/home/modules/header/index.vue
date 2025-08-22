@@ -90,6 +90,6 @@ console.log('%c Line:40 🍻 websiteUrl', 'color:#4fff4B', websiteUrl)
   </nav>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>

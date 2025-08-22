@@ -1,13 +1,13 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
-import { loadTexture } from '@/utils'
-
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry'
+
+import { loadTexture } from '@/utils'
 
 const props = defineProps({
   /**
@@ -312,6 +312,6 @@ onUnmounted(() => {
   />
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>

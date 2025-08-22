@@ -22,6 +22,6 @@ import UiContainer from './uiContainer/index.vue'
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>
