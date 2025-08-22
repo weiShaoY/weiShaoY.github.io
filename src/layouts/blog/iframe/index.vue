@@ -1,20 +1,11 @@
 <script setup lang="ts">
-import type { ElLoadingService } from 'element-plus'
-
-import { ElLoading } from 'element-plus'
 
 import { onMounted, ref } from 'vue'
 
 import { useRoute } from 'vue-router'
 
-/**
- * 路由实例
- */
 const route = useRoute()
 
-/**
- * iframe 元素引用
- */
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 
 /**
@@ -25,7 +16,7 @@ const iframeContainer = ref<HTMLDivElement | null>(null)
 /**
  * 加载状态
  */
-const isLoading = ref(true)
+const isLoading = ref(false)
 
 /**
  * iframe 地址
@@ -33,41 +24,10 @@ const isLoading = ref(true)
 const iframeUrl = ref('')
 
 /**
- * 加载实例
- */
-let loadingInstance: ReturnType<typeof ElLoadingService> | null = null
-
-/**
  * 处理 iframe 加载完成
  */
 function handleIframeLoad(): void {
   isLoading.value = false
-  closeLoading()
-}
-
-/**
- * 关闭加载状态
- */
-function closeLoading(): void {
-  if (loadingInstance) {
-    loadingInstance.close()
-    loadingInstance = null
-  }
-}
-
-/**
- * 显示加载状态
- */
-function showLoading(): void {
-  if (!iframeContainer.value) {
-    return
-  }
-
-  loadingInstance = ElLoading.service({
-    target: iframeContainer.value,
-    lock: true,
-    background: 'rgba(0, 0, 0, 0.7)',
-  })
 }
 
 /**
@@ -83,17 +43,16 @@ function initIframe(): void {
   }
 
   iframeUrl.value = url
-  showLoading()
+  isLoading.value = true
 }
 
-onMounted(() => {
-  initIframe()
-})
+onMounted(initIframe)
 </script>
 
 <template>
   <div
     ref="iframeContainer"
+    v-loading="isLoading"
     class="h-full flex"
   >
     <iframe
