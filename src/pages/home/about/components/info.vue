@@ -45,11 +45,11 @@ function handleCopy() {
     class="px-5 py-20 sm:px-10"
   >
     <div
-      class="grid grid-cols-1 h-full gap-5 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-6"
+      class="grid grid-cols-1 h-full gap-5"
     >
       <!-- 技术栈 -->
       <div
-        class="xl:col-span-2 xl:row-span-3"
+        class="col-span-2 row-span-3 max-sm:col-span-12"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
@@ -78,7 +78,7 @@ function handleCopy() {
 
       <!-- 地球部分 -->
       <div
-        class="col-span-1 xl:row-span-4"
+        class="col-span-1 row-span-4 max-sm:col-span-12"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
@@ -128,16 +128,11 @@ function handleCopy() {
 
       <!-- 编码热情部分 -->
       <div
-        class="xl:col-span-2 xl:row-span-3"
+        class="col-span-2 row-span-3 max-sm:col-span-12"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
         >
-          <!-- <img
-            :src="passionImage"
-            alt="grid-3"
-            class="h-fit w-full object-contain sm:h-[266px]"
-          > -->
           <div
             class="h-fit w-full cursor-pointer sm:h-[266px]"
           >
@@ -162,16 +157,11 @@ function handleCopy() {
 
       <!-- 联系我部分 -->
       <div
-        class="xl:col-span-1 xl:row-span-2"
+        class="col-span-1 row-span-2 max-sm:col-span-12"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
         >
-          <!-- <img
-            :src="contactImage"
-            alt="grid-4"
-            class="h-fit w-full object-cover md:h-[126px] sm:h-[276px] sm:object-top"
-          > -->
           <div
             class="aspect-square h-fit w-full cursor-pointer sm:h-[120px]"
           >
@@ -208,7 +198,7 @@ function handleCopy() {
 
       <!-- Github活动图 -->
       <GithubActivityGraph
-        class="xl:col-span-3 xl:row-span-2"
+        class="col-span-3 row-span-2 max-sm:col-span-12"
       />
     </div>
   </section>

@@ -1,25 +1,20 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
-// import { HomeApi } from '@/api'
-
 import Experience from './components/experience/index.vue'
 
 import Project from './components/project/index.vue'
 
-onMounted(async () => {
-  // const aaa = await HomeApi.test()
-
-  // console.log('%c Line:7 🍣 aaa', 'color:#42b983', aaa)
-})
 </script>
 
 <template>
   <div
-    class="relative mx-auto h-full max-w-7xl w-full pt-20"
+    class="relative mx-auto h-full max-w-7xl w-full flex flex-col gap-20 py-40 max-sm:py-10"
   >
+    <!-- 作品 -->
     <Project />
 
+    <!-- 经历 -->
     <Experience />
   </div>
 </template>

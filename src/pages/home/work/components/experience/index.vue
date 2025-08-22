@@ -8,8 +8,7 @@ const workExperiences = [
     name: 'Framer',
     pos: 'Lead Web Developer',
     duration: '2022 - Present',
-    title:
-			'Framer是我创建交互式原型的首选工具。我用它来实现设计，让利益相关者在开发之前体验用户流和交互。',
+    title: 'Framer是我创建交互式原型的首选工具。我用它来实现设计,让利益相关者在开发之前体验用户流和交互。',
     icon: 'home-project-experience-1',
     animation: 'victory',
   },
@@ -18,8 +17,7 @@ const workExperiences = [
     name: 'Figma',
     pos: 'Web Developer',
     duration: '2020 - 2022',
-    title:
-			'Figma是我首选的协同设计平台。我利用它与团队成员和客户无缝协作，促进实时反馈和设计迭代。它基于云。',
+    title: 'Figma是我首选的协同设计平台。我利用它与团队成员和客户无缝协作,促进实时反馈和设计迭代。它基于云。',
     icon: 'home-project-experience-2',
     animation: 'clapping',
   },
@@ -28,8 +26,7 @@ const workExperiences = [
     name: 'Notion',
     pos: 'Junior Web Developer',
     duration: '2019 - 2020',
-    title:
-			'Notion帮助我保持项目的有序性。我使用它进行项目管理、任务跟踪，并将其作为文档的中心枢纽，确保从设计说明到。',
+    title: 'Notion帮助我保持项目的有序性。我使用它进行项目管理、任务跟踪,并将其作为文档的中心枢纽,确保从设计说明到。',
     icon: 'home-project-experience-3',
     animation: 'salute',
   },
@@ -42,19 +39,19 @@ const animationName = ref('idle')
 <template>
   <section
     id="work"
-    class="px-5 py-20 sm:px-10"
+    class="px-10 max-sm:px-5 max-sm:py-20"
   >
     <div
       class="w-full text-[#afb0b6]"
     >
       <p
-        class="text-3xl font-semibold sm:text-4xl"
+        class="text-4xl font-semibold max-sm:text-3xl"
       >
         我的工作经历
       </p>
 
       <div
-        class="grid grid-cols-1 mt-12 gap-5 lg:grid-cols-3"
+        class="grid grid-cols-3 mt-12 gap-5 max-sm:grid-cols-1"
       >
         <div
           class="col-span-1 border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10]"
@@ -66,15 +63,15 @@ const animationName = ref('idle')
         </div>
 
         <div
-          class="col-span-2 border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10]"
+          class="col-span-2 border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10] max-sm:col-span-1"
         >
           <div
-            class="px-2.5 py-5 sm:px-5 sm:py-10"
+            class="px-5 py-10 max-sm:px-2.5 max-sm:py-5"
           >
             <div
               v-for="item in workExperiences"
               :key="item.id"
-              class="grid grid-cols-[auto_1fr] cursor-pointer items-start gap-5 rounded-lg px-2.5 transition-all duration-500 ease-in-out hover:bg-[#1c1c21] sm:px-5"
+              class="grid grid-cols-[auto_1fr] cursor-pointer items-start gap-5 rounded-lg px-5 transition-all duration-500 ease-in-out hover:bg-[#1c1c21] max-sm:px-2.5"
               @click="animationName = item.animation"
               @pointerover="animationName = item.animation"
               @pointerout="animationName = 'idle'"
@@ -98,7 +95,7 @@ const animationName = ref('idle')
               </div>
 
               <div
-                class="px-2.5 py-5 sm:p-5"
+                class="p-5 max-sm:px-2.5 max-sm:py-5"
               >
                 <p
                   class="text-[#e4e4e6] font-bold"
