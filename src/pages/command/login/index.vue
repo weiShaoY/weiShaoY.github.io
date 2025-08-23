@@ -89,7 +89,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <GoHomeButton />
+  <BackHomeButton />
 
   <div
     class="h-full min-h-screen w-full flex items-center justify-center bg-[#103289]"

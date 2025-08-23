@@ -19,7 +19,7 @@ import UiContainer from './uiContainer/index.vue'
     <ThreeContainer />
 
     <!-- 回到首页按钮 -->
-    <GoHomeButton />
+    <BackHomeButton />
   </div>
 </template>
 

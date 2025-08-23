@@ -9,7 +9,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppProvider: typeof import('./../components/AppProvider/index.vue')['default']
-    BaseButton: typeof import('./../components/BaseButton/index.vue')['default']
+    BackHomeButton: typeof import('./../components/Button/back-home-button/index.vue')['default']
+    BaseButton: typeof import('./../components/Button/base-button/index.vue')['default']
     ButtonIcon: typeof import('./../components/ButtonIcon/index.vue')['default']
     CanvasLoader: typeof import('./../components/CanvasLoader/index.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
@@ -68,11 +69,10 @@ declare module 'vue' {
     ElWatermark: typeof import('element-plus/es')['ElWatermark']
     Github: typeof import('./../components/Github/index.vue')['default']
     GithubActivityGraph: typeof import('./../components/GithubActivityGraph/index.vue')['default']
-    GoHomeButton: typeof import('./../components/GoHomeButton/index.vue')['default']
     IconButton: typeof import('./../components/Button/icon-button/index.vue')['default']
     IconLogo: typeof import('./../components/Logo/icon-logo/index.vue')['default']
     'Index copy': typeof import('./../components/MusicPlayer/index copy.vue')['default']
-    LinkButton: typeof import('./../components/LinkButton/index.vue')['default']
+    LinkButton: typeof import('./../components/Button/link-button/index.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     MousePosition: typeof import('./../components/MousePosition/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']
