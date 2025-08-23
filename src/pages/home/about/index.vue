@@ -23,7 +23,7 @@ import Intro from './components/intro.vue'
     <!-- 第一页 -->
     <div
       class="relative w-full"
-      :class=" isMobile ? 'h-[22vh]' : 'min-h-screen'"
+      :class=" isMobile ? 'h-70' : 'min-h-screen'"
     >
 
       <!-- 太阳 -->
@@ -33,14 +33,13 @@ import Intro from './components/intro.vue'
         <Sun />
       </div>
 
-      <!-- 电脑桌模型 -->
+      <!-- 电脑桌模型 移动端不显示 -->
       <div
         v-if="!isMobile"
         class="absolute z-1"
       >
         <!-- <Desktop /> -->
         <Test />
-
       </div>
 
       <!-- 个人介绍 -->
@@ -50,10 +49,9 @@ import Intro from './components/intro.vue'
 
     <!-- 第二页 -->
     <div
-      class="relative mx-auto max-w-7xl min-h-screen"
+      class="relative mx-auto max-w-7xl min-h-screen px-10 py-20 max-sm:px-5"
     >
       <Info />
-
     </div>
   </div>
 </template>

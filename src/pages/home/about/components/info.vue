@@ -42,7 +42,6 @@ function handleCopy() {
 <template>
   <section
     id="info"
-    class="px-5 py-20 sm:px-10"
   >
     <div
       class="grid grid-cols-1 h-full gap-5"
@@ -52,10 +51,10 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-12"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
+          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
         >
           <div
-            class="h-fit w-full cursor-pointer sm:h-[266px]"
+            class="h-[266px] w-full cursor-pointer max-sm:h-fit"
           >
             <Tech />
           </div>
@@ -81,10 +80,10 @@ function handleCopy() {
         class="col-span-1 row-span-4 max-sm:col-span-12"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
+          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
         >
           <div
-            class="h-fit w-full flex items-center justify-center rounded-3xl sm:h-[326px]"
+            class="h-[326px] w-full flex items-center justify-center rounded-3xl max-sm:h-fit"
           >
             <Earth
               :height="326"
@@ -131,10 +130,10 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-12"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
+          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
         >
           <div
-            class="h-fit w-full cursor-pointer sm:h-[266px]"
+            class="h-[266px] cursor-pointer max-sm:w-full"
           >
             <Keyboard />
           </div>
@@ -160,10 +159,10 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-12"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-4 sm:p-7"
+          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
         >
           <div
-            class="aspect-square h-fit w-full cursor-pointer sm:h-[120px]"
+            class="aspect-square h-[120px] w-full cursor-pointer max-sm:h-fit"
           >
             <Mail />
           </div>
@@ -187,7 +186,7 @@ function handleCopy() {
               />
 
               <p
-                class="from-[60%] via-[60%] to-[100%] from-[#BEC1CF] via-[#D5D8EA] to-[#D5D8EA] bg-gradient-to-r bg-clip-text text-white font-medium lg:text-2xl md:text-xl"
+                class="from-[60%] via-[60%] to-[100%] from-[#BEC1CF] via-[#D5D8EA] to-[#D5D8EA] bg-gradient-to-r bg-clip-text text-2xl text-white font-medium max-sm:text-xl"
               >
                 {{ emailUrl }}
               </p>

@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="absolute inset-0 top-[120px] mx-auto max-w-7xl flex flex-row items-start gap-5 px-6 sm:px-16"
+    class="absolute inset-0 top-[120px] mx-auto max-w-7xl flex flex-row items-start gap-5 px-16 max-sm:px-6"
   >
     <!-- 左侧装饰条 -->
     <div
