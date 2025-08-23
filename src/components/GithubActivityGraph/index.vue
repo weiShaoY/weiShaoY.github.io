@@ -39,35 +39,20 @@ const props = withDefaults(defineProps<PropsType>(), {
   height: '100%',
 })
 
-/** Github 活动图 API 地址 */
-const GITHUB_ACTIVITY_GRAPH_URL = 'https://github-readme-activity-graph.vercel.app/graph'
-
-/**
- * Github 活动图配置项
- * @see https://github.com/Ashutosh00710/github-readme-activity-graph#options
- */
-const options = {
-  username: import.meta.env.VITE_APP_TITLE,
-  theme: 'high-contrast',
-  hide_border: true,
-  custom_title: import.meta.env.VITE_APP_DESC,
-  radius: 8,
-}
-
 /**
  * 生成 Github 活动图的完整 URL
  * @returns {import('vue').ComputedRef<string>} 图片地址
  */
-// eslint-disable-next-line unused-imports/no-unused-vars
-const imageUrl = computed(() => {
-  const params = new URLSearchParams(
-    Object.fromEntries(
-      Object.entries(options).map(([key, value]) => [key, String(value)]),
-    ),
-  )
 
-  return `${GITHUB_ACTIVITY_GRAPH_URL}?${params.toString()}`
-})
+// const imageUrl = computed(() => {
+//   const params = new URLSearchParams(
+//     Object.fromEntries(
+//       Object.entries(options).map(([key, value]) => [key, String(value)]),
+//     ),
+//   )
+
+//   return `${GITHUB_ACTIVITY_GRAPH_URL}?${params.toString()}`
+// })
 
 /**
  * 计算图片样式
@@ -84,15 +69,11 @@ const computedImageStyle = computed<CSSProperties>(() => ({
  * @see https://github-profile-summary-cards.vercel.app/demo.html
  */
 const githubProfileSummaryCardsUrl = `http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${import.meta.env.VITE_APP_TITLE}&theme=highcontrast`
+
+// const url = `http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${import.meta.env.VITE_APP_TITLE}&show_icons=true&theme=highcontrast`
 </script>
 
 <template>
-  <!-- <img
-    :class="props.class"
-    :style="computedImageStyle"
-    :src="imageUrl"
-    alt="GitHub 活动图"
-  > -->
 
   <img
     :class="props.class"

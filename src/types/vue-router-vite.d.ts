@@ -84,7 +84,6 @@ declare module 'vue-router/auto-routes' {
     '/home/about/': RouteRecordInfo<'/home/about/', '/home/about', Record<never, never>, Record<never, never>>,
     '/home/about/components/info': RouteRecordInfo<'/home/about/components/info', '/home/about/components/info', Record<never, never>, Record<never, never>>,
     '/home/about/components/intro': RouteRecordInfo<'/home/about/components/intro', '/home/about/components/intro', Record<never, never>, Record<never, never>>,
-    '/home/about/components/map': RouteRecordInfo<'/home/about/components/map', '/home/about/components/map', Record<never, never>, Record<never, never>>,
     '/home/contact/': RouteRecordInfo<'/home/contact/', '/home/contact', Record<never, never>, Record<never, never>>,
     '/home/resume/': RouteRecordInfo<'/home/resume/', '/home/resume', Record<never, never>, Record<never, never>>,
     '/home/work/': RouteRecordInfo<'/home/work/', '/home/work', Record<never, never>, Record<never, never>>,
@@ -367,10 +366,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/home/about/components/intro.vue': {
       routes: '/home/about/components/intro'
-      views: never
-    }
-    'src/pages/home/about/components/map.vue': {
-      routes: '/home/about/components/map'
       views: never
     }
     'src/pages/home/contact/index.vue': {
