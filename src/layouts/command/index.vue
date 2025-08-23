@@ -1,18 +1,6 @@
 <script setup lang="ts">
-import LayoutFooter from './LayoutFooter.vue'
-
-import LayoutLoading from './LayoutLoading.vue'
 
 import GlobalHeader from './modules/global-header/index.vue'
-
-// type PropsType = {
-//   loading: {
-//     total: number // 全部
-//     loaded: number // 已加载
-//     isLoading: boolean // 执行状态
-//   }
-// }
-// const props = defineProps<PropsType>()
 
 </script>
 
