@@ -3,7 +3,7 @@ import type { EChartsOption } from 'echarts'
 
 import { registerMap } from 'echarts/core'
 
-import chinaMap from '@/assets/jsons/china.json'
+import chinaMap from '@/assets/jsons/chinaMap.json'
 
 import { isMobile } from '@/utils'
 
