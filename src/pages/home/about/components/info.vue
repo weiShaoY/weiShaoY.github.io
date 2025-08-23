@@ -195,7 +195,7 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <img
-          src="https://github-readme-stats.vercel.app/api?username=weiShaoY&theme=chartreuse-dark&show_icons=true&hide_border=true&count_private=true&locale=cn&bg_color=0E0E10&line_height=36"
+          src="https://github-readme-stats.vercel.app/api?username=weiShaoY&theme=chartreuse-dark&show_icons=true&hide_border=true&count_private=true&locale=cn&bg_color=0E0E10&line_height=36&title_color=BFFFBF"
           alt=""
           class="h-full w-full"
         >
@@ -205,7 +205,7 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <img
-          src="https://github-readme-stats.vercel.app/api/top-langs/?username=weiShaoY&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=truechart&locale=cn&bg_color=0E0E10&layout=compact"
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=weiShaoY&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=truechart&locale=cn&bg_color=0E0E10&layout=compact&title_color=BFFFBF"
           alt=""
           class="h-60 w-full"
         >
@@ -215,7 +215,7 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <img
-          src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=weiShaoY&theme=highcontrast"
+          src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=weiShaoY&theme=merko"
           alt=""
           class="h-60 w-full"
         >
