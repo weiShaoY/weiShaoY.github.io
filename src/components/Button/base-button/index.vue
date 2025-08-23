@@ -6,11 +6,6 @@ import type { CSSProperties } from 'vue'
 
 import { twMerge } from 'tailwind-merge'
 
-defineOptions({
-  name: 'BaseButton',
-  inheritAttrs: false,
-})
-
 const props = withDefaults(defineProps<Props>(), {
   class: '',
   icon: '',
@@ -60,7 +55,7 @@ type Props = {
 /**
  * 默认按钮类
  */
-const DEFAULT_CLASS = 'flex items-center justify-center'
+const DEFAULT_CLASS = 'flex items-center justify-center '
 
 /**
  * 处理 class，兼容多种格式
@@ -120,7 +115,7 @@ const computedStyle = computed(() => ({
       <ElButton
         text
         quaternary
-        class="!h-auto !p-0"
+        class="!h-auto !rounded-lg !p-0"
         @click="$emit('click', $event)"
       >
         <div

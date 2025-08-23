@@ -3,12 +3,6 @@ import type { Placement } from 'element-plus'
 
 import type { CSSProperties } from 'vue'
 
-// 定义组件选项
-defineOptions({
-  name: 'BaseButton',
-  inheritAttrs: false,
-})
-
 // 定义 Props 并设置默认值
 const props = withDefaults(defineProps<PropsType>(), {
   class: '',

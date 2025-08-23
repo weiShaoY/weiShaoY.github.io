@@ -35,7 +35,7 @@ function handleClick(event: MouseEvent) {
 
   // 其他点击行为使用自定义处理
   event.preventDefault()
-  window.open(props.url, '_blank')
+  window.open(props.url, '_blank', 'noopener noreferrer')
 }
 </script>
 
@@ -44,10 +44,11 @@ function handleClick(event: MouseEvent) {
     :href="url"
     target="_blank"
     rel="noopener noreferrer"
+    class="block cursor-pointer"
     @click="handleClick"
   >
     <SvgIcon
-      class="transform cursor-pointer transition-transform duration-500 hover:-translate-y-1"
+      class="transform transition-transform duration-500 hover:-translate-y-1"
       :icon="icon"
       :size="size"
       :style="{ color }"
