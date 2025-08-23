@@ -40,9 +40,7 @@ function handleOpenSite() {
 </script>
 
 <template>
-  <section
-    class="px-10 max-sm:px-5 max-sm:py-20"
-  >
+  <section>
     <div
       class="w-full text-[#afb0b6]"
     >
@@ -170,7 +168,7 @@ function handleOpenSite() {
 
         <!-- 右侧 -->
         <div
-          class="relative h-96 w-full border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10] md:h-full"
+          class="relative h-full w-full border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10] max-sm:h-96"
         >
           <Computer
             :video="selectedProject.video"

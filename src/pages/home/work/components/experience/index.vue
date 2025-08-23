@@ -39,7 +39,6 @@ const animationName = ref('idle')
 <template>
   <section
     id="work"
-    class="px-10 max-sm:px-5 max-sm:py-20"
   >
     <div
       class="w-full text-[#afb0b6]"
