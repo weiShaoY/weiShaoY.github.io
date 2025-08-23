@@ -61,13 +61,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-white font-semibold"
+              class="text-regular mb-2 text-xl font-semibold"
             >
               技术栈
             </p>
 
             <p
-              class="text-base text-[#afb0b6]"
+              class="text-base"
             >
               我擅长各种语言、框架和工具，它们让我能够构建强大且可扩展的应用程序
             </p>
@@ -92,13 +92,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-white font-semibold"
+              class="text-regular mb-2 text-xl font-semibold"
             >
               我对时区、通讯和位置非常灵活
             </p>
 
             <p
-              class="text-base text-[#afb0b6]"
+              class="text-base"
             >
               我居住在湖南长沙，愿意进行远程工作。
             </p>
@@ -140,13 +140,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-white font-semibold"
+              class="text-regular mb-2 text-xl font-semibold"
             >
               我对编码的热情
             </p>
 
             <p
-              class="text-base text-[#afb0b6]"
+              class="text-base"
             >
               我喜欢通过代码解决问题和构建事物,喜欢探索新技术并提高自己的技能。
             </p>
@@ -167,31 +167,24 @@ function handleCopy() {
             <Mail />
           </div>
 
-          <div
-            class="space-y-2"
+          <button
+            class="mx-auto mt-10 w-full flex cursor-pointer items-center justify-center gap-4 rounded-md bg-[#1c1c21] p-3 text-white transition-all active:scale-95"
+            type="button"
+            @click="handleCopy"
           >
-            <p
-              class="text-center text-base text-[#afb0b6]"
+            <span
+              class="relative h-3 w-3 flex"
             >
-              联系我
-            </p>
-
-            <div
-              class="h-10 flex cursor-pointer items-center justify-center gap-2"
-              @click="handleCopy"
-            >
-              <SvgIcon
-                :icon="hasCopied ? 'home-about-tick' : 'home-about-copy'"
-                class="!h-8 !w-8"
+              <span
+                class="absolute h-full w-full inline-flex animate-ping rounded-full bg-[#CC171D] opacity-75"
               />
 
-              <p
-                class="from-[60%] via-[60%] to-[100%] from-[#BEC1CF] via-[#D5D8EA] to-[#D5D8EA] bg-gradient-to-r bg-clip-text text-2xl text-white font-medium max-sm:text-xl"
-              >
-                {{ emailUrl }}
-              </p>
-            </div>
-          </div>
+              <span
+                class="relative h-3 w-3 inline-flex rounded-full bg-[#CC171D]"
+              />
+            </span>
+            {{ emailUrl }}
+          </button>
         </div>
       </div>
 

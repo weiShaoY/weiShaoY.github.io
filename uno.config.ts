@@ -33,7 +33,7 @@ export default defineConfig({
       /**
        *  @description 次要颜色
        */
-      secondary: '#BFFFBF',
+      regular: '#BFFFBF',
 
       /**
        *  @description 红色

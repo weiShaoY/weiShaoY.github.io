@@ -116,7 +116,7 @@ onMounted(async () => {
     0.1,
     1000,
   )
-  camera.position.set(0, 0, 5)
+  camera.position.set(0, 0, 4)
 
   renderer = new THREE.WebGLRenderer({
     canvas: mailRef.value,

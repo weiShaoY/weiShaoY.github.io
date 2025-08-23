@@ -1,4 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  我的作品  ------------------------------------------------->
 <script lang="ts" setup>
 import Computer from '@/canvas/computer/index.vue'
 
@@ -42,10 +42,10 @@ function handleOpenSite() {
 <template>
   <section>
     <div
-      class="w-full text-[#afb0b6]"
+      class="w-full"
     >
       <p
-        class="text-4xl font-semibold max-sm:text-3xl"
+        class="text-4xl text-primary font-semibold max-sm:text-3xl"
       >
         我的精选作品
       </p>
@@ -81,11 +81,11 @@ function handleOpenSite() {
 
           <!-- 项目描述 -->
           <div
-            class="my-5 flex flex-col gap-5 text-[#afb0b6]"
+            class="my-5 flex flex-col gap-5"
           >
             <p
               v-animated-text
-              class="animatedText text-2xl text-white font-semibold"
+              class="animatedText text-regular text-2xl font-semibold"
             >
               {{ selectedProject.title }}
             </p>

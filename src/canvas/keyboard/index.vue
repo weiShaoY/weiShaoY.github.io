@@ -1,10 +1,14 @@
 <script setup lang="ts">
 
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+import {
+  disposeScene,
+  isMobile,
+  loadGLTFModel,
+} from '@/utils'
 
 /**
  *  是否显示加载loading
@@ -139,7 +143,7 @@ onMounted(async () => {
     // 远裁剪面
     1000,
   )
-  camera.position.set(0, 0, 5)
+  camera.position.set(0, 0, isMobile.value ? 8 : 5)
 
   renderer = new THREE.WebGLRenderer({
     canvas: keyboardRef.value,

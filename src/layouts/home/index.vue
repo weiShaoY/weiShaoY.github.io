@@ -7,7 +7,7 @@ import Header from './modules/header/index.vue'
 
 <template>
   <div
-    class="min-h-screen w-full bg-[#212224]"
+    class="min-h-screen w-full bg-[#212224] color-[#e4e4e6]"
   >
     <!-- 顶部导航栏 -->
     <Header />

@@ -1,4 +1,4 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  我的经历  ------------------------------------------------->
 <script lang="ts" setup>
 import Developer from '@/canvas/developer/index.vue'
 
@@ -41,10 +41,10 @@ const animationName = ref('idle')
     id="work"
   >
     <div
-      class="w-full text-[#afb0b6]"
+      class="w-full"
     >
       <p
-        class="text-4xl font-semibold max-sm:text-3xl"
+        class="text-4xl text-primary font-semibold max-sm:text-3xl"
       >
         我的工作经历
       </p>
@@ -97,7 +97,7 @@ const animationName = ref('idle')
                 class="p-5 max-sm:px-2.5 max-sm:py-5"
               >
                 <p
-                  class="text-[#e4e4e6] font-bold"
+                  class="text-regular font-bold"
                 >
                   {{ item.name }}
                 </p>

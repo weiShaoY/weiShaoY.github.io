@@ -60,15 +60,14 @@ async function handleSubmit(e: Event) {
 
 <template>
   <div
-    class="relative mx-auto h-full max-w-7xl w-full pt-20"
+    class="relative mx-auto h-full max-w-7xl w-full px-10 py-40 max-sm:px-5"
   >
     <section
       id="contact"
-      class="px-10 py-20 text-[#afb0b6] max-sm:px-5"
+      class=""
     >
-
       <p
-        class="text-4xl font-semibold max-sm:text-3xl"
+        class="text-4xl text-primary font-semibold max-sm:text-3xl"
       >
         联系我
       </p>
@@ -90,7 +89,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-[#afb0b6]"
+                class="text-regular text-lg"
               >
                 姓名
               </span>
@@ -100,7 +99,7 @@ async function handleSubmit(e: Event) {
                 type="text"
                 name="name"
                 required
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-[#e4e4e6] shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
                 placeholder="例如, 张三"
               >
             </label>
@@ -109,7 +108,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-[#afb0b6]"
+                class="text-regular text-lg"
               >
                 电子邮件
               </span>
@@ -119,7 +118,7 @@ async function handleSubmit(e: Event) {
                 type="email"
                 name="email"
                 required
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-[#e4e4e6] shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
                 placeholder="例如, zhangSan@gmail.com"
               >
             </label>
@@ -128,7 +127,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-[#afb0b6]"
+                class="text-regular text-lg"
               >
                 您的留言
               </span>
@@ -138,13 +137,13 @@ async function handleSubmit(e: Event) {
                 name="message"
                 required
                 rows="5"
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-[#e4e4e6] shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
                 placeholder="分享您的想法或询问..."
               />
             </label>
 
             <button
-              class="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 text-white transition-all active:scale-95 hover:bg-opacity-70"
+              class="text-regular flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 transition-all active:scale-95 hover:bg-opacity-70 !hover:text-primary"
               type="submit"
               :disabled="loading"
             >
