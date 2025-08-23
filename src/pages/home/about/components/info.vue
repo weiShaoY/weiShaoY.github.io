@@ -44,11 +44,11 @@ function handleCopy() {
     id="info"
   >
     <div
-      class="grid grid-cols-1 h-full gap-5"
+      class="grid grid-cols-3 h-full w-full gap-5"
     >
       <!-- 技术栈 -->
       <div
-        class="col-span-2 row-span-3 max-sm:col-span-12"
+        class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
@@ -77,7 +77,7 @@ function handleCopy() {
 
       <!-- 地球部分 -->
       <div
-        class="col-span-1 row-span-4 max-sm:col-span-12"
+        class="col-span-1 row-span-4 max-sm:col-span-3"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
@@ -127,7 +127,7 @@ function handleCopy() {
 
       <!-- 编码热情部分 -->
       <div
-        class="col-span-2 row-span-3 max-sm:col-span-12"
+        class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
@@ -156,7 +156,7 @@ function handleCopy() {
 
       <!-- 联系我部分 -->
       <div
-        class="col-span-1 row-span-2 max-sm:col-span-12"
+        class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <div
           class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
@@ -189,9 +189,51 @@ function handleCopy() {
       </div>
 
       <!-- Github活动图 -->
-      <GithubActivityGraph
-        class="col-span-3 row-span-2 max-sm:col-span-12"
-      />
+
+      <!-- github-readme-stats -->
+      <div
+        class="col-span-1 row-span-2 max-sm:col-span-3"
+      >
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=weiShaoY&theme=chartreuse-dark&show_icons=true&hide_border=true&count_private=true&locale=cn&bg_color=0E0E10&line_height=36"
+          alt=""
+          class="h-full w-full"
+        >
+      </div>
+
+      <div
+        class="col-span-1 row-span-2 max-sm:col-span-3"
+      >
+        <img
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=weiShaoY&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=truechart&locale=cn&bg_color=0E0E10&layout=compact"
+          alt=""
+          class="h-60 w-full"
+        >
+      </div>
+
+      <div
+        class="col-span-1 row-span-2 max-sm:col-span-3"
+      >
+        <img
+          src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=weiShaoY&theme=highcontrast"
+          alt=""
+          class="h-60 w-full"
+        >
+
+        <!-- <img
+          src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=merko&hide_border=true&radius=8&bg_color=0E0E10&line=00ff00&point=ffffff&custom_title=Github%20%E8%B4%A1%E7%8C%AE%E5%9B%BE"
+          alt=""
+          class="h-[212px] w-full"
+        > -->
+
+        <!-- <img
+          src="https://pixel-profile.vercel.app/api/github-stats?username=weiShaoY&theme=crt&pixelate_avatar=false"
+          alt=""
+          class="h-[212px] w-full"
+        > -->
+      </div>
+
     </div>
+
   </section>
 </template>

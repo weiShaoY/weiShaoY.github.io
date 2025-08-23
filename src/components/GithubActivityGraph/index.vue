@@ -70,7 +70,6 @@ const computedImageStyle = computed<CSSProperties>(() => ({
  */
 const githubProfileSummaryCardsUrl = `http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${import.meta.env.VITE_APP_TITLE}&theme=highcontrast`
 
-// const url = `http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${import.meta.env.VITE_APP_TITLE}&show_icons=true&theme=highcontrast`
 </script>
 
 <template>
