@@ -20,7 +20,7 @@ const router = useRouter()
 
 /**
  * 选择菜单项
- * @param {string} key - 路由路径
+ * @param  key - 路由路径
  */
 function handleSelect(key: string) {
   router.push(key) // 使用 Vue Router 跳转
@@ -29,7 +29,7 @@ function handleSelect(key: string) {
 
 <template>
   <div
-    class="hidden items-center gap-5 sm:flex"
+    class="flex items-center gap-5 max-sm:hidden"
   >
     <div
       v-for="item in menuList"

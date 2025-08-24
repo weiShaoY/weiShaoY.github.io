@@ -44,7 +44,7 @@ function closeMenu() {
 
 /**
  * 选择菜单项
- * @param {string} key - 路由路径
+ * @param  key - 路由路径
  */
 function handleSelect(key: string) {
   closeMenu()
@@ -58,7 +58,7 @@ function handleSelect(key: string) {
 
 <template>
   <div
-    class="block sm:hidden"
+    class="block hidden max-sm:block"
   >
     <!-- 下拉按钮 -->
     <button

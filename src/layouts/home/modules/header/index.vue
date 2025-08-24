@@ -23,6 +23,7 @@ const menuList = [
   {
     key: '/command-login',
     label: 'Command',
+    isHiddenOnMobile: true,
   },
   {
     key: '/garage',
@@ -31,14 +32,13 @@ const menuList = [
   {
     key: '/test',
     label: 'Test',
+    isHiddenOnMobile: true,
   },
 ]
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
 const websiteUrl = import.meta.env.VITE_WEBSITE_URL
-
-console.log('%c Line:40 🍻 websiteUrl', 'color:#4fff4B', websiteUrl)
 
 </script>
 
@@ -75,7 +75,7 @@ console.log('%c Line:40 🍻 websiteUrl', 'color:#4fff4B', websiteUrl)
 
         <MobileMenu
           v-if="isMobile"
-          :menu-list="menuList"
+          :menu-list="menuList.filter(item => !item.isHiddenOnMobile)"
         />
 
         <!-- 仅开发环境显示  -->
