@@ -57,6 +57,7 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getCurrentWatcher: typeof import('vue')['getCurrentWatcher']
   const h: typeof import('vue')['h']
+  const homeMittBus: typeof import('../utils/blogMittBus')['homeMittBus']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const imageFileToBase64: typeof import('../utils/base64')['imageFileToBase64']
   const imageUrlToBase64: typeof import('../utils/base64')['imageUrlToBase64']
@@ -423,6 +424,7 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly homeMittBus: UnwrapRef<typeof import('../utils/blogMittBus')['homeMittBus']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly imageFileToBase64: UnwrapRef<typeof import('../utils/base64')['imageFileToBase64']>
     readonly imageUrlToBase64: UnwrapRef<typeof import('../utils/base64')['imageUrlToBase64']>

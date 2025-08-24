@@ -17,6 +17,9 @@ importers:
       '@vueuse/motion':
         specifier: ^3.0.3
         version: 3.0.3(rollup@4.46.2)(vue@3.5.18(typescript@5.6.3))
+      autofit.js:
+        specifier: ^3.1.0
+        version: 3.2.8
       axios:
         specifier: ^1.9.0
         version: 1.9.0
@@ -56,6 +59,9 @@ importers:
       pinia-plugin-persistedstate:
         specifier: ^4.5.0
         version: 4.5.0(pinia@3.0.3(typescript@5.6.3)(vue@3.5.18(typescript@5.6.3)))
+      point-in-polygon:
+        specifier: ^1.1.0
+        version: 1.1.0
       qrcode.vue:
         specifier: ^3.6.0
         version: 3.6.0(vue@3.5.18(typescript@5.6.3))
@@ -71,6 +77,12 @@ importers:
       three-stdlib:
         specifier: ^2.36.0
         version: 2.36.0(three@0.179.1)
+      three.interactive:
+        specifier: ^1.7.0
+        version: 1.8.0(three@0.179.1)
+      tiny-emitter:
+        specifier: ^2.1.0
+        version: 2.1.0
       typeit:
         specifier: ^8.8.7
         version: 8.8.7
@@ -2201,6 +2213,9 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
+  autofit.js@3.2.8:
+    resolution: {integrity: sha512-albZNwDIXvcRneEDyZLW3uAIOH0cUQG/TnCGQ7jpfnL0gPn/+1ZNVRuEz3ZuzZvVkQ4HQRplGHjUeMRtPNxjLQ==}
+
   axios@1.9.0:
     resolution: {integrity: sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==}
 
@@ -3914,6 +3929,9 @@ packages:
   point-in-polygon-hao@1.2.3:
     resolution: {integrity: sha512-uZsWylGd8nthIYS8F7aSyM7Pot+4L/bgXheJcCNdRr4eLpsM/rMb3hIi5SqNxAVjUoDDao3QzCtdaVDzmeF9Cw==}
 
+  point-in-polygon@1.1.0:
+    resolution: {integrity: sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==}
+
   popmotion@11.0.5:
     resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
 
@@ -4277,8 +4295,16 @@ packages:
     peerDependencies:
       three: '>=0.128.0'
 
+  three.interactive@1.8.0:
+    resolution: {integrity: sha512-qnPHHE8enXYLETuVzD9RRAfL1dU55nH87sduzBbEiMUSl21HXc+OVnIaLVokYfJ/ktl2QeL6pocO4rTOHlDjGw==}
+    peerDependencies:
+      three: '>= 0.122.0'
+
   three@0.179.1:
     resolution: {integrity: sha512-5y/elSIQbrvKOISxpwXCR4sQqHtGiOI+MKLc3SsBdDXA2hz3Mdp3X59aUp8DyybMa34aeBwbFTpdoLJaUDEWSw==}
+
+  tiny-emitter@2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
 
   tinycolor2@1.6.0:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
@@ -7033,6 +7059,8 @@ snapshots:
 
   asynckit@0.4.0: {}
 
+  autofit.js@3.2.8: {}
+
   axios@1.9.0:
     dependencies:
       follow-redirects: 1.15.9
@@ -9015,6 +9043,8 @@ snapshots:
     dependencies:
       robust-predicates: 3.0.2
 
+  point-in-polygon@1.1.0: {}
+
   popmotion@11.0.5:
     dependencies:
       framesync: 6.1.2
@@ -9423,7 +9453,13 @@ snapshots:
       potpack: 1.0.2
       three: 0.179.1
 
+  three.interactive@1.8.0(three@0.179.1):
+    dependencies:
+      three: 0.179.1
+
   three@0.179.1: {}
+
+  tiny-emitter@2.1.0: {}
 
   tinycolor2@1.6.0: {}
 

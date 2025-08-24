@@ -19,6 +19,8 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/bigScreen/': RouteRecordInfo<'/bigScreen/', '/bigScreen', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mapScene/': RouteRecordInfo<'/bigScreen/comments/mapScene/', '/bigScreen/comments/mapScene', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mHeader/': RouteRecordInfo<'/bigScreen/comments/mHeader/', '/bigScreen/comments/mHeader', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/': RouteRecordInfo<'/blog/creativity/calendar/', '/blog/creativity/calendar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/left': RouteRecordInfo<'/blog/creativity/calendar/left', '/blog/creativity/calendar/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/right': RouteRecordInfo<'/blog/creativity/calendar/right', '/blog/creativity/calendar/right', Record<never, never>, Record<never, never>>,
@@ -107,6 +109,14 @@ declare module 'vue-router/auto-routes' {
   export interface _RouteFileInfoMap {
     'src/pages/bigScreen/index.vue': {
       routes: '/bigScreen/'
+      views: never
+    }
+    'src/pages/bigScreen/comments/mapScene/index.vue': {
+      routes: '/bigScreen/comments/mapScene/'
+      views: never
+    }
+    'src/pages/bigScreen/comments/mHeader/index.vue': {
+      routes: '/bigScreen/comments/mHeader/'
       views: never
     }
     'src/pages/blog/creativity/calendar/index.vue': {

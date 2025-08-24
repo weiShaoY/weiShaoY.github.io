@@ -7,6 +7,10 @@ const loadingText = ['L', 'O', 'A', 'D', 'I', 'N', 'G']
 const welcomeMessage = ['欢', '迎', '来', '到', '我', '的', '网', '站']
 
 // 隐藏loading动画
+
+/**
+ * 隐藏loading动画
+ */
 function hideLoading() {
   return new Promise((resolve) => {
     const tl = gsap.timeline()
@@ -90,7 +94,7 @@ onUnmounted(() => {
     timer.value = null
   }
 
-  window.removeEventListener('load', () => {})
+  // window.removeEventListener('load', () => {})
 })
 
 </script>

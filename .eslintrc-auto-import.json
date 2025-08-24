@@ -64,6 +64,7 @@
     "getCurrentScope": true,
     "getCurrentWatcher": true,
     "h": true,
+    "homeMittBus": true,
     "ignorableWatch": true,
     "imageFileToBase64": true,
     "imageUrlToBase64": true,

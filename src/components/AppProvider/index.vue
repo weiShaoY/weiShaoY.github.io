@@ -55,7 +55,7 @@ const ContextHolder = defineComponent({
 
 <template>
   <div
-    class="h-full"
+    class="h-screen"
   >
     <ContextHolder />
 
