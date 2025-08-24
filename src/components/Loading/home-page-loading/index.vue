@@ -1,36 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import gsap from 'gsap'
 
-import { watch } from 'vue'
-
-// 定义props
-const props = defineProps({
-  /**
-   * 进度
-   */
-  progress: {
-    type: Number,
-    default: 0,
-  },
-
-  /**
-   * 是否显示
-   */
-  visible: {
-    type: Boolean,
-    default: true,
-  },
-})
+import { homeMittBus } from '@/utils'
 
 // 组件内部状态
 const loadingText = ['L', 'O', 'A', 'D', 'I', 'N', 'G']
-
-// 监听visible变化，执行隐藏动画
-watch(() => props.visible, (newVal, oldVal) => {
-  if (oldVal === true && newVal === false) {
-    hideLoading()
-  }
-})
 
 // 隐藏loading动画
 function hideLoading() {
@@ -58,17 +32,67 @@ function hideLoading() {
       opacity: 0,
       ease: 'power4.inOut',
       onComplete: () => {
-        // emit('hide-complete')
-        resolve()
+        resolve(true)
       },
     }, '-=1')
   })
 }
 
-// 暴露方法给父组件
-defineExpose({
-  hideLoading,
+const visible = ref(true)
+
+const progress = ref(0)
+
+const timer = ref<NodeJS.Timeout | null>(null)
+
+function startProgress() {
+  timer.value = setInterval(() => {
+    if (progress.value < 90) {
+      progress.value += 1
+    }
+  }, 500) // 减少间隔, 更平滑 (可选)
+}
+
+// 关闭 loading 的函数
+function closeLoading() {
+  if (timer.value) {
+    clearInterval(timer.value)
+    timer.value = null
+  }
+
+  progress.value = 100
+  setTimeout(() => {
+    hideLoading().then(() => {
+      visible.value = false
+    })
+  }, 500) // 确保视觉效果平滑过渡
+}
+
+onMounted(() => {
+  startProgress()
+
+  // 页面加载完成时
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      closeLoading()
+    }, 2000)
+  })
+
+  // 如果在 mounted 时， 页面已经加载完毕，则主动触发 closeLoading
+  if (document.readyState === 'complete') {
+    setTimeout(() => {
+      closeLoading()
+    }, 2000)
+  }
 })
+onUnmounted(() => {
+  if (timer.value) {
+    clearInterval(timer.value)
+    timer.value = null
+  }
+
+  window.removeEventListener('load', () => {})
+})
+
 </script>
 
 <template>
