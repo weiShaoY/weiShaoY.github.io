@@ -137,7 +137,7 @@ const computedStyle = computed(() => ({
           <template
             v-else
           >
-            <Loading
+            <IconLoading
               :size="size - 14"
             />
           </template>

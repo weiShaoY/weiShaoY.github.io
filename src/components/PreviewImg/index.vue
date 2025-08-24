@@ -118,7 +118,7 @@ const computedImageStyle = computed<CSSProperties>(() => ({
       <template
         #placeholder
       >
-        <Loading
+        <IconLoading
           :size="iconSize"
         />
       </template>

@@ -31,7 +31,7 @@ import Header from './components/header/index.vue'
       <template
         #fallback
       >
-        <Loading />
+        <IconLoading />
       </template>
     </Suspense>
   </div>

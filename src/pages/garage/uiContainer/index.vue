@@ -21,7 +21,7 @@ watch(() => garageStore.state.isMute, (newVal) => {
 <template>
 
   <div>
-    <Loading
+    <IconLoading
       v-if=" garageStore.state.isLoading"
     />
 
