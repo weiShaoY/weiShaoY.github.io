@@ -77,7 +77,7 @@ declare module 'vue' {
     LinkButton: typeof import('./../components/Button/link-button/index.vue')['default']
     Loading: typeof import('./../components/Loading/index.vue')['default']
     MousePosition: typeof import('./../components/MousePosition/index.vue')['default']
-    MSvglineAnimation: typeof import('./../components/mSvglineAnimation/index.vue')['default']
+    MSvglineAnimation: typeof import('./../components/BgScreen/mSvglineAnimation/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']
     PageLoading: typeof import('./../components/Loading/page-loading/index.vue')['default']
     PreviewImg: typeof import('./../components/PreviewImg/index.vue')['default']
@@ -87,6 +87,7 @@ declare module 'vue' {
     TextLogo: typeof import('./../components/Logo/text-logo/index.vue')['default']
     TypeIt: typeof import('./../components/TypeIt/index.vue')['default']
     VideoPlayer: typeof import('./../components/VideoPlayer/index.vue')['default']
+    VueCountTo: typeof import('./../components/BgScreen/mCountTo/vue-countTo.vue')['default']
     VueEcharts: typeof import('./../components/VueEcharts/index.vue')['default']
   }
   export interface GlobalDirectives {

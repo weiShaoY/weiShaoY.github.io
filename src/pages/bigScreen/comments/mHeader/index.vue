@@ -94,6 +94,8 @@
     font-family: 'YouSheBiaoTiHei', '阿里妈妈数黑体 Bold';
     background: -webkit-linear-gradient(rgba(117, 232, 255, 1), rgba(255, 255, 255, 1));
     -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text; /* 标准属性 */
     -webkit-text-fill-color: transparent;
   }
   &-subtext {

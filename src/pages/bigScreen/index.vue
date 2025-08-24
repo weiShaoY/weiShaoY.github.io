@@ -7,7 +7,13 @@ import { Assets } from './assets.js'
 
 import MapScene from './comments/mapScene/index.vue'
 
+import mCountCard from './comments/mCountCard/index.vue'
+
 import mHeader from './comments/mHeader/index.vue'
+
+import mMenu from './comments/mMenu/index.vue'
+
+import mMenuItem from './comments/mMenuItem/index.vue'
 
 import emitter from './utils/emitter'
 
@@ -164,6 +170,10 @@ onMounted(() => {
     mapSceneRef.value.play()
   })
 })
+
+function handleMenuSelect(index: any) {
+  state.activeIndex = index
+}
 </script>
 
 <template>
@@ -205,6 +215,68 @@ onMounted(() => {
           </div>
         </template>
       </m-header>
+
+      <!-- 顶部菜单 -->
+      <div
+        class="top-menu"
+      >
+        <mMenu
+          :default-active="state.activeIndex"
+          @select="handleMenuSelect"
+        >
+          <mMenuItem
+            index="1"
+          >
+            经济概览
+          </mMenuItem>
+
+          <mMenuItem
+            index="2"
+          >
+            导航栏
+          </mMenuItem>
+
+          <mMenuItem
+            index="3"
+          >
+            导航栏
+          </mMenuItem>
+
+          <div
+            class="top-menu-mid-space"
+          />
+
+          <mMenuItem
+            index="4"
+          >
+            导航栏
+          </mMenuItem>
+
+          <mMenuItem
+            index="5"
+          >
+            导航栏
+          </mMenuItem>
+
+          <mMenuItem
+            index="6"
+          >
+            导航栏
+          </mMenuItem>
+        </mMenu>
+      </div>
+
+      <!-- 顶部统计卡片 -->
+      <div
+        class="top-count-card"
+      >
+        <mCountCard
+          v-for="(item, index) in state.totalView"
+          :key="index"
+          :info="item"
+        />
+      </div>
+
     </div>
   </div>
 
@@ -220,6 +292,19 @@ onMounted(() => {
     padding-right: 10px;
     color: #c4f3fe;
     font-size: 14px;
+  }
+}
+
+.top-menu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 40px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  .top-menu-mid-space {
+    width: 800px;
   }
 }
 </style>

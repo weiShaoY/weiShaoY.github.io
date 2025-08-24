@@ -1,4 +1,6 @@
-<script>
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+
 /**
  * SVG动画路径组件
  * @description  SVG动画路径组件
@@ -8,65 +10,82 @@
  * @property {number} duration  路径动画持续时间
  * @property {number} length  路径显示的长度
  * @property {number} begin  路径开始的位置
- * @property {number} dir 路径移动方向 [0,1]-正向 [1,0]-反向
+ * @property {number[]} dir 路径移动方向 [0,1]-正向 [1,0]-反向
  * @property {number} strokeWidth 路径的粗细
  * @property {string} color 路径的颜色
  */
-export default {
-  name: 'SvglineAnimation',
-  props: {
-    width: {
-      type: Number,
-      default: 135,
-    },
-    height: {
-      type: Number,
-      default: 150,
-    },
-    path: {
-      type: String,
-      default: 'M0 72.5H682L732 0.5H3082',
-    },
-    color: {
-      type: String,
-      default: '#0091FF',
-    },
-    duration: {
-      type: Number,
-      default: 3,
-    },
-    length: {
-      type: Number,
-      default: 100,
-    },
-    begin: {
-      type: Number,
-      default: 0,
-    },
-    dir: {
-      type: Array,
-      default: () => [0, 1],
-    },
-    strokeWidth: {
-      type: Number,
-      default: 4,
-    },
-  },
-  data() {
-    let uid = 1
+type PropsType = {
 
-    return {
-      maskId: `svgline-${uid}`,
-      radialGradientId: `radialGradient-${uid}`,
-    }
-  },
-  mounted() {
-    let uid = this._.uid
+  /**
+   * svg的宽度
+   */
+  width?: number
 
-    this.maskId = `svgline-${uid}`
-    this.radialGradientId = `radialGradient-${uid}`
-  },
+  /**
+   * svg的高度
+   */
+  height?: number
+
+  /**
+   * svg的路径值
+   */
+  path?: string
+
+  /**
+   * 路径的颜色
+   */
+  color?: string
+
+  /**
+   * 路径动画持续时间
+   */
+  duration?: number
+
+  /**
+   * 路径显示的长度
+   */
+  length?: number
+
+  /**
+   * 路径开始的位置
+   */
+  begin?: number
+
+  /**
+   * 路径移动方向 [0,1]-正向 [1,0]-反向
+   */
+  dir?: [number, number]
+
+  /**
+   * 路径的粗细
+   */
+  strokeWidth?: number
 }
+withDefaults(defineProps<PropsType>(), {
+  width: 135,
+  height: 150,
+  path: 'M0 72.5H682L732 0.5H3082',
+  color: '#0091FF',
+  duration: 3,
+  length: 100,
+  begin: 0,
+  dir: () => [0, 1],
+  strokeWidth: 4,
+})
+
+// 生成唯一的ID
+const maskId = ref('')
+
+const radialGradientId = ref('')
+
+onMounted(() => {
+  const uid = Math.random()
+    .toString(36)
+    .slice(2, 11)
+
+  maskId.value = `svgline-${uid}`
+  radialGradientId.value = `radialGradient-${uid}`
+})
 </script>
 
 <template>
@@ -135,7 +154,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .path-line {
   mix-blend-mode: screen;
 }
