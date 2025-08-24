@@ -34,6 +34,11 @@ const menuList = [
     label: 'Test',
     isHiddenOnMobile: true,
   },
+  {
+    key: '/bigScreen',
+    label: 'BigScreen',
+    isHiddenOnMobile: true,
+  },
 ]
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'

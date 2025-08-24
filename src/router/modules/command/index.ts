@@ -21,32 +21,32 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
     component: COMMAND_LAYOUT,
     children: [
       {
-        path: 'command-identity',
-        name: 'CommandIdentity',
+        path: 'identityQuery',
+        name: 'IdentityQuery',
         meta: {
           title: '身份查询',
         },
         children: [
           {
-            path: 'command-identity-search',
-            name: 'CommandIdentitySearch',
-            component: () => import('@/pages/command/identity/search/index.vue'),
+            path: 'identity-query-search',
+            name: 'IdentityQuerySearch',
+            component: () => import('@/pages/command/identityQuery/search/index.vue'),
             meta: {
               title: '身份查询-搜索',
             },
           },
           {
-            path: 'command-identity-result',
-            name: 'CommandIdentityResult',
-            component: () => import('@/pages/command/identity/result/index.vue'),
+            path: 'identity-query-result',
+            name: 'IdentityQueryResult',
+            component: () => import('@/pages/command/identityQuery/result/index.vue'),
             meta: {
-              title: '身份查询-详情',
+              title: '身份查询-结果列表',
             },
           },
           {
-            path: 'command-identity-detail',
-            name: 'CommandIdentityDetail',
-            component: () => import('@/pages/command/identity/detail/index.vue'),
+            path: 'identity-query-detail',
+            name: 'IdentityQueryDetail',
+            component: () => import('@/pages/command/identityQuery/detail/index.vue'),
             meta: {
               title: '身份查询-详情',
             },

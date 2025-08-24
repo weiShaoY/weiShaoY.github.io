@@ -11,7 +11,7 @@ function search() {
   if (searchVal.value) {
     console.log(searchVal.value)
     router.push({
-      name: 'CommandIdentityResult',
+      name: 'IdentityQueryResult',
       query: {
         search: searchVal.value,
       },

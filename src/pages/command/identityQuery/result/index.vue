@@ -77,7 +77,7 @@ function handleClick(item: any) {
   console.log('%c Line:75 🌭 item', 'color:#e41a6a', item)
 
   router.push({
-    name: 'CommandIdentityDetail',
+    name: 'IdentityQueryDetail',
     query: {
       id: item.id,
     },
