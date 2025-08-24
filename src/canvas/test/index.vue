@@ -4,7 +4,11 @@ import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-import { disposeScene, loadGLTFModel } from '@/utils'
+import {
+  disposeScene,
+  homeMittBus,
+  loadGLTFModel,
+} from '@/utils'
 
 // const imageUrl = 'https://api.lolimi.cn/API/dmtx/api.php' // 替换为实际的纹理 URL
 
@@ -111,6 +115,8 @@ async function addModel() {
     // replaceTexturesInScene(model)
 
     scene.add(model)
+
+    homeMittBus.emit('hideHomePageLoading')
   })
 }
 

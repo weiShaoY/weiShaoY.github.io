@@ -7,3 +7,5 @@
 import mitt from 'mitt'
 
 export const blogMittBus = mitt()
+
+export const homeMittBus = mitt()

@@ -69,6 +69,7 @@ declare module 'vue' {
     ElWatermark: typeof import('element-plus/es')['ElWatermark']
     Github: typeof import('./../components/Github/index.vue')['default']
     GithubActivityGraph: typeof import('./../components/GithubActivityGraph/index.vue')['default']
+    HomePageLoading: typeof import('./../components/Loading/home-page-loading/index.vue')['default']
     IconButton: typeof import('./../components/Button/icon-button/index.vue')['default']
     IconLoading: typeof import('./../components/Loading/icon-loading/index.vue')['default']
     IconLogo: typeof import('./../components/Logo/icon-logo/index.vue')['default']

@@ -2,7 +2,7 @@ import type { App as VueApp } from 'vue'
 
 import { setElementPlus } from './elementPlus'
 
-import { setupInitialLoading } from './initialLoading'
+// import { setupInitialLoading } from './initialLoading'
 
 import { setupNProgress } from './nprogress'
 
@@ -19,7 +19,7 @@ export function setupPlugins(app: VueApp) {
 
   setupNProgress()
 
-  setupInitialLoading()
+  // setupInitialLoading()
 
   setElementPlus(app)
 }
