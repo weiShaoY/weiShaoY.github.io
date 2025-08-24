@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import gsap from 'gsap'
 
-import { homeMittBus } from '@/utils'
-
 // 组件内部状态
 const loadingText = ['L', 'O', 'A', 'D', 'I', 'N', 'G']
+
+const welcomeMessage = ['欢', '迎', '来', '到', '我', '的', '网', '站']
 
 // 隐藏loading动画
 function hideLoading() {
@@ -71,11 +71,11 @@ onMounted(() => {
   startProgress()
 
   // 页面加载完成时
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      closeLoading()
-    }, 2000)
-  })
+  // window.addEventListener('load', () => {
+  //   setTimeout(() => {
+  //     closeLoading()
+  //   }, 2000)
+  // })
 
   // 如果在 mounted 时， 页面已经加载完毕，则主动触发 closeLoading
   if (document.readyState === 'complete') {
@@ -103,13 +103,32 @@ onUnmounted(() => {
     <div
       class="loading-text"
     >
-      <span
-        v-for="(letter, index) in loadingText"
-        :key="index"
-        :style="{ '--index': index + 1 }"
+
+      <div
+        class=""
       >
-        {{ letter }}
-      </span>
+        <span
+          v-for="(letter, index) in loadingText"
+          :key="index"
+          :style="{ '--index': index + 1 }"
+        >
+          {{ letter }}
+        </span>
+
+      </div>
+
+      <div
+        class=""
+      >
+        <span
+          v-for="(letter, index) in welcomeMessage"
+          :key="index"
+          :style="{ '--index': index + 1 }"
+        >
+          {{ letter }}
+        </span>
+      </div>
+
     </div>
 
     <div
@@ -136,14 +155,16 @@ onUnmounted(() => {
   background: #000;
   pointer-events: none;
   z-index: 99999;
-  &-text {
+
+  .loading-text {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
     color: #fff;
-    font-family: 'D-DIN', Arial, sans-serif;
+    // font-family: 'D-DIN', Arial, sans-serif;
     letter-spacing: 10px;
     span {
       font-size: 2vw;
@@ -160,7 +181,7 @@ onUnmounted(() => {
     top: 50%;
     transform: translate(-50%, -50%);
     transform-origin: center;
-    margin-top: -3vw;
+    margin-top: -5vw;
     .unit {
       padding-left: 10px;
       font-size: 1vw;
