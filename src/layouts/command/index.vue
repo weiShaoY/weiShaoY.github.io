@@ -21,6 +21,8 @@ import GlobalHeader from './modules/global-header/index.vue'
       </div>
     </div>
   </div>
+
+  <BackHomeButton />
 </template>
 
 <style lang="scss" scoped>

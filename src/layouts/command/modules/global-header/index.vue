@@ -21,13 +21,13 @@ const titleInfo = ref({
     {
       id: 2,
       name: '监 控 系 统',
-      routeName: 'evaluste',
+      routeName: 'Evaluate',
       children: [],
     },
     {
       id: 3,
       name: '档 案 系 统',
-      routeName: 'spaceControl',
+      routeName: 'SpaceControl',
       children: [],
     },
   ],
