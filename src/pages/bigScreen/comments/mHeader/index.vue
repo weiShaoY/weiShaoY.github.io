@@ -21,17 +21,25 @@
       class="m-header-left"
       style="color: #fff"
     >
-      <slot
-        name="left"
-      />
+      <div
+        class="m-header-weather"
+      >
+        <span>小雨</span>
+
+        <span>27℃</span>
+      </div>
     </div>
 
     <div
       class="m-header-right"
     >
-      <slot
-        name="right"
-      />
+      <div
+        class="m-header-date"
+      >
+        <span>2023-10-12</span>
+
+        <span>17:53:16</span>
+      </div>
     </div>
 
     <div
@@ -64,6 +72,14 @@
 </template>
 
 <style lang="scss">
+.m-header-weather,
+.m-header-date {
+  span {
+    padding-right: 10px;
+    color: #c4f3fe;
+    font-size: 14px;
+  }
+}
 .m-header {
   position: relative;
   left: 0;

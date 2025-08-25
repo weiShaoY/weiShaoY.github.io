@@ -17,9 +17,9 @@ import mMenuItem from './comments/mMenuItem/index.vue'
 
 import emitter from './utils/emitter'
 
-const assets = shallowRef(null)
+const assets = shallowRef<Assets | null>(null)
 
-const mapSceneRef = ref(null)
+const mapSceneRef = ref<InstanceType<typeof MapScene> | null>(null)
 
 const state = reactive({
   // 进度
@@ -121,7 +121,7 @@ function handleMapPlayComplete() {
 }
 
 // 初始化加载资源
-function initAssets(onLoadCallback) {
+function initAssets(onLoadCallback: (() => void) | undefined) {
   assets.value = new Assets()
 
   // 资源加载进度
@@ -129,7 +129,7 @@ function initAssets(onLoadCallback) {
     progress: 0,
   }
 
-  assets.value.instance.on('onProgress', (path, itemsLoaded, itemsTotal) => {
+  assets.value.instance.on('onProgress', (path: string, itemsLoaded: number, itemsTotal: number) => {
     const p = Math.floor((itemsLoaded / itemsTotal) * 100)
 
     gsap.to(params, {
@@ -159,7 +159,7 @@ onMounted(() => {
     dw: 1920,
     el: '#large-screen',
     resize: true,
-  })
+  }) as any
 
   // 初始化资源
   initAssets(async () => {
@@ -167,7 +167,9 @@ onMounted(() => {
     emitter.$emit('loadMap', assets.value)
 
     // 播放场景
-    mapSceneRef.value.play()
+    if (mapSceneRef.value) {
+      mapSceneRef.value.play()
+    }
   })
 })
 
@@ -189,32 +191,7 @@ function handleMenuSelect(index: any) {
       id="large-screen"
       class="large-screen-wrap"
     >
-      <m-header>
-        <!-- 左侧 天气 -->
-        <template
-          #left
-        >
-          <div
-            class="m-header-weather"
-          >
-            <span>小雨</span>
-
-            <span>27℃</span>
-          </div>
-        </template>
-        <!-- 右侧 日期 -->
-        <template
-          #right
-        >
-          <div
-            class="m-header-date"
-          >
-            <span>2023-10-12</span>
-
-            <span>17:53:16</span>
-          </div>
-        </template>
-      </m-header>
+      <m-header />
 
       <!-- 顶部菜单 -->
       <div

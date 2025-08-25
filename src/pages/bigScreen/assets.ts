@@ -67,7 +67,7 @@ export class Assets {
   /**
    * 资源实例
    */
-  private instance!: Resource
+  public instance!: Resource
 
   /**
    * 构造函数
