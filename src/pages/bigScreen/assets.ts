@@ -42,20 +42,50 @@ import side from './assets/texture/side.png'
 
 import { Resource } from './mini3d'
 
+/**
+ * 资源类型
+ */
+type AssetItem = {
+
+  /**
+   * 资源类型
+   */
+  type: 'Texture' | 'File'
+
+  /**
+   * 资源名称
+   */
+  name: string
+
+  /**
+   * 资源路径
+   */
+  path: string
+}
+
 export class Assets {
+  /**
+   * 资源实例
+   */
+  private instance!: Resource
+
+  /**
+   * 构造函数
+   */
   constructor() {
     this.init()
   }
 
-  init() {
+  init(): void {
     this.instance = new Resource()
 
-    // 添加Fileloader
+    /**
+     * 添加Fileloader 用于加载json文件
+     */
     this.instance.addLoader(FileLoader, 'FileLoader')
 
     // 资源加载
-
-    const assets = [
+    const assets: AssetItem[] = [
       {
         type: 'Texture',
         name: 'flyline',
