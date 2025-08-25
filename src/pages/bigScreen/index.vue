@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type MapScene from './comments/mapScene/index.vue'
-
 import autofit from 'autofit.js'
 
 import gsap from 'gsap'
 
 import { Assets } from './assets'
+
+import MapScene from './comments/mapScene/index.vue'
 
 import GlobalCountCard from './modules/global-count-card/index.vue'
 
@@ -63,7 +63,7 @@ function handleMapPlayComplete() {
 
   const rightCards = gsap.utils.toArray('.right-card')
 
-  const countCards = gsap.utils.toArray('.count-card')
+  const countCards = gsap.utils.toArray('.top-count-card')
 
   tl.addLabel('start', 0.5)
   tl.addLabel('menu', 0.5)
@@ -184,9 +184,9 @@ onMounted(() => {
     class="large-screen"
   >
     <!-- 地图 -->
-    <!-- <MapScene
+    <MapScene
       ref="mapSceneRef"
-    /> -->
+    />
 
     <div
       id="large-screen"
@@ -228,4 +228,29 @@ onMounted(() => {
 
 <style lang="scss">
 @use './home.scss';
+
+///////////////////// 初始化动画 /////////////////////
+// 头部
+.m-header {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+// 顶部菜单
+.top-menu {
+  transform: translateY(-250%);
+  opacity: 0;
+}
+
+// 顶部计数卡片
+.top-count-card {
+  transform: translateY(150%);
+  opacity: 0;
+}
+
+// 底部托盘
+.bottom-tray {
+  transform: translateY(100%);
+  opacity: 0;
+}
 </style>

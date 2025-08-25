@@ -38,7 +38,7 @@ function handleClick(index: number) {
 
 <template>
   <div
-    class="absolute left-0 right-0 top-[40px] z-3 flex justify-center"
+    class="top-menu absolute left-0 right-0 top-[40px] z-3 flex justify-center"
   >
     <div
       class="m-menu flex"
