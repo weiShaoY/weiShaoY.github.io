@@ -7,7 +7,7 @@ import gsap from 'gsap'
 
 import { Assets } from './assets'
 
-import mCountCard from './comments/mCountCard/index.vue'
+import GlobalCountCard from './modules/global-count-card/index.vue'
 
 import GlobalHeader from './modules/global-header/index.vue'
 
@@ -34,6 +34,7 @@ const state = reactive({
       en: 'Gross Domestic Product in 2024',
       value: 31500,
       unit: '亿元',
+      decimals: 0,
     },
     {
       icon: 'zongxiaoliang',
@@ -41,6 +42,7 @@ const state = reactive({
       en: 'resident population in 2024',
       value: 15000,
       unit: '万人',
+      decimals: 0,
     },
   ],
 })
@@ -196,15 +198,9 @@ onMounted(() => {
       />
 
       <!-- 顶部统计卡片 -->
-      <div
-        class="top-count-card"
-      >
-        <mCountCard
-          v-for="(item, index) in state.totalView"
-          :key="index"
-          :info="item"
-        />
-      </div>
+      <GlobalCountCard
+        :total-view="state.totalView"
+      />
 
     </div>
   </div>
@@ -212,6 +208,6 @@ onMounted(() => {
   <BackHomeButton />
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use './home.scss';
 </style>

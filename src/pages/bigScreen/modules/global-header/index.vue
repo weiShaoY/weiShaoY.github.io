@@ -7,10 +7,7 @@
     class="m-header relative left-0 right-0 top-0 z-2 h-22 w-full"
   >
     <div
-      class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2"
-      :style="{
-        backgroundSize: '100%',
-      }"
+      class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2 !bg-[length:100%]"
     >
       <div
         class="m-header-title bg-clip-text text-[44px] text-white tracking-[1px]"
