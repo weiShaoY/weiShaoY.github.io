@@ -42,6 +42,7 @@ const props = withDefaults(defineProps<ChartPropsType>(), {
   isLoading: false,
   width: '100%',
   height: '100%',
+
 })
 
 const loadingOptions = {

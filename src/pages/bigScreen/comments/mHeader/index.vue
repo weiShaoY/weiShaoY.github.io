@@ -4,13 +4,16 @@
 
 <template>
   <div
-    class="m-header"
+    class="m-header relative left-0 right-0 top-0 z-2 h-22 w-full"
   >
     <div
-      class="m-header-wrap"
+      class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2"
+      :style="{
+        backgroundSize: '100%',
+      }"
     >
       <div
-        class="m-header-title"
+        class="m-header-title bg-clip-text text-[44px] text-white tracking-[1px]"
       >
         广东省数据可视化平台
       </div>
@@ -18,35 +21,24 @@
     </div>
 
     <div
-      class="m-header-left"
-      style="color: #fff"
+      class="absolute left-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] text-white font-[14px]"
     >
-      <div
-        class="m-header-weather"
-      >
-        <span>小雨</span>
+      <span>小雨</span>
 
-        <span>27℃</span>
-      </div>
+      <span>27℃</span>
     </div>
 
     <div
-      class="m-header-right"
+      class="absolute right-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] text-white font-[14px]"
     >
-      <div
-        class="m-header-date"
-      >
-        <span>2023-10-12</span>
+      <span>2023-10-12</span>
 
-        <span>17:53:16</span>
-      </div>
+      <span>17:53:16</span>
     </div>
 
-    <div
-      class="m-header-line"
-    >
+    <div>
       <mSvglineAnimation
-        class="m-header-line-left"
+        class="absolute right-[50%] top-[11px] mr-[14px] h-[79px] w-[961px]"
         :width="961"
         :height="79"
         color="#30DCFF"
@@ -57,7 +49,7 @@
       />
 
       <mSvglineAnimation
-        class="m-header-line-right"
+        class="absolute left-[50%] top-[11px] ml-[-14px] h-[79px] w-[961px] scale-x-[-1] transform"
         :width="961"
         :height="79"
         color="#30DCFF"
@@ -72,104 +64,14 @@
 </template>
 
 <style lang="scss">
-.m-header-weather,
-.m-header-date {
-  span {
-    padding-right: 10px;
-    color: #c4f3fe;
-    font-size: 14px;
-  }
+.m-header-wrap {
+  background: url('../../assets/images/header-bg.png');
 }
-.m-header {
-  position: relative;
-  left: 0;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 90px;
-  z-index: 2;
-  &-wrap {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 
-    width: 1920px;
-    height: 90px;
-    margin: 0 auto;
-    background: url('../../assets/images/header-bg.png');
-    background-size: 100%;
-    text-align: center;
-    box-sizing: border-box;
-    padding-top: 10px;
-  }
-
-  &-title {
-    color: #fff;
-    font-size: 44px;
-    letter-spacing: 1px;
-    font-family: 'YouSheBiaoTiHei', '阿里妈妈数黑体 Bold';
-    background: -webkit-linear-gradient(rgba(117, 232, 255, 1), rgba(255, 255, 255, 1));
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text; /* 标准属性 */
-    -webkit-text-fill-color: transparent;
-  }
-  &-subtext {
-    opacity: 0.64;
-    font-size: 12px;
-    letter-spacing: 3px;
-    font-weight: 300;
-    font-family: 'D-DIN';
-    line-height: 14.4px;
-    color: rgba(196, 243, 254, 1);
-  }
-  &-left {
-    color: #fff;
-    position: absolute;
-    top: 47px;
-    left: 32px;
-  }
-  &-right {
-    color: #fff;
-    position: absolute;
-    top: 47px;
-    right: 32px;
-  }
-  &-line {
-    &-left {
-      position: absolute;
-      right: 50%;
-      top: 11px;
-      width: 961px;
-      height: 79px;
-      margin-right: 14px;
-    }
-    &-right {
-      position: absolute;
-      left: 50%;
-      top: 11px;
-      width: 961px;
-      height: 79px;
-      margin-left: -14px;
-      transform: scaleX(-1);
-    }
-    &-left-top {
-      position: absolute;
-      right: 50%;
-      top: -6px;
-      width: 329px;
-      height: 30px;
-      margin-right: 295px;
-    }
-    &-right-top {
-      position: absolute;
-      left: 50%;
-      top: -6px;
-      width: 329px;
-      height: 30px;
-      margin-left: 293px;
-      transform: scaleX(-1);
-    }
-  }
+.m-header-title {
+  background: -webkit-linear-gradient(rgba(117, 232, 255, 1), rgba(255, 255, 255, 1));
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* 标准属性 */
+  color: transparent;
 }
 </style>
