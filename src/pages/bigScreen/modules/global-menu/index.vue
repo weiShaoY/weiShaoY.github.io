@@ -46,14 +46,10 @@ function handleClick(index: number) {
       <div
         v-for="item in menuList"
         :key="item.index"
-        class="m-menu-item pointer-events-auto relative z-1 mx-3 h-8 w-25 flex cursor-pointer items-center justify-center text-4 !bg-[length:100%]"
+        class="m-menu-item pointer-events-auto relative z-1 mx-3 h-8 w-25 flex cursor-pointer items-center justify-center bg-[length:100%] text-4 !bg-[length:100%] !color-[#A3AEB5]"
         :class="{
           'is-active': item.index === activeIndex,
           '!mr-200': item.index === 3,
-        }"
-        :style="{
-          backgroundSize: '100%',
-          color: 'rgba(255, 255, 255, 0.6)',
         }"
         @click="handleClick(item.index)"
       >
@@ -64,15 +60,13 @@ function handleClick(index: number) {
 </template>
 
 <style lang="scss">
-  .m-menu-item {
+.m-menu-item {
   background-image: url('../../assets/images/menu-btn.png');
 
   &:hover,
   &.is-active {
-    color: rgba(255, 255, 255, 1);
+    color: white !important;
     background-image: url('../../assets/images/menu-btn-hover.png');
-  }
-  &.is-active {
     &:after {
       display: block;
       width: 100px;

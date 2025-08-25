@@ -111,19 +111,19 @@ body {
       }
     }
     .bottom-tray {
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      z-index: 3;
-      margin-left: -960px;
-      width: 1920px;
-      height: 90px;
-      box-sizing: border-box;
-      padding-top: 20px;
-      display: flex;
-      justify-content: center;
-      background: url("@/assets/images/bgScreen/bottom-menu-bg.png") no-repeat;
-      background-size: contain;
+      // position: absolute;
+      // left: 50%;
+      // bottom: 0;
+      // z-index: 3;
+      // margin-left: -960px;
+      // width: 1920px;
+      // height: 90px;
+      // box-sizing: border-box;
+      // padding-top: 20px;
+      // display: flex;
+      // justify-content: center;
+      // background: url("@/assets/images/bgScreen/bottom-menu-bg.png") no-repeat;
+      // background-size: contain;
       // &-arrow {
       //   display: flex;
       //   align-items: center;
@@ -140,39 +140,39 @@ body {
       // }
 
       .bottom-menu {
-        display: flex;
-        padding: 0 20px;
+        // display: flex;
+        // padding: 0 20px;
         &-item {
-          width: 100px;
-          height: 32px;
-          background: url("@/assets/images/bgScreen/bottom-menu-btn.png")
-            no-repeat;
-          background-size: 100%;
-          font-size: 15px;
+          // width: 100px;
+          // height: 32px;
+          // background: url("@/assets/images/bgScreen/bottom-menu-btn.png")
+          //   no-repeat;
+          // background-size: 100%;
+          // font-size: 15px;
 
-          letter-spacing: 1.6px;
-          text-align: center;
-          line-height: 30px;
-          cursor: pointer;
-          pointer-events: all;
-          span {
-            display: block;
-            width: 100px;
-            height: 32px;
-            font-weight: 700;
-            background: -webkit-linear-gradient(
-              rgba(117, 232, 255, 1),
-              rgba(255, 255, 255, 1)
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          &:hover,
-          &.is-active {
-            background: url("@/assets/images/bgScreen/bottom-menu-btn-hover.png")
-              no-repeat;
-            background-size: 100%;
-          }
+          // letter-spacing: 1.6px;
+          // text-align: center;
+          // line-height: 30px;
+          // cursor: pointer;
+          // pointer-events: all;
+          // span {
+          //   display: block;
+          //   width: 100px;
+          //   height: 32px;
+          //   font-weight: 700;
+          //   background: -webkit-linear-gradient(
+          //     rgba(117, 232, 255, 1),
+          //     rgba(255, 255, 255, 1)
+          //   );
+          //   -webkit-background-clip: text;
+          //   -webkit-text-fill-color: transparent;
+          // }
+          // &:hover,
+          // &.is-active {
+          //   background: url("@/assets/images/bgScreen/bottom-menu-btn-hover.png")
+          //     no-repeat;
+          //   background-size: 100%;
+          // }
         }
       }
     }

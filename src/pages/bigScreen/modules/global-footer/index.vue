@@ -1,11 +1,35 @@
 <!------  2025-08-25---22:28---星期一  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+
+const activeIndex = ref(1)
+
+const menuList = [
+  {
+    index: 1,
+    name: '人口概览',
+  },
+
+  {
+    index: 2,
+    name: '人口概览',
+  },
+
+  {
+    index: 3,
+    name: '人口概览',
+  },
+
+  {
+    index: 4,
+    name: '人口概览',
+  },
+]
 </script>
 
 <template>
   <div
-    class="bottom-tray"
+    class="bottom-tray absolute bottom-0 left-2/4 z-[3] ml-[-960px] box-border h-[90px] w-[1920px] flex justify-center bg-contain pt-5"
   >
     <!-- svg线条动画 -->
     <mSvglineAnimation
@@ -46,30 +70,22 @@
 
     <!-- 底部菜单 -->
     <div
-      class="bottom-menu"
+      class="bottom-menu flex px-5"
     >
       <div
-        class="bottom-menu-item is-active"
+        v-for="item in menuList"
+        :key="item.index"
+        class="bottom-menu-item pointer-events-auto h-8 w-25 cursor-pointer bg-[length:100%] text-center text-4 leading-[30px] tracking-[1.6px]"
+        :class="{
+          'is-active': item.index === activeIndex,
+        }"
       >
-        <span>人口概览</span>
-      </div>
-
-      <div
-        class="bottom-menu-item"
-      >
-        <span>小标题</span>
-      </div>
-
-      <div
-        class="bottom-menu-item"
-      >
-        <span>小标题</span>
-      </div>
-
-      <div
-        class="bottom-menu-item"
-      >
-        <span>小标题</span>
+        <span
+          class="block h-8 w-25 from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-transparent font-bold"
+          :style="{
+          }"
+        >{{ item.name }}
+        </span>
       </div>
     </div>
 
@@ -91,6 +107,19 @@
 </template>
 
 <style lang="scss" scoped>
+.bottom-tray {
+  background-image: url('@/assets/images/bgScreen/bottom-menu-bg.png');
+}
+.bottom-menu-item {
+  background-image: url('@/assets/images/bgScreen/bottom-menu-btn.png');
+
+  &:hover {
+    background-image: url('@/assets/images/bgScreen/bottom-menu-btn-hover.png');
+  }
+  &.is-active {
+    background-image: url('@/assets/images/bgScreen/bottom-menu-btn-hover.png');
+  }
+}
 
 .arrowAnimate1 {
   animation: arrowAnimate1 2s ease-in-out infinite;

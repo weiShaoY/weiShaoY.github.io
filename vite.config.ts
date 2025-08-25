@@ -20,7 +20,7 @@ import Glsl from 'vite-plugin-glsl'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng'
 
-import vueDevTools from 'vite-plugin-vue-devtools'
+// import vueDevTools from 'vite-plugin-vue-devtools'
 
 // Element Plus 组件列表 - 用于预加载和按需加载
 const elementPlusComponents = [
@@ -230,7 +230,7 @@ export default defineConfig(({ mode }) => {
       vueJsx(),
 
       // 启用 Vue 开发者工具
-      vueDevTools(),
+      // vueDevTools(),
 
       // 自动导入配置
       AutoImport({
