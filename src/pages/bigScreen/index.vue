@@ -17,6 +17,8 @@ import GlobalHeader from './modules/global-header/index.vue'
 
 import GlobalMenu from './modules/global-menu/index.vue'
 
+import GlobalRadar from './modules/global-radar/index.vue'
+
 import emitter from './utils/emitter'
 
 const assets = shallowRef<Assets | null>(null)
@@ -209,16 +211,11 @@ onMounted(() => {
       <!-- 底部托盘 -->
       <GlobalFooter />
 
+      <!-- 底部雷达 -->
+      <GlobalRadar />
+
       <!-- 左右装饰线 -->
       <GlobalDecorativeLine />
-
-      <!-- <div
-        class="large-screen-left-zsline"
-      />
-
-      <div
-        class="large-screen-right-zsline"
-      /> -->
 
     </div>
   </div>
@@ -228,6 +225,16 @@ onMounted(() => {
 
 <style lang="scss">
 @use './home.scss';
+
+// 360旋转
+@keyframes rotate360Animate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 ///////////////////// 初始化动画 /////////////////////
 // 头部

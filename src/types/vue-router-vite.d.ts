@@ -25,6 +25,7 @@ declare module 'vue-router/auto-routes' {
     '/bigScreen/modules/global-footer/': RouteRecordInfo<'/bigScreen/modules/global-footer/', '/bigScreen/modules/global-footer', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-header/': RouteRecordInfo<'/bigScreen/modules/global-header/', '/bigScreen/modules/global-header', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-menu/': RouteRecordInfo<'/bigScreen/modules/global-menu/', '/bigScreen/modules/global-menu', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-radar/': RouteRecordInfo<'/bigScreen/modules/global-radar/', '/bigScreen/modules/global-radar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/': RouteRecordInfo<'/blog/creativity/calendar/', '/blog/creativity/calendar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/left': RouteRecordInfo<'/blog/creativity/calendar/left', '/blog/creativity/calendar/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/right': RouteRecordInfo<'/blog/creativity/calendar/right', '/blog/creativity/calendar/right', Record<never, never>, Record<never, never>>,
@@ -137,6 +138,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/bigScreen/modules/global-menu/index.vue': {
       routes: '/bigScreen/modules/global-menu/'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-radar/index.vue': {
+      routes: '/bigScreen/modules/global-radar/'
       views: never
     }
     'src/pages/blog/creativity/calendar/index.vue': {
