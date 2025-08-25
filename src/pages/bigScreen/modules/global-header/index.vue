@@ -21,7 +21,7 @@
     </div>
 
     <div
-      class="absolute left-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] text-white font-[14px]"
+      class="absolute left-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] font-[14px]"
     >
       <span>小雨</span>
 
@@ -29,7 +29,7 @@
     </div>
 
     <div
-      class="absolute right-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] text-white font-[14px]"
+      class="absolute right-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] font-[14px]"
     >
       <span>2023-10-12</span>
 

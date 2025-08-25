@@ -1,19 +1,17 @@
 <script setup lang="ts">
+import type MapScene from './comments/mapScene/index.vue'
+
 import autofit from 'autofit.js'
 
 import gsap from 'gsap'
 
 import { Assets } from './assets'
 
-import MapScene from './comments/mapScene/index.vue'
-
 import mCountCard from './comments/mCountCard/index.vue'
 
-import mHeader from './comments/mHeader/index.vue'
+import GlobalHeader from './modules/global-header/index.vue'
 
-import mMenu from './comments/mMenu/index.vue'
-
-import mMenuItem from './comments/mMenuItem/index.vue'
+import GlobalMenu from './modules/global-menu/index.vue'
 
 import emitter from './utils/emitter'
 
@@ -26,7 +24,7 @@ const state = reactive({
   progress: 0,
 
   // 当前顶部导航索引
-  activeIndex: '1',
+  activeIndex: 1,
 
   // 卡片统计数据
   totalView: [
@@ -173,9 +171,6 @@ onMounted(() => {
   })
 })
 
-function handleMenuSelect(index: any) {
-  state.activeIndex = index
-}
 </script>
 
 <template>
@@ -183,65 +178,22 @@ function handleMenuSelect(index: any) {
     class="large-screen"
   >
     <!-- 地图 -->
-    <MapScene
+    <!-- <MapScene
       ref="mapSceneRef"
-    />
+    /> -->
 
     <div
       id="large-screen"
       class="large-screen-wrap"
     >
-      <m-header />
+
+      <!-- 头部 -->
+      <GlobalHeader />
 
       <!-- 顶部菜单 -->
-      <div
-        class="top-menu"
-      >
-        <mMenu
-          :default-active="state.activeIndex"
-          @select="handleMenuSelect"
-        >
-          <mMenuItem
-            index="1"
-          >
-            经济概览
-          </mMenuItem>
-
-          <mMenuItem
-            index="2"
-          >
-            导航栏
-          </mMenuItem>
-
-          <mMenuItem
-            index="3"
-          >
-            导航栏
-          </mMenuItem>
-
-          <div
-            class="top-menu-mid-space"
-          />
-
-          <mMenuItem
-            index="4"
-          >
-            导航栏
-          </mMenuItem>
-
-          <mMenuItem
-            index="5"
-          >
-            导航栏
-          </mMenuItem>
-
-          <mMenuItem
-            index="6"
-          >
-            导航栏
-          </mMenuItem>
-        </mMenu>
-      </div>
+      <GlobalMenu
+        v-model="state.activeIndex"
+      />
 
       <!-- 顶部统计卡片 -->
       <div
@@ -262,26 +214,4 @@ function handleMenuSelect(index: any) {
 
 <style lang="scss" scoped>
 @use './home.scss';
-
-.m-header-weather,
-.m-header-date {
-  span {
-    padding-right: 10px;
-    color: #c4f3fe;
-    font-size: 14px;
-  }
-}
-
-.top-menu {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 40px;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  .top-menu-mid-space {
-    width: 800px;
-  }
-}
 </style>
