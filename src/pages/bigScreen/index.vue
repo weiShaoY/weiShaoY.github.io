@@ -9,6 +9,8 @@ import { Assets } from './assets'
 
 import GlobalCountCard from './modules/global-count-card/index.vue'
 
+import GlobalFooter from './modules/global-footer/index.vue'
+
 import GlobalHeader from './modules/global-header/index.vue'
 
 import GlobalMenu from './modules/global-menu/index.vue'
@@ -200,6 +202,18 @@ onMounted(() => {
       <!-- 顶部统计卡片 -->
       <GlobalCountCard
         :total-view="state.totalView"
+      />
+
+      <!-- 底部托盘 -->
+      <GlobalFooter />
+
+      <!-- 左右装饰线 -->
+      <div
+        class="large-screen-left-zsline"
+      />
+
+      <div
+        class="large-screen-right-zsline"
       />
 
     </div>

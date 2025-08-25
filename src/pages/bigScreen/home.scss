@@ -7,50 +7,6 @@ body {
   -webkit-user-select: none; /*webkit浏览器*/
   user-select: none;
 }
-// .loading {
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   background: #000;
-//   pointer-events: none;
-//   z-index: 99;
-//   &-text {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 100%;
-//     height: 100%;
-//     color: #fff;
-//     font-family: "D-DIN", Arial, sans-serif;
-//     letter-spacing: 10px;
-//     span {
-//       font-size: 2vw;
-//       animation: blurAni 1.5s calc(var(--index) / 5 * 1s) alternate infinite;
-//     }
-//   }
-//   &-progress {
-//     font-size: 2vw;
-//     color: #fff;
-//     font-family: "D-DIN", Arial, sans-serif;
-//     position: absolute;
-//     left: 50%;
-//     top: 50%;
-//     transform: translate(-50%, -50%);
-//     transform-origin: center;
-//     margin-top: -3vw;
-//     .unit {
-//       padding-left: 10px;
-//       font-size: 1vw;
-//     }
-//   }
-// }
-// @keyframes blurAni {
-//   to {
-//     filter: blur(3px);
-//   }
-// }
 
 .large-screen {
   position: relative;
@@ -84,7 +40,7 @@ body {
       bottom: 0;
       z-index: 1;
       opacity: 0.5;
-      background: url("@/assets/images/bg.png") no-repeat;
+      background: url("@/assets/images/bgScreen/bg.png") no-repeat;
       background-size: cover;
     }
     .top-count-card {
@@ -166,29 +122,31 @@ body {
       padding-top: 20px;
       display: flex;
       justify-content: center;
-      background: url("~@/assets/images/bottom-menu-bg.png") no-repeat;
+      background: url("@/assets/images/bgScreen/bottom-menu-bg.png") no-repeat;
       background-size: contain;
-      &-arrow {
-        display: flex;
-        align-items: center;
-        height: 30px;
-        &.is-reverse {
-          transform: scaleX(-1);
-        }
-        img {
-          animation: arrowAnimate 2s ease-in-out infinite;
-        }
-        img:last-child {
-          animation: arrowAnimate2 2s ease-in-out infinite;
-        }
-      }
+      // &-arrow {
+      //   display: flex;
+      //   align-items: center;
+      //   height: 30px;
+      //   &.is-reverse {
+      //     transform: scaleX(-1);
+      //   }
+      //   img {
+      //     animation: arrowAnimate 2s ease-in-out infinite;
+      //   }
+      //   img:last-child {
+      //     animation: arrowAnimate2 2s ease-in-out infinite;
+      //   }
+      // }
+
       .bottom-menu {
         display: flex;
         padding: 0 20px;
         &-item {
           width: 100px;
           height: 32px;
-          background: url("~@/assets/images/bottom-menu-btn.png") no-repeat;
+          background: url("@/assets/images/bgScreen/bottom-menu-btn.png")
+            no-repeat;
           background-size: 100%;
           font-size: 15px;
 
@@ -211,7 +169,7 @@ body {
           }
           &:hover,
           &.is-active {
-            background: url("~@/assets/images/bottom-menu-btn-hover.png")
+            background: url("@/assets/images/bgScreen/bottom-menu-btn-hover.png")
               no-repeat;
             background-size: 100%;
           }
@@ -219,6 +177,7 @@ body {
       }
     }
   }
+
   &-left-zsline {
     position: absolute;
     left: 0;
@@ -227,7 +186,7 @@ body {
     margin-top: -540px;
     width: 120px;
     height: 1080px;
-    background: url("~@/assets/images/left-kuang.svg") no-repeat;
+    background: url("@/assets/svgs/bgScreen/left-kuang.svg") no-repeat;
     background-size: contain;
     animation: bkAnimate 3s infinite;
   }
@@ -239,7 +198,7 @@ body {
     margin-top: -540px;
     width: 120px;
     height: 1080px;
-    background: url("~@/assets/images/right-kuang.svg") no-repeat;
+    background: url("@/assets/svgs/bgScreen/right-kuang.svg") no-repeat;
     background-size: contain;
     animation: bkAnimate 3s infinite;
   }
@@ -257,28 +216,28 @@ body {
   }
 }
 
-@keyframes arrowAnimate {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@keyframes arrowAnimate2 {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(90%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
+// @keyframes arrowAnimate {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   50% {
+//     transform: translateX(100%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
+// @keyframes arrowAnimate2 {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   50% {
+//     transform: translateX(90%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
 // 360旋转
 @keyframes rotate360Animate {
   0% {
