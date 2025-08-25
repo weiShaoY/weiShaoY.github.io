@@ -3,7 +3,7 @@ import autofit from 'autofit.js'
 
 import gsap from 'gsap'
 
-import { Assets } from './assets.js'
+import { Assets } from './assets'
 
 import MapScene from './comments/mapScene/index.vue'
 
