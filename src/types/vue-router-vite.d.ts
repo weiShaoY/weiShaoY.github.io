@@ -21,6 +21,7 @@ declare module 'vue-router/auto-routes' {
     '/bigScreen/': RouteRecordInfo<'/bigScreen/', '/bigScreen', Record<never, never>, Record<never, never>>,
     '/bigScreen/comments/mapScene/': RouteRecordInfo<'/bigScreen/comments/mapScene/', '/bigScreen/comments/mapScene', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-count-card/': RouteRecordInfo<'/bigScreen/modules/global-count-card/', '/bigScreen/modules/global-count-card', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-decorative-line/': RouteRecordInfo<'/bigScreen/modules/global-decorative-line/', '/bigScreen/modules/global-decorative-line', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-footer/': RouteRecordInfo<'/bigScreen/modules/global-footer/', '/bigScreen/modules/global-footer', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-header/': RouteRecordInfo<'/bigScreen/modules/global-header/', '/bigScreen/modules/global-header', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-menu/': RouteRecordInfo<'/bigScreen/modules/global-menu/', '/bigScreen/modules/global-menu', Record<never, never>, Record<never, never>>,
@@ -120,6 +121,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/bigScreen/modules/global-count-card/index.vue': {
       routes: '/bigScreen/modules/global-count-card/'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-decorative-line/index.vue': {
+      routes: '/bigScreen/modules/global-decorative-line/'
       views: never
     }
     'src/pages/bigScreen/modules/global-footer/index.vue': {

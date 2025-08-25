@@ -9,6 +9,8 @@ import { Assets } from './assets'
 
 import GlobalCountCard from './modules/global-count-card/index.vue'
 
+import GlobalDecorativeLine from './modules/global-decorative-line/index.vue'
+
 import GlobalFooter from './modules/global-footer/index.vue'
 
 import GlobalHeader from './modules/global-header/index.vue'
@@ -208,13 +210,15 @@ onMounted(() => {
       <GlobalFooter />
 
       <!-- 左右装饰线 -->
-      <div
+      <GlobalDecorativeLine />
+
+      <!-- <div
         class="large-screen-left-zsline"
       />
 
       <div
         class="large-screen-right-zsline"
-      />
+      /> -->
 
     </div>
   </div>
