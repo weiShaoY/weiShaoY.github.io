@@ -80,43 +80,57 @@ function sortByValue(data) {
 export class World extends Mini3d {
   /**
    * 构造函数
-   * @param {HTMLElement} canvas - 画布元素
-   * @param {object} assets - 资源对象
+   * @param  canvas - 画布元素
+   * @param  assets - 资源对象
    */
   constructor(canvas, assets) {
     super(canvas) // 调用父类构造函数
+
     // 地理投影中心坐标 [经度, 纬度]
     this.geoProjectionCenter = [113.280637, 23.125178]
+
     // 地理投影缩放比例
     this.geoProjectionScale = 120
+
     // 飞线中心坐标 [经度, 纬度]
     this.flyLineCenter = [113.544372, 23.329249]
+
     // 地图拉伸高度
     this.depth = 0.5
+
     // 地图焦点标签信息
     this.mapFocusLabelInfo = {
       name: '广东省', // 中文名称
       enName: 'GUANGDONG PROVINCE', // 英文名称
       center: [113.280637, 20.625178], // 中心坐标
     }
+
     // 是否已点击状态
     this.clicked = false
+
     // 创建雾效果 - 颜色、近平面、远平面
     this.scene.fog = new Fog(0x102736, 1, 50)
+
     // 设置场景背景颜色
     this.scene.background = new Color(0x102736)
 
     // 设置相机初始位置
     this.camera.instance.position.set(-13.767695123014105, 12.990152163077308, 39.28228164159694)
+
     this.camera.instance.near = 1 // 近裁剪面
+
     this.camera.instance.far = 10000 // 远裁剪面
+
     this.camera.instance.updateProjectionMatrix() // 更新投影矩阵
+
     // 创建交互管理器
     this.interactionManager = new InteractionManager(this.renderer.instance, this.camera.instance, this.canvas)
 
     this.assets = assets // 保存资源对象
+
     // 初始化环境光照
     this.initEnvironment()
+
     // 初始化场景
     this.init()
   }
