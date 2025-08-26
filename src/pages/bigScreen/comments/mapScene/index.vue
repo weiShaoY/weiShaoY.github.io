@@ -180,7 +180,9 @@ defineExpose({
       }
     }
   }
+  /* 省份标签样式 */
   .provinces-label {
+    /* 省份标签包装器 */
     &-wrap {
       transform: translate(50%, 200%);
       opacity: 0;
@@ -193,11 +195,14 @@ defineExpose({
       border-radius: 30px 30px 30px 0px;
       background: rgba(0, 0, 0, 0.4);
     }
+
+    /* 数字显示 */
     .number {
       color: #fff;
       font-size: 30px;
       font-weight: 700;
 
+      /* 单位 */
       .unit {
         color: #fff;
         font-size: 12px;
@@ -206,6 +211,8 @@ defineExpose({
         padding-left: 5px;
       }
     }
+
+    /* 名称显示 */
     .name {
       color: #fff;
       font-size: 16px;
@@ -213,6 +220,7 @@ defineExpose({
       span {
         display: block;
       }
+      /* 英文名称 */
       .en {
         color: #fff;
         font-size: 10px;
@@ -220,6 +228,8 @@ defineExpose({
         font-weight: 700;
       }
     }
+
+    /* 编号显示 */
     .no {
       color: #7efbf6;
       text-shadow:
@@ -228,6 +238,8 @@ defineExpose({
       font-size: 30px;
       font-weight: 700;
     }
+
+    /* 黄色主题 */
     .yellow {
       .no {
         color: #fef99e !important;
@@ -238,11 +250,13 @@ defineExpose({
     }
   }
 
+  /* 中国标签样式 */
   .china-label {
     color: #fff;
-
     font-size: 12px;
     will-change: transform;
+
+    /* 其他标签 */
     .other-label {
       display: flex;
       align-items: center;
@@ -252,10 +266,13 @@ defineExpose({
       will-change: transform;
     }
 
+    /* 模糊状态 */
     &.blur {
       filter: blur(2px);
       opacity: 0.5;
     }
+
+    /* 标签图标 */
     .label-icon {
       display: block;
       width: 20px;
@@ -263,6 +280,8 @@ defineExpose({
       margin: 0 10px 0 0;
     }
   }
+
+  /* 地图标签样式 */
   .map-label {
     padding: 5px;
     color: #fff;
@@ -270,13 +289,18 @@ defineExpose({
     font-size: 36px;
     font-weight: bold;
     letter-spacing: 4.5px;
+    /* 倒影效果 */
     -webkit-box-reflect: below 0 -webkit-linear-gradient(transparent, transparent 20%, rgba(255, 255, 255, 0.3));
+
+    /* 其他标签 */
     .other-label {
       display: flex;
       flex-direction: column;
     }
+
     span {
       font-size: 46px;
+      /* 副标题 */
       &:last-child {
         font-size: 12px;
         font-weight: normal;
@@ -285,17 +309,23 @@ defineExpose({
       }
     }
   }
+
+  /* 装饰标签样式 */
   .decoration-label {
     // &.reflect {
     //   -webkit-box-reflect: below 0 -webkit-linear-gradient(transparent, transparent 20%, rgba(255, 255, 255, 0.3));
     // }
     // padding-bottom: 10px;
+
+    /* 装饰图标 */
     .label-icon {
       display: block;
       width: 40px;
       height: 40px;
     }
   }
+
+  /* 其他标签通用样式 */
   .other-label {
     transform: translateY(200%);
     opacity: 0;
