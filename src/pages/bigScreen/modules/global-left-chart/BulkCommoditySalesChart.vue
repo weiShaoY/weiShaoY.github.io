@@ -186,10 +186,10 @@ const option = ref({
     <m-card
       title="大宗商品销售额"
     >
-      <!-- <VChart
+      <VChart
         :option="option"
         :autoresize="true"
-      /> -->
+      />
     </m-card>
   </div>
 </template>

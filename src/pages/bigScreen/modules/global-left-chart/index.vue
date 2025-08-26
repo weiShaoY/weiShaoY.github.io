@@ -23,14 +23,15 @@ import YearlyEconomyTrend from './YearlyEconomyTrend.vue'
       <!-- 大宗商品销售额 -->
       <BulkCommoditySalesChart />
 
-      <!-- 年度经济增长点 -->
-      <YearlyEconomyTrend />
+      <!-- 各区经济收益 -->
+      <DistrictEconomicIncome />
 
       <!-- 近年经济情况 -->
       <EconomicTrendChart />
 
-      <!-- 各区经济收益 -->
-      <DistrictEconomicIncome />
+      <!-- 年度经济增长点 -->
+      <YearlyEconomyTrend />
+
     </div>
   </div>
 </template>

@@ -17,12 +17,15 @@ import QuarterlyGrowthSituation from './QuarterlyGrowthSituation.vue'
     <div
       class="right-wrap-3d"
     >
-      <!-- 专项资金用途 -->
-      <PurposeSpecialFunds />
-      <!-- 人群消费占比 -->
-      <ProportionPopulationConsumption />
       <!-- 用电情况 -->
       <ElectricityUsage />
+
+      <!-- 人群消费占比 -->
+      <ProportionPopulationConsumption />
+
+      <!-- 专项资金用途 -->
+      <PurposeSpecialFunds />
+
       <!-- 各季度增长情况 -->
       <QuarterlyGrowthSituation />
     </div>
