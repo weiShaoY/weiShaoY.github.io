@@ -9,37 +9,72 @@ import emitter from '../../utils/emitter'
 
 import { World } from './map.js'
 
+/**
+ * 地图画布实例的浅层引用
+ * 使用 shallowRef 避免深度响应式，提高性能
+ */
 const canvasMap = shallowRef(null)
 
+/**
+ * 组件挂载时监听地图加载事件
+ */
 onMounted(() => {
   emitter.$on('loadMap', loadMap)
 })
+
+/**
+ * 组件卸载时清理资源
+ */
 onBeforeUnmount(() => {
+  // 销毁地图实例
   canvasMap.value && canvasMap.value.destroy()
+
+  // 移除事件监听
   emitter.$off('loadMap', loadMap)
 })
+
+/**
+ * 加载地图
+ * @param  assets - 地图资源对象
+ */
 function loadMap(assets) {
+  // 创建地图世界实例
   canvasMap.value = new World(document.getElementById('canvasMap'), assets)
+
+  // 暂停时间轴
   canvasMap.value.time.pause()
 }
 
+/**
+ * 播放地图动画
+ */
 async function play() {
+  // 恢复时间轴
   canvasMap.value.time.resume()
-  canvasMap.value.animateTl.timeScale(1) // 设置播放速度正常
+
+  // 设置播放速度正常
+  canvasMap.value.animateTl.timeScale(1)
+
+  // 开始播放动画
   canvasMap.value.animateTl.play()
 }
 
+/**
+ * 暴露方法给父组件使用
+ */
 defineExpose({
-  loadMap,
-  play,
-  canvasMap,
+  loadMap, // 加载地图方法
+  play, // 播放动画方法
+  canvasMap, // 地图实例引用
 })
 </script>
 
 <template>
+  <!-- 地图容器 -->
   <div
     class="map"
   >
+    <!-- 地图画布 -->
     <canvas
       id="canvasMap"
     />
@@ -47,6 +82,7 @@ defineExpose({
 </template>
 
 <style lang="scss">
+/* 地图容器样式 */
 .map {
   position: absolute;
   z-index: 1;
@@ -55,6 +91,8 @@ defineExpose({
   right: 0;
   bottom: 0;
   background-color: #000;
+
+  /* 信息点样式 */
   .info-point {
     background: rgba(0, 0, 0, 0.5);
     color: #a3dcde;
@@ -64,7 +102,10 @@ defineExpose({
     padding: 16px 12px 0;
     margin-bottom: 30px;
     will-change: transform;
+
+    /* 信息点包装器 - 边框装饰 */
     &-wrap {
+      /* 上边框装饰 */
       &:after,
       &:before {
         display: block;
@@ -83,6 +124,8 @@ defineExpose({
         right: 0;
         border-right: 1px solid #4b87a6;
       }
+
+      /* 内层包装器 - 下边框装饰 */
       &-inner {
         &:after,
         &:before {
@@ -104,6 +147,8 @@ defineExpose({
         }
       }
     }
+
+    /* 信息点线条装饰 */
     &-line {
       position: absolute;
       top: 7px;
@@ -116,6 +161,8 @@ defineExpose({
         background: #17e5c3;
       }
     }
+
+    /* 信息点内容 */
     &-content {
       .content-item {
         display: flex;
