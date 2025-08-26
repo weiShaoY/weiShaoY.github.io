@@ -6,7 +6,7 @@ import Pie from './pie.vue'
 
 const pie = ref(null)
 
-const state = reactive({
+const state = ref({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],
   pieData: [
     {
@@ -42,10 +42,10 @@ function getNumber(slotProps) {
       title="年度经济增长点"
     >
       <div
-        class="pie-chat-wrap"
+        class="pie-chat-wrap h-full w-full flex"
       >
         <div
-          class="pie-chat"
+          class="pie-chat pointer-events-auto relative h-full w-[236px]"
         >
           <Pie
             ref="pie"
@@ -53,16 +53,16 @@ function getNumber(slotProps) {
             :delay="3000"
             :colors="state.pieDataColor"
             :opacity="0.6"
-            class="pieCanvas"
+            class="pieCanvas pointer-events-auto h-full w-full"
           >
             <template
               #default="slotProps"
             >
               <div
-                class="pieCanvas-content"
+                class="pieCanvas-content mb-8 h-full w-full flex flex-col items-center justify-center text-xs text-white"
               >
                 <div
-                  class="pieCanvas-content-value"
+                  class="pieCanvas-content-value text-4 font-bold text-shadow-[0_0_10px_rgb(0_0_0)]"
                 >
                   <mCountTo
                     :start-val="0"
@@ -75,7 +75,7 @@ function getNumber(slotProps) {
                 </div>
 
                 <div
-                  class="pieCanvas-content-name"
+                  class="pieCanvas-content-name w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs text-white"
                 >
                   {{ slotProps.data.name }}
                 </div>
@@ -85,30 +85,36 @@ function getNumber(slotProps) {
         </div>
 
         <div
-          class="pie-legend"
+          class="pie-legend flex flex-col flex-wrap items-center justify-between px-0 py-5"
         >
           <div
             v-for="(item, index) in state.pieData"
             :key="index"
-            class="pie-legend-item"
+            class="pie-legend-item box-border flex flex-nowrap items-center"
           >
             <div
-              class="icon"
+              class="icon mr-2.5 box-border h-2.5 w-2.5 border-2 border-[#17e6c3] rounded-3 border-solid"
               :style="{ borderColor: state.pieDataColor[index] }"
             />
 
             <div
-              class="name"
+              class="name text-xs text-white font-medium"
             >
               {{ item.name }}
             </div>
 
             <div
-              class="value"
+              class="value w-20 flex flex-nowrap items-end justify-end text-right text-base text-white font-bold"
             >
-              {{ item.value }}<span
-                class="unit"
-              >亿</span>
+              <span>
+                {{ item.value }}
+              </span>
+
+              <span
+                class="unit pl-3 text-xs text-white font-normal opacity-50"
+              >
+                亿
+              </span>
             </div>
           </div>
         </div>
@@ -118,98 +124,5 @@ function getNumber(slotProps) {
 </template>
 
 <style lang="scss">
-.pie-chat-wrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-// 饼图
-.pie-chat {
-  pointer-events: all;
-  position: relative;
-  width: 236px;
-  height: 100%;
 
-  .pieCanvas {
-    width: 100%;
-    height: 100%;
-    pointer-events: all;
-  }
-  .pieCanvas-content {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 12px;
-    &-value {
-      font-size: 15px;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgb(0 0 0);
-    }
-    &-name {
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: #fff;
-      font-size: 12px;
-      text-align: center;
-    }
-  }
-}
-// 饼图3d legend
-.pie-legend {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 20px 0;
-  &-item {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    box-sizing: border-box;
-
-    .icon {
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
-      border: 2px solid #17e6c3;
-      box-sizing: border-box;
-      margin-right: 10px;
-    }
-    .name {
-      font-weight: 500;
-      font-size: 12px;
-      color: #ffffff;
-    }
-    .value {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: flex-end;
-      justify-content: flex-end;
-      width: 80px;
-      text-align: right;
-
-      font-weight: bold;
-      color: #ffffff;
-      font-family: D-DIN;
-      font-weight: bold;
-      font-size: 16px;
-      .unit {
-        font-family: D-DIN;
-        font-weight: 400;
-        font-size: 10px;
-        color: #ffffff;
-        opacity: 0.5;
-        padding-left: 10px;
-      }
-    }
-  }
-}
 </style>
