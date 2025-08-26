@@ -17,7 +17,7 @@ watchEffect(() => {
 /**
  *  是否为开发环境
  */
-const isDev = import.meta.env.VITE_APP_NODE_ENV === 'development'
+// const isDev = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
 </script>
 
@@ -30,7 +30,7 @@ const isDev = import.meta.env.VITE_APP_NODE_ENV === 'development'
     </AppProvider>
   </ElConfigProvider>
 
-  <HomePageLoading
+  <!-- <HomePageLoading
     v-if="!isDev"
-  />
+  /> -->
 </template>
