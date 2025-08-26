@@ -222,165 +222,182 @@ export class World extends Mini3d {
       'focusMap', // 与 focusMap 标签同步
     )
 
+    // 焦点地图顶面材质透明度动画
     tl.to(
       this.focusMapTopMaterial,
       {
-        duration: 1,
-        opacity: 1,
-        ease: 'circ.out',
+        duration: 1, // 持续时间 1 秒
+        opacity: 1, // 目标不透明度
+        ease: 'circ.out', // 缓动函数
       },
-      'focusMapOpacity',
+      'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+    // 焦点地图侧面材质透明度动画
     tl.to(
       this.focusMapSideMaterial,
       {
-        duration: 1,
-        opacity: 1,
-        ease: 'circ.out',
+        duration: 1, // 持续时间 1 秒
+        opacity: 1, // 目标不透明度
+        ease: 'circ.out', // 缓动函数
         onComplete: () => {
-          this.focusMapSideMaterial.transparent = false
+          this.focusMapSideMaterial.transparent = false // 动画完成后禁用透明度
         },
       },
-      'focusMapOpacity',
+      'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+    // 其他标签动画
     this.otherLabel.map((item, index) => {
-      const element = item.element.querySelector('.other-label')
+      const element = item.element.querySelector('.other-label') // 获取标签元素
       tl.to(
         element,
         {
-          duration: 1,
-          delay: 0.1 * index,
-          translateY: 0,
-          opacity: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.1 * index, // 延迟时间（按索引递增）
+          translateY: 0, // 目标Y位移
+          opacity: 1, // 目标不透明度
+          ease: 'circ.out', // 缓动函数
         },
-        'focusMapOpacity',
+        'focusMapOpacity', // 与 focusMapOpacity 标签同步
       )
     })
+    // 地图边线材质透明度动画
     tl.to(
       this.mapLineMaterial,
       {
-        duration: 0.5,
-        delay: 0.3,
-        opacity: 1,
+        duration: 0.5, // 持续时间 0.5 秒
+        delay: 0.3, // 延迟 0.3 秒
+        opacity: 1, // 目标不透明度
       },
-      'focusMapOpacity',
+      'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+    // 旋转边框1缩放动画
     tl.to(
       this.rotateBorder1.scale,
       {
-        delay: 0.3,
-        duration: 1,
-        x: 1,
-        y: 1,
-        z: 1,
-        ease: 'circ.out',
+        delay: 0.3, // 延迟 0.3 秒
+        duration: 1, // 持续时间 1 秒
+        x: 1, // 目标X缩放
+        y: 1, // 目标Y缩放
+        z: 1, // 目标Z缩放
+        ease: 'circ.out', // 缓动函数
       },
-      'focusMapOpacity',
+      'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+    // 旋转边框2缩放动画
     tl.to(
       this.rotateBorder2.scale,
       {
-        duration: 1,
-        delay: 0.5,
-        x: 1,
-        y: 1,
-        z: 1,
-        ease: 'circ.out',
+        duration: 1, // 持续时间 1 秒
+        delay: 0.5, // 延迟 0.5 秒
+        x: 1, // 目标X缩放
+        y: 1, // 目标Y缩放
+        z: 1, // 目标Z缩放
+        ease: 'circ.out', // 缓动函数
         onComplete: () => {
-          this.flyLineFocusGroup.visible = true
-          emitter.$emit('mapPlayComplete')
+          this.flyLineFocusGroup.visible = true // 显示飞线焦点组
+          emitter.$emit('mapPlayComplete') // 发射地图播放完成事件
         },
       },
-      'focusMapOpacity',
+      'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
 
+    // 柱状图缩放动画
     this.allBar.map((item, index) => {
-      if (item.userData.name === '广州市') {
+      if (item.userData.name === '广州市') { // 跳过广州市
         return false
       }
       tl.to(
         item.scale,
         {
-          duration: 1,
-          delay: 0.1 * index,
-          x: 1,
-          y: 1,
-          z: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.1 * index, // 延迟时间（按索引递增）
+          x: 1, // 目标X缩放
+          y: 1, // 目标Y缩放
+          z: 1, // 目标Z缩放
+          ease: 'circ.out', // 缓动函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
     })
+    // 柱状图材质透明度动画
     this.allBarMaterial.map((item, index) => {
       tl.to(
         item,
         {
-          duration: 1,
-          delay: 0.1 * index,
-          opacity: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.1 * index, // 延迟时间（按索引递增）
+          opacity: 1, // 目标不透明度
+          ease: 'circ.out', // 缓动函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
     })
 
+    // 省份标签动画
     this.allProvinceLabel.map((item, index) => {
-      const element = item.element.querySelector('.provinces-label-wrap')
-      const number = item.element.querySelector('.number .value')
-      const numberVal = Number(number.textContent)
+      const element = item.element.querySelector('.provinces-label-wrap') // 获取标签包装元素
+      const number = item.element.querySelector('.number .value') // 获取数值元素
+      const numberVal = Number(number.textContent) // 获取数值
       const numberAnimate = {
-        score: 0,
+        score: 0, // 动画数值对象
       }
+      // 标签元素位移动画
       tl.to(
         element,
         {
-          duration: 1,
-          delay: 0.2 * index,
-          translateY: 0,
-          opacity: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.2 * index, // 延迟时间（按索引递增）
+          translateY: 0, // 目标Y位移
+          opacity: 1, // 目标不透明度
+          ease: 'circ.out', // 缓动函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
+      // 数值计数动画
       tl.to(
         numberAnimate,
         {
-          duration: 1,
-          delay: 0.2 * index,
-          score: numberVal,
-          onUpdate: showScore,
+          duration: 1, // 持续时间 1 秒
+          delay: 0.2 * index, // 延迟时间（按索引递增）
+          score: numberVal, // 目标数值
+          onUpdate: showScore, // 更新回调函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
+      /**
+       * 显示分数函数
+       */
       function showScore() {
-        number.textContent = numberAnimate.score.toFixed(0)
+        number.textContent = numberAnimate.score.toFixed(0) // 更新显示数值
       }
     })
+    // 光圈缩放动画
     this.allGuangquan.map((item, index) => {
+      // 第一个光圈缩放动画
       tl.to(
         item.children[0].scale,
         {
-          duration: 1,
-          delay: 0.1 * index,
-          x: 1,
-          y: 1,
-          z: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.1 * index, // 延迟时间（按索引递增）
+          x: 1, // 目标X缩放
+          y: 1, // 目标Y缩放
+          z: 1, // 目标Z缩放
+          ease: 'circ.out', // 缓动函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
+      // 第二个光圈缩放动画
       tl.to(
         item.children[1].scale,
         {
-          duration: 1,
-          delay: 0.1 * index,
-          x: 1,
-          y: 1,
-          z: 1,
-          ease: 'circ.out',
+          duration: 1, // 持续时间 1 秒
+          delay: 0.1 * index, // 延迟时间（按索引递增）
+          x: 1, // 目标X缩放
+          y: 1, // 目标Y缩放
+          z: 1, // 目标Z缩放
+          ease: 'circ.out', // 缓动函数
         },
-        'bar',
+        'bar', // 与 bar 标签同步
       )
     })
   }
