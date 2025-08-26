@@ -1,6 +1,6 @@
 <script setup>
 
-import mCountTo from '@/components/BgScreen/mCountTo/index.js'
+import mCountTo from '@/components/BigScreen/mCountTo/index.js'
 
 import Pie from './pie.vue'
 

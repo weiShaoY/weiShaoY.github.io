@@ -1,7 +1,7 @@
 <!------  2025-08-25---22:17---星期一  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import mCountTo from '@/components/BgScreen/mCountTo/index.js'
+import mCountTo from '@/components/BigScreen/mCountTo/index.js'
 
 type PropsType = {
 

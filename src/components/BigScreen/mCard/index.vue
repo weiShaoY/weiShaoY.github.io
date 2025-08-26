@@ -29,10 +29,14 @@ const props = withDefaults(defineProps<PropsType>(), {
   title: '标题',
 })
 
-// 唯一id
+/**
+ * 唯一id
+ */
 const componentsUID = ref('1')
 
-// svg的路径计算
+/**
+ * svg的路径计算
+ */
 const titleStorke = computed(() => {
   const width = props.width
 
@@ -108,7 +112,9 @@ const titleStorke = computed(() => {
   L9.29289 -0.207107Z`
 })
 
-// bd的路径
+/**
+ * bd的路径
+ */
 const bdPath = computed(() => {
   const minHeight = 156
 
