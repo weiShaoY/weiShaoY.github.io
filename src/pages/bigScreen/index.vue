@@ -276,4 +276,10 @@ onMounted(() => {
   transform: translateX(-150%);
   opacity: 0;
 }
+
+// 右边卡片
+.right-card {
+  transform: translateX(150%);
+  opacity: 0;
+}
 </style>
