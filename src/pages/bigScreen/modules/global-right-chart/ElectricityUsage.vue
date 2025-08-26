@@ -340,7 +340,7 @@ const option = ref({
 
 <template>
   <div
-    class="right-card"
+    class="right-card mb-3 flex-1"
   >
     <m-card
       title="用电情况"
