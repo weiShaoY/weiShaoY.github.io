@@ -159,14 +159,14 @@ onMounted(() => {
 
 <template>
   <div
-    class="m-card"
+    class="m-card relative"
     :style="calcWidthHeightStyle"
   >
     <div
-      class="m-card-hd"
+      class="m-card-hd absolute left-0 top-0 z-2 w-full"
     >
       <div
-        class="m-card-hd-bg"
+        class="m-card-hd-bg absolute left-0 top-0"
       >
         <svg
           :width="width"
@@ -604,11 +604,16 @@ onMounted(() => {
         </svg>
       </div>
 
-      <img
-        class="m-card-hd-zs1"
+      <!-- <img
+        class="m-card-hd-zs1 absolute right-3 top-3 h-3 w-30"
         src="@/assets/svgs/bigScreen/card-title-zs1.svg"
         alt=""
-      >
+      > -->
+      <SvgIcon
+        icon="bigScreen-card-title-zs1"
+        :size="30"
+        class="absolute right-3 top-3"
+      />
 
       <div
         class="saoguang"
@@ -715,11 +720,11 @@ onMounted(() => {
 .m-card {
   position: relative;
   &-hd {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 2;
+    // position: absolute;
+    // left: 0;
+    // top: 0;
+    // width: 100%;
+    // z-index: 2;
     &-bg {
       position: absolute;
       left: 0;
