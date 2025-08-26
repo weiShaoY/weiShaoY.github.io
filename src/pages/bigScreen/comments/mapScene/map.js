@@ -32,7 +32,9 @@ import {
   Vector3,
 } from 'three'
 import { InteractionManager } from 'three.interactive'
+
 import labelIcon from '../../assets/texture/label-icon.png'
+
 import {
   BaseMap,
   DiffuseShader,
@@ -46,7 +48,9 @@ import {
   Particles,
   Plane,
 } from '../../mini3d'
+
 import emitter from '../../utils/emitter'
+
 import chinaData from './map/chinaData'
 import infoData from './map/infoData'
 import provincesData from './map/provincesData'
