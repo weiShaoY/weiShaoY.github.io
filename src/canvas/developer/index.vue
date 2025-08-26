@@ -1,20 +1,11 @@
 <script lang="ts" setup>
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as THREE from 'three'
-
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 import { SkeletonUtils } from 'three-stdlib'
 
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-  watch,
-} from 'vue'
+import { FBXLoader, OrbitControls } from 'three/addons'
+
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 const props = defineProps({
   /**

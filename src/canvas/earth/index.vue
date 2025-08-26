@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls } from 'three/addons'
+
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 const earthRef = ref<HTMLCanvasElement | null>(null)
 

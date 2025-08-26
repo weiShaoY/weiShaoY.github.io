@@ -1,15 +1,7 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry'
-
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue'
+import { DecalGeometry, OrbitControls } from 'three/addons'
 
 import {
   disposeScene,

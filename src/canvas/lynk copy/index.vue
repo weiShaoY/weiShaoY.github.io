@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import * as TWEEN from '@tweenjs/tween.js'
 
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls } from 'three/addons'
 
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue'
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 import { addMaterialAndAction } from './MaterialAndAction'
 
-// 是否显示加载loading
 const isLoading = ref(true)
 
 const lynkRef = ref<HTMLCanvasElement | null>(null)

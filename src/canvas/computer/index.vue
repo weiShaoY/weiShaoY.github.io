@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 
-import { disposeScene, loadGLTFModel } from '@/utils'
-
 import gsap from 'gsap'
 
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/addons'
+
+import { disposeScene, loadGLTFModel } from '@/utils'
 
 const props = defineProps({
   /**

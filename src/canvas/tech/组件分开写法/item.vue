@@ -3,9 +3,7 @@
 
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry'
+import { DecalGeometry, OrbitControls } from 'three/addons'
 
 import { loadTexture } from '@/utils'
 

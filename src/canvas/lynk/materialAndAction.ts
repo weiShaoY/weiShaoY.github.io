@@ -1,10 +1,12 @@
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import type { GLTF } from 'three/addons'
+
+// import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader'
+
+// import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader'
 
 import * as THREE from 'three'
 
-import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader'
-
-import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader'
+import { DDSLoader, KTXLoader } from 'three/addons'
 
 const config = {
   body_colors: {

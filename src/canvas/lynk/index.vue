@@ -3,13 +3,7 @@ import * as TWEEN from '@tweenjs/tween.js'
 
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue'
+import { OrbitControls } from 'three/addons'
 
 import { disposeScene, loadGLTFModel } from '@/utils'
 

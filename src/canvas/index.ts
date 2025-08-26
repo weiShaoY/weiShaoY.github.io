@@ -8,10 +8,6 @@
 
 // console.log('%c Line:35 🍏 size', 'color:#b03734', size)
 
-
-
-
-
 // 设置模型的缩放、位置和旋转
 // model.scale.set(0.3, 0.3, 0.3)
 
