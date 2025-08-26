@@ -1,9 +1,16 @@
-<script>
+<script setup lang="ts">
 import gsap from 'gsap'
 
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/addons'
+
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+} from 'vue'
 
 import ring2 from '@/assets/images/bgScreen/pie/ring2.png'
 
@@ -13,406 +20,446 @@ import ring4 from '@/assets/images/bgScreen/pie/ring4.png'
 
 import { emptyObject } from '../../mini3d'
 
-export default {
-  name: 'ThreePie',
-  props: {
-    data: {
-      type: Array,
-      default: () => [],
-    },
-    colors: {
-      type: Array,
-      default: () => [0x20FAAE, 0xEAB108, 0x2FA4E7, 0x00FFFF, 0xFC5430],
-    },
-    opacity: {
-      type: Number,
-      default: 0.5,
-    },
-    delay: {
-      type: Number,
-      default: 5000,
-    },
-    loopComplete: {
-      type: Function,
-      default: () => {},
-    },
-  },
-  data() {
-    this.scene = null
-    this.camera = null
-    this.renderer = null
-    this.controls = null
-    this.axes = null
-    this.pieGroup = new THREE.Group()
-    return {
-      width: 300,
-      height: 200,
-      activeIndex: 0,
-      count: 0,
-      timer: null,
-    }
-  },
-  computed: {
-    currentData() {
-      return {
-        ...this.data[this.activeIndex],
-        count: this.count,
-      }
-    },
-  },
-  mounted() {
-    this.width = this.$refs.pieDom.offsetWidth
-    this.height = this.$refs.pieDom.offsetHeight
-    this.count = this.data.map(item => item.value).reduce((prev, current) => prev + current, 0)
-    this.init()
-  },
-  beforeUnmount() {
-    clearInterval(this.timer)
-    this.destroy()
-  },
-  methods: {
-    init() {
-      this.scene = new THREE.Scene()
-      this.initCamera()
-      this.initRenderer()
-      this.initLight()
-      this.initAxes()
-      this.initControls()
-      this.createPlane({
-        url: ring2,
-        width: 5,
-        position: new THREE.Vector3(0, 0, -0.01),
-        color: '#00ffff',
-      })
-      this.createPlane({
-        url: ring3,
-        width: 6.5,
-        position: new THREE.Vector3(0, 0, -0.02),
-        color: '#00ffff',
-      })
-      this.createPlane({
-        url: ring4,
-        width: 5.5,
-        position: new THREE.Vector3(0, 0, -0.03),
-        animate: true,
-        color: '#00ffff',
-      })
-      this.createPie()
-      this.loop()
-    },
-    createPlane(opt) {
-      let defaultOpt = {
-        url: 'texture/ring1.png',
-        width: 5.5,
-        z: 0,
-        position: new THREE.Vector3(0, 0, 0),
-        animate: false,
-        color: null,
-      }
+type PropsType = {
 
-      let options = Object.assign(defaultOpt, opt)
+  /**
+   *  饼图数据
+   */
+  data?: {
+    name: string
+    value: number
+  }[]
 
-      const geometry = new THREE.PlaneGeometry(options.width, options.width)
+  /**
+   *  颜色数组
+   */
+  colors?: number[]
 
-      const material = new THREE.MeshBasicMaterial({
-        map: this.getTexture(options.url),
+  /**
+   *  透明度
+   */
+  opacity?: number
 
-        // color: 0x00ffff,
-        transparent: true,
-        side: THREE.DoubleSide,
+  /**
+   *  延迟时间
+   */
+  delay?: number
 
-        // depthWrite: false,
-        depthTest: false,
-      })
-
-      if (options.color) {
-        material.color = new THREE.Color(options.color)
-      }
-
-      const mesh = new THREE.Mesh(geometry, material)
-
-      mesh.position.copy(options.position)
-      mesh.rotation.x = (-1 * Math.PI) / 2
-      if (options.animate) {
-        gsap.to(mesh.rotation, {
-          z: 2 * Math.PI,
-          repeat: -1,
-          ease: 'none',
-          duration: 3,
-        })
-      }
-
-      this.scene.add(mesh)
-    },
-    getTexture(url) {
-      const texture = new THREE.TextureLoader().load(url)
-
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping
-      return texture
-    },
-    createPie() {
-      let startAngle = 0
-
-      let endAngle = 0
-
-      for (let i = 0; i < this.data.length; i++) {
-        let percent = this.data[i].value / this.count
-
-        if (i == 0) {
-          startAngle = 0
-        }
-        else {
-          startAngle = endAngle + 0.0001
-        }
-
-        endAngle = endAngle + 2 * Math.PI * percent - 0.0001
-
-        let ring = this.addRing({
-          startAngle,
-          endAngle,
-          color: new THREE.Color(this.colors[i % this.colors.length]),
-        })
-
-        ring.name = `ring${i}`
-        this.pieGroup.add(ring)
-      }
-
-      this.scene.add(this.pieGroup)
-      this.chooseRing(this.activeIndex, true)
-
-      this.timer = setInterval(() => {
-        this.loopChange()
-      }, this.delay)
-    },
-
-    loopChange() {
-      let index = this.activeIndex + 1
-
-      if (index >= this.data.length) {
-        index = 0
-        this.loopComplete && this.loopComplete()
-      }
-
-      this.chooseRing(index)
-    },
-    chooseRing(activeIndex = 0, isFirst = false) {
-      let prevIndex = activeIndex - 1 < 0 ? this.data.length - 1 : activeIndex - 1
-
-      let prevMesh = this.pieGroup.children[prevIndex]
-
-      this.prevMesh = prevMesh
-      this.activeIndex = activeIndex
-      let chooseMesh = this.pieGroup.children[activeIndex]
-
-      if (!isFirst) {
-        gsap.to(prevMesh.scale, {
-          z: 1,
-        })
-        gsap.to(prevMesh.material, {
-          opacity: this.opacity,
-        })
-      }
-
-      gsap.to(chooseMesh.scale, {
-        z: 2,
-      })
-      gsap.to(chooseMesh.material, {
-        opacity: 0.8,
-      })
-    },
-    addRing(opt = {
-}) {
-      let defaultOpt = {
-        innerRadius: 1.5, // 内圆半径
-        outerRadius: 2, // 外援半径
-        thickness: 0.5, // 厚度
-        startAngle: 0,
-        endAngle: Math.PI / 2,
-        color: 0x00FFFF,
-        segments: 120,
-      }
-
-      let options = Object.assign(defaultOpt, opt)
-
-      // 外层
-      let outerShape = new THREE.Shape()
-
-      outerShape.arc(0, 0, options.outerRadius, options.startAngle, options.endAngle)
-      let outerPoints = outerShape.getPoints(options.segments)
-
-      // 内层：需要把开始结束角度调换下，并反向绘制
-      let innerShape = new THREE.Shape()
-
-      innerShape.arc(0, 0, options.innerRadius, options.endAngle, options.startAngle, true)
-      let innerPoints = innerShape.getPoints(options.segments)
-
-      // 组合内外侧的点，并重新生成shape
-      let shape = new THREE.Shape(outerPoints.concat(innerPoints))
-
-      // 扩展设置
-      const extrudeSettings = {
-        steps: 1,
-        depth: options.thickness,
-        bevelEnabled: true,
-        bevelThickness: 0,
-        bevelSize: 0,
-        bevelOffset: 0,
-        bevelSegments: 0,
-      }
-
-      const extruGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings)
-
-      let material = new THREE.MeshLambertMaterial({
-        color: options.color,
-        transparent: true,
-        opacity: this.opacity,
-        side: THREE.DoubleSide,
-      })
-
-      const mesh = new THREE.Mesh(extruGeometry, material.clone())
-
-      mesh.renderOrder = 10
-      mesh.rotation.x = (-1 * Math.PI) / 2
-      return mesh
-    },
-    initCamera() {
-      let rate = this.width / this.height
-
-      this.camera = new THREE.PerspectiveCamera(30, rate, 0.1, 1500)
-
-      // this.camera .position.set(4.972679988078243, 4.643664044427053, 5.723022308725478)
-      this.camera.position.set(6.023813305272227, 4.838542633695233, 6.111272698256137)
-      this.camera.lookAt(0, 0, 0)
-    },
-
-    initRenderer() {
-      this.renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true,
-      })
-      this.renderer.setPixelRatio(window.devicePixelRatio)
-      this.renderer.setSize(this.width, this.height)
-      this.$refs.pieDom.appendChild(this.renderer.domElement)
-    },
-
-    initLight() {
-      //   平行光1
-      let directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 2)
-
-      directionalLight1.position.set(200, 300, 200)
-
-      //   平行光2
-      let directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 2)
-
-      directionalLight2.position.set(-200, -300, -200)
-
-      // 环境光
-      let ambientLight = new THREE.AmbientLight(0xFFFFFF, 2)
-
-      // 将光源添加到场景中
-      this.scene.add(directionalLight1)
-      this.scene.add(directionalLight2)
-      this.scene.add(ambientLight)
-    },
-
-    initAxes() {
-      this.axes = new THREE.AxesHelper(0)
-      this.scene.add(this.axes)
-    },
-
-    initControls() {
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-      this.controls.maxPolarAngle = Math.PI
-      this.controls.autoRotate = false
-      this.controls.enableDamping = true
-      this.controls.enabled = false
-    },
-
-    loop() {
-      this.renderer.setAnimationLoop(() => {
-        this.renderer.render(this.scene, this.camera)
-        this.controls && this.controls.update()
-
-        // console.log(this.camera .position);
-      })
-    },
-    start() {
-      this.loop()
-      this.controls.enabled = true
-      this.timer = setInterval(() => {
-        this.loopChange()
-      }, this.delay)
-    },
-    stop() {
-      clearInterval(this.timer)
-      if (this.controls) {
-        this.controls.enabled = false
-      }
-
-      if (this.renderer) {
-        this.renderer.setAnimationLoop(null)
-      }
-    },
-
-    // 获取场景
-    getScene() {
-      return this.scene
-    },
-    getRender() {
-      return this.renderer
-    },
-    resize() {
-      this.width = this.$refs.pieDom.offsetWidth
-      this.height = this.$refs.pieDom.offsetHeight
-      let aspect = this.width / this.height
-
-      this.camera.aspect = aspect
-      this.camera.updateProjectionMatrix()
-      this.renderer.setSize(this.width, this.height)
-      this.renderer.setPixelRatio(window.devicePixelRatio)
-    },
-    destroy() {
-      if (this.prevMesh) {
-        gsap.set(this.prevMesh.scale, {
-          z: 1,
-        })
-        gsap.set(this.prevMesh.material, {
-          opacity: this.opacity,
-        })
-      }
-
-      this.stop()
-      window.removeEventListener('resize', () => {
-        this.resize()
-      })
-      if (this.renderer) {
-        emptyObject(this.pieGroup)
-        this.renderer.dispose()
-        this.renderer.forceContextLoss()
-        this.controls.dispose()
-        this.$refs.pieDom.innerHTML = ''
-        this.scene = null
-        this.camera = null
-        this.renderer = null
-        this.controls = null
-        this.axes = null
-      }
-    },
-  },
+  /**
+   *  循环完成回调
+   */
+  loopComplete?: () => void
 }
+
+const props = withDefaults(defineProps<PropsType>(), {
+  data: () => [],
+  colors: () => [0x20FAAE, 0xEAB108, 0x2FA4E7, 0x00FFFF, 0xFC5430],
+  opacity: 0.5,
+  delay: 5000,
+  loopComplete: () => {},
+})
+
+const data = props.data ?? []
+
+const colors = props.colors ?? [0x20FAAE, 0xEAB108, 0x2FA4E7, 0x00FFFF, 0xFC5430]
+
+const opacity = props.opacity ?? 0.5
+
+const delay = props.delay ?? 5000
+
+const loopComplete = props.loopComplete ?? (() => {})
+
+// refs
+const pieDom = ref<HTMLElement | null>(null)
+
+// state
+const width = ref(300)
+
+const height = ref(200)
+
+const activeIndex = ref(0)
+
+const count = ref(0)
+
+const timer = ref<number | null>(null)
+
+// three.js objects
+let scene: THREE.Scene | null = null
+
+let camera: THREE.PerspectiveCamera | null = null
+
+let renderer: THREE.WebGLRenderer | null = null
+
+let controls: OrbitControls | null = null
+
+let axes: THREE.AxesHelper | null = null
+
+const pieGroup = new THREE.Group()
+
+let prevMesh: THREE.Mesh | null = null
+
+// computed
+const currentData = computed(() => {
+  return {
+    ...(data[activeIndex.value] || {
+    }),
+    count: count.value,
+  }
+})
+
+// methods
+function getTexture(url: string) {
+  const texture = new THREE.TextureLoader().load(url)
+
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping
+  return texture
+}
+
+function createPlane(opt: {
+  url: string
+  width: number
+  position: THREE.Vector3
+  animate?: boolean
+  color?: string | null
+}) {
+  const defaultOpt = {
+    url: 'texture/ring1.png',
+    width: 5.5,
+    position: new THREE.Vector3(0, 0, 0),
+    animate: false,
+    color: null,
+  }
+
+  const options = Object.assign(defaultOpt, opt)
+
+  const geometry = new THREE.PlaneGeometry(options.width, options.width)
+
+  const material = new THREE.MeshBasicMaterial({
+    map: getTexture(options.url),
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthTest: false,
+  })
+
+  if (options.color) {
+    material.color = new THREE.Color(options.color)
+  }
+
+  const mesh = new THREE.Mesh(geometry, material)
+
+  mesh.position.copy(options.position)
+  mesh.rotation.x = (-1 * Math.PI) / 2
+  if (options.animate) {
+    gsap.to(mesh.rotation, {
+      z: 2 * Math.PI,
+      repeat: -1,
+      ease: 'none',
+      duration: 3,
+    })
+  }
+
+  scene!.add(mesh)
+}
+
+function addRing(opt: Partial<{
+  innerRadius: number
+  outerRadius: number
+  thickness: number
+  startAngle: number
+  endAngle: number
+  color: THREE.Color
+  segments: number
+}>): THREE.Mesh {
+  const defaultOpt = {
+    innerRadius: 1.5,
+    outerRadius: 2,
+    thickness: 0.5,
+    startAngle: 0,
+    endAngle: Math.PI / 2,
+    color: new THREE.Color(0x00FFFF),
+    segments: 120,
+  }
+
+  const options = Object.assign(defaultOpt, opt)
+
+  const outerShape = new THREE.Shape()
+
+  outerShape.arc(0, 0, options.outerRadius, options.startAngle, options.endAngle)
+  const outerPoints = outerShape.getPoints(options.segments)
+
+  const innerShape = new THREE.Shape()
+
+  innerShape.arc(0, 0, options.innerRadius, options.endAngle, options.startAngle, true)
+  const innerPoints = innerShape.getPoints(options.segments)
+
+  const shape = new THREE.Shape(outerPoints.concat(innerPoints))
+
+  const extrudeSettings = {
+    steps: 1,
+    depth: options.thickness,
+    bevelEnabled: true,
+    bevelThickness: 0,
+    bevelSize: 0,
+    bevelOffset: 0,
+    bevelSegments: 0,
+  }
+
+  const extruGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings)
+
+  const material = new THREE.MeshLambertMaterial({
+    color: options.color,
+    transparent: true,
+    opacity,
+    side: THREE.DoubleSide,
+  })
+
+  const mesh = new THREE.Mesh(extruGeometry, material.clone())
+
+  mesh.renderOrder = 10
+  mesh.rotation.x = (-1 * Math.PI) / 2
+  return mesh
+}
+
+function chooseRing(newActiveIndex = 0, isFirst = false) {
+  const prevIndex = newActiveIndex - 1 < 0 ? data.length - 1 : newActiveIndex - 1
+
+  prevMesh = pieGroup.children[prevIndex] as THREE.Mesh
+  activeIndex.value = newActiveIndex
+  const chooseMesh = pieGroup.children[newActiveIndex] as THREE.Mesh
+
+  if (!isFirst) {
+    gsap.to((prevMesh as THREE.Mesh).scale, {
+      z: 1,
+    })
+    gsap.to((prevMesh as THREE.Mesh).material, {
+      opacity,
+    })
+  }
+
+  gsap.to((chooseMesh as THREE.Mesh).scale, {
+    z: 2,
+  })
+  gsap.to((chooseMesh as THREE.Mesh).material, {
+    opacity: 0.8,
+  })
+}
+
+function loopChange() {
+  let index = activeIndex.value + 1
+
+  if (index >= data.length) {
+    index = 0
+    loopComplete && loopComplete()
+  }
+
+  chooseRing(index)
+}
+
+function createPie() {
+  let startAngle = 0
+
+  let endAngle = 0
+
+  for (let i = 0; i < data.length; i++) {
+    const percent = data[i].value / count.value
+
+    startAngle = i === 0 ? 0 : endAngle + 0.0001
+    endAngle = endAngle + 2 * Math.PI * percent - 0.0001
+    const ring = addRing({
+      startAngle,
+      endAngle,
+      color: new THREE.Color(colors[i % colors.length]),
+    })
+
+    ring.name = `ring${i}`
+    pieGroup.add(ring)
+  }
+
+  scene!.add(pieGroup)
+  chooseRing(activeIndex.value, true)
+  timer.value = window.setInterval(loopChange, delay)
+}
+
+function init() {
+  scene = new THREE.Scene()
+  initCamera()
+  initRenderer()
+  initLight()
+  initAxes()
+  initControls()
+  createPlane({
+    url: ring2,
+    width: 5,
+    position: new THREE.Vector3(0, 0, -0.01),
+    color: '#00ffff',
+  })
+  createPlane({
+    url: ring3,
+    width: 6.5,
+    position: new THREE.Vector3(0, 0, -0.02),
+    color: '#00ffff',
+  })
+  createPlane({
+    url: ring4,
+    width: 5.5,
+    position: new THREE.Vector3(0, 0, -0.03),
+    animate: true,
+    color: '#00ffff',
+  })
+  createPie()
+  loop()
+}
+
+function initCamera() {
+  const rate = width.value / height.value
+
+  camera = new THREE.PerspectiveCamera(30, rate, 0.1, 1500)
+  camera.position.set(6.023813305272227, 4.838542633695233, 6.111272698256137)
+  camera.lookAt(0, 0, 0)
+}
+
+function initRenderer() {
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+  })
+  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setSize(width.value, height.value)
+  pieDom.value?.appendChild(renderer.domElement)
+}
+
+function initLight() {
+  const directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 2)
+
+  directionalLight1.position.set(200, 300, 200)
+  const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 2)
+
+  directionalLight2.position.set(-200, -300, -200)
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 2)
+
+  scene!.add(directionalLight1)
+  scene!.add(directionalLight2)
+  scene!.add(ambientLight)
+}
+
+function initAxes() {
+  axes = new THREE.AxesHelper(0)
+  scene!.add(axes)
+}
+
+function initControls() {
+  controls = new OrbitControls(camera!, renderer!.domElement)
+  controls.maxPolarAngle = Math.PI
+  controls.autoRotate = false
+  controls.enableDamping = true
+  controls.enabled = false
+}
+
+function loop() {
+  renderer!.setAnimationLoop(() => {
+    renderer!.render(scene!, camera!)
+    controls && controls.update()
+  })
+}
+
+// function start() {
+//   loop()
+//   if (controls) {
+//     controls.enabled = true
+//   }
+
+//   timer.value = window.setInterval(loopChange, delay)
+// }
+
+function stop() {
+  if (timer.value) {
+    clearInterval(timer.value)
+  }
+
+  if (controls) {
+    controls.enabled = false
+  }
+
+  if (renderer) {
+    renderer.setAnimationLoop(null)
+  }
+}
+
+// function getScene() {
+//   return scene
+// }
+
+// function getRender() {
+//   return renderer
+// }
+
+// function resize() {
+//   width.value = pieDom.value?.offsetWidth ?? 300
+//   height.value = pieDom.value?.offsetHeight ?? 200
+//   const aspect = width.value / height.value
+
+//   camera!.aspect = aspect
+//   camera!.updateProjectionMatrix()
+//   renderer!.setSize(width.value, height.value)
+//   renderer!.setPixelRatio(window.devicePixelRatio)
+// }
+
+function destroy() {
+  if (prevMesh) {
+    gsap.set(prevMesh.scale, {
+      z: 1,
+    })
+    gsap.set(prevMesh.material, {
+      opacity,
+    })
+  }
+
+  stop()
+  if (renderer) {
+    emptyObject(pieGroup)
+    renderer.dispose()
+    renderer.forceContextLoss()
+    controls?.dispose()
+    if (pieDom.value) {
+      pieDom.value.innerHTML = ''
+    }
+
+    scene = null
+    camera = null
+    renderer = null
+    controls = null
+    axes = null
+  }
+}
+
+onMounted(() => {
+  width.value = pieDom.value?.offsetWidth ?? 300
+  height.value = pieDom.value?.offsetHeight ?? 200
+  count.value = data.map(item => item.value).reduce((prev, current) => prev + current, 0)
+  init()
+})
+
+onBeforeUnmount(() => {
+  if (timer.value) {
+    clearInterval(timer.value)
+  }
+
+  destroy()
+})
+
 </script>
 
 <template>
   <div
-    class="three-pie-wrap"
+    class="three-pie-wrap relative z-2 h-full w-full"
   >
     <div
       ref="pieDom"
-      class="three-pie"
+      class="three-pie h-full w-full"
     />
 
     <div
-      class="three-pie-slot"
+      class="three-pie-slot pointer-events-none absolute left-0 top-0 h-full w-full flex items-center justify-center"
     >
       <slot
         :data="currentData"
@@ -421,26 +468,6 @@ export default {
   </div>
 </template>
 
-<style>
-.three-pie-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.three-pie {
-  width: 100%;
-  height: 100%;
-}
-.three-pie-slot {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+<style lang="scss" scoped>
+
 </style>
