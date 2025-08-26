@@ -1,6 +1,9 @@
 <!------  2025-08-26---01:09---星期二  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import img_radarBg from '@/assets/images/bigScreen/radar-bg.png'
+
+import img_radarSaomiao from '@/assets/images/bigScreen/radar-saomiao.png'
 </script>
 
 <template>
@@ -12,13 +15,13 @@
     >
       <img
         class="m-radar-bg"
-        src="@/assets/images/bgScreen/radar-bg.png"
+        :src="img_radarBg"
         alt=""
       >
 
       <img
         class="m-radar-saomiao"
-        src="@/assets/images/bgScreen/radar-saomiao.png"
+        :src="img_radarSaomiao"
         alt=""
       >
 
