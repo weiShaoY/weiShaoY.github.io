@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import img_radarBg from '@/assets/images/bigScreen/radar-bg.png'
 
-import img_radarSaomiao from '@/assets/images/bigScreen/radar-saomiao.png'
+import img_radarSaomiao from '@/assets/images/bigScreen/radar-saoMiao.png'
 </script>
 
 <template>
