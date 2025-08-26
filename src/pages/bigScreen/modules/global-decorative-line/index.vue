@@ -1,39 +1,32 @@
 <!------  2025-08-26---00:45---星期二  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import img_leftKuang from '@/assets/svgs/bigScreen/left-kuang.svg'
+import svg_leftKuang from '@/assets/svgs/bigScreen/left-kuang.svg'
 
-import img_rightKuang from '@/assets/svgs/bigScreen/right-kuang.svg'
+import svg_rightKuang from '@/assets/svgs/bigScreen/right-kuang.svg'
 </script>
 
 <template>
   <div
-    class="left-zsline absolute left-0 top-1/2 z-[3] mt-[-540px] h-[1080px] w-[120px] bg-contain"
+    class="left-zsline bkAnimateAnimate absolute left-0 top-1/2 z-[3] mt-[-540px] h-[1080px] w-[120px] bg-contain bg-no-repeat"
     :style="{
-      backgroundImage: `url(${img_leftKuang})`,
-      animation: 'bkAnimate 3s infinite',
+      backgroundImage: `url(${svg_leftKuang})`,
     }"
   />
 
   <div
-    class="right-zsline absolute right-0 top-1/2 z-[3] mt-[-540px] h-[1080px] w-[120px] bg-contain"
+    class="right-zsline bkAnimateAnimate absolute right-0 top-1/2 z-[3] mt-[-540px] h-[1080px] w-[120px] bg-contain bg-no-repeat"
     :style="{
-      backgroundImage: `url(${img_rightKuang})`,
-      animation: 'bkAnimate 3s infinite',
+      backgroundImage: `url(${svg_rightKuang})`,
     }"
   />
 </template>
 
 <style lang="scss" scoped>
 
-//   .left-zsline {
-//   background: url('@/assets/svgs/bigScreen/left-kuang.svg') no-repeat;
-//   animation: bkAnimate 3s infinite;
-// }
-// .right-zsline {
-//   background: url('@/assets/svgs/bigScreen/right-kuang.svg') no-repeat;
-//   animation: bkAnimate 3s infinite;
-// }
+.bkAnimateAnimate {
+  animation: bkAnimate 3s infinite;
+}
 
 @keyframes bkAnimate {
   0% {

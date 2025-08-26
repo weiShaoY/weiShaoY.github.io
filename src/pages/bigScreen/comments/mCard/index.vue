@@ -6,9 +6,15 @@ import {
   ref,
 } from 'vue'
 
-import img_contentBottomRightArrow from '@/assets/svgs/bigScreen/card-content-bottom-right-arrow.svg'
+import svg_card_content_bottom_left_arrow from '@/assets/svgs/bigScreen/card-content-bottom-left-arrow.svg'
 
-import img_titleZs1 from '@/assets/svgs/bigScreen/card-title-zs1.svg'
+import svg_card_content_bottom_right_arrow from '@/assets/svgs/bigScreen/card-content-bottom-right-arrow.svg'
+
+import svg_card_content_middle_line from '@/assets/svgs/bigScreen/card-content-middle-line.svg'
+
+import svg_card_saoguang from '@/assets/svgs/bigScreen/card-saoguang.svg'
+
+import svg_card_title_zs1 from '@/assets/svgs/bigScreen/card-title-zs1.svg'
 
 type PropsType = {
 
@@ -604,39 +610,38 @@ onMounted(() => {
         </svg>
       </div>
 
-      <!-- <img
+      <img
         class="m-card-hd-zs1 absolute right-3 top-3 h-3 w-30"
-        src="@/assets/svgs/bigScreen/card-title-zs1.svg"
+        :src="svg_card_title_zs1"
         alt=""
-      > -->
-      <SvgIcon
-        icon="bigScreen-card-title-zs1"
-        :size="30"
-        class="absolute right-3 top-3"
-      />
+      >
 
       <div
-        class="saoguang"
+        class="saoguang pointer-events-none absolute left-0 top-0 h-6 w-full overflow-hidden"
       >
         <img
-          src="@/assets/svgs/bigScreen/card-saoguang.svg"
+          :src="svg_card_saoguang"
           alt=""
+          class="h-9 w-23"
+          :style="{
+            animation: 'saoguangMove 6s linear infinite',
+          }"
         >
       </div>
 
       <div
-        class="m-card-hd-title"
+        class="m-card-hd-title absolute left-[22px] h-[36px] from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-base text-transparent font-semibold leading-[32px] tracking-[1.6px] font-['PingFangSc']"
       >
         {{ title }}
       </div>
     </div>
 
     <div
-      class="m-card-bd"
+      class="m-card-bd absolute left-0 top-0 z-1"
       :style="calcWidthHeightStyle"
     >
       <div
-        class="m-card-bd-bg"
+        class="m-card-bd-bg absolute left-0 top-0"
         :style="calcWidthHeightStyle"
       >
         <svg
@@ -682,33 +687,35 @@ onMounted(() => {
           </defs>
         </svg>
 
+        <!-- 底部左边小箭头 -->
         <img
-          class="m-card-bd-bottom-left-arrow"
-          src="@/assets/svgs/bigScreen/card-content-bottom-left-arrow.svg"
+          class="m-card-bd-bottom-left-arrow absolute bottom-1 left-1"
+          :src="svg_card_content_bottom_left_arrow"
+          alt=""
+        >
+
+        <!-- 底部右边小箭头 -->
+        <img
+          class="m-card-bd-bottom-right-arrow absolute bottom-1 right-1"
+          :src="svg_card_content_bottom_right_arrow"
           alt=""
         >
 
         <img
-          class="m-card-bd-bottom-right-arrow"
-          src="@/assets/svgs/bigScreen/card-content-bottom-right-arrow.svg"
+          class="m-card-bd-middle-left-line absolute left-0 top-1/2 mt-[-35px]"
+          :src="svg_card_content_middle_line"
           alt=""
         >
 
         <img
-          class="m-card-bd-middle-left-line"
-          src="@/assets/svgs/bigScreen/card-content-middle-line.svg"
-          alt=""
-        >
-
-        <img
-          class="m-card-bd-middle-right-line"
-          src="@/assets/svgs/bigScreen/card-content-middle-line.svg"
+          class="m-card-bd-middle-right-line absolute right-0 top-1/2 mt-[-35px]"
+          :src="svg_card_content_middle_line"
           alt=""
         >
       </div>
 
       <div
-        class="m-card-bd-content"
+        class="m-card-bd-content pointer-events-auto absolute bottom-0 left-0 right-0 top-9 overflow-hidden"
       >
         <slot />
       </div>
@@ -717,101 +724,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-.m-card {
-  position: relative;
-  &-hd {
-    // position: absolute;
-    // left: 0;
-    // top: 0;
-    // width: 100%;
-    // z-index: 2;
-    &-bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    &-zs1 {
-      position: absolute;
-      right: 12px;
-      top: 10px;
-      width: 120px;
-      height: 11px;
-    }
-    &-title {
-      position: absolute;
-      left: 22px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 1.6px;
-      height: 36px;
-      line-height: 32px;
-      font-family: 'PingFangSc';
-      font-weight: 600;
-      background: -webkit-linear-gradient(rgba(219, 249, 255, 1), rgba(169, 240, 255, 1));
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .saoguang {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 36px;
-      overflow: hidden;
-      pointer-events: none;
-      img {
-        width: 89px;
-        height: 36px;
-        animation: saoguangMove 6s linear infinite;
-      }
-    }
-  }
-  &-bd {
-    position: absolute;
-    left: 0;
-    top: 0;
 
-    z-index: 1;
-
-    &-bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    &-bottom-left-arrow {
-      position: absolute;
-      left: 4px;
-      bottom: 4px;
-    }
-    &-bottom-right-arrow {
-      position: absolute;
-      right: 4px;
-      bottom: 4px;
-    }
-    &-middle-left-line {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      margin-top: -35px;
-    }
-    &-middle-right-line {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      margin-top: -35px;
-    }
-    &-content {
-      position: absolute;
-      left: 0;
-      top: 36px;
-      right: 0;
-      bottom: 0;
-      pointer-events: all;
-      overflow: hidden;
-    }
-  }
-}
 @keyframes saoguangMove {
   from {
     transform: translateX(-160px);

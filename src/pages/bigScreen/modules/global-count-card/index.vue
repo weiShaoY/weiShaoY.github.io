@@ -1,48 +1,63 @@
 <!------  2025-08-25---22:17---星期一  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import img_count_icon1 from '@/assets/images/bigScreen/count-icon1.png'
+
+import img_count_icon2 from '@/assets/images/bigScreen/count-icon2.png'
+
 import { mCountTo } from '../../comments'
 
-type PropsType = {
+type itemType = {
 
   /**
-   * 卡片信息
+   * 图标
    */
-  totalView: {
+  icon: string
 
-    /**
-     * 图标
-     */
-    icon: string
+  /**
+   * 中文标题
+   */
+  zh: string
 
-    /**
-     * 中文标题
-     */
-    zh: string
+  /**
+   * 英文标题
+   */
+  en: string
 
-    /**
-     * 英文标题
-     */
-    en: string
+  /**
+   * 值
+   */
+  value: number
 
-    /**
-     * 值
-     */
-    value: number
+  /**
+   * 单位
+   */
+  unit: string
 
-    /**
-     * 单位
-     */
-    unit: string
-
-    /**
-     * 小数位数
-     */
-    decimals: number
-  }[]
+  /**
+   * 小数位数
+   */
+  decimals: number
 }
 
-defineProps<PropsType>()
+const totalView = ref<itemType[]>([
+  {
+    icon: img_count_icon1,
+    zh: '2024年生产总值',
+    en: 'Gross Domestic Product in 2024',
+    value: 31500,
+    unit: '亿元',
+    decimals: 0,
+  },
+  {
+    icon: img_count_icon2,
+    zh: '2024年常驻人数',
+    en: 'resident population in 2024',
+    value: 15000,
+    unit: '万人',
+    decimals: 0,
+  },
+])
 
 function toUpper(text: string) {
   return text.toUpperCase()
@@ -63,7 +78,9 @@ function toUpper(text: string) {
       >
         <div
           class="count-card-icon mr-3 h-15 w-15 bg-center bg-no-repeat !bg-[length:100%]"
-          :class="`icon-${info.icon}`"
+          :style="{
+            backgroundImage: `url(${info.icon})`,
+          }"
         />
 
         <div
@@ -110,10 +127,5 @@ function toUpper(text: string) {
 </template>
 
 <style lang="scss" scoped>
-.icon-xiaoshoujine {
-  background-image: url('../../assets/images/icon1.png');
-}
-.icon-zongxiaoliang {
-  background-image: url('../../assets/images/icon2.png');
-}
+
 </style>

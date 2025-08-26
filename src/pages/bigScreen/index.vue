@@ -208,9 +208,7 @@ onMounted(() => {
       />
 
       <!-- 顶部统计卡片 -->
-      <GlobalCountCard
-        :total-view="state.totalView"
-      />
+      <GlobalCountCard />
 
       <!-- 底部托盘 -->
       <GlobalFooter />
