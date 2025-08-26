@@ -1,7 +1,12 @@
 <script setup lang="ts">
+
 import * as echarts from 'echarts'
 
 import VChart from 'vue-echarts'
+
+import img_pieMidCircle from '@/assets/images/bgScreen/pie/pie-mid-circle.png'
+
+import img_pieZsBg from '@/assets/images/bgScreen/pie/pie-zs-bg.png'
 
 const state = reactive({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],
@@ -141,18 +146,29 @@ const option = ref({
       title="人群消费占比"
     >
       <div
-        class="population-proportion"
+        class="population-proportion h-full flex"
       >
         <div
-          class="population-proportion-chart"
+          class="population-proportion-chart relative ml-4 h-full w-45 bg-cover bg-no-repeat"
+          :style="{
+            backgroundImage: `url(${img_pieZsBg})`,
+          }"
         >
+          <div
+            class="absolute left-2/4 top-2/4 z-[-1] h-[72px] w-[72px] animate-[rotate360Animate_2s_linear_infinite] bg-cover content-[''] -ml-9 -mt-9"
+            aria-hidden="true"
+            :style="{
+              backgroundImage: `url(${img_pieMidCircle})`,
+            }"
+          />
+
           <VChart
             :option="option"
             :autoresize="true"
           />
 
           <div
-            class="label-name"
+            class="label-name absolute left-1/2 top-1/2 h-18 w-18 flex items-center justify-center text-xs text-[#c4e3fd] -ml-9 -mt-9"
           >
             消费占比
           </div>
@@ -198,44 +214,5 @@ const option = ref({
 </template>
 
 <style lang="scss">
-.population-proportion {
-  display: flex;
-  height: 100%;
-  &-chart {
-    position: relative;
-    width: 180px;
-    height: 100%;
-    margin-left: 15px;
-    background: url('@/assets/images/bgScreen/pie/pie-zs-bg.png') no-repeat;
-    background-size: cover;
-    .label-name {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 72px;
-      height: 72px;
-      margin-left: -36px;
-      margin-top: -36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #c4e3fd;
-    }
-    &:after {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: -1;
-      margin-left: -36px;
-      margin-top: -36px;
-      content: '';
-      width: 72px;
-      height: 72px;
-      background: url('@/assets/images/bgScreen/pie/pie-mid-circle.png') no-repeat;
-      background-size: cover;
-      animation: rotate360Animate 2s linear infinite;
-    }
-  }
-}
+
 </style>
