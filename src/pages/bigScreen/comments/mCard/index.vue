@@ -6,6 +6,10 @@ import {
   ref,
 } from 'vue'
 
+import img_contentBottomRightArrow from '@/assets/svgs/bigScreen/card-content-bottom-right-arrow.svg'
+
+import img_titleZs1 from '@/assets/svgs/bigScreen/card-title-zs1.svg'
+
 type PropsType = {
 
   /**
@@ -602,7 +606,7 @@ onMounted(() => {
 
       <img
         class="m-card-hd-zs1"
-        src="@/assets/images/bgScreen/m-card/title-zs1.svg"
+        src="@/assets/svgs/bigScreen/card-title-zs1.svg"
         alt=""
       >
 
@@ -610,7 +614,7 @@ onMounted(() => {
         class="saoguang"
       >
         <img
-          src="@/assets/images/bgScreen/m-card/saoguang.svg"
+          src="@/assets/svgs/bigScreen/card-saoguang.svg"
           alt=""
         >
       </div>
@@ -675,25 +679,25 @@ onMounted(() => {
 
         <img
           class="m-card-bd-bottom-left-arrow"
-          src="@/assets/images/bgScreen/m-card/content-bottom-left-arrow.svg"
+          src="@/assets/svgs/bigScreen/card-content-bottom-left-arrow.svg"
           alt=""
         >
 
         <img
           class="m-card-bd-bottom-right-arrow"
-          src="@/assets/images/bgScreen/m-card/content-bottom-right-arrow.svg"
+          src="@/assets/svgs/bigScreen/card-content-bottom-right-arrow.svg"
           alt=""
         >
 
         <img
           class="m-card-bd-middle-left-line"
-          src="@/assets/images/bgScreen/m-card/content-middle-line.svg"
+          src="@/assets/svgs/bigScreen/card-content-middle-line.svg"
           alt=""
         >
 
         <img
           class="m-card-bd-middle-right-line"
-          src="@/assets/images/bgScreen/m-card/content-middle-line.svg"
+          src="@/assets/svgs/bigScreen/card-content-middle-line.svg"
           alt=""
         >
       </div>

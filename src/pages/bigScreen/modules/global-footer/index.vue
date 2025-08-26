@@ -1,6 +1,11 @@
 <!------  2025-08-25---22:28---星期一  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import img_bottomMenuBg from '@/assets/images/bigScreen/bottom-menu-bg.png'
+
+import img_bottomMenuBtnHover from '@/assets/images/bigScreen/bottom-menu-btn-hover.png'
+
+import img_bottomMenuBtn from '@/assets/images/bigScreen/bottom-menu-btn.png'
 
 const activeIndex = ref(1)
 
@@ -30,6 +35,9 @@ const menuList = [
 <template>
   <div
     class="bottom-tray absolute bottom-0 left-2/4 z-[3] ml-[-960px] box-border h-[90px] w-[1920px] flex justify-center bg-contain pt-5"
+    :style="{
+      backgroundImage: `url(${img_bottomMenuBg})`,
+    }"
   >
     <!-- svg线条动画 -->
     <mSvglineAnimation
@@ -58,12 +66,12 @@ const menuList = [
       class="bottom-tray-arrow h-7 flex items-center"
     >
       <SvgIcon
-        icon="bgScreen-bottom-menu-arrow-big"
+        icon="bigScreen-bottom-menu-arrow-big"
         class="arrowAnimate1"
       />
 
       <SvgIcon
-        icon="bgScreen-bottom-menu-arrow-small"
+        icon="bigScreen-bottom-menu-arrow-small"
         class="arrowAnimate2"
       />
     </div>
@@ -79,6 +87,10 @@ const menuList = [
         :class="{
           'is-active': item.index === activeIndex,
         }"
+        :style="{
+          backgroundImage: `url(${item.index === activeIndex ? img_bottomMenuBtnHover : img_bottomMenuBtn})`,
+        }"
+        @click="activeIndex = item.index"
       >
         <span
           class="block h-8 w-25 from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-transparent font-bold"
@@ -94,12 +106,12 @@ const menuList = [
       class="bottom-tray-arrow h-7 flex items-center -scale-x-100"
     >
       <SvgIcon
-        icon="bgScreen-bottom-menu-arrow-big"
+        icon="bigScreen-bottom-menu-arrow-big"
         class="arrowAnimate1"
       />
 
       <SvgIcon
-        icon="bgScreen-bottom-menu-arrow-small"
+        icon="bigScreen-bottom-menu-arrow-small"
         class="arrowAnimate2"
       />
     </div>
@@ -107,29 +119,16 @@ const menuList = [
 </template>
 
 <style lang="scss" scoped>
-.bottom-tray {
-  background-image: url('@/assets/images/bgScreen/bottom-menu-bg.png');
-}
-.bottom-menu-item {
-  background-image: url('@/assets/images/bgScreen/bottom-menu-btn.png');
-
-  &:hover {
-    background-image: url('@/assets/images/bgScreen/bottom-menu-btn-hover.png');
-  }
-  &.is-active {
-    background-image: url('@/assets/images/bgScreen/bottom-menu-btn-hover.png');
-  }
-}
 
 .arrowAnimate1 {
-  animation: arrowAnimate1 2s ease-in-out infinite;
+  animation: arrowAnimation1 2s ease-in-out infinite;
 }
 
 .arrowAnimate2 {
-  animation: arrowAnimate2 2s ease-in-out infinite;
+  animation: arrowAnimation2 2s ease-in-out infinite;
 }
 
-@keyframes arrowAnimate1 {
+@keyframes arrowAnimation1 {
   0% {
     transform: translateX(0);
   }
@@ -140,7 +139,7 @@ const menuList = [
     transform: translateX(0);
   }
 }
-@keyframes arrowAnimate2 {
+@keyframes arrowAnimation2 {
   0% {
     transform: translateX(0);
   }

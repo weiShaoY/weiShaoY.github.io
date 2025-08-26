@@ -11,18 +11,21 @@ import img_radarSaomiao from '@/assets/images/bigScreen/radar-saomiao.png'
     class="bottom-tray absolute bottom-25 right-125 z-3"
   >
     <div
-      class="m-radar"
+      class="m-radar relative h-24 w-24"
     >
       <img
-        class="m-radar-bg"
+        class="m-radar-bg h-24 w-24"
         :src="img_radarBg"
         alt=""
       >
 
       <img
-        class="m-radar-saomiao"
+        class="m-radar-saomiao absolute left-1/2 top-1/2 z-[-1] h-20 w-20 -ml-10 -mt-10"
         :src="img_radarSaomiao"
         alt=""
+        :style="{
+          animation: 'rotate360Animate 3s linear infinite',
+        }"
       >
 
     </div>
@@ -30,23 +33,5 @@ import img_radarSaomiao from '@/assets/images/bigScreen/radar-saomiao.png'
 </template>
 
 <style lang="scss" scoped>
-.m-radar {
-  position: relative;
-  width: 92px;
-  height: 92px;
-  &-bg {
-    width: 92px;
-    height: 92px;
-  }
-  &-saomiao {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -39px;
-    margin-top: -39px;
-    width: 79px;
-    height: 79px;
-    animation: rotate360Animate 3s linear infinite;
-  }
-}
+
 </style>

@@ -157,10 +157,11 @@ const option = ref({
           }"
         >
           <div
-            class="absolute left-2/4 top-2/4 z-[-1] h-[72px] w-[72px] animate-[rotate360Animate_2s_linear_infinite] bg-cover content-[''] -ml-9 -mt-9"
+            class="absolute left-1/2 top-1/2 z-[-1] h-[72px] w-[72px] bg-cover content-[''] -ml-9 -mt-9"
             aria-hidden="true"
             :style="{
               backgroundImage: `url(${img_pieMidCircle})`,
+              animation: 'rotate360Animate 2s linear infinite',
             }"
           />
 

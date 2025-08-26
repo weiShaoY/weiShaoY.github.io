@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
 </script>
 
 <template>
@@ -8,9 +8,12 @@
   >
     <div
       class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2 !bg-[length:100%]"
+      :style="{
+        backgroundImage: `url(${img_headerBg})`,
+      }"
     >
       <div
-        class="m-header-title bg-clip-text text-[44px] text-white tracking-[1px]"
+        class="m-header-title from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text bg-clip-text text-11 text-transparent tracking-[1px]"
       >
         广东省数据可视化平台
       </div>
@@ -61,14 +64,5 @@
 </template>
 
 <style lang="scss">
-.m-header-wrap {
-  background: url('../../assets/images/header-bg.png');
-}
 
-.m-header-title {
-  background: -webkit-linear-gradient(rgba(117, 232, 255, 1), rgba(255, 255, 255, 1));
-  -webkit-text-fill-color: transparent;
-  background-clip: text; /* 标准属性 */
-  color: transparent;
-}
 </style>

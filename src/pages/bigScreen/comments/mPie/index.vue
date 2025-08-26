@@ -12,11 +12,11 @@ import {
   ref,
 } from 'vue'
 
-import ring2 from '@/assets/images/bgScreen/pie/ring2.png'
+import img_pieRing2 from '@/assets/images/bigScreen/pie-ring2.png'
 
-import ring3 from '@/assets/images/bgScreen/pie/ring3.png'
+import img_pieRing3 from '@/assets/images/bigScreen/pie-ring3.png'
 
-import ring4 from '@/assets/images/bgScreen/pie/ring4.png'
+import img_pieRing4 from '@/assets/images/bigScreen/pie-ring4.png'
 
 import { emptyObject } from '../../mini3d'
 
@@ -288,19 +288,19 @@ function init() {
   initAxes()
   initControls()
   createPlane({
-    url: ring2,
+    url: img_pieRing2,
     width: 5,
     position: new THREE.Vector3(0, 0, -0.01),
     color: '#00ffff',
   })
   createPlane({
-    url: ring3,
+    url: img_pieRing3,
     width: 6.5,
     position: new THREE.Vector3(0, 0, -0.02),
     color: '#00ffff',
   })
   createPlane({
-    url: ring4,
+    url: img_pieRing4,
     width: 5.5,
     position: new THREE.Vector3(0, 0, -0.03),
     animate: true,
