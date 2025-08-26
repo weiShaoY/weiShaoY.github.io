@@ -170,7 +170,7 @@ const option = ref({
 
 <template>
   <div
-    class="left-card"
+    class="left-card mb-3 flex-1"
   >
     <m-card
       title="近年经济情况"

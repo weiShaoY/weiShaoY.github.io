@@ -272,10 +272,10 @@ onMounted(() => {
 }
 
 // 左边卡片
-.left-card {
-  transform: translateX(-150%);
-  opacity: 0;
-}
+// .left-card {
+//   transform: translateX(-150%);
+//   opacity: 0;
+// }
 
 // 右边卡片
 .right-card {

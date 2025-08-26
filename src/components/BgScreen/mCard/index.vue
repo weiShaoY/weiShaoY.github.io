@@ -34,7 +34,7 @@ const componentsUID = ref('1')
 
 // svg的路径计算
 const titleStorke = computed(() => {
-  const width = props.width
+  let width = props.width
 
   return `M165 0.5
   L165.707 -0.207107
@@ -138,12 +138,17 @@ const bdPath = computed(() => {
   V${46.0565 + diff / 2}Z`
 })
 
+console.log('%c Line:142 🍢 bdPath.value', 'color:#ffdd4d', bdPath.value)
+
 const calcWidthHeightStyle = computed(() => {
   return `width:${props.width}px;height:${props.height}px;`
 })
 
+console.log('%c Line:148 🍷 calcWidthHeightStyle.value', 'color:#93c0a4', calcWidthHeightStyle.value)
+
 onMounted(() => {
-  componentsUID.value = `__${getCurrentInstance()?.uid}`
+  componentsUID.value = `__${getCurrentInstance()?.uid}` as string
+  console.log('%c Line:151 🍻 componentsUID.value', 'color:#2eafb0', componentsUID.value)
 })
 </script>
 
