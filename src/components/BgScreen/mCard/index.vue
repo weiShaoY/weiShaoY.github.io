@@ -34,7 +34,7 @@ const componentsUID = ref('1')
 
 // svg的路径计算
 const titleStorke = computed(() => {
-  let width = props.width
+  const width = props.width
 
   return `M165 0.5
   L165.707 -0.207107
@@ -637,7 +637,7 @@ onMounted(() => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
-            opacity="0.6"
+            class="opacity-60"
           >
             <path
               :d="bdPath"
