@@ -159,30 +159,36 @@ const option = ref({
         </div>
 
         <div
-          class="pie-legend"
+          class="pie-legend flex flex-col flex-wrap items-center justify-between py-5 pl-8"
         >
           <div
             v-for="(item, index) in state.pieData"
             :key="index"
-            class="pie-legend-item"
+            class="pie-legend-item box-border flex flex-nowrap items-center"
           >
             <div
-              class="icon"
+              class="icon mr-2.5 box-border h-2.5 w-2.5 border-2 border-[#17e6c3] rounded-3 border-solid"
               :style="{ borderColor: state.pieDataColor[index] }"
             />
 
             <div
-              class="name"
+              class="name text-xs text-white font-medium"
             >
               {{ item.name }}
             </div>
 
             <div
-              class="value"
+              class="value w-20 flex flex-nowrap items-end justify-end text-right text-base text-white font-bold"
             >
-              {{ item.value }}<span
-                class="unit"
-              >%</span>
+              <span>
+                {{ item.value }}
+              </span>
+
+              <span
+                class="unit pl-3 text-xs text-white font-normal opacity-50"
+              >
+                %
+              </span>
             </div>
           </div>
         </div>
@@ -200,7 +206,7 @@ const option = ref({
     width: 180px;
     height: 100%;
     margin-left: 15px;
-    background: url('@/assets/images/bigScreen/pie/pie-zs-bg.png') no-repeat;
+    background: url('@/assets/images/bgScreen/pie/pie-zs-bg.png') no-repeat;
     background-size: cover;
     .label-name {
       position: absolute;
@@ -226,13 +232,10 @@ const option = ref({
       content: '';
       width: 72px;
       height: 72px;
-      background: url('@/assets/images/bigScreen/pie/pie-mid-circle.png') no-repeat;
+      background: url('@/assets/images/bgScreen/pie/pie-mid-circle.png') no-repeat;
       background-size: cover;
       animation: rotate360Animate 2s linear infinite;
     }
-  }
-  .pie-legend {
-    padding-left: 30px;
   }
 }
 </style>
