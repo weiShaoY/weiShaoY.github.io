@@ -105,7 +105,7 @@ export default [
     name: '湖南省',
     center: [112.982279, 28.19409],
     centroid: [111.711649, 27.629216],
-    blur: true,
+    hide: true,
   },
   {
     name: '广东省',

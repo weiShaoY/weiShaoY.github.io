@@ -113,17 +113,27 @@ export class Assets {
         path: `/json/中华人民共和国.json`,
       },
 
+      // {
+      //   type: 'File',
+      //   name: 'mapJson',
+      //   path: `/json/广东省.json`,
+      // },
       {
         type: 'File',
         name: 'mapJson',
-        path: `/json/广东省.json`,
+        path: `/json/湖南省.json`,
       },
+
+      // {
+      //   type: 'File',
+      //   name: 'mapStroke',
+      //   path: `/json/广东省-轮廓.json`,
+      // },
       {
         type: 'File',
         name: 'mapStroke',
-        path: `/json/广东省-轮廓.json`,
+        path: `/json/湖南省-轮廓.json`,
       },
-
       {
         type: 'Texture',
         name: 'huiguang',

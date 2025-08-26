@@ -200,30 +200,30 @@ onMounted(() => {
     >
 
       <!-- 头部 -->
-      <!-- <GlobalHeader /> -->
+      <GlobalHeader />
 
       <!-- 顶部菜单 -->
-      <!-- <GlobalMenu
+      <GlobalMenu
         v-model="state.activeIndex"
-      /> -->
+      />
 
       <!-- 顶部统计卡片 -->
-      <!-- <GlobalCountCard /> -->
+      <GlobalCountCard />
 
       <!-- 底部托盘 -->
-      <!-- <GlobalFooter /> -->
+      <GlobalFooter />
 
       <!-- 底部雷达 -->
-      <!-- <GlobalRadar /> -->
+      <GlobalRadar />
 
       <!-- 左右装饰线 -->
-      <!-- <GlobalDecorativeLine /> -->
+      <GlobalDecorativeLine />
 
       <!-- 左边布局 图表 -->
-      <!-- <GlobalLeftChart /> -->
+      <GlobalLeftChart />
 
       <!-- 右边布局 图表 -->
-      <!-- <GlobalRightChart /> -->
+      <GlobalRightChart />
 
     </div>
   </div>

@@ -15,7 +15,7 @@ import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
       <div
         class="m-header-title from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text bg-clip-text text-11 text-transparent tracking-[1px]"
       >
-        广东省数据可视化平台
+        湖南省国安厅作战指挥平台
       </div>
 
     </div>

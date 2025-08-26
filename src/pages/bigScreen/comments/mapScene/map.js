@@ -87,22 +87,32 @@ export class World extends Mini3d {
     super(canvas) // 调用父类构造函数
 
     // 地理投影中心坐标 [经度, 纬度]
-    this.geoProjectionCenter = [113.280637, 23.125178]
+    // this.geoProjectionCenter = [113.280637, 23.125178]
+    // this.geoProjectionCenter = [112.9823, 28.1941] // 湖南省中心坐标
+    this.geoProjectionCenter = [111.75, 27.75] // 娄底市中心
 
     // 地理投影缩放比例
     this.geoProjectionScale = 120
 
     // 飞线中心坐标 [经度, 纬度]
-    this.flyLineCenter = [113.544372, 23.329249]
+    // this.flyLineCenter = [113.544372, 23.329249]
+    // 长沙
+    this.flyLineCenter = [112.9823, 28.1941]
 
     // 地图拉伸高度
     this.depth = 0.5
 
     // 地图焦点标签信息
+    // this.mapFocusLabelInfo = {
+    //   name: '广东省', // 中文名称
+    //   enName: 'GUANGDONG PROVINCE', // 英文名称
+    //   center: [113.280637, 20.625178], // 中心坐标
+    // }
+
     this.mapFocusLabelInfo = {
-      name: '广东省', // 中文名称
-      enName: 'GUANGDONG PROVINCE', // 英文名称
-      center: [113.280637, 20.625178], // 中心坐标
+      name: '湖南省', // 中文名称
+      enName: 'Hunan Province', // 英文名称
+      center: [111.42, 23.99], // 中心坐标
     }
 
     // 是否已点击状态
@@ -124,7 +134,11 @@ export class World extends Mini3d {
     this.camera.instance.updateProjectionMatrix() // 更新投影矩阵
 
     // 创建交互管理器
-    this.interactionManager = new InteractionManager(this.renderer.instance, this.camera.instance, this.canvas)
+    this.interactionManager = new InteractionManager(
+      this.renderer.instance,
+      this.camera.instance,
+      this.canvas,
+    )
 
     this.assets = assets // 保存资源对象
 
@@ -1230,7 +1244,7 @@ export class World extends Mini3d {
     const rotationBorder2 = this.assets.instance.getResource('rotationBorder2')
     // 创建第一个旋转平面
     const plane01 = new Plane(this, {
-      width: max * 1.178, // 宽度
+      width: max * 1.85, // 宽度
       needRotate: true, // 需要旋转
       rotateSpeed: 0.001, // 旋转速度
       material: new MeshBasicMaterial({
@@ -1250,7 +1264,7 @@ export class World extends Mini3d {
     plane01.setParent(this.scene) // 设置父级
     // 创建第二个旋转平面
     const plane02 = new Plane(this, {
-      width: max * 1.116, // 宽度
+      width: max * 1.7, // 宽度
       needRotate: true, // 需要旋转
       rotateSpeed: -0.004, // 旋转速度（反向）
       material: new MeshBasicMaterial({
