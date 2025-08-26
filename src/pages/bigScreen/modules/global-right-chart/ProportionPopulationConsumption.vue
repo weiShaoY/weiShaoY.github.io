@@ -4,9 +4,11 @@ import * as echarts from 'echarts'
 
 import VChart from 'vue-echarts'
 
-import img_pieMidCircle from '@/assets/images/bgScreen/pie/pie-mid-circle.png'
+import img_pieMidCircle from '@/assets/images/bigScreen/pie-mid-circle.png'
 
-import img_pieZsBg from '@/assets/images/bgScreen/pie/pie-zs-bg.png'
+import img_pieZsBg from '@/assets/images/bigScreen/pie-zs-bg.png'
+
+import { mCard } from '../../comments'
 
 const state = reactive({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],

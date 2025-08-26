@@ -3,6 +3,8 @@ import * as echarts from 'echarts'
 
 import VChart from 'vue-echarts'
 
+import { mCard } from '../../comments'
+
 const option = ref({
   title: {
     text: '亿元',

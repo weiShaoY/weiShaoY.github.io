@@ -20,6 +20,10 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/bigScreen/': RouteRecordInfo<'/bigScreen/', '/bigScreen', Record<never, never>, Record<never, never>>,
     '/bigScreen/comments/mapScene/': RouteRecordInfo<'/bigScreen/comments/mapScene/', '/bigScreen/comments/mapScene', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mCard/': RouteRecordInfo<'/bigScreen/comments/mCard/', '/bigScreen/comments/mCard', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mCountTo/vue-countTo': RouteRecordInfo<'/bigScreen/comments/mCountTo/vue-countTo', '/bigScreen/comments/mCountTo/vue-countTo', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mPie/': RouteRecordInfo<'/bigScreen/comments/mPie/', '/bigScreen/comments/mPie', Record<never, never>, Record<never, never>>,
+    '/bigScreen/comments/mSvglineAnimation/': RouteRecordInfo<'/bigScreen/comments/mSvglineAnimation/', '/bigScreen/comments/mSvglineAnimation', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-count-card/': RouteRecordInfo<'/bigScreen/modules/global-count-card/', '/bigScreen/modules/global-count-card', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-decorative-line/': RouteRecordInfo<'/bigScreen/modules/global-decorative-line/', '/bigScreen/modules/global-decorative-line', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-footer/': RouteRecordInfo<'/bigScreen/modules/global-footer/', '/bigScreen/modules/global-footer', Record<never, never>, Record<never, never>>,
@@ -28,7 +32,6 @@ declare module 'vue-router/auto-routes' {
     '/bigScreen/modules/global-left-chart/BulkCommoditySalesChart': RouteRecordInfo<'/bigScreen/modules/global-left-chart/BulkCommoditySalesChart', '/bigScreen/modules/global-left-chart/BulkCommoditySalesChart', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-left-chart/DistrictEconomicIncome': RouteRecordInfo<'/bigScreen/modules/global-left-chart/DistrictEconomicIncome', '/bigScreen/modules/global-left-chart/DistrictEconomicIncome', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-left-chart/EconomicTrendChart': RouteRecordInfo<'/bigScreen/modules/global-left-chart/EconomicTrendChart', '/bigScreen/modules/global-left-chart/EconomicTrendChart', Record<never, never>, Record<never, never>>,
-    '/bigScreen/modules/global-left-chart/pie': RouteRecordInfo<'/bigScreen/modules/global-left-chart/pie', '/bigScreen/modules/global-left-chart/pie', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-left-chart/YearlyEconomyTrend': RouteRecordInfo<'/bigScreen/modules/global-left-chart/YearlyEconomyTrend', '/bigScreen/modules/global-left-chart/YearlyEconomyTrend', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-menu/': RouteRecordInfo<'/bigScreen/modules/global-menu/', '/bigScreen/modules/global-menu', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-radar/': RouteRecordInfo<'/bigScreen/modules/global-radar/', '/bigScreen/modules/global-radar', Record<never, never>, Record<never, never>>,
@@ -131,6 +134,22 @@ declare module 'vue-router/auto-routes' {
       routes: '/bigScreen/comments/mapScene/'
       views: never
     }
+    'src/pages/bigScreen/comments/mCard/index.vue': {
+      routes: '/bigScreen/comments/mCard/'
+      views: never
+    }
+    'src/pages/bigScreen/comments/mCountTo/vue-countTo.vue': {
+      routes: '/bigScreen/comments/mCountTo/vue-countTo'
+      views: never
+    }
+    'src/pages/bigScreen/comments/mPie/index.vue': {
+      routes: '/bigScreen/comments/mPie/'
+      views: never
+    }
+    'src/pages/bigScreen/comments/mSvglineAnimation/index.vue': {
+      routes: '/bigScreen/comments/mSvglineAnimation/'
+      views: never
+    }
     'src/pages/bigScreen/modules/global-count-card/index.vue': {
       routes: '/bigScreen/modules/global-count-card/'
       views: never
@@ -161,10 +180,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/bigScreen/modules/global-left-chart/EconomicTrendChart.vue': {
       routes: '/bigScreen/modules/global-left-chart/EconomicTrendChart'
-      views: never
-    }
-    'src/pages/bigScreen/modules/global-left-chart/pie.vue': {
-      routes: '/bigScreen/modules/global-left-chart/pie'
       views: never
     }
     'src/pages/bigScreen/modules/global-left-chart/YearlyEconomyTrend.vue': {

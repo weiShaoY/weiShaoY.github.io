@@ -1,8 +1,10 @@
 <script setup>
 
-import mCountTo from '@/components/BigScreen/mCountTo/index.js'
-
-import Pie from './pie.vue'
+import {
+  mCard,
+  mCountTo,
+  mPie,
+} from '../../comments'
 
 const pie = ref(null)
 
@@ -47,7 +49,7 @@ function getNumber(slotProps) {
         <div
           class="pie-chat pointer-events-auto relative h-full w-[236px]"
         >
-          <Pie
+          <mPie
             ref="pie"
             :data="state.pieData"
             :delay="3000"
@@ -81,7 +83,7 @@ function getNumber(slotProps) {
                 </div>
               </div>
             </template>
-          </Pie>
+          </mPie>
         </div>
 
         <div
