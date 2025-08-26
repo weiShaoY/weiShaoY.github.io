@@ -136,13 +136,14 @@ export class World extends Mini3d {
     this.createInfoPoint()
     // 创建轮廓
     this.createStorke()
-    // this.time.on("tick", () => {
-    //   console.log(this.camera.instance.position);
-    // });
-    // 创建动画时间线
-    let tl = gsap.timeline({
+
+    /**
+     * 动画时间线
+     */
+    const tl = gsap.timeline({
       onComplete: () => {},
     })
+
     tl.pause()
     this.animateTl = tl
     tl.addLabel('focusMap', 1.5)
@@ -209,7 +210,7 @@ export class World extends Mini3d {
       'focusMapOpacity',
     )
     this.otherLabel.map((item, index) => {
-      let element = item.element.querySelector('.other-label')
+      const element = item.element.querySelector('.other-label')
       tl.to(
         element,
         {
@@ -259,6 +260,7 @@ export class World extends Mini3d {
       },
       'focusMapOpacity',
     )
+
     this.allBar.map((item, index) => {
       if (item.userData.name === '广州市') {
         return false
@@ -290,10 +292,10 @@ export class World extends Mini3d {
     })
 
     this.allProvinceLabel.map((item, index) => {
-      let element = item.element.querySelector('.provinces-label-wrap')
-      let number = item.element.querySelector('.number .value')
-      let numberVal = Number(number.innerText)
-      let numberAnimate = {
+      const element = item.element.querySelector('.provinces-label-wrap')
+      const number = item.element.querySelector('.number .value')
+      const numberVal = Number(number.textContent)
+      const numberAnimate = {
         score: 0,
       }
       tl.to(
@@ -318,7 +320,7 @@ export class World extends Mini3d {
         'bar',
       )
       function showScore() {
-        number.innerText = numberAnimate.score.toFixed(0)
+        number.textContent = numberAnimate.score.toFixed(0)
       }
     })
     this.allGuangquan.map((item, index) => {
@@ -350,9 +352,9 @@ export class World extends Mini3d {
   }
 
   initEnvironment() {
-    let sun = new AmbientLight(0xFFFFFF, 5)
+    const sun = new AmbientLight(0xFFFFFF, 5)
     this.scene.add(sun)
-    let directionalLight = new DirectionalLight(0xFFFFFF, 5)
+    const directionalLight = new DirectionalLight(0xFFFFFF, 5)
     directionalLight.position.set(-30, 6, -8)
     directionalLight.castShadow = true
     directionalLight.shadow.radius = 20
@@ -384,11 +386,11 @@ export class World extends Mini3d {
   }
 
   createMap() {
-    let mapGroup = new Group()
-    let focusMapGroup = new Group()
+    const mapGroup = new Group()
+    const focusMapGroup = new Group()
     this.focusMapGroup = focusMapGroup
-    let { china, chinaTopLine } = this.createChina()
-    let { map, mapTop, mapLine } = this.createProvince()
+    const { china, chinaTopLine } = this.createChina()
+    const { map, mapTop, mapLine } = this.createProvince()
     china.setParent(mapGroup)
     chinaTopLine.setParent(mapGroup)
     // 创建扩散
@@ -406,17 +408,17 @@ export class World extends Mini3d {
   }
 
   createChina() {
-    let params = {
+    const params = {
       chinaBgMaterialColor: '#152c47',
       lineColor: '#3f82cd',
     }
-    let chinaData = this.assets.instance.getResource('china')
-    let chinaBgMaterial = new MeshLambertMaterial({
+    const chinaData = this.assets.instance.getResource('china')
+    const chinaBgMaterial = new MeshLambertMaterial({
       color: new Color(params.chinaBgMaterialColor),
       transparent: true,
       opacity: 1,
     })
-    let china = new BaseMap(this, {
+    const china = new BaseMap(this, {
       // position: new Vector3(0, 0, -0.03),
       data: chinaData,
       geoProjectionCenter: this.geoProjectionCenter,
@@ -425,10 +427,10 @@ export class World extends Mini3d {
       material: chinaBgMaterial,
       renderOrder: 2,
     })
-    let chinaTopLineMaterial = new LineBasicMaterial({
+    const chinaTopLineMaterial = new LineBasicMaterial({
       color: params.lineColor,
     })
-    let chinaTopLine = new Line(this, {
+    const chinaTopLine = new Line(this, {
       // position: new Vector3(0, 0, -0.02),
       data: chinaData,
       geoProjectionCenter: this.geoProjectionCenter,
@@ -441,11 +443,11 @@ export class World extends Mini3d {
   }
 
   createProvince() {
-    let mapJsonData = this.assets.instance.getResource('mapJson')
-    let [topMaterial, sideMaterial] = this.createProvinceMaterial()
+    const mapJsonData = this.assets.instance.getResource('mapJson')
+    const [topMaterial, sideMaterial] = this.createProvinceMaterial()
     this.focusMapTopMaterial = topMaterial
     this.focusMapSideMaterial = sideMaterial
-    let map = new ExtrudeMap(this, {
+    const map = new ExtrudeMap(this, {
       geoProjectionCenter: this.geoProjectionCenter,
       geoProjectionScale: this.geoProjectionScale,
       position: new Vector3(0, 0, 0.11),
@@ -455,13 +457,14 @@ export class World extends Mini3d {
       sideMaterial,
       renderOrder: 9,
     })
-    let faceMaterial = new MeshStandardMaterial({
+    const faceMaterial = new MeshStandardMaterial({
       color: 0xFFFFFF,
       transparent: true,
       opacity: 0.5,
       // fog: false,
     })
-    let faceGradientShader = new GradientShader(faceMaterial, {
+
+    const faceGradientShader = new GradientShader(faceMaterial, {
       // uColor1: 0x2a6e92,
       // uColor2: 0x102736,
       uColor1: 0x12BBE0,
@@ -473,7 +476,7 @@ export class World extends Mini3d {
     this.defaultLightMaterial.opacity = 0.8
     // this.defaultLightMaterial.emissive.setHex(new Color("rgba(115,208,255,1)"));
     // this.defaultLightMaterial.emissiveIntensity = 3.5;
-    let mapTop = new BaseMap(this, {
+    const mapTop = new BaseMap(this, {
       geoProjectionCenter: this.geoProjectionCenter,
       geoProjectionScale: this.geoProjectionScale,
       position: new Vector3(0, 0, this.depth + 0.22),
@@ -494,7 +497,7 @@ export class World extends Mini3d {
       transparent: true,
       fog: false,
     })
-    let mapLine = new Line(this, {
+    const mapLine = new Line(this, {
       geoProjectionCenter: this.geoProjectionCenter,
       geoProjectionScale: this.geoProjectionScale,
       data: mapJsonData,
@@ -510,7 +513,7 @@ export class World extends Mini3d {
   }
 
   createProvinceMaterial() {
-    let topMaterial = new MeshLambertMaterial({
+    const topMaterial = new MeshLambertMaterial({
       color: 0xFFFFFF,
       transparent: true,
       opacity: 0,
@@ -563,12 +566,12 @@ export class World extends Mini3d {
       `,
       )
     }
-    let sideMap = this.assets.instance.getResource('side')
+    const sideMap = this.assets.instance.getResource('side')
     sideMap.wrapS = RepeatWrapping
     sideMap.wrapT = RepeatWrapping
     sideMap.repeat.set(1, 1.5)
     sideMap.offset.y += 0.065
-    let sideMaterial = new MeshStandardMaterial({
+    const sideMaterial = new MeshStandardMaterial({
       color: 0xFFFFFF,
       map: sideMap,
       fog: false,
@@ -624,8 +627,8 @@ export class World extends Mini3d {
   }
 
   createBar() {
-    let self = this
-    let data = sortByValue(provincesData).filter((item, index) => index < 7)
+    const self = this
+    const data = sortByValue(provincesData).filter((item, index) => index < 7)
     const barGroup = new Group()
     this.barGroup = barGroup
     const factor = 0.7
@@ -636,8 +639,8 @@ export class World extends Mini3d {
     this.allGuangquan = []
     this.allProvinceLabel = []
     data.map((item, index) => {
-      let geoHeight = height * (item.value / max)
-      let material = new MeshBasicMaterial({
+      const geoHeight = height * (item.value / max)
+      const material = new MeshBasicMaterial({
         color: 0xFFFFFF,
         transparent: true,
         opacity: 0,
@@ -650,21 +653,22 @@ export class World extends Mini3d {
         size: geoHeight,
         dir: 'y',
       })
+
       const geo = new BoxGeometry(0.1 * factor, 0.1 * factor, geoHeight)
       geo.translate(0, 0, geoHeight / 2)
       const mesh = new Mesh(geo, material)
       mesh.renderOrder = 5
-      let areaBar = mesh
-      let [x, y] = this.geoProjection(item.centroid)
+      const areaBar = mesh
+      const [x, y] = this.geoProjection(item.centroid)
       areaBar.position.set(x, -y, this.depth + 0.45)
       areaBar.scale.set(1, 1, 0)
       areaBar.userData = { ...item }
-      let guangQuan = this.createQuan(new Vector3(x, this.depth + 0.44, y), index)
-      let hg = this.createHUIGUANG(geoHeight, index > 3 ? 0xFFFEF4 : 0x77FBF5)
+      const guangQuan = this.createQuan(new Vector3(x, this.depth + 0.44, y), index)
+      const hg = this.createHUIGUANG(geoHeight, index > 3 ? 0xFFFEF4 : 0x77FBF5)
       areaBar.add(...hg)
       barGroup.add(areaBar)
       barGroup.rotation.x = -Math.PI / 2
-      let barLabel = labelStyle04(item, index, new Vector3(x, -y, this.depth + 1.1 + geoHeight))
+      const barLabel = labelStyle04(item, index, new Vector3(x, -y, this.depth + 1.1 + geoHeight))
       this.allBar.push(areaBar)
       this.allBarMaterial.push(material)
       this.allGuangquan.push(guangQuan)
@@ -732,13 +736,13 @@ export class World extends Mini3d {
   }
 
   createHUIGUANG(h, color) {
-    let geometry = new PlaneGeometry(0.35, h)
+    const geometry = new PlaneGeometry(0.35, h)
     geometry.translate(0, h / 2, 0)
     const texture = this.assets.instance.getResource('huiguang')
     texture.colorSpace = SRGBColorSpace
     texture.wrapS = RepeatWrapping
     texture.wrapT = RepeatWrapping
-    let material = new MeshBasicMaterial({
+    const material = new MeshBasicMaterial({
       color,
       map: texture,
       transparent: true,
@@ -747,11 +751,11 @@ export class World extends Mini3d {
       side: DoubleSide,
       blending: AdditiveBlending,
     })
-    let mesh = new Mesh(geometry, material)
+    const mesh = new Mesh(geometry, material)
     mesh.renderOrder = 10
     mesh.rotateX(Math.PI / 2)
-    let mesh2 = mesh.clone()
-    let mesh3 = mesh.clone()
+    const mesh2 = mesh.clone()
+    const mesh3 = mesh.clone()
     mesh2.rotateY((Math.PI / 180) * 60)
     mesh3.rotateY((Math.PI / 180) * 120)
     return [mesh, mesh2, mesh3]
@@ -760,8 +764,8 @@ export class World extends Mini3d {
   createQuan(position, index) {
     const guangquan1 = this.assets.instance.getResource('guangquan1')
     const guangquan2 = this.assets.instance.getResource('guangquan2')
-    let geometry = new PlaneGeometry(0.5, 0.5)
-    let material1 = new MeshBasicMaterial({
+    const geometry = new PlaneGeometry(0.5, 0.5)
+    const material1 = new MeshBasicMaterial({
       color: 0xFFFFFF,
       map: guangquan1,
       alphaMap: guangquan1,
@@ -771,7 +775,7 @@ export class World extends Mini3d {
       fog: false,
       blending: AdditiveBlending,
     })
-    let material2 = new MeshBasicMaterial({
+    const material2 = new MeshBasicMaterial({
       color: 0xFFFFFF,
       map: guangquan2,
       alphaMap: guangquan2,
@@ -781,8 +785,8 @@ export class World extends Mini3d {
       fog: false,
       blending: AdditiveBlending,
     })
-    let mesh1 = new Mesh(geometry, material1)
-    let mesh2 = new Mesh(geometry, material2)
+    const mesh1 = new Mesh(geometry, material1)
+    const mesh2 = new Mesh(geometry, material2)
     mesh1.renderOrder = 6
     mesh2.renderOrder = 6
     mesh1.rotateX(-Math.PI / 2)
@@ -803,8 +807,8 @@ export class World extends Mini3d {
 
   // 创建扩散
   createDiffuse() {
-    let geometry = new PlaneGeometry(200, 200)
-    let material = new MeshBasicMaterial({
+    const geometry = new PlaneGeometry(200, 200)
+    const material = new MeshBasicMaterial({
       color: 0x000000,
       depthWrite: false,
       // depthTest: false,
@@ -833,7 +837,7 @@ export class World extends Mini3d {
         }, 3)
       },
     })
-    let mesh = new Mesh(geometry, material)
+    const mesh = new Mesh(geometry, material)
     mesh.renderOrder = 3
     mesh.rotation.x = -Math.PI / 2
     mesh.position.set(0, 0.21, 0)
@@ -853,25 +857,25 @@ export class World extends Mini3d {
   }
 
   createBottomBg() {
-    let geometry = new PlaneGeometry(20, 20)
+    const geometry = new PlaneGeometry(20, 20)
     const texture = this.assets.instance.getResource('ocean')
     texture.colorSpace = SRGBColorSpace
     texture.wrapS = RepeatWrapping
     texture.wrapT = RepeatWrapping
     texture.repeat.set(1, 1)
-    let material = new MeshBasicMaterial({
+    const material = new MeshBasicMaterial({
       map: texture,
       opacity: 1,
       fog: false,
     })
-    let mesh = new Mesh(geometry, material)
+    const mesh = new Mesh(geometry, material)
     mesh.rotation.x = -Math.PI / 2
     mesh.position.set(0, -0.7, 0)
     this.scene.add(mesh)
   }
 
   createChinaBlurLine() {
-    let geometry = new PlaneGeometry(147, 147)
+    const geometry = new PlaneGeometry(147, 147)
     const texture = this.assets.instance.getResource('chinaBlurLine')
     texture.colorSpace = SRGBColorSpace
     texture.wrapS = RepeatWrapping
@@ -879,37 +883,37 @@ export class World extends Mini3d {
     texture.generateMipmaps = false
     texture.minFilter = NearestFilter
     texture.repeat.set(1, 1)
-    let material = new MeshBasicMaterial({
+    const material = new MeshBasicMaterial({
       color: 0x3F82CD,
       alphaMap: texture,
       transparent: true,
       opacity: 0.5,
     })
-    let mesh = new Mesh(geometry, material)
+    const mesh = new Mesh(geometry, material)
     mesh.rotateX(-Math.PI / 2)
     mesh.position.set(-19.3, -0.5, -19.7)
     this.scene.add(mesh)
   }
 
   createLabel() {
-    let self = this
-    let labelGroup = this.labelGroup
-    let label3d = this.label3d
-    let otherLabel = []
+    const self = this
+    const labelGroup = this.labelGroup
+    const label3d = this.label3d
+    const otherLabel = []
     chinaData.map((province) => {
-      if (province.hide == true)
+      if (province.hide === true)
         return false
-      let label = labelStyle01(province, label3d, labelGroup)
+      const label = labelStyle01(province, label3d, labelGroup)
       otherLabel.push(label)
     })
-    let mapFocusLabel = labelStyle02(
+    const mapFocusLabel = labelStyle02(
       {
         ...this.mapFocusLabelInfo,
       },
       label3d,
       labelGroup,
     )
-    let iconLabel1 = labelStyle03(
+    const iconLabel1 = labelStyle03(
       {
         icon: labelIcon,
         center: [118.280637, 21.625178],
@@ -920,7 +924,7 @@ export class World extends Mini3d {
       label3d,
       labelGroup,
     )
-    let iconLabel2 = labelStyle03(
+    const iconLabel2 = labelStyle03(
       {
         icon: labelIcon,
         center: [106.280637, 25.625178],
@@ -936,7 +940,7 @@ export class World extends Mini3d {
     otherLabel.push(iconLabel2)
     this.otherLabel = otherLabel
     function labelStyle01(province, label3d, labelGroup) {
-      let label = label3d.create('', `china-label ${province.blur ? ' blur' : ''}`, false)
+      const label = label3d.create('', `china-label ${province.blur ? ' blur' : ''}`, false)
       const [x, y] = self.geoProjection(province.center)
       label.init(
         `<div class="other-label"><img class="label-icon" src="${labelIcon}">${province.name}</div>`,
@@ -947,7 +951,7 @@ export class World extends Mini3d {
       return label
     }
     function labelStyle02(province, label3d, labelGroup) {
-      let label = label3d.create('', 'map-label', false)
+      const label = label3d.create('', 'map-label', false)
       const [x, y] = self.geoProjection(province.center)
       label.init(
         `<div class="other-label"><span>${province.name}</span><span>${province.enName}</span></div>`,
@@ -958,7 +962,7 @@ export class World extends Mini3d {
       return label
     }
     function labelStyle03(data, label3d, labelGroup) {
-      let label = label3d.create('', `decoration-label  ${data.reflect ? ' reflect' : ''}`, false)
+      const label = label3d.create('', `decoration-label  ${data.reflect ? ' reflect' : ''}`, false)
       const [x, y] = self.geoProjection(data.center)
       label.init(
         `<div class="other-label"><img class="label-icon" style="width:${data.width};height:${data.height}" src="${data.icon}">`,
@@ -969,7 +973,7 @@ export class World extends Mini3d {
       return label
     }
     function labelStyle04(data, label3d, labelGroup, index) {
-      let label = label3d.create('', 'provinces-label', false)
+      const label = label3d.create('', 'provinces-label', false)
       const [x, y] = self.geoProjection(data.center)
       label.init(
         `<div class="provinces-label">
@@ -991,10 +995,10 @@ export class World extends Mini3d {
   }
 
   createRotateBorder() {
-    let max = 12
-    let rotationBorder1 = this.assets.instance.getResource('rotationBorder1')
-    let rotationBorder2 = this.assets.instance.getResource('rotationBorder2')
-    let plane01 = new Plane(this, {
+    const max = 12
+    const rotationBorder1 = this.assets.instance.getResource('rotationBorder1')
+    const rotationBorder2 = this.assets.instance.getResource('rotationBorder2')
+    const plane01 = new Plane(this, {
       width: max * 1.178,
       needRotate: true,
       rotateSpeed: 0.001,
@@ -1013,7 +1017,7 @@ export class World extends Mini3d {
     plane01.instance.renderOrder = 6
     plane01.instance.scale.set(0, 0, 0)
     plane01.setParent(this.scene)
-    let plane02 = new Plane(this, {
+    const plane02 = new Plane(this, {
       width: max * 1.116,
       needRotate: true,
       rotateSpeed: -0.004,
@@ -1047,8 +1051,8 @@ export class World extends Mini3d {
     const tubeSegments = 32
     const tubeRadialSegments = 2
     const closed = false
-    let [centerX, centerY] = this.geoProjection(this.flyLineCenter)
-    let centerPoint = new Vector3(centerX, -centerY, 0)
+    const [centerX, centerY] = this.geoProjection(this.flyLineCenter)
+    const centerPoint = new Vector3(centerX, -centerY, 0)
     const material = new MeshBasicMaterial({
       map: texture,
       // alphaMap: texture,
@@ -1065,8 +1069,8 @@ export class World extends Mini3d {
     provincesData
       .filter((item, index) => index < 7)
       .map((city) => {
-        let [x, y] = this.geoProjection(city.centroid)
-        let point = new Vector3(x, -y, 0)
+        const [x, y] = this.geoProjection(city.centroid)
+        const point = new Vector3(x, -y, 0)
         const center = new Vector3()
         center.addVectors(centerPoint, point).multiplyScalar(0.5)
         center.setZ(3)
@@ -1082,8 +1086,8 @@ export class World extends Mini3d {
 
   // 创建焦点
   createFocus() {
-    let focusObj = new Focus(this, { color1: 0xBDFDFD, color2: 0xBDFDFD })
-    let [x, y] = this.geoProjection(this.flyLineCenter)
+    const focusObj = new Focus(this, { color1: 0xBDFDFD, color2: 0xBDFDFD })
+    const [x, y] = this.geoProjection(this.flyLineCenter)
     focusObj.position.set(x, -y, this.depth + 0.44)
     focusObj.scale.set(1, 1, 1)
     this.flyLineFocusGroup.add(focusObj)
@@ -1130,14 +1134,14 @@ export class World extends Mini3d {
       transparent: true,
       depthTest: false,
     })
-    let scatterAllData = sortByValue(scatterData)
-    let max = scatterAllData[0].value
+    const scatterAllData = sortByValue(scatterData)
+    const max = scatterAllData[0].value
     scatterAllData.map((data) => {
       const sprite = new Sprite(material)
       sprite.renderOrder = 23
-      let scale = 0.1 + (data.value / max) * 0.2
+      const scale = 0.1 + (data.value / max) * 0.2
       sprite.scale.set(scale, scale, scale)
-      let [x, y] = this.geoProjection([data.lng, data.lat])
+      const [x, y] = this.geoProjection([data.lng, data.lat])
       sprite.position.set(x, -y, this.depth + 0.45)
       sprite.userData.position = [x, -y, this.depth + 0.45]
       this.scatterGroup.add(sprite)
@@ -1145,7 +1149,7 @@ export class World extends Mini3d {
   }
 
   createInfoPoint() {
-    let self = this
+    const self = this
     this.InfoPointGroup = new Group()
     this.scene.add(this.InfoPointGroup)
     this.InfoPointGroup.visible = false
@@ -1153,11 +1157,11 @@ export class World extends Mini3d {
     this.infoPointIndex = 0
     this.infoPointLabelTime = null
     this.infoLabelElement = []
-    let label3d = this.label3d
+    const label3d = this.label3d
     const texture = this.assets.instance.getResource('point')
-    let colors = [0xFFFEF4, 0x77FBF5]
-    let infoAllData = sortByValue(infoData)
-    let max = infoAllData[0].value
+    const colors = [0xFFFEF4, 0x77FBF5]
+    const infoAllData = sortByValue(infoData)
+    const max = infoAllData[0].value
     infoAllData.map((data, index) => {
       const material = new SpriteMaterial({
         map: texture,
@@ -1168,10 +1172,10 @@ export class World extends Mini3d {
       })
       const sprite = new Sprite(material)
       sprite.renderOrder = 23
-      let scale = 0.7 + (data.value / max) * 0.4
+      const scale = 0.7 + (data.value / max) * 0.4
       sprite.scale.set(scale, scale, scale)
-      let [x, y] = this.geoProjection([data.lng, data.lat])
-      let position = [x, -y, this.depth + 0.7]
+      const [x, y] = this.geoProjection([data.lng, data.lat])
+      const position = [x, -y, this.depth + 0.7]
       sprite.position.set(...position)
       sprite.userData.position = [...position]
       sprite.userData = {
@@ -1182,7 +1186,7 @@ export class World extends Mini3d {
         index,
       }
       this.InfoPointGroup.add(sprite)
-      let label = infoLabel(data, label3d, this.InfoPointGroup)
+      const label = infoLabel(data, label3d, this.InfoPointGroup)
       this.infoLabelElement.push(label)
       this.interactionManager.add(sprite)
       sprite.addEventListener('mousedown', (ev) => {
@@ -1207,7 +1211,7 @@ export class World extends Mini3d {
       })
     })
     function infoLabel(data, label3d, labelGroup) {
-      let label = label3d.create('', 'info-point', true)
+      const label = label3d.create('', 'info-point', true)
       const [x, y] = self.geoProjection([data.lng, data.lat])
       label.init(
         ` <div class="info-point-wrap">
@@ -1258,7 +1262,7 @@ export class World extends Mini3d {
     texture.wrapS = texture.wrapT = RepeatWrapping
     texture.repeat.set(2, 1)
 
-    let pathLine = new Line(this, {
+    const pathLine = new Line(this, {
       geoProjectionCenter: this.geoProjectionCenter,
       geoProjectionScale: this.geoProjectionScale,
       position: new Vector3(0, 0, this.depth + 0.24),
