@@ -37,7 +37,6 @@ const menuList = [
   {
     key: '/bigScreen',
     label: 'BigScreen',
-    isHiddenOnMobile: true,
   },
 ]
 
