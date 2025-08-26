@@ -24,8 +24,19 @@ declare module 'vue-router/auto-routes' {
     '/bigScreen/modules/global-decorative-line/': RouteRecordInfo<'/bigScreen/modules/global-decorative-line/', '/bigScreen/modules/global-decorative-line', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-footer/': RouteRecordInfo<'/bigScreen/modules/global-footer/', '/bigScreen/modules/global-footer', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-header/': RouteRecordInfo<'/bigScreen/modules/global-header/', '/bigScreen/modules/global-header', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/': RouteRecordInfo<'/bigScreen/modules/global-left-chart/', '/bigScreen/modules/global-left-chart', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/BulkCommoditySalesChart': RouteRecordInfo<'/bigScreen/modules/global-left-chart/BulkCommoditySalesChart', '/bigScreen/modules/global-left-chart/BulkCommoditySalesChart', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/DistrictEconomicIncome': RouteRecordInfo<'/bigScreen/modules/global-left-chart/DistrictEconomicIncome', '/bigScreen/modules/global-left-chart/DistrictEconomicIncome', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/EconomicTrendChart': RouteRecordInfo<'/bigScreen/modules/global-left-chart/EconomicTrendChart', '/bigScreen/modules/global-left-chart/EconomicTrendChart', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/pie': RouteRecordInfo<'/bigScreen/modules/global-left-chart/pie', '/bigScreen/modules/global-left-chart/pie', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-left-chart/YearlyEconomyTrend': RouteRecordInfo<'/bigScreen/modules/global-left-chart/YearlyEconomyTrend', '/bigScreen/modules/global-left-chart/YearlyEconomyTrend', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-menu/': RouteRecordInfo<'/bigScreen/modules/global-menu/', '/bigScreen/modules/global-menu', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-radar/': RouteRecordInfo<'/bigScreen/modules/global-radar/', '/bigScreen/modules/global-radar', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-right-chart/': RouteRecordInfo<'/bigScreen/modules/global-right-chart/', '/bigScreen/modules/global-right-chart', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-right-chart/ElectricityUsage': RouteRecordInfo<'/bigScreen/modules/global-right-chart/ElectricityUsage', '/bigScreen/modules/global-right-chart/ElectricityUsage', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-right-chart/ProportionPopulationConsumption': RouteRecordInfo<'/bigScreen/modules/global-right-chart/ProportionPopulationConsumption', '/bigScreen/modules/global-right-chart/ProportionPopulationConsumption', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-right-chart/PurposeSpecialFunds': RouteRecordInfo<'/bigScreen/modules/global-right-chart/PurposeSpecialFunds', '/bigScreen/modules/global-right-chart/PurposeSpecialFunds', Record<never, never>, Record<never, never>>,
+    '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation': RouteRecordInfo<'/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation', '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/': RouteRecordInfo<'/blog/creativity/calendar/', '/blog/creativity/calendar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/left': RouteRecordInfo<'/blog/creativity/calendar/left', '/blog/creativity/calendar/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/right': RouteRecordInfo<'/blog/creativity/calendar/right', '/blog/creativity/calendar/right', Record<never, never>, Record<never, never>>,
@@ -136,12 +147,56 @@ declare module 'vue-router/auto-routes' {
       routes: '/bigScreen/modules/global-header/'
       views: never
     }
+    'src/pages/bigScreen/modules/global-left-chart/index.vue': {
+      routes: '/bigScreen/modules/global-left-chart/'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-left-chart/BulkCommoditySalesChart.vue': {
+      routes: '/bigScreen/modules/global-left-chart/BulkCommoditySalesChart'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-left-chart/DistrictEconomicIncome.vue': {
+      routes: '/bigScreen/modules/global-left-chart/DistrictEconomicIncome'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-left-chart/EconomicTrendChart.vue': {
+      routes: '/bigScreen/modules/global-left-chart/EconomicTrendChart'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-left-chart/pie.vue': {
+      routes: '/bigScreen/modules/global-left-chart/pie'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-left-chart/YearlyEconomyTrend.vue': {
+      routes: '/bigScreen/modules/global-left-chart/YearlyEconomyTrend'
+      views: never
+    }
     'src/pages/bigScreen/modules/global-menu/index.vue': {
       routes: '/bigScreen/modules/global-menu/'
       views: never
     }
     'src/pages/bigScreen/modules/global-radar/index.vue': {
       routes: '/bigScreen/modules/global-radar/'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-right-chart/index.vue': {
+      routes: '/bigScreen/modules/global-right-chart/'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-right-chart/ElectricityUsage.vue': {
+      routes: '/bigScreen/modules/global-right-chart/ElectricityUsage'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-right-chart/ProportionPopulationConsumption.vue': {
+      routes: '/bigScreen/modules/global-right-chart/ProportionPopulationConsumption'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-right-chart/PurposeSpecialFunds.vue': {
+      routes: '/bigScreen/modules/global-right-chart/PurposeSpecialFunds'
+      views: never
+    }
+    'src/pages/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation.vue': {
+      routes: '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation'
       views: never
     }
     'src/pages/blog/creativity/calendar/index.vue': {

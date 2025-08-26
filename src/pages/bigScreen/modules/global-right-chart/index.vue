@@ -1,0 +1,59 @@
+<!------  2025-08-26---09:25---星期二  ------>
+<!------------------------------------    ------------------------------------------------->
+<script lang="ts" setup>
+import ElectricityUsage from './ElectricityUsage.vue'
+
+import ProportionPopulationConsumption from './ProportionPopulationConsumption.vue'
+
+import PurposeSpecialFunds from './PurposeSpecialFunds.vue'
+
+import QuarterlyGrowthSituation from './QuarterlyGrowthSituation.vue'
+</script>
+
+<template>
+  <div
+    class="right-wrap"
+  >
+    <div
+      class="right-wrap-3d"
+    >
+      <!-- 专项资金用途 -->
+      <PurposeSpecialFunds />
+      <!-- 人群消费占比 -->
+      <ProportionPopulationConsumption />
+      <!-- 用电情况 -->
+      <ElectricityUsage />
+      <!-- 各季度增长情况 -->
+      <QuarterlyGrowthSituation />
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+    .right-wrap {
+  position: absolute;
+  z-index: 4;
+  width: 398px;
+  right: 32px;
+  top: 126px;
+  bottom: 50px;
+  perspective: 800px;
+  perspective-origin: 50% 50%;
+  &-3d {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    transform: translate3d(0px, 0px, 0px) scaleX(1) scaleY(1) rotateX(0deg) rotateY(-6deg) rotateZ(0deg) skewX(0deg)
+      skewY(0deg);
+    .right-card {
+      flex: 1;
+      margin-bottom: 12px;
+    }
+  }
+}
+</style>

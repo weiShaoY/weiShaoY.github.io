@@ -15,9 +15,13 @@ import GlobalFooter from './modules/global-footer/index.vue'
 
 import GlobalHeader from './modules/global-header/index.vue'
 
+import GlobalLeftChart from './modules/global-left-chart/index.vue'
+
 import GlobalMenu from './modules/global-menu/index.vue'
 
 import GlobalRadar from './modules/global-radar/index.vue'
+
+import GlobalRightChart from './modules/global-right-chart/index.vue'
 
 import emitter from './utils/emitter'
 
@@ -217,6 +221,12 @@ onMounted(() => {
       <!-- 左右装饰线 -->
       <GlobalDecorativeLine />
 
+      <!-- 左边布局 图表 -->
+      <GlobalLeftChart />
+
+      <!-- 右边布局 图表 -->
+      <GlobalRightChart />
+
     </div>
   </div>
 
@@ -258,6 +268,12 @@ onMounted(() => {
 // 底部托盘
 .bottom-tray {
   transform: translateY(100%);
+  opacity: 0;
+}
+
+// 左边卡片
+.left-card {
+  transform: translateX(-150%);
   opacity: 0;
 }
 </style>
