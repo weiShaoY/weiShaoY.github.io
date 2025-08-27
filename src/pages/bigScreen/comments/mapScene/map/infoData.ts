@@ -3,31 +3,31 @@
  */
 export default [
   {
-    name: '信息点-01', // 常德市
-    level: '中',
-    value: 65.2111,
+    name: '常德市', // 常德市
+    level: '一级',
+    value: 65,
     lng: 110.901,
     lat: 29.878,
   },
 
   {
-    name: '信息点-02', // 湘西州
-    level: '差',
-    value: 84.9,
+    name: '湘西州', // 湘西州
+    level: '二级',
+    value: 24,
     lng: 109.75,
     lat: 26.30,
   },
   {
-    name: '信息点-03', // 郴州
-    level: '极好',
-    value: 12.5,
+    name: '郴州', // 郴州
+    level: '二级',
+    value: 32,
     lng: 113.60,
     lat: 25.55,
   },
   {
-    name: '信息点-04', // 永州
-    level: '极好',
-    value: 12.5,
+    name: '永州', // 永州
+    level: '三级',
+    value: 16,
     lng: 112.00,
     lat: 25.25,
   },

@@ -7,7 +7,7 @@ export default [
     enName: 'Changsha',
     center: [113.0823, 28.2568],
     centroid: [113.0, 28.2], // 示例，精确值需要查找
-    value: 100, // 示例值
+    value: 39, // 示例值
   },
   {
     name: '株洲市',
@@ -21,35 +21,35 @@ export default [
     enName: 'Xiangtan',
     center: [112.9167, 27.8667],
     centroid: [112.9, 27.9],
-    value: 79,
+    value: 9,
   },
   {
     name: '衡阳市',
     enName: 'Hengyang',
     center: [112.5833, 26.8667],
     centroid: [112.6, 26.9],
-    value: 68,
+    value: 13,
   },
   {
     name: '岳阳市',
     enName: 'Yueyang',
     center: [113.1, 29.3667],
     centroid: [113.1, 29.4],
-    value: 56,
+    value: 16,
   },
   {
     name: '常德市',
     enName: 'Changde',
     center: [111.6833, 29.0333],
     centroid: [111.7, 29.0],
-    value: 52,
+    value: 33,
   },
   {
     name: '张家界市',
     enName: 'Zhangjiajie',
     center: [110.4833, 29.1333],
     centroid: [110.5, 29.1],
-    value: 30,
+    value: 9,
   },
   {
     name: '益阳市',
@@ -63,14 +63,14 @@ export default [
     enName: 'Yongzhou',
     center: [111.5833, 26.4333],
     centroid: [111.6, 26.4],
-    value: 48,
+    value: 18,
   },
   {
     name: '邵阳市',
     enName: 'Shaoyang',
     center: [111.4667, 27.2333],
     centroid: [111.5, 27.2],
-    value: 51,
+    value: 12,
   },
   {
     name: '怀化市',
@@ -84,7 +84,7 @@ export default [
     enName: 'Loudi',
     center: [112.0, 27.7333],
     centroid: [112.0, 27.7],
-    value: 23,
+    value: 13,
   },
   {
     name: '郴州市',

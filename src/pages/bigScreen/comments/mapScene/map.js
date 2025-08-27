@@ -830,7 +830,7 @@ export class World extends Mini3d {
       label.init(
         `<div class="provinces-label ${index > 4 ? 'yellow' : ''}">
       <div class="provinces-label-wrap">
-        <div class="number"><span class="value">${data.value}</span><span class="unit">万人</span></div>
+        <div class="number"><span class="value">${data.value}</span><span class="unit">件</span></div>
         <div class="name">
           <span class="zh">${data.name}</span>
           <span class="en">${data.enName.toUpperCase()}</span>
@@ -1219,7 +1219,7 @@ export class World extends Mini3d {
       label.init(
         `<div class="provinces-label">
       <div class="provinces-label-wrap">
-        <div class="number">${data.value}<span>万人</span></div>
+        <div class="number">${data.value}<span>件</span></div>
         <div class="name">
           <span class="zh">${data.name}</span>
           <span class="en">${data.enName.toUpperCase()}</span>
@@ -1513,7 +1513,7 @@ export class World extends Mini3d {
             </div>
             <div class="info-point-content">
               <div class="content-item"><span class="label">名称</span><span class="value">${data.name}</span></div>
-              <div class="content-item"><span class="label">PM2.5</span><span class="value">${data.value}ug/m²</span></div>
+              <div class="content-item"><span class="label">风险指数</span><span class="value">${data.value}</span></div>
               <div class="content-item"><span class="label">等级</span><span class="value">${data.level}</span></div>
             </div>
           </div>

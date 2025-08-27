@@ -171,7 +171,7 @@ defineExpose({
         background: rgba(35, 47, 58, 0.6);
         margin-bottom: 5px;
         .label {
-          width: 60px;
+          width: 80px;
           padding-left: 10px;
         }
         .value {
