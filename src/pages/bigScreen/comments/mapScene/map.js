@@ -86,10 +86,8 @@ export class World extends Mini3d {
   constructor(canvas, assets) {
     super(canvas) // 调用父类构造函数
 
-    // 地理投影中心坐标 [经度, 纬度]
-    // this.geoProjectionCenter = [113.280637, 23.125178]
-    // this.geoProjectionCenter = [112.9823, 28.1941] // 湖南省中心坐标
-    this.geoProjectionCenter = [111.75, 27.75] // 娄底市中心
+    // 地理投影中心坐标 [经度, 纬度] (省中心点)
+    this.geoProjectionCenter = [111.75, 27.55] // 娄底市中心
 
     // 地理投影缩放比例
     this.geoProjectionScale = 120
@@ -111,7 +109,7 @@ export class World extends Mini3d {
 
     this.mapFocusLabelInfo = {
       name: '湖南省', // 中文名称
-      enName: 'Hunan Province', // 英文名称
+      enName: 'HUNAN PROVINCE', // 英文名称
       center: [111.42, 23.99], // 中心坐标
     }
 
@@ -1242,9 +1240,11 @@ export class World extends Mini3d {
     // 获取旋转边框贴图
     const rotationBorder1 = this.assets.instance.getResource('rotationBorder1')
     const rotationBorder2 = this.assets.instance.getResource('rotationBorder2')
-    // 创建第一个旋转平面
+    // 创建第一个旋转平面 （外圈 ）
     const plane01 = new Plane(this, {
-      width: max * 1.85, // 宽度
+      // width: max * 1.85, // 宽度
+      width: max * 1.35, // 宽度
+
       needRotate: true, // 需要旋转
       rotateSpeed: 0.001, // 旋转速度
       material: new MeshBasicMaterial({
@@ -1262,9 +1262,11 @@ export class World extends Mini3d {
     plane01.instance.renderOrder = 6 // 设置渲染顺序
     plane01.instance.scale.set(0, 0, 0) // 初始缩放为0
     plane01.setParent(this.scene) // 设置父级
-    // 创建第二个旋转平面
+    // 创建第二个旋转平面 （内圈）
     const plane02 = new Plane(this, {
-      width: max * 1.7, // 宽度
+      // width: max * 1.7, // 宽度
+      width: max * 1.25, // 宽度
+
       needRotate: true, // 需要旋转
       rotateSpeed: -0.004, // 旋转速度（反向）
       material: new MeshBasicMaterial({
