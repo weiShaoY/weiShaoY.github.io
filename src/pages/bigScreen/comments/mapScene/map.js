@@ -797,9 +797,11 @@ export class World extends Mini3d {
       areaBar.position.set(x, -y, this.depth + 0.45) // 设置位置
       areaBar.scale.set(1, 1, 0) // 初始缩放为0
       areaBar.userData = { ...item } // 保存用户数据
+
       // 创建光圈效果
       const guangQuan = this.createQuan(new Vector3(x, this.depth + 0.44, y), index)
       // 创建辉光效果
+
       const hg = this.createHUIGUANG(geoHeight, index > 3 ? 0xFFFEF4 : 0x77FBF5)
       areaBar.add(...hg) // 添加辉光到柱状图
       barGroup.add(areaBar) // 添加到组
@@ -812,6 +814,7 @@ export class World extends Mini3d {
       this.allGuangquan.push(guangQuan)
       this.allProvinceLabel.push(barLabel)
     })
+
     this.scene.add(barGroup) // 添加到场景
     /**
      * 创建柱状图标签样式
@@ -1324,7 +1327,7 @@ export class World extends Mini3d {
     })
     // 遍历前7个省份创建飞线
     provincesData
-      .filter((item, index) => index < 7) // 过滤前7个
+      .filter((item, index) => index < 15) // 过滤前7个
       .map((city) => {
         const [x, y] = this.geoProjection(city.centroid) // 投影坐标
         const point = new Vector3(x, -y, 0) // 目标点

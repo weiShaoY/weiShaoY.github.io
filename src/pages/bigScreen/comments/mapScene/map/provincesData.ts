@@ -1,3 +1,6 @@
+/**
+ *  飞线数据
+ */
 export default [
   {
     name: '长沙市',
@@ -81,7 +84,7 @@ export default [
     enName: 'Chenzhou',
     center: [113.0333, 25.7833],
     centroid: [113.0, 25.8],
-    value: 26,
+    value: 20,
   },
   {
     name: '湘西土家族苗族自治州',
