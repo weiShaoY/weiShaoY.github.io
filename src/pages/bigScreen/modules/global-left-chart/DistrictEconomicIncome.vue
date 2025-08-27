@@ -7,7 +7,7 @@ import { mCard } from '../../comments'
 
 const option = ref({
   title: {
-    text: '亿元',
+    text: '趋势',
     left: '5%',
     top: '8%',
     textStyle: {
@@ -60,7 +60,7 @@ const option = ref({
         interval: 0,
         padding: [0, 0, 0, 0],
       },
-      data: ['南山区', '天河区', '福田区', '龙岗区', '宝安区'],
+      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     },
     {
       axisLine: {
@@ -74,7 +74,9 @@ const option = ref({
   ],
   yAxis: {
     type: 'value',
-
+    interval: 20,
+    min: 0, // 从 0 开始
+    max: 100, // 略高于最大值 21
     axisLine: {
       show: false,
     },
@@ -104,7 +106,7 @@ const option = ref({
 
       data: [
         {
-          value: 8000,
+          value: 80,
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
@@ -119,7 +121,7 @@ const option = ref({
           },
         },
         {
-          value: 7500,
+          value: 75,
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
@@ -134,7 +136,7 @@ const option = ref({
           },
         },
         {
-          value: 6000,
+          value: 60,
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
@@ -149,7 +151,7 @@ const option = ref({
           },
         },
         {
-          value: 5800,
+          value: 58,
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
@@ -164,7 +166,7 @@ const option = ref({
           },
         },
         {
-          value: 5000,
+          value: 50,
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
@@ -174,6 +176,43 @@ const option = ref({
               {
                 offset: 1,
                 color: 'rgba(64, 175, 255, 0.10)',
+              },
+            ]),
+          },
+        },
+        {
+          value: 40,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(64, 175, 255, 1)',
+              },
+            ]),
+          },
+        },
+        {
+          value: 30,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(24, 75, 255, 1)',
+              },
+              {
+                offset: 1,
+                color: 'rgba(24, 75, 255, 0.10)',
+              },
+            ]),
+          },
+        },
+        {
+          value: 20,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(241, 25, 185, 1)',
               },
             ]),
           },
@@ -220,7 +259,7 @@ const option = ref({
     class="left-card mb-3 flex-1"
   >
     <m-card
-      title="各区经济收益"
+      title="重点区域风险指数趋势"
     >
       <VChart
         :option="option"

@@ -14,19 +14,19 @@ const state = reactive({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],
   pieData: [
     {
-      name: '类型1',
+      name: '长沙',
       value: 40,
     },
     {
-      name: '类型2',
+      name: '湘南',
       value: 25,
     },
     {
-      name: '类型3',
+      name: '湘西',
       value: 20,
     },
     {
-      name: '类型4',
+      name: '湘中',
       value: 15,
     },
   ],
@@ -145,7 +145,7 @@ const option = ref({
     class="right-card mb-3 flex-1"
   >
     <m-card
-      title="人群消费占比"
+      title="地域分布统计"
     >
       <div
         class="population-proportion h-full flex"
@@ -173,7 +173,7 @@ const option = ref({
           <div
             class="label-name absolute left-1/2 top-1/2 h-18 w-18 flex items-center justify-center text-xs text-[#c4e3fd] -ml-9 -mt-9"
           >
-            消费占比
+            分布统计
           </div>
         </div>
 

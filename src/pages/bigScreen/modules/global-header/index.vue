@@ -1,5 +1,48 @@
 <script setup lang="ts">
+
+/**
+ *  时间 - 每秒更新
+ */
+import {
+  onMounted,
+  onUnmounted,
+  ref,
+} from 'vue'
+
 import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
+
+const timeStr = ref('')
+
+function updateTime() {
+  const time = new Date()
+
+  const year = time.getFullYear()
+
+  const month = String(time.getMonth() + 1).padStart(2, '0')
+
+  const day = String(time.getDate()).padStart(2, '0')
+
+  const hour = String(time.getHours()).padStart(2, '0')
+
+  const minute = String(time.getMinutes()).padStart(2, '0')
+
+  const second = String(time.getSeconds()).padStart(2, '0')
+
+  timeStr.value = `${year}-${month}-${day} ${hour}:${minute}:${second}`
+}
+
+let timer: NodeJS.Timeout | null = null
+
+onMounted(() => {
+  updateTime() // 立即更新一次
+  timer = setInterval(updateTime, 1000) // 每秒更新
+})
+
+onUnmounted(() => {
+  if (timer) {
+    clearInterval(timer)
+  }
+})
 </script>
 
 <template>
@@ -31,9 +74,9 @@ import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
     <div
       class="absolute right-[32px] top-[47px] flex items-center gap-3 text-[#c4f3fe] font-[14px]"
     >
-      <span>2023-10-12</span>
+      <span>{{ timeStr }}</span>
 
-      <span>17:53:16</span>
+      <!-- <span>17:53</span> -->
     </div>
 
     <div>

@@ -43,18 +43,18 @@ type itemType = {
 const totalView = ref<itemType[]>([
   {
     icon: img_count_icon1,
-    zh: '2024年生产总值',
-    en: 'Gross Domestic Product in 2024',
-    value: 31500,
-    unit: '亿元',
+    zh: '2025年总案件数',
+    en: 'Total number of cases in 2025',
+    value: 82,
+    unit: '件',
     decimals: 0,
   },
   {
     icon: img_count_icon2,
-    zh: '2024年常驻人数',
-    en: 'resident population in 2024',
-    value: 15000,
-    unit: '万人',
+    zh: '2025已结案数',
+    en: 'Total number of cases in 2025',
+    value: 60,
+    unit: '件',
     decimals: 0,
   },
 ])

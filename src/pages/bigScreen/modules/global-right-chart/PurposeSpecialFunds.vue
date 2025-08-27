@@ -88,7 +88,7 @@ const option = ref({
       splitLine: {
         show: false,
       },
-      data: ['扶贫资金', '医疗卫生', '渔业资金', '社区改造'],
+      data: ['设备费', '伙食费', '交通费', '其他费用'],
     },
     {
       inverse: true,
@@ -224,7 +224,7 @@ const option = ref({
     class="right-card mb-3 flex-1"
   >
     <m-card
-      title="专项资金用途"
+      title="办案资金用途"
     >
       <VChart
         :option="option"

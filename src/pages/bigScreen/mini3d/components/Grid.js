@@ -1,5 +1,4 @@
 import {
-  AdditiveBlending,
   BufferAttribute,
   BufferGeometry,
   DoubleSide,
@@ -7,7 +6,6 @@ import {
   Group,
   Mesh,
   MeshBasicMaterial,
-  MultiplyBlending,
   NormalBlending,
   Points,
   PointsMaterial,
@@ -17,7 +15,6 @@ import {
   Vector3,
 } from 'three'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils'
-import { DiffuseShader } from '../shader/DiffuseShader'
 
 export class Grid {
   constructor({ scene, time }, options) {

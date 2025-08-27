@@ -234,6 +234,10 @@ onMounted(() => {
 <style lang="scss">
 @use './home.scss';
 
+.large-screen {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
 // 360旋转
 @keyframes rotate360Animate {
   0% {

@@ -7,7 +7,7 @@ import { mCard } from '../../comments'
 
 const option = ref({
   title: {
-    text: '亿元',
+    text: '趋势',
     left: '5%',
     top: '8%',
     textStyle: {
@@ -73,6 +73,8 @@ const option = ref({
   ],
   yAxis: {
     type: 'value',
+    min: 0,
+    max: 100,
 
     axisLine: {
       show: false,
@@ -98,7 +100,7 @@ const option = ref({
   series: [
     {
       name: '类型1',
-      data: [100, 120, 130, 110],
+      data: [80, 30, 50, 20],
       type: 'bar',
       barWidth: 4,
       label: {
@@ -120,7 +122,7 @@ const option = ref({
     },
     {
       name: '类型2',
-      data: [60, 100, 150, 90],
+      data: [20, 39, 42, 68],
       type: 'bar',
       barWidth: 4,
       barGap: 2,
@@ -168,7 +170,7 @@ const option = ref({
     class="right-card mb-3 flex-1"
   >
     <m-card
-      title="各季度增长情况"
+      title="舆情热度趋势"
     >
       <VChart
         :option="option"

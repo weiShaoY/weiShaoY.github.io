@@ -7,7 +7,7 @@ import { mCard } from '../../comments'
 
 const option = ref({
   title: {
-    text: '亿元',
+    text: '趋势',
     left: '5%',
     top: '8%',
     textStyle: {
@@ -61,18 +61,18 @@ const option = ref({
         padding: [0, 0, 0, 0],
       },
       data: [
-        '2023/04',
-        '2023/05',
-        '2023/06',
-        '2023/07',
-        '2023/08',
-        '2023/09',
-        '2023/10',
-        '2023/11',
-        '2023/12',
-        '2024/01',
-        '2024/02',
-        '2024/03',
+        '1月',
+        '2月',
+        '3月',
+        '4月',
+        '5月',
+        '6月',
+        '7月',
+        '8月',
+        '9月',
+        '10月',
+        '11月',
+        '12月',
       ],
     },
     {
@@ -87,6 +87,9 @@ const option = ref({
   ],
   yAxis: {
     type: 'value',
+    interval: 20,
+    min: 0, // 从 0 开始
+    max: 100, // 略高于最大值 21
 
     axisLine: {
       show: false,
@@ -111,7 +114,7 @@ const option = ref({
   },
   series: [
     {
-      data: [500, 1000, 300, 1300, 500, 1330, 620, 400, 700, 1300, 300, 1234],
+      data: [50, 10, 30, 30, 50, 33, 62, 40],
       type: 'line',
       smooth: true,
       symbol:
@@ -175,7 +178,7 @@ const option = ref({
     class="left-card mb-3 flex-1"
   >
     <m-card
-      title="近年经济情况"
+      title="预警信息响应时间趋势"
     >
       <VChart
         :option="option"

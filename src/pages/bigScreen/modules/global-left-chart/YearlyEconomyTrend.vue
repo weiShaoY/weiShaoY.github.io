@@ -12,20 +12,20 @@ const state = ref({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],
   pieData: [
     {
-      name: '类型1',
-      value: 400,
+      name: '涉外经济',
+      value: 40,
     },
     {
-      name: '类型2',
-      value: 250,
+      name: '涉外国防',
+      value: 16,
     },
     {
-      name: '类型3',
-      value: 200,
+      name: '涉外金融',
+      value: 23,
     },
     {
-      name: '类型4',
-      value: 150,
+      name: '涉外文化',
+      value: 21,
     },
   ],
 })
@@ -41,7 +41,7 @@ function getNumber(slotProps) {
     class="left-card mb-3 flex-1"
   >
     <m-card
-      title="年度经济增长点"
+      title="案件类型分布"
     >
       <div
         class="pie-chat-wrap h-full w-full flex"
@@ -115,7 +115,7 @@ function getNumber(slotProps) {
               <span
                 class="unit pl-3 text-xs text-white font-normal opacity-50"
               >
-                亿
+                %
               </span>
             </div>
           </div>

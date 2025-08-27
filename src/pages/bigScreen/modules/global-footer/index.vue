@@ -12,22 +12,22 @@ const activeIndex = ref(1)
 const menuList = [
   {
     index: 1,
-    name: '人口概览',
+    name: '热点话题',
   },
 
   {
     index: 2,
-    name: '人口概览',
+    name: '应急预案',
   },
 
   {
     index: 3,
-    name: '人口概览',
+    name: '舆情监控',
   },
 
   {
     index: 4,
-    name: '人口概览',
+    name: '通信指挥',
   },
 ]
 </script>

@@ -45,6 +45,13 @@ export default [
     value: 52,
   },
   {
+    name: '张家界市',
+    enName: 'Zhangjiajie',
+    center: [110.4833, 29.1333],
+    centroid: [110.5, 29.1],
+    value: 30,
+  },
+  {
     name: '益阳市',
     enName: 'Yiyang',
     center: [112.3333, 28.5833],
@@ -93,11 +100,5 @@ export default [
     centroid: [109.7, 28.3],
     value: 18,
   },
-  {
-    name: '张家界市',
-    enName: 'Zhangjiajie',
-    center: [110.4833, 29.1333],
-    centroid: [110.5, 29.1],
-    value: 30,
-  },
+
 ]

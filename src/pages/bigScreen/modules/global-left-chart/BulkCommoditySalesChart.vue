@@ -7,7 +7,7 @@ import { mCard } from '../../comments'
 
 const option = ref({
   title: {
-    text: '亿元',
+    text: '件',
     left: '5%',
     top: '8%',
     textStyle: {
@@ -59,7 +59,7 @@ const option = ref({
         interval: 0,
         padding: [0, 0, 0, 0],
       },
-      data: ['农产品', '能源', '金属', '化工', '木材'],
+      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     },
     {
       axisLine: {
@@ -73,7 +73,9 @@ const option = ref({
   ],
   yAxis: {
     type: 'value',
-
+    min: 0, // 从 0 开始
+    max: 30, // 略高于最大值 21
+    interval: 10,
     axisLine: {
       show: false,
     },
@@ -98,7 +100,7 @@ const option = ref({
   series: [
     {
       name: '',
-      data: [100, 120, 150, 110, 100],
+      data: [10, 21, 12, 6, 3, 10, 14, 8],
       type: 'bar',
       barWidth: 4,
       stack: 'b',
@@ -129,34 +131,35 @@ const option = ref({
         ]),
       },
     },
-    {
-      type: 'custom',
-      renderItem: (params, api) => {
-        const categoryIndex = api.value(0)
 
-        const categoryData = api.value(1)
+    // {
+    //   type: 'custom',
+    //   renderItem: (params, api) => {
+    //     const categoryIndex = api.value(0)
 
-        const basicsCoord = api.coord([categoryIndex, categoryData])
+    //     const categoryData = api.value(1)
 
-        const topBasicsYAxis = basicsCoord[1]
+    //     const basicsCoord = api.coord([categoryIndex, categoryData])
 
-        const basicsXAxis = basicsCoord[0]
+    //     const topBasicsYAxis = basicsCoord[1]
 
-        return {
-          type: 'image',
-          style: {
-            x: basicsXAxis - 4.5,
-            y: topBasicsYAxis - 9,
-            width: 10,
-            height: 10,
-            image:
-              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAL1JREFUOE9j/P///38GMgAjSKOMdxRJWp9sXcYA18giJMLw99MHhv9//mA1hJGZhYGZX4Dhz7s3DCgaGVlYGDjVtBi+37rO8P/PbxTNjCysDJyqWgzfb18Dy6FoBKmEKfh17wZcM0iMTUkDrgmkDkMjSJCFnZ3hwbr5KDYqBCUy/Pn5Ey6GVSMzMxPDw01LUDTK+8Uw/P37j0YayXIqWYGDHuTInsQbHeAE8PEDw/+/JCYAUtIcPDpI0QRTCwDhurXXJ/EmUwAAAABJRU5ErkJggg==',
-          },
-        }
-      },
-      xAxisIndex: 1,
-      data: [100, 120, 150, 110, 100],
-    },
+    //     const basicsXAxis = basicsCoord[0]
+
+    //     return {
+    //       type: 'image',
+    //       style: {
+    //         x: basicsXAxis - 4.5,
+    //         y: topBasicsYAxis - 9,
+    //         width: 10,
+    //         height: 10,
+    //         image:
+    //           'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAL1JREFUOE9j/P///38GMgAjSKOMdxRJWp9sXcYA18giJMLw99MHhv9//mA1hJGZhYGZX4Dhz7s3DCgaGVlYGDjVtBi+37rO8P/PbxTNjCysDJyqWgzfb18Dy6FoBKmEKfh17wZcM0iMTUkDrgmkDkMjSJCFnZ3hwbr5KDYqBCUy/Pn5Ey6GVSMzMxPDw01LUDTK+8Uw/P37j0YayXIqWYGDHuTInsQbHeAE8PEDw/+/JCYAUtIcPDpI0QRTCwDhurXXJ/EmUwAAAABJRU5ErkJggg==',
+    //       },
+    //     }
+    //   },
+    //   xAxisIndex: 1,
+    //   data: [100, 120, 150, 110, 100],
+    // },
     {
       type: 'bar',
       barWidth: 32,
@@ -186,7 +189,7 @@ const option = ref({
     class="left-card mb-3 flex-1"
   >
     <m-card
-      title="大宗商品销售额"
+      title="事件总数趋势"
     >
       <VChart
         :option="option"

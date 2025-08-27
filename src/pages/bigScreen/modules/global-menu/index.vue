@@ -8,28 +8,28 @@ const activeIndex = defineModel<number>()
 const menuList = [
   {
     index: 1,
-    name: '经济概览',
+    name: '态势总览',
   },
   {
     index: 2,
-    name: '经济概览',
+    name: '风险预警',
   },
 
   {
     index: 3,
-    name: '经济概览',
+    name: '情报研判',
   },
   {
     index: 4,
-    name: '经济概览',
+    name: '任务管理',
   },
   {
     index: 5,
-    name: '经济概览',
+    name: '装备管理',
   },
   {
     index: 6,
-    name: '经济概览',
+    name: '人员管理',
   },
 ]
 
