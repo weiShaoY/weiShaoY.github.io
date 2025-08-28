@@ -7,19 +7,19 @@ import PcMenu from './components/pc-menu.vue'
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
-const pcMenuList = homeConfig.headerRouterList.filter((item) => {
+type HeaderRoute = typeof homeConfig.headerRouterList[number]
+
+function shouldShowOnPC(item: HeaderRoute) {
   // 开发环境下，保留所有
   if (isDevelopment) {
     return true
   }
 
   // 非开发环境下，过滤掉 isDevelopmentOnly 为 true 的
-  else {
-    return !item.isDevelopmentOnly
-  }
-})
+  return !item.isDevelopmentOnly
+}
 
-const mobileMenuList = homeConfig.headerRouterList.filter((item) => {
+function shouldShowOnMobile(item: HeaderRoute) {
   // 开发环境下：仅过滤掉 PC 专属
   if (isDevelopment) {
     return !item.isPCOnly
@@ -27,7 +27,11 @@ const mobileMenuList = homeConfig.headerRouterList.filter((item) => {
 
   // 非开发环境：过滤掉 PC 专属 和 开发专属
   return !item.isPCOnly && !item.isDevelopmentOnly
-})
+}
+
+const pcMenuList = homeConfig.headerRouterList.filter(shouldShowOnPC)
+
+const mobileMenuList = homeConfig.headerRouterList.filter(shouldShowOnMobile)
 
 </script>
 
