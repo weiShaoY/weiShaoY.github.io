@@ -20,10 +20,13 @@ const pcMenuList = homeConfig.headerRouterList.filter((item) => {
 })
 
 const mobileMenuList = homeConfig.headerRouterList.filter((item) => {
-  // 开发环境下，保留所有
-  if (isDevelopment && !item.isPCOnly) {
-    return true
+  // 开发环境下：仅过滤掉 PC 专属
+  if (isDevelopment) {
+    return !item.isPCOnly
   }
+
+  // 非开发环境：过滤掉 PC 专属 和 开发专属
+  return !item.isPCOnly && !item.isDevelopmentOnly
 })
 
 </script>
