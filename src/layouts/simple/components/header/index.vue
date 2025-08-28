@@ -7,9 +7,10 @@
     class="fixed left-0 right-0 top-0 z-100 h-20 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
   >
     <div
-      class="container mx-5 flex items-center justify-between"
+      class="container flex items-center justify-between max-sm:mx-5"
     >
 
+      <!-- 左侧logo -->
       <div
         class="flex items-center"
       >
@@ -22,7 +23,7 @@
         />
       </div>
 
-      <!-- 右边 -->
+      <!-- 右侧 -->
       <div
         class="flex items-center gap-5"
       >

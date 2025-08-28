@@ -1,48 +1,30 @@
 <script setup lang="ts">
+import { homeConfig } from '@/configs'
+
 import MobileMenu from './components/mobile-menu.vue'
 
 import PcMenu from './components/pc-menu.vue'
 
-const menuList = [
-  {
-    key: '/home/about',
-    label: 'About',
-  },
-  {
-    key: '/home/work',
-    label: 'Work',
-  },
-  {
-    key: '/home/contact',
-    label: 'Contact',
-  },
-  {
-    key: '/blog',
-    label: 'Blog',
-  },
-  {
-    key: '/command-login',
-    label: 'Command',
-    isHiddenOnMobile: true,
-  },
-  {
-    key: '/garage',
-    label: 'Garage',
-  },
-  {
-    key: '/test',
-    label: 'Test',
-    isHiddenOnMobile: true,
-  },
-  {
-    key: '/bigScreen',
-    label: 'BigScreen',
-  },
-]
-
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
-const websiteUrl = import.meta.env.VITE_WEBSITE_URL
+const pcMenuList = homeConfig.headerRouterList.filter((item) => {
+  // 开发环境下，保留所有
+  if (isDevelopment) {
+    return true
+  }
+
+  // 非开发环境下，过滤掉 isDevelopmentOnly 为 true 的
+  else {
+    return !item.isDevelopmentOnly
+  }
+})
+
+const mobileMenuList = homeConfig.headerRouterList.filter((item) => {
+  // 开发环境下，保留所有
+  if (isDevelopment && !item.isPCOnly) {
+    return true
+  }
+})
 
 </script>
 
@@ -51,9 +33,10 @@ const websiteUrl = import.meta.env.VITE_WEBSITE_URL
     class="fixed left-0 right-0 top-0 z-100 h-20 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
   >
     <div
-      class="container mx-5 flex items-center justify-between"
+      class="container relative flex items-center justify-between max-sm:mx-5"
     >
 
+      <!-- 左侧logo -->
       <div
         class="flex items-center"
       >
@@ -66,30 +49,16 @@ const websiteUrl = import.meta.env.VITE_WEBSITE_URL
         />
       </div>
 
+      <!-- 菜单 -->
       <PcMenu
         v-if="!isMobile"
-        :menu-list="menuList"
+        :menu-list="pcMenuList"
       />
 
-      <!-- 右边 -->
-      <div
-        class="flex items-center gap-5"
-      >
-        <Github />
-
-        <MobileMenu
-          v-if="isMobile"
-          :menu-list="menuList.filter(item => !item.isHiddenOnMobile)"
-        />
-
-        <!-- 仅开发环境显示  -->
-        <LinkButton
-          v-if="isDevelopment"
-          icon="home-navbar-demo"
-          :size="34"
-          :url="websiteUrl"
-        />
-      </div>
+      <MobileMenu
+        v-else
+        :menu-list="mobileMenuList"
+      />
     </div>
   </nav>
 </template>
