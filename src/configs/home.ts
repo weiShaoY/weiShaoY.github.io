@@ -51,6 +51,7 @@ export const homeConfig: HomeConfigType = {
       value: '/admin-login',
       label: 'Admin',
       isPCOnly: true,
+      isDevelopmentOnly: true,
     },
     {
       value: '/test',
