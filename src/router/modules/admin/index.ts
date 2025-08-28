@@ -3,18 +3,18 @@ import { COMMAND_LAYOUT } from '@/layouts'
 /**
  *  指挥台路由
  */
-const commandRouter: RouterType.RouteRecordRaw[] = [
+const adminRouter: RouterType.RouteRecordRaw[] = [
   {
-    path: 'command-login',
-    name: 'CommandLogin',
-    component: () => import('@/pages/command/login/index.vue'),
+    path: 'admin-login',
+    name: 'AdminLogin',
+    component: () => import('@/pages/admin/login/index.vue'),
     meta: {
       title: '登录',
     },
   },
   {
-    path: '/command',
-    name: 'Command',
+    path: '/admin',
+    name: 'Admin',
     meta: {
       title: '指挥台',
     },
@@ -30,7 +30,7 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-search',
             name: 'IdentityQuerySearch',
-            component: () => import('@/pages/command/identityQuery/search/index.vue'),
+            component: () => import('@/pages/admin/identityQuery/search/index.vue'),
             meta: {
               title: '身份查询-搜索',
             },
@@ -38,7 +38,7 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-result',
             name: 'IdentityQueryResult',
-            component: () => import('@/pages/command/identityQuery/result/index.vue'),
+            component: () => import('@/pages/admin/identityQuery/result/index.vue'),
             meta: {
               title: '身份查询-结果列表',
             },
@@ -46,7 +46,7 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-detail',
             name: 'IdentityQueryDetail',
-            component: () => import('@/pages/command/identityQuery/detail/index.vue'),
+            component: () => import('@/pages/admin/identityQuery/detail/index.vue'),
             meta: {
               title: '身份查询-详情',
             },
@@ -58,4 +58,4 @@ const commandRouter: RouterType.RouteRecordRaw[] = [
 
 ]
 
-export default commandRouter
+export default adminRouter

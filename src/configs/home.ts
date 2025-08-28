@@ -48,8 +48,8 @@ export const homeConfig: HomeConfigType = {
       label: 'BigScreen',
     },
     {
-      value: '/command-login',
-      label: 'Command',
+      value: '/admin-login',
+      label: 'Admin',
       isPCOnly: true,
     },
     {
