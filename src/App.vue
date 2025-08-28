@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
-import { isMobile } from '@/utils/isMobile'
+import { homeMittBus, isMobile } from '@/utils'
 
 /**
  * 组件名称
@@ -17,8 +17,11 @@ watchEffect(() => {
 /**
  *  是否为开发环境
  */
-// const isDev = import.meta.env.VITE_APP_NODE_ENV === 'development'
+const isDev = false
 
+onMounted(() => {
+  homeMittBus.emit('startLoading', 3)
+})
 </script>
 
 <template>
@@ -30,7 +33,7 @@ watchEffect(() => {
     </AppProvider>
   </ElConfigProvider>
 
-  <!-- <HomePageLoading
+  <HomePageLoading
     v-if="!isDev"
-  /> -->
+  />
 </template>

@@ -160,6 +160,9 @@ onBeforeUnmount(() => {
   emitter.$off('mapPlayComplete', handleMapPlayComplete)
 })
 onMounted(() => {
+  // 开始全屏loading
+  homeMittBus.emit('startLoading', 3)
+
   // 监听地图播放完成，执行事件
   emitter.$on('mapPlayComplete', handleMapPlayComplete)
 
@@ -175,6 +178,9 @@ onMounted(() => {
   initAssets(async () => {
     // 加载地图
     emitter.$emit('loadMap', assets.value)
+
+    // 关闭全屏loading
+    homeMittBus.emit('closeLoading')
 
     // 播放场景
     if (mapSceneRef.value) {

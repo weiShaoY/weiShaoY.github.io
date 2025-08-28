@@ -1,16 +1,12 @@
 <script setup lang="ts">
 
+import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
+
+import { mSvglineAnimation } from '../../comments'
+
 /**
  *  时间 - 每秒更新
  */
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue'
-
-import img_headerBg from '@/assets/images/bigScreen/header-bg.png'
-
 const timeStr = ref('')
 
 function updateTime() {
