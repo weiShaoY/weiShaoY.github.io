@@ -7,7 +7,7 @@ import {
 
 import emitter from '../../utils/emitter'
 
-import { World } from './map.js'
+import { World } from './map.ts'
 
 /**
  * 地图画布实例的浅层引用

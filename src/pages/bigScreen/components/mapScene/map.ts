@@ -1,5 +1,6 @@
 // 导入 D3 地理投影库
 import { geoMercator } from 'd3-geo'
+
 // 导入 GSAP 动画库
 import gsap from 'gsap'
 
@@ -34,6 +35,7 @@ import {
   TubeGeometry, // 管道几何体
   Vector3, // 三维向量
 } from 'three'
+
 // 导入交互管理器
 import { InteractionManager } from 'three.interactive'
 
@@ -41,7 +43,12 @@ import { InteractionManager } from 'three.interactive'
 import emitter from '../../utils/emitter'
 
 // 导入地图数据
-import { chinaData, infoData, provincesData, scatterData } from './data'
+import {
+  chinaData,
+  infoData,
+  provincesData,
+  scatterData,
+} from './data'
 
 // 导入自定义 3D 组件
 import {
@@ -57,6 +64,7 @@ import {
   Particles, // 粒子系统
   Plane, // 平面
 } from './mini3d'
+
 // 导入标签图标资源
 import labelIcon from './texture/label-icon.png'
 
@@ -69,6 +77,7 @@ function sortByValue(data) {
   data.sort((a, b) => b.value - a.value) // 按 value 值降序排列
   return data
 }
+
 /**
  * 世界类 - 继承自 Mini3d 基础类
  * 负责管理整个 3D 地图场景
@@ -159,34 +168,46 @@ export class World extends Mini3d {
     this.scene.add(this.flyLineFocusGroup) // 添加到场景
     // 区域事件元素数组
     this.eventElement = []
+
     // 鼠标交互材质
     this.defaultMaterial = null // 默认材质
     this.defaultLightMaterial = null // 高亮材质
     // 创建底部背景
     this.createBottomBg()
+
     // 创建中国模糊边线
     this.createChinaBlurLine()
 
     // 创建扩散网格
     this.createGrid()
+
     // 创建旋转圆环
     this.createRotateBorder()
+
     // 创建标签
     this.createLabel()
+
     // 创建地图
     this.createMap()
+
     // 添加交互事件
     this.createEvent()
+
     // 创建飞线
     this.createFlyLine()
+
     // 创建飞线焦点
     this.createFocus()
+
     // 创建粒子系统
     this.createParticles()
+
     // 创建散点图
     this.createScatter()
+
     // 创建信息点
     this.createInfoPoint()
+
     // 创建轮廓线
     this.createStorke()
 
@@ -213,6 +234,7 @@ export class World extends Mini3d {
         this.flyLineFocusGroup.visible = false // 隐藏飞线焦点组
       },
     })
+
     // 焦点地图位置动画
     tl.to(
       this.focusMapGroup.position,
@@ -254,6 +276,7 @@ export class World extends Mini3d {
       },
       'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+
     // 焦点地图侧面材质透明度动画
     tl.to(
       this.focusMapSideMaterial,
@@ -267,9 +290,11 @@ export class World extends Mini3d {
       },
       'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+
     // 其他标签动画
     this.otherLabel.map((item, index) => {
       const element = item.element.querySelector('.other-label') // 获取标签元素
+
       tl.to(
         element,
         {
@@ -282,6 +307,7 @@ export class World extends Mini3d {
         'focusMapOpacity', // 与 focusMapOpacity 标签同步
       )
     })
+
     // 地图边线材质透明度动画
     tl.to(
       this.mapLineMaterial,
@@ -292,6 +318,7 @@ export class World extends Mini3d {
       },
       'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+
     // 旋转边框1缩放动画
     tl.to(
       this.rotateBorder1.scale,
@@ -305,6 +332,7 @@ export class World extends Mini3d {
       },
       'focusMapOpacity', // 与 focusMapOpacity 标签同步
     )
+
     // 旋转边框2缩放动画
     tl.to(
       this.rotateBorder2.scale,
@@ -328,6 +356,7 @@ export class World extends Mini3d {
       if (item.userData.name === '广州市') { // 跳过广州市
         return false
       }
+
       tl.to(
         item.scale,
         {
@@ -341,6 +370,7 @@ export class World extends Mini3d {
         'bar', // 与 bar 标签同步
       )
     })
+
     // 柱状图材质透明度动画
     this.allBarMaterial.map((item, index) => {
       tl.to(
@@ -358,11 +388,15 @@ export class World extends Mini3d {
     // 省份标签动画
     this.allProvinceLabel.map((item, index) => {
       const element = item.element.querySelector('.provinces-label-wrap') // 获取标签包装元素
+
       const number = item.element.querySelector('.number .value') // 获取数值元素
+
       const numberVal = Number(number.textContent) // 获取数值
+
       const numberAnimate = {
         score: 0, // 动画数值对象
       }
+
       // 标签元素位移动画
       tl.to(
         element,
@@ -375,6 +409,7 @@ export class World extends Mini3d {
         },
         'bar', // 与 bar 标签同步
       )
+
       // 数值计数动画
       tl.to(
         numberAnimate,
@@ -386,6 +421,7 @@ export class World extends Mini3d {
         },
         'bar', // 与 bar 标签同步
       )
+
       /**
        * 显示分数函数
        */
@@ -393,6 +429,7 @@ export class World extends Mini3d {
         number.textContent = numberAnimate.score.toFixed(0) // 更新显示数值
       }
     })
+
     // 光圈缩放动画
     this.allGuangquan.map((item, index) => {
       // 第一个光圈缩放动画
@@ -408,6 +445,7 @@ export class World extends Mini3d {
         },
         'bar', // 与 bar 标签同步
       )
+
       // 第二个光圈缩放动画
       tl.to(
         item.children[1].scale,
@@ -430,9 +468,11 @@ export class World extends Mini3d {
   initEnvironment() {
     // 创建环境光
     const sun = new AmbientLight(0xFFFFFF, 5) // 白色环境光，强度 5
+
     this.scene.add(sun) // 添加到场景
     // 创建平行光
     const directionalLight = new DirectionalLight(0xFFFFFF, 5) // 白色平行光，强度 5
+
     directionalLight.position.set(-30, 6, -8) // 设置光源位置
     directionalLight.castShadow = true // 启用阴影
     directionalLight.shadow.radius = 20 // 阴影半径
@@ -448,6 +488,7 @@ export class World extends Mini3d {
       y: 3, // Y 坐标
       z: -3, // Z 坐标
     })
+
     // 创建第二个点光源
     this.createPointLight({
       color: '#1d5e5e', // 颜色
@@ -465,6 +506,7 @@ export class World extends Mini3d {
    */
   createPointLight(pointParams) {
     const pointLight = new PointLight(0x1D5E5E, pointParams.intensity, pointParams.distance) // 创建点光源
+
     pointLight.position.set(pointParams.x, pointParams.y, pointParams.z) // 设置位置
     this.scene.add(pointLight) // 添加到场景
   }
@@ -474,10 +516,14 @@ export class World extends Mini3d {
    */
   createMap() {
     const mapGroup = new Group() // 创建地图组
+
     const focusMapGroup = new Group() // 创建焦点地图组
+
     this.focusMapGroup = focusMapGroup // 保存引用
     const { china, chinaTopLine } = this.createChina() // 创建中国地图
+
     const { map, mapTop, mapLine } = this.createProvince() // 创建省份地图
+
     china.setParent(mapGroup) // 设置父级
     chinaTopLine.setParent(mapGroup) // 设置父级
     // 创建扩散效果
@@ -504,14 +550,17 @@ export class World extends Mini3d {
       chinaBgMaterialColor: '#152c47', // 中国地图背景材质颜色
       lineColor: '#3f82cd', // 边线颜色
     }
+
     // 获取中国地图数据
     const chinaData = this.assets.instance.getResource('china')
+
     // 创建中国地图背景材质
     const chinaBgMaterial = new MeshLambertMaterial({
       color: new Color(params.chinaBgMaterialColor), // 设置颜色
       transparent: true, // 启用透明度
       opacity: 1, // 不透明度
     })
+
     // 创建中国地图
     const china = new BaseMap(this, {
       data: chinaData, // 地图数据
@@ -521,10 +570,12 @@ export class World extends Mini3d {
       material: chinaBgMaterial, // 材质
       renderOrder: 2, // 渲染顺序
     })
+
     // 创建中国地图边线材质
     const chinaTopLineMaterial = new LineBasicMaterial({
       color: params.lineColor, // 边线颜色
     })
+
     // 创建中国地图边线
     const chinaTopLine = new Line(this, {
       data: chinaData, // 地图数据
@@ -533,8 +584,12 @@ export class World extends Mini3d {
       material: chinaTopLineMaterial, // 材质
       renderOrder: 3, // 渲染顺序
     })
+
     chinaTopLine.lineGroup.position.z += 0.01 // 调整边线 Z 位置
-    return { china, chinaTopLine } // 返回地图和边线对象
+    return {
+      china,
+      chinaTopLine,
+    } // 返回地图和边线对象
   }
 
   /**
@@ -544,8 +599,10 @@ export class World extends Mini3d {
   createProvince() {
     // 获取省份地图数据
     const mapJsonData = this.assets.instance.getResource('mapJson')
+
     // 创建省份材质
     const [topMaterial, sideMaterial] = this.createProvinceMaterial()
+
     this.focusMapTopMaterial = topMaterial // 保存顶面材质引用
     this.focusMapSideMaterial = sideMaterial // 保存侧面材质引用
     // 创建挤压地图
@@ -559,6 +616,7 @@ export class World extends Mini3d {
       sideMaterial, // 侧面材质
       renderOrder: 9, // 渲染顺序
     })
+
     // 创建面材质
     const faceMaterial = new MeshStandardMaterial({
       color: 0xFFFFFF, // 白色
@@ -571,6 +629,7 @@ export class World extends Mini3d {
       uColor1: 0x12BBE0, // 渐变颜色1
       uColor2: 0x0094B5, // 渐变颜色2
     })
+
     this.defaultMaterial = faceMaterial // 保存默认材质
     this.defaultLightMaterial = this.defaultMaterial.clone() // 克隆高亮材质
     this.defaultLightMaterial.color = new Color('rgba(115,208,255,1)') // 设置高亮颜色
@@ -584,6 +643,7 @@ export class World extends Mini3d {
       material: faceMaterial, // 材质
       renderOrder: 2, // 渲染顺序
     })
+
     // 收集可交互的网格元素
     mapTop.mapGroup.children.map((group) => {
       group.children.map((mesh) => {
@@ -592,6 +652,7 @@ export class World extends Mini3d {
         }
       })
     })
+
     // 创建地图边线材质
     this.mapLineMaterial = new LineBasicMaterial({
       color: 0xFFFFFF, // 白色
@@ -599,6 +660,7 @@ export class World extends Mini3d {
       transparent: true, // 启用透明度
       fog: false, // 禁用雾效果
     })
+
     // 创建地图边线
     const mapLine = new Line(this, {
       geoProjectionCenter: this.geoProjectionCenter, // 投影中心
@@ -607,6 +669,7 @@ export class World extends Mini3d {
       material: this.mapLineMaterial, // 材质
       renderOrder: 3, // 渲染顺序
     })
+
     mapLine.lineGroup.position.z += this.depth + 0.23 // 调整边线 Z 位置
     return {
       map, // 挤压地图
@@ -628,14 +691,20 @@ export class World extends Mini3d {
       fog: false, // 禁用雾效果
       side: DoubleSide, // 双面材质
     })
+
     // 自定义着色器编译
     topMaterial.onBeforeCompile = (shader) => {
       // 添加自定义uniform变量
       shader.uniforms = {
         ...shader.uniforms,
-        uColor1: { value: new Color(0x2A6E92) }, // 渐变颜色1
-        uColor2: { value: new Color(0x102736) }, // 渐变颜色2
+        uColor1: {
+          value: new Color(0x2A6E92),
+        }, // 渐变颜色1
+        uColor2: {
+          value: new Color(0x102736),
+        }, // 渐变颜色2
       }
+
       // 修改顶点着色器
       shader.vertexShader = shader.vertexShader.replace(
         'void main() {',
@@ -648,6 +717,7 @@ export class World extends Mini3d {
           vPosition = position; // 传递位置
       `,
       )
+
       // 修改片段着色器
       shader.fragmentShader = shader.fragmentShader.replace(
         'void main() {',
@@ -659,6 +729,7 @@ export class World extends Mini3d {
         void main() {
       `,
       )
+
       // 替换片段着色器主函数
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <opaque_fragment>',
@@ -679,8 +750,10 @@ export class World extends Mini3d {
       `,
       )
     }
+
     // 获取侧面贴图
     const sideMap = this.assets.instance.getResource('side')
+
     sideMap.wrapS = RepeatWrapping // 设置S方向重复包裹
     sideMap.wrapT = RepeatWrapping // 设置T方向重复包裹
     sideMap.repeat.set(1, 1.5) // 设置重复次数
@@ -693,18 +766,25 @@ export class World extends Mini3d {
       opacity: 0, // 初始不透明度为0
       side: DoubleSide, // 双面材质
     })
+
     // 添加时间更新监听，实现贴图滚动效果
     this.time.on('tick', () => {
       sideMap.offset.y += 0.005 // 每帧增加Y偏移
     })
+
     // 自定义侧面材质着色器编译
     sideMaterial.onBeforeCompile = (shader) => {
       // 添加自定义uniform变量
       shader.uniforms = {
         ...shader.uniforms,
-        uColor1: { value: new Color(0x2A6E92) }, // 渐变颜色1
-        uColor2: { value: new Color(0x2A6E92) }, // 渐变颜色2
+        uColor1: {
+          value: new Color(0x2A6E92),
+        }, // 渐变颜色1
+        uColor2: {
+          value: new Color(0x2A6E92),
+        }, // 渐变颜色2
       }
+
       // 修改顶点着色器
       shader.vertexShader = shader.vertexShader.replace(
         'void main() {',
@@ -717,6 +797,7 @@ export class World extends Mini3d {
           vPosition = position; // 传递位置
       `,
       )
+
       // 修改片段着色器
       shader.fragmentShader = shader.fragmentShader.replace(
         'void main() {',
@@ -728,6 +809,7 @@ export class World extends Mini3d {
         void main() {
       `,
       )
+
       // 替换片段着色器主函数
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <opaque_fragment>',
@@ -744,6 +826,7 @@ export class World extends Mini3d {
       `,
       )
     }
+
     return [topMaterial, sideMaterial] // 返回顶面材质和侧面材质
   }
 
@@ -752,13 +835,19 @@ export class World extends Mini3d {
    */
   createBar() {
     const self = this // 保存this引用
+
     // 获取前7个省份数据并按值排序
     const data = sortByValue(provincesData).filter((item, index) => index < 7)
+
     const barGroup = new Group() // 创建柱状图组
+
     this.barGroup = barGroup // 保存引用
     const factor = 0.7 // 缩放因子
+
     const height = 4.0 * factor // 最大高度
+
     const max = data[0].value // 最大值
+
     // 初始化数组
     this.allBar = [] // 所有柱状图
     this.allBarMaterial = [] // 所有材质
@@ -767,6 +856,7 @@ export class World extends Mini3d {
     // 遍历数据创建柱状图
     data.map((item, index) => {
       const geoHeight = height * (item.value / max) // 计算柱状图高度
+
       // 创建柱状图材质
       const material = new MeshBasicMaterial({
         color: 0xFFFFFF, // 白色
@@ -775,6 +865,7 @@ export class World extends Mini3d {
         depthTest: false, // 禁用深度测试
         fog: false, // 禁用雾效果
       })
+
       // 创建渐变着色器
       new GradientShader(material, {
         uColor1: index > 3 ? 0xFBDF88 : 0x50BBFE, // 根据索引选择颜色1
@@ -785,25 +876,34 @@ export class World extends Mini3d {
 
       // 创建盒子几何体
       const geo = new BoxGeometry(0.1 * factor, 0.1 * factor, geoHeight)
+
       geo.translate(0, 0, geoHeight / 2) // 平移几何体
       const mesh = new Mesh(geo, material) // 创建网格
+
       mesh.renderOrder = 5 // 设置渲染顺序
       const areaBar = mesh // 保存引用
+
       const [x, y] = this.geoProjection(item.centroid) // 投影坐标
+
       areaBar.position.set(x, -y, this.depth + 0.45) // 设置位置
       areaBar.scale.set(1, 1, 0) // 初始缩放为0
-      areaBar.userData = { ...item } // 保存用户数据
+      areaBar.userData = {
+        ...item,
+      } // 保存用户数据
 
       // 创建光圈效果
       const guangQuan = this.createQuan(new Vector3(x, this.depth + 0.44, y), index)
+
       // 创建辉光效果
 
       const hg = this.createHUIGUANG(geoHeight, index > 3 ? 0xFFFEF4 : 0x77FBF5)
+
       areaBar.add(...hg) // 添加辉光到柱状图
       barGroup.add(areaBar) // 添加到组
       barGroup.rotation.x = -Math.PI / 2 // 旋转组
       // 创建标签
       const barLabel = labelStyle04(item, index, new Vector3(x, -y, this.depth + 1.1 + geoHeight))
+
       // 保存到数组
       this.allBar.push(areaBar)
       this.allBarMaterial.push(material)
@@ -822,6 +922,7 @@ export class World extends Mini3d {
     function labelStyle04(data, index, position) {
       // 创建3D标签
       let label = self.label3d.create('', 'provinces-label', false)
+
       // 初始化标签内容
       label.init(
         `<div class="provinces-label ${index > 4 ? 'yellow' : ''}">
@@ -847,6 +948,7 @@ export class World extends Mini3d {
    */
   createEvent() {
     let objectsHover = [] // 悬停对象数组
+
     /**
      * 重置材质
      * @param {object} mesh - 网格对象
@@ -858,6 +960,7 @@ export class World extends Mini3d {
         }
       })
     }
+
     /**
      * 设置高亮材质
      * @param {object} mesh - 网格对象
@@ -869,6 +972,7 @@ export class World extends Mini3d {
         }
       })
     }
+
     // 为每个事件元素添加交互
     this.eventElement.map((mesh) => {
       this.interactionManager.add(mesh) // 添加到交互管理器
@@ -876,20 +980,24 @@ export class World extends Mini3d {
       mesh.addEventListener('mousedown', (ev) => {
         console.log(ev.target.userData.name) // 输出名称
       })
+
       // 鼠标悬停事件
       mesh.addEventListener('mouseover', (event) => {
         if (!objectsHover.includes(event.target.parent)) {
           objectsHover.push(event.target.parent) // 添加到悬停数组
         }
+
         document.body.style.cursor = 'pointer' // 设置鼠标样式
         move(event.target.parent) // 设置高亮材质
       })
+
       // 鼠标离开事件
       mesh.addEventListener('mouseout', (event) => {
         objectsHover = objectsHover.filter(n => n.userData.name !== event.target.parent.userData.name) // 从悬停数组移除
         if (objectsHover.length > 0) {
           const mesh = objectsHover[objectsHover.length - 1] // 获取最后一个悬停对象
         }
+
         reset(event.target.parent) // 重置材质
         document.body.style.cursor = 'default' // 恢复鼠标样式
       })
@@ -905,9 +1013,11 @@ export class World extends Mini3d {
   createHUIGUANG(h, color) {
     // 创建平面几何体
     const geometry = new PlaneGeometry(0.35, h)
+
     geometry.translate(0, h / 2, 0) // 平移几何体
     // 获取辉光贴图
     const texture = this.assets.instance.getResource('huiguang')
+
     texture.colorSpace = SRGBColorSpace // 设置颜色空间
     texture.wrapS = RepeatWrapping // 设置S方向重复包裹
     texture.wrapT = RepeatWrapping // 设置T方向重复包裹
@@ -921,13 +1031,17 @@ export class World extends Mini3d {
       side: DoubleSide, // 双面材质
       blending: AdditiveBlending, // 加法混合
     })
+
     // 创建辉光网格
     const mesh = new Mesh(geometry, material)
+
     mesh.renderOrder = 10 // 设置渲染顺序
     mesh.rotateX(Math.PI / 2) // 旋转90度
     // 克隆网格创建多个辉光面
     const mesh2 = mesh.clone()
+
     const mesh3 = mesh.clone()
+
     mesh2.rotateY((Math.PI / 180) * 60) // 旋转60度
     mesh3.rotateY((Math.PI / 180) * 120) // 旋转120度
     return [mesh, mesh2, mesh3] // 返回三个辉光网格
@@ -942,9 +1056,12 @@ export class World extends Mini3d {
   createQuan(position, index) {
     // 获取光圈贴图
     const guangquan1 = this.assets.instance.getResource('guangquan1')
+
     const guangquan2 = this.assets.instance.getResource('guangquan2')
+
     // 创建平面几何体
     const geometry = new PlaneGeometry(0.5, 0.5)
+
     // 创建光圈材质1
     const material1 = new MeshBasicMaterial({
       color: 0xFFFFFF, // 白色
@@ -956,6 +1073,7 @@ export class World extends Mini3d {
       fog: false, // 禁用雾效果
       blending: AdditiveBlending, // 加法混合
     })
+
     // 创建光圈材质2
     const material2 = new MeshBasicMaterial({
       color: 0xFFFFFF, // 白色
@@ -967,9 +1085,12 @@ export class World extends Mini3d {
       fog: false, // 禁用雾效果
       blending: AdditiveBlending, // 加法混合
     })
+
     // 创建光圈网格
     const mesh1 = new Mesh(geometry, material1)
+
     const mesh2 = new Mesh(geometry, material2)
+
     mesh1.renderOrder = 6 // 设置渲染顺序
     mesh2.renderOrder = 6 // 设置渲染顺序
     mesh1.rotateX(-Math.PI / 2) // 旋转-90度
@@ -996,6 +1117,7 @@ export class World extends Mini3d {
   createDiffuse() {
     // 创建大平面几何体
     const geometry = new PlaneGeometry(200, 200)
+
     // 创建扩散材质
     const material = new MeshBasicMaterial({
       color: 0x000000, // 黑色
@@ -1003,6 +1125,7 @@ export class World extends Mini3d {
       transparent: true, // 启用透明度
       blending: CustomBlending, // 自定义混合模式
     })
+
     // 使用CustomBlending实现混合叠加
     material.blendEquation = AddEquation // 加法混合方程
     material.blendSrc = DstColorFactor // 源颜色因子
@@ -1027,8 +1150,10 @@ export class World extends Mini3d {
         }, 3)
       },
     })
+
     // 创建扩散网格
     const mesh = new Mesh(geometry, material)
+
     mesh.renderOrder = 3 // 设置渲染顺序
     mesh.rotation.x = -Math.PI / 2 // 旋转-90度
     mesh.position.set(0, 0.21, 0) // 设置位置
@@ -1056,8 +1181,10 @@ export class World extends Mini3d {
   createBottomBg() {
     // 创建平面几何体
     const geometry = new PlaneGeometry(20, 20)
+
     // 获取海洋贴图
     const texture = this.assets.instance.getResource('ocean')
+
     texture.colorSpace = SRGBColorSpace // 设置颜色空间
     texture.wrapS = RepeatWrapping // 设置S方向重复包裹
     texture.wrapT = RepeatWrapping // 设置T方向重复包裹
@@ -1068,8 +1195,10 @@ export class World extends Mini3d {
       opacity: 1, // 不透明度
       fog: false, // 禁用雾效果
     })
+
     // 创建底部背景网格
     const mesh = new Mesh(geometry, material)
+
     mesh.rotation.x = -Math.PI / 2 // 旋转-90度
     mesh.position.set(0, -0.7, 0) // 设置位置
     this.scene.add(mesh) // 添加到场景
@@ -1081,8 +1210,10 @@ export class World extends Mini3d {
   createChinaBlurLine() {
     // 创建平面几何体
     const geometry = new PlaneGeometry(147, 147)
+
     // 获取中国模糊边线贴图
     const texture = this.assets.instance.getResource('chinaBlurLine')
+
     texture.colorSpace = SRGBColorSpace // 设置颜色空间
     texture.wrapS = RepeatWrapping // 设置S方向重复包裹
     texture.wrapT = RepeatWrapping // 设置T方向重复包裹
@@ -1096,8 +1227,10 @@ export class World extends Mini3d {
       transparent: true, // 启用透明度
       opacity: 0.5, // 不透明度
     })
+
     // 创建模糊边线网格
     const mesh = new Mesh(geometry, material)
+
     mesh.rotateX(-Math.PI / 2) // 旋转-90度
     mesh.position.set(-19.3, -0.5, -19.7) // 设置位置
     this.scene.add(mesh) // 添加到场景
@@ -1108,16 +1241,23 @@ export class World extends Mini3d {
    */
   createLabel() {
     const self = this // 保存this引用
+
     const labelGroup = this.labelGroup // 标签组
+
     const label3d = this.label3d // 3D标签管理器
+
     const otherLabel = [] // 其他标签数组
+
     // 遍历中国数据创建省份标签
     chinaData.map((province) => {
       if (province.hide === true) // 如果隐藏则跳过
-        return false
+      { return false }
+
       const label = labelStyle01(province, label3d, labelGroup) // 创建标签
+
       otherLabel.push(label) // 添加到数组
     })
+
     // 创建地图焦点标签
     const mapFocusLabel = labelStyle02(
       {
@@ -1126,6 +1266,7 @@ export class World extends Mini3d {
       label3d,
       labelGroup,
     )
+
     // 创建图标标签1
     const iconLabel1 = labelStyle03(
       {
@@ -1138,6 +1279,7 @@ export class World extends Mini3d {
       label3d,
       labelGroup,
     )
+
     // 创建图标标签2
     const iconLabel2 = labelStyle03(
       {
@@ -1150,6 +1292,7 @@ export class World extends Mini3d {
       label3d,
       labelGroup,
     )
+
     // 添加所有标签到数组
     otherLabel.push(mapFocusLabel)
     otherLabel.push(iconLabel1)
@@ -1164,7 +1307,9 @@ export class World extends Mini3d {
      */
     function labelStyle01(province, label3d, labelGroup) {
       const label = label3d.create('', `china-label ${province.blur ? ' blur' : ''}`, false) // 创建标签
+
       const [x, y] = self.geoProjection(province.center) // 投影坐标
+
       label.init(
         `<div class="other-label"><img class="label-icon" src="${labelIcon}">${province.name}</div>`, // 标签内容
         new Vector3(x, -y, 0.4), // 标签位置
@@ -1173,6 +1318,7 @@ export class World extends Mini3d {
       label.setParent(labelGroup) // 设置父级
       return label // 返回标签对象
     }
+
     /**
      * 创建地图焦点标签样式2
      * @param {object} province - 省份数据
@@ -1182,7 +1328,9 @@ export class World extends Mini3d {
      */
     function labelStyle02(province, label3d, labelGroup) {
       const label = label3d.create('', 'map-label', false) // 创建标签
+
       const [x, y] = self.geoProjection(province.center) // 投影坐标
+
       label.init(
         `<div class="other-label"><span>${province.name}</span><span>${province.enName}</span></div>`, // 标签内容
         new Vector3(x, -y, 0.4), // 标签位置
@@ -1191,6 +1339,7 @@ export class World extends Mini3d {
       label.setParent(labelGroup) // 设置父级
       return label // 返回标签对象
     }
+
     /**
      * 创建装饰标签样式3
      * @param {object} data - 数据对象
@@ -1200,7 +1349,9 @@ export class World extends Mini3d {
      */
     function labelStyle03(data, label3d, labelGroup) {
       const label = label3d.create('', `decoration-label  ${data.reflect ? ' reflect' : ''}`, false) // 创建标签
+
       const [x, y] = self.geoProjection(data.center) // 投影坐标
+
       label.init(
         `<div class="other-label"><img class="label-icon" style="width:${data.width};height:${data.height}" src="${data.icon}">`, // 标签内容
         new Vector3(x, -y, 0.4), // 标签位置
@@ -1209,9 +1360,12 @@ export class World extends Mini3d {
       label.setParent(labelGroup) // 设置父级
       return label // 返回标签对象
     }
+
     function labelStyle04(data, label3d, labelGroup, index) {
       const label = label3d.create('', 'provinces-label', false)
+
       const [x, y] = self.geoProjection(data.center)
+
       label.init(
         `<div class="provinces-label">
       <div class="provinces-label-wrap">
@@ -1236,9 +1390,12 @@ export class World extends Mini3d {
    */
   createRotateBorder() {
     const max = 12 // 最大尺寸
+
     // 获取旋转边框贴图
     const rotationBorder1 = this.assets.instance.getResource('rotationBorder1')
+
     const rotationBorder2 = this.assets.instance.getResource('rotationBorder2')
+
     // 创建第一个旋转平面 （外圈 ）
     const plane01 = new Plane(this, {
       // width: max * 1.85, // 宽度
@@ -1257,6 +1414,7 @@ export class World extends Mini3d {
       }),
       position: new Vector3(0, 0.28, 0), // 位置
     })
+
     plane01.instance.rotation.x = -Math.PI / 2 // 旋转-90度
     plane01.instance.renderOrder = 6 // 设置渲染顺序
     plane01.instance.scale.set(0, 0, 0) // 初始缩放为0
@@ -1279,6 +1437,7 @@ export class World extends Mini3d {
       }),
       position: new Vector3(0, 0.3, 0), // 位置
     })
+
     plane02.instance.rotation.x = -Math.PI / 2 // 旋转-90度
     plane02.instance.renderOrder = 6 // 设置渲染顺序
     plane02.instance.scale.set(0, 0, 0) // 初始缩放为0
@@ -1297,16 +1456,23 @@ export class World extends Mini3d {
     this.scene.add(this.flyLineGroup) // 添加到场景
     // 获取飞线贴图
     const texture = this.assets.instance.getResource('mapFlyline')
+
     texture.wrapS = texture.wrapT = RepeatWrapping // 设置重复包裹
     texture.repeat.set(0.5, 2) // 设置重复次数
     // 飞线参数
     const tubeRadius = 0.1 // 管道半径
+
     const tubeSegments = 32 // 管道段数
+
     const tubeRadialSegments = 2 // 径向段数
+
     const closed = false // 是否闭合
+
     // 计算中心点
     const [centerX, centerY] = this.geoProjection(this.flyLineCenter)
+
     const centerPoint = new Vector3(centerX, -centerY, 0)
+
     // 创建飞线材质
     const material = new MeshBasicMaterial({
       map: texture, // 贴图
@@ -1317,25 +1483,33 @@ export class World extends Mini3d {
       depthTest: false, // 禁用深度测试
       blending: AdditiveBlending, // 加法混合
     })
+
     // 添加贴图滚动动画
     this.time.on('tick', () => {
       texture.offset.x -= 0.006 // 每帧移动贴图
     })
+
     // 遍历前7个省份创建飞线
     provincesData
       .filter((item, index) => index < 15) // 过滤前7个
       .map((city) => {
         const [x, y] = this.geoProjection(city.centroid) // 投影坐标
+
         const point = new Vector3(x, -y, 0) // 目标点
+
         const center = new Vector3() // 中心点
+
         center.addVectors(centerPoint, point).multiplyScalar(0.5) // 计算中心
         center.setZ(3) // 设置Z坐标
         // 创建贝塞尔曲线
         const curve = new QuadraticBezierCurve3(centerPoint, center, point)
+
         // 创建管道几何体
         const tubeGeometry = new TubeGeometry(curve, tubeSegments, tubeRadius, tubeRadialSegments, closed)
+
         // 创建飞线网格
         const mesh = new Mesh(tubeGeometry, material)
+
         mesh.rotation.x = -Math.PI / 2 // 旋转-90度
         mesh.position.set(0, this.depth + 0.44, 0) // 设置位置
         mesh.renderOrder = 21 // 设置渲染顺序
@@ -1348,8 +1522,13 @@ export class World extends Mini3d {
    */
   createFocus() {
     // 创建焦点对象
-    const focusObj = new Focus(this, { color1: 0xBDFDFD, color2: 0xBDFDFD }) // 焦点颜色
+    const focusObj = new Focus(this, {
+      color1: 0xBDFDFD,
+      color2: 0xBDFDFD,
+    }) // 焦点颜色
+
     const [x, y] = this.geoProjection(this.flyLineCenter) // 投影坐标
+
     focusObj.position.set(x, -y, this.depth + 0.44) // 设置位置
     focusObj.scale.set(1, 1, 1) // 设置缩放
     this.flyLineFocusGroup.add(focusObj) // 添加到飞线焦点组
@@ -1378,6 +1557,7 @@ export class World extends Mini3d {
         sizeAttenuation: true, // 启用大小衰减
       }),
     })
+
     // 创建粒子组
     this.particleGroup = new Group()
     this.scene.add(this.particleGroup) // 添加到场景
@@ -1397,6 +1577,7 @@ export class World extends Mini3d {
     this.scene.add(this.scatterGroup) // 添加到场景
     // 获取箭头贴图
     const texture = this.assets.instance.getResource('arrow')
+
     // 创建精灵材质
     const material = new SpriteMaterial({
       map: texture, // 贴图
@@ -1405,16 +1586,22 @@ export class World extends Mini3d {
       transparent: true, // 启用透明度
       depthTest: false, // 禁用深度测试
     })
+
     // 获取散点数据并按值排序
     const scatterAllData = sortByValue(scatterData)
+
     const max = scatterAllData[0].value // 最大值
+
     // 遍历数据创建散点
     scatterAllData.map((data) => {
       const sprite = new Sprite(material) // 创建精灵
+
       sprite.renderOrder = 23 // 设置渲染顺序
       const scale = 0.1 + (data.value / max) * 0.2 // 计算缩放
+
       sprite.scale.set(scale, scale, scale) // 设置缩放
       const [x, y] = this.geoProjection([data.lng, data.lat]) // 投影坐标
+
       sprite.position.set(x, -y, this.depth + 0.45) // 设置位置
       sprite.userData.position = [x, -y, this.depth + 0.45] // 保存位置数据
       this.scatterGroup.add(sprite) // 添加到散点组
@@ -1426,6 +1613,7 @@ export class World extends Mini3d {
    */
   createInfoPoint() {
     const self = this // 保存this引用
+
     this.InfoPointGroup = new Group() // 创建信息点组
     this.scene.add(this.InfoPointGroup) // 添加到场景
     this.InfoPointGroup.visible = false // 初始隐藏
@@ -1434,12 +1622,17 @@ export class World extends Mini3d {
     this.infoPointLabelTime = null // 信息点标签时间
     this.infoLabelElement = [] // 信息标签元素数组
     const label3d = this.label3d // 3D标签管理器
+
     // 获取点贴图
     const texture = this.assets.instance.getResource('point')
+
     const colors = [0xFFFEF4, 0x77FBF5] // 颜色数组
+
     // 获取信息数据并按值排序
     const infoAllData = sortByValue(infoData)
+
     const max = infoAllData[0].value // 最大值
+
     // 遍历数据创建信息点
     infoAllData.map((data, index) => {
       // 创建精灵材质
@@ -1450,13 +1643,18 @@ export class World extends Mini3d {
         transparent: true, // 启用透明度
         depthTest: false, // 禁用深度测试
       })
+
       // 创建精灵
       const sprite = new Sprite(material)
+
       sprite.renderOrder = 23 // 设置渲染顺序
       const scale = 0.7 + (data.value / max) * 0.4 // 计算缩放
+
       sprite.scale.set(scale, scale, scale) // 设置缩放
       const [x, y] = this.geoProjection([data.lng, data.lat]) // 投影坐标
+
       const position = [x, -y, this.depth + 0.7] // 位置
+
       sprite.position.set(...position) // 设置位置
       sprite.userData.position = [...position] // 保存位置数据
       sprite.userData = {
@@ -1469,12 +1667,14 @@ export class World extends Mini3d {
       this.InfoPointGroup.add(sprite) // 添加到信息点组
       // 创建信息标签
       const label = infoLabel(data, label3d, this.InfoPointGroup)
+
       this.infoLabelElement.push(label) // 添加到标签数组
       this.interactionManager.add(sprite) // 添加到交互管理器
       // 鼠标按下事件
       sprite.addEventListener('mousedown', (ev) => {
         if (this.clicked || !this.InfoPointGroup.visible) // 如果已点击或不可见则返回
-          return false
+        { return false }
+
         this.clicked = true // 设置点击状态
         this.infoPointIndex = ev.target.userData.index // 设置信息点索引
         this.infoLabelElement.map((label) => {
@@ -1483,14 +1683,17 @@ export class World extends Mini3d {
         label.visible = true // 显示当前标签
         this.createInfoPointLabelLoop() // 创建信息点标签循环
       })
+
       // 鼠标抬起事件
       sprite.addEventListener('mouseup', (ev) => {
         this.clicked = false // 重置点击状态
       })
+
       // 鼠标悬停事件
       sprite.addEventListener('mouseover', (event) => {
         document.body.style.cursor = 'pointer' // 设置鼠标样式
       })
+
       // 鼠标离开事件
       sprite.addEventListener('mouseout', (event) => {
         document.body.style.cursor = 'default' // 恢复鼠标样式
@@ -1498,7 +1701,9 @@ export class World extends Mini3d {
     })
     function infoLabel(data, label3d, labelGroup) {
       const label = label3d.create('', 'info-point', true)
+
       const [x, y] = self.geoProjection([data.lng, data.lat])
+
       label.init(
         ` <div class="info-point-wrap">
           <div class="info-point-wrap-inner">
@@ -1534,6 +1739,7 @@ export class World extends Mini3d {
       if (this.infoPointIndex >= this.infoLabelElement.length) {
         this.infoPointIndex = 0 // 重置索引
       }
+
       // 遍历标签元素
       this.infoLabelElement.map((label, i) => {
         if (this.infoPointIndex === i) {
@@ -1552,8 +1758,10 @@ export class World extends Mini3d {
   createStorke() {
     // 获取地图轮廓数据
     const mapStroke = this.assets.instance.getResource('mapStroke')
+
     // 获取路径线贴图
     const texture = this.assets.instance.getResource('pathLine3')
+
     texture.wrapS = texture.wrapT = RepeatWrapping // 设置重复包裹
     texture.repeat.set(2, 1) // 设置重复次数
 
@@ -1576,6 +1784,7 @@ export class World extends Mini3d {
       renderOrder: 22, // 渲染顺序
       tubeRadius: 0.03, // 管道半径
     })
+
     // 设置父级
     this.focusMapGroup.add(pathLine.lineGroup) // 添加到焦点地图组
     // 添加贴图滚动动画
