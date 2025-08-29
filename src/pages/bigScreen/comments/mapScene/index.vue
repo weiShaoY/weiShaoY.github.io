@@ -72,7 +72,7 @@ defineExpose({
 <template>
   <!-- 地图容器 -->
   <div
-    class="map !h-[100vh]"
+    class="map absolute bottom-0 left-0 right-0 top-0 z-1 bg-black !h-[100vh]"
   >
     <!-- 地图画布 -->
     <canvas
@@ -83,16 +83,33 @@ defineExpose({
 </template>
 
 <style lang="scss">
+.large-screen {
+  &-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    pointer-events: none;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      opacity: 0.5;
+      background: url('@/assets/images/bigScreen/bg.png') no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
 /* 地图容器样式 */
 .map {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #000;
-
   /* 信息点样式 */
   .info-point {
     background: rgba(0, 0, 0, 0.5);
@@ -313,11 +330,6 @@ defineExpose({
 
   /* 装饰标签样式 */
   .decoration-label {
-    // &.reflect {
-    //   -webkit-box-reflect: below 0 -webkit-linear-gradient(transparent, transparent 20%, rgba(255, 255, 255, 0.3));
-    // }
-    // padding-bottom: 10px;
-
     /* 装饰图标 */
     .label-icon {
       display: block;

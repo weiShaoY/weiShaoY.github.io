@@ -66,12 +66,12 @@ function toUpper(text: string) {
 
 <template>
   <div
-    class="top-count-card"
+    class="top-count-card absolute left-140 right-140 top-32 z-9 flex justify-center"
   >
     <div
       v-for="(info, index) in totalView"
       :key="index"
-      class="count-card flex items-center"
+      class="count-card flex items-center px-12"
     >
       <div
         class="count-card-left flex items-center"

@@ -3,7 +3,7 @@ import img_menuBtnHover from '@/assets/images/bigScreen/menu-btn-hover.png'
 
 import img_menuBtn from '@/assets/images/bigScreen/menu-btn.png'
 
-const activeIndex = defineModel<number>()
+const activeIndex = ref(1)
 
 const menuList = [
   {

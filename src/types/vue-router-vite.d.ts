@@ -44,8 +44,6 @@ declare module 'vue-router/auto-routes' {
     '/bigScreen/modules/global-right-chart/ProportionPopulationConsumption': RouteRecordInfo<'/bigScreen/modules/global-right-chart/ProportionPopulationConsumption', '/bigScreen/modules/global-right-chart/ProportionPopulationConsumption', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-right-chart/PurposeSpecialFunds': RouteRecordInfo<'/bigScreen/modules/global-right-chart/PurposeSpecialFunds', '/bigScreen/modules/global-right-chart/PurposeSpecialFunds', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation': RouteRecordInfo<'/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation', '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation', Record<never, never>, Record<never, never>>,
-    '/bigScreen/备份': RouteRecordInfo<'/bigScreen/备份', '/bigScreen/备份', Record<never, never>, Record<never, never>>,
-    '/bigScreen/备份2': RouteRecordInfo<'/bigScreen/备份2', '/bigScreen/备份2', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/': RouteRecordInfo<'/blog/creativity/calendar/', '/blog/creativity/calendar', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/left': RouteRecordInfo<'/blog/creativity/calendar/left', '/blog/creativity/calendar/left', Record<never, never>, Record<never, never>>,
     '/blog/creativity/calendar/right': RouteRecordInfo<'/blog/creativity/calendar/right', '/blog/creativity/calendar/right', Record<never, never>, Record<never, never>>,
@@ -230,14 +228,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation.vue': {
       routes: '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation'
-      views: never
-    }
-    'src/pages/bigScreen/备份.vue': {
-      routes: '/bigScreen/备份'
-      views: never
-    }
-    'src/pages/bigScreen/备份2.vue': {
-      routes: '/bigScreen/备份2'
       views: never
     }
     'src/pages/blog/creativity/calendar/index.vue': {

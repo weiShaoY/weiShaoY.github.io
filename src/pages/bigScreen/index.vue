@@ -29,34 +29,6 @@ const assets = shallowRef<Assets | null>(null)
 
 const mapSceneRef = ref<InstanceType<typeof MapScene> | null>(null)
 
-const state = reactive({
-  // 进度
-  progress: 0,
-
-  // 当前顶部导航索引
-  activeIndex: 1,
-
-  // 卡片统计数据
-  totalView: [
-    {
-      icon: 'xiaoshoujine',
-      zh: '2024年生产总值',
-      en: 'Gross Domestic Product in 2024',
-      value: 31500,
-      unit: '亿元',
-      decimals: 0,
-    },
-    {
-      icon: 'zongxiaoliang',
-      zh: '2024年常驻人数',
-      en: 'resident population in 2024',
-      value: 15000,
-      unit: '万人',
-      decimals: 0,
-    },
-  ],
-})
-
 /**
  * 地图开始动画播放完成
  */
@@ -134,22 +106,6 @@ function handleMapPlayComplete() {
 function initAssets(onLoadCallback: (() => void) | undefined) {
   assets.value = new Assets()
 
-  // 资源加载进度
-  const params = {
-    progress: 0,
-  }
-
-  assets.value.instance.on('onProgress', (path: string, itemsLoaded: number, itemsTotal: number) => {
-    const p = Math.floor((itemsLoaded / itemsTotal) * 100)
-
-    gsap.to(params, {
-      progress: p,
-      onUpdate: () => {
-        state.progress = Math.floor(params.progress)
-      },
-    })
-  })
-
   // 资源加载完成
   assets.value.instance.on('onLoad', () => {
     onLoadCallback && onLoadCallback()
@@ -193,7 +149,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="large-screen"
+    class="large-screen relative mx-auto h-full w-full bg-[#050F33] text-3.5"
   >
     <!-- 地图 -->
     <MapScene
@@ -209,9 +165,7 @@ onMounted(() => {
       <GlobalHeader />
 
       <!-- 顶部菜单 -->
-      <GlobalMenu
-        v-model="state.activeIndex"
-      />
+      <GlobalMenu />
 
       <!-- 顶部统计卡片 -->
       <GlobalCountCard />
@@ -238,7 +192,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@use './home.scss';
+body {
+  font-family: 'SourceHanSansCN', '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', Helvetica, 'Segoe UI',
+    'Arial', 'Roboto', 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  background: #000;
+  -webkit-user-select: none; /*webkit浏览器*/
+  user-select: none;
+}
 
 .large-screen {
   font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
