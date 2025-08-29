@@ -4,7 +4,7 @@ import {
   mCard,
   mCountTo,
   mPie,
-} from '../../comments'
+} from '../../components'
 
 const pie = ref(null)
 

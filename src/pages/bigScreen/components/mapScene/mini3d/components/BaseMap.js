@@ -1,6 +1,5 @@
 import { geoMercator } from 'd3-geo'
 import {
-  AdditiveBlending,
   BufferAttribute,
   Color,
   DoubleSide,
@@ -8,22 +7,18 @@ import {
   Group,
   Mesh,
   MeshBasicMaterial,
-  MeshLambertMaterial,
-  MeshStandardMaterial,
-  MultiplyBlending,
   Object3D,
-  RepeatWrapping,
   Shape,
+  ShapeGeometry,
   Vector2,
   Vector3,
 } from 'three'
-import { transfromMapGeoJSON } from '../../mini3d'
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils'
+import { getBoundBox, transfromMapGeoJSON } from '..'
 
-export class ExtrudeMap {
-  constructor({ assets, time }, config = {}) {
+export class BaseMap {
+  constructor({}, config = {}) {
     this.mapGroup = new Group()
-    this.assets = assets
-    this.time = time
     this.coordinates = []
     this.config = Object.assign(
       {
@@ -32,22 +27,16 @@ export class ExtrudeMap {
         geoProjectionScale: 120,
         data: '',
         renderOrder: 1,
-        topFaceMaterial: new MeshBasicMaterial({
+        merge: false,
+        material: new MeshBasicMaterial({
           color: 0x18263B,
           transparent: true,
           opacity: 1,
         }),
-        sideMaterial: new MeshBasicMaterial({
-          color: 0x07152B,
-          transparent: true,
-          opacity: 1,
-        }),
-        depth: 0.1,
       },
       config,
     )
     this.mapGroup.position.copy(this.config.position)
-
     const mapData = transfromMapGeoJSON(this.config.data)
     this.create(mapData)
   }
@@ -60,21 +49,16 @@ export class ExtrudeMap {
   }
 
   create(mapData) {
+    const { merge } = this.config
+    const shapes = []
     mapData.features.forEach((feature) => {
       const group = new Object3D()
 
       const { name, center = [], centroid = [] } = feature.properties
       this.coordinates.push({ name, center, centroid })
-
-      const extrudeSettings = {
-        depth: this.config.depth,
-        bevelEnabled: true,
-        bevelSegments: 1,
-        bevelThickness: 0.1,
-      }
-      const materials = [this.config.topFaceMaterial, this.config.sideMaterial]
+      group.userData.name = name
       feature.geometry.coordinates.forEach((multiPolygon) => {
-        multiPolygon.forEach((polygon, index) => {
+        multiPolygon.forEach((polygon) => {
           const shape = new Shape()
           for (let i = 0; i < polygon.length; i++) {
             if (!polygon[i][0] || !polygon[i][1]) {
@@ -87,14 +71,28 @@ export class ExtrudeMap {
             shape.lineTo(x, -y)
           }
 
-          const geometry = new ExtrudeGeometry(shape, extrudeSettings)
-          const mesh = new Mesh(geometry, materials)
-
-          group.add(mesh)
+          const geometry = new ShapeGeometry(shape)
+          if (merge) {
+            shapes.push(geometry)
+          }
+          else {
+            const mesh = new Mesh(geometry, this.config.material)
+            mesh.renderOrder = this.config.renderOrder
+            mesh.userData.name = name
+            group.add(mesh)
+          }
         })
       })
-      this.mapGroup.add(group)
+      if (!merge) {
+        this.mapGroup.add(group)
+      }
     })
+    if (merge) {
+      const geometry = mergeGeometries(shapes)
+      const mesh = new Mesh(geometry, this.config.material)
+      mesh.renderOrder = this.config.renderOrder
+      this.mapGroup.add(mesh)
+    }
   }
 
   getCoordinates() {

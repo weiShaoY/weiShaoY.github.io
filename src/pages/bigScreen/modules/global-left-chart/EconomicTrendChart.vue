@@ -3,7 +3,7 @@ import * as echarts from 'echarts'
 
 import VChart from 'vue-echarts'
 
-import { mCard } from '../../comments'
+import { mCard } from '../../components'
 
 const option = ref({
   title: {

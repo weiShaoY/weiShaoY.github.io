@@ -7,7 +7,7 @@ import img_bottomMenuBtnHover from '@/assets/images/bigScreen/bottom-menu-btn-ho
 
 import img_bottomMenuBtn from '@/assets/images/bigScreen/bottom-menu-btn.png'
 
-import { mSvglineAnimation } from '../../comments'
+import { mSvglineAnimation } from '../../components'
 
 const activeIndex = ref(1)
 

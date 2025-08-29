@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import { AdditiveBlending, Color, DoubleSide, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry } from 'three'
-import { emptyObject } from '../../mini3d'
+import { emptyObject } from '..'
 
 export class Focus extends Object3D {
   constructor(self, config) {

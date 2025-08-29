@@ -5,7 +5,7 @@ import img_count_icon1 from '@/assets/images/bigScreen/count-icon1.png'
 
 import img_count_icon2 from '@/assets/images/bigScreen/count-icon2.png'
 
-import { mCountTo } from '../../comments'
+import { mCountTo } from '../../components'
 
 type itemType = {
 

@@ -23,11 +23,11 @@ declare module 'vue-router/auto-routes' {
     '/admin/identityQuery/search/': RouteRecordInfo<'/admin/identityQuery/search/', '/admin/identityQuery/search', Record<never, never>, Record<never, never>>,
     '/admin/login/': RouteRecordInfo<'/admin/login/', '/admin/login', Record<never, never>, Record<never, never>>,
     '/bigScreen/': RouteRecordInfo<'/bigScreen/', '/bigScreen', Record<never, never>, Record<never, never>>,
-    '/bigScreen/comments/mapScene/': RouteRecordInfo<'/bigScreen/comments/mapScene/', '/bigScreen/comments/mapScene', Record<never, never>, Record<never, never>>,
-    '/bigScreen/comments/mCard/': RouteRecordInfo<'/bigScreen/comments/mCard/', '/bigScreen/comments/mCard', Record<never, never>, Record<never, never>>,
-    '/bigScreen/comments/mCountTo/vue-countTo': RouteRecordInfo<'/bigScreen/comments/mCountTo/vue-countTo', '/bigScreen/comments/mCountTo/vue-countTo', Record<never, never>, Record<never, never>>,
-    '/bigScreen/comments/mPie/': RouteRecordInfo<'/bigScreen/comments/mPie/', '/bigScreen/comments/mPie', Record<never, never>, Record<never, never>>,
-    '/bigScreen/comments/mSvglineAnimation/': RouteRecordInfo<'/bigScreen/comments/mSvglineAnimation/', '/bigScreen/comments/mSvglineAnimation', Record<never, never>, Record<never, never>>,
+    '/bigScreen/components/mapScene/': RouteRecordInfo<'/bigScreen/components/mapScene/', '/bigScreen/components/mapScene', Record<never, never>, Record<never, never>>,
+    '/bigScreen/components/mCard/': RouteRecordInfo<'/bigScreen/components/mCard/', '/bigScreen/components/mCard', Record<never, never>, Record<never, never>>,
+    '/bigScreen/components/mCountTo/vue-countTo': RouteRecordInfo<'/bigScreen/components/mCountTo/vue-countTo', '/bigScreen/components/mCountTo/vue-countTo', Record<never, never>, Record<never, never>>,
+    '/bigScreen/components/mPie/': RouteRecordInfo<'/bigScreen/components/mPie/', '/bigScreen/components/mPie', Record<never, never>, Record<never, never>>,
+    '/bigScreen/components/mSvglineAnimation/': RouteRecordInfo<'/bigScreen/components/mSvglineAnimation/', '/bigScreen/components/mSvglineAnimation', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-count-card/': RouteRecordInfo<'/bigScreen/modules/global-count-card/', '/bigScreen/modules/global-count-card', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-decorative-line/': RouteRecordInfo<'/bigScreen/modules/global-decorative-line/', '/bigScreen/modules/global-decorative-line', Record<never, never>, Record<never, never>>,
     '/bigScreen/modules/global-footer/': RouteRecordInfo<'/bigScreen/modules/global-footer/', '/bigScreen/modules/global-footer', Record<never, never>, Record<never, never>>,
@@ -146,24 +146,24 @@ declare module 'vue-router/auto-routes' {
       routes: '/bigScreen/'
       views: never
     }
-    'src/pages/bigScreen/comments/mapScene/index.vue': {
-      routes: '/bigScreen/comments/mapScene/'
+    'src/pages/bigScreen/components/mapScene/index.vue': {
+      routes: '/bigScreen/components/mapScene/'
       views: never
     }
-    'src/pages/bigScreen/comments/mCard/index.vue': {
-      routes: '/bigScreen/comments/mCard/'
+    'src/pages/bigScreen/components/mCard/index.vue': {
+      routes: '/bigScreen/components/mCard/'
       views: never
     }
-    'src/pages/bigScreen/comments/mCountTo/vue-countTo.vue': {
-      routes: '/bigScreen/comments/mCountTo/vue-countTo'
+    'src/pages/bigScreen/components/mCountTo/vue-countTo.vue': {
+      routes: '/bigScreen/components/mCountTo/vue-countTo'
       views: never
     }
-    'src/pages/bigScreen/comments/mPie/index.vue': {
-      routes: '/bigScreen/comments/mPie/'
+    'src/pages/bigScreen/components/mPie/index.vue': {
+      routes: '/bigScreen/components/mPie/'
       views: never
     }
-    'src/pages/bigScreen/comments/mSvglineAnimation/index.vue': {
-      routes: '/bigScreen/comments/mSvglineAnimation/'
+    'src/pages/bigScreen/components/mSvglineAnimation/index.vue': {
+      routes: '/bigScreen/components/mSvglineAnimation/'
       views: never
     }
     'src/pages/bigScreen/modules/global-count-card/index.vue': {

@@ -8,7 +8,7 @@ import img_pieMidCircle from '@/assets/images/bigScreen/pie-mid-circle.png'
 
 import img_pieZsBg from '@/assets/images/bigScreen/pie-zs-bg.png'
 
-import { mCard } from '../../comments'
+import { mCard } from '../../components'
 
 const state = reactive({
   pieDataColor: ['#17E6C3', '#40CFFF', '#1979FF', '#FFC472'],

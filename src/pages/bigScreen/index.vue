@@ -3,9 +3,9 @@ import autofit from 'autofit.js'
 
 import gsap from 'gsap'
 
-import { Assets } from './comments/mapScene/assets'
+import { Assets } from './components/mapScene/assets'
 
-import MapScene from './comments/mapScene/index.vue'
+import MapScene from './components/mapScene/index.vue'
 
 import GlobalCountCard from './modules/global-count-card/index.vue'
 
