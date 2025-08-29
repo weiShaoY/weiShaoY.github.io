@@ -41,13 +41,7 @@ import { InteractionManager } from 'three.interactive'
 import emitter from '../../utils/emitter'
 
 // 导入地图数据
-import chinaData from './map/chinaData' // 中国地图数据
-
-import infoData from './map/infoData' // 信息点数据
-
-import provincesData from './map/provincesData' // 省份数据
-
-import scatterData from './map/scatter' // 散点数据
+import { chinaData, infoData, provincesData, scatterData } from './data'
 
 // 导入自定义 3D 组件
 import {

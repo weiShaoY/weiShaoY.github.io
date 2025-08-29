@@ -1,7 +1,7 @@
 /**
  *  信息点数据
  */
-export default [
+export const infoData = [
   {
     name: '常德市', // 常德市
     level: '一级',

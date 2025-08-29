@@ -1,7 +1,7 @@
 /**
  *  飞线数据
  */
-export default [
+export const provincesData = [
   {
     name: '长沙市',
     enName: 'Changsha',

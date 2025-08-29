@@ -87,7 +87,7 @@
 //     lat: 28.3170,
 //   },
 // ]
-export default [
+export const scatterData = [
   {
     name: '长沙市',
     value: 180,

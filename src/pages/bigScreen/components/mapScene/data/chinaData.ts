@@ -1,4 +1,4 @@
-export default [
+export const chinaData = [
   {
     name: '北京市',
     center: [116.405285, 39.904989],
