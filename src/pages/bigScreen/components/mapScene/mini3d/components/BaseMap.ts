@@ -1,29 +1,46 @@
 import { geoMercator } from 'd3-geo'
+
 import {
-  BufferAttribute,
-  Color,
-  DoubleSide,
-  ExtrudeGeometry,
   Group,
   Mesh,
   MeshBasicMaterial,
   Object3D,
   Shape,
   ShapeGeometry,
-  Vector2,
   Vector3,
 } from 'three'
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils'
-import { getBoundBox, transfromMapGeoJSON } from '..'
+
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
+
+import { transfromMapGeoJSON } from '..'
 
 export class BaseMap {
-  constructor({}, config = {}) {
+  private mapGroup: Group
+
+  private coordinates: Array<{
+    name: string
+    center: number[]
+    centroid: number[]
+  }>
+
+  private config: {
+    position: Vector3
+    geoProjectionCenter: [number, number]
+    geoProjectionScale: number
+    data: string
+    renderOrder: number
+    merge: boolean
+    material: MeshBasicMaterial
+  }
+
+  constructor(config = {
+}) {
     this.mapGroup = new Group()
     this.coordinates = []
     this.config = Object.assign(
       {
         position: new Vector3(0, 0, 0),
-        geoProjectionCenter: new Vector2(0, 0),
+        geoProjectionCenter: [0, 0] as [number, number],
         geoProjectionScale: 120,
         data: '',
         renderOrder: 1,
@@ -37,46 +54,73 @@ export class BaseMap {
       config,
     )
     this.mapGroup.position.copy(this.config.position)
+
+    // 检查数据是否有效
+    if (!this.config.data || this.config.data.trim() === '') {
+      console.warn('BaseMap: 地图数据为空，跳过创建')
+      return
+    }
+
     const mapData = transfromMapGeoJSON(this.config.data)
+
     this.create(mapData)
   }
 
-  geoProjection(args) {
+  geoProjection(args: [number, number]): [number, number] | null {
     return geoMercator()
       .center(this.config.geoProjectionCenter)
       .scale(this.config.geoProjectionScale)
       .translate([0, 0])(args)
   }
 
-  create(mapData) {
+  create(mapData: any) {
     const { merge } = this.config
-    const shapes = []
-    mapData.features.forEach((feature) => {
+
+    const shapes: any[] = []
+
+    mapData.features.forEach((feature: any) => {
       const group = new Object3D()
 
       const { name, center = [], centroid = [] } = feature.properties
-      this.coordinates.push({ name, center, centroid })
+
+      this.coordinates.push({
+        name,
+        center,
+        centroid,
+      })
       group.userData.name = name
-      feature.geometry.coordinates.forEach((multiPolygon) => {
-        multiPolygon.forEach((polygon) => {
+      feature.geometry.coordinates.forEach((multiPolygon: any) => {
+        multiPolygon.forEach((polygon: any) => {
           const shape = new Shape()
+
           for (let i = 0; i < polygon.length; i++) {
             if (!polygon[i][0] || !polygon[i][1]) {
               return false
             }
-            const [x, y] = this.geoProjection(polygon[i])
+
+            const projected = this.geoProjection(polygon[i])
+
+            if (!projected) {
+              continue
+            }
+
+            const [x, y] = projected
+
             if (i === 0) {
               shape.moveTo(x, -y)
             }
+
             shape.lineTo(x, -y)
           }
 
           const geometry = new ShapeGeometry(shape)
+
           if (merge) {
             shapes.push(geometry)
           }
           else {
             const mesh = new Mesh(geometry, this.config.material)
+
             mesh.renderOrder = this.config.renderOrder
             mesh.userData.name = name
             group.add(mesh)
@@ -89,7 +133,9 @@ export class BaseMap {
     })
     if (merge) {
       const geometry = mergeGeometries(shapes)
+
       const mesh = new Mesh(geometry, this.config.material)
+
       mesh.renderOrder = this.config.renderOrder
       this.mapGroup.add(mesh)
     }
@@ -99,7 +145,7 @@ export class BaseMap {
     return this.coordinates
   }
 
-  setParent(parent) {
+  setParent(parent: Object3D) {
     parent.add(this.mapGroup)
   }
 }

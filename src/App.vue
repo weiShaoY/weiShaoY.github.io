@@ -17,7 +17,7 @@ watchEffect(() => {
 /**
  *  是否为开发环境
  */
-const isDev = false
+const isDev = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
 onMounted(() => {
   homeMittBus.emit('startLoading', 3)
