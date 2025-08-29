@@ -70,11 +70,12 @@ import labelIcon from './texture/label-icon.png'
 
 /**
  * 按数值排序函数
- * @param {Array} data - 需要排序的数据数组
- * @returns {Array} 排序后的数据数组
+ * @param  data - 需要排序的数据数组，每个元素必须包含 value 属性，且为数字类型
+ * @returns  排序后的数据数组
  */
-function sortByValue(data) {
-  data.sort((a, b) => b.value - a.value) // 按 value 值降序排列
+function sortByValue<T extends { value: number }>(data: T[]): T[] {
+  // 按 value 值降序排列
+  data.sort((a, b) => b.value - a.value)
   return data
 }
 
@@ -88,7 +89,7 @@ export class World extends Mini3d {
    * @param  canvas - 画布元素
    * @param  assets - 资源对象
    */
-  constructor(canvas, assets) {
+  constructor(canvas: HTMLCanvasElement, assets) {
     super(canvas) // 调用父类构造函数
 
     // 地理投影中心坐标 [经度, 纬度] (省中心点)
@@ -1131,7 +1132,7 @@ export class World extends Mini3d {
     material.blendSrc = DstColorFactor // 源颜色因子
     material.blendDst = OneFactor // 目标颜色因子
     // 创建扩散着色器
-    let diffuse = new DiffuseShader({
+    const diffuse = new DiffuseShader({
       material, // 材质
       time: this.time, // 时间对象
       size: 60, // 扩散大小
