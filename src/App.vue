@@ -33,7 +33,7 @@ onMounted(() => {
     </AppProvider>
   </ElConfigProvider>
 
-  <HomePageLoading
+  <PageLoading
     v-if="!isDev"
   />
 </template>

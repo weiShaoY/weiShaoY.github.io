@@ -24,6 +24,6 @@ export const BLOG_IFRAME_LAYOUT = () => import('./blog/iframe/index.vue')
 export const BLOG_EXTERNAL_LAYOUT = () => import('./blog/external/index.vue')
 
 /**
- *  指挥台模块 布局组件
+ *  管理后台模块 布局组件
  */
-export const COMMAND_LAYOUT = () => import('./command/index.vue')
+export const ADMIN_LAYOUT = () => import('./admin/index.vue')

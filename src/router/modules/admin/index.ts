@@ -1,4 +1,4 @@
-import { COMMAND_LAYOUT } from '@/layouts'
+import { ADMIN_LAYOUT } from '@/layouts'
 
 /**
  *  指挥台路由
@@ -18,7 +18,7 @@ const adminRouter: RouterType.RouteRecordRaw[] = [
     meta: {
       title: '指挥台',
     },
-    component: COMMAND_LAYOUT,
+    component: ADMIN_LAYOUT,
     children: [
       {
         path: 'identityQuery',

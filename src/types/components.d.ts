@@ -76,6 +76,7 @@ declare module 'vue' {
     LinkButton: typeof import('./../components/Button/link-button/index.vue')['default']
     MousePosition: typeof import('./../components/MousePosition/index.vue')['default']
     MusicPlayer: typeof import('./../components/MusicPlayer/index.vue')['default']
+    PageLoading: typeof import('./../components/Loading/page-loading/index.vue')['default']
     PreviewImg: typeof import('./../components/PreviewImg/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

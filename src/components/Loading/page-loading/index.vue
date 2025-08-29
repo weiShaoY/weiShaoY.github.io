@@ -190,7 +190,6 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 span {
-  // font-size: 2vw;
   animation: blurAni 1.5s calc(var(--index) / 5 * 1s) alternate infinite;
 }
 

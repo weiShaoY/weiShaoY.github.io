@@ -1,7 +1,5 @@
-// import { COMMAND_LAYOUT } from '@/layouts'
-
 /**
- *  指挥台路由
+ *  大屏路由
  */
 const BigScreenRouter: RouterType.RouteRecordRaw[] = [
   {
