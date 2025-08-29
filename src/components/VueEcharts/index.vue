@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
 
-import type { GeoJSON } from 'echarts/types/src/coord/geo/geoTypes'
-
 import type { CSSProperties } from 'vue'
 
 import { registerMap } from 'echarts/core'
@@ -49,7 +47,7 @@ type ChartPropsType = {
     /**
      * 地图文件（当传入时需要同时传入 mapName）
      */
-    mapJson: Record<string, any> | GeoJSON
+    mapJson?: any
 
     /**
      * 地图名称
@@ -89,7 +87,7 @@ const computedStyle = computed<CSSProperties>(() => ({
 }))
 
 if (props.mapJson && props.mapName) {
-  registerMap(props.mapName, props.mapJson as GeoJSON)
+  registerMap(props.mapName, props.mapJson)
 }
 else if (props.mapJson && !props.mapName) {
   window.$notification?.error('提供地图文件时需要同时提供地图名称')
