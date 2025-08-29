@@ -18,7 +18,7 @@ import img_pieRing3 from '@/assets/images/bigScreen/pie-ring3.png'
 
 import img_pieRing4 from '@/assets/images/bigScreen/pie-ring4.png'
 
-import { emptyObject } from '../../mini3d'
+import { emptyObject } from '../mapScene/mini3d'
 
 type PropsType = {
 

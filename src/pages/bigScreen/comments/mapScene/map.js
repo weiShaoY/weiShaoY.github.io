@@ -37,8 +37,17 @@ import {
 // 导入交互管理器
 import { InteractionManager } from 'three.interactive'
 
-// 导入标签图标资源
-import labelIcon from '../../assets/texture/label-icon.png'
+// 导入事件发射器
+import emitter from '../../utils/emitter'
+
+// 导入地图数据
+import chinaData from './map/chinaData' // 中国地图数据
+
+import infoData from './map/infoData' // 信息点数据
+
+import provincesData from './map/provincesData' // 省份数据
+
+import scatterData from './map/scatter' // 散点数据
 
 // 导入自定义 3D 组件
 import {
@@ -53,16 +62,9 @@ import {
   Mini3d, // 迷你 3D 基础类
   Particles, // 粒子系统
   Plane, // 平面
-} from '../../mini3d'
-
-// 导入事件发射器
-import emitter from '../../utils/emitter'
-
-// 导入地图数据
-import chinaData from './map/chinaData' // 中国地图数据
-import infoData from './map/infoData' // 信息点数据
-import provincesData from './map/provincesData' // 省份数据
-import scatterData from './map/scatter' // 散点数据
+} from './mini3d'
+// 导入标签图标资源
+import labelIcon from './texture/label-icon.png'
 
 /**
  * 按数值排序函数

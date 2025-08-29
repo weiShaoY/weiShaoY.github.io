@@ -1,46 +1,46 @@
 import { FileLoader } from 'three'
 
-import arrow from './assets/texture/arrow.png'
+import { Resource } from './mini3d'
 
-import chinaBlurLine from './assets/texture/chinaBlurLine.png'
+import arrow from './texture/arrow.png'
 
-import mapFlyline from './assets/texture/flyline6.png'
+import chinaBlurLine from './texture/chinaBlurLine.png'
+
+import mapFlyline from './texture/flyline6.png'
 
 // 焦点贴图
-import focusArrowsTexture from './assets/texture/focus/focus_arrows.png'
+import focusArrowsTexture from './texture/focus/focus_arrows.png'
 
-import focusBarTexture from './assets/texture/focus/focus_bar.png'
+import focusBarTexture from './texture/focus/focus_bar.png'
 
-import focusBgTexture from './assets/texture/focus/focus_bg.png'
+import focusBgTexture from './texture/focus/focus_bg.png'
 
-import focusMidQuanTexture from './assets/texture/focus/focus_mid_quan.png'
+import focusMidQuanTexture from './texture/focus/focus_mid_quan.png'
 
-import focusMoveBgTexture from './assets/texture/focus/focus_move_bg.png'
+import focusMoveBgTexture from './texture/focus/focus_move_bg.png'
 
-import guangquan1 from './assets/texture/guangquan01.png'
+import guangquan1 from './texture/guangquan01.png'
 
-// import flyLineFocus from './assets/texture/guangquan01.png'
-import guangquan2 from './assets/texture/guangquan02.png'
+// import flyLineFocus from './texture/guangquan01.png'
+import guangquan2 from './texture/guangquan02.png'
 
-import huiguang from './assets/texture/huiguang.png'
+import huiguang from './texture/huiguang.png'
 
-import ocean from './assets/texture/ocean-bg.png'
+import ocean from './texture/ocean-bg.png'
 
-import pathLine3 from './assets/texture/pathLine2.png'
+import pathLine3 from './texture/pathLine2.png'
 
-import pathLine from './assets/texture/pathLine4.png'
+import pathLine from './texture/pathLine4.png'
 
-import pathLine2 from './assets/texture/pathLine.png'
+import pathLine2 from './texture/pathLine.png'
 
-import point from './assets/texture/point1.png'
+import point from './texture/point1.png'
 
-import rotationBorder1 from './assets/texture/rotationBorder1.png'
+import rotationBorder1 from './texture/rotationBorder1.png'
 
-import rotationBorder2 from './assets/texture/rotationBorder2.png'
+import rotationBorder2 from './texture/rotationBorder2.png'
 
-import side from './assets/texture/side.png'
-
-import { Resource } from './mini3d'
+import side from './texture/side.png'
 
 /**
  * 资源类型
@@ -87,6 +87,23 @@ export class Assets {
     // 资源加载
     const assets: AssetItem[] = [
       {
+        type: 'File',
+        name: 'china',
+        path: `/jsons/中华人民共和国.json`,
+      },
+
+      {
+        type: 'File',
+        name: 'mapJson',
+        path: `/jsons/湖南省.json`,
+      },
+
+      {
+        type: 'File',
+        name: 'mapStroke',
+        path: `/jsons/湖南省-轮廓.json`,
+      },
+      {
         type: 'Texture',
         name: 'flyline',
         path: pathLine,
@@ -107,33 +124,6 @@ export class Assets {
         path: pathLine3,
       },
 
-      {
-        type: 'File',
-        name: 'china',
-        path: `/json/中华人民共和国.json`,
-      },
-
-      // {
-      //   type: 'File',
-      //   name: 'mapJson',
-      //   path: `/json/广东省.json`,
-      // },
-      {
-        type: 'File',
-        name: 'mapJson',
-        path: `/json/湖南省.json`,
-      },
-
-      // {
-      //   type: 'File',
-      //   name: 'mapStroke',
-      //   path: `/json/广东省-轮廓.json`,
-      // },
-      {
-        type: 'File',
-        name: 'mapStroke',
-        path: `/json/湖南省-轮廓.json`,
-      },
       {
         type: 'Texture',
         name: 'huiguang',
