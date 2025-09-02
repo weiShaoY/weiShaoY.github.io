@@ -314,6 +314,7 @@
     "useStyleTag": true,
     "useSupported": true,
     "useSwipe": true,
+    "useTableStore": true,
     "useTemplateRef": true,
     "useTemplateRefsList": true,
     "useTextDirection": true,
