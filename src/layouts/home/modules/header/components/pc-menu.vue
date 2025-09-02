@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 type PropsType = {
 
@@ -16,16 +16,6 @@ defineProps<PropsType>()
 
 const route = useRoute()
 
-const router = useRouter()
-
-/**
- * 选择菜单项
- * @param  key - 路由路径
- */
-function handleSelect(key: string) {
-  router.push(key) // 使用 Vue Router 跳转
-}
-
 const websiteUrl = import.meta.env.VITE_WEBSITE_URL
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
@@ -35,17 +25,15 @@ const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
   <div
     class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
   >
-    <div
+    <RouterLink
       v-for="item in menuList"
       :key="item.value"
+      :to="item.value"
       class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-primary"
-      :class="{
-        'text-primary': route.path === item.value,
-      }"
-      @click="handleSelect(item.value)"
+      :class="{ 'text-primary': route.path === item.value }"
     >
       {{ item.label }}
-    </div>
+    </RouterLink>
   </div>
 
   <div
