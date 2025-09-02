@@ -85,7 +85,7 @@ function handleOpenSite() {
           >
             <p
               v-animated-text
-              class="animatedText text-regular text-2xl font-semibold"
+              class="text-2xl text-regular font-semibold"
             >
               {{ selectedProject.title }}
             </p>
