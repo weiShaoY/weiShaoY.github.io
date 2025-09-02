@@ -1,26 +1,26 @@
-import cssSvg from '@/assets/svgs/tech-css.svg'
+import cssSvg from '@/assets/svgs/tech/css.svg'
 
-import gitSvg from '@/assets/svgs/tech-git.svg'
+import gitSvg from '@/assets/svgs/tech/git.svg'
 
-import htmlSvg from '@/assets/svgs/tech-html.svg'
+import htmlSvg from '@/assets/svgs/tech/html.svg'
 
-import javaScriptSvg from '@/assets/svgs/tech-javaScript.svg'
+import javaScriptSvg from '@/assets/svgs/tech/javaScript.svg'
 
-import nodeSvg from '@/assets/svgs/tech-node.svg'
+import nodeSvg from '@/assets/svgs/tech/node.svg'
 
-import piniaSvg from '@/assets/svgs/tech-pinia.svg'
+import piniaSvg from '@/assets/svgs/tech/pinia.svg'
 
-import reactSvg from '@/assets/svgs/tech-react.svg'
+import reactSvg from '@/assets/svgs/tech/react.svg'
 
-import tailwindCssSvg from '@/assets/svgs/tech-tailwindCss.svg'
+import tailwindCssSvg from '@/assets/svgs/tech/tailwindCss.svg'
 
-import threeJsSvg from '@/assets/svgs/tech-threeJs.svg'
+import threeJsSvg from '@/assets/svgs/tech/threeJs.svg'
 
-import typeScriptSvg from '@/assets/svgs/tech-typeScript.svg'
+import typeScriptSvg from '@/assets/svgs/tech/typeScript.svg'
 
-import unocssSvg from '@/assets/svgs/tech-unocss.svg'
+import unocssSvg from '@/assets/svgs/tech/unocss.svg'
 
-import vueSvg from '@/assets/svgs/tech-vue.svg'
+import vueSvg from '@/assets/svgs/tech/vue.svg'
 
 /**
  *  定义每个技术栈对象的类型

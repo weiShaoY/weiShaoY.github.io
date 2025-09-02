@@ -12,6 +12,7 @@ declare module 'vue' {
     BackHomeButton: typeof import('./../components/Button/back-home-button/index.vue')['default']
     BaseButton: typeof import('./../components/Button/base-button/index.vue')['default']
     CodeHighlightBlock: typeof import('./../components/CodeHighlightBlock/index.vue')['default']
+    copy: typeof import('./../components/MusicPlayer/index copy.vue')['default']
     DownloadButton: typeof import('./../components/DownloadButton/index.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
