@@ -1,46 +1,33 @@
 import { geoMercator } from 'd3-geo'
 
 import {
+  BufferAttribute,
+  Color,
+  DoubleSide,
+  ExtrudeGeometry,
   Group,
   Mesh,
   MeshBasicMaterial,
   Object3D,
   Shape,
   ShapeGeometry,
+  Vector2,
   Vector3,
 } from 'three'
 
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils'
 
-import { transfromMapGeoJSON } from '..'
+import { getBoundBox, transfromMapGeoJSON } from '..'
 
 export class BaseMap {
-  private mapGroup: Group
-
-  private coordinates: Array<{
-    name: string
-    center: number[]
-    centroid: number[]
-  }>
-
-  private config: {
-    position: Vector3
-    geoProjectionCenter: [number, number]
-    geoProjectionScale: number
-    data: string
-    renderOrder: number
-    merge: boolean
-    material: MeshBasicMaterial
-  }
-
-  constructor(config = {
+  constructor({}, config = {
 }) {
     this.mapGroup = new Group()
     this.coordinates = []
     this.config = Object.assign(
       {
         position: new Vector3(0, 0, 0),
-        geoProjectionCenter: [0, 0] as [number, number],
+        geoProjectionCenter: new Vector2(0, 0),
         geoProjectionScale: 120,
         data: '',
         renderOrder: 1,
@@ -54,31 +41,24 @@ export class BaseMap {
       config,
     )
     this.mapGroup.position.copy(this.config.position)
-
-    // 检查数据是否有效
-    if (!this.config.data || this.config.data.trim() === '') {
-      console.warn('BaseMap: 地图数据为空，跳过创建')
-      return
-    }
-
     const mapData = transfromMapGeoJSON(this.config.data)
 
     this.create(mapData)
   }
 
-  geoProjection(args: [number, number]): [number, number] | null {
+  geoProjection(args) {
     return geoMercator()
       .center(this.config.geoProjectionCenter)
       .scale(this.config.geoProjectionScale)
       .translate([0, 0])(args)
   }
 
-  create(mapData: any) {
+  create(mapData) {
     const { merge } = this.config
 
-    const shapes: any[] = []
+    const shapes = []
 
-    mapData.features.forEach((feature: any) => {
+    mapData.features.forEach((feature) => {
       const group = new Object3D()
 
       const { name, center = [], centroid = [] } = feature.properties
@@ -89,8 +69,8 @@ export class BaseMap {
         centroid,
       })
       group.userData.name = name
-      feature.geometry.coordinates.forEach((multiPolygon: any) => {
-        multiPolygon.forEach((polygon: any) => {
+      feature.geometry.coordinates.forEach((multiPolygon) => {
+        multiPolygon.forEach((polygon) => {
           const shape = new Shape()
 
           for (let i = 0; i < polygon.length; i++) {
@@ -98,13 +78,7 @@ export class BaseMap {
               return false
             }
 
-            const projected = this.geoProjection(polygon[i])
-
-            if (!projected) {
-              continue
-            }
-
-            const [x, y] = projected
+            const [x, y] = this.geoProjection(polygon[i])
 
             if (i === 0) {
               shape.moveTo(x, -y)
@@ -145,7 +119,7 @@ export class BaseMap {
     return this.coordinates
   }
 
-  setParent(parent: Object3D) {
+  setParent(parent) {
     parent.add(this.mapGroup)
   }
 }

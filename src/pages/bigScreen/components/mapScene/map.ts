@@ -543,7 +543,7 @@ export class World extends Mini3d {
 
   /**
    * 创建中国地图
-   * @returns {object} 包含中国地图和边线的对象
+   * @returns 包含中国地图和边线的对象
    */
   createChina() {
     // 地图参数配置
@@ -681,7 +681,7 @@ export class World extends Mini3d {
 
   /**
    * 创建省份材质
-   * @returns {Array} 包含顶面材质和侧面材质的数组
+   * @returns  包含顶面材质和侧面材质的数组
    */
   createProvinceMaterial() {
     // 创建顶面材质
