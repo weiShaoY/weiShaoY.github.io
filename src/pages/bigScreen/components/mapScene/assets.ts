@@ -89,19 +89,19 @@ export class Assets {
       {
         type: 'File',
         name: 'china',
-        path: `/jsons/中华人民共和国.json`,
+        path: new URL('@/assets/jsons/中华人民共和国.json', import.meta.url).href,
       },
 
       {
         type: 'File',
         name: 'mapJson',
-        path: `/jsons/湖南省.json`,
+        path: new URL('@/assets/jsons/湖南省.json', import.meta.url).href,
       },
 
       {
         type: 'File',
         name: 'mapStroke',
-        path: `/jsons/湖南省-轮廓.json`,
+        path: new URL('@/assets/jsons/湖南省-轮廓.json', import.meta.url).href,
       },
       {
         type: 'Texture',

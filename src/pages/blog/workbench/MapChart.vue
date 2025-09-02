@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EChartsOption } from 'echarts'
 
-import chinaMapJson from '@/assets/jsons/chinaMap.json'
+import chinaMapJson from '@/assets/jsons/中华人民共和国.json'
 
 // 地图配置
 const options: EChartsOption = {

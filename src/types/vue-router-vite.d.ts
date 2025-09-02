@@ -90,7 +90,6 @@ declare module 'vue-router/auto-routes' {
     '/blog/tool/qrcode/': RouteRecordInfo<'/blog/tool/qrcode/', '/blog/tool/qrcode', Record<never, never>, Record<never, never>>,
     '/blog/workbench/': RouteRecordInfo<'/blog/workbench/', '/blog/workbench', Record<never, never>, Record<never, never>>,
     '/blog/workbench/MapChart': RouteRecordInfo<'/blog/workbench/MapChart', '/blog/workbench/MapChart', Record<never, never>, Record<never, never>>,
-    '/blog/workbench/测试/MapChart copy 3': RouteRecordInfo<'/blog/workbench/测试/MapChart copy 3', '/blog/workbench/测试/MapChart copy 3', Record<never, never>, Record<never, never>>,
     '/error/403/': RouteRecordInfo<'/error/403/', '/error/403', Record<never, never>, Record<never, never>>,
     '/error/404/': RouteRecordInfo<'/error/404/', '/error/404', Record<never, never>, Record<never, never>>,
     '/error/500/': RouteRecordInfo<'/error/500/', '/error/500', Record<never, never>, Record<never, never>>,
@@ -412,10 +411,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/blog/workbench/MapChart.vue': {
       routes: '/blog/workbench/MapChart'
-      views: never
-    }
-    'src/pages/blog/workbench/测试/MapChart copy 3.vue': {
-      routes: '/blog/workbench/测试/MapChart copy 3'
       views: never
     }
     'src/pages/error/403/index.vue': {
