@@ -9,7 +9,7 @@ import Keyboard from '@/canvas/keyboard/index.vue'
 
 import Mail from '@/canvas/mail/index.vue'
 
-import Tech from '@/canvas/tech/index.vue'
+import Skills from '@/canvas/skills/index.vue'
 
 import { copyText } from '@/utils'
 
@@ -56,12 +56,12 @@ function handleCopy() {
           <div
             class="h-[266px] w-full cursor-pointer max-sm:h-fit"
           >
-            <Tech />
+            <Skills />
           </div>
 
           <div>
             <p
-              class="text-regular mb-2 text-xl font-semibold"
+              class="mb-2 text-xl text-regular font-semibold"
             >
               技术栈
             </p>
@@ -92,7 +92,7 @@ function handleCopy() {
 
           <div>
             <p
-              class="text-regular mb-2 text-xl font-semibold"
+              class="mb-2 text-xl text-regular font-semibold"
             >
               我对时区、通讯和位置非常灵活
             </p>
@@ -140,7 +140,7 @@ function handleCopy() {
 
           <div>
             <p
-              class="text-regular mb-2 text-xl font-semibold"
+              class="mb-2 text-xl text-regular font-semibold"
             >
               我对编码的热情
             </p>

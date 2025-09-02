@@ -23,127 +23,143 @@ import unocssSvg from '@/assets/svgs/tech/unocss.svg'
 import vueSvg from '@/assets/svgs/tech/vue.svg'
 
 /**
- *  定义每个技术栈对象的类型
+ * 技术栈项目类型定义
  */
-export type TechStackItemType = {
+export type SkillsItemType = {
 
-  /**
-   *  技术名称
-   */
+  /** 技术名称 */
   name: string
 
-  /**
-   *  图标名称
-   *  @description 用于 Svg
-   */
+  /** 图标名称（用于 Svg） */
   icon: string
 
-  /**
-   *  图片路径
-   *  @description 用于 image 标签的 src 属性
-   */
+  /** 图片路径（用于 image 标签的 src 属性） */
   image: string
 
-  /**
-   *  文档链接
-   */
+  /** 文档链接 */
   document: string
 }
 
 /**
- *  定义 技术栈 对象的类型，包含多个技术栈项s
+ * 技术栈配置类型
  */
-type TechStackType = {
-
-  // 使用索引签名，允许任意键（如 html、css、node等），值为 TechItem 类型
-  // [key: string]: TechStackItemType;
-  html: TechStackItemType
-  css: TechStackItemType
-  javaScript: TechStackItemType
-  typeScript: TechStackItemType
-  node: TechStackItemType
-  react: TechStackItemType
-  vue: TechStackItemType
-  tailwindCss: TechStackItemType
-  unocss: TechStackItemType
-  threeJs: TechStackItemType
-  git: TechStackItemType
-  pinia: TechStackItemType
+export type SkillsConfig = {
+  html: SkillsItemType
+  css: SkillsItemType
+  javaScript: SkillsItemType
+  typeScript: SkillsItemType
+  node: SkillsItemType
+  react: SkillsItemType
+  vue: SkillsItemType
+  tailwindCss: SkillsItemType
+  unocss: SkillsItemType
+  threeJs: SkillsItemType
+  git: SkillsItemType
+  pinia: SkillsItemType
 }
 
-export const techStack: TechStackType = {
+/**
+ * 技术栈配置
+ */
+export const skillsConfig: SkillsConfig = {
   html: {
-    name: 'html',
+    name: 'HTML',
     icon: 'tech-html',
     image: htmlSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/HTML',
   },
   css: {
-    name: 'css',
+    name: 'CSS',
     icon: 'tech-css',
     image: cssSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/CSS',
   },
   javaScript: {
-    name: 'javaScript',
+    name: 'JavaScript',
     icon: 'tech-javaScript',
     image: javaScriptSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
   },
   typeScript: {
-    name: 'typeScript',
+    name: 'TypeScript',
     icon: 'tech-typeScript',
     image: typeScriptSvg,
     document: 'https://www.typescriptlang.org/zh/',
   },
   node: {
-    name: 'node',
+    name: 'Node.js',
     icon: 'tech-node',
     image: nodeSvg,
     document: 'https://nodejs.org/en/',
   },
   react: {
-    name: 'react',
+    name: 'React',
     icon: 'tech-react',
     image: reactSvg,
     document: 'https://zh-hans.react.dev/',
   },
   vue: {
-    name: 'vue',
+    name: 'Vue.js',
     icon: 'tech-vue',
     image: vueSvg,
     document: 'https://cn.vuejs.org/',
   },
   tailwindCss: {
-    name: 'tailwindCSS',
+    name: 'Tailwind CSS',
     icon: 'tech-tailwindCss',
     image: tailwindCssSvg,
     document: 'https://tailwindcss.com/docs/installation',
   },
   unocss: {
-    name: 'unocss',
+    name: 'UnoCSS',
     icon: 'tech-unocss',
     image: unocssSvg,
     document: 'https://unocss-cn.pages.dev/',
   },
   threeJs: {
-    name: 'threeJs',
+    name: 'Three.js',
     icon: 'tech-threeJs',
     image: threeJsSvg,
     document: 'https://threejs.org/',
   },
   git: {
-    name: 'git',
+    name: 'Git',
     icon: 'tech-git',
     image: gitSvg,
     document: 'https://git-scm.com/',
   },
   pinia: {
-    name: 'pinia',
+    name: 'Pinia',
     icon: 'tech-pinia',
     image: piniaSvg,
     document: 'https://pinia.vuejs.org/zh/',
   },
+} as const
+
+/**
+ * 获取技术栈项目
+ * @param key 技术栈键名
+ * @returns 技术栈项目
+ */
+export function getSkillsItem<K extends keyof SkillsConfig>(key: K): SkillsConfig[K] {
+  return skillsConfig[key]
 }
 
-export default techStack
+/**
+ * 获取所有技术栈项目
+ * @returns 技术栈项目数组
+ */
+export function getAllSkillsItems(): SkillsItemType[] {
+  return Object.values(skillsConfig)
+}
+
+/**
+ * 根据名称查找技术栈项目
+ * @param name 技术名称
+ * @returns 技术栈项目或 undefined
+ */
+export function findSkillsByName(name: string): SkillsItemType | undefined {
+  return getAllSkillsItems().find(item =>
+    item.name.toLowerCase() === name.toLowerCase(),
+  )
+}

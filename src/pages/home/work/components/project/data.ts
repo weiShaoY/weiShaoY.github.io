@@ -1,4 +1,4 @@
-import type { TechStackItemType } from '@/utils'
+import type { SkillsItemType } from '@/configs'
 
 import logo1 from '@/assets/images/home/work-project-logo-1.png'
 
@@ -30,7 +30,7 @@ import video4 from '@/assets/videos/home/work-project-video-4.mp4'
 
 import video5 from '@/assets/videos/home/work-project-video-5.mp4'
 
-import { techStack } from '@/utils'
+import { skillsConfig } from '@/configs'
 
 /**
  * 项目 Logo 样式类型
@@ -101,7 +101,7 @@ type ProjectType = {
   /**
    *  项目相关的技术标签
    */
-  tags: TechStackItemType[]
+  tags: SkillsItemType[]
 }
 
 /**
@@ -122,10 +122,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight1,
     tags: [
-      techStack.react,
-      techStack.tailwindCss,
-      techStack.typeScript,
-      techStack.threeJs,
+      skillsConfig.react,
+      skillsConfig.tailwindCss,
+      skillsConfig.typeScript,
+      skillsConfig.threeJs,
     ],
   },
   {
@@ -142,10 +142,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight2,
     tags: [
-      techStack.vue,
-      techStack.tailwindCss,
-      techStack.typeScript,
-      techStack.unocss,
+      skillsConfig.vue,
+      skillsConfig.tailwindCss,
+      skillsConfig.typeScript,
+      skillsConfig.unocss,
     ],
   },
   {
@@ -165,10 +165,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight3,
     tags: [
-      techStack.react,
-      techStack.tailwindCss,
-      techStack.javaScript,
-      techStack.threeJs,
+      skillsConfig.react,
+      skillsConfig.tailwindCss,
+      skillsConfig.javaScript,
+      skillsConfig.threeJs,
     ],
   },
   {
@@ -185,10 +185,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight4,
     tags: [
-      techStack.react,
-      techStack.tailwindCss,
-      techStack.typeScript,
-      techStack.threeJs,
+      skillsConfig.react,
+      skillsConfig.tailwindCss,
+      skillsConfig.typeScript,
+      skillsConfig.threeJs,
     ],
   },
   {
@@ -205,10 +205,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight5,
     tags: [
-      techStack.react,
-      techStack.tailwindCss,
-      techStack.typeScript,
-      techStack.threeJs,
+      skillsConfig.react,
+      skillsConfig.tailwindCss,
+      skillsConfig.typeScript,
+      skillsConfig.threeJs,
     ],
   },
 ]

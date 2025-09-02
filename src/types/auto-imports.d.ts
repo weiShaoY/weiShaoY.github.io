@@ -370,9 +370,6 @@ declare global {
   // @ts-ignore
   export type { RouteLocationRaw } from 'vue-router'
   import('vue-router')
-  // @ts-ignore
-  export type { TechStackItemType } from '../utils/techStack'
-  import('../utils/techStack')
 }
 
 // for vue template auto import
@@ -518,7 +515,6 @@ declare module 'vue' {
     readonly stores: UnwrapRef<typeof import('../stores/index')['default']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
-    readonly techStack: UnwrapRef<typeof import('../utils/techStack')['default']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
     readonly throttledRef: UnwrapRef<typeof import('@vueuse/core')['throttledRef']>
     readonly throttledWatch: UnwrapRef<typeof import('@vueuse/core')['throttledWatch']>

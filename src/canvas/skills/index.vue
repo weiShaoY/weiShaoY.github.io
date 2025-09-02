@@ -3,27 +3,30 @@ import * as THREE from 'three'
 
 import { DecalGeometry, OrbitControls } from 'three/addons'
 
+import { skillsConfig } from '@/configs'
+
 import {
   disposeScene,
   isMobile,
   loadTexture,
-  techStack,
 } from '@/utils'
 
-// 定义技术栈数据
-const technologies = [
-  techStack.html,
-  techStack.css,
-  techStack.javaScript,
-  techStack.typeScript,
-  techStack.node,
-  techStack.react,
-  techStack.vue,
-  techStack.tailwindCss,
-  techStack.unocss,
-  techStack.threeJs,
-  techStack.git,
-  techStack.pinia,
+/**
+ *  技术栈列表
+ */
+const skillsList = [
+  skillsConfig.html,
+  skillsConfig.css,
+  skillsConfig.javaScript,
+  skillsConfig.typeScript,
+  skillsConfig.node,
+  skillsConfig.react,
+  skillsConfig.vue,
+  skillsConfig.tailwindCss,
+  skillsConfig.unocss,
+  skillsConfig.threeJs,
+  skillsConfig.git,
+  skillsConfig.pinia,
 ]
 
 /**
@@ -115,12 +118,12 @@ async function addIcosahedrons() {
    */
   const numColumns = isMobile.value ? 4 : 6
 
-  const numRows = Math.ceil(technologies.length / numColumns) // 行数
+  const numRows = Math.ceil(skillsList.length / numColumns) // 行数
 
   const spacing = 3 // 间距
 
-  for (let i = 0; i < technologies.length; i++) {
-    const tech = technologies[i]
+  for (let i = 0; i < skillsList.length; i++) {
+    const tech = skillsList[i]
 
     await loadTexture(tech.image, (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace

@@ -20,6 +20,4 @@ export * from './openUrlInWindow'
 
 export * from './sendContactEmail'
 
-export * from './techStack'
-
 export * from './threeJs'
