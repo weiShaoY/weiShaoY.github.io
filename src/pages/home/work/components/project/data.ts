@@ -1,34 +1,34 @@
 import type { TechStackItemType } from '@/utils'
 
-import logo1 from '@/assets/images/home-work-project-logo-1.png'
+import logo1 from '@/assets/images/home/work-project-logo-1.png'
 
-import logo2 from '@/assets/images/home-work-project-logo-2.png'
+import logo2 from '@/assets/images/home/work-project-logo-2.png'
 
-import logo3 from '@/assets/images/home-work-project-logo-3.png'
+import logo3 from '@/assets/images/home/work-project-logo-3.png'
 
-import logo4 from '@/assets/images/home-work-project-logo-4.png'
+import logo4 from '@/assets/images/home/work-project-logo-4.png'
 
-import logo5 from '@/assets/images/home-work-project-logo-5.png'
+import logo5 from '@/assets/images/home/work-project-logo-5.png'
 
-import spotlight1 from '@/assets/images/home-work-project-spotlight-1.png'
+import spotlight1 from '@/assets/images/home/work-project-spotlight-1.png'
 
-import spotlight2 from '@/assets/images/home-work-project-spotlight-2.png'
+import spotlight2 from '@/assets/images/home/work-project-spotlight-2.png'
 
-import spotlight3 from '@/assets/images/home-work-project-spotlight-3.png'
+import spotlight3 from '@/assets/images/home/work-project-spotlight-3.png'
 
-import spotlight4 from '@/assets/images/home-work-project-spotlight-4.png'
+import spotlight4 from '@/assets/images/home/work-project-spotlight-4.png'
 
-import spotlight5 from '@/assets/images/home-work-project-spotlight-5.png'
+import spotlight5 from '@/assets/images/home/work-project-spotlight-5.png'
 
-import video1 from '@/assets/videos/home-work-project-video-1.mp4'
+import video1 from '@/assets/videos/home/work-project-video-1.mp4'
 
-import video2 from '@/assets/videos/home-work-project-video-2.mp4'
+import video2 from '@/assets/videos/home/work-project-video-2.mp4'
 
-import video3 from '@/assets/videos/home-work-project-video-3.mp4'
+import video3 from '@/assets/videos/home/work-project-video-3.mp4'
 
-import video4 from '@/assets/videos/home-work-project-video-4.mp4'
+import video4 from '@/assets/videos/home/work-project-video-4.mp4'
 
-import video5 from '@/assets/videos/home-work-project-video-5.mp4'
+import video5 from '@/assets/videos/home/work-project-video-5.mp4'
 
 import { techStack } from '@/utils'
 
