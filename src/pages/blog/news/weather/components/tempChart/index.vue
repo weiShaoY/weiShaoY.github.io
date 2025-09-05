@@ -3,37 +3,37 @@ import type { EChartsOption } from 'echarts'
 
 import type { WeatherType } from '../../types'
 
-import day_0 from '@/assets/svgs/weather-day_0.svg'
+import day_0 from '@/assets/svgs/blog/weather-day_0.svg'
 
-import day_1 from '@/assets/svgs/weather-day_1.svg'
+import day_1 from '@/assets/svgs/blog/weather-day_1.svg'
 
-import day_2 from '@/assets/svgs/weather-day_2.svg'
+import day_2 from '@/assets/svgs/blog/weather-day_2.svg'
 
-import day_3 from '@/assets/svgs/weather-day_3.svg'
+import day_3 from '@/assets/svgs/blog/weather-day_3.svg'
 
-import day_7 from '@/assets/svgs/weather-day_7.svg'
+import day_7 from '@/assets/svgs/blog/weather-day_7.svg'
 
-import day_8 from '@/assets/svgs/weather-day_8.svg'
+import day_8 from '@/assets/svgs/blog/weather-day_8.svg'
 
-import day_13 from '@/assets/svgs/weather-day_13.svg'
+import day_13 from '@/assets/svgs/blog/weather-day_13.svg'
 
-import day_14 from '@/assets/svgs/weather-day_14.svg'
+import day_14 from '@/assets/svgs/blog/weather-day_14.svg'
 
-import night_0 from '@/assets/svgs/weather-night_0.svg'
+import night_0 from '@/assets/svgs/blog/weather-night_0.svg'
 
-import night_1 from '@/assets/svgs/weather-night_1.svg'
+import night_1 from '@/assets/svgs/blog/weather-night_1.svg'
 
-import night_2 from '@/assets/svgs/weather-night_2.svg'
+import night_2 from '@/assets/svgs/blog/weather-night_2.svg'
 
-import night_3 from '@/assets/svgs/weather-night_3.svg'
+import night_3 from '@/assets/svgs/blog/weather-night_3.svg'
 
-import night_7 from '@/assets/svgs/weather-night_7.svg'
+import night_7 from '@/assets/svgs/blog/weather-night_7.svg'
 
-import night_8 from '@/assets/svgs/weather-night_8.svg'
+import night_8 from '@/assets/svgs/blog/weather-night_8.svg'
 
-import night_13 from '@/assets/svgs/weather-night_13.svg'
+import night_13 from '@/assets/svgs/blog/weather-night_13.svg'
 
-import night_14 from '@/assets/svgs/weather-night_14.svg'
+import night_14 from '@/assets/svgs/blog/weather-night_14.svg'
 
 const data = defineModel<WeatherType>({
   required: true,
