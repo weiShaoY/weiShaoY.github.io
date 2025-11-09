@@ -35,7 +35,7 @@ export function documentTitleGuard(router: Router): void {
       useTitle(title)
     }
     catch {
-      window.$notification.error('Failed to set document title:')
+      window.$notification.error('未能设置页面标题!')
       useTitle(import.meta.env.VITE_APP_DESC)
     }
   })

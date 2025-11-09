@@ -8,7 +8,7 @@ function startProgress(): void {
     window.NProgress?.start?.()
   }
   catch {
-    window.$notification.error('Failed to start progress:')
+    window.$notification.error('未能启动进度条!')
   }
 }
 
@@ -20,7 +20,7 @@ function doneProgress(): void {
     window.NProgress?.done()
   }
   catch {
-    window.$notification.error('Failed to end progress:')
+    window.$notification.error('未能结束进度条!')
   }
 }
 
