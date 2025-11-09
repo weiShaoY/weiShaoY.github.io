@@ -10,7 +10,7 @@ import {
 import { createRouterGuard } from './guard'
 
 import {
-  checkDuplicateRoutes,
+  checkDuplicateRouteList,
   formatModules,
   recursiveNormalizeRoutesPath,
   recursiveSetRoutesRedirect,
@@ -33,20 +33,6 @@ function initRoutes() {
 }
 
 const routeList = initRoutes()
-
-/**
- * 延迟检查重复路由
- */
-setTimeout(() => {
-  requestAnimationFrame(() => {
-    try {
-      checkDuplicateRoutes(routeList)
-    }
-    catch {
-      window.$notification.error('路由检查失败')
-    }
-  })
-}, 3000)
 
 /**
  * 创建路由实例
@@ -83,17 +69,19 @@ export const router = createRouter({
  */
 export async function setupRouter(app: App) {
   try {
-    // 在 Vue 应用中使用路由
-    app.use(router)
-
     // 创建并应用路由守卫
     createRouterGuard(router)
 
-    // 等待路由准备就绪
-    await router.isReady()
+    // 在 Vue 应用中使用路由
+    app.use(router)
   }
   catch (error) {
     window.$notification.error('Router setup failed:')
     throw error
   }
 }
+
+/**
+ * 延迟检查重复路由
+ */
+checkDuplicateRouteList(routeList)

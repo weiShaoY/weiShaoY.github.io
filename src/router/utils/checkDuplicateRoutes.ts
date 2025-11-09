@@ -6,7 +6,7 @@ import type { RouteRecordRaw } from 'vue-router'
  * @returns 检查结果 { hasDuplicate: boolean, duplicates: { names: string[], paths: string[] } }
  * @description 检查路由配置中的重复 name 和 path，并生成警告信息
  */
-export function checkDuplicateRoutes(routes: RouteRecordRaw[]): {
+function checkRouteConfigDuplicates(routes: RouteRecordRaw[]): {
   hasDuplicate: boolean
   duplicates: {
     names: string[]
@@ -22,6 +22,10 @@ export function checkDuplicateRoutes(routes: RouteRecordRaw[]): {
     paths: [] as string[],
   }
 
+  /**
+   *  递归检查单个路由及其子路由
+   *  @param route 路由记录
+   */
   function checkRoute(route: RouteRecordRaw) {
     // 检查重复 name（安全处理 symbol 类型）
     if (route.name) {
@@ -90,4 +94,33 @@ export function checkDuplicateRoutes(routes: RouteRecordRaw[]): {
     hasDuplicate: duplicates.names.length > 0 || duplicates.paths.length > 0,
     duplicates,
   }
+}
+
+/**
+ * 延迟检查路由配置中的重复 name 和 path
+ * @param routeList 路由配置数组
+ * @param time 延迟时间（毫秒） 默认 3000 毫秒
+ */
+export function checkDuplicateRouteList(routeList: RouteRecordRaw[], time = 3000) {
+/**
+ * 延迟检查重复路由
+ */
+  setTimeout(() => {
+    requestAnimationFrame(() => {
+      try {
+        checkRouteConfigDuplicates(routeList)
+
+        if (window._DEV__) {
+          // window.$notification.success('路由检查完成')
+          window.$notification?.success({
+            title: '路由检查完成!',
+            message: '未发现重复路由!',
+          })
+        }
+      }
+      catch {
+        window.$notification.error('路由检查失败')
+      }
+    })
+  }, time)
 }

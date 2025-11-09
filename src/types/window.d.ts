@@ -32,5 +32,11 @@ declare global {
      * @description 用于显示系统通知
      */
     $notification: import('element-plus').Notify
+
+    /**
+     *  是否为开发环境
+     * @description 用于区分开发环境和生产环境
+     */
+    _DEV__: boolean
   }
 }
