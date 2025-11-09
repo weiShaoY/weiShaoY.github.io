@@ -19,7 +19,7 @@ const errorRouter: RouterType.RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/404',
+    path: '/:pathMatch(.*)*',
     component: SIMPLE_Layout,
     children: [
       {

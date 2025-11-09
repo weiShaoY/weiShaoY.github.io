@@ -49,12 +49,6 @@ export const router = createRouter({
 
     // 业务路由
     ...routeList,
-
-    // 404 路由
-    {
-      path: '/:pathMatch(.*)*',
-      redirect: '/404',
-    },
   ],
 
   scrollBehavior: () => ({
