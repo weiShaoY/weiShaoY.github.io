@@ -1,6 +1,5 @@
 <!------------------------------------  首页模块  ------------------------------------------------->
 <script lang="ts" setup>
-import Loading from '@/components/Loading/index.vue'
 
 import Header from './modules/header/index.vue'
 </script>
