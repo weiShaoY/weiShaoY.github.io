@@ -1,3 +1,6 @@
+/**
+ *  打字组件
+ */
 <script lang="ts" setup>
 import type { Options } from 'typeit'
 
