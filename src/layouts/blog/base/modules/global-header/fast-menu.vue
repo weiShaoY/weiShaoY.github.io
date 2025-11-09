@@ -1,11 +1,11 @@
 <!-- 快速入口 -->
 
 <script setup lang="ts">
-import { blogFastMenuList } from '@/router/modules/blog'
-
 import { ref } from 'vue'
 
 import { useRouter } from 'vue-router'
+
+import { blogFastMenuList } from '@/router/modules/blog'
 
 import { blogMenuJump } from '../utils'
 
@@ -25,7 +25,7 @@ const quickLinks: QuickLink[] = [
   },
 ]
 
-function handleAppClick(item: RouterType.BlogRouteRecordRaw) {
+function handleAppClick(item: RouterType.BlogRoute) {
   blogMenuJump(item)
   popoverRef.value?.hide()
 }

@@ -14,7 +14,7 @@ const emits = defineEmits<{
    * @param menu 菜单项
    * @param jumpToFirst 是否跳转到第一个子菜单
    */
-  blogMenuJump: [menu: RouterType.BlogRouteRecordRaw, jumpToFirst: boolean]
+  blogMenuJump: [menu: RouterType.BlogRoute, jumpToFirst: boolean]
 }>()
 
 const blogStore = useBlogStore()
@@ -26,7 +26,7 @@ type Props = {
   /**
    *  菜单
    */
-  menuList: RouterType.BlogRouteRecordRaw[]
+  menuList: RouterType.BlogRoute[]
 
 }
 
@@ -41,7 +41,7 @@ const dualMenuShowText = ref(true)
 /**
  * 当前路由对应的第一级菜单项
  */
-const currentRoute = computed<RouterType.BlogRouteRecordRaw | undefined>(() => {
+const currentRoute = computed<RouterType.BlogRoute | undefined>(() => {
   return findTopRouteByPath(route.path, menuList)
 })
 

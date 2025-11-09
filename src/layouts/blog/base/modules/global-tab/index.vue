@@ -154,7 +154,7 @@ watch(
 /**
  * 点击标签页导航
  */
-function clickTab(item: RouterType.BlogRouteRecordRaw) {
+function clickTab(item: RouterType.BlogRoute) {
   console.log('%c Line:156 🍺 item', 'color:#ed9ec7', item)
   router.push({
     path: item.path,

@@ -6,6 +6,10 @@ import { documentTitleGuard } from './documentTitleGuard'
 
 import { progressGuard } from './progressGuard'
 
+/**
+ *  创建路由守卫
+ *  @param router 路由实例
+ */
 export function createRouterGuard(router: Router) {
   // 创建进度条守卫
   progressGuard(router)

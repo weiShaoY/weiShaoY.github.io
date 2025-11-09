@@ -14,7 +14,7 @@ type Props = {
   /**
    *  菜单
    */
-  menuList: RouterType.BlogRouteRecordRaw[]
+  menuList: RouterType.BlogRoute[]
 }
 
 const blogStore = useBlogStore()

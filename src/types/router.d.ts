@@ -1,5 +1,8 @@
 /** 路由类型 */
 
+/**
+ * 路由类型命名空间
+ */
 declare namespace RouterType {
   import type { Component } from 'vue'
 
@@ -31,7 +34,7 @@ declare namespace RouterType {
   }
 
   /** 博客模块路由类型 */
-  type BlogRouteRecordRaw = {
+  type BlogRoute = {
 
     /** 路由路径 */
     path: string
@@ -82,13 +85,14 @@ declare namespace RouterType {
        */
       fastMenuOrder?: number
     } & (
-      | {
+      {
+
+        /** 内嵌iframe地址（禁止同时存在） */
+        iframeUrl?: never
 
         /** 外链跳转地址 */
         externalUrl: string
 
-        /** 内嵌iframe地址（禁止同时存在） */
-        iframeUrl?: never
       }
       | {
 
@@ -100,16 +104,17 @@ declare namespace RouterType {
       }
       | {
 
+        /** 内嵌iframe地址（禁止同时存在） */
+        iframeUrl?: never
+
         /** 外链跳转地址（禁止同时存在） */
         externalUrl?: never
 
-        /** 内嵌iframe地址（禁止同时存在） */
-        iframeUrl?: never
       }
     )
 
     /** 子路由配置（如果存在 externalUrl 或 iframeUrl，则禁止 children） */
-    children?: BlogRouteRecordRaw[]
+    children?: BlogRoute[]
   } & (
     | {
       meta: { externalUrl: string } | { iframeUrl: string }
@@ -121,7 +126,7 @@ declare namespace RouterType {
       meta: { externalUrl?: never, iframeUrl?: never }
 
       /** 如果 meta 没有 externalUrl 或 iframeUrl，则允许 children */
-      children?: BlogRouteRecordRaw[]
+      children?: BlogRoute[]
     }
   )
 }

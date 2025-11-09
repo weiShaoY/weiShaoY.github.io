@@ -1,10 +1,9 @@
-import type { defineComponent } from 'vue'
+import type { Component } from 'vue'
 
 // export type Component<T = any> =
 //   | ReturnType<typeof defineComponent>
 //   | (() => Promise<typeof import('*.vue')>)
 //   | (() => Promise<T>)
-import type { Component } from 'vue'
 
 import type { NavigationGuard, RouteMeta } from 'vue-router'
 

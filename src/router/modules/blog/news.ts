@@ -1,4 +1,4 @@
-const News: RouterType.BlogRouteRecordRaw = {
+const News: RouterType.BlogRoute = {
   path: 'news',
   name: 'News',
   meta: {

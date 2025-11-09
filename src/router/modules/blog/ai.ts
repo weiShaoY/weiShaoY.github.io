@@ -1,4 +1,4 @@
-const aiRoute: RouterType.BlogRouteRecordRaw = {
+const aiRoute: RouterType.BlogRoute = {
   path: 'ai',
   name: 'Ai',
   meta: {

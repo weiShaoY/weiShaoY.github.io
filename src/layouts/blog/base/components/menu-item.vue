@@ -9,7 +9,7 @@ type Props = {
   /**
    *  菜单项
    */
-  menu: RouterType.BlogRouteRecordRaw
+  menu: RouterType.BlogRoute
 
   /**
    *  额外的 CSS 类名

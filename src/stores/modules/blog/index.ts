@@ -68,22 +68,22 @@ export const useBlogStore = defineStore('blog', () => {
   /**
    *  菜单列表
    */
-  const menuList = computed<RouterType.BlogRouteRecordRaw[]>(() => blogRouterList)
+  const menuList = computed<RouterType.BlogRoute[]>(() => blogRouterList)
 
   /**
    *  搜索历史列表
    */
-  const searchHistoryList = ref<RouterType.BlogRouteRecordRaw[]>([])
+  const searchHistoryList = ref<RouterType.BlogRoute[]>([])
 
   /**
    *  已经打开的选项卡
    */
-  const openedTabList = ref<RouterType.BlogRouteRecordRaw[]>([])
+  const openedTabList = ref<RouterType.BlogRoute[]>([])
 
   /**
    *  当前激活的选项卡
    */
-  const currentTab = ref<Partial<RouterType.BlogRouteRecordRaw>>({
+  const currentTab = ref<Partial<RouterType.BlogRoute>>({
   })
 
   /**
@@ -95,7 +95,7 @@ export const useBlogStore = defineStore('blog', () => {
    * 将指定选项卡添加到 keepAlive 排除列表中，只有当该选项卡的 keepAlive 为 true 时才进行添加
    * @param tab 选项卡对象
    */
-  const addKeepAliveExclude = (tab: RouterType.BlogRouteRecordRaw) => {
+  const addKeepAliveExclude = (tab: RouterType.BlogRoute) => {
     if (tab.meta.keepAlive && tab.name && !keepAliveExclude.value.includes(tab.name)) {
       keepAliveExclude.value.push(tab.name)
     }
@@ -105,7 +105,7 @@ export const useBlogStore = defineStore('blog', () => {
    * 将传入的一组选项卡的组件名称标记为排除缓存
    * @param tabs 需要标记的选项卡数组
    */
-  const markTabsToRemove = (tabs: RouterType.BlogRouteRecordRaw[]) => {
+  const markTabsToRemove = (tabs: RouterType.BlogRoute[]) => {
     tabs.forEach((tab) => {
       if (tab.name) {
         addKeepAliveExclude(tab)
@@ -139,7 +139,7 @@ export const useBlogStore = defineStore('blog', () => {
     // 若关闭的是当前激活标签，则标记其为缓存排除，并激活相邻标签
     if (currentTab.value.path === path) {
       if (currentTab.value.name) {
-        addKeepAliveExclude(currentTab.value as RouterType.BlogRouteRecordRaw)
+        addKeepAliveExclude(currentTab.value as RouterType.BlogRoute)
       }
 
       const newIndex = index >= openedTabList.value.length ? openedTabList.value.length - 1 : index
@@ -241,7 +241,7 @@ export const useBlogStore = defineStore('blog', () => {
    * 打开一个新的标签页或激活已存在的标签页
    * @param tab - 要打开的路由标签页对象，类型为BlogRouteRecordRaw
    */
-  const openTab = (tab: RouterType.BlogRouteRecordRaw): void => {
+  const openTab = (tab: RouterType.BlogRoute): void => {
     removeKeepAliveExclude(tab.name as string)
 
     // 从keep-alive的排除列表中移除当前标签页名称

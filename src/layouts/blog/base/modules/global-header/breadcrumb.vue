@@ -18,7 +18,7 @@ const route = useRoute()
 /**
  *  面包屑数据
  */
-const breadList = ref<RouterType.BlogRouteRecordRaw[]>([])
+const breadList = ref<RouterType.BlogRoute[]>([])
 
 /**
  *  获取面包屑数据
@@ -35,7 +35,7 @@ function getBreadcrumb() {
 
   breadList.value = matched.slice(1).map(item => ({
     ...item,
-  })) as unknown as RouterType.BlogRouteRecordRaw[]
+  })) as unknown as RouterType.BlogRoute[]
 }
 
 // watchEffect(() => {
