@@ -180,6 +180,15 @@ export default defineConfig(({ mode }) => {
       //     rewrite: path => path.replace(/^\/api/, ''),
       //   },
       // },
+
+      proxy: {
+        '/docs': { // 代理路径，所有以 /docs 开头的请求都会被代理
+          target: 'http://localhost:5173', // Vitepress 服务器地址，确保包含协议 (http:// 或 https://)
+          changeOrigin: true, // 改变源，用于模拟跨域请求
+          secure: false, // 如果你的目标服务器使用 HTTPS，并且证书无效，可以设置为 false (不推荐在生产环境中使用)
+          ws: true, // 启用 WebSocket 代理
+        },
+      },
     },
 
     // 生产环境构建配置
