@@ -5,12 +5,12 @@ const aaaContent = ref('')
 
 onMounted(async () => {
   try {
-    const modules = import.meta.glob('./bbb.ts', {
+    const modules = import.meta.glob('./aaa.vue', {
       as: 'raw',
       eager: true,
     })
 
-    aaaContent.value = modules['./bbb.ts']
+    aaaContent.value = modules['./aaa.vue']
   }
   catch (error) {
     console.error('Error reading file:', error)
@@ -23,7 +23,7 @@ onMounted(async () => {
   <div>
     <PrismView
       :code="aaaContent"
-      language="typescript"
+      language="vue"
     />
   </div>
 </template>

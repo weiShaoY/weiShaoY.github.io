@@ -2,7 +2,7 @@ import path from 'node:path'
 
 import Vue from '@vitejs/plugin-vue'
 
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import VueJsx from '@vitejs/plugin-vue-jsx'
 
 import UnoCSS from 'unocss/vite'
 
@@ -227,7 +227,7 @@ export default defineConfig(({ mode }) => {
       }),
 
       // 支持 Vue 的 JSX 语法
-      vueJsx(),
+      VueJsx(),
 
       // 启用 Vue 开发者工具
       // vueDevTools(),
@@ -297,6 +297,7 @@ export default defineConfig(({ mode }) => {
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svgs')],
         symbolId: `${env.VITE_APP_ICON_PREFIX || 'icon'}-[dir]-[name]`,
       }),
+
     ],
   }
 })
