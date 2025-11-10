@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router'
 
-import { blogRouteGuard } from './blogRouteGuard'
+import { adminRouteGuard } from './adminRouteGuard'
 
 import { documentTitleGuard } from './documentTitleGuard'
 
@@ -18,5 +18,5 @@ export function createRouterGuard(router: Router) {
   documentTitleGuard(router)
 
   // 创建博客路由守卫
-  blogRouteGuard(router)
+  adminRouteGuard(router)
 }

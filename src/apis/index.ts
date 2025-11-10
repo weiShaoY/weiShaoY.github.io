@@ -1,8 +1,8 @@
-import BlogApi from './modules/blog'
+import AdminApi from './modules/admin'
 
 import CommandApi from './modules/command'
 
 export {
-  BlogApi,
+  AdminApi,
   CommandApi,
 }

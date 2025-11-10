@@ -68,12 +68,12 @@ declare namespace Env {
     /**
      * 路由-博客模块路径
      */
-    readonly VITE_ROUTER_BLOG_PATH: string
+    readonly VITE_ROUTER_ADMIN_PATH: string
 
     /**
      * 路由-博客模块首页路径
      */
-    readonly VITE_ROUTER_BLOG_HOME_PATH: string
+    readonly VITE_ROUTER_ADMIN_HOME_PATH: string
 
     /**
      *  Github仓库地址

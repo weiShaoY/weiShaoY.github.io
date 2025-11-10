@@ -34,7 +34,7 @@ declare namespace RouterType {
   }
 
   /** 博客模块路由类型 */
-  type BlogRoute = {
+  type AdminRoute = {
 
     /** 路由路径 */
     path: string
@@ -114,7 +114,7 @@ declare namespace RouterType {
     )
 
     /** 子路由配置（如果存在 externalUrl 或 iframeUrl，则禁止 children） */
-    children?: BlogRoute[]
+    children?: AdminRoute[]
   } & (
     | {
       meta: { externalUrl: string } | { iframeUrl: string }
@@ -126,7 +126,7 @@ declare namespace RouterType {
       meta: { externalUrl?: never, iframeUrl?: never }
 
       /** 如果 meta 没有 externalUrl 或 iframeUrl，则允许 children */
-      children?: BlogRoute[]
+      children?: AdminRoute[]
     }
   )
 }

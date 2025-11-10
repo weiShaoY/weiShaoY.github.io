@@ -24,7 +24,7 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   type: 'image',
   class: '',
-  icon: 'blog-download',
+  icon: 'admin-download',
   size: 40,
   tooltipContent: '',
   tooltipPlacement: 'bottom',

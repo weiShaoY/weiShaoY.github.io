@@ -1,7 +1,7 @@
 /**
  * 博客模块命名类型
  */
-declare namespace BlogType {
+declare namespace AdminType {
 
   /**
    *  标签类型

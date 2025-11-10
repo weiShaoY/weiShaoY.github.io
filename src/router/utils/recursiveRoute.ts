@@ -1,4 +1,4 @@
-import { BLOG_IFRAME_LAYOUT } from '@/layouts'
+import { ADMIN_IFRAME_LAYOUT } from '@/layouts'
 
 /**
  * 基础递归路由处理函数
@@ -76,13 +76,13 @@ export function recursiveNormalizeRoutesPath(routes: any[], parentPath = ''): an
  * // 设置默认重定向
  * const routes = [
  *   { path: '/police', children: [{ path: 'dashboard' }, { path: 'users' }] },
- *   { path: '/blog', children: [{ path: 'posts' }, { path: 'categories' }] }
+ *   { path: '/admin', children: [{ path: 'posts' }, { path: 'categories' }] }
  * ]
  * const routesWithRedirect = recursiveSetRoutesRedirect(routes)
  * // 结果:
  * // [
  * //   { path: '/police', redirect: '/police/dashboard', children: [...] },
- * //   { path: '/blog', redirect: '/blog/posts', children: [...] }
+ * //   { path: '/admin', redirect: '/admin/posts', children: [...] }
  * // ]
  */
 export function recursiveSetRoutesRedirect(routes: any[]): any[] {
@@ -153,13 +153,13 @@ export function recursiveSortRoutesByOrder(routes: any[]): any[] {
  * // 结果:
  * // [
  * //   { path: '/normal', component: 'NormalComponent' },
- * //   { path: '/iframe', meta: { iframeUrl: 'https://example.com' }, component: BLOG_IFRAME_LAYOUT }
+ * //   { path: '/iframe', meta: { iframeUrl: 'https://example.com' }, component: ADMIN_IFRAME_LAYOUT }
  * // ]
  */
 export function recursiveHandleIframeRoutes(routes: any[]): any[] {
   return recursiveWalkRoutes(routes, (route) => {
     if (route.meta?.iframeUrl) {
-      route.component = BLOG_IFRAME_LAYOUT
+      route.component = ADMIN_IFRAME_LAYOUT
     }
   })
 }

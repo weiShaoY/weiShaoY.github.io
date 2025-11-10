@@ -1,4 +1,4 @@
-export * from './blog'
+export * from './admin'
 
 export * from './home'
 

@@ -12,9 +12,9 @@ declare global {
   const ElWatermark: typeof import('element-plus/es')['ElWatermark']
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const addEventListen: typeof import('../utils/event').addEventListen
+  const adminMittBus: typeof import('../utils/adminMittBus').adminMittBus
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
-  const blogMittBus: typeof import('../utils/blogMittBus').blogMittBus
   const computed: typeof import('vue').computed
   const computedAsync: typeof import('@vueuse/core').computedAsync
   const computedEager: typeof import('@vueuse/core').computedEager
@@ -57,7 +57,7 @@ declare global {
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
   const h: typeof import('vue').h
-  const homeMittBus: typeof import('../utils/blogMittBus').homeMittBus
+  const homeMittBus: typeof import('../utils/adminMittBus').homeMittBus
   const ignorableWatch: typeof import('@vueuse/core').ignorableWatch
   const imageFileToBase64: typeof import('../utils/base64').imageFileToBase64
   const imageUrlToBase64: typeof import('../utils/base64').imageUrlToBase64
@@ -177,6 +177,7 @@ declare global {
   const until: typeof import('@vueuse/core').until
   const urlToBase64: typeof import('../utils/base64')['urlToBase64']
   const useActiveElement: typeof import('@vueuse/core').useActiveElement
+  const useAdminStore: typeof import('../stores/modules/admin/index').useAdminStore
   const useAnimate: typeof import('@vueuse/core').useAnimate
   const useArrayDifference: typeof import('@vueuse/core').useArrayDifference
   const useArrayEvery: typeof import('@vueuse/core').useArrayEvery
@@ -195,7 +196,6 @@ declare global {
   const useAttrs: typeof import('vue').useAttrs
   const useBase64: typeof import('@vueuse/core').useBase64
   const useBattery: typeof import('@vueuse/core').useBattery
-  const useBlogStore: typeof import('../stores/modules/blog/index').useBlogStore
   const useBluetooth: typeof import('@vueuse/core').useBluetooth
   const useBreakpoints: typeof import('@vueuse/core').useBreakpoints
   const useBroadcastChannel: typeof import('@vueuse/core').useBroadcastChannel
@@ -383,9 +383,9 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../utils/event')['addEventListen']>
+    readonly adminMittBus: UnwrapRef<typeof import('../utils/adminMittBus')['adminMittBus']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
-    readonly blogMittBus: UnwrapRef<typeof import('../utils/blogMittBus')['blogMittBus']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -425,7 +425,7 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
-    readonly homeMittBus: UnwrapRef<typeof import('../utils/blogMittBus')['homeMittBus']>
+    readonly homeMittBus: UnwrapRef<typeof import('../utils/adminMittBus')['homeMittBus']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly imageFileToBase64: UnwrapRef<typeof import('../utils/base64')['imageFileToBase64']>
     readonly imageUrlToBase64: UnwrapRef<typeof import('../utils/base64')['imageUrlToBase64']>
@@ -558,7 +558,6 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useBase64: UnwrapRef<typeof import('@vueuse/core')['useBase64']>
     readonly useBattery: UnwrapRef<typeof import('@vueuse/core')['useBattery']>
-    readonly useBlogStore: UnwrapRef<typeof import('../stores/modules/blog/index')['useBlogStore']>
     readonly useBluetooth: UnwrapRef<typeof import('@vueuse/core')['useBluetooth']>
     readonly useBreakpoints: UnwrapRef<typeof import('@vueuse/core')['useBreakpoints']>
     readonly useBroadcastChannel: UnwrapRef<typeof import('@vueuse/core')['useBroadcastChannel']>

@@ -34,6 +34,8 @@ function initRoutes() {
 
 const routeList = initRoutes()
 
+console.log('%c Line:36 🎂 routeList', 'color:#42b983', routeList)
+
 /**
  * 创建路由实例
  */

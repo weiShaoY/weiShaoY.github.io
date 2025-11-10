@@ -35,8 +35,8 @@ export const homeConfig: HomeConfigType = {
       label: 'Contact',
     },
     {
-      value: '/blog',
-      label: 'Blog',
+      value: '/admin',
+      label: 'Admin',
     },
 
     {
