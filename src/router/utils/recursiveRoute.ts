@@ -75,13 +75,13 @@ export function recursiveNormalizeRoutesPath(routes: any[], parentPath = ''): an
  * @example
  * // 设置默认重定向
  * const routes = [
- *   { path: '/admin', children: [{ path: 'dashboard' }, { path: 'users' }] },
+ *   { path: '/police', children: [{ path: 'dashboard' }, { path: 'users' }] },
  *   { path: '/blog', children: [{ path: 'posts' }, { path: 'categories' }] }
  * ]
  * const routesWithRedirect = recursiveSetRoutesRedirect(routes)
  * // 结果:
  * // [
- * //   { path: '/admin', redirect: '/admin/dashboard', children: [...] },
+ * //   { path: '/police', redirect: '/police/dashboard', children: [...] },
  * //   { path: '/blog', redirect: '/blog/posts', children: [...] }
  * // ]
  */

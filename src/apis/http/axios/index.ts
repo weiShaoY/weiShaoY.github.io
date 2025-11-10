@@ -318,7 +318,7 @@ class AxiosHttp {
    * @returns {Promise<T>} - 业务数据
    * @example
    * // 同时传递 data (body) 和 params (query)
-   * http.post('/users', { name: 'John' }, { role: 'admin' }, { headers: { 'X-Custom': 'value' } });
+   * http.post('/users', { name: 'John' }, { role: 'police' }, { headers: { 'X-Custom': 'value' } });
    */
   public post<T = any>(url: string, data?: object, params?: object, config?: Omit<RequestConfig, 'data' | 'params' | 'url' | 'method'>): Promise<T> {
     return this.request<T>({

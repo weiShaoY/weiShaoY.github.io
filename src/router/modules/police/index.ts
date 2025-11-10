@@ -1,24 +1,24 @@
-import { ADMIN_LAYOUT } from '@/layouts'
+import { Police_LAYOUT } from '@/layouts'
 
 /**
  *  指挥台路由
  */
-const adminRouter: RouterType.RouteRecordRaw[] = [
+const policeRouter: RouterType.RouteRecordRaw[] = [
   {
-    path: 'admin-login',
-    name: 'AdminLogin',
-    component: () => import('@/pages/admin/login/index.vue'),
+    path: 'police-login',
+    name: 'policeLogin',
+    component: () => import('@/pages/police/login/index.vue'),
     meta: {
       title: '登录',
     },
   },
   {
-    path: '/admin',
-    name: 'Admin',
+    path: '/police',
+    name: 'police',
     meta: {
       title: '指挥台',
     },
-    component: ADMIN_LAYOUT,
+    component: Police_LAYOUT,
     children: [
       {
         path: 'identityQuery',
@@ -30,7 +30,7 @@ const adminRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-search',
             name: 'IdentityQuerySearch',
-            component: () => import('@/pages/admin/identityQuery/search/index.vue'),
+            component: () => import('@/pages/police/identityQuery/search/index.vue'),
             meta: {
               title: '身份查询-搜索',
             },
@@ -38,7 +38,7 @@ const adminRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-result',
             name: 'IdentityQueryResult',
-            component: () => import('@/pages/admin/identityQuery/result/index.vue'),
+            component: () => import('@/pages/police/identityQuery/result/index.vue'),
             meta: {
               title: '身份查询-结果列表',
             },
@@ -46,7 +46,7 @@ const adminRouter: RouterType.RouteRecordRaw[] = [
           {
             path: 'identity-query-detail',
             name: 'IdentityQueryDetail',
-            component: () => import('@/pages/admin/identityQuery/detail/index.vue'),
+            component: () => import('@/pages/police/identityQuery/detail/index.vue'),
             meta: {
               title: '身份查询-详情',
             },
@@ -58,4 +58,4 @@ const adminRouter: RouterType.RouteRecordRaw[] = [
 
 ]
 
-export default adminRouter
+export default policeRouter

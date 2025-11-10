@@ -8,7 +8,7 @@ class CommandApi {
       const { username, password } = JSON.parse(options.body)
 
       if (
-        username === 'admin'
+        username === 'police'
         && password === '123456'
       ) {
         resolve({

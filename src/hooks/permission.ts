@@ -28,7 +28,7 @@ export default function usePermission() {
      *  @param  role - 用户角色
      *  @returns  第一个具有权限的路由
      */
-    findFirstPermissionRoute(_routers: any, role = 'admin') {
+    findFirstPermissionRoute(_routers: any, role = 'police') {
       const cloneRouters = [..._routers]
 
       while (cloneRouters.length) {

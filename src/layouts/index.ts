@@ -26,4 +26,4 @@ export const BLOG_EXTERNAL_LAYOUT = () => import('./blog/external/index.vue')
 /**
  *  管理后台模块 布局组件
  */
-export const ADMIN_LAYOUT = () => import('./admin/index.vue')
+export const Police_LAYOUT = () => import('./police/index.vue')

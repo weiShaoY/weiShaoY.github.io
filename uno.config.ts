@@ -103,7 +103,7 @@ export default defineConfig({
    *  @description UnoCSS 使用的预设
    */
   presets: [
-    // presetSoybeanAdmin(),
+    // presetSoybeanpolice(),
 
     /**
      *  @description UnoCSS 的核心预设

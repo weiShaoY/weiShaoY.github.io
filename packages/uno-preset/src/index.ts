@@ -4,9 +4,9 @@ import type { Preset } from '@unocss/core'
 
 import type { Theme } from '@unocss/preset-uno'
 
-export function presetSoybeanAdmin(): Preset<Theme> {
+export function presetSoybeanpolice(): Preset<Theme> {
   const preset: Preset<Theme> = {
-    name: 'preset-soybean-admin',
+    name: 'preset-soybean-police',
     shortcuts: [
       {
         'flex-center': 'flex justify-center items-center',
@@ -53,4 +53,4 @@ export function presetSoybeanAdmin(): Preset<Theme> {
   return preset
 }
 
-export default presetSoybeanAdmin
+export default presetSoybeanpolice
