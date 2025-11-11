@@ -6,18 +6,7 @@ type HomeConfigType = {
   /**
    *  头部路由列表
    */
-  headerRouterList: CommonType.Option<string, {
-
-    /**
-     *  是否只在PC端显示
-     */
-    isPCOnly?: boolean
-
-    /**
-     *  是否只在开发环境显示
-     */
-    isDevelopmentOnly?: boolean
-  }>[]
+  headerRouterList: HomeType.HeaderRouter[]
 }
 
 export const homeConfig: HomeConfigType = {
@@ -46,6 +35,13 @@ export const homeConfig: HomeConfigType = {
     {
       value: '/bigScreen',
       label: 'BigScreen',
+    },
+    {
+      value: '/blog/',
+      label: 'Blog',
+      isPCOnly: true,
+      isDevelopmentOnly: true,
+      isAnchorLink: true,
     },
     {
       value: '/police-login',

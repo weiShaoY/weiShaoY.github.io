@@ -29,6 +29,6 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "proxy.js", "src/pages/bigScreen/components/mapScene/mini3d/components/index.ts"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "proxy.js", "src/pages/bigScreen/components/mapScene/mini3d/components/index.ts", "blog/.vitepress/theme/index.ts"],
   "exclude": ["dist", "node_modules"]
 }

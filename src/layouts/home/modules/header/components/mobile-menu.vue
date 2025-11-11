@@ -9,9 +9,7 @@ type PropsType = {
   /**
    *  菜单列表
    */
-  menuList: CommonType.Option<string, {
-    isPCOnly?: boolean
-  }>[]
+  menuList: HomeType.HeaderRouter[]
 }
 
 defineProps<PropsType>()
@@ -43,14 +41,24 @@ function closeMenu() {
 
 /**
  * 选择菜单项
- * @param  key - 路由路径
  */
-function handleSelect(key: string) {
+function handleSelect(item: HomeType.HeaderRouter) {
   closeMenu()
 
   // 延迟跳转，确保动画完成
   setTimeout(() => {
-    router.push(key)
+    // router.push(key)
+
+    if (route.path === item.value) {
+      return
+    }
+
+    if (item.isAnchorLink) {
+      window.location.href = item.value
+    }
+    else {
+      router.push(item.value)
+    }
   }, 500) // 500ms 是关闭菜单的动画时间
 }
 </script>
@@ -100,7 +108,7 @@ function handleSelect(key: string) {
             :class="{
               'bg-[#D0D2D6]': route.path === item.value,
             }"
-            @click="handleSelect(item.value)"
+            @click="handleSelect(item)"
           >
             {{ item.label }}
           </div>

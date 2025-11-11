@@ -499,6 +499,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/blog/': RouteRecordInfo<
+      '/blog/',
+      '/blog',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -1113,6 +1120,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation.vue': {
       routes:
         | '/bigScreen/modules/global-right-chart/QuarterlyGrowthSituation'
+      views:
+        | never
+    }
+    'src/pages/blog/index.vue': {
+      routes:
+        | '/blog/'
       views:
         | never
     }

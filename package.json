@@ -16,7 +16,9 @@
     "pnpm": ">=8.7.0"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npm-run-all --parallel dev:app dev:blog",
+    "dev:app": "vite",
+    "dev:blog": "vitepress dev blog",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
@@ -24,9 +26,9 @@
     "up": "taze major -I",
     "build": "vite build",
     "clean": "rimraf node_modules",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:dev": "vitepress dev blog",
+    "docs:build": "vitepress build blog",
+    "docs:preview": "vitepress preview blog"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -43,6 +45,7 @@
     "lunar-typescript": "^1.8.6",
     "lygia": "1.3.3",
     "md5-ts": "^0.1.6",
+    "npm-run-all": "^4.1.5",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",

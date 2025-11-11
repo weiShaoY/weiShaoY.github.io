@@ -178,6 +178,7 @@
     "unrefElement": true,
     "until": true,
     "useActiveElement": true,
+    "useAdminStore": true,
     "useAnimate": true,
     "useArrayDifference": true,
     "useArrayEvery": true,
