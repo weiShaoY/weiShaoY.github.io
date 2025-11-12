@@ -36,6 +36,7 @@ export function transformMarkdownFiles(files: Record<string, { default: string }
       content: fileContent,
       type: 'file',
       key: '',
+      fullPath: filePath,
     }, '')
   }
 
@@ -74,6 +75,7 @@ function buildFolderStructure(
       children: [],
       type: 'folder',
       key: currentPath,
+      fullPath: currentPath,
     }
     currentLevel.push(folder)
   }

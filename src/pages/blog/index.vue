@@ -40,11 +40,12 @@ const mdFile = ref<BlogType.MdFile> ({
 
 const fileList = ref<BlogType.Folder[]>([])
 
-await getMarkdownList().then((res) => {
+await getMarkdownList().then((res: any) => {
   console.log('%c Line:45 🍰 res', 'color:#fca650', res)
 
   if (res.length) {
-    mdFile.value = res[0].children[0] as any
+    mdFile.value = res[0].children[0].children[0] as any
+    console.log('%c Line:48 🥒 mdFile.value', 'color:#ed9ec7', mdFile.value)
   }
 
   fileList.value = res
@@ -104,7 +105,7 @@ function handleFileSelect(file: BlogType.MdFile) {
 
       <el-scrollbar
         v-if="!isMobile"
-        class="bg-[#FFFFFF] scrollbar-hide !w-70"
+        class="!w-160"
       >
         <Sidebar
           :file-list="fileList"
@@ -143,5 +144,7 @@ function handleFileSelect(file: BlogType.MdFile) {
 </template>
 
 <style lang="scss" scoped>
-
+::deep(.el-menu) {
+  border-right: none !important;
+}
 </style>

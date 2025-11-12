@@ -40,9 +40,15 @@ function handleFileSelect(file: BlogType.MdFile) {
         #title
       >
         <span
-          class="text-4 font-medium"
+          class="flex items-center gap-2 text-4 font-medium"
         >
-          {{ node.name }}
+          <SvgIcon
+            icon="folder"
+          />
+
+          <span>
+            {{ node.name }}
+          </span>
         </span>
       </template>
 
@@ -58,10 +64,15 @@ function handleFileSelect(file: BlogType.MdFile) {
       @click=" handleFileSelect(node) "
     >
       <span
-        class="text-4 font-medium"
+        class="flex items-center gap-2 text-4 font-medium"
       >
-        {{ node.name }}
-      </span>
+        <SvgIcon
+          icon="markdown"
+        />
+
+        <span>
+          {{ node.name }}
+        </span>      </span>
     </el-menu-item>
   </template>
 </template>
