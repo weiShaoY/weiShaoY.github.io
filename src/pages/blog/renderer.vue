@@ -7,7 +7,33 @@ import { defaultLanguages, registerHighlight } from 'stream-markdown'
 
 import { getMarkdown } from 'stream-markdown-parser'
 
-import { streamContent } from './markdown'
+// import { streamContent } from './markdown'
+
+type PropsType = {
+
+  /**
+   *  文件
+   */
+  fileObj: {
+
+    /**
+     *  文件名称
+     */
+    name: string
+
+    /**
+     *  文件内容
+     */
+    content: string
+
+  }
+}
+
+const props = withDefaults(defineProps<PropsType>(), {
+
+})
+
+const streamContent = props.fileObj.content
 
 // 语言名称映射表，将代码文件扩展名映射为可读的语言名称
 const languageMap: Record<string, string> = {
@@ -230,7 +256,7 @@ function formatThemeName(themeName: string) {
 }
 
 // 设置面板显示状态
-const showSettings = ref(false)
+// const showSettings = ref(false)
 
 // 自动滚动到底部功能
 const messagesContainer = ref<HTMLElement | null>(null) // 消息容器引用
@@ -550,7 +576,9 @@ function handleContainerScroll() {
     lastUserScrollDirection.value = 'down'
 
     // 如果接近底部，重新启用自动滚动
-    if (isAtBottom(messagesContainer.value)) { autoScrollEnabled.value = true }
+    if (isAtBottom(messagesContainer.value)) {
+      autoScrollEnabled.value = true
+    }
   }
 
   // 更新最后滚动位置以供将来比较
@@ -738,181 +766,121 @@ watch(content, () => {
 </script>
 
 <template>
-  <div
-    class="app-container h-full flex items-center justify-center bg-gray-50 p-4 dark:bg-gray-900"
-  >
 
-    <!-- 聊天机器人风格的容器 -->
+  <!-- 聊天机器人风格的容器 -->
+  <div
+    class="chatbot-container w-1/2 flex flex-col overflow-hidden border border-gray-200 rounded-2xl bg-white shadow-2xl max-sm:w-full dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50"
+  >
+    <!-- 头部 -->
     <div
-      class="chatbot-container max-w-5xl w-full flex flex-col overflow-hidden border border-gray-200 rounded-2xl bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50"
+      class="chatbot-header border-b border-gray-200 from-blue-50 to-purple-50 bg-gradient-to-r px-6 py-4 dark:border-gray-700 dark:from-gray-800 dark:to-gray-800"
     >
-      <!-- 头部 -->
       <div
-        class="chatbot-header border-b border-gray-200 from-blue-50 to-purple-50 bg-gradient-to-r px-6 py-4 dark:border-gray-700 dark:from-gray-800 dark:to-gray-800"
+        class="flex items-center justify-between gap-3"
       >
         <div
-          class="flex items-center justify-between gap-3"
+          class="flex items-center gap-3"
         >
           <div
-            class="flex items-center gap-3"
+            class="h-10 w-10 flex items-center justify-center rounded-full from-blue-500 to-purple-600 bg-gradient-to-br shadow-lg"
           >
-            <div
-              class="h-10 w-10 flex items-center justify-center rounded-full from-blue-500 to-purple-600 bg-gradient-to-br shadow-lg"
-            >
-              <Icon
-                icon="carbon:chat"
-                class="h-5 w-5 text-white"
-              />
-            </div>
-
-            <div>
-              <h1
-                class="text-lg text-gray-800 font-semibold dark:text-gray-100"
-              >
-                vue-renderer-markdown
-              </h1>
-
-              <p
-                class="text-xs text-gray-500 dark:text-gray-400"
-              >
-                流媒体降价演示
-              </p>
-            </div>
+            <!-- <Icon
+              icon="carbon:chat"
+              class="h-5 w-5 text-white"
+            /> -->
           </div>
 
-          <div
-            class="absolute right-0 top-52 mt-2 min-w-[220px] origin-top-right border border-gray-200/50 rounded-xl bg-white/95 p-4 shadow-xl backdrop-blur-md space-y-4 dark:border-gray-700/50 dark:bg-gray-800/95 dark:shadow-gray-900/30"
-            @click.stop
-          >
-            <!-- 主题选择器 -->
-            <div
-              class="space-y-2"
+          <div>
+            <h1
+              class="text-lg text-gray-800 font-semibold dark:text-gray-100"
             >
-              <label
-                class="block text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
-              >
-                代码主题
-              </label>
+              vue-renderer-markdown
+            </h1>
 
-              <div
-                class="relative"
-              >
-                <select
-                  v-model="selectedTheme"
-                  class="w-full cursor-pointer appearance-none border border-gray-200 rounded-lg bg-gray-50 px-3 py-2 pr-8 text-sm text-gray-900 font-medium transition-all duration-200 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700/50 hover:bg-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700"
-                  aria-label="Code block theme"
-                  @click.stop
-                  @change.stop
-                >
-                  <option
-                    v-for="t in themes"
-                    :key="t"
-                    :value="t"
-                  >
-                    {{ formatThemeName(t) }}
-                  </option>
-                </select>
-
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
-                >
-                  <Icon
-                    icon="carbon:chevron-down"
-                    class="h-4 w-4 text-gray-400 dark:text-gray-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- 分割线 -->
-            <div
-              class="border-t border-gray-200 dark:border-gray-700"
-            />
-
-            <!-- 主题切换 -->
-            <div
-              class="flex items-center justify-between"
+            <p
+              class="text-xs text-gray-500 dark:text-gray-400"
             >
-              <label
-                class="text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
-              >
-                深色模式
-              </label>
-
-              <button
-                class="relative h-6 w-12 rounded-full transition-all duration-200 ease-out active:scale-95 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                :style="{
-                  backgroundColor: isDark ? '#3b82f6' : '#e5e7eb',
-                  transition: 'background-color 0.35s ease-out, box-shadow 0.2s ease, transform 0.1s ease',
-                }"
-                @click.stop="toggleTheme()"
-              >
-                <!-- 滑动圆点 -->
-                <div
-                  class="absolute top-0.5 h-5 w-5 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg"
-                  :style="{
-                    left: isDark ? '26px' : '2px',
-                    transform: `scale(${isDark ? 1.02 : 1})`,
-                    transition: 'left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s ease-out, box-shadow 0.2s ease',
-                  }"
-                >
-                  <!-- 图标根据状态显示 -->
-                  <Transition
-                    enter-active-class="transition-all duration-300 ease-out"
-                    leave-active-class="transition-all duration-200 ease-in"
-                    enter-from-class="opacity-0 scale-0 rotate-90"
-                    enter-to-class="opacity-100 scale-100 rotate-0"
-                    leave-from-class="opacity-100 scale-100 rotate-0"
-                    leave-to-class="opacity-0 scale-0 rotate-90"
-                    mode="out-in"
-                  >
-                    <a
-                      v-if="isDark"
-                      key="moon"
-                      icon="carbon:moon"
-                      class="h-3 w-3 text-blue-600 drop-shadow-sm"
-                    />
-
-                    <Icon
-                      v-else
-                      key="sun"
-                      icon="carbon:sun"
-                      class="h-3 w-3 text-yellow-500 drop-shadow-sm"
-                    />
-                  </Transition>
-                </div>
-              </button>
-            </div>
+              流媒体降价演示
+            </p>
           </div>
         </div>
-      </div>
 
-      <!-- 带滚动的消息区域 -->
-      <main
-        ref="messagesContainer"
-        class="chatbot-messages mb-4 mr-[1px] max-w-full flex-1 overflow-y-auto prose prose-sm"
-        @scroll="handleContainerScroll"
-      >
         <div
-          class="p-6"
-          v-html="html"
-        />
-        <!-- Sentinel observed by IntersectionObserver to detect reaching bottom reliably on mobile -->
-        <div
-          ref="bottomSentinel"
-          aria-hidden="true"
-          class="pointer-events-none h-1 w-full"
-        />
-      </main>
+          class="absolute right-0 top-52 mt-2 min-w-[220px] origin-top-right border border-gray-200/50 rounded-xl bg-white/95 p-4 shadow-xl backdrop-blur-md space-y-4 dark:border-gray-700/50 dark:bg-gray-800/95 dark:shadow-gray-900/30"
+          @click.stop
+        >
+          <!-- 主题选择器 -->
+          <div
+            class="space-y-2"
+          >
+            <label
+              class="block text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
+            >
+              代码主题
+            </label>
+
+            <div
+              class="relative"
+            >
+              <select
+                v-model="selectedTheme"
+                class="w-full cursor-pointer appearance-none border border-gray-200 rounded-lg bg-gray-50 px-3 py-2 pr-8 text-sm text-gray-900 font-medium transition-all duration-200 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700/50 hover:bg-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700"
+                aria-label="Code block theme"
+                @click.stop
+                @change.stop
+              >
+                <option
+                  v-for="t in themes"
+                  :key="t"
+                  :value="t"
+                >
+                  {{ formatThemeName(t) }}
+                </option>
+              </select>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+              >
+                <!-- <Icon
+                  icon="carbon:chevron-down"
+                  class="h-4 w-4 text-gray-400 dark:text-gray-500"
+                /> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 分割线 -->
+          <div
+            class="border-t border-gray-200 dark:border-gray-700"
+          />
+
+          <!-- 主题切换 -->
+
+        </div>
+      </div>
     </div>
+
+    <!-- 带滚动的消息区域 -->
+    <main
+      ref="messagesContainer"
+      class="chatbot-messages mb-4 mr-[1px] max-w-full flex-1 overflow-y-auto prose prose-sm"
+      @scroll="handleContainerScroll"
+    >
+      <div
+        class="p-6"
+        v-html="html"
+      />
+      <!-- Sentinel observed by IntersectionObserver to detect reaching bottom reliably on mobile -->
+      <div
+        ref="bottomSentinel"
+        aria-hidden="true"
+        class="pointer-events-none h-1 w-full"
+      />
+    </main>
   </div>
 </template>
 
 <style scoped>
-.app-container {
-  transition: background-color 0.3s ease;
-  overflow: hidden;
-}
 
 /* 外部高度 */
 .chatbot-container {

@@ -506,9 +506,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/blog/index copy': RouteRecordInfo<
-      '/blog/index copy',
-      '/blog/index copy',
+    '/blog/components/sidebar/': RouteRecordInfo<
+      '/blog/components/sidebar/',
+      '/blog/components/sidebar',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/blog/components/sidebar/sidebar-item': RouteRecordInfo<
+      '/blog/components/sidebar/sidebar-item',
+      '/blog/components/sidebar/sidebar-item',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -516,13 +523,6 @@ declare module 'vue-router/auto-routes' {
     '/blog/renderer': RouteRecordInfo<
       '/blog/renderer',
       '/blog/renderer',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/blog/renderer copy': RouteRecordInfo<
-      '/blog/renderer copy',
-      '/blog/renderer copy',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1150,21 +1150,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/blog/index copy.vue': {
+    'src/pages/blog/components/sidebar/index.vue': {
       routes:
-        | '/blog/index copy'
+        | '/blog/components/sidebar/'
+      views:
+        | never
+    }
+    'src/pages/blog/components/sidebar/sidebar-item.vue': {
+      routes:
+        | '/blog/components/sidebar/sidebar-item'
       views:
         | never
     }
     'src/pages/blog/renderer.vue': {
       routes:
         | '/blog/renderer'
-      views:
-        | never
-    }
-    'src/pages/blog/renderer copy.vue': {
-      routes:
-        | '/blog/renderer copy'
       views:
         | never
     }

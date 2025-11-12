@@ -1,6 +1,5 @@
 export const streamContent = `
 
-
 1. First, let's set up the project:
 
 \`\`\`shellscript
@@ -66,8 +65,5 @@ app.on('activate', () => {
   }
 });
 \`\`\`
-
-
-
 
 `
