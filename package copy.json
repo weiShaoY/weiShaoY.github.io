@@ -16,19 +16,14 @@
     "pnpm": ">=8.7.0"
   },
   "scripts": {
-    "dev": "npm-run-all --parallel dev:app dev:blog",
-    "dev:app": "vite",
-    "dev:blog": "vitepress dev blog",
+    "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "up": "taze major -I",
     "build": "vite build",
-    "clean": "rimraf node_modules",
-    "docs:dev": "vitepress dev blog",
-    "docs:build": "vitepress build blog",
-    "docs:preview": "vitepress preview blog"
+    "clean": "rimraf node_modules"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
