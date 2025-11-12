@@ -10,6 +10,8 @@ import Renderer from './renderer.vue'
 
 import { transformMarkdownFiles } from './transformMarkdownFiles'
 
+const loading = ref(true)
+
 // 在需要的地方动态获取
 async function getMarkdownList() {
   const markdownFiles = import.meta.glob('./models/**/*.md', {
@@ -25,12 +27,30 @@ const mdFile = ref<BlogType.MdFile> ({
   content: '',
   type: 'file',
   key: '',
+  fullPath: '',
 })
 
 /**
  *  文件数组
  */
-const fileList: BlogType.Folder[] = await getMarkdownList()
+// const fileList: BlogType.Folder[] = await getMarkdownList().then((res) => {
+//   loading.value = false
+//   return res
+// })
+
+const fileList = ref<BlogType.Folder[]>([])
+
+await getMarkdownList().then((res) => {
+  console.log('%c Line:45 🍰 res', 'color:#fca650', res)
+
+  if (res.length) {
+    mdFile.value = res[0].children[0] as any
+  }
+
+  fileList.value = res
+  loading.value = false
+  return res
+})
 
 /**
  *  是否显示抽屉
@@ -64,7 +84,7 @@ function handleFileSelect(file: BlogType.MdFile) {
     size="80%"
   >
     <el-scrollbar
-      class="h-full w-full bg-[#FFFFFF] bg-fuchsia scrollbar-hide"
+      class="h-full w-full scrollbar-hide"
     >
       <Sidebar
         :file-list="fileList"
@@ -74,6 +94,7 @@ function handleFileSelect(file: BlogType.MdFile) {
   </el-drawer>
 
   <div
+    v-loading="loading"
     class="mt-20 h-[calc(100vh-80px)] flex flex-col"
   >
 
@@ -95,12 +116,17 @@ function handleFileSelect(file: BlogType.MdFile) {
         class="h-full w-full flex flex-col gap-3"
       >
         <div
-          class="rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
+          v-if="isMobile"
+          class="flex items-center gap-2 rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
         >
           <BaseButton
             icon="home-navbar-menu2"
             @click="switchShowDrawer"
           />
+
+          <span>
+            {{ mdFile.fullPath }}
+          </span>
         </div>
 
         <Renderer

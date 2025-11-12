@@ -27,6 +27,11 @@ declare namespace BlogType {
      *  唯一键
      */
     key: string
+
+    /**
+     *  完整路径
+     */
+    fullPath: string
   }
 
   /**
@@ -53,6 +58,11 @@ declare namespace BlogType {
      *  唯一键
      */
     key: string
+
+    /**
+     *  完整路径
+     */
+    fullPath: string
   }
 
   /**

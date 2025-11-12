@@ -36,12 +36,11 @@ export function transformMarkdownFiles(files: Record<string, { default: string }
       content: fileContent,
       type: 'file',
       key: '',
-      fullPath: '', // 初始化完整路径
     }, '')
   }
 
-  // 为所有节点分配 key 和完整路径
-  assignKeysAndPaths(result)
+  // 为所有节点分配 key
+  assignKeys(result)
   return result
 }
 
@@ -56,12 +55,7 @@ function buildFolderStructure(
 ): void {
   if (pathParts.length === 0) {
     // 到达目标层级，添加文件
-    const fileFullPath = parentPath ? `${parentPath}/${file.name}` : file.name
-
-    currentLevel.push({
-      ...file,
-      fullPath: fileFullPath, // 设置文件的完整路径
-    })
+    currentLevel.push(file)
     return
   }
 
@@ -80,7 +74,6 @@ function buildFolderStructure(
       children: [],
       type: 'folder',
       key: currentPath,
-      fullPath: currentPath, // 设置文件夹的完整路径
     }
     currentLevel.push(folder)
   }
@@ -90,9 +83,9 @@ function buildFolderStructure(
 }
 
 /**
- * 为所有节点分配唯一的 key 和完整路径
+ * 为所有节点分配唯一的 key
  */
-function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''): void {
+function assignKeys(nodes: BlogType.FileNode[], parentKey: string = ''): void {
   nodes.forEach((node, index) => {
     const currentKey = parentKey ? `${parentKey}-${index + 1}` : `${index + 1}`
 
@@ -100,30 +93,12 @@ function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''):
       // 文件夹节点
       node.key = currentKey
 
-      // 如果还没有完整路径，根据父路径生成
-      if (!node.fullPath) {
-        const parentPath = parentKey.split('-')
-          .slice(0, -1)
-          .join('/')
-
-        node.fullPath = parentPath ? `${parentPath}/${node.name}` : node.name
-      }
-
-      // 递归为子节点分配 key 和路径
-      assignKeysAndPaths(node.children, currentKey)
+      // 递归为子节点分配 key
+      assignKeys(node.children, currentKey)
     }
     else {
       // 文件节点
       node.key = currentKey
-
-      // 如果还没有完整路径，根据父路径生成
-      if (!node.fullPath) {
-        const parentPath = parentKey.split('-')
-          .slice(0, -1)
-          .join('/')
-
-        node.fullPath = parentPath ? `${parentPath}/${node.name}` : node.name
-      }
     }
   })
 }
