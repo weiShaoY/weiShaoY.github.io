@@ -506,6 +506,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/blog/index copy': RouteRecordInfo<
+      '/blog/index copy',
+      '/blog/index copy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/blog/renderer': RouteRecordInfo<
+      '/blog/renderer',
+      '/blog/renderer',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -684,6 +698,20 @@ declare module 'vue-router/auto-routes' {
     '/test/': RouteRecordInfo<
       '/test/',
       '/test',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/test/index copy': RouteRecordInfo<
+      '/test/index copy',
+      '/test/index copy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/test/renderer': RouteRecordInfo<
+      '/test/renderer',
+      '/test/renderer',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1115,6 +1143,18 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/blog/index copy.vue': {
+      routes:
+        | '/blog/index copy'
+      views:
+        | never
+    }
+    'src/pages/blog/renderer.vue': {
+      routes:
+        | '/blog/renderer'
+      views:
+        | never
+    }
     'src/pages/error/403/index.vue': {
       routes:
         | '/error/403/'
@@ -1268,6 +1308,18 @@ declare module 'vue-router/auto-routes' {
     'src/pages/test/index.vue': {
       routes:
         | '/test/'
+      views:
+        | never
+    }
+    'src/pages/test/index copy.vue': {
+      routes:
+        | '/test/index copy'
+      views:
+        | never
+    }
+    'src/pages/test/renderer.vue': {
+      routes:
+        | '/test/renderer'
       views:
         | never
     }

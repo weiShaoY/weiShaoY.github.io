@@ -1,17 +1,11 @@
-<!------  2025-11-10---16:44---星期一  ------>
+<!------  2025-11-12---16:24---星期三  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-
-const vitpressUrl = window._DEV__
-  ? 'http://localhost:5173/blog/linux/commands.html'
-  : '/blog/linux/commands.html'
+import Renderer from './renderer.vue'
 </script>
 
 <template>
-  <iframe
-    :src="vitpressUrl"
-    class="mt-20 h-[100vh] w-[100vw] border-none"
-  />
+  <Renderer />
 </template>
 
 <style lang="scss" scoped>
