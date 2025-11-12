@@ -520,6 +520,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/blog/renderer copy': RouteRecordInfo<
+      '/blog/renderer copy',
+      '/blog/renderer copy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -1152,6 +1159,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/blog/renderer.vue': {
       routes:
         | '/blog/renderer'
+      views:
+        | never
+    }
+    'src/pages/blog/renderer copy.vue': {
+      routes:
+        | '/blog/renderer copy'
       views:
         | never
     }

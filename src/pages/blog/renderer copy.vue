@@ -741,6 +741,139 @@ watch(content, () => {
   <div
     class="app-container h-full flex items-center justify-center bg-gray-50 p-4 dark:bg-gray-900"
   >
+    <!-- 设置按钮和面板 -->
+    <div
+      class="fixed right-4 top-4 z-10"
+    >
+      <!-- 设置按钮 -->
+      <button
+        class="settings-toggle h-10 w-10 flex items-center justify-center border border-gray-200/50 rounded-full bg-white/95 shadow-lg backdrop-blur-md transition-all duration-200 dark:border-gray-700/50 dark:bg-gray-800/95 hover:bg-gray-50 dark:shadow-gray-900/20 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700/50"
+        :class="{ 'ring-2 ring-blue-500/50': showSettings }"
+        @click="showSettings = !showSettings"
+      >
+        <Icon
+          icon="carbon:settings"
+          class="h-5 w-5 text-gray-600 transition-transform duration-200 dark:text-gray-400"
+          :class="{ 'rotate-90': showSettings }"
+        />
+      </button>
+
+      <!-- 设置面板 -->
+      <Transition
+        enter-active-class="transition ease-out duration-300"
+        enter-from-class="opacity-0 scale-95 translate-y-2"
+        enter-to-class="opacity-100 scale-100 translate-y-0"
+        leave-active-class="transition ease-in duration-200"
+        leave-from-class="opacity-100 scale-100 translate-y-0"
+        leave-to-class="opacity-0 scale-95 translate-y-2"
+      >
+        <div
+          v-if="showSettings"
+          class="absolute right-0 top-52 mt-2 min-w-[220px] origin-top-right border border-gray-200/50 rounded-xl bg-white/95 p-4 shadow-xl backdrop-blur-md space-y-4 dark:border-gray-700/50 dark:bg-gray-800/95 dark:shadow-gray-900/30"
+          @click.stop
+        >
+          <!-- 主题选择器 -->
+          <div
+            class="space-y-2"
+          >
+            <label
+              class="block text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
+            >
+              代码主题
+            </label>
+
+            <div
+              class="relative"
+            >
+              <select
+                v-model="selectedTheme"
+                class="w-full cursor-pointer appearance-none border border-gray-200 rounded-lg bg-gray-50 px-3 py-2 pr-8 text-sm text-gray-900 font-medium transition-all duration-200 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700/50 hover:bg-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700"
+                aria-label="Code block theme"
+                @click.stop
+                @change.stop
+              >
+                <option
+                  v-for="t in themes"
+                  :key="t"
+                  :value="t"
+                >
+                  {{ formatThemeName(t) }}
+                </option>
+              </select>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+              >
+                <Icon
+                  icon="carbon:chevron-down"
+                  class="h-4 w-4 text-gray-400 dark:text-gray-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 分割线 -->
+          <div
+            class="border-t border-gray-200 dark:border-gray-700"
+          />
+
+          <!-- 主题切换 -->
+          <div
+            class="flex items-center justify-between"
+          >
+            <label
+              class="text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
+            >
+              深色模式
+            </label>
+
+            <button
+              class="relative h-6 w-12 rounded-full transition-all duration-200 ease-out active:scale-95 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              :style="{
+                backgroundColor: isDark ? '#3b82f6' : '#e5e7eb',
+                transition: 'background-color 0.35s ease-out, box-shadow 0.2s ease, transform 0.1s ease',
+              }"
+              @click.stop="toggleTheme()"
+            >
+              <!-- 滑动圆点 -->
+              <div
+                class="absolute top-0.5 h-5 w-5 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg"
+                :style="{
+                  left: isDark ? '26px' : '2px',
+                  transform: `scale(${isDark ? 1.02 : 1})`,
+                  transition: 'left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s ease-out, box-shadow 0.2s ease',
+                }"
+              >
+                <!-- 图标根据状态显示 -->
+                <Transition
+                  enter-active-class="transition-all duration-300 ease-out"
+                  leave-active-class="transition-all duration-200 ease-in"
+                  enter-from-class="opacity-0 scale-0 rotate-90"
+                  enter-to-class="opacity-100 scale-100 rotate-0"
+                  leave-from-class="opacity-100 scale-100 rotate-0"
+                  leave-to-class="opacity-0 scale-0 rotate-90"
+                  mode="out-in"
+                >
+                  <a
+                    v-if="isDark"
+                    key="moon"
+                    icon="carbon:moon"
+                    class="h-3 w-3 text-blue-600 drop-shadow-sm"
+                  />
+
+                  <Icon
+                    v-else
+                    key="sun"
+                    icon="carbon:sun"
+                    class="h-3 w-3 text-yellow-500 drop-shadow-sm"
+                  />
+                </Transition>
+              </div>
+            </button>
+          </div>
+        </div>
+      </Transition>
+    </div>
 
     <!-- 聊天机器人风格的容器 -->
     <div
@@ -780,110 +913,20 @@ watch(content, () => {
             </div>
           </div>
 
-          <div
-            class="absolute right-0 top-52 mt-2 min-w-[220px] origin-top-right border border-gray-200/50 rounded-xl bg-white/95 p-4 shadow-xl backdrop-blur-md space-y-4 dark:border-gray-700/50 dark:bg-gray-800/95 dark:shadow-gray-900/30"
-            @click.stop
+          <!-- GitHub Star Button -->
+          <a
+            href="https://github.com/Simon-He95/vue-markdown-render"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="github-star-btn flex items-center gap-2 rounded-lg bg-gray-800 px-3 py-1.5 text-sm text-white font-medium shadow-md transition-all duration-200 dark:bg-gray-700 hover:bg-gray-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-600"
           >
-            <!-- 主题选择器 -->
-            <div
-              class="space-y-2"
-            >
-              <label
-                class="block text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
-              >
-                代码主题
-              </label>
-
-              <div
-                class="relative"
-              >
-                <select
-                  v-model="selectedTheme"
-                  class="w-full cursor-pointer appearance-none border border-gray-200 rounded-lg bg-gray-50 px-3 py-2 pr-8 text-sm text-gray-900 font-medium transition-all duration-200 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700/50 hover:bg-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700"
-                  aria-label="Code block theme"
-                  @click.stop
-                  @change.stop
-                >
-                  <option
-                    v-for="t in themes"
-                    :key="t"
-                    :value="t"
-                  >
-                    {{ formatThemeName(t) }}
-                  </option>
-                </select>
-
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
-                >
-                  <Icon
-                    icon="carbon:chevron-down"
-                    class="h-4 w-4 text-gray-400 dark:text-gray-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- 分割线 -->
-            <div
-              class="border-t border-gray-200 dark:border-gray-700"
+            <Icon
+              icon="carbon:star"
+              class="h-4 w-4"
             />
 
-            <!-- 主题切换 -->
-            <div
-              class="flex items-center justify-between"
-            >
-              <label
-                class="text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
-              >
-                深色模式
-              </label>
-
-              <button
-                class="relative h-6 w-12 rounded-full transition-all duration-200 ease-out active:scale-95 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                :style="{
-                  backgroundColor: isDark ? '#3b82f6' : '#e5e7eb',
-                  transition: 'background-color 0.35s ease-out, box-shadow 0.2s ease, transform 0.1s ease',
-                }"
-                @click.stop="toggleTheme()"
-              >
-                <!-- 滑动圆点 -->
-                <div
-                  class="absolute top-0.5 h-5 w-5 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg"
-                  :style="{
-                    left: isDark ? '26px' : '2px',
-                    transform: `scale(${isDark ? 1.02 : 1})`,
-                    transition: 'left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s ease-out, box-shadow 0.2s ease',
-                  }"
-                >
-                  <!-- 图标根据状态显示 -->
-                  <Transition
-                    enter-active-class="transition-all duration-300 ease-out"
-                    leave-active-class="transition-all duration-200 ease-in"
-                    enter-from-class="opacity-0 scale-0 rotate-90"
-                    enter-to-class="opacity-100 scale-100 rotate-0"
-                    leave-from-class="opacity-100 scale-100 rotate-0"
-                    leave-to-class="opacity-0 scale-0 rotate-90"
-                    mode="out-in"
-                  >
-                    <a
-                      v-if="isDark"
-                      key="moon"
-                      icon="carbon:moon"
-                      class="h-3 w-3 text-blue-600 drop-shadow-sm"
-                    />
-
-                    <Icon
-                      v-else
-                      key="sun"
-                      icon="carbon:sun"
-                      class="h-3 w-3 text-yellow-500 drop-shadow-sm"
-                    />
-                  </Transition>
-                </div>
-              </button>
-            </div>
-          </div>
+            <span>Star</span>
+          </a>
         </div>
       </div>
 
