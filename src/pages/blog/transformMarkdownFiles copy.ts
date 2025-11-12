@@ -1,5 +1,5 @@
 /**
- * 类型守卫函数
+ *  类型守卫函数
  */
 function isFolderStructure(item: BlogType.FileNode): item is BlogType.Folder {
   return 'children' in item
@@ -35,12 +35,9 @@ export function transformMarkdownFiles(files: Record<string, { default: string }
       name: fileName,
       content: fileContent,
       type: 'file',
-      key: '',
-    }, '')
+    })
   }
 
-  // 为所有节点分配 key
-  assignKeys(result)
   return result
 }
 
@@ -51,7 +48,6 @@ function buildFolderStructure(
   currentLevel: BlogType.FileNode[],
   pathParts: string[],
   file: BlogType.MdFile,
-  parentPath: string,
 ): void {
   if (pathParts.length === 0) {
     // 到达目标层级，添加文件
@@ -60,8 +56,6 @@ function buildFolderStructure(
   }
 
   const [currentFolderName, ...remainingPath] = pathParts
-
-  const currentPath = parentPath ? `${parentPath}/${currentFolderName}` : currentFolderName
 
   // 查找或创建当前层级的文件夹
   let folder = currentLevel.find((item): item is BlogType.Folder =>
@@ -73,32 +67,10 @@ function buildFolderStructure(
       name: currentFolderName,
       children: [],
       type: 'folder',
-      key: currentPath,
     }
     currentLevel.push(folder)
   }
 
   // 递归处理剩余路径
-  buildFolderStructure(folder.children, remainingPath, file, currentPath)
-}
-
-/**
- * 为所有节点分配唯一的 key
- */
-function assignKeys(nodes: BlogType.FileNode[], parentKey: string = ''): void {
-  nodes.forEach((node, index) => {
-    const currentKey = parentKey ? `${parentKey}-${index + 1}` : `${index + 1}`
-
-    if (isFolderStructure(node)) {
-      // 文件夹节点
-      node.key = currentKey
-
-      // 递归为子节点分配 key
-      assignKeys(node.children, currentKey)
-    }
-    else {
-      // 文件节点
-      node.key = currentKey
-    }
-  })
+  buildFolderStructure(folder.children, remainingPath, file)
 }

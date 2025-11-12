@@ -7,19 +7,33 @@ import { defaultLanguages, registerHighlight } from 'stream-markdown'
 
 import { getMarkdown } from 'stream-markdown-parser'
 
+// import { streamContent } from './markdown'
+
 type PropsType = {
 
   /**
    *  文件
    */
-  mdFile: BlogType.MdFile
+  fileObj: {
+
+    /**
+     *  文件名称
+     */
+    name: string
+
+    /**
+     *  文件内容
+     */
+    content: string
+
+  }
 }
 
 const props = withDefaults(defineProps<PropsType>(), {
 
 })
 
-// const streamContent = props.fileObj.content
+const streamContent = props.fileObj.content
 
 // 语言名称映射表，将代码文件扩展名映射为可读的语言名称
 const languageMap: Record<string, string> = {
@@ -50,58 +64,33 @@ const languageMap: Record<string, string> = {
 }
 
 // 响应式变量，存储流式输出的markdown内容
-/**
- *  响应式变量，存储流式输出的markdown内容
- */
 const content = ref<string>('')
 
-watch(() => props.mdFile.content, (newContent, _old, onInvalidate) => {
-  // 用于终止上一个流
-  let stopped = false
+// 使用定时器模拟流式输出内容
+// 为了避免在流式传输期间出现闪烁序列（如":::"，稍后可能变成AdmonitionNode），
+// 我们在遇到":"时向前查看，并在看到非冒号字符之前延迟追加连续的冒号。
+useInterval(16, {
+  callback() {
+    const cur = content.value.length // 当前内容长度
 
-  content.value = '' // 重置内容
-
-  const intervalId = setInterval(() => {
-    // 若已被 watch 失效（新内容触发），就立即终止
-    if (stopped) {
-      clearInterval(intervalId)
-      return
+    if (cur >= streamContent.length) { // 如果已输出完所有内容
+      return // 停止输出
     }
 
-    const cur = content.value.length
+    const nextChar = streamContent.charAt(cur) // 获取下一个字符
 
-    if (cur >= newContent.length) {
-      clearInterval(intervalId)
-      return
-    }
-
-    content.value += newContent.charAt(cur)
-  }, 16)
-
-  // 用于外部终止当前流
-  onInvalidate(() => {
-    stopped = true
-    clearInterval(intervalId)
-  })
-}, {
-  immediate: true,
+    // 对于非冒号字符，执行正常的单字符追加
+    content.value += nextChar
+  },
 })
 
-/**
- *  代码高亮器实例
- */
+// 代码高亮器实例
 const highlighter = ref<Highlighter | null>(null)
 
-/**
- *  当前选中的主题
- */
-const selectedCodeTheme = ref('vitesse-dark')
+// 当前选中的主题
+const selectedTheme = ref('vitesse-dark')
 
 // 初始化markdown解析器
-
-/**
- *  初始化markdown解析器
- */
 const md = getMarkdown('hi', {
   markdownItOptions: {
     // 代码高亮函数
@@ -115,7 +104,7 @@ const md = getMarkdown('hi', {
       if (highlighter.value) { // 如果高亮器已初始化
         return highlighter.value.codeToHtml(str, { // 返回高亮后的HTML
           lang: _lang,
-          theme: selectedCodeTheme.value,
+          theme: selectedTheme.value,
         })
       }
 
@@ -164,7 +153,7 @@ md.renderer.rules.fence = (tokens, idx) => {
   if (highlighter.value) { // 如果高亮器可用
     return highlighter.value.codeToHtml(token.content, { // 返回高亮后的代码HTML
       lang: defaultLanguages.includes(lang) ? lang : 'plaintext', // 检查是否为支持的语言
-      theme: selectedCodeTheme.value,
+      theme: selectedTheme.value,
     })
   }
 
@@ -172,15 +161,7 @@ md.renderer.rules.fence = (tokens, idx) => {
 }
 
 // 计算属性：将markdown内容转换为HTML
-// const html = computed(() => md.render(content.value))
-
-const html = computed(() => {
-  if (!content.value) {
-    return ''
-  }
-
-  return md.render(content.value)
-})
+const html = computed(() => md.render(content.value))
 
 // 主题切换功能
 const isDark = useDark() // 使用暗色主题
@@ -188,7 +169,7 @@ const isDark = useDark() // 使用暗色主题
 const toggleTheme = useToggle(isDark) // 主题切换函数
 
 // 代码块主题选择器（单个下拉菜单）
-const codeThemeList = [
+const themes = [
   'andromeeda',
   'aurora-x',
   'ayu-dark',
@@ -253,10 +234,10 @@ const codeThemeList = [
 
 // 在客户端环境下监听主题变化
 if (typeof window !== 'undefined') {
-  watch(() => selectedCodeTheme.value, async (newThemes) => {
+  watch(() => selectedTheme.value, async (newThemes) => {
     if (!highlighter.value) { // 如果高亮器未初始化
       highlighter.value = await registerHighlight({ // 注册高亮器
-        themes: codeThemeList as ThemeInput[],
+        themes: themes as ThemeInput[],
       })
     }
 
@@ -266,14 +247,16 @@ if (typeof window !== 'undefined') {
   })
 }
 
-/**
- *  选中代码主题
- */
-function handleSelectCodeTheme(codeTheme: string) {
-  console.log('%c Line:787 🥃 type', 'color:#93c0a4', codeTheme)
-
-  selectedCodeTheme.value = codeTheme
+// 格式化主题名称显示：将连字符分隔的单词转换为首字母大写的格式
+function formatThemeName(themeName: string) {
+  return themeName
+    .split('-') // 按连字符分割
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // 每个单词首字母大写
+    .join(' ') // 用空格重新连接
 }
+
+// 设置面板显示状态
+// const showSettings = ref(false)
 
 // 自动滚动到底部功能
 const messagesContainer = ref<HTMLElement | null>(null) // 消息容器引用
@@ -406,9 +389,7 @@ function performAutoScrollIfNeeded() {
   }
 }
 
-/**
- *  执行滚动操作
- */
+// 执行滚动操作
 function executeScroll() {
   if (!messagesContainer.value) {
     return
@@ -440,9 +421,7 @@ function executeScroll() {
   }
 }
 
-/**
- *  设置ResizeObserver以检测内容高度变化
- */
+// 设置ResizeObserver以检测内容高度变化
 function setupContentResizeObserver() {
   if (!messagesContainer.value) {
     return
@@ -476,9 +455,7 @@ function setupContentResizeObserver() {
   contentResizeObserver.observe(messagesContainer.value)
 }
 
-/**
- *  设置MutationObserver以检测DOM变化（表格内容加载等）
- */
+// 设置MutationObserver以检测DOM变化（表格内容加载等）
 function setupContentMutationObserver() {
   if (!messagesContainer.value) {
     return
@@ -546,9 +523,7 @@ function teardownContentMutationObserver() {
   }
 }
 
-/**
- *  处理滚动事件以管理自动滚动行为
- */
+// 处理滚动事件以管理自动滚动行为
 function handleContainerScroll() {
   if (!messagesContainer.value) {
     return
@@ -611,16 +586,12 @@ function handleContainerScroll() {
   lastKnownScrollHeight = currentScrollHeight
 }
 
-/**
- *  跟踪触摸/指针起始位置以检测方向
- */
+// 跟踪触摸/指针起始位置以检测方向
 const touchStartY = ref<number | null>(null) // 触摸起始Y坐标
 
 const pointerStartY = ref<number | null>(null) // 指针起始Y坐标
 
-/**
- *  滚轮事件：仅当用户向上滚动时禁用自动滚动（deltaY < 0）
- */
+// 滚轮事件：仅当用户向上滚动时禁用自动滚动（deltaY < 0）
 function handleWheel(e: WheelEvent) {
   try {
     if (!messagesContainer.value) {
@@ -645,9 +616,7 @@ function handleWheel(e: WheelEvent) {
   }
 }
 
-/**
- *  触摸处理程序：检测touchstart和touchmove之间的移动方向
- */
+// 触摸处理程序：检测touchstart和touchmove之间的移动方向
 function handleTouchStart(e: TouchEvent) {
   if (e.touches && e.touches.length > 0) {
     touchStartY.value = e.touches[0].clientY // 记录起始触摸位置
@@ -794,7 +763,6 @@ watch(content, () => {
     }, delay)
   })
 })
-
 </script>
 
 <template>
@@ -813,84 +781,82 @@ watch(content, () => {
         <div
           class="flex items-center gap-3"
         >
+          <div
+            class="h-10 w-10 flex items-center justify-center rounded-full from-blue-500 to-purple-600 bg-gradient-to-br shadow-lg"
+          >
+            <!-- <Icon
+              icon="carbon:chat"
+              class="h-5 w-5 text-white"
+            /> -->
+          </div>
 
           <div>
             <h1
               class="text-lg text-gray-800 font-semibold dark:text-gray-100"
             >
-              {{ mdFile.name }}
+              vue-renderer-markdown
             </h1>
 
             <p
               class="text-xs text-gray-500 dark:text-gray-400"
             >
-              <!-- 副标题 -->
+              流媒体降价演示
             </p>
           </div>
         </div>
 
-        <!-- 右侧 -->
-        <label
-          class="relative inline-flex cursor-pointer items-center"
+        <div
+          class="absolute right-0 top-52 mt-2 min-w-[220px] origin-top-right border border-gray-200/50 rounded-xl bg-white/95 p-4 shadow-xl backdrop-blur-md space-y-4 dark:border-gray-700/50 dark:bg-gray-800/95 dark:shadow-gray-900/30"
+          @click.stop
         >
-          <input
-            class="peer sr-only"
-            type="checkbox"
-            @change="toggleTheme"
-          >
-
+          <!-- 主题选择器 -->
           <div
-            class="h-10 w-20 rounded-full from-yellow-300 to-orange-400 bg-gradient-to-r transition-all duration-500 after:absolute after:left-1 after:top-1 after:h-8 after:w-8 after:flex after:items-center after:justify-center after:rounded-full after:bg-white peer-checked:from-blue-400 peer-checked:to-indigo-500 after:text-lg after:shadow-md after:transition-all after:duration-500 after:content-['☀️'] peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']"
+            class="space-y-2"
+          >
+            <label
+              class="block text-xs text-gray-600 font-semibold tracking-wide uppercase dark:text-gray-400"
+            >
+              代码主题
+            </label>
+
+            <div
+              class="relative"
+            >
+              <select
+                v-model="selectedTheme"
+                class="w-full cursor-pointer appearance-none border border-gray-200 rounded-lg bg-gray-50 px-3 py-2 pr-8 text-sm text-gray-900 font-medium transition-all duration-200 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700/50 hover:bg-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:hover:bg-gray-700"
+                aria-label="Code block theme"
+                @click.stop
+                @change.stop
+              >
+                <option
+                  v-for="t in themes"
+                  :key="t"
+                  :value="t"
+                >
+                  {{ formatThemeName(t) }}
+                </option>
+              </select>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+              >
+                <!-- <Icon
+                  icon="carbon:chevron-down"
+                  class="h-4 w-4 text-gray-400 dark:text-gray-500"
+                /> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 分割线 -->
+          <div
+            class="border-t border-gray-200 dark:border-gray-700"
           />
 
-          <span
-            class="ml-3 text-sm text-gray-900 font-medium"
-          >
-            暗色模式
-          </span>
-        </label>
+          <!-- 主题切换 -->
 
-        <el-dropdown
-          placement="bottom-end"
-          @command="handleSelectCodeTheme"
-        >
-          <span
-            class="el-dropdown-link"
-          >
-            {{ selectedCodeTheme }}
-          </span>
-
-          <template
-            #dropdown
-          >
-            <el-dropdown-menu
-              class="h-70 overflow-auto"
-            >
-              <el-dropdown-item
-                v-for="item in codeThemeList"
-                :key="item"
-                :command="item"
-              >
-
-                <SvgIcon
-                  icon="selected"
-                  :size="12"
-                  class="mr-3"
-                  :class="[
-                    item !== selectedCodeTheme ? 'opacity-0' : '',
-                  ]"
-                />
-
-                <span>
-                  {{ item }}
-                </span>
-
-              </el-dropdown-item>
-
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-
+        </div>
       </div>
     </div>
 
@@ -928,8 +894,6 @@ watch(content, () => {
 
   height: 100%;
   max-height: 100%;
-
-  font-family: 'Fira Code VF', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .github-star-btn:active {

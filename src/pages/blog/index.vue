@@ -18,21 +18,24 @@ async function getMarkdownList() {
   return transformMarkdownFiles(markdownFiles)
 }
 
-// 在组件中使用
-const list = await getMarkdownList()
-
-console.log('%c Line:14 🌽 list', 'color:#3f7cff', list)
-
-const fileObj = ref ({
-
+const mdFile = ref<BlogType.MdFile> ({
+  name: '',
+  content: '',
+  type: 'file',
+  key: '',
 })
 
-function handleFileSelect(file: any) {
-  console.log('%c Line:20 🍎 file', 'color:#ff5722', file)
-  fileObj.value = file
-}
+/**
+ *  文件数组
+ */
+const fileList: BlogType.Folder[] = await getMarkdownList()
 
-fileObj.value = list[0]
+/**
+ *  文件选择
+ */
+function handleFileSelect(file: BlogType.MdFile) {
+  mdFile.value = file
+}
 
 </script>
 
@@ -43,22 +46,21 @@ fileObj.value = list[0]
   >
 
     <div
-      class="h-full flex items-center justify-center bg-gray-50 p-4 dark:bg-gray-900"
+      class="h-full flex items-center justify-between bg-gray-50 p-4 dark:bg-gray-900"
     >
 
-      <div
-        class="mh-[60vh] h-[60vh] flex-1 bg-amber"
+      <el-scrollbar
+        class="bg-amber scrollbar-hide !w-70"
       >
-
         <Sidebar
-          :file-structure="list"
+          :file-list="fileList"
           @file-select="handleFileSelect"
         />
-      </div>
+      </el-scrollbar>
 
       <Renderer
-        v-if="list.length > 0"
-        :file-obj="fileObj"
+        v-if="fileList.length > 0"
+        v-model:md-file="mdFile"
       />
 
       <div
