@@ -7,6 +7,8 @@ import { defaultLanguages, registerHighlight } from 'stream-markdown'
 
 import { getMarkdown } from 'stream-markdown-parser'
 
+import { isMobile } from '@/utils'
+
 type PropsType = {
 
   /**
@@ -183,9 +185,24 @@ const html = computed(() => {
 })
 
 // 主题切换功能
+/**
+ *
+ */
 const isDark = useDark() // 使用暗色主题
 
 const toggleTheme = useToggle(isDark) // 主题切换函数
+
+// 监听暗色模式自动切换代码主题
+watch(isDark, (dark) => {
+  selectedCodeTheme.value = dark ? 'vitesse-dark' : 'vitesse-light'
+})
+
+/**
+ * 处理暗色模式切换
+ */
+function handleDarkModeToggle() {
+  toggleTheme()
+}
 
 // 代码块主题选择器（单个下拉菜单）
 const codeThemeList = [
@@ -801,14 +818,14 @@ watch(content, () => {
 
   <!-- 聊天机器人风格的容器 -->
   <div
-    class="chatbot-container w-1/2 flex flex-col overflow-hidden border border-gray-200 rounded-2xl bg-white shadow-2xl max-sm:w-full dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50"
+    class="chatbot-container flex flex-col flex-1 overflow-hidden border border-gray-200 rounded-2xl bg-white shadow-2xl max-sm:w-full dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50"
   >
     <!-- 头部 -->
     <div
       class="chatbot-header border-b border-gray-200 from-blue-50 to-purple-50 bg-gradient-to-r px-6 py-4 dark:border-gray-700 dark:from-gray-800 dark:to-gray-800"
     >
       <div
-        class="flex items-center justify-between gap-3"
+        class="flex flex-wrap items-center justify-between gap-3"
       >
         <div
           class="flex items-center gap-3"
@@ -830,66 +847,70 @@ watch(content, () => {
         </div>
 
         <!-- 右侧 -->
-        <label
-          class="relative inline-flex cursor-pointer items-center"
+        <div
+          class="flex items-center justify-between gap-10"
+          :class="[
+            isMobile ? 'w-full' : '',
+          ]"
         >
-          <input
-            class="peer sr-only"
-            type="checkbox"
-            @change="toggleTheme"
+          <el-dropdown
+            placement="bottom-end"
+            @command="handleSelectCodeTheme"
           >
-
-          <div
-            class="h-10 w-20 rounded-full from-yellow-300 to-orange-400 bg-gradient-to-r transition-all duration-500 after:absolute after:left-1 after:top-1 after:h-8 after:w-8 after:flex after:items-center after:justify-center after:rounded-full after:bg-white peer-checked:from-blue-400 peer-checked:to-indigo-500 after:text-lg after:shadow-md after:transition-all after:duration-500 after:content-['☀️'] peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']"
-          />
-
-          <span
-            class="ml-3 text-sm text-gray-900 font-medium"
-          >
-            暗色模式
-          </span>
-        </label>
-
-        <el-dropdown
-          placement="bottom-end"
-          @command="handleSelectCodeTheme"
-        >
-          <span
-            class="el-dropdown-link"
-          >
-            {{ selectedCodeTheme }}
-          </span>
-
-          <template
-            #dropdown
-          >
-            <el-dropdown-menu
-              class="h-70 overflow-auto"
+            <span
+              class="text-sm font-medium"
             >
-              <el-dropdown-item
-                v-for="item in codeThemeList"
-                :key="item"
-                :command="item"
+              代码主题:    {{ selectedCodeTheme }}
+            </span>
+
+            <template
+              #dropdown
+            >
+              <el-dropdown-menu
+                class="h-70 overflow-auto"
               >
+                <el-dropdown-item
+                  v-for="item in codeThemeList"
+                  :key="item"
+                  :command="item"
+                >
 
-                <SvgIcon
-                  icon="selected"
-                  :size="12"
-                  class="mr-3"
-                  :class="[
-                    item !== selectedCodeTheme ? 'opacity-0' : '',
-                  ]"
-                />
+                  <SvgIcon
+                    icon="selected"
+                    :size="12"
+                    class="mr-3"
+                    :class="[
+                      item !== selectedCodeTheme ? 'opacity-0' : '',
+                    ]"
+                  />
 
-                <span>
-                  {{ item }}
-                </span>
+                  <span>
+                    {{ item }}
+                  </span>
 
-              </el-dropdown-item>
+                </el-dropdown-item>
 
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <label
+            class="relative inline-flex cursor-pointer items-center"
+          >
+            <input
+              class="peer sr-only"
+              type="checkbox"
+              :checked="isDark"
+              @change="handleDarkModeToggle"
+            >
+
+            <div
+              class="h-10 w-20 rounded-full from-yellow-300 to-orange-400 bg-gradient-to-r transition-all duration-500 after:absolute after:left-1 after:top-1 after:h-8 after:w-8 after:flex after:items-center after:justify-center after:rounded-full after:bg-white peer-checked:from-blue-400 peer-checked:to-indigo-500 after:text-lg after:shadow-md after:transition-all after:duration-500 after:content-['☀️'] peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']"
+            />
+
+          </label>
+
+        </div>
 
       </div>
     </div>
@@ -926,8 +947,9 @@ watch(content, () => {
 
   /* max-height: calc(var(--app-viewport-vh, 1vh) * 100 - 2rem); */
 
-  height: 100%;
-  max-height: 100%;
+  /* height: 100%;
+  max-height: 100%; */
+  flex: 1;
 
   font-family: 'Fira Code VF', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -39,7 +39,11 @@ function handleFileSelect(file: BlogType.MdFile) {
       <template
         #title
       >
-        <span>{{ node.name }}</span>
+        <span
+          class="text-4 font-medium"
+        >
+          {{ node.name }}
+        </span>
       </template>
 
       <SidebarItem
@@ -53,7 +57,11 @@ function handleFileSelect(file: BlogType.MdFile) {
       :index="node.key"
       @click=" handleFileSelect(node) "
     >
-      {{ node.name }}
+      <span
+        class="text-4 font-medium"
+      >
+        {{ node.name }}
+      </span>
     </el-menu-item>
   </template>
 </template>

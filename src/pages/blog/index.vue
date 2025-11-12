@@ -2,6 +2,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
 
+import { isMobile } from '@/utils'
+
 import Sidebar from './components/sidebar/index.vue'
 
 import Renderer from './renderer.vue'
@@ -31,26 +33,57 @@ const mdFile = ref<BlogType.MdFile> ({
 const fileList: BlogType.Folder[] = await getMarkdownList()
 
 /**
+ *  是否显示抽屉
+ */
+const isShowDrawer = ref(false)
+
+/**
+ *  切换显示抽屉
+ */
+function switchShowDrawer() {
+  isShowDrawer.value = !isShowDrawer.value
+}
+
+/**
  *  文件选择
  */
 function handleFileSelect(file: BlogType.MdFile) {
   mdFile.value = file
-}
 
+  isShowDrawer.value = false
+}
 </script>
 
 <template>
+
+  <el-drawer
+    v-if="isMobile"
+    v-model="isShowDrawer"
+    :with-header="false"
+    direction="ltr"
+    size="80%"
+  >
+    <el-scrollbar
+      class="h-full w-full bg-[#FFFFFF] bg-fuchsia scrollbar-hide"
+    >
+      <Sidebar
+        :file-list="fileList"
+        @file-select="handleFileSelect"
+      />
+    </el-scrollbar>
+  </el-drawer>
 
   <div
     class="mt-20 h-[calc(100vh-80px)] flex flex-col"
   >
 
     <div
-      class="h-full flex items-center justify-between bg-gray-50 p-4 dark:bg-gray-900"
+      class="h-full flex items-center justify-between gap-20 bg-gray-50 p-4 dark:bg-gray-900"
     >
 
       <el-scrollbar
-        class="bg-amber scrollbar-hide !w-70"
+        v-if="!isMobile"
+        class="bg-[#FFFFFF] scrollbar-hide !w-70"
       >
         <Sidebar
           :file-list="fileList"
@@ -58,16 +91,25 @@ function handleFileSelect(file: BlogType.MdFile) {
         />
       </el-scrollbar>
 
-      <Renderer
-        v-if="fileList.length > 0"
-        v-model:md-file="mdFile"
-      />
-
       <div
-        flex-1
+        class="h-full w-full flex flex-col gap-3"
       >
-        1
+        <div
+          class="rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
+        >
+          <BaseButton
+            icon="home-navbar-menu2"
+            @click="switchShowDrawer"
+          />
+        </div>
+
+        <Renderer
+          v-if="fileList.length > 0"
+          v-model:md-file="mdFile"
+        />
+
       </div>
+
     </div>
 
   </div>
