@@ -949,7 +949,7 @@ watch(content, () => {
 
   /* height: 100%;
   max-height: 100%; */
-  flex: 1;
+  /* flex: 1; */
 
   font-family: 'Fira Code VF', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

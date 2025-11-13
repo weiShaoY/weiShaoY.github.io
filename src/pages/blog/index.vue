@@ -81,82 +81,71 @@ function handleFileSelect(file: BlogType.MdFile) {
     v-loading="loading"
     class="mt-20 h-[calc(100vh-80px)] flex flex-col"
   >
-
-    <div
-      class="h-full flex items-center justify-between gap-20 bg-gray-50 p-4 dark:bg-gray-900"
-    >
-      <!-- pc -->
-      <el-scrollbar
+    <el-splitter>
+      <el-splitter-panel
         v-if="!isMobile"
-        height="100%"
-        max-height="100%"
-        class="!w-120 !bg-cyan"
-        :always="true"
+        min="15%"
+        size="25%"
+        class="h-full w-full flex flex-col gap-3 p-r-6"
       >
         <Sidebar
           :file-list="fileList"
           :selected-key="mdFile.id"
           @file-select="handleFileSelect"
         />
-      </el-scrollbar>
 
-      <!-- mobile -->
-      <el-drawer
-        v-model="isShowDrawer"
-        :with-header="false"
-        direction="ltr"
-        size="80%"
-      >
-        <el-scrollbar
-          class="h-full w-full"
-        >
-          <Sidebar
-            :file-list="fileList"
-            :selected-key="mdFile.id"
-            @file-select="handleFileSelect"
-          />
-        </el-scrollbar>
-      </el-drawer>
+      </el-splitter-panel>
 
-      <!-- 主体 -->
-      <div
-        class="h-full w-full flex flex-col gap-3"
+      <el-splitter-panel
+        min="50%"
+        class="h-full w-full flex flex-col gap-3 p-3 p-l-6"
       >
 
-        <div
+        <!-- 移动端 -->
+        <template
           v-if="isMobile"
-          class="flex items-center gap-2 rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
         >
-          <BaseButton
-            icon="home-navbar-menu2"
-            @click="switchShowDrawer"
-          />
+          <el-drawer
+            v-model="isShowDrawer"
+            :with-header="false"
+            direction="ltr"
+            size="80%"
+          >
+            <Sidebar
+              :file-list="fileList"
+              :selected-key="mdFile.id"
+              @file-select="handleFileSelect"
+            />
+          </el-drawer>
 
-          <span>
-            {{ mdFile.fullPath }}
-          </span>
-        </div>
+          <div
+            v-if="isMobile"
+            class="flex items-center gap-2 rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
+          >
+            <BaseButton
+              icon="home-navbar-menu2"
+              @click="switchShowDrawer"
+            />
 
-        <!-- 渲染器 -->
+            <span
+              class="break-normal text-3"
+            >
+              {{ mdFile.fullPath }}
+            </span>
+          </div>
+        </template>
+
+        <!-- 主渲染器 -->
         <Renderer
           v-if="fileList.length > 0"
           v-model:md-file="mdFile"
         />
-
-      </div>
-
-    </div>
-
+      </el-splitter-panel>
+    </el-splitter>
   </div>
 
 </template>
 
 <style lang="scss" scoped>
-::deep(.el-menu) {
-  border-right: none !important;
-}
 
-:deep(.el-scrollbar__view) {
-  height: 100%;
-}
 </style>

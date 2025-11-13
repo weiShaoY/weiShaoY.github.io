@@ -31,8 +31,6 @@ function handleNodeClick(data: BlogType.Folder | BlogType.MdFile) {
   }
 }
 
-const selectedKey = ref('1-1-1') // 你想要选中的 key
-
 const tree = ref(null) as any
 
 onMounted(() => {
@@ -43,7 +41,7 @@ onMounted(() => {
 <template>
   <el-tree
     ref="tree"
-    class="min-h-full"
+    class="h-full overflow-auto rounded-2xl bg-white p-3 shadow-2xl max-sm:w-full dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50"
     :data="fileList"
     node-key="id"
     highlight-current
@@ -65,18 +63,25 @@ onMounted(() => {
       </div>
     </template>
   </el-tree>
+
 </template>
 
 <style lang="scss" scoped>
-/* 你的样式 */
-
-::deep(.el-tree) {
-  .el-tree-node > .el-tree-node__children {
-    overflow: visible;
-  }
-}
 </style>
 
 <style>
 
+.el-drawer__body {
+  padding: 0 !important;
+}
+
+.el-tree-node__content {
+  overflow: auto;
+  height: 40px !important;
+}
+
+.el-tree-node__content::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
 </style>
