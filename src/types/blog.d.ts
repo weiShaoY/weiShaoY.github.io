@@ -1,29 +1,73 @@
 /**
  * 博客模块命名类型
  */
-declare namespace AdminType {
+declare namespace BlogType {
 
   /**
-   *  标签类型
+   * Markdown 文件类型
    */
-  type Tab = {
+  type MdFile = {
 
-    /** 标签页标题 */
-    title: string
+    /**
+     * 文件名称（不包含扩展名）
+     */
+    label: string
 
-    /** 路由路径 */
-    path: string
+    /**
+     * 文件内容
+     */
+    content: string
 
-    /** 路由名称 */
-    name: string
+    /**
+     * 类型标识，固定为 'file'
+     */
+    fileType: 'markdown'
 
-    /** 是否保持页面状态 */
-    keepAlive: boolean
+    /**
+     *  唯一键
+     */
+    id: string
 
-    /** 路由参数 */
-    params?: Record<string, any>
-
-    /** 路由查询参数 */
-    query?: Record<string, any>
+    /**
+     *  完整路径
+     */
+    fullPath: string
   }
+
+  /**
+   * 文件夹类型
+   */
+  type Folder = {
+
+    /**
+     * 文件夹名称
+     */
+    label: string
+
+    /**
+     * 子项数组，可以是文件夹或文件
+     */
+    children: Array<Folder | MdFile>
+
+    /**
+     * 类型标识，固定为 'folder'
+     */
+    fileType: 'folder'
+
+    /**
+     *  唯一键
+     */
+    id: string
+
+    /**
+     *  完整路径
+     */
+    fullPath: string
+  }
+
+  /**
+   * 文件系统节点：文件夹或文件
+   */
+  type FileNode = Folder | MdFile
+
 }

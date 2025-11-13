@@ -1,29 +1,13 @@
+<!------  2025-11-12---16:24---星期三  ------>
+<!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-
-const aaaContent = ref('')
-
-onMounted(async () => {
-  try {
-    const modules = import.meta.glob('./bbb.ts', {
-      as: 'raw',
-      eager: true,
-    })
-
-    aaaContent.value = modules['./bbb.ts']
-  }
-  catch (error) {
-    console.error('Error reading file:', error)
-    aaaContent.value = 'Error: Could not read file.'
-  }
-})
+import Renderer from './renderer.vue'
 </script>
 
 <template>
-  <div>
-    <PrismView
-      :code="aaaContent"
-      language="typescript"
-    />
-  </div>
+  <Renderer />
 </template>
+
+<style lang="scss" scoped>
+
+</style>

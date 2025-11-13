@@ -6,7 +6,7 @@ const testRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/test',
     name: 'Test',
-    component: () => import('@/pages/test/index.vue'),
+    component: () => import('@/pages/test/renderer.vue'),
     meta: {
       title: '测试',
     },

@@ -506,6 +506,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/blog/components/sidebar/': RouteRecordInfo<
+      '/blog/components/sidebar/',
+      '/blog/components/sidebar',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/blog/renderer': RouteRecordInfo<
+      '/blog/renderer',
+      '/blog/renderer',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -688,16 +702,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/test/aaa': RouteRecordInfo<
-      '/test/aaa',
-      '/test/aaa',
+    '/test/index copy': RouteRecordInfo<
+      '/test/index copy',
+      '/test/index copy',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/test/index copy': RouteRecordInfo<
-      '/test/index copy',
-      '/test/index copy',
+    '/test/renderer': RouteRecordInfo<
+      '/test/renderer',
+      '/test/renderer',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1129,6 +1143,18 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/blog/components/sidebar/index.vue': {
+      routes:
+        | '/blog/components/sidebar/'
+      views:
+        | never
+    }
+    'src/pages/blog/renderer.vue': {
+      routes:
+        | '/blog/renderer'
+      views:
+        | never
+    }
     'src/pages/error/403/index.vue': {
       routes:
         | '/error/403/'
@@ -1285,15 +1311,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/test/aaa.vue': {
-      routes:
-        | '/test/aaa'
-      views:
-        | never
-    }
     'src/pages/test/index copy.vue': {
       routes:
         | '/test/index copy'
+      views:
+        | never
+    }
+    'src/pages/test/renderer.vue': {
+      routes:
+        | '/test/renderer'
       views:
         | never
     }
