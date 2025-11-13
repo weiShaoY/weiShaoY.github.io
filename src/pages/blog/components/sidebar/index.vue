@@ -58,9 +58,9 @@ onMounted(() => {
           :size="data.fileType === 'folder' ? 30 : 24"
         />
 
-        <span>{{ data.label }}</span>
-
-        <span>{{ data.fileType }}</span>
+        <span>
+          {{ data.label }}
+        </span>
       </div>
     </template>
   </el-tree>
