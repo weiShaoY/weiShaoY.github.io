@@ -695,20 +695,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/test/index copy': RouteRecordInfo<
-      '/test/index copy',
-      '/test/index copy',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/test/renderer': RouteRecordInfo<
-      '/test/renderer',
-      '/test/renderer',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
   }
 
   /**
@@ -1295,18 +1281,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/test/index.vue': {
       routes:
         | '/test/'
-      views:
-        | never
-    }
-    'src/pages/test/index copy.vue': {
-      routes:
-        | '/test/index copy'
-      views:
-        | never
-    }
-    'src/pages/test/renderer.vue': {
-      routes:
-        | '/test/renderer'
       views:
         | never
     }

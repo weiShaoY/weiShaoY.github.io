@@ -55,8 +55,16 @@ function handleSelect(item: HomeType.HeaderRouter) {
     <LinkButton
       v-if="isDevelopment"
       icon="home-navbar-demo"
-      :size="34"
+      :size="36"
       :url="websiteUrl"
     />
+
+    <LinkButton
+      v-if="isDevelopment"
+      icon="home-navbar-warehouse"
+      :size="36"
+      url="https://github.com/weiShaoY/weiShaoY.github.io"
+    />
+
   </div>
 </template>
