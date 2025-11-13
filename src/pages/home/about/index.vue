@@ -17,7 +17,7 @@ import Intro from './components/intro.vue'
 
 <template>
   <div
-    class="relative h-full w-full"
+    class="relative bg-[#212224]"
   >
 
     <!-- 第一页 -->

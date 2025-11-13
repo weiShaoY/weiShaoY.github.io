@@ -53,12 +53,7 @@ function handleSelect(item: HomeType.HeaderRouter) {
       return
     }
 
-    if (item.isAnchorLink) {
-      window.location.href = item.value
-    }
-    else {
-      router.push(item.value)
-    }
+    router.push(item.value)
   }, 500) // 500ms 是关闭菜单的动画时间
 }
 </script>

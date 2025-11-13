@@ -82,14 +82,14 @@ function handleFileSelect(file: BlogType.MdFile) {
 
   <div
     v-loading="loading"
-    class="mt-20 h-[calc(100vh-80px)] flex flex-col"
+    class="h-full flex flex-col"
   >
     <el-splitter>
       <el-splitter-panel
         v-if="!isMobile"
         min="15%"
         size="25%"
-        class="h-full w-full flex flex-col gap-3 p-r-6"
+        class="h-full w-full flex flex-col gap-3 p-3 p-r-6"
       >
         <Sidebar
           :file-list="fileList"

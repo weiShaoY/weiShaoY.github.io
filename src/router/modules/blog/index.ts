@@ -1,4 +1,4 @@
-import { SIMPLE_Layout } from '@/layouts'
+import { HOME_DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  大屏路由
@@ -6,7 +6,7 @@ import { SIMPLE_Layout } from '@/layouts'
 const BlogRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/blog',
-    component: SIMPLE_Layout,
+    component: HOME_DEFAULT_LAYOUT,
     children: [
       {
         path: '', // 空路径，作为默认子路由

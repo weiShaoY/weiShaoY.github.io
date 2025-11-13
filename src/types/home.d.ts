@@ -18,9 +18,5 @@ declare namespace HomeType {
      */
     isDevelopmentOnly?: boolean
 
-    /**
-     *  是否通过a标签跳转
-     */
-    isAnchorLink?: boolean
   }>
 }

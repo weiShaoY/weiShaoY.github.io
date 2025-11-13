@@ -27,12 +27,7 @@ function handleSelect(item: HomeType.HeaderRouter) {
     return
   }
 
-  if (item.isAnchorLink) {
-    window.location.href = item.value
-  }
-  else {
-    router.push(item.value)
-  }
+  router.push(item.value)
 }
 
 </script>
