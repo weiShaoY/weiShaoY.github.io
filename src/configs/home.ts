@@ -40,8 +40,6 @@ export const homeConfig: HomeConfigType = {
       value: '/blog/',
       label: 'Blog',
       isPCOnly: true,
-      isDevelopmentOnly: true,
-      isAnchorLink: true,
     },
     {
       value: '/police-login',
