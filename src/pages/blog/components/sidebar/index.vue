@@ -55,6 +55,7 @@ onMounted(() => {
       >
         <SvgIcon
           :icon="data.fileType === 'folder' ? 'folder' : 'markdown'"
+          :size="data.fileType === 'folder' ? 30 : 24"
         />
 
         <span>{{ data.label }}</span>
