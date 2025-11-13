@@ -48,6 +48,7 @@
     "point-in-polygon": "^1.1.0",
     "qrcode.vue": "^3.6.0",
     "stream-markdown": "^0.0.9",
+    "stream-markdown-parser": "^0.0.19",
     "three": "^0.181.0",
     "three-custom-shader-material": "^6.4.0",
     "three-globe": "^2.45.0",
