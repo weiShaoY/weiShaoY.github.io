@@ -71,6 +71,9 @@ importers:
       qrcode.vue:
         specifier: ^3.6.0
         version: 3.6.0(vue@3.5.24(typescript@5.9.3))
+      stream-markdown:
+        specifier: ^0.0.9
+        version: 0.0.9(shiki@3.15.0)
       three:
         specifier: ^0.181.0
         version: 0.181.0
@@ -10177,7 +10180,6 @@ snapshots:
   stream-markdown@0.0.9(shiki@3.15.0):
     dependencies:
       shiki: 3.15.0
-    optional: true
 
   stream-monaco@0.0.2(monaco-editor@0.52.2):
     dependencies:

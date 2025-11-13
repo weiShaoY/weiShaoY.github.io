@@ -382,7 +382,6 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly ElTree: UnwrapRef<typeof import('element-plus/es')['ElTree']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../utils/event')['addEventListen']>
     readonly adminMittBus: UnwrapRef<typeof import('../utils/adminMittBus')['adminMittBus']>
