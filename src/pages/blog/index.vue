@@ -3,19 +3,14 @@
 <script lang="ts" setup>
 import { isMobile } from '@/utils'
 
-import Sidebar from './components/sidebar/index.vue'
+import Renderer from './components/renderer/index.vue'
 
-import Renderer from './renderer.vue'
+import Sidebar from './components/sidebar/index.vue'
 
 import { transformMarkdownFiles } from './transformMarkdownFiles'
 
-const domain = window.location.hostname
-
-console.log('%c Line:5 🍊 domain', 'color:#ffdd4d', domain)
-
 const loading = ref(true)
 
-// 在需要的地方动态获取
 async function getMarkdownList() {
   const markdownFiles = import.meta.glob('./models/**/*.md', {
     as: 'raw',
@@ -44,8 +39,6 @@ const mdFile = ref<BlogType.MdFile> ({
 const fileList = ref<BlogType.Folder[]>([])
 
 await getMarkdownList().then((res: any) => {
-  console.log('%c Line:45 🍰 res', 'color:#fca650', res)
-
   if (res.length) {
     mdFile.value = res[0].children[0].children[0] as any
   }

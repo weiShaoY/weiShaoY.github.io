@@ -506,16 +506,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/blog/components/sidebar/': RouteRecordInfo<
-      '/blog/components/sidebar/',
-      '/blog/components/sidebar',
+    '/blog/components/renderer/': RouteRecordInfo<
+      '/blog/components/renderer/',
+      '/blog/components/renderer',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/blog/renderer': RouteRecordInfo<
-      '/blog/renderer',
-      '/blog/renderer',
+    '/blog/components/sidebar/': RouteRecordInfo<
+      '/blog/components/sidebar/',
+      '/blog/components/sidebar',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1122,15 +1122,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/blog/components/sidebar/index.vue': {
+    'src/pages/blog/components/renderer/index.vue': {
       routes:
-        | '/blog/components/sidebar/'
+        | '/blog/components/renderer/'
       views:
         | never
     }
-    'src/pages/blog/renderer.vue': {
+    'src/pages/blog/components/sidebar/index.vue': {
       routes:
-        | '/blog/renderer'
+        | '/blog/components/sidebar/'
       views:
         | never
     }

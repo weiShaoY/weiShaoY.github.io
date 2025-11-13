@@ -21,9 +21,9 @@ const props = withDefaults(defineProps<PropsType>(), {
 
 })
 
-// const streamContent = props.fileObj.content
-
-// 语言名称映射表，将代码文件扩展名映射为可读的语言名称
+/**
+ *  语言名称映射表，将代码文件扩展名映射为可读的语言名称
+ */
 const languageMap: Record<string, string> = {
   'js': 'JavaScript',
   'ts': 'TypeScript',
@@ -51,7 +51,6 @@ const languageMap: Record<string, string> = {
   'plain': 'Plain Text',
 }
 
-// 响应式变量，存储流式输出的markdown内容
 /**
  *  响应式变量，存储流式输出的markdown内容
  */
@@ -98,8 +97,6 @@ const highlighter = ref<Highlighter | null>(null)
  *  当前选中的主题
  */
 const selectedCodeTheme = ref('vitesse-dark')
-
-// 初始化markdown解析器
 
 /**
  *  初始化markdown解析器
@@ -173,9 +170,9 @@ md.renderer.rules.fence = (tokens, idx) => {
   return `<pre><code class="language-${lang}">${token.content}</code></pre>` // 否则返回基础代码块
 }
 
-// 计算属性：将markdown内容转换为HTML
-// const html = computed(() => md.render(content.value))
-
+/**
+ *  将markdown内容转换为HTML
+ */
 const html = computed(() => {
   if (!content.value) {
     return ''
@@ -184,13 +181,15 @@ const html = computed(() => {
   return md.render(content.value)
 })
 
-// 主题切换功能
 /**
- *
+ *  主题切换功能
  */
 const isDark = useDark() // 使用暗色主题
 
-const toggleTheme = useToggle(isDark) // 主题切换函数
+/**
+ *  主题切换函数
+ */
+const toggleTheme = useToggle(isDark)
 
 // 监听暗色模式自动切换代码主题
 watch(isDark, (dark) => {
@@ -292,41 +291,68 @@ function handleSelectCodeTheme(codeTheme: string) {
   selectedCodeTheme.value = codeTheme
 }
 
-// 自动滚动到底部功能
-const messagesContainer = ref<HTMLElement | null>(null) // 消息容器引用
+/**
+ *  自动滚动到底部功能
+ */
+const messagesContainer = ref<HTMLElement | null>(null)
 
-const autoScrollEnabled = ref(true) // 跟踪自动滚动是否启用
+/**
+ *  跟踪自动滚动是否启用
+ */
+const autoScrollEnabled = ref(true)
 
-const lastScrollTop = ref(0) // 跟踪最后滚动位置以检测滚动方向
+/**
+ *  跟踪最后滚动位置以检测滚动方向
+ */
+const lastScrollTop = ref(0)
 
-// 跟踪最后用户驱动的滚动方向：'none'（尚无用户滚动），'up' 或 'down'
+/**
+ *  跟踪最后用户驱动的滚动方向：'none'（尚无用户滚动），'up' 或 'down'
+ */
 const lastUserScrollDirection = ref<'none' | 'up' | 'down'>('none')
 
-// 最后用户滚动事件的时间戳（毫秒）
+/**
+ *  最后用户滚动事件的时间戳（毫秒）
+ */
 const lastUserScrollTime = ref(0)
 
-// 标记是否忽略由我们自己的程序化滚动引起的滚动事件
+/**
+ *  标记是否忽略由我们自己的程序化滚动引起的滚动事件
+ */
 const isProgrammaticScroll = ref(false)
 
-let lastKnownScrollHeight = 0 // 最后已知的滚动高度
+/**
+ *  最后已知的滚动高度
+ */
+let lastKnownScrollHeight = 0
 
-// 检查用户是否在滚动区域的底部（基于像素的回退方法）
+/**
+ *  检查用户是否在滚动区域的底部（基于像素的回退方法）
+ */
 function isAtBottom(element: HTMLElement, threshold = 50): boolean {
   return element.scrollHeight - element.scrollTop - element.clientHeight <= threshold
 }
 
-// 用于可靠底部检测的 IntersectionObserver 哨兵引用（在移动端效果更好）
+/**
+ *  用于可靠底部检测的 IntersectionObserver 哨兵引用（在移动端效果更好）
+ */
 const bottomSentinel = ref<HTMLElement | null>(null)
 
 let bottomObserver: IntersectionObserver | null = null
 
-// ResizeObserver 用于检测内容高度变化（用于异步渲染，如代码高亮、mermaid等）
+/**
+ *  ResizeObserver 用于检测内容高度变化（用于异步渲染，如代码高亮、mermaid等）
+ */
 let contentResizeObserver: ResizeObserver | null = null
 
-// MutationObserver 用于检测DOM变化（如表加载 -> 内容）
+/**
+ *  MutationObserver 用于检测DOM变化（如表加载 -> 内容）
+ */
 let contentMutationObserver: MutationObserver | null = null
 
-// 设置底部观察器
+/**
+ *  设置底部观察器
+ */
 function setupBottomObserver() {
   if (!messagesContainer.value) { // 如果消息容器不存在
     return
@@ -729,7 +755,9 @@ function handlePointerDown(e: PointerEvent) {
   document.addEventListener('pointerup', up) // 添加抬起监听器
 }
 
-// 键盘交互：仅将向上导航视为禁用；向下导航在接近底部时可能重新启用。
+/**
+ *  键盘交互：仅将向上导航视为禁用；向下导航在接近底部时可能重新启用
+ */
 function handleKeyDown(e: KeyboardEvent) {
   const upKeys = ['PageUp', 'ArrowUp', 'Home'] // 向上滚动键
 
