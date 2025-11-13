@@ -48,7 +48,7 @@ function handleSelect(item: HomeType.HeaderRouter) {
   </div>
 
   <div
-    class="flex flex-1 items-center justify-end gap-5"
+    class="flex flex items-center justify-end gap-5"
   >
     <Github />
 

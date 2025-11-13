@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router'
+
 import { homeConfig } from '@/configs'
 
 import MobileMenu from './components/mobile-menu.vue'
 
 import PcMenu from './components/pc-menu.vue'
+
+const route = useRoute()
+
+const router = useRouter()
 
 const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
 
@@ -33,6 +39,16 @@ const pcMenuList = homeConfig.headerRouterList.filter(shouldShowOnPC)
 
 const mobileMenuList = homeConfig.headerRouterList.filter(shouldShowOnMobile)
 
+const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
+
+function handleToHome() {
+  if (route.path === routerRootPath) {
+    return
+  }
+
+  router.push(routerRootPath)
+}
+
 </script>
 
 <template>
@@ -44,17 +60,23 @@ const mobileMenuList = homeConfig.headerRouterList.filter(shouldShowOnMobile)
     >
 
       <!-- 左侧logo -->
-      <div
-        class="flex items-center"
+      <a
+        class="z-999 flex items-center"
       >
-        <IconLogo />
-
-        <TextLogo
-          :size="120"
-          color="white"
-          url="/"
+        <SvgIcon
+          icon="logo"
+          :size="60"
+          class="cursor-pointer"
+          @click="handleToHome"
         />
-      </div>
+
+        <SvgIcon
+          icon="weiShaoY"
+          :size="120"
+          class="cursor-pointer !hover:color-[#08FF00]"
+          @click="handleToHome"
+        />
+      </a>
 
       <!-- 菜单 -->
       <PcMenu
