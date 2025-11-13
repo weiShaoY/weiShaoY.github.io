@@ -43,7 +43,7 @@ function isFolderOpen(folder: BlogType.Folder) {
 }
 
 function getItemKey(item: BlogType.FileNode): string {
-  return `${item.type}-${item.name}`
+  return `${item.fileType}-${item.lable}`
 }
 
 function selectFile(file: BlogType.Folder) {
@@ -84,7 +84,7 @@ function selectFile(file: BlogType.Folder) {
 
           <span
             class="folder-name"
-          >{{ item.name }}</span>
+          >{{ item.label }}</span>
         </div>
 
         <!-- 递归渲染子文件夹 -->
@@ -113,7 +113,7 @@ function selectFile(file: BlogType.Folder) {
 
         <span
           class="file-name"
-        >{{ item.name }}</span>
+        >{{ item.label }}</span>
       </div>
     </div>
   </div>

@@ -32,10 +32,10 @@ export function transformMarkdownFiles(files: Record<string, { default: string }
 
     // 递归构建文件夹结构
     buildFolderStructure(result, pathParts, {
-      name: fileName,
+      label: fileName,
       content: fileContent,
-      type: 'file',
-      key: '',
+      fileType: 'file',
+      id: '',
       fullPath: filePath,
     }, '')
   }
@@ -66,15 +66,15 @@ function buildFolderStructure(
 
   // 查找或创建当前层级的文件夹
   let folder = currentLevel.find((item): item is BlogType.Folder =>
-    isFolderStructure(item) && item.name === currentFolderName,
+    isFolderStructure(item) && item.label === currentFolderName,
   )
 
   if (!folder) {
     folder = {
-      name: currentFolderName,
+      label: currentFolderName,
       children: [],
-      type: 'folder',
-      key: currentPath,
+      fileType: 'folder',
+      id: currentPath,
       fullPath: currentPath,
     }
     currentLevel.push(folder)
@@ -93,14 +93,14 @@ function assignKeys(nodes: BlogType.FileNode[], parentKey: string = ''): void {
 
     if (isFolderStructure(node)) {
       // 文件夹节点
-      node.key = currentKey
+      node.id = currentKey
 
       // 递归为子节点分配 key
       assignKeys(node.children, currentKey)
     }
     else {
       // 文件节点
-      node.key = currentKey
+      node.id = currentKey
     }
   })
 }

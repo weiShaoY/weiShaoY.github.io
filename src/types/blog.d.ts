@@ -11,7 +11,7 @@ declare namespace BlogType {
     /**
      * 文件名称（不包含扩展名）
      */
-    name: string
+    label: string
 
     /**
      * 文件内容
@@ -21,12 +21,12 @@ declare namespace BlogType {
     /**
      * 类型标识，固定为 'file'
      */
-    type: 'file'
+    fileType: 'markdown'
 
     /**
      *  唯一键
      */
-    key: string
+    id: string
 
     /**
      *  完整路径
@@ -42,7 +42,7 @@ declare namespace BlogType {
     /**
      * 文件夹名称
      */
-    name: string
+    label: string
 
     /**
      * 子项数组，可以是文件夹或文件
@@ -52,12 +52,12 @@ declare namespace BlogType {
     /**
      * 类型标识，固定为 'folder'
      */
-    type: 'folder'
+    fileType: 'folder'
 
     /**
      *  唯一键
      */
-    key: string
+    id: string
 
     /**
      *  完整路径

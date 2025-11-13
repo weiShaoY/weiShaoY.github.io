@@ -835,7 +835,7 @@ watch(content, () => {
             <h1
               class="text-lg text-gray-800 font-semibold dark:text-gray-100"
             >
-              {{ mdFile.name }}
+              {{ mdFile.label }}
             </h1>
 
             <p

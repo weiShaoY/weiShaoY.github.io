@@ -32,10 +32,10 @@ export function transformMarkdownFiles(files: Record<string, { default: string }
 
     // 递归构建文件夹结构
     buildFolderStructure(result, pathParts, {
-      name: fileName,
+      label: fileName,
       content: fileContent,
-      type: 'file',
-      key: '',
+      fileType: 'markdown',
+      id: '',
       fullPath: '', // 初始化完整路径
     }, '')
   }
@@ -56,7 +56,7 @@ function buildFolderStructure(
 ): void {
   if (pathParts.length === 0) {
     // 到达目标层级，添加文件
-    const fileFullPath = parentPath ? `${parentPath}/${file.name}` : file.name
+    const fileFullPath = parentPath ? `${parentPath}/${file.label}` : file.label
 
     currentLevel.push({
       ...file,
@@ -71,15 +71,15 @@ function buildFolderStructure(
 
   // 查找或创建当前层级的文件夹
   let folder = currentLevel.find((item): item is BlogType.Folder =>
-    isFolderStructure(item) && item.name === currentFolderName,
+    isFolderStructure(item) && item.label === currentFolderName,
   )
 
   if (!folder) {
     folder = {
-      name: currentFolderName,
+      label: currentFolderName,
       children: [],
-      type: 'folder',
-      key: currentPath,
+      fileType: 'folder',
+      id: currentPath,
       fullPath: currentPath, // 设置文件夹的完整路径
     }
     currentLevel.push(folder)
@@ -98,7 +98,7 @@ function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''):
 
     if (isFolderStructure(node)) {
       // 文件夹节点
-      node.key = currentKey
+      node.id = currentKey
 
       // 如果还没有完整路径，根据父路径生成
       if (!node.fullPath) {
@@ -106,7 +106,7 @@ function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''):
           .slice(0, -1)
           .join('/')
 
-        node.fullPath = parentPath ? `${parentPath}/${node.name}` : node.name
+        node.fullPath = parentPath ? `${parentPath}/${node.label}` : node.label
       }
 
       // 递归为子节点分配 key 和路径
@@ -114,7 +114,7 @@ function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''):
     }
     else {
       // 文件节点
-      node.key = currentKey
+      node.id = currentKey
 
       // 如果还没有完整路径，根据父路径生成
       if (!node.fullPath) {
@@ -122,7 +122,7 @@ function assignKeysAndPaths(nodes: BlogType.FileNode[], parentKey: string = ''):
           .slice(0, -1)
           .join('/')
 
-        node.fullPath = parentPath ? `${parentPath}/${node.name}` : node.name
+        node.fullPath = parentPath ? `${parentPath}/${node.label}` : node.label
       }
     }
   })

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 
-import SidebarItem from './sidebar-item.vue'
+import { onMounted, ref } from 'vue'
+
+// import SidebarItem from './sidebar-item.vue'
 
 const props = defineProps<{
 
@@ -8,42 +10,72 @@ const props = defineProps<{
    * 文件夹数组
    */
   fileList: BlogType.Folder[]
+
+  /**
+   *  选中的 key
+   */
+  selectedKey: string
 }>()
 
 const emit = defineEmits<{
   fileSelect: [file: BlogType.MdFile]
 }>()
 
-console.log('%c Line:12 🍭 props', 'color:#42b983', props.fileList)
-
-function handleOpen(key: string, keyPath: string[]) {
-  console.log(key, keyPath)
-}
-
-function handleClose(key: string, keyPath: string[]) {
-  console.log(key, keyPath)
-}
-
 function handleFileSelect(file: BlogType.MdFile) {
-  console.log('%c Line:44444 🍩 file', 'color:#e41a6a', file)
   emit('fileSelect', file) // 这里要 emit 到父组件
 }
 
+function handleNodeClick(data: BlogType.Folder | BlogType.MdFile) {
+  if (data.fileType === 'markdown') {
+    handleFileSelect(data)
+  }
+}
+
+const selectedKey = ref('1-1-1') // 你想要选中的 key
+
+const tree = ref(null) as any
+
+onMounted(() => {
+  tree?.value?.setCurrentKey(props.selectedKey)
+})
 </script>
 
 <template>
-  <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo !w-full"
-    @open="handleOpen"
-    @close="handleClose"
+  <el-tree
+    ref="tree"
+    class="min-h-full"
+    :data="fileList"
+    node-key="id"
+    highlight-current
+    @node-click="handleNodeClick"
   >
-    <SidebarItem
-      :nodes="fileList"
-      @file-item-select="handleFileSelect"
-    />
-  </el-menu>
+    <template
+      #default="{ data }"
+    >
+      <div
+        class="custom-tree-node flex items-center gap-2 p-2"
+      >
+        <SvgIcon
+          :icon="data.fileType === 'folder' ? 'folder' : 'markdown'"
+        />
+
+        <span>{{ data.label }}</span>
+
+        <span>{{ data.fileType }}</span>
+      </div>
+    </template>
+  </el-tree>
 </template>
+
+<style lang="scss" scoped>
+/* 你的样式 */
+
+::deep(.el-tree) {
+  .el-tree-node > .el-tree-node__children {
+    overflow: visible;
+  }
+}
+</style>
 
 <style>
 

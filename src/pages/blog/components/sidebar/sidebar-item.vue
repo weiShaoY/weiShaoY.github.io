@@ -30,11 +30,11 @@ function handleFileSelect(file: BlogType.MdFile) {
 <template>
   <template
     v-for="node in nodes"
-    :key="node.key"
+    :key="node.id"
   >
     <el-sub-menu
       v-if="isFolderStructure(node)"
-      :index="node.key"
+      :index="node.id"
     >
       <template
         #title
@@ -47,7 +47,7 @@ function handleFileSelect(file: BlogType.MdFile) {
           />
 
           <span>
-            {{ node.name }}
+            {{ node.label }}
           </span>
         </span>
       </template>
@@ -60,7 +60,7 @@ function handleFileSelect(file: BlogType.MdFile) {
 
     <el-menu-item
       v-else
-      :index="node.key"
+      :index="node.id"
       @click=" handleFileSelect(node) "
     >
       <span
@@ -71,7 +71,7 @@ function handleFileSelect(file: BlogType.MdFile) {
         />
 
         <span>
-          {{ node.name }}
+          {{ node.label }}
         </span>      </span>
     </el-menu-item>
   </template>

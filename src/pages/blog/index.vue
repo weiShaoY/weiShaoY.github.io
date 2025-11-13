@@ -23,10 +23,10 @@ async function getMarkdownList() {
 }
 
 const mdFile = ref<BlogType.MdFile> ({
-  name: '',
+  label: '',
   content: '',
-  type: 'file',
-  key: '',
+  fileType: 'markdown',
+  id: '1-1-1',
   fullPath: '',
 })
 
@@ -45,10 +45,10 @@ await getMarkdownList().then((res: any) => {
 
   if (res.length) {
     mdFile.value = res[0].children[0].children[0] as any
-    console.log('%c Line:48 🥒 mdFile.value', 'color:#ed9ec7', mdFile.value)
   }
 
   fileList.value = res
+
   loading.value = false
   return res
 })
@@ -77,23 +77,6 @@ function handleFileSelect(file: BlogType.MdFile) {
 
 <template>
 
-  <el-drawer
-    v-if="isMobile"
-    v-model="isShowDrawer"
-    :with-header="false"
-    direction="ltr"
-    size="80%"
-  >
-    <el-scrollbar
-      class="h-full w-full scrollbar-hide"
-    >
-      <Sidebar
-        :file-list="fileList"
-        @file-select="handleFileSelect"
-      />
-    </el-scrollbar>
-  </el-drawer>
-
   <div
     v-loading="loading"
     class="mt-20 h-[calc(100vh-80px)] flex flex-col"
@@ -102,20 +85,44 @@ function handleFileSelect(file: BlogType.MdFile) {
     <div
       class="h-full flex items-center justify-between gap-20 bg-gray-50 p-4 dark:bg-gray-900"
     >
-
+      <!-- pc -->
       <el-scrollbar
         v-if="!isMobile"
-        class="!w-160"
+        height="100%"
+        max-height="100%"
+        class="!w-120 !bg-cyan"
+        :always="true"
       >
         <Sidebar
           :file-list="fileList"
+          :selected-key="mdFile.id"
           @file-select="handleFileSelect"
         />
       </el-scrollbar>
 
+      <!-- mobile -->
+      <el-drawer
+        v-model="isShowDrawer"
+        :with-header="false"
+        direction="ltr"
+        size="80%"
+      >
+        <el-scrollbar
+          class="h-full w-full"
+        >
+          <Sidebar
+            :file-list="fileList"
+            :selected-key="mdFile.id"
+            @file-select="handleFileSelect"
+          />
+        </el-scrollbar>
+      </el-drawer>
+
+      <!-- 主体 -->
       <div
         class="h-full w-full flex flex-col gap-3"
       >
+
         <div
           v-if="isMobile"
           class="flex items-center gap-2 rounded-1 from-[#ffe4e6] to-[#ccfbf1] bg-gradient-to-bl p-2"
@@ -130,6 +137,7 @@ function handleFileSelect(file: BlogType.MdFile) {
           </span>
         </div>
 
+        <!-- 渲染器 -->
         <Renderer
           v-if="fileList.length > 0"
           v-model:md-file="mdFile"
@@ -146,5 +154,9 @@ function handleFileSelect(file: BlogType.MdFile) {
 <style lang="scss" scoped>
 ::deep(.el-menu) {
   border-right: none !important;
+}
+
+:deep(.el-scrollbar__view) {
+  height: 100%;
 }
 </style>

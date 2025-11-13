@@ -37,7 +37,7 @@ function isFolderOpen(folder: BlogType.Folder) {
 
 // 生成文件夹的唯一标识
 function getFolderKey(folder: BlogType.Folder): string {
-  return folder.name
+  return folder.label
 }
 
 // 文件选择事件
@@ -63,7 +63,7 @@ function onFileSelect(file: BlogType.MdFile) {
     >
       <div
         v-for="folder in fileList"
-        :key="folder.name"
+        :key="folder.label"
         class="folder-item"
       >
         <!-- 文件夹 -->
@@ -85,7 +85,7 @@ function onFileSelect(file: BlogType.MdFile) {
 
           <span
             class="folder-name"
-          >{{ folder.name }}</span>
+          >{{ folder.label }}</span>
         </div>
 
         <!-- 文件夹内容（递归渲染） -->
