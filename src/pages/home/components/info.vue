@@ -197,7 +197,7 @@ function handleCopy() {
         <img
           src="https://github-readme-stats.vercel.app/api?username=weiShaoY&theme=chartreuse-dark&show_icons=true&hide_border=true&count_private=true&locale=cn&bg_color=0E0E10&line_height=36&title_color=BFFFBF"
           alt=""
-          class="h-full w-full"
+          class="h-full w-full overflow-hidden rounded-1"
         >
       </div>
 
@@ -207,7 +207,7 @@ function handleCopy() {
         <img
           src="https://github-readme-stats.vercel.app/api/top-langs/?username=weiShaoY&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=truechart&locale=cn&bg_color=0E0E10&layout=compact&title_color=BFFFBF"
           alt=""
-          class="h-60 w-full"
+          class="h-60 w-full overflow-hidden rounded-1"
         >
       </div>
 
@@ -229,14 +229,15 @@ function handleCopy() {
         <img
           src="https://pixel-profile.vercel.app/api/github-stats?username=weiShaoY&theme=crt&pixelate_avatar=false"
           alt=""
-          class="h-[212px] w-full"
+          class="h-[212px] w-full overflow-hidden rounded-1"
         >
       </div>
 
       <div
-        class="col-span-3 row-span-3 bg-cyan max-sm:col-span-3"
+        class="col-span-3 row-span-3 max-sm:col-span-3"
       >
         <img
+          class="overflow-hidden rounded-1"
           src="https://cdn.jsdelivr.net/gh/weiShaoY/gitHubContributionSvg@main/profile-3d-contrib/profile-night-rainbow.svg"
           alt=""
         >
