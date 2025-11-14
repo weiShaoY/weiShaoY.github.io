@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { policeLayoutConfig } from '@/configs'
+import { layoutConfig } from '@/configs'
 
 import headerBgImage from './command-header-bg.png'
 
@@ -78,7 +78,7 @@ function logout() {
     class="fixed left-0 right-0 top-0 z-100 flex items-center bg-cover bg-center bg-no-repeat"
     :style="{
       backgroundImage: `url(${headerBgImage})`,
-      height: `${policeLayoutConfig.headerHeight}px`,
+      height: `${layoutConfig.police.headerHeight}px`,
     }"
   >
 

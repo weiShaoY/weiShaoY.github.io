@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 
-import { defaultLayoutConfig } from '@/configs'
+import { layoutConfig } from '@/configs'
 
 import { isMobile } from '@/utils'
 
@@ -32,14 +32,14 @@ const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 /**
  *  pc端菜单列表
  */
-const pcMenuList = defaultLayoutConfig.headerRouterList.filter(({ isDevelopmentOnly }) =>
+const pcMenuList = layoutConfig.default.headerRouterList.filter(({ isDevelopmentOnly }) =>
   isDevelopment || !isDevelopmentOnly,
 )
 
 /**
  *  移动菜单列表
  */
-const mobileMenuList = defaultLayoutConfig.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
+const mobileMenuList = layoutConfig.default.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
   !isPCOnly && (isDevelopment || !isDevelopmentOnly),
 )
 
@@ -81,7 +81,7 @@ function handleToHome() {
 /**
  *  选择菜单项
  */
-function handleSelect(item: LayoutType.DefaultLayoutConfig['headerRouterList'][0]) {
+function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
   isOpenMobileMenu.value = false
 
   if (route.path === item.value) {
@@ -97,7 +97,7 @@ function handleSelect(item: LayoutType.DefaultLayoutConfig['headerRouterList'][0
   <nav
     class="fixed left-0 right-0 top-0 z-100 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
     :style="{
-      height: `${defaultLayoutConfig.headerHeight}px`,
+      height: `${layoutConfig.default.headerHeight}px`,
     }"
   >
     <div
@@ -192,7 +192,7 @@ function handleSelect(item: LayoutType.DefaultLayoutConfig['headerRouterList'][0
               :class="[
                 isOpenMobileMenu ? 'max-h-screen' : 'max-h-0',
               ]"
-              :style="{ top: `${defaultLayoutConfig.headerHeight}px` }"
+              :style="{ top: `${layoutConfig.default.headerHeight}px` }"
             >
               <!-- 操作组 -->
               <div

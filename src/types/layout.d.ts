@@ -1,12 +1,12 @@
 /**
  * 默认布局类型
  */
-declare namespace LayoutType {
+declare namespace LayoutConfigType {
 
   /**
    *  默认布局配置
    */
-  type DefaultLayoutConfig = {
+  type Default = {
 
     /**
      *  头部高度
@@ -35,7 +35,7 @@ declare namespace LayoutType {
   /**
    *  指挥台布局配置
    */
-  type PoliceLayoutConfig = {
+  type Police = {
 
     /**
      *  头部高度

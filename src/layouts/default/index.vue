@@ -1,6 +1,6 @@
 <!------------------------------------  首页模块  ------------------------------------------------->
 <script lang="ts" setup>
-import { defaultLayoutConfig } from '@/configs'
+import { layoutConfig } from '@/configs'
 
 import GlobalHeader from './modules/global-header/index.vue'
 </script>
@@ -15,7 +15,7 @@ import GlobalHeader from './modules/global-header/index.vue'
     <div
       class="mt-20 w-full overflow-auto"
       :style="{
-        height: `calc(100vh - ${defaultLayoutConfig.headerHeight}px)`,
+        height: `calc(100vh - ${layoutConfig.default.headerHeight}px)`,
       }"
     >
       <!-- 路由切换动画 -->

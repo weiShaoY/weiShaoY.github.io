@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { policeLayoutConfig } from '@/configs'
+import { layoutConfig } from '@/configs'
 
 import GlobalHeader from './modules/global-header/index.vue'
 
@@ -15,7 +15,7 @@ import GlobalHeader from './modules/global-header/index.vue'
     <div
       class="mt-20 w-full overflow-auto"
       :style="{
-        height: `calc(100vh - ${policeLayoutConfig.headerHeight}px)`,
+        height: `calc(100vh - ${layoutConfig.police.headerHeight}px)`,
       }"
     >
       <!-- 路由切换动画 -->
