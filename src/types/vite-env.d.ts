@@ -17,84 +17,90 @@ declare namespace Env {
   type ImportMeta = {
 
     /**
-     *  当前环境
+     * 运行环境
+     * @default development
      */
-    readonly VITE_APP_NODE_ENV: 'development' | 'production'
+    readonly VITE_APP_ENV: 'development' | 'production'
 
     /**
-     * 应用的基本 URL，用于构建和部署应用时的路径
+     * 应用部署基路径 (影响构建产物的资源路径)
      * @default /
      */
     readonly VITE_APP_BASE_URL: string
 
     /**
-     * 应用的端口号
+     * 应用开发服务器端口号
      * @default 1819
      */
     readonly VITE_APP_PORT: number
 
     /**
-     *  应用的标题，用于页面标题显示
+     * 应用显示名称 (用于页面标题和浏览器标签)
      */
     readonly VITE_APP_TITLE: string
 
     /**
-     *  应用的描述信息，通常用于 SEO 或页面 meta 信息
+     * 应用描述信息 (用于 SEO 和社交媒体分享)
      */
     readonly VITE_APP_DESC: string
 
     /**
-     *  应用字体家族
+     * 应用全局字体家族 (需在 CSS 中定义对应字体)
      */
     readonly VITE_APP_FONT_FAMILY: string
 
     /**
-     *  图标名称的前缀，用于统一应用内的图标命名规则
+     * 应用内图标名称的前缀 (用于统一管理Svg图标命名)
+     * @default icon
      */
     readonly VITE_APP_ICON_PREFIX: string
 
     /**
-     * 路由-模式
+     * 路由模式 (hash: 带#号路径 | history: 标准路径)
      * @default history
      */
-    readonly VITE_ROUTER_MODE: 'hash' | 'history'
+    readonly VITE_ROUTER_MODE: RouterHistoryMode
 
     /**
-     * 路由-根路径
-     * @default /
+     * 路由根路径 (应用入口页面)
+     * @default /home/about
      */
     readonly VITE_ROUTER_ROOT_PATH: string
 
     /**
-     * 路由-博客模块路径
+     * 管理模块路由前缀
+     * @default /admin
      */
     readonly VITE_ROUTER_ADMIN_PATH: string
 
     /**
-     * 路由-博客模块首页路径
+     * 管理模块默认首页
+     * @default /admin/workbench
      */
     readonly VITE_ROUTER_ADMIN_HOME_PATH: string
 
     /**
-     *  Github仓库地址
+     * 应用的在线演示地址
+     */
+    readonly VITE_APP_DEMO_URL: string
+
+    /**
+     * 应用的 Github 仓库地址
+     */
+    readonly VITE_APP_REPO_URL: string
+
+    /**
+     * 个人的 Github 主页地址
      */
     readonly VITE_GITHUB_URL: string
 
     /**
-     *  网站在线地址
+     * 个人的邮箱地址 (外部联系方式)
      */
-    readonly VITE_WEBSITE_URL: string
+    readonly VITE_CONTACT_EMAIL: string
 
     /**
-     *  邮箱地址
-     */
-    readonly VITE_EMAIL_URL: string
-
-    /**
-     * 第三方代理服务配置（ThingProxy）
-     *
-     * @constant {string}
-     * @default ''
+     * 接口-第三方代理地址 (ThingProxy 最快的免费代理服务，重要，影响接口访问)
      *
      * @description
      * ThingProxy 是一个免费的跨域代理服务，用于解决前端开发中的 CORS 限制问题。
@@ -104,9 +110,6 @@ declare namespace Env {
      * - 免费且响应速度较快
      *
      * @example
-     * // 在 vite 环境变量中配置
-     * VITE_API_PROXY_URL='https://thingproxy.freeboard.io/fetch/'
-     *
      * // 使用示例
      * fetch(`${import.meta.env.VITE_API_PROXY_URL}https://target-api.com/data`)
      *

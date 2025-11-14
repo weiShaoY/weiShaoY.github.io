@@ -11,7 +11,20 @@ const route = useRoute()
 
 const router = useRouter()
 
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
+/**
+ *  是否为开发环境
+ */
+const isDevelopment = import.meta.env.VITE_APP_ENV === 'development'
+
+/**
+ *  网站在线地址
+ */
+const websiteUrl = import.meta.env.VITE_APP_DEMO_URL
+
+/**
+ *  路由根地址
+ */
+const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 
 type HeaderRoute = typeof homeConfig.headerRouterList[number]
 
@@ -38,8 +51,6 @@ function shouldShowOnMobile(item: HeaderRoute) {
 const pcMenuList = homeConfig.headerRouterList.filter(shouldShowOnPC)
 
 const mobileMenuList = homeConfig.headerRouterList.filter(shouldShowOnMobile)
-
-const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 
 function handleToHome() {
   if (route.path === routerRootPath) {
@@ -79,7 +90,7 @@ function handleToHome() {
       </a>
 
       <!-- 菜单 -->
-      <PcMenu
+      <!-- <PcMenu
         v-if="!isMobile"
         :menu-list="pcMenuList"
       />
@@ -87,7 +98,28 @@ function handleToHome() {
       <MobileMenu
         v-else
         :menu-list="mobileMenuList"
-      />
+      /> -->
+
+      <div
+        class="flex flex items-center justify-end gap-5"
+      >
+        <Github />
+
+        <LinkButton
+          v-if="isDevelopment"
+          icon="home-navbar-demo"
+          :size="36"
+          :url="websiteUrl"
+        />
+
+        <LinkButton
+          v-if="isDevelopment"
+          icon="home-navbar-warehouse"
+          :size="36"
+          url="https://github.com/weiShaoY/weiShaoY.github.io"
+        />
+      </div>
+
     </div>
   </nav>
 </template>

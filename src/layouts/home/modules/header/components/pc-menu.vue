@@ -15,9 +15,9 @@ const route = useRoute()
 
 const router = useRouter()
 
-const websiteUrl = import.meta.env.VITE_WEBSITE_URL
+const websiteUrl = import.meta.env.VITE_APP_DEMO_URL
 
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
+const isDevelopment = import.meta.env.VITE_APP_ENV === 'development'
 
 /**
  * 跳转路由或链接

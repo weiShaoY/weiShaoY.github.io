@@ -20,7 +20,7 @@ defineOptions({
   name: 'AppProvider',
 })
 
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === 'development'
+const isDevelopment = import.meta.env.VITE_APP_ENV === 'development'
 
 /**
  * 上下文持有者组件

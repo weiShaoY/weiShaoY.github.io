@@ -17,7 +17,7 @@ const hasCopied = ref(false)
 
 const router = useRouter()
 
-const emailUrl = import.meta.env.VITE_EMAIL_URL
+const contactEmailUrl = import.meta.env.VITE_CONTACT_EMAIL
 
 function handleContactMe() {
   router.push({
@@ -26,11 +26,11 @@ function handleContactMe() {
 }
 
 function handleCopy() {
-  copyText(emailUrl)
+  copyText(contactEmailUrl)
   hasCopied.value = true
   window.$notification?.success({
     title: '邮箱复制成功',
-    message: emailUrl,
+    message: contactEmailUrl,
   })
 
   setTimeout(() => {
@@ -183,7 +183,7 @@ function handleCopy() {
                 class="relative h-3 w-3 inline-flex rounded-full bg-[#CC171D]"
               />
             </span>
-            {{ emailUrl }}
+            {{ contactEmailUrl }}
           </button>
         </div>
       </div>

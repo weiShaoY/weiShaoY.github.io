@@ -16,10 +16,6 @@ function getDocumentTitle(meta: Record<string, unknown>): string {
     return `${meta.title} - ${import.meta.env.VITE_APP_TITLE}`
   }
 
-  if (import.meta.env.VITE_APP_NODE_ENV === 'development') {
-    return 'Vue-实现'
-  }
-
   return import.meta.env.VITE_APP_DESC
 }
 
