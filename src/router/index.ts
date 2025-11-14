@@ -24,9 +24,9 @@ const routerModules = import.meta.glob<{ default: RouteRecordRaw[] }>('./modules
 })
 
 /**
- * 初始化路由配置
+ * 初始化路由列表
  */
-function initRoutes() {
+function initRouteList() {
   const routes = formatModules(routerModules, []) as RouteRecordRaw[]
 
   const normalizedRoutes = recursiveNormalizeRoutesPath(routes)
@@ -34,7 +34,10 @@ function initRoutes() {
   return recursiveSetRoutesRedirect(normalizedRoutes)
 }
 
-const routeList = initRoutes()
+/**
+ *  路由列表
+ */
+const routeList = initRouteList()
 
 console.log('%c Line:36 🎂 routeList', 'color:#42b983', routeList)
 
@@ -74,7 +77,7 @@ export async function setupRouter(app: App) {
     app.use(router)
   }
   catch (error) {
-    window.$notification.error('Router setup failed:')
+    window.$notification.error('路由器设置失败')
     throw error
   }
 }
