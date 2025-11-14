@@ -27,7 +27,7 @@ const appRepoUrl = import.meta.env.VITE_APP_REPO_URL
 /**
  *  路由根地址
  */
-const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
+// const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 
 /**
  *  pc端菜单列表
@@ -70,13 +70,13 @@ function closeMobileMenu() {
 /**
  *  跳转到首页
  */
-function handleToHome() {
-  if (route.path === routerRootPath) {
-    return
-  }
+// function handleToHome() {
+//   if (route.path === routerRootPath) {
+//     return
+//   }
 
-  router.push(routerRootPath)
-}
+//   router.push(routerRootPath)
+// }
 
 /**
  *  选择菜单项
@@ -108,7 +108,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
       <a
         class="z-999 flex items-center"
       >
-        <SvgIcon
+        <!-- <SvgIcon
           icon="logo"
           :size="60"
           class="cursor-pointer"
@@ -120,7 +120,27 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           :size="120"
           class="cursor-pointer !hover:color-[#08FF00]"
           @click="handleToHome"
-        />
+        /> -->
+
+        <router-link
+          to="/"
+        >
+          <SvgIcon
+            icon="logo"
+            :size="60"
+            class="cursor-pointer"
+          />
+        </router-link>
+
+        <router-link
+          to="/"
+        >
+          <SvgIcon
+            icon="weiShaoY"
+            :size="120"
+            class="cursor-pointer !hover:color-[#08FF00]"
+          />
+        </router-link>
       </a>
 
       <!-- PC端菜单 -->
@@ -128,15 +148,15 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
         v-if="!isMobile"
         class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
       >
-        <span
+        <router-link
           v-for="item in pcMenuList"
           :key="item.value"
+          :to="item.value"
           class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-primary"
           :class="{ 'text-primary': route.path === item.value }"
-          @click="handleSelect (item)"
         >
           {{ item.label }}
-        </span>
+        </router-link>
       </div>
 
       <!-- 操作按钮区域 -->
