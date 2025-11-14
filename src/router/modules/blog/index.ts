@@ -1,7 +1,7 @@
 import { HOME_DEFAULT_LAYOUT } from '@/layouts'
 
 /**
- *  大屏路由
+ *  博客路由
  */
 const BlogRouter: RouterType.RouteRecordRaw[] = [
   {

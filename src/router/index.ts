@@ -16,8 +16,10 @@ import {
   recursiveSetRoutesRedirect,
 } from './utils'
 
-// 路由模块加载配置
-const appModules = import.meta.glob<{ default: RouteRecordRaw[] }>('./modules/*/index.ts', {
+/**
+ *  路由模块加载配置
+ */
+const routerModules = import.meta.glob<{ default: RouteRecordRaw[] }>('./modules/*/index.ts', {
   eager: true,
 })
 
@@ -25,7 +27,7 @@ const appModules = import.meta.glob<{ default: RouteRecordRaw[] }>('./modules/*/
  * 初始化路由配置
  */
 function initRoutes() {
-  const routes = formatModules(appModules, []) as RouteRecordRaw[]
+  const routes = formatModules(routerModules, []) as RouteRecordRaw[]
 
   const normalizedRoutes = recursiveNormalizeRoutesPath(routes)
 
