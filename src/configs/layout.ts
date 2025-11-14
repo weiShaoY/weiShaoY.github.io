@@ -52,6 +52,12 @@ export const layoutConfig: {
         label: 'Test',
         isDevelopmentOnly: true,
       },
+      {
+        value: '/tool',
+        label: 'Tool',
+        isPCOnly: true,
+        isDevelopmentOnly: true,
+      },
     ],
   },
   police: {

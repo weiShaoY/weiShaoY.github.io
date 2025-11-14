@@ -1,6 +1,6 @@
 const Tool: RouterType.AdminRoute = {
   path: 'tool',
-  name: 'Tool',
+  name: 'Tool1',
   meta: {
     title: '工具',
     icon: 'admin-menu-tool',
