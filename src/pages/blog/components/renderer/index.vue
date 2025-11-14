@@ -189,7 +189,7 @@ const isDark = useDark() // 使用暗色主题
 /**
  *  主题切换函数
  */
-const toggleTheme = useToggle(isDark)
+// const toggleTheme = useToggle(isDark)
 
 // 监听暗色模式自动切换代码主题
 watch(isDark, (dark) => {
@@ -199,9 +199,9 @@ watch(isDark, (dark) => {
 /**
  * 处理暗色模式切换
  */
-function handleDarkModeToggle() {
-  toggleTheme()
-}
+// function handleDarkModeToggle() {
+//   toggleTheme()
+// }
 
 // 代码块主题选择器（单个下拉菜单）
 const codeThemeList = [
@@ -922,7 +922,8 @@ watch(content, () => {
             </template>
           </el-dropdown>
 
-          <label
+          <!-- 切换主题 -->
+          <!-- <label
             class="relative inline-flex cursor-pointer items-center"
           >
             <input
@@ -936,7 +937,7 @@ watch(content, () => {
               class="h-10 w-20 rounded-full from-yellow-300 to-orange-400 bg-gradient-to-r transition-all duration-500 after:absolute after:left-1 after:top-1 after:h-8 after:w-8 after:flex after:items-center after:justify-center after:rounded-full after:bg-white peer-checked:from-blue-400 peer-checked:to-indigo-500 after:text-lg after:shadow-md after:transition-all after:duration-500 after:content-['☀️'] peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']"
             />
 
-          </label>
+          </label> -->
 
         </div>
 

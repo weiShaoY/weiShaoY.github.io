@@ -527,6 +527,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/emoji/': RouteRecordInfo<
+      '/emoji/',
+      '/emoji',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -1165,6 +1172,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/contact/index.vue': {
       routes:
         | '/contact/'
+      views:
+        | never
+    }
+    'src/pages/emoji/index.vue': {
+      routes:
+        | '/emoji/'
       views:
         | never
     }
