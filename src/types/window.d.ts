@@ -37,6 +37,6 @@ declare global {
      *  是否为开发环境
      * @description 用于区分开发环境和生产环境
      */
-    _DEV__: boolean
+    $isDevelopment: boolean
   }
 }

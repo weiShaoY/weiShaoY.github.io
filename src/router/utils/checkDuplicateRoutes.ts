@@ -110,7 +110,7 @@ export function checkDuplicateRouteList(routeList: RouteRecordRaw[], time = 3000
       try {
         checkRouteConfigDuplicates(routeList)
 
-        if (window._DEV__) {
+        if (window.$isDevelopment) {
           // window.$notification.success('路由检查完成')
           window.$notification?.success({
             title: '路由检查完成!',
