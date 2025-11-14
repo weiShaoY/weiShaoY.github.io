@@ -6,7 +6,7 @@ export const defaultLayoutConfig: LayoutType.DefaultLayoutConfig = {
   headerRouterList: [
     {
       value: '/home',
-      label: 'About',
+      label: 'Home',
     },
     {
       value: '/work',
@@ -25,7 +25,6 @@ export const defaultLayoutConfig: LayoutType.DefaultLayoutConfig = {
       label: 'Admin',
       isPCOnly: true,
     },
-
     {
       value: '/garage',
       label: 'Garage',
@@ -35,7 +34,7 @@ export const defaultLayoutConfig: LayoutType.DefaultLayoutConfig = {
       label: 'BigScreen',
     },
     {
-      value: '/police-login',
+      value: '/police',
       label: 'Police',
       isPCOnly: true,
       isDevelopmentOnly: true,

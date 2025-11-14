@@ -71,7 +71,7 @@ async function handleSubmit() {
       window.$notification?.success('登录成功')
 
       router.push({
-        name: 'IdentityQuery',
+        name: 'PoliceIdentityQuerySearch',
       })
     }
     else {

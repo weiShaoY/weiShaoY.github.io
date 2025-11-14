@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { policeLayoutConfig } from '@/configs'
 
 import headerBgImage from './command-header-bg.png'
 
@@ -15,7 +16,7 @@ const titleInfo = ref({
     {
       id: 1,
       name: '身 份 查 询',
-      routeName: 'CommandIdentity',
+      routeName: 'PoliceIdentityQuery',
       children: [],
     },
     {
@@ -43,29 +44,25 @@ const titleInfo = ref({
       name: '空 间 管 控',
       routeName: 'spaceControl',
     },
-
-    // {
-    //   id: 4,
-    //   name: '退出登录',
-    //   routeName: 'CommandLogin',
-    // },
   ],
 })
 
-const isShowLight = ref('home')
+const isShowLightImage = ref('PoliceIdentityQuerySearch')
 
 watch(() => route.name, () => {
-  isShowLight.value = route.name as string
+  isShowLightImage.value = route.name as string
 }, {
   deep: true,
   immediate: true,
 })
 
 function jumpPage(item: any) {
-  isShowLight.value = item.routeName
-  if (item.routeName === 'CommandIdentity') {
+  console.log('%c Line:60 🥤 item', 'color:#4fff4B', item)
+  isShowLightImage.value = item.routeName
+
+  if (item.routeName === 'PoliceIdentityQuery') {
     router.push({
-      name: 'CommandIdentitySearch',
+      name: 'PoliceIdentityQuerySearch',
     })
   }
 
@@ -79,16 +76,17 @@ function jumpPage(item: any) {
  */
 function logout() {
   router.push({
-    name: 'CommandLogin',
+    name: 'PoliceLogin',
   })
 }
 </script>
 
 <template>
   <div
-    class="wrap relative h-20 flex items-center bg-cover bg-center bg-no-repeat"
+    class="fixed left-0 right-0 top-0 z-100 flex items-center bg-cover bg-center bg-no-repeat"
     :style="{
       backgroundImage: `url(${headerBgImage})`,
+      height: `${policeLayoutConfig.headerHeight}px`,
     }"
   >
 
@@ -100,7 +98,7 @@ function logout() {
         :key="index"
         class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
         :style="{
-          backgroundImage: `url(${isShowLight.includes(item.routeName) ? buttonActiveBgImage : buttonBgImage})`,
+          backgroundImage: `url(${isShowLightImage.includes(item.routeName) ? buttonActiveBgImage : buttonBgImage})`,
         }"
         @click="jumpPage(item)"
       >
@@ -160,7 +158,7 @@ function logout() {
         :key="index"
         class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
         :style="{
-          backgroundImage: `url(${isShowLight === item.routeName ? buttonActiveBgImage : buttonBgImage})`,
+          backgroundImage: `url(${isShowLightImage === item.routeName ? buttonActiveBgImage : buttonBgImage})`,
         }"
         @click="jumpPage(item)"
       >
@@ -184,7 +182,7 @@ function logout() {
           <div
             class="relative h-10 w-1/3 flex items-center justify-center bg-[length:100%_100%] text-4 leading-10 hover:cursor-pointer"
             :style="{
-              backgroundImage: `url(${isShowLight === 'CommandLogin' ? buttonActiveBgImage : buttonBgImage})`,
+              backgroundImage: `url(${isShowLightImage === 'CommandLogin' ? buttonActiveBgImage : buttonBgImage})`,
             }"
           >
             <span

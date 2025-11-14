@@ -74,10 +74,8 @@ const tableData = [
 ]
 
 function handleClick(item: any) {
-  console.log('%c Line:75 🌭 item', 'color:#e41a6a', item)
-
   router.push({
-    name: 'IdentityQueryDetail',
+    name: 'PoliceIdentityQueryDetail',
     query: {
       id: item.id,
     },

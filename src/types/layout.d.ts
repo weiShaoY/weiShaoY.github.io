@@ -31,4 +31,15 @@ declare namespace LayoutType {
     }>[]
 
   }
+
+  /**
+   *  指挥台布局配置
+   */
+  type PoliceLayoutConfig = {
+
+    /**
+     *  头部高度
+     */
+    headerHeight: number
+  }
 }

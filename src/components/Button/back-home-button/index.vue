@@ -4,7 +4,7 @@
 
 <template>
   <div
-    class="fixed bottom-5 left-5 z-1000"
+    class="fixed bottom-3 left-3 z-1000"
   >
     <BaseButton
       tooltip-content="返回首页"

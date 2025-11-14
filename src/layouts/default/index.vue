@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import { defaultLayoutConfig } from '@/configs'
 
-import Header from './modules/header/index.vue'
+import GlobalHeader from './modules/global-header/index.vue'
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import Header from './modules/header/index.vue'
     class="h-screen w-full flex flex-col bg-[#212224] color-[#e4e4e6]"
   >
     <!-- 顶部导航栏 -->
-    <Header />
+    <GlobalHeader />
 
     <div
       class="mt-20 w-full overflow-auto"

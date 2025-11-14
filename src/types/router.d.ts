@@ -30,7 +30,18 @@ declare namespace RouterType {
     children?: RouteRecordRaw[]
 
     /** 额外的元信息，可以存储权限、标题、缓存等自定义数据 */
-    meta?: Record<string, any>
+    /** 路由元信息 */
+    meta?: {
+
+      /** 文档标题（可选），用于浏览器标签显示 */
+      documentTitle?: string
+
+      /** 是否需要认证才能访问 */
+      requiresAuth?: boolean
+
+      /** 是否缓存组件 */
+      keepAlive?: boolean
+    }
   }
 
   /** 博客模块路由类型 */
