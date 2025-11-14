@@ -85,7 +85,7 @@ declare namespace Env {
     readonly VITE_APP_DEMO_URL: string
 
     /**
-     * 应用的 Github 仓库地址
+     * 应用的 代码仓库 地址
      */
     readonly VITE_APP_REPO_URL: string
 

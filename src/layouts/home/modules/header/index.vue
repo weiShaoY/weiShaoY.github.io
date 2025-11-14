@@ -3,9 +3,9 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { homeConfig } from '@/configs'
 
-import MobileMenu from './components/mobile-menu.vue'
+import { isMobile } from '@/utils'
 
-import PcMenu from './components/pc-menu.vue'
+import MobileMenu from './components/mobile-menu.vue'
 
 const route = useRoute()
 
@@ -14,44 +14,34 @@ const router = useRouter()
 /**
  *  是否为开发环境
  */
-const isDevelopment = import.meta.env.VITE_APP_ENV === 'development'
+const isDevelopment = window.$isDevelopment
 
 /**
- *  网站在线地址
+ *  应用的在线演示地址
  */
-const websiteUrl = import.meta.env.VITE_APP_DEMO_URL
+const appDemoUrl = import.meta.env.VITE_APP_DEMO_URL
+
+/**
+ *  应用的代码仓库地址
+ */
+const appRepoUrl = import.meta.env.VITE_APP_REPO_URL
 
 /**
  *  路由根地址
  */
 const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 
-type HeaderRoute = typeof homeConfig.headerRouterList[number]
+const pcMenuList = homeConfig.headerRouterList.filter(({ isDevelopmentOnly }) =>
+  isDevelopment || !isDevelopmentOnly,
+)
 
-function shouldShowOnPC(item: HeaderRoute) {
-  // 开发环境下，保留所有
-  if (isDevelopment) {
-    return true
-  }
+const mobileMenuList = homeConfig.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
+  !isPCOnly && (isDevelopment || !isDevelopmentOnly),
+)
 
-  // 非开发环境下，过滤掉 isDevelopmentOnly 为 true 的
-  return !item.isDevelopmentOnly
-}
-
-function shouldShowOnMobile(item: HeaderRoute) {
-  // 开发环境下：仅过滤掉 PC 专属
-  if (isDevelopment) {
-    return !item.isPCOnly
-  }
-
-  // 非开发环境：过滤掉 PC 专属 和 开发专属
-  return !item.isPCOnly && !item.isDevelopmentOnly
-}
-
-const pcMenuList = homeConfig.headerRouterList.filter(shouldShowOnPC)
-
-const mobileMenuList = homeConfig.headerRouterList.filter(shouldShowOnMobile)
-
+/**
+ *  跳转到首页
+ */
 function handleToHome() {
   if (route.path === routerRootPath) {
     return
@@ -60,17 +50,31 @@ function handleToHome() {
   router.push(routerRootPath)
 }
 
+/**
+ * 跳转路由或链接
+ */
+function handleSelect(item: HomeType.HeaderRouter) {
+  if (route.path === item.value) {
+    return
+  }
+
+  router.push(item.value)
+}
+
 </script>
 
 <template>
   <nav
-    class="fixed left-0 right-0 top-0 z-100 h-20 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
+    class="fixed left-0 right-0 top-0 z-100 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
+    :style="{
+      height: `${homeConfig.headerHeight}px`,
+    }"
   >
     <div
       class="container relative flex items-center justify-between max-sm:mx-5"
     >
 
-      <!-- 左侧logo -->
+      <!-- Logo区域 -->
       <a
         class="z-999 flex items-center"
       >
@@ -89,37 +93,54 @@ function handleToHome() {
         />
       </a>
 
-      <!-- 菜单 -->
-      <!-- <PcMenu
+      <!-- PC端菜单 -->
+      <div
         v-if="!isMobile"
-        :menu-list="pcMenuList"
-      />
+        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
+      >
+        <span
+          v-for="item in pcMenuList"
+          :key="item.value"
+          class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-primary"
+          :class="{ 'text-primary': route.path === item.value }"
+          @click="handleSelect (item)"
+        >
+          {{ item.label }}
+        </span>
+      </div>
 
-      <MobileMenu
-        v-else
-        :menu-list="mobileMenuList"
-      /> -->
-
+      <!-- 操作按钮区域 -->
       <div
         class="flex flex items-center justify-end gap-5"
       >
         <Github />
 
-        <LinkButton
-          v-if="isDevelopment"
-          icon="home-navbar-demo"
-          :size="36"
-          :url="websiteUrl"
-        />
+        <!-- 开发环境且非移动端显示额外按钮 -->
+        <template
+          v-if="isDevelopment && !isMobile"
+        >
+          <LinkButton
+            icon="home-navbar-demo"
+            :size="36"
+            :url="appDemoUrl"
+          />
 
-        <LinkButton
-          v-if="isDevelopment"
-          icon="home-navbar-warehouse"
-          :size="36"
-          url="https://github.com/weiShaoY/weiShaoY.github.io"
-        />
+          <LinkButton
+            icon="home-navbar-warehouse"
+            :size="36"
+            :url="appRepoUrl"
+          />
+        </template>
+
+        <!-- 移动端菜单 -->
+        <template
+          v-else
+        >
+          <MobileMenu
+            :menu-list="mobileMenuList"
+          />
+        </template>
       </div>
-
     </div>
   </nav>
 </template>

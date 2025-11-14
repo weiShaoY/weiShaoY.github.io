@@ -1,15 +1,8 @@
 /**
- *  首页配置类型
+ *  首页配置
  */
-type HomeConfigType = {
-
-  /**
-   *  头部路由列表
-   */
-  headerRouterList: HomeType.HeaderRouter[]
-}
-
-export const homeConfig: HomeConfigType = {
+export const homeConfig: HomeType.Config = {
+  headerHeight: 80,
   headerRouterList: [
     {
       value: '/home/about',
@@ -24,6 +17,10 @@ export const homeConfig: HomeConfigType = {
       label: 'Contact',
     },
     {
+      value: '/blog',
+      label: 'Blog',
+    },
+    {
       value: '/admin',
       label: 'Admin',
     },
@@ -35,11 +32,6 @@ export const homeConfig: HomeConfigType = {
     {
       value: '/bigScreen',
       label: 'BigScreen',
-    },
-    {
-      value: '/blog/',
-      label: 'Blog',
-      isPCOnly: true,
     },
     {
       value: '/police-login',

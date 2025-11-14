@@ -14,13 +14,13 @@ type PropsType = {
 
 defineProps<PropsType>()
 
-// 路由导航
 const router = useRouter()
 
-// 控制菜单是否打开
+/**
+ *  控制菜单是否打开
+ */
 const isOpen = ref(false)
 
-// 引用按钮元素
 const buttonRef = ref(null)
 
 const route = useRoute()
@@ -60,60 +60,54 @@ function handleSelect(item: HomeType.HeaderRouter) {
 
 <template>
   <div
-    class="flex flex-1 items-center justify-end gap-5"
+    class="block"
   >
-    <Github />
-
-    <div
-      class="block"
+    <!-- 下拉按钮 -->
+    <button
+      ref="buttonRef"
+      class="aspect-square h-10 rounded-md hover:bg-[#333639]"
+      :class="[
+        isOpen ? 'bg-[#333639]' : '',
+      ]"
+      type="button"
+      @click="toggleMenu"
     >
-      <!-- 下拉按钮 -->
-      <button
-        ref="buttonRef"
-        class="aspect-square h-10 rounded-md hover:bg-[#333639]"
-        :class="[
-          isOpen ? 'bg-[#333639]' : '',
-        ]"
-        type="button"
-        @click="toggleMenu"
-      >
-        <SvgIcon
-          :icon="isOpen ? 'home-navbar-menu1' : 'home-navbar-menu2'"
-          :size="24"
-          color="#fff"
-        />
-      </button>
+      <SvgIcon
+        :icon="isOpen ? 'home-navbar-menu1' : 'home-navbar-menu2'"
+        :size="24"
+        color="#fff"
+      />
+    </button>
 
-      <!-- 弹出层 -->
+    <!-- 弹出层 -->
+    <div
+      class="fixed bottom-0 left-0 right-0 flex flex-col overflow-hidden bg-black bg-opacity-70 transition-max-height duration-500 ease-in-out"
+      :class="[
+        isOpen ? 'max-h-screen' : 'max-h-0',
+      ]"
+      :style="{ top: '80px' }"
+    >
+      <!-- 操作组 -->
       <div
-        class="fixed bottom-0 left-0 right-0 flex flex-col overflow-hidden bg-black bg-opacity-70 transition-max-height duration-500 ease-in-out"
-        :class="[
-          isOpen ? 'max-h-screen' : 'max-h-0',
-        ]"
-        :style="{ top: '80px' }"
+        class="bg-[#333639]"
       >
-        <!-- 操作组 -->
         <div
-          class="bg-[#333639]"
+          v-for="item in menuList"
+          :key="item.value"
+          class="m-3 flex cursor-pointer items-center rounded-md p-3 text-lg text-white font-bold hover:bg-[#D0D2D6]"
+          :class="{
+            'bg-[#D0D2D6]': route.path === item.value,
+          }"
+          @click="handleSelect(item)"
         >
-          <div
-            v-for="item in menuList"
-            :key="item.value"
-            class="m-3 flex cursor-pointer items-center rounded-md p-3 text-lg text-white font-bold hover:bg-[#D0D2D6]"
-            :class="{
-              'bg-[#D0D2D6]': route.path === item.value,
-            }"
-            @click="handleSelect(item)"
-          >
-            {{ item.label }}
-          </div>
+          {{ item.label }}
         </div>
-
-        <div
-          class="flex-1"
-          @click="closeMenu"
-        />
       </div>
+
+      <div
+        class="flex-1"
+        @click="closeMenu"
+      />
     </div>
   </div>
 
