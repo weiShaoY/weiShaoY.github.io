@@ -152,7 +152,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           v-for="item in pcMenuList"
           :key="item.value"
           :to="item.value"
-          class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-primary"
+          class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-[#BFFFBF]"
           :class="{ 'text-primary': route.path === item.value }"
         >
           {{ item.label }}
