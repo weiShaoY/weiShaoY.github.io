@@ -5,15 +5,15 @@ export const defaultLayoutConfig: LayoutType.DefaultLayoutConfig = {
   headerHeight: 80,
   headerRouterList: [
     {
-      value: '/home/about',
+      value: '/home',
       label: 'About',
     },
     {
-      value: '/home/work',
+      value: '/work',
       label: 'Work',
     },
     {
-      value: '/home/contact',
+      value: '/contact',
       label: 'Contact',
     },
     {

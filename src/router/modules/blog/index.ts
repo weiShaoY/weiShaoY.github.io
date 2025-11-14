@@ -9,7 +9,7 @@ const BlogRouter: RouterType.RouteRecordRaw = {
   children: [
     {
       path: '', // 空路径，作为默认子路由
-      name: '博客', // 移动 name 到子路由
+      name: 'Blog', // 移动 name 到子路由
       component: () => import('@/pages/blog/index.vue'),
       meta: {
         documentTitle: '我的博客!',

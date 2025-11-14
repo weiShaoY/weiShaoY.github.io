@@ -1,5 +1,5 @@
 export * from './admin'
 
-export * from './home'
+export * from './defaultLayout'
 
 export * from './skills'

@@ -520,6 +520,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/contact/': RouteRecordInfo<
+      '/contact/',
+      '/contact',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -604,51 +611,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/home/about/': RouteRecordInfo<
-      '/home/about/',
-      '/home/about',
+    '/home/': RouteRecordInfo<
+      '/home/',
+      '/home',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/home/about/components/info': RouteRecordInfo<
-      '/home/about/components/info',
-      '/home/about/components/info',
+    '/home/components/info': RouteRecordInfo<
+      '/home/components/info',
+      '/home/components/info',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/home/about/components/intro': RouteRecordInfo<
-      '/home/about/components/intro',
-      '/home/about/components/intro',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/home/contact/': RouteRecordInfo<
-      '/home/contact/',
-      '/home/contact',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/home/work/': RouteRecordInfo<
-      '/home/work/',
-      '/home/work',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/home/work/components/experience/': RouteRecordInfo<
-      '/home/work/components/experience/',
-      '/home/work/components/experience',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/home/work/components/project/': RouteRecordInfo<
-      '/home/work/components/project/',
-      '/home/work/components/project',
+    '/home/components/intro': RouteRecordInfo<
+      '/home/components/intro',
+      '/home/components/intro',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -691,6 +670,27 @@ declare module 'vue-router/auto-routes' {
     '/test/': RouteRecordInfo<
       '/test/',
       '/test',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/work/': RouteRecordInfo<
+      '/work/',
+      '/work',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/work/components/experience/': RouteRecordInfo<
+      '/work/components/experience/',
+      '/work/components/experience',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/work/components/project/': RouteRecordInfo<
+      '/work/components/project/',
+      '/work/components/project',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1134,6 +1134,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/contact/index.vue': {
+      routes:
+        | '/contact/'
+      views:
+        | never
+    }
     'src/pages/error/403/index.vue': {
       routes:
         | '/error/403/'
@@ -1206,45 +1212,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/home/about/index.vue': {
+    'src/pages/home/index.vue': {
       routes:
-        | '/home/about/'
+        | '/home/'
       views:
         | never
     }
-    'src/pages/home/about/components/info.vue': {
+    'src/pages/home/components/info.vue': {
       routes:
-        | '/home/about/components/info'
+        | '/home/components/info'
       views:
         | never
     }
-    'src/pages/home/about/components/intro.vue': {
+    'src/pages/home/components/intro.vue': {
       routes:
-        | '/home/about/components/intro'
-      views:
-        | never
-    }
-    'src/pages/home/contact/index.vue': {
-      routes:
-        | '/home/contact/'
-      views:
-        | never
-    }
-    'src/pages/home/work/index.vue': {
-      routes:
-        | '/home/work/'
-      views:
-        | never
-    }
-    'src/pages/home/work/components/experience/index.vue': {
-      routes:
-        | '/home/work/components/experience/'
-      views:
-        | never
-    }
-    'src/pages/home/work/components/project/index.vue': {
-      routes:
-        | '/home/work/components/project/'
+        | '/home/components/intro'
       views:
         | never
     }
@@ -1281,6 +1263,24 @@ declare module 'vue-router/auto-routes' {
     'src/pages/test/index.vue': {
       routes:
         | '/test/'
+      views:
+        | never
+    }
+    'src/pages/work/index.vue': {
+      routes:
+        | '/work/'
+      views:
+        | never
+    }
+    'src/pages/work/components/experience/index.vue': {
+      routes:
+        | '/work/components/experience/'
+      views:
+        | never
+    }
+    'src/pages/work/components/project/index.vue': {
+      routes:
+        | '/work/components/project/'
       views:
         | never
     }
