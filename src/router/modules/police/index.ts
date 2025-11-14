@@ -3,61 +3,6 @@ import { Police_LAYOUT } from '@/layouts'
 /**
  *  指挥台路由
  */
-// const policeRouter: RouterType.RouteRecordRaw[] = [
-//   {
-//     path: 'police-login',
-//     name: 'policeLogin',
-//     component: () => import('@/pages/police/login/index.vue'),
-//     meta: {
-//       documentTitle: '登录',
-//     },
-//   },
-//   {
-//     path: '/police',
-//     name: 'police',
-//     meta: {
-//       title: '指挥台',
-//     },
-//     component: Police_LAYOUT,
-//     children: [
-//       {
-//         path: 'identityQuery',
-//         name: 'IdentityQuery',
-//         meta: {
-//           title: '身份查询',
-//         },
-//         children: [
-//           {
-//             path: 'identity-query-search',
-//             name: 'IdentityQuerySearch',
-//             component: () => import('@/pages/police/identityQuery/search/index.vue'),
-//             meta: {
-//               title: '身份查询-搜索',
-//             },
-//           },
-//           {
-//             path: 'identity-query-result',
-//             name: 'IdentityQueryResult',
-//             component: () => import('@/pages/police/identityQuery/result/index.vue'),
-//             meta: {
-//               title: '身份查询-结果列表',
-//             },
-//           },
-//           {
-//             path: 'identity-query-detail',
-//             name: 'IdentityQueryDetail',
-//             component: () => import('@/pages/police/identityQuery/detail/index.vue'),
-//             meta: {
-//               title: '身份查询-详情',
-//             },
-//           },
-//         ],
-//       },
-//     ],
-//   },
-
-// ]
-
 const policeRouter: RouterType.RouteRecordRaw = {
   path: '/police',
   name: 'Police',
@@ -70,7 +15,7 @@ const policeRouter: RouterType.RouteRecordRaw = {
       path: 'login',
       name: 'PoliceLogin',
       component: () => import('@/pages/police/login/index.vue'),
-      meta: { // 修改这里
+      meta: {
         documentTitle: '登录',
       },
     },
@@ -105,6 +50,74 @@ const policeRouter: RouterType.RouteRecordRaw = {
           component: () => import('@/pages/police/identityQuery/detail/index.vue'),
           meta: {
             documentTitle: '身份查询-详情',
+          },
+        },
+      ],
+    },
+    {
+      path: 'monitorSystem',
+      meta: {
+        documentTitle: '监控系统',
+      },
+      component: Police_LAYOUT,
+      children: [
+        {
+          path: '', // 空路径，作为默认子路由
+          name: 'PoliceMonitorSystem', // 移动 name 到子路由
+          component: () => import('@/pages/police/monitorSystem/index.vue'),
+          meta: {
+            documentTitle: '监控系统',
+          },
+        },
+      ],
+    },
+    {
+      path: 'archiveSystem',
+      meta: {
+        documentTitle: '档案系统',
+      },
+      component: Police_LAYOUT,
+      children: [
+        {
+          path: '', // 空路径，作为默认子路由
+          name: 'PoliceArchiveSystem', // 移动 name 到子路由
+          component: () => import('@/pages/police/archiveSystem/index.vue'),
+          meta: {
+            documentTitle: '档案系统',
+          },
+        },
+      ],
+    },
+    {
+      path: 'statisticalAnalysis',
+      meta: {
+        documentTitle: '统计分析',
+      },
+      component: Police_LAYOUT,
+      children: [
+        {
+          path: '', // 空路径，作为默认子路由
+          name: 'PoliceStatisticalAnalysis', // 移动 name 到子路由
+          component: () => import('@/pages/police/statisticalAnalysis/index.vue'),
+          meta: {
+            documentTitle: '统计分析',
+          },
+        },
+      ],
+    },
+    {
+      path: 'spaceControl',
+      meta: {
+        documentTitle: '空间管控',
+      },
+      component: Police_LAYOUT,
+      children: [
+        {
+          path: '', // 空路径，作为默认子路由
+          name: 'PoliceSpaceControl', // 移动 name 到子路由
+          component: () => import('@/pages/police/spaceControl/index.vue'),
+          meta: {
+            documentTitle: '空间管控',
           },
         },
       ],

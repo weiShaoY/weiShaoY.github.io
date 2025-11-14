@@ -639,6 +639,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/police/archiveSystem/': RouteRecordInfo<
+      '/police/archiveSystem/',
+      '/police/archiveSystem',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/police/identityQuery/detail/': RouteRecordInfo<
       '/police/identityQuery/detail/',
       '/police/identityQuery/detail',
@@ -663,6 +670,27 @@ declare module 'vue-router/auto-routes' {
     '/police/login/': RouteRecordInfo<
       '/police/login/',
       '/police/login',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/police/monitorSystem/': RouteRecordInfo<
+      '/police/monitorSystem/',
+      '/police/monitorSystem',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/police/spaceControl/': RouteRecordInfo<
+      '/police/spaceControl/',
+      '/police/spaceControl',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/police/statisticalAnalysis/': RouteRecordInfo<
+      '/police/statisticalAnalysis/',
+      '/police/statisticalAnalysis',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1236,6 +1264,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/police/archiveSystem/index.vue': {
+      routes:
+        | '/police/archiveSystem/'
+      views:
+        | never
+    }
     'src/pages/police/identityQuery/detail/index.vue': {
       routes:
         | '/police/identityQuery/detail/'
@@ -1257,6 +1291,24 @@ declare module 'vue-router/auto-routes' {
     'src/pages/police/login/index.vue': {
       routes:
         | '/police/login/'
+      views:
+        | never
+    }
+    'src/pages/police/monitorSystem/index.vue': {
+      routes:
+        | '/police/monitorSystem/'
+      views:
+        | never
+    }
+    'src/pages/police/spaceControl/index.vue': {
+      routes:
+        | '/police/spaceControl/'
+      views:
+        | never
+    }
+    'src/pages/police/statisticalAnalysis/index.vue': {
+      routes:
+        | '/police/statisticalAnalysis/'
       views:
         | never
     }

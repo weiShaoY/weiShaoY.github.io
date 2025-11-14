@@ -18,6 +18,12 @@
         > Title </span>
       </template>
     </el-page-header>
+
+    <div
+      class="flex flex-1 items-center justify-center text-10"
+    >
+      查询详情
+    </div>
   </div>
 </template>
 

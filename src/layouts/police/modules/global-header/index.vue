@@ -22,13 +22,13 @@ const titleInfo = ref({
     {
       id: 2,
       name: '监 控 系 统',
-      routeName: 'Evaluate',
+      routeName: 'PoliceMonitorSystem',
       children: [],
     },
     {
       id: 3,
       name: '档 案 系 统',
-      routeName: 'SpaceControl',
+      routeName: 'PoliceArchiveSystem',
       children: [],
     },
   ],
@@ -37,17 +37,17 @@ const titleInfo = ref({
     {
       id: 3,
       name: '统 计 分 析',
-      routeName: 'analyze',
+      routeName: 'PoliceStatisticalAnalysis',
     },
     {
       id: 4,
       name: '空 间 管 控',
-      routeName: 'spaceControl',
+      routeName: 'PoliceSpaceControl',
     },
   ],
 })
 
-const isShowLightImage = ref('PoliceIdentityQuerySearch')
+const isShowLightImage = ref('PoliceIdentityQuery')
 
 watch(() => route.name, () => {
   isShowLightImage.value = route.name as string
@@ -57,15 +57,7 @@ watch(() => route.name, () => {
 })
 
 function jumpPage(item: any) {
-  console.log('%c Line:60 🥤 item', 'color:#4fff4B', item)
   isShowLightImage.value = item.routeName
-
-  if (item.routeName === 'PoliceIdentityQuery') {
-    router.push({
-      name: 'PoliceIdentityQuerySearch',
-    })
-  }
-
   router.push({
     name: item.routeName,
   })
