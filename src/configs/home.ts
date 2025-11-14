@@ -1,7 +1,7 @@
 /**
- *  首页配置
+ *  默认布局配置
  */
-export const homeConfig: HomeType.Config = {
+export const defaultLayoutConfig: LayoutType.DefaultLayoutConfig = {
   headerHeight: 80,
   headerRouterList: [
     {
@@ -23,6 +23,7 @@ export const homeConfig: HomeType.Config = {
     {
       value: '/admin',
       label: 'Admin',
+      isPCOnly: true,
     },
 
     {

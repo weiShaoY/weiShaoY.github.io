@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 
-import { homeConfig } from '@/configs'
+import { defaultLayoutConfig } from '@/configs'
 
 import { isMobile } from '@/utils'
-
-import MobileMenu from './components/mobile-menu.vue'
 
 const route = useRoute()
 
@@ -31,13 +29,43 @@ const appRepoUrl = import.meta.env.VITE_APP_REPO_URL
  */
 const routerRootPath = import.meta.env.VITE_ROUTER_ROOT_PATH
 
-const pcMenuList = homeConfig.headerRouterList.filter(({ isDevelopmentOnly }) =>
+/**
+ *  pc端菜单列表
+ */
+const pcMenuList = defaultLayoutConfig.headerRouterList.filter(({ isDevelopmentOnly }) =>
   isDevelopment || !isDevelopmentOnly,
 )
 
-const mobileMenuList = homeConfig.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
+/**
+ *  移动菜单列表
+ */
+const mobileMenuList = defaultLayoutConfig.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
   !isPCOnly && (isDevelopment || !isDevelopmentOnly),
 )
+
+/**
+ *  移动菜单按钮引用
+ */
+const mobileButtonRef = ref(null)
+
+/**
+ *  是否打开移动菜单
+ */
+const isOpenMobileMenu = ref(false)
+
+/**
+ * 切换移动菜单
+ */
+function toggleMobileMenu() {
+  isOpenMobileMenu.value = !isOpenMobileMenu.value
+}
+
+/**
+ * 关闭移动菜单
+ */
+function closeMobileMenu() {
+  isOpenMobileMenu.value = false
+}
 
 /**
  *  跳转到首页
@@ -51,9 +79,11 @@ function handleToHome() {
 }
 
 /**
- * 跳转路由或链接
+ *  选择菜单项
  */
-function handleSelect(item: HomeType.HeaderRouter) {
+function handleSelect(item: LayoutType.DefaultLayoutConfig['headerRouterList'][0]) {
+  isOpenMobileMenu.value = false
+
   if (route.path === item.value) {
     return
   }
@@ -67,7 +97,7 @@ function handleSelect(item: HomeType.HeaderRouter) {
   <nav
     class="fixed left-0 right-0 top-0 z-100 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
     :style="{
-      height: `${homeConfig.headerHeight}px`,
+      height: `${defaultLayoutConfig.headerHeight}px`,
     }"
   >
     <div
@@ -136,9 +166,58 @@ function handleSelect(item: HomeType.HeaderRouter) {
         <template
           v-else
         >
-          <MobileMenu
-            :menu-list="mobileMenuList"
-          />
+          <div
+            class="block"
+          >
+            <!-- 菜单按钮 -->
+            <button
+              ref="mobileButtonRef"
+              class="aspect-square h-10 rounded-md hover:bg-[#333639]"
+              :class="[
+                isOpenMobileMenu ? 'bg-[#333639]' : '',
+              ]"
+              type="button"
+              @click="toggleMobileMenu"
+            >
+              <SvgIcon
+                :icon="isOpenMobileMenu ? 'home-navbar-menu1' : 'home-navbar-menu2'"
+                :size="24"
+                color="#fff"
+              />
+            </button>
+
+            <!-- 弹出层 -->
+            <div
+              class="fixed bottom-0 left-0 right-0 flex flex-col overflow-hidden bg-black bg-opacity-70 transition-max-height duration-500 ease-in-out"
+              :class="[
+                isOpenMobileMenu ? 'max-h-screen' : 'max-h-0',
+              ]"
+              :style="{ top: `${defaultLayoutConfig.headerHeight}px` }"
+            >
+              <!-- 操作组 -->
+              <div
+                class="bg-[#333639]"
+              >
+                <div
+                  v-for="item in mobileMenuList"
+                  :key="item.value"
+                  class="m-3 flex cursor-pointer items-center rounded-md p-3 text-lg text-white font-bold hover:bg-[#D0D2D6]"
+                  :class="{
+                    'bg-[#D0D2D6]': route.path === item.value,
+                  }"
+                  @click="handleSelect(item)"
+                >
+                  {{ item.label }}
+                </div>
+              </div>
+
+              <!-- 遮罩层 -->
+              <div
+                class="flex-1"
+                @click="closeMobileMenu"
+              />
+            </div>
+          </div>
         </template>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { HOME_DEFAULT_LAYOUT } from '@/layouts'
+import { DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  首页路由
@@ -7,7 +7,7 @@ const homeRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Home',
-    component: HOME_DEFAULT_LAYOUT,
+    component: DEFAULT_LAYOUT,
     children: [
       {
         path: 'about',

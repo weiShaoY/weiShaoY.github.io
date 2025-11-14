@@ -1,4 +1,4 @@
-import { SIMPLE_Layout } from '@/layouts'
+import { DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  错误页面路由
@@ -6,7 +6,7 @@ import { SIMPLE_Layout } from '@/layouts'
 const errorRouter: RouterType.RouteRecordRaw[] = [
   {
     path: '/403',
-    component: SIMPLE_Layout,
+    component: DEFAULT_LAYOUT,
     children: [
       {
         path: '', // 空路径，作为默认子路由
@@ -20,7 +20,7 @@ const errorRouter: RouterType.RouteRecordRaw[] = [
   },
   {
     path: '/:pathMatch(.*)*',
-    component: SIMPLE_Layout,
+    component: DEFAULT_LAYOUT,
     children: [
       {
         path: '', // 空路径
@@ -34,7 +34,7 @@ const errorRouter: RouterType.RouteRecordRaw[] = [
   },
   {
     path: '/500',
-    component: SIMPLE_Layout,
+    component: DEFAULT_LAYOUT,
     children: [
       {
         path: '', // 空路径
