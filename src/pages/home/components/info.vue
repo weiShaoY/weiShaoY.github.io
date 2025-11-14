@@ -212,13 +212,13 @@ function handleCopy() {
       </div>
 
       <div
-        class="col-span-1 row-span-2 max-sm:col-span-3"
+        class="col-span-1 row-span-2 flex items-center justify-center max-sm:col-span-3"
       >
-        <img
+        <!-- <img
           src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=weiShaoY&theme=merko"
           alt=""
           class="h-60 w-full"
-        >
+        > -->
 
         <!-- <img
           src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=merko&hide_border=true&radius=8&bg_color=0E0E10&line=00ff00&point=ffffff&custom_title=Github%20%E8%B4%A1%E7%8C%AE%E5%9B%BE"
@@ -226,13 +226,21 @@ function handleCopy() {
           class="h-[212px] w-full"
         > -->
 
-        <!-- <img
+        <img
           src="https://pixel-profile.vercel.app/api/github-stats?username=weiShaoY&theme=crt&pixelate_avatar=false"
           alt=""
           class="h-[212px] w-full"
-        > -->
+        >
       </div>
 
+      <div
+        class="col-span-3 row-span-3 bg-cyan max-sm:col-span-3"
+      >
+        <img
+          src="https://cdn.jsdelivr.net/gh/weiShaoY/gitHubContributionSvg@main/profile-3d-contrib/profile-night-rainbow.svg"
+          alt=""
+        >
+      </div>
     </div>
 
   </section>
