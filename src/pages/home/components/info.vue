@@ -238,7 +238,7 @@ function handleCopy() {
       >
         <img
           class="overflow-hidden rounded-1"
-          src="https://cdn.jsdelivr.net/gh/weiShaoY/gitHubContributionSvg@main/profile-3d-contrib/profile-night-rainbow.svg"
+          src="https://cdn.jsdelivr.net/gh/weiShaoY/weiShaoY@main/profile-3d-contrib/profile-night-rainbow.svg"
           alt=""
         >
       </div>
