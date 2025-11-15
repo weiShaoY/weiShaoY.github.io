@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@simonwep/pickr": "^1.9.1",
     "@vueuse/core": "^14.0.0",
     "@vueuse/motion": "^3.0.3",
     "autofit.js": "^3.2.8",
