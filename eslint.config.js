@@ -186,4 +186,9 @@ export default antfu({
       ],
     },
   },
+
+  rules: {
+    // 关闭 jsonc 排序键规则
+    'jsonc/sort-keys': 'off',
+  },
 })
