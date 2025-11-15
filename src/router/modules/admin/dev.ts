@@ -1,6 +1,6 @@
 const devRoute: RouterType.AdminRoute = {
-  path: 'dev',
-  name: 'Dev',
+  path: 'dev1',
+  name: 'Dev1',
   meta: {
     title: '开发',
     order: 2,
