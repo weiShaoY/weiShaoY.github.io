@@ -12,11 +12,15 @@
 
 // Fira Code Variable Fonts
 @font-face {
-  font-family: "Fira Code VF";
+  font-family: "firaCode";
   src: url("@/assets/fonts/FiraCode-VF.woff2") format("woff2-variations");
   /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
   font-weight: 300 700;
   font-style: normal;
   // 仅应用于英文字母和符号
   // unicode-range: U+0020-007E;
+}
+
+body {
+  font-family: "gaiLiangShouJinTi", "firaCode", sans-serif;
 }

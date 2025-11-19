@@ -78,8 +78,8 @@ importers:
         specifier: ^0.0.9
         version: 0.0.9(shiki@3.15.0)
       stream-markdown-parser:
-        specifier: ^0.0.19
-        version: 0.0.19
+        specifier: ^0.0.25
+        version: 0.0.25
       three:
         specifier: ^0.181.0
         version: 0.181.0
@@ -111,8 +111,8 @@ importers:
         specifier: ^2.6.0
         version: 2.6.0(vue@3.5.24(typescript@5.9.3))
       vue-renderer-markdown:
-        specifier: 0.0.61-beta.9
-        version: 0.0.61-beta.9(katex@0.16.25)(shiki@3.15.0)(stream-markdown@0.0.9(shiki@3.15.0))(stream-monaco@0.0.2(monaco-editor@0.52.2))(vue@3.5.24(typescript@5.9.3))
+        specifier: 0.0.59
+        version: 0.0.59(katex@0.16.25)(shiki@3.15.0)(stream-markdown@0.0.9(shiki@3.15.0))(stream-monaco@0.0.2(monaco-editor@0.52.2))(vue@3.5.24(typescript@5.9.3))
       vue-router:
         specifier: ^4.6.3
         version: 4.6.3(vue@3.5.24(typescript@5.9.3))
@@ -156,6 +156,9 @@ importers:
       '@unocss/reset':
         specifier: ^66.5.5
         version: 66.5.5
+      '@unocss/transformer-directives':
+        specifier: ^66.5.7
+        version: 66.5.7
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.2.2(@types/node@24.10.0)(jiti@2.5.1)(less@4.4.2)(sass@1.93.3)(tsx@4.19.2)(yaml@2.8.1))(vue@3.5.24(typescript@5.9.3))
@@ -211,8 +214,8 @@ importers:
         specifier: ^2.14.5
         version: 2.14.5(@vueuse/core@14.0.0(vue@3.5.24(typescript@5.9.3)))(esbuild@0.25.3)(rollup@4.46.2)(typescript@5.9.3)(vite@7.2.2(@types/node@24.10.0)(jiti@2.5.1)(less@4.4.2)(sass@1.93.3)(tsx@4.19.2)(yaml@2.8.1))(vue-tsc@3.1.3(typescript@5.9.3))(vue@3.5.24(typescript@5.9.3))
       unplugin-vue-router:
-        specifier: ^0.16.1
-        version: 0.16.1(@vue/compiler-sfc@3.5.24)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.24(typescript@5.9.3)))(vue@3.5.24(typescript@5.9.3))
+        specifier: ^0.17.0
+        version: 0.17.0(@vue/compiler-sfc@3.5.24)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.24(typescript@5.9.3)))(vue@3.5.24(typescript@5.9.3))
       vite:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.0)(jiti@2.5.1)(less@4.4.2)(sass@1.93.3)(tsx@4.19.2)(yaml@2.8.1)
@@ -1577,6 +1580,9 @@ packages:
   '@unocss/core@66.5.5':
     resolution: {integrity: sha512-BL+TdQMJCuu3fOGnF8wugGVpqrgBUEFzWp3yI9VJe/+p6H6NXuqlzwgSKcbpJD0XQMnxhRYYtC5Gh1coNXiBIQ==}
 
+  '@unocss/core@66.5.7':
+    resolution: {integrity: sha512-5ZEjmqRHlwRVSfoVQvy1QKOIfEB9MYRHmYTlwbEvNReFE3Nr0jMk08mo+F80jlb0eoTFjELEUJe9EiEowQeKhQ==}
+
   '@unocss/eslint-config@66.5.5':
     resolution: {integrity: sha512-+0iYkFXT2ND/JDcyvxeDVrD8ykfTXEeIg0XFbs3uYcSnFWZ71jMk3L5Q/ESYtD5JTFUidWgQELeaSCmpE5x2zw==}
     engines: {node: '>=14'}
@@ -1634,6 +1640,10 @@ packages:
     resolution: {integrity: sha512-74bccTyWDXcMPYydMfFvuaGL9DeaJd6sjcjVaDgA9aImpRpKbkFz0htHzcgzO4JXhOewTGPycVu+ssyCIHPa4A==}
     engines: {node: '>=14'}
 
+  '@unocss/rule-utils@66.5.7':
+    resolution: {integrity: sha512-239fcZXoeShgOWMD73FCyitJSyAj6XOOIocLVYXBIO9QWGdeyli2tlOayFnXCQB/vqhBQv5Cq1EGTWJKuVBKRA==}
+    engines: {node: '>=14'}
+
   '@unocss/transformer-attributify-jsx@66.5.5':
     resolution: {integrity: sha512-TbBp8qwLtNZwLP6RqpcXXc1YYTJA1+j3eOEaOAflca+c9nTIA3w4RP/s5flLYttGkZiMeK6WPD3rkfqv/9knGQ==}
 
@@ -1642,6 +1652,9 @@ packages:
 
   '@unocss/transformer-directives@66.5.5':
     resolution: {integrity: sha512-7EQFiOKuBEuK6L1A5bN4D2ot4DgPW4vxhhatjn3wswRLP39PCx7ldglTMUdSOVnNw0tqJELiN2zJMZ6lmG5vWg==}
+
+  '@unocss/transformer-directives@66.5.7':
+    resolution: {integrity: sha512-/eO8NGUgxgnGpe3N2S9KEe+usxY0digP+ggbThx36WcdvdmiY3T1pgnbKyTsCkBWZXeT3k8GL41S8ANqVvN+tA==}
 
   '@unocss/transformer-variant-group@66.5.5':
     resolution: {integrity: sha512-zfcaOPgK+VdIAUR8hYD3TF6u49jZIHiFx7O3w/8Z2FjQGdB2iWsGOPMHqlkZaNfsISFkxuAy5YNm26O4w44XNQ==}
@@ -3644,9 +3657,6 @@ packages:
     resolution: {integrity: sha512-8ngQgLhcT0t3YBdn9CGkZqCYlvwW9pm7aWJwd7AxseVWf1RU8ZHCQvG1mt3N5vvUme+pXTcHB8G/7fE666U8Vw==}
     engines: {node: '>=20.18.0'}
 
-  magic-string@0.30.18:
-    resolution: {integrity: sha512-yi8swmWbO17qHhwIBNeeZxTceJMeBvWJaId6dyvTSOwTipqeHhMhOrz6513r1sOKnpvQ7zkhlG8tPrpilwTxHQ==}
-
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -3681,8 +3691,13 @@ packages:
   markdown-it-task-checkbox@1.0.6:
     resolution: {integrity: sha512-7pxkHuvqTOu3iwVGmDPeYjQg+AIS9VQxzyLP9JCg9lBjgPAJXGEkChK6A2iFuj3tS0GV3HG2u5AMNhcQqwxpJw==}
 
-  markdown-it-ts@0.0.2-beta.3:
-    resolution: {integrity: sha512-VVSU480eHU2g6UwPCunzVyZBa01Anf2wembh63ZZPqCWbC2BQ33Rp6sqz4Y6cczRoD94HOCxR5Qhm4iaKzOcQw==}
+  markdown-it-ts@0.0.2-beta.4:
+    resolution: {integrity: sha512-IODjyQuedEjZkUoILLHOvPvG1CEyDECr8bja5VLTwQ2UD0wGSA9guNrD+ko8t5LLR1dglcBTEsMw9iYt7Ngrsg==}
+    engines: {node: '>=18'}
+
+  markdown-it@14.1.0:
+    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+    hasBin: true
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
@@ -4555,11 +4570,11 @@ packages:
     resolution: {integrity: sha512-eLoXW/DHyl62zxY4SCaIgnRhuMr6ri4juEYARS8E6sCEqzKpOiE521Ucofdx+KnDZl5xmvGYaaKCk5FEOxJCoQ==}
     engines: {node: '>= 0.4'}
 
-  stream-markdown-parser@0.0.17:
-    resolution: {integrity: sha512-SSwYQLPgTboi05/7uqbqbvRt0C6Jh+mrqZgPRi2MPOXZrhJrieCuceZ5lTCvo/sfKyLEtcKiNLEGfoMSHrEJmw==}
+  stream-markdown-parser@0.0.2:
+    resolution: {integrity: sha512-QD8aMxTb1gw31hhSAkQ5WVcv/eUyNKa9PzMwaIQrWArudls3SYfIu4iRFOqrgvBS6aCeuZ4I1uxjVs+iXSb6kA==}
 
-  stream-markdown-parser@0.0.19:
-    resolution: {integrity: sha512-msxvSiZjURiIjQWR1jJKgBLWzXJyrDXFRgOQsoZ4IE4tq179kX0UoNkzHgwfrgsyxEVscFZIcvs4ct5wvpMzcQ==}
+  stream-markdown-parser@0.0.25:
+    resolution: {integrity: sha512-B1jp4x6xHE2E6hyUcV7ZAtKBy3K71CnsZ3tP6eqILhXjC6lq8E/AQogF4r8apMwckDwCxLs9vBwUCx2ZEuKoMw==}
 
   stream-markdown@0.0.9:
     resolution: {integrity: sha512-oodVRz9a4AF03eIkOZkP4LIAw0UusWU2KJwQLDI4Yu463KEYVCdsHpdg0OjLdRgh55aT97N5E6y77CJfauWgoA==}
@@ -4963,8 +4978,8 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.2.25
 
-  unplugin-vue-router@0.16.1:
-    resolution: {integrity: sha512-7A7gUVzLIYMBrBPKk8l4lZoZXDOrO8+etw6/RTrqG3OzpLUUZEXJFUW7+OyMIpQK93sEbdkR2z9ZNNl/r32FMw==}
+  unplugin-vue-router@0.17.0:
+    resolution: {integrity: sha512-cQYRlybeOZWANyjipekbJxnUH3LnqbOHmUFXNzJ6BplH8BeiEEA7lZnNUc0EIktR8fe2I+zghAEPb+Jod8o6TQ==}
     peerDependencies:
       '@vue/compiler-sfc': ^3.5.17
       vue-router: ^4.6.0
@@ -5139,13 +5154,13 @@ packages:
     peerDependencies:
       vue: '>=3.0.0'
 
-  vue-renderer-markdown@0.0.61-beta.9:
-    resolution: {integrity: sha512-7czSLHIaQDbSfRewytYumlKz7zfWzAaaIKsS6Q5YEp6JofcAqFS/UvmOH5qm9vaJzTZVTvUtiKxhLniuNCJ/ng==}
+  vue-renderer-markdown@0.0.59:
+    resolution: {integrity: sha512-Np2DfVsE8GrHnfWnr67BhnawsLTQcpeXKSbQjMpeQnqDyQvzp/I+IVcjIS8oYQcNcYQ6l4YEOXTRshTvasDkdQ==}
     peerDependencies:
       katex: '>=0.16.22'
       mermaid: '>=11'
       shiki: ^3.13.0
-      stream-markdown: '>=0.0.9'
+      stream-markdown: '>=0.0.2'
       stream-monaco: '>=0.0.2'
       vue: '>=3.0.0'
       vue-i18n: '>=9'
@@ -6546,6 +6561,8 @@ snapshots:
 
   '@unocss/core@66.5.5': {}
 
+  '@unocss/core@66.5.7': {}
+
   '@unocss/eslint-config@66.5.5(eslint@9.39.1(jiti@2.5.1))(typescript@5.9.3)':
     dependencies:
       '@unocss/eslint-plugin': 66.5.5(eslint@9.39.1(jiti@2.5.1))(typescript@5.9.3)
@@ -6650,6 +6667,11 @@ snapshots:
       '@unocss/core': 66.5.5
       magic-string: 0.30.21
 
+  '@unocss/rule-utils@66.5.7':
+    dependencies:
+      '@unocss/core': 66.5.7
+      magic-string: 0.30.21
+
   '@unocss/transformer-attributify-jsx@66.5.5':
     dependencies:
       '@babel/parser': 7.27.7
@@ -6666,6 +6688,12 @@ snapshots:
     dependencies:
       '@unocss/core': 66.5.5
       '@unocss/rule-utils': 66.5.5
+      css-tree: 3.1.0
+
+  '@unocss/transformer-directives@66.5.7':
+    dependencies:
+      '@unocss/core': 66.5.7
+      '@unocss/rule-utils': 66.5.7
       css-tree: 3.1.0
 
   '@unocss/transformer-variant-group@66.5.5':
@@ -7103,7 +7131,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.18
       '@vue/shared': 3.5.18
       estree-walker: 2.0.2
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       postcss: 8.5.6
       source-map-js: 1.2.1
 
@@ -9076,10 +9104,6 @@ snapshots:
     dependencies:
       magic-string: 0.30.21
 
-  magic-string@0.30.18:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
-
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -9108,8 +9132,17 @@ snapshots:
 
   markdown-it-task-checkbox@1.0.6: {}
 
-  markdown-it-ts@0.0.2-beta.3:
+  markdown-it-ts@0.0.2-beta.4:
     dependencies:
+      entities: 4.5.0
+      linkify-it: 5.0.0
+      mdurl: 2.0.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
+
+  markdown-it@14.1.0:
+    dependencies:
+      argparse: 2.0.1
       entities: 4.5.0
       linkify-it: 5.0.0
       mdurl: 2.0.0
@@ -10192,8 +10225,9 @@ snapshots:
       es-errors: 1.3.0
       internal-slot: 1.1.0
 
-  stream-markdown-parser@0.0.17:
+  stream-markdown-parser@0.0.2:
     dependencies:
+      markdown-it: 14.1.0
       markdown-it-container: 4.0.0
       markdown-it-emoji: 3.0.0
       markdown-it-footnote: 4.0.0
@@ -10202,9 +10236,8 @@ snapshots:
       markdown-it-sub: 2.0.0
       markdown-it-sup: 2.0.0
       markdown-it-task-checkbox: 1.0.6
-      markdown-it-ts: 0.0.2-beta.3
 
-  stream-markdown-parser@0.0.19:
+  stream-markdown-parser@0.0.25:
     dependencies:
       markdown-it-container: 4.0.0
       markdown-it-emoji: 3.0.0
@@ -10214,7 +10247,7 @@ snapshots:
       markdown-it-sub: 2.0.0
       markdown-it-sup: 2.0.0
       markdown-it-task-checkbox: 1.0.6
-      markdown-it-ts: 0.0.2-beta.3
+      markdown-it-ts: 0.0.2-beta.4
 
   stream-markdown@0.0.9(shiki@3.15.0):
     dependencies:
@@ -10770,7 +10803,7 @@ snapshots:
       - vue-tsc
       - webpack
 
-  unplugin-vue-router@0.16.1(@vue/compiler-sfc@3.5.24)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.24(typescript@5.9.3)))(vue@3.5.24(typescript@5.9.3)):
+  unplugin-vue-router@0.17.0(@vue/compiler-sfc@3.5.24)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.24(typescript@5.9.3)))(vue@3.5.24(typescript@5.9.3)):
     dependencies:
       '@babel/generator': 7.28.5
       '@vue-macros/common': 3.1.1(vue@3.5.24(typescript@5.9.3))
@@ -10972,10 +11005,10 @@ snapshots:
     dependencies:
       vue: 3.5.24(typescript@5.9.3)
 
-  vue-renderer-markdown@0.0.61-beta.9(katex@0.16.25)(shiki@3.15.0)(stream-markdown@0.0.9(shiki@3.15.0))(stream-monaco@0.0.2(monaco-editor@0.52.2))(vue@3.5.24(typescript@5.9.3)):
+  vue-renderer-markdown@0.0.59(katex@0.16.25)(shiki@3.15.0)(stream-markdown@0.0.9(shiki@3.15.0))(stream-monaco@0.0.2(monaco-editor@0.52.2))(vue@3.5.24(typescript@5.9.3)):
     dependencies:
       '@floating-ui/dom': 1.7.4
-      stream-markdown-parser: 0.0.17
+      stream-markdown-parser: 0.0.2
       vue: 3.5.24(typescript@5.9.3)
     optionalDependencies:
       katex: 0.16.25

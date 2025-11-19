@@ -2,7 +2,6 @@ import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 
 import {
   defineConfig,
-  presetAttributify,
   presetIcons,
   presetTypography,
   presetUno,
@@ -103,21 +102,19 @@ export default defineConfig({
    *  @description UnoCSS 使用的预设
    */
   presets: [
-    // presetSoybeanpolice(),
-
     /**
      *  @description UnoCSS 的核心预设
      *  @see https://github.com/unocss/unocss#preset-uno
      */
     presetUno({
-      dark: 'class',
+      // dark: 'class',
     }),
 
     /**
      *  @description 属性化预设，允许通过 HTML 属性直接应用样式
      *  @see https://github.com/unocss/unocss#preset-attributify
      */
-    presetAttributify(),
+    // presetAttributify(),
 
     /**
      *  @description 图标预设，支持通过类名插入 SVG 图标
@@ -155,7 +152,7 @@ export default defineConfig({
          *  @description 中文字体
          *  @default '改良瘦金体'
          */
-        theme: ['gaiLiangShouJinTi', 'Fira Code VF'],
+        theme: ['gaiLiangShouJinTi', 'firaCodeVf'],
       },
 
       /**

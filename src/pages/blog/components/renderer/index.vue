@@ -980,7 +980,7 @@ watch(content, () => {
   max-height: 100%; */
   /* flex: 1; */
 
-  font-family: 'Fira Code VF', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'firaCodeVf', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .github-star-btn:active {

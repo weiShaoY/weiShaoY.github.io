@@ -12,7 +12,13 @@ import { setupRouter } from './router'
 
 import pinia from './stores'
 
-import './themes/index'
+import '@unocss/reset/tailwind.css'
+
+import 'uno.css'
+
+import 'virtual:uno.css'
+
+import '@/assets/styles/index.scss'
 
 /**
  * 初始化应用程序
