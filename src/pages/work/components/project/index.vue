@@ -115,7 +115,7 @@ function handleOpenSite() {
               <button
                 v-for="(tag) in selectedProject.tags"
                 :key="tag.name"
-                className="p-2 bg-[#f5f5f5] bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg hover:bg-opacity-20 active:scale-95 transition-all"
+                className="p-2 bg-[#f5f5f5] opacity-50 backdrop-filter backdrop-blur-lg rounded-lg hover:bg-opacity-20 active:scale-95 transition-all"
                 type="button"
               >
                 <SvgIcon

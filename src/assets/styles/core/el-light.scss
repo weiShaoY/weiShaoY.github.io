@@ -1,0 +1,47 @@
+// https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
+// 自定义 Element Plus 亮色主题
+
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  // 颜色配置
+  $colors: (
+      "white": #ffffff,
+      // 白色
+      "black": #000000,
+      // 黑色
+      "success": (
+          "base": #13deb9, // 成功色 - 青色
+        ),
+      "warning": (
+        "base": #ffae1f, // 警告色 - 橙色
+      ),
+      "danger": (
+        "base": #ff4d4f, // 危险色 - 红色
+      ),
+      "error": (
+        "base": #fa896b, // 错误色 - 珊瑚色
+      )
+    ),
+
+  // 按钮配置
+  $button: (
+      "hover-bg-color": var(--el-color-primary-light-9),
+      // 悬停背景色 - 主色浅色变体
+      "hover-border-color": var(--el-color-primary),
+      // 悬停边框色 - 主色
+      "border-color": var(--el-color-primary),
+      // 边框颜色 - 主色
+      "text-color": var(--el-color-primary) // 文字颜色 - 主色
+    ),
+
+  // 消息框配置
+  $messagebox: (
+      "border-radius": "12px" // 消息框圆角
+    ),
+
+  // 弹出框配置
+  $popover: (
+      "padding": "14px",
+      // 内边距
+      "border-radius": "10px" // 圆角
+    )
+);

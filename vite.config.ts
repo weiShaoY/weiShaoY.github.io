@@ -1,10 +1,10 @@
 import path from 'node:path'
 
+import Tailwindcss from '@tailwindcss/vite'
+
 import Vue from '@vitejs/plugin-vue'
 
 import VueJsx from '@vitejs/plugin-vue-jsx'
-
-import UnoCSS from 'unocss/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 
@@ -22,80 +22,6 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
 
-// Element Plus 组件列表 - 用于预加载和按需加载
-const elementPlusComponents = [
-  'form',
-  'form-item',
-  'button',
-  'input',
-  'input-number',
-  'switch',
-  'upload',
-  'menu',
-  'col',
-  'icon',
-  'row',
-  'tag',
-  'dialog',
-  'loading',
-  'radio',
-  'radio-group',
-  'popover',
-  'scrollbar',
-  'tooltip',
-  'dropdown',
-  'dropdown-menu',
-  'dropdown-item',
-  'sub-menu',
-  'menu-item',
-  'divider',
-  'card',
-  'link',
-  'breadcrumb',
-  'breadcrumb-item',
-  'table',
-  'tree-select',
-  'table-column',
-  'select',
-  'option',
-  'pagination',
-  'tree',
-  'alert',
-  'radio-button',
-  'checkbox-group',
-  'checkbox',
-  'tabs',
-  'tab-pane',
-  'rate',
-  'date-picker',
-  'notification',
-  'image',
-  'statistic',
-  'watermark',
-  'config-provider',
-  'text',
-  'drawer',
-  'color-picker',
-  'backtop',
-  'message-box',
-  'skeleton',
-  'skeleton-item',
-  'badge',
-  'steps',
-  'step',
-  'avatar',
-  'descriptions',
-  'descriptions-item',
-  'progress',
-  'image-viewer',
-  'empty',
-  'segmented',
-  'calendar',
-  'message',
-  'timeline',
-  'timeline-item',
-].map(component => `element-plus/es/components/${component}/style/css`)
-
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd()) as Env.ImportMeta
 
@@ -110,6 +36,10 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
+        '@utils': path.resolve('src/utils'),
+        '@styles': path.resolve('src/assets/styles'),
+        '@store': path.resolve('src/stores'),
+        '@images': path.resolve('src/assets/images'),
       },
 
       // 指定在解析模块路径时需要尝试的文件扩展名的顺序
@@ -118,25 +48,28 @@ export default defineConfig(({ mode }) => {
 
     // CSS 相关配置
     css: {
-      // 启用开发模式下的 CSS Source Map，方便调试
-      devSourcemap: true,
       preprocessorOptions: {
+        // sass variable and mixin
         scss: {
-          // 使用现代编译器 API (Sass 新特性支持)
-          api: 'modern-compiler',
-
-          /**
-           * 全局注入的 SCSS 代码
-           * @use 指令引入全局样式文件
-           * as * 表示将所有 mixin/variables 导入全局命名空间
-           */
           additionalData: `
-            @use "@/themes/variables.scss" as *;
+            @use "@styles/core/el-light.scss" as *;
+            @use "@styles/core/mixin.scss" as *;
           `,
-
-          // 禁用在生成的 CSS 文件中加入 @charset 声明
-          charset: false,
         },
+      },
+      postcss: {
+        plugins: [
+          {
+            postcssPlugin: 'internal:charset-removal',
+            AtRule: {
+              charset: (atRule) => {
+                if (atRule.name === 'charset') {
+                  atRule.remove()
+                }
+              },
+            },
+          },
+        ],
       },
     },
 
@@ -149,7 +82,6 @@ export default defineConfig(({ mode }) => {
         'axios',
         '@vueuse/core',
         'echarts',
-        ...elementPlusComponents,
       ],
     },
 
@@ -181,14 +113,6 @@ export default defineConfig(({ mode }) => {
       //   },
       // },
 
-      // proxy: {
-      //   '/blog': { // 代理路径，所有以 /docs 开头的请求都会被代理
-      //     target: 'http://localhost:5173', // Vitepress 服务器地址，确保包含协议 (http:// 或 https://)
-      //     changeOrigin: true, // 改变源，用于模拟跨域请求
-      //     secure: false, // 如果你的目标服务器使用 HTTPS，并且证书无效，可以设置为 false (不推荐在生产环境中使用)
-      //     ws: true, // 启用 WebSocket 代理
-      //   },
-      // },
     },
 
     // 生产环境构建配置
@@ -237,6 +161,9 @@ export default defineConfig(({ mode }) => {
 
       // 支持 Vue 的 JSX 语法
       VueJsx(),
+
+      // 启用 Tailwindcss 原子化 CSS 引擎
+      Tailwindcss(),
 
       // 启用 Vue 开发者工具
       // vueDevTools(),
@@ -293,9 +220,6 @@ export default defineConfig(({ mode }) => {
           }),
         ],
       }),
-
-      // UnoCSS 原子化 CSS 引擎
-      UnoCSS(),
 
       // GLSL 着色器支持
       Glsl(),

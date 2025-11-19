@@ -1,0 +1,76 @@
+// 定义基础变量
+$bg-animation-color-light: #000;
+$bg-animation-color-dark: #fff;
+$bg-animation-duration: 0.5s;
+
+html {
+  // 设置背景动画颜色变量
+  --bg-animation-color: #{$bg-animation-color-light};
+
+  // 深色模式
+  &.dark {
+    --bg-animation-color: #{$bg-animation-color-dark};
+  }
+
+  // 视图过渡样式 - 旧页面
+  &::view-transition-old(*) {
+    animation: none; /* 禁用默认动画 */
+  }
+
+  // 视图过渡样式 - 新页面
+  &::view-transition-new(*) {
+    animation: clip $bg-animation-duration ease-in both; /* 应用裁剪动画 */
+  }
+
+  // 根元素旧页面层级
+  &::view-transition-old(root) {
+    z-index: 1; /* 较低层级 */
+  }
+
+  // 根元素新页面层级
+  &::view-transition-new(root) {
+    z-index: 9999; /* 较高层级 */
+  }
+
+  // 深色模式下的视图过渡
+  &.dark {
+    // 深色模式旧页面动画
+    &::view-transition-old(*) {
+      animation: clip $bg-animation-duration ease-in reverse both; /* 反向裁剪动画 */
+    }
+
+    // 深色模式新页面动画
+    &::view-transition-new(*) {
+      animation: none; /* 禁用动画 */
+    }
+
+    // 深色模式根元素旧页面层级
+    &::view-transition-old(root) {
+      z-index: 9999; /* 较高层级 */
+    }
+
+    // 深色模式根元素新页面层级
+    &::view-transition-new(root) {
+      z-index: 1; /* 较低层级 */
+    }
+  }
+}
+
+// 定义裁剪动画
+@keyframes clip {
+  from {
+    // 初始状态：圆形裁剪区域为0%
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+
+  to {
+    // 结束状态：圆形裁剪区域扩展到半径r
+    clip-path: circle(var(--r) at var(--x) var(--y));
+  }
+}
+
+// body 元素样式
+body {
+  // 设置背景颜色为动画变量
+  background-color: var(--bg-animation-color);
+}

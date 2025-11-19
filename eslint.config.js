@@ -1,10 +1,9 @@
-// eslint.config.js
 import antfu from '@antfu/eslint-config'
+import tailwind from 'eslint-plugin-tailwindcss'
 
 export default antfu({
-  unocss: true,
+  unocss: false,
   formatters: true,
-  // pnpm: true,
   ignores: [
     '**/components.d.ts',
     '**/dist/**',
@@ -77,9 +76,8 @@ export default antfu({
           maxEmptyLines: 1, // 设置空行的最大数量为 1
         },
       ],
-    },
+    }, // 这里缺少了闭合括号
   },
-
   typescript: {
     overrides: {
       // 禁止使用 alert
@@ -191,4 +189,7 @@ export default antfu({
     // 关闭 jsonc 排序键规则
     'jsonc/sort-keys': 'off',
   },
+
+  // 将 tailwind 配置放在最后
+  ...tailwind.configs['flat/recommended'],
 })

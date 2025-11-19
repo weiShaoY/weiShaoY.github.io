@@ -32,15 +32,16 @@ const appRepoUrl = import.meta.env.VITE_APP_REPO_URL
 /**
  *  pc端菜单列表
  */
-const pcMenuList = layoutConfig.default.headerRouterList.filter(({ isDevelopmentOnly }) =>
-  isDevelopment || !isDevelopmentOnly,
+const pcMenuList = layoutConfig.default.headerRouterList.filter(
+  ({ isDevelopmentOnly }) => isDevelopment || !isDevelopmentOnly,
 )
 
 /**
  *  移动菜单列表
  */
-const mobileMenuList = layoutConfig.default.headerRouterList.filter(({ isPCOnly, isDevelopmentOnly }) =>
-  !isPCOnly && (isDevelopment || !isDevelopmentOnly),
+const mobileMenuList = layoutConfig.default.headerRouterList.filter(
+  ({ isPCOnly, isDevelopmentOnly }) =>
+    !isPCOnly && (isDevelopment || !isDevelopmentOnly),
 )
 
 /**
@@ -90,12 +91,11 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
 
   router.push(item.value)
 }
-
 </script>
 
 <template>
   <nav
-    class="fixed left-0 right-0 top-0 z-100 flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
+    class="fixed left-0 right-0 top-0 z-[100] flex justify-center bg-[#191919] bg-opacity-90 shadow-md"
     :style="{
       height: `${layoutConfig.default.headerHeight}px`,
     }"
@@ -103,32 +103,16 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
     <div
       class="container relative flex items-center justify-between max-sm:mx-5"
     >
-
       <!-- Logo区域 -->
       <a
-        class="z-999 flex items-center"
+        class="z-[999] flex items-center"
       >
-        <!-- <SvgIcon
-          icon="logo"
-          :size="60"
-          class="cursor-pointer"
-          @click="handleToHome"
-        />
-
-        <SvgIcon
-          icon="weiShaoY"
-          :size="120"
-          class="cursor-pointer !hover:color-[#08FF00]"
-          @click="handleToHome"
-        /> -->
-
         <router-link
           to="/"
         >
           <SvgIcon
             icon="logo"
             :size="60"
-            class="cursor-pointer"
           />
         </router-link>
 
@@ -138,7 +122,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           <SvgIcon
             icon="weiShaoY"
             :size="120"
-            class="cursor-pointer !hover:color-[#08FF00]"
+            class="text-white hover:text-primary"
           />
         </router-link>
       </a>
@@ -152,8 +136,8 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           v-for="item in pcMenuList"
           :key="item.value"
           :to="item.value"
-          class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-[#BFFFBF]"
-          :class="{ 'text-primary': route.path === item.value }"
+          class="flex cursor-pointer items-center text-lg text-white font-bold hover:text-secondary"
+          :class="{ 'text-primary!': route.path === item.value }"
         >
           {{ item.label }}
         </router-link>
@@ -161,7 +145,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
 
       <!-- 操作按钮区域 -->
       <div
-        class="flex flex items-center justify-end gap-5"
+        class="flex items-center justify-end gap-5"
       >
         <Github />
 
@@ -193,14 +177,14 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             <button
               ref="mobileButtonRef"
               class="aspect-square h-10 rounded-md hover:bg-[#333639]"
-              :class="[
-                isOpenMobileMenu ? 'bg-[#333639]' : '',
-              ]"
+              :class="[isOpenMobileMenu ? 'bg-[#333639]' : '']"
               type="button"
               @click="toggleMobileMenu"
             >
               <SvgIcon
-                :icon="isOpenMobileMenu ? 'home-navbar-menu1' : 'home-navbar-menu2'"
+                :icon="
+                  isOpenMobileMenu ? 'home-navbar-menu1' : 'home-navbar-menu2'
+                "
                 :size="24"
                 color="#fff"
               />
@@ -209,9 +193,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             <!-- 弹出层 -->
             <div
               class="fixed bottom-0 left-0 right-0 flex flex-col overflow-hidden bg-black bg-opacity-70 transition-max-height duration-500 ease-in-out"
-              :class="[
-                isOpenMobileMenu ? 'max-h-screen' : 'max-h-0',
-              ]"
+              :class="[isOpenMobileMenu ? 'max-h-screen' : 'max-h-0']"
               :style="{ top: `${layoutConfig.default.headerHeight}px` }"
             >
               <!-- 操作组 -->
@@ -244,6 +226,4 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
   </nav>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

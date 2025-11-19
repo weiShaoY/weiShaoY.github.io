@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+/* 深色模式自定义变量 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==================== 浅色模式变量 ==================== */
+:root {
+  /* 基础颜色 */
+  --art-color: #ffffff;
+  --theme-color: var(--main-color);
+
+  /* 主题颜色 - OKLCH 格式 */
+  --art-primary: oklch(0.8664 0.294827 142.4953);
+  --art-secondary: oklch(0.9409 0.1069 144.67);
+
+  --art-error: oklch(0.73 0.15 25.3);
+  --art-info: oklch(0.58 0.03 254.1);
+  --art-success: oklch(0.78 0.17 166.1);
+  --art-warning: oklch(0.78 0.14 75.5);
+  --art-danger: oklch(0.68 0.22 25.3);
+
+  /* 灰色调色板 - 浅色模式 */
+  --art-gray-100: #f9fafb;
+  --art-gray-200: #f2f4f5;
+  --art-gray-300: #e6eaeb;
+  --art-gray-400: #dbdfe1;
+  --art-gray-500: #949eb7;
+  --art-gray-600: #7987a1;
+  --art-gray-700: #4d5875;
+  --art-gray-800: #383853;
+  --art-gray-900: #323251;
+
+  /* 边框颜色 */
+  --art-card-border: rgba(0, 0, 0, 0.08);
+  --default-border: #e2e8ee;
+  --default-border-dashed: #dbdfe9;
+
+  /* 背景颜色 */
+  --default-bg-color: #fafbfc;
+  --default-box-color: #ffffff;
+
+  /* 悬停颜色 */
+  --art-hover-color: #edeff0;
+
+  /* 激活状态颜色 */
+  --art-active-color: #f2f4f5;
+
+  /* 元素组件激活颜色 */
+  --art-el-active-color: #f2f4f5;
+}
+
+/* ==================== 深色模式变量 ==================== */
+.dark {
+  /* 基础颜色 */
+  --art-color: #000000;
+
+  /* 灰色调色板 - 深色模式 */
+  --art-gray-100: #110f0f;
+  --art-gray-200: #17171c;
+  --art-gray-300: #393946;
+  --art-gray-400: #505062;
+  --art-gray-500: #73738c;
+  --art-gray-600: #8f8fa3;
+  --art-gray-700: #ababba;
+  --art-gray-800: #c7c7d1;
+  --art-gray-900: #e3e3e8;
+
+  /* 边框颜色 */
+  --art-card-border: rgba(255, 255, 255, 0.08);
+  --default-border: rgba(255, 255, 255, 0.1);
+  --default-border-dashed: #363843;
+
+  /* 背景颜色 */
+  --default-bg-color: #070707;
+  --default-box-color: #161618;
+
+  /* 悬停颜色 */
+  --art-hover-color: #252530;
+
+  /* 激活状态颜色 */
+  --art-active-color: #202226;
+
+  /* 元素组件激活颜色 */
+  --art-el-active-color: #2e2e38;
+}
+
+/* ==================== Tailwind 主题配置 ==================== */
+@theme {
+  /* 盒子颜色 (浅色: 白色 / 深色: 黑色) */
+  --color-box: var(--default-box-color);
+
+  /* 系统主题颜色 */
+  --color-theme: var(--theme-color);
+
+  /* 悬停颜色 */
+  --color-hover-color: var(--art-hover-color);
+
+  /* 激活状态颜色 */
+  --color-active-color: var(--art-active-color);
+
+  /* 元素激活颜色 */
+  --color-el-active-color: var(--art-active-color);
+
+  /* ElementPlus 主题颜色 */
+  --color-primary: var(--art-primary);
+  --color-secondary: var(--art-secondary);
+  --color-error: var(--art-error);
+  --color-info: var(--art-info);
+  --color-success: var(--art-success);
+  --color-warning: var(--art-warning);
+  --color-danger: var(--art-danger);
+
+  /* 灰色调色板颜色 (自动适配深色模式) */
+  --color-g-100: var(--art-gray-100);
+  --color-g-200: var(--art-gray-200);
+  --color-g-300: var(--art-gray-300);
+  --color-g-400: var(--art-gray-400);
+  --color-g-500: var(--art-gray-500);
+  --color-g-600: var(--art-gray-600);
+  --color-g-700: var(--art-gray-700);
+  --color-g-800: var(--art-gray-800);
+  --color-g-900: var(--art-gray-900);
+}
+
+/* ==================== 自定义圆角工具类 ==================== */
+/* @utility rounded-custom-xs {
+  border-radius: calc(var(--custom-radius) / 2);
+}
+
+@utility rounded-custom-sm {
+  border-radius: calc(var(--custom-radius) / 2 + 2px);
+} */
+
+/* ==================== 自定义圆角工具类 ==================== */
+@layer utilities {
+  .rounded-custom-xs {
+    /* 超小圆角 */
+    border-radius: calc(var(--custom-radius) / 2);
+  }
+
+  .rounded-custom-sm {
+    /* 小圆角 */
+    border-radius: calc(var(--custom-radius) / 2 + 2px);
+  }
+}
+
+/* ==================== 自定义工具类 ==================== */
+@layer utilities {
+  /* 弹性布局工具类 */
+  .flex-c {
+    /* 垂直居中布局 */
+    @apply flex items-center;
+  }
+
+  .flex-b {
+    /* 两端对齐布局 */
+    @apply flex justify-between;
+  }
+
+  .flex-cc {
+    /* 水平垂直居中布局 */
+    @apply flex items-center justify-center;
+  }
+
+  .flex-cb {
+    /* 垂直居中两端对齐布局 */
+    @apply flex items-center justify-between;
+  }
+
+  /* 过渡动画工具类 */
+  .tad-200 {
+    /* 200ms 所有属性过渡 */
+    @apply transition-all duration-200;
+  }
+
+  .tad-300 {
+    /* 300ms 所有属性过渡 */
+    @apply transition-all duration-300;
+  }
+
+  /* 边框工具类 */
+  .border-full-d {
+    /* 全边框 */
+    @apply border border-[var(--default-border)];
+  }
+
+  .border-b-d {
+    /* 底部边框 */
+    @apply border-b border-[var(--default-border)];
+  }
+
+  .border-t-d {
+    /* 顶部边框 */
+    @apply border-t border-[var(--default-border)];
+  }
+
+  .border-l-d {
+    /* 左侧边框 */
+    @apply border-l border-[var(--default-border)];
+  }
+
+  .border-r-d {
+    /* 右侧边框 */
+    @apply border-r border-[var(--default-border)];
+  }
+
+  /* 光标工具类 */
+  .c-p {
+    /* 指针光标 */
+    @apply cursor-pointer;
+  }
+}
+
+/* ==================== 自定义组件类 ==================== */
+@layer components {
+  /* 卡片头部组件 */
+  .art-card-header {
+    @apply flex justify-between pr-6 pb-1;
+
+    .title {
+      h4 {
+        /* 标题样式 */
+        @apply text-lg font-medium text-g-900;
+      }
+
+      p {
+        /* 描述文字样式 */
+        @apply mt-1 text-sm text-g-600;
+
+        span {
+          /* 描述文字内的 span 样式 */
+          @apply ml-2 font-medium;
+        }
+      }
+    }
+  }
+}
+
+/* //  自定义颜色 */
+@layer utilities {
+}

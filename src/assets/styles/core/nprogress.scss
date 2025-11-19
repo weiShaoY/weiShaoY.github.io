@@ -1,0 +1,30 @@
+@import "nprogress/nprogress.css";
+
+// #nprogress .bar {
+//   // background-color: #00ff00 !important;
+//   height: 0.25rem;
+// }
+
+// 顶部进度条样式配置
+#nprogress .bar {
+  z-index: 2400; // 高层级确保显示在最前面
+  background-color: color-mix(
+    in srgb,
+    var(--theme-color) 70%,
+    white
+  ); // 混合颜色：主题色70% + 白色30%
+}
+
+// 进度条阴影效果
+#nprogress .peg {
+  box-shadow:
+    0 0 10px var(--theme-color),
+    // 外发光阴影，10px模糊半径
+    0 0 5px var(--theme-color) !important; // 内发光阴影，5px模糊半径
+}
+
+// 加载旋转器颜色
+#nprogress .spinner-icon {
+  border-top-color: var(--theme-color) !important; // 顶部边框颜色 - 主题色
+  border-left-color: var(--theme-color) !important; // 左侧边框颜色 - 主题色
+}

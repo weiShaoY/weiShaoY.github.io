@@ -1,0 +1,574 @@
+// 优化 Element Plus 组件库默认样式
+
+:root {
+  // 系统主色
+  --main-color: var(--el-color-primary);
+
+  --el-color-white: white !important;
+
+  --el-color-black: white !important;
+
+  // 输入框边框颜色
+  // --el-border-color: #E4E4E7 !important; // DCDFE6
+
+  // 按钮字体粗细
+  --el-font-weight-primary: 400 !important;
+
+  // 自定义组件高度
+  --el-component-custom-height: 36px !important;
+  --el-component-size: var(--el-component-custom-height) !important;
+
+  // 边框、按钮圆角
+  --el-border-radius-base: calc(var(--custom-radius) / 3 + 2px) !important;
+  --el-border-radius-small: calc(var(--custom-radius) / 3 + 4px) !important;
+  --el-messagebox-border-radius: calc(
+    var(--custom-radius) / 3 + 4px
+  ) !important;
+  --el-popover-border-radius: calc(var(--custom-radius) / 3 + 4px) !important;
+
+  // 区域单选按钮选中样式
+  .region .el-radio-button__original-radio:checked + .el-radio-button__inner {
+    color: var(--theme-color);
+  }
+}
+
+// 优化表单标签高度
+.el-form-item__label {
+  height: var(--el-component-custom-height) !important;
+  line-height: var(--el-component-custom-height) !important;
+}
+
+// 日期范围选择器样式
+.el-date-range-picker {
+  --el-datepicker-inrange-bg-color: var(
+    --art-gray-200
+  ) !important; // 范围内背景色
+}
+
+// 深色模式卡片背景色
+html.dark .el-card {
+  --el-card-bg-color: var(
+    --default-box-color
+  ) !important; // 卡片背景色与系统背景色一致
+}
+
+// 修改分页组件大小
+.el-pagination--default {
+  & {
+    --el-pagination-button-width: 32px !important; // 分页按钮宽度
+    --el-pagination-button-height: var(
+      --el-pagination-button-width
+    ) !important; // 分页按钮高度
+  }
+
+  // 响应式设计：小屏幕适配
+  @media (max-width: 1180px) {
+    & {
+      --el-pagination-button-width: 28px !important; // 小屏幕分页按钮宽度
+    }
+  }
+
+  // 选择器包装器高度
+  .el-select--default .el-select__wrapper {
+    min-height: var(--el-pagination-button-width) !important;
+  }
+
+  // 跳转输入框高度
+  .el-pagination__jump .el-input {
+    height: var(--el-pagination-button-width) !important;
+  }
+}
+
+// 分页项内边距
+.el-pager li {
+  padding: 0 10px !important;
+}
+
+// 优化菜单折叠展开动画（提升动画流畅度）
+.el-menu.el-menu--inline {
+  transition: max-height 0.26s cubic-bezier(0.4, 0, 0.2, 1) !important; // 贝塞尔曲线过渡
+}
+
+// 优化菜单项悬停动画（提升鼠标跟手感）
+.el-sub-menu__title,
+.el-menu-item {
+  transition: background-color 0s !important; // 无延迟背景色过渡
+}
+
+// -------------------------------- 修改 el-size=default 组件默认高度 start --------------------------------
+// 修改按钮高度
+.el-button--default {
+  height: var(--el-component-custom-height) !important;
+}
+
+// 圆形按钮宽度优化
+.el-button--default.is-circle {
+  width: var(--el-component-custom-height) !important;
+}
+
+// 修改选择器高度
+.el-select--default {
+  .el-select__wrapper {
+    min-height: var(--el-component-custom-height) !important;
+  }
+}
+
+// 修改复选框按钮和单选按钮高度
+.el-checkbox-button--default .el-checkbox-button__inner,
+.el-radio-button--default .el-radio-button__inner {
+  padding: 10px 15px !important; // 内边距调整
+}
+// -------------------------------- 修改 el-size=default 组件默认高度 end --------------------------------
+
+// 分页组件圆角
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .el-pager li {
+  border-radius: 6px;
+}
+
+// 弹出框样式
+.el-popover {
+  min-width: 80px; // 最小宽度
+  border-radius: var(--el-border-radius-small) !important; // 圆角
+}
+
+// 对话框样式
+.el-dialog {
+  border-radius: 100px !important;
+  border-radius: calc(
+    var(--custom-radius) / 1.2 + 2px
+  ) !important; // 自定义圆角
+  overflow: hidden; // 隐藏溢出内容
+}
+
+// 对话框标题
+.el-dialog__header {
+  .el-dialog__title {
+    font-size: 16px; // 标题字体大小
+  }
+}
+
+// 对话框主体
+.el-dialog__body {
+  padding: 25px 0 !important; // 上下内边距
+  position: relative; // 相对定位，为了兼容分页组件样式
+}
+
+// 带边框的对话框
+.el-dialog.el-dialog-border {
+  .el-dialog__body {
+    // 上边框
+    &::before,
+    // 下边框
+    &::after {
+      content: "";
+      position: absolute;
+      left: -16px;
+      width: calc(100% + 32px);
+      height: 1px;
+      background-color: var(--art-gray-300); // 边框颜色
+    }
+
+    &::before {
+      top: 0; // 上边框位置
+    }
+
+    &::after {
+      bottom: 0; // 下边框位置
+    }
+  }
+}
+
+// 消息提示样式优化
+.el-message {
+  background-color: var(--default-box-color) !important; // 背景色
+  border: 0 !important; // 无边框
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05) !important; // 多层阴影
+
+  p {
+    font-size: 13px; // 文字大小
+  }
+}
+
+// 下拉菜单样式
+.el-dropdown-menu {
+  padding: 6px !important; // 内边距
+  border-radius: 10px !important; // 圆角
+  border: none !important; // 无边框
+
+  .el-dropdown-menu__item {
+    padding: 6px 16px !important; // 项内边距
+    border-radius: 6px !important; // 项圆角
+
+    // 悬停状态
+    &:hover:not(.is-disabled) {
+      color: var(--art-gray-900) !important; // 文字颜色
+      background-color: var(--art-el-active-color) !important; // 背景色
+    }
+
+    // 焦点状态
+    &:focus:not(.is-disabled) {
+      color: var(--art-gray-900) !important; // 文字颜色
+      background-color: var(--art-gray-200) !important; // 背景色
+    }
+  }
+}
+
+// 隐藏选择器和下拉菜单的箭头
+.el-select__popper,
+.el-dropdown__popper {
+  margin-top: -6px !important; // 上边距调整
+
+  .el-popper__arrow {
+    display: none; // 隐藏箭头
+  }
+}
+
+// 自定义下拉菜单焦点样式
+.el-dropdown-selfdefine:focus {
+  outline: none !important; // 无轮廓
+}
+
+// 移动端组件兼容性处理
+@media screen and (max-width: 640px) {
+  .el-message-box,
+  .el-message,
+  .el-dialog {
+    width: calc(100% - 24px) !important; // 响应式宽度
+  }
+
+  .el-date-picker.has-sidebar.has-time {
+    width: calc(100% - 24px); // 日期选择器宽度
+    left: 12px !important; // 位置调整
+  }
+
+  // 隐藏侧边栏
+  .el-picker-panel *[slot="sidebar"],
+  .el-picker-panel__sidebar {
+    display: none;
+  }
+
+  .el-picker-panel *[slot="sidebar"] + .el-picker-panel__body,
+  .el-picker-panel__sidebar + .el-picker-panel__body {
+    margin-left: 0; // 移除左边距
+  }
+}
+
+// 文本按钮样式
+.el-button {
+  &.el-button--text {
+    background-color: transparent !important; // 透明背景
+    padding: 0 !important; // 无内边距
+
+    span {
+      margin-left: 0 !important; // 无左边距
+    }
+  }
+}
+
+// 标签样式
+.el-tag {
+  font-weight: 500; // 字体粗细
+  transition: all 0s !important; // 无过渡效果
+
+  &.el-tag--default {
+    height: 26px !important; // 默认标签高度
+  }
+}
+
+// 复选框组样式
+.el-checkbox-group {
+  &.el-table-filter__checkbox-group label.el-checkbox {
+    height: 17px !important; // 复选框高度
+
+    .el-checkbox__label {
+      font-weight: 400 !important; // 标签字体粗细
+    }
+  }
+}
+
+// 单选按钮样式优化
+.el-radio--default {
+  .el-radio__input {
+    .el-radio__inner {
+      width: 16px; // 单选按钮宽度
+      height: 16px; // 单选按钮高度
+
+      &::after {
+        width: 6px; // 选中标记宽度
+        height: 6px; // 选中标记高度
+      }
+    }
+  }
+}
+
+// 复选框样式
+.el-checkbox {
+  .el-checkbox__inner {
+    border-radius: 2px !important; // 复选框圆角
+  }
+}
+
+// 优化复选框样式
+.el-checkbox--default {
+  .el-checkbox__inner {
+    width: 16px !important; // 复选框宽度
+    height: 16px !important; // 复选框高度
+    border-radius: 4px !important; // 复选框圆角
+
+    &::before {
+      content: "";
+      height: 4px !important; // 伪元素高度
+      top: 5px !important; // 伪元素位置
+      background-color: #fff !important; // 伪元素背景色
+      transform: scale(0.6) !important; // 伪元素缩放
+    }
+  }
+
+  // 选中状态
+  .is-checked {
+    .el-checkbox__inner {
+      &::after {
+        width: 3px; // 对勾宽度
+        height: 8px; // 对勾高度
+        margin: auto; // 自动外边距
+        border: 2px solid var(--el-checkbox-checked-icon-color); // 对勾边框
+        border-left: 0; // 无左边框
+        border-top: 0; // 无上边框
+        transform: translate(-45%, -60%) rotate(45deg) scale(0.86) !important; // 对勾变换
+        transform-origin: center; // 变换原点
+      }
+    }
+  }
+}
+
+// 通知图标大小
+.el-notification .el-notification__icon {
+  font-size: 22px !important; // 图标大小
+}
+
+// 消息框和对话框关闭按钮样式
+.el-message-box__headerbtn .el-message-box__close,
+.el-dialog__headerbtn .el-dialog__close {
+  top: 7px; // 顶部位置
+  right: 7px; // 右侧位置
+  width: 30px; // 宽度
+  height: 30px; // 高度
+  border-radius: 5px; // 圆角
+  transition: all 0.3s; // 过渡效果
+
+  // 悬停状态
+  &:hover {
+    background-color: var(--art-hover-color) !important; // 背景色
+    color: var(--art-gray-900) !important; // 颜色
+  }
+}
+
+// 消息框内边距
+.el-message-box {
+  padding: 25px 20px !important;
+}
+
+// 消息框标题字体粗细
+.el-message-box__title {
+  font-weight: 500 !important;
+}
+
+// 表格列过滤器触发器
+.el-table__column-filter-trigger i {
+  color: var(--theme-color) !important; // 图标颜色
+  margin: -3px 0 0 2px; // 外边距
+}
+
+// 去除下拉菜单鼠标放上去出现的边框
+.el-tooltip__trigger:focus-visible {
+  outline: unset; // 无轮廓
+}
+
+// iPad 表单右侧按钮优化
+@media screen and (max-width: 1180px) {
+  .el-table-fixed-column--right {
+    padding-right: 0 !important; // 无右内边距
+
+    .el-button {
+      margin: 5px 10px 5px 0 !important; // 按钮外边距
+    }
+  }
+}
+
+// 登出对话框样式
+.login-out-dialog {
+  padding: 30px 20px !important; // 内边距
+  border-radius: 10px !important; // 圆角
+}
+
+// 对话框进入动画
+.dialog-fade-enter-active {
+  .el-dialog:not(.is-draggable) {
+    animation: dialog-open 0.3s cubic-bezier(0.32, 0.14, 0.15, 0.86); // 打开动画
+
+    // 修复对话框动画后宽度不自适应问题
+    .el-select__selected-item {
+      display: inline-block; // 内联块显示
+    }
+  }
+}
+
+// 对话框离开动画
+.dialog-fade-leave-active {
+  animation: fade-out 0.2s linear; // 淡出动画
+
+  .el-dialog:not(.is-draggable) {
+    animation: dialog-close 0.5s; // 关闭动画
+  }
+}
+
+// 对话框打开动画关键帧
+@keyframes dialog-open {
+  0% {
+    opacity: 0; // 完全透明
+    transform: scale(0.2); // 缩小
+  }
+
+  100% {
+    opacity: 1; // 完全不透明
+    transform: scale(1); // 原始大小
+  }
+}
+
+// 对话框关闭动画关键帧
+@keyframes dialog-close {
+  0% {
+    opacity: 1; // 完全不透明
+    transform: scale(1); // 原始大小
+  }
+
+  100% {
+    opacity: 0; // 完全透明
+    transform: scale(0.2); // 缩小
+  }
+}
+
+// 遮罩层淡出动画
+@keyframes fade-out {
+  0% {
+    opacity: 1; // 完全不透明
+  }
+
+  100% {
+    opacity: 0; // 完全透明
+  }
+}
+
+// 选择器下拉列表样式
+.el-select__popper:not(.el-tree-select__popper) {
+  .el-select-dropdown__list {
+    padding: 5px !important; // 内边距
+
+    .el-select-dropdown__item {
+      height: 34px !important; // 项高度
+      line-height: 34px !important; // 行高
+      border-radius: 6px !important; // 项圆角
+
+      // 选中状态
+      &.is-selected {
+        color: var(--art-gray-900) !important; // 文字颜色
+        font-weight: 400 !important; // 字体粗细
+        background-color: var(--art-el-active-color) !important; // 背景色
+        margin-bottom: 4px !important; // 下边距
+      }
+
+      // 悬停状态
+      &:hover {
+        background-color: var(--art-hover-color) !important; // 背景色
+      }
+    }
+
+    // 相邻项悬停状态处理
+    .el-select-dropdown__item:hover ~ .is-selected,
+    .el-select-dropdown__item.is-selected:has(
+        ~ .el-select-dropdown__item:hover
+      ) {
+      background-color: transparent !important; // 透明背景
+    }
+  }
+}
+
+// 树形选择器样式
+.el-tree-select__popper {
+  .el-select-dropdown__list {
+    padding: 5px !important; // 内边距
+
+    .el-tree-node {
+      .el-tree-node__content {
+        height: 36px !important; // 内容高度
+        border-radius: 6px !important; // 内容圆角
+
+        // 悬停状态
+        &:hover {
+          background-color: var(--art-gray-200) !important; // 背景色
+        }
+      }
+    }
+  }
+}
+
+// 实现水波纹在文字下面效果
+.el-button > span {
+  position: relative; // 相对定位
+  z-index: 10; // 层级
+}
+
+// 优化颜色选择器圆角
+.el-color-picker__color {
+  border-radius: 2px !important; // 颜色块圆角
+}
+
+// 优化日期时间选择器底部圆角
+.el-picker-panel {
+  .el-picker-panel__footer {
+    border-radius: 0 0 var(--el-border-radius-base) var(--el-border-radius-base); // 底部圆角
+  }
+}
+
+// 优化树型菜单样式
+.el-tree-node__content {
+  border-radius: 4px; // 圆角
+  margin-bottom: 4px; // 下边距
+  padding: 1px 0; // 内边距
+
+  // 悬停状态
+  &:hover {
+    background-color: var(--art-hover-color) !important; // 背景色
+  }
+}
+
+// 深色模式当前节点高亮
+.dark {
+  .el-tree--highlight-current
+    .el-tree-node.is-current
+    > .el-tree-node__content {
+    background-color: var(--art-gray-300) !important; // 背景色
+  }
+}
+
+// 隐藏折叠菜单弹窗焦点时出现的边框
+.menu-left-popper:focus-within,
+.horizontal-menu-popper:focus-within {
+  box-shadow: none !important; // 无阴影
+  outline: none !important; // 无轮廓
+}
+
+// 数字输入组件右侧按钮高度跟随自定义组件高度
+.el-input-number--default.is-controls-right {
+  .el-input-number__decrease,
+  .el-input-number__increase {
+    height: calc(
+      (var(--el-component-size) / 2)
+    ) !important; // 按钮高度为组件高度的一半
+  }
+}

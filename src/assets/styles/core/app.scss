@@ -1,0 +1,317 @@
+// 全局样式配置
+
+// 处理移动端组件兼容性
+@media screen and (max-width: 640px) {
+  * {
+    cursor: default !important; // 移动端使用默认光标，提升性能
+  }
+}
+
+// 背景滤镜变量定义
+*,
+::before,
+::after {
+  --tw-backdrop-blur: ; // 背景模糊度
+  --tw-backdrop-brightness: ; // 背景亮度
+  --tw-backdrop-contrast: ; // 背景对比度
+  --tw-backdrop-grayscale: ; // 背景灰度
+  --tw-backdrop-hue-rotate: ; // 背景色相旋转
+  --tw-backdrop-invert: ; // 背景反色
+  --tw-backdrop-opacity: ; // 背景透明度
+  --tw-backdrop-saturate: ; // 背景饱和度
+  --tw-backdrop-sepia: ; // 背景怀旧效果
+}
+
+// 色弱模式样式
+.color-weak {
+  filter: invert(80%); // 颜色反转80%，辅助色弱用户
+  -webkit-filter: invert(80%); // Webkit 浏览器兼容
+}
+
+// 空元素隐藏
+#noop {
+  display: none; // 隐藏空元素，避免占用空间
+}
+
+// 语言切换下拉菜单样式
+.langDropDownStyle {
+  // 选中项背景颜色
+  .is-selected {
+    background-color: var(--art-el-active-color) !important; // 使用元素激活颜色
+  }
+
+  // 语言切换按钮菜单样式优化
+  .lang-btn-item {
+    // 菜单项内边距调整
+    .el-dropdown-menu__item {
+      padding-left: 13px !important; // 左侧内边距
+      padding-right: 6px !important; // 右侧内边距
+      margin-bottom: 3px !important; // 底部外边距
+    }
+
+    // 最后一个菜单项去除底部外边距
+    &:last-child {
+      .el-dropdown-menu__item {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    // 菜单文字样式
+    .menu-txt {
+      min-width: 60px; // 最小宽度
+      display: block; // 块级显示
+    }
+
+    // 图标样式
+    i {
+      font-size: 10px; // 图标大小
+      margin-left: 10px; // 左侧外边距
+    }
+  }
+}
+
+// 页面内容区域默认边框
+.page-content {
+  border: 1px solid var(--art-card-border) !important; // 卡片边框颜色
+}
+
+// 艺术卡片基础混合宏
+@mixin art-card-base($border-color, $shadow: none, $radius-diff: 4px) {
+  background: var(--default-box-color); // 背景颜色
+  border: 1px solid #{$border-color} !important; // 边框样式
+  border-radius: calc(
+    var(--custom-radius) + #{$radius-diff}
+  ) !important; // 动态圆角
+  box-shadow: #{$shadow} !important; // 阴影效果
+
+  --el-card-border-color: var(
+    --default-border
+  ) !important; // Element 卡片边框颜色
+}
+
+// 艺术卡片尺寸变体
+.art-card,
+.art-card-sm,
+.art-card-xs {
+  border: 1px solid var(--art-card-border); // 统一边框样式
+}
+
+// 边框模式样式
+[data-box-mode="border-mode"] {
+  // 页面内容和表格卡片边框
+  .page-content,
+  .art-table-card {
+    border: 1px solid var(--art-card-border) !important; // 卡片边框颜色
+  }
+
+  // 大卡片样式
+  .art-card {
+    @include art-card-base(
+      var(--art-card-border),
+      none,
+      4px
+    ); // 标准圆角增加4px
+  }
+
+  // 中卡片样式
+  .art-card-sm {
+    @include art-card-base(var(--art-card-border), none, 0px); // 标准圆角
+  }
+
+  // 小卡片样式
+  .art-card-xs {
+    @include art-card-base(
+      var(--art-card-border),
+      none,
+      -4px
+    ); // 标准圆角减少4px
+  }
+}
+
+// 阴影模式样式
+[data-box-mode="shadow-mode"] {
+  // 页面内容和表格卡片阴影
+  .page-content,
+  .art-table-card {
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.04) !important; // 轻微阴影
+    border: 1px solid var(--art-gray-200) !important; // 浅灰色边框
+  }
+
+  // 侧边栏边框
+  .layout-sidebar {
+    border-right: 1px solid var(--art-card-border) !important; // 右侧边框
+  }
+
+  // 大卡片阴影样式
+  .art-card {
+    @include art-card-base(
+      var(--art-gray-200),
+      // 边框颜色
+      (0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.08)),
+      // 多层阴影
+      4px // 圆角增加
+    );
+  }
+
+  // 中卡片阴影样式
+  .art-card-sm {
+    @include art-card-base(
+      var(--art-gray-200),
+      // 边框颜色
+      (0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.08)),
+      // 多层阴影
+      2px // 圆角微增
+    );
+  }
+
+  // 小卡片阴影样式
+  .art-card-xs {
+    @include art-card-base(
+      var(--art-gray-200),
+      // 边框颜色
+      (0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 1px -1px rgba(0, 0, 0, 0.08)),
+      // 轻微阴影
+      -4px // 圆角减少
+    );
+  }
+}
+
+// 元素全屏样式
+.el-full-screen {
+  position: fixed; // 固定定位
+  top: 0; // 顶部对齐
+  left: 0; // 左侧对齐
+  right: 0; // 右侧对齐
+  width: 100vw !important; // 全视口宽度
+  height: 100% !important; // 全高度
+  z-index: 2300; // 较高层级
+  margin-top: 0; // 无上边距
+  padding: 15px; // 内边距
+  box-sizing: border-box; // 盒模型
+  background-color: var(--default-box-color); // 背景颜色
+  display: flex; // 弹性布局
+  flex-direction: column; // 垂直方向
+}
+
+// 表格卡片样式
+.art-table-card {
+  flex: 1; // 弹性填充
+  display: flex; // 弹性布局
+  flex-direction: column; // 垂直方向
+  margin-top: 12px; // 上边距
+  border-radius: calc(var(--custom-radius) / 2 + 2px) !important; // 动态圆角
+
+  // 卡片主体样式
+  .el-card__body {
+    height: 100%; // 全高度
+    overflow: hidden; // 隐藏溢出
+  }
+}
+
+// 容器全高样式
+.art-full-height {
+  height: var(--art-full-height); // 自定义全高变量
+  display: flex; // 弹性布局
+  flex-direction: column; // 垂直方向
+
+  // 移动端适配
+  @media (max-width: 640px) {
+    height: auto; // 自动高度
+  }
+}
+
+// 徽章基础样式
+.art-badge {
+  position: absolute; // 绝对定位
+  top: 0; // 顶部对齐
+  right: 20px; // 右侧位置
+  bottom: 0; // 底部对齐
+  width: 6px; // 宽度
+  height: 6px; // 高度
+  margin: auto; // 自动外边距居中
+  background: #ff3860; // 红色背景
+  border-radius: 50%; // 圆形
+  animation: breathe 1.5s ease-in-out infinite; // 呼吸动画
+
+  // 水平徽章变体
+  &.art-badge-horizontal {
+    right: 0; // 右侧对齐
+  }
+
+  // 混合徽章变体
+  &.art-badge-mixed {
+    right: 0; // 右侧对齐
+  }
+
+  // 双重徽章变体
+  &.art-badge-dual {
+    right: 5px; // 右侧偏移
+    top: 5px; // 顶部偏移
+    bottom: auto; // 取消底部对齐
+  }
+}
+
+// 文字徽章样式
+.art-text-badge {
+  position: absolute; // 绝对定位
+  top: 0; // 顶部对齐
+  right: 12px; // 右侧位置
+  bottom: 0; // 底部对齐
+  min-width: 20px; // 最小宽度
+  height: 18px; // 高度
+  line-height: 17px; // 行高
+  padding: 0 5px; // 内边距
+  margin: auto; // 自动外边距居中
+  font-size: 10px; // 字体大小
+  color: #fff; // 白色文字
+  text-align: center; // 文字居中
+  background: #fd4e4e; // 红色背景
+  border-radius: 4px; // 圆角
+}
+
+// 呼吸动画关键帧
+@keyframes breathe {
+  0% {
+    opacity: 0.7; // 半透明
+    transform: scale(1); // 原始大小
+  }
+
+  50% {
+    opacity: 1; // 完全不透明
+    transform: scale(1.1); // 轻微放大
+  }
+
+  100% {
+    opacity: 0.7; // 半透明
+    transform: scale(1); // 恢复原始大小
+  }
+}
+
+// 修复老机型 loading 定位问题
+.art-loading-fix {
+  position: fixed !important; // 固定定位
+  top: 0 !important; // 顶部对齐
+  left: 0 !important; // 左侧对齐
+  right: 0 !important; // 右侧对齐
+  bottom: 0 !important; // 底部对齐
+  width: 100vw !important; // 全视口宽度
+  height: 100vh !important; // 全视口高度
+  display: flex !important; // 弹性布局
+  align-items: center !important; // 垂直居中
+  justify-content: center !important; // 水平居中
+}
+
+// 加载旋转器定位修复
+.art-loading-fix .el-loading-spinner {
+  position: static !important; // 静态定位
+  top: auto !important; // 自动顶部
+  left: auto !important; // 自动左侧
+  transform: none !important; // 无变换
+}
+
+// 去除移动端点击背景色
+@media screen and (max-width: 1180px) {
+  * {
+    -webkit-tap-highlight-color: transparent; // 透明点击高亮
+  }
+}

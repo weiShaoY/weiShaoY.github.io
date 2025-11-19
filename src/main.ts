@@ -12,7 +12,9 @@ import { setupRouter } from './router'
 
 import pinia from './stores'
 
-import './themes/index'
+import '@styles/core/tailwind.css'
+
+import '@styles/index.scss'
 
 /**
  * 初始化应用程序

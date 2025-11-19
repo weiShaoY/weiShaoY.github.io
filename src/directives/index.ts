@@ -27,6 +27,11 @@ const directivesMap: { [key: string]: Directive } = {
   waterMarker,
 }
 
+/**
+ * 注册指令
+ * @description 遍历指令映射表，将每个指令注册到 Vue 应用实例中
+ * @param {App<Element>} app - Vue 应用实例
+ */
 export function setDirectives(app: App<Element>) {
   Object.keys(directivesMap).forEach((name) => {
     app.directive(name, directivesMap[name])

@@ -1,0 +1,105 @@
+/*
+ * 深色主题配置
+ * 单页面移除深色主题：document.getElementsByTagName("html")[0].removeAttribute('class')
+ */
+
+// 深色主题字体颜色
+$font-color: rgba(#ffffff, 0.85);
+
+/* 覆盖 Element Plus 默认深色背景色 */
+html.dark {
+  // Element Plus 组件样式
+  --el-bg-color: var(--default-box-color); // 背景颜色 - 使用自定义盒子颜色
+  --el-text-color-regular: #{$font-color}; // 常规文字颜色 - 半透明白色
+
+  // 富文本编辑器样式变量
+  --w-e-toolbar-bg-color: #18191c; // 工具栏背景颜色 - 深灰色
+  --w-e-textarea-bg-color: #090909; // 输入区域背景颜色 - 接近黑色
+  --w-e-toolbar-color: var(--art-gray-600); // 工具栏文字颜色 - 艺术灰色600
+  --w-e-toolbar-active-bg-color: #25262b; // 选中菜单背景颜色 - 深灰色
+  --w-e-toolbar-border-color: var(
+    --default-border-dashed
+  ); // 弹窗边框颜色 - 自定义虚线边框色
+  --w-e-textarea-border-color: var(
+    --default-border-dashed
+  ); // 分割线颜色 - 自定义虚线边框色
+  --w-e-modal-button-border-color: var(
+    --default-border-dashed
+  ); // 链接输入框边框颜色 - 自定义虚线边框色
+  --w-e-textarea-slight-bg-color: #090909; // 表格头背景颜色 - 接近黑色
+  --w-e-modal-button-bg-color: #090909; // 按钮背景颜色 - 接近黑色
+  --w-e-toolbar-active-color: var(
+    --art-gray-800
+  ); // 悬停工具栏文字颜色 - 艺术灰色800
+}
+
+/* 深色主题具体样式 */
+.dark {
+  // 页面内容区域文章列表项边框
+  .page-content .article-list .item .left .outer > div {
+    border-right-color: var(
+      --dark-border-color
+    ) !important; // 右侧边框颜色 - 深色边框色
+  }
+
+  // 富文本编辑器通用样式
+  .editor-wrapper {
+    *:not(pre code *) {
+      color: inherit !important; // 继承颜色，排除代码块内的元素
+    }
+  }
+
+  // 工具栏分隔线
+  .w-e-bar-divider {
+    background-color: var(
+      --art-gray-300
+    ) !important; // 分隔线颜色 - 艺术灰色300
+  }
+
+  // 选择列表、下拉面板、工具栏菜单容器、代码块边框
+  .w-e-select-list,
+  .w-e-drop-panel,
+  .w-e-bar-item-group .w-e-bar-item-menus-container,
+  .w-e-text-container [data-slate-editor] pre > code {
+    border: 1px solid var(--default-border) !important; // 边框样式 - 自定义边框色
+  }
+
+  // 下拉选择框背景
+  .w-e-select-list {
+    background-color: var(
+      --default-box-color
+    ) !important; // 背景颜色 - 自定义盒子颜色
+  }
+
+  /* 下拉选择框悬停样式 */
+  .w-e-select-list ul li:hover,
+  /* 工具栏按钮悬停样式 */
+  .w-e-bar-item button:hover {
+    background-color: #090909 !important; // 悬停背景颜色 - 接近黑色
+  }
+
+  /* 代码块样式 */
+  .w-e-text-container [data-slate-editor] pre > code {
+    background-color: #25262b !important; // 代码块背景颜色 - 深灰色
+    text-shadow: none !important; // 无文字阴影
+  }
+
+  /* 引用块样式 */
+  .w-e-text-container [data-slate-editor] blockquote {
+    border-left: 4px solid var(--default-border-dashed) !important; // 左侧边框 - 自定义虚线边框色
+    background-color: var(--art-color); // 背景颜色 - 艺术主题颜色
+  }
+
+  // 编辑器包装器特定样式
+  .editor-wrapper {
+    // 表格容器最后一个表头边框
+    .w-e-text-container [data-slate-editor] .table-container th:last-of-type {
+      border-right: 1px solid var(--default-border-dashed) !important; // 右侧边框 - 自定义虚线边框色
+    }
+
+    // 模态框背景
+    .w-e-modal {
+      background-color: var(--art-color); // 背景颜色 - 艺术主题颜色
+    }
+  }
+}

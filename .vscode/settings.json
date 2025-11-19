@@ -1,5 +1,8 @@
 {
   "unot.switchMagic": true,
   "workbench.statusBar.visible": true,
-  "workbench.activityBar.orientation": "vertical"
+  "workbench.activityBar.orientation": "vertical",
+
+  // 开启 tailwindcss 类名建议  检测类名是否使用了最优形式。默认值：warning
+  "tailwindCSS.lint.suggestCanonicalClasses": "warning"
 }

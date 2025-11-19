@@ -61,13 +61,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl font-semibold text-secondary"
             >
               技术栈
             </p>
 
             <p
-              class="text-base"
+              class="text-base text-white"
             >
               我擅长各种语言、框架和工具，它们让我能够构建强大且可扩展的应用程序
             </p>
@@ -92,13 +92,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl  font-semibold text-secondary"
             >
               我对时区、通讯和位置非常灵活
             </p>
 
             <p
-              class="text-base"
+              class="text-base text-white"
             >
               我居住在湖南长沙，愿意进行远程工作。
             </p>
@@ -140,13 +140,13 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl  font-semibold text-secondary"
             >
               我对编码的热情
             </p>
 
             <p
-              class="text-base"
+              class="text-base text-white"
             >
               我喜欢通过代码解决问题和构建事物,喜欢探索新技术并提高自己的技能。
             </p>
@@ -197,7 +197,7 @@ function handleCopy() {
         <img
           src="https://github-readme-stats.vercel.app/api?username=weiShaoY&theme=chartreuse-dark&show_icons=true&hide_border=true&count_private=true&locale=cn&bg_color=0E0E10&line_height=36&title_color=BFFFBF"
           alt=""
-          class="h-full w-full overflow-hidden rounded-1"
+          class="h-full w-full overflow-hidden rounded-[1px]"
         >
       </div>
 
@@ -207,7 +207,7 @@ function handleCopy() {
         <img
           src="https://github-readme-stats.vercel.app/api/top-langs/?username=weiShaoY&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=truechart&locale=cn&bg_color=0E0E10&layout=compact&title_color=BFFFBF"
           alt=""
-          class="h-60 w-full overflow-hidden rounded-1"
+          class="h-60 w-full overflow-hidden rounded-[1px]"
         >
       </div>
 
@@ -229,7 +229,7 @@ function handleCopy() {
         <img
           src="https://pixel-profile.vercel.app/api/github-stats?username=weiShaoY&theme=crt&pixelate_avatar=false"
           alt=""
-          class="h-[212px] w-full overflow-hidden rounded-1"
+          class="h-[212px] w-full overflow-hidden rounded-[1px]"
         >
       </div>
 
@@ -237,7 +237,7 @@ function handleCopy() {
         class="col-span-3 row-span-3 max-sm:col-span-3"
       >
         <img
-          class="overflow-hidden rounded-1"
+          class="overflow-hidden rounded-[1px]"
           src="https://cdn.jsdelivr.net/gh/weiShaoY/weiShaoY@main/profile-3d-contrib/profile-night-rainbow.svg"
           alt=""
         >

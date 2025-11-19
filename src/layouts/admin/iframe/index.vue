@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { onMounted, ref } from 'vue'
 
 import { useRoute } from 'vue-router'
@@ -53,7 +52,7 @@ onMounted(initIframe)
   <div
     ref="iframeContainer"
     v-loading="isLoading"
-    class="h-full flex"
+    class="!h-full flex"
   >
     <iframe
       v-if="iframeUrl"
