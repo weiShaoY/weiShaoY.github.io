@@ -33,7 +33,7 @@ const option = computed<EChartsOption>(() => {
     title: {
       text: `${data.value.climate.time} 月平均气温和降水`,
       textStyle: {
-        fontFamily: 'gaiLiangShouJinTi',
+        fontFamily: 'shouJinTi',
         fontSize: 16,
       },
     },

@@ -8,6 +8,7 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
+
 } from 'unocss'
 
 import { presetScrollbarHide } from 'unocss-preset-scrollbar-hide'
@@ -152,13 +153,13 @@ export default defineConfig({
          *  @description 中文字体
          *  @default '改良瘦金体'
          */
-        theme: ['gaiLiangShouJinTi', 'firaCodeVf'],
-      },
+        theme: ['shouJinTi', 'firaCode'],
 
-      /**
-       *  @description 处理本地字体
-       */
-      processors: createLocalFontProcessor(),
+        shouJinTi: ['shouJinTi'],
+
+        firaCode: ['firaCode'],
+
+      },
     }),
 
     /**

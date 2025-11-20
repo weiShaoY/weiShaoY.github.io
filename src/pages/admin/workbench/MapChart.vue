@@ -9,7 +9,7 @@ const options: EChartsOption = {
    *  文字样式配置
    */
   textStyle: {
-    fontFamily: 'gaiLiangShouJinTi', // 字体家族
+    fontFamily: 'shouJinTi', // 字体家族
   },
 
   /**

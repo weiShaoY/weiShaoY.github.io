@@ -65,7 +65,7 @@ const option = computed<EChartsOption>(() => {
     title: {
       text: `最新整点实况 (${latestData.value.time}) :  气温:${latestData.value.temperature}°C  降水量:${latestData.value.rain1h}mm  相对湿度:${latestData.value.humidity}%  气压:${latestData.value.pressure}hPa`,
       textStyle: {
-        fontFamily: 'gaiLiangShouJinTi',
+        fontFamily: 'shouJinTi',
         fontSize: 16,
       },
     },

@@ -78,7 +78,7 @@ const emit = defineEmits(['click'])
 
 const loadingOptions = {
   fontSize: 20,
-  fontFamily: 'gaiLiangShouJinTi',
+  fontFamily: 'shouJinTi',
 }
 
 const computedStyle = computed<CSSProperties>(() => ({

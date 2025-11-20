@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="aaa"
+    class="aaa font-theme"
   >
     111
   </div>
