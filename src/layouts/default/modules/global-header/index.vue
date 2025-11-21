@@ -125,8 +125,8 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           <SvgIcon
             icon="weiShaoY"
             :height="80"
-            :width="120"
-            class="cursor-pointer text-[150%] !hover:color-[#08FF00]"
+            :width="160"
+            class="scale-100 cursor-pointer !hover:color-[#08FF00]"
           />
         </router-link>
       </a>
