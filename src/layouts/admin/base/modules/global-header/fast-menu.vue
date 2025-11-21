@@ -114,7 +114,7 @@ function handleAppClick(item: RouterType.AdminRoute) {
         class="border-l-[1px] border-l-[#ebeef5] border-solid pl-6 pt-2"
       >
         <h3
-          class="m-0 mb-2.5 text-base text-[#b5b7c8] font-medium"
+          class="m-0 mb-2.5 text-[#b5b7c8] text-info font-medium"
         >
           标题
         </h3>

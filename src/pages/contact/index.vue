@@ -78,7 +78,7 @@ async function handleSubmit(e: Event) {
         <!-- 左侧 -->
         <div
           v-light
-          class="relative flex flex-col gap-5 rounded-lg p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
+          class="relative flex flex-col gap-5 rounded-lg bg-[#0E0E0F] p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
         >
           <form
             ref="formRef"
@@ -99,7 +99,7 @@ async function handleSubmit(e: Event) {
                 type="text"
                 name="name"
                 required
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-info focus:outline-[#DED9FC]"
                 placeholder="例如, 张三"
               >
             </label>
@@ -118,7 +118,7 @@ async function handleSubmit(e: Event) {
                 type="email"
                 name="email"
                 required
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-info focus:outline-[#DED9FC]"
                 placeholder="例如, zhangSan@gmail.com"
               >
             </label>
@@ -137,7 +137,7 @@ async function handleSubmit(e: Event) {
                 name="message"
                 required
                 rows="5"
-                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-[#62646c] focus:outline-[#DED9FC]"
+                class="min-h-14 w-full rounded-lg bg-[#1c1c21] px-5 py-2 text-lg text-primary shadow-[#0E0E10] shadow-2xl placeholder:text-info focus:outline-[#DED9FC]"
                 placeholder="分享您的想法或询问..."
               />
             </label>

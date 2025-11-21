@@ -59,13 +59,7 @@ export default defineConfig({
       danger: '#FF4C4C',
 
     },
-    fontSize: {
-      'icon-xs': '0.875rem',
-      'icon-small': '1rem',
-      'icon': '1.125rem',
-      'icon-large': '1.5rem',
-      'icon-xl': '2rem',
-    },
+
   },
 
   /**
@@ -85,6 +79,14 @@ export default defineConfig({
     'text-ellipsis': 'truncate',
 
     'card-wrapper': 'rd-8px shadow-sm',
+
+    // //////////////////  主题  //////////////////
+    'switch-animation': 'transition duration-300',
+    'bg-base': 'bg-[#f0f0f0] dark:bg-[#20202a] switch-animation',
+    'card-base': 'bg-[#ffffff] dark:bg-[#10101a] switch-animation',
+    'text-base': 'text-[#20202a] dark:text-[#f0f0f0] switch-animation',
+    'switch-label-base': 'bg-gray-200 dark:bg-gray-800 switch-animation',
+    'switch-span-base': 'bg-white dark:bg-gray-300 switch-animation',
   },
 
   /**

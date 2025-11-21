@@ -630,7 +630,7 @@ onMounted(() => {
       </div>
 
       <div
-        class="m-card-hd-title absolute left-[22px] h-[36px] from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-base text-transparent font-semibold leading-[32px] tracking-[1.6px] font-['PingFangSc']"
+        class="m-card-hd-title absolute left-[22px] h-[36px] from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-info text-transparent font-semibold leading-[32px] tracking-[1.6px] font-['PingFangSc']"
       >
         {{ title }}
       </div>

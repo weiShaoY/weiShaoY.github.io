@@ -55,7 +55,7 @@ function handleOpenSite() {
       >
         <!-- 左侧 -->
         <div
-          class="relative flex flex-col gap-5 p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
+          class="relative flex flex-col gap-5 bg-[#0E0E0F] p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
         >
           <!-- 项目展示图 -->
           <div

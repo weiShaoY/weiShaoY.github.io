@@ -197,7 +197,7 @@ const option = ref({
             </div>
 
             <div
-              class="value w-20 flex flex-nowrap items-end justify-end text-right text-base text-white font-bold"
+              class="value w-20 flex flex-nowrap items-end justify-end text-right text-info text-white font-bold"
             >
               <span>
                 {{ item.value }}

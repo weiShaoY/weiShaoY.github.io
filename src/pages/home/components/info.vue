@@ -67,7 +67,7 @@ function handleCopy() {
             </p>
 
             <p
-              class="text-base"
+              class="text-info"
             >
               我擅长各种语言、框架和工具，它们让我能够构建强大且可扩展的应用程序
             </p>
@@ -98,7 +98,7 @@ function handleCopy() {
             </p>
 
             <p
-              class="text-base"
+              class="text-info"
             >
               我居住在湖南长沙，愿意进行远程工作。
             </p>
@@ -151,7 +151,7 @@ function handleCopy() {
             </p>
 
             <p
-              class="text-base"
+              class="text-info"
             >
               我喜欢通过代码解决问题和构建事物,喜欢探索新技术并提高自己的技能。
             </p>
