@@ -108,26 +108,13 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
       <a
         class="z-999 flex items-center"
       >
-        <!-- <SvgIcon
-          icon="logo"
-          :size="60"
-          class="cursor-pointer"
-          @click="handleToHome"
-        />
-
-        <SvgIcon
-          icon="weiShaoY"
-          :size="120"
-          class="cursor-pointer !hover:color-[#08FF00]"
-          @click="handleToHome"
-        /> -->
 
         <router-link
           to="/"
         >
           <SvgIcon
             icon="logo"
-            :size="60"
+            :size="80"
             class="cursor-pointer"
           />
         </router-link>
@@ -137,8 +124,9 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
         >
           <SvgIcon
             icon="weiShaoY"
-            :size="120"
-            class="cursor-pointer !hover:color-[#08FF00]"
+            :height="80"
+            :width="120"
+            class="cursor-pointer text-[150%] !hover:color-[#08FF00]"
           />
         </router-link>
       </a>

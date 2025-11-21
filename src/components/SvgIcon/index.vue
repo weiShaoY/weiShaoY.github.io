@@ -20,6 +20,12 @@ type SvgIconPropsType = {
   /** 图标的大小 */
   size?: string | number
 
+  /** 图标的高度 */
+  height?: string | number
+
+  /** 图标的宽度 */
+  width?: string | number
+
   /** 额外的 CSS 类名 */
   class?: string | Record<string, boolean> | Array<string | Record<string, boolean>>
 
@@ -94,13 +100,30 @@ const computedClass = computed(() => {
 /**
  * 计算 SVG 的行内样式
  */
-const computedStyle = computed(() => ({
-  verticalAlign: 'middle',
-  width: props.size,
-  height: props.size,
-  color: props.color,
-  ...props.style,
-}))
+const computedStyle = computed(() => {
+  const style: CSSProperties = {
+    verticalAlign: 'middle',
+    color: props.color,
+    ...props.style,
+  }
+
+  // 优先使用 height 和 width，否则使用 size
+  if (props.height !== undefined) {
+    style.height = props.height
+  }
+  else {
+    style.height = props.size
+  }
+
+  if (props.width !== undefined) {
+    style.width = props.width
+  }
+  else {
+    style.width = props.size
+  }
+
+  return style
+})
 
 /**
  * 计算图标的描述文本
