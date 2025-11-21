@@ -126,7 +126,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             icon="weiShaoY"
             :height="80"
             :width="160"
-            class="scale-100 cursor-pointer !hover:color-[#08FF00]"
+            class="scale-100 cursor-pointer !text-white !hover:text-[#08FF00]"
           />
         </router-link>
       </a>
@@ -140,8 +140,8 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           v-for="item in pcMenuList"
           :key="item.value"
           :to="item.value"
-          class="flex cursor-pointer items-center text-lg text-[#D0D2D6] font-bold hover:text-[#BFFFBF]"
-          :class="{ 'text-primary': route.path === item.value }"
+          class="flex cursor-pointer items-center text-lg text-white font-bold hover:text-secondary"
+          :class="{ '!text-primary': route.path === item.value }"
         >
           {{ item.label }}
         </router-link>

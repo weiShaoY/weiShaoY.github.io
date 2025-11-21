@@ -156,7 +156,7 @@ onMounted(() => {
         :key="weekTitle"
         :class="[
           {
-            'text-red': weekTitle === '六' || weekTitle === '日',
+            'text-error': weekTitle === '六' || weekTitle === '日',
           },
         ]"
         class="m-x-1 text-center text-6"
@@ -214,8 +214,8 @@ onMounted(() => {
           <div
             class="date text-6 font-bold"
             :class="[
-              day.isRestDay ? 'text-red' : '',
-              dayIndex >= 5 ? 'text-red' : '',
+              day.isRestDay ? 'text-error' : '',
+              dayIndex >= 5 ? 'text-error' : '',
               day.isToday ? '!text-white' : '',
             ]"
           >

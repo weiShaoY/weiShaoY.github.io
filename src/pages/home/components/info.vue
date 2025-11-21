@@ -61,7 +61,7 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl text-secondary font-semibold"
             >
               技术栈
             </p>
@@ -92,7 +92,7 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl text-secondary font-semibold"
             >
               我对时区、通讯和位置非常灵活
             </p>
@@ -119,7 +119,12 @@ function handleCopy() {
                   class="relative h-3 w-3 inline-flex rounded-full bg-[#22c55e]"
                 />
               </span>
-              联系我
+
+              <span
+                class="text-info"
+              >
+                联系我
+              </span>
             </button>
           </div>
         </div>
@@ -140,7 +145,7 @@ function handleCopy() {
 
           <div>
             <p
-              class="mb-2 text-xl text-regular font-semibold"
+              class="mb-2 text-xl text-secondary font-semibold"
             >
               我对编码的热情
             </p>
@@ -168,7 +173,7 @@ function handleCopy() {
           </div>
 
           <button
-            class="mx-auto mt-10 w-full flex cursor-pointer items-center justify-center gap-4 rounded-md bg-[#1c1c21] p-3 text-white transition-all active:scale-95"
+            class="mx-auto mt-10 w-full flex cursor-pointer items-center justify-center gap-4 rounded-md bg-[#1c1c21] p-3 transition-all active:scale-95"
             type="button"
             @click="handleCopy"
           >
@@ -176,14 +181,19 @@ function handleCopy() {
               class="relative h-3 w-3 flex"
             >
               <span
-                class="absolute h-full w-full inline-flex animate-ping rounded-full bg-[#CC171D] opacity-75"
+                class="absolute h-full w-full inline-flex animate-ping rounded-full bg-[#F71E25] opacity-75"
               />
 
               <span
-                class="relative h-3 w-3 inline-flex rounded-full bg-[#CC171D]"
+                class="relative h-3 w-3 inline-flex rounded-full bg-[#F71E25]"
               />
             </span>
-            {{ contactEmailUrl }}
+
+            <span
+              class="text-info"
+            >
+              {{ contactEmailUrl }}
+            </span>
           </button>
         </div>
       </div>

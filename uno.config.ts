@@ -1,5 +1,3 @@
-import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
-
 import {
   defineConfig,
   presetIcons,
@@ -33,12 +31,33 @@ export default defineConfig({
       /**
        *  @description 次要颜色
        */
-      regular: '#BFFFBF',
+      secondary: '#BFFFBF',
 
       /**
-       *  @description 红色
+       *  @description 错误颜色
        */
-      red: '#E43961',
+      error: '#E43961',
+
+      /**
+       *  @description 信息颜色
+       */
+      info: '#D0D2D6',
+
+      /**
+       *  @description 成功颜色
+       */
+      success: '#00D89E',
+
+      /**
+       *  @description 警告颜色
+       */
+      warning: '#FF9800',
+
+      /**
+       *  @description 危险颜色
+       */
+      danger: '#FF4C4C',
+
     },
     fontSize: {
       'icon-xs': '0.875rem',
@@ -93,7 +112,7 @@ export default defineConfig({
     transformerDirectives(),
 
     /**
-     *  @description 允许通过逗号分隔的语法同时应用多个变体 例如 hover:(text-red bg-blue)
+     *  @description 允许通过逗号分隔的语法同时应用多个变体 例如 hover:(text-error bg-blue)
      *  @see https://github.com/unocss/unocss#transformer-variantgroup
      */
     transformerVariantGroup(),

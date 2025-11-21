@@ -201,7 +201,7 @@ onMounted(async () => {
               #default="{ row }"
             >
               <span
-                class="text-red"
+                class="text-error"
               >
                 {{ row.sc > 0 ? row.sc.toFixed(1) : "暂无评分" }}
               </span>

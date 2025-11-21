@@ -35,7 +35,7 @@
       </h1>
 
       <TypeIt
-        class="mt-2 select-none text-[40px] text-[#BFFFBF] font-medium max-sm:text-[20px]"
+        class="mt-2 select-none text-[40px] text-secondary font-medium max-sm:text-[20px]"
         :string-list="['一个热爱编程的前端开发', '热爱计算机科学和IT互联网事业', '热爱编程、软路由、硬件、Diy等']"
       />
     </div>

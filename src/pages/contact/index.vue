@@ -89,7 +89,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-regular"
+                class="text-lg text-secondary"
               >
                 姓名
               </span>
@@ -108,7 +108,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-regular"
+                class="text-lg text-secondary"
               >
                 电子邮件
               </span>
@@ -127,7 +127,7 @@ async function handleSubmit(e: Event) {
               class="space-y-3"
             >
               <span
-                class="text-lg text-regular"
+                class="text-lg text-secondary"
               >
                 您的留言
               </span>
@@ -143,7 +143,7 @@ async function handleSubmit(e: Event) {
             </label>
 
             <button
-              class="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 text-regular transition-all active:scale-95 hover:bg-opacity-70 !hover:text-primary"
+              class="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 text-secondary transition-all active:scale-95 hover:bg-opacity-70 !hover:text-primary"
               type="submit"
               :disabled="loading"
             >

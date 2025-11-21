@@ -97,7 +97,7 @@ const animationName = ref('idle')
                 class="p-5 max-sm:px-2.5 max-sm:py-5"
               >
                 <p
-                  class="text-regular font-bold"
+                  class="text-secondary font-bold"
                 >
                   {{ item.name }}
                 </p>
