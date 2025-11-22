@@ -53,7 +53,7 @@ const animationName = ref('idle')
         class="grid grid-cols-3 mt-12 gap-5 max-sm:grid-cols-1"
       >
         <div
-          class="col-span-1 border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10]"
+          class="col-span-1 rounded-lg card-base"
         >
           <!-- 开发者模型 -->
           <Developer
@@ -62,7 +62,7 @@ const animationName = ref('idle')
         </div>
 
         <div
-          class="col-span-2 border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10] max-sm:col-span-1"
+          class="col-span-2 card-base max-sm:col-span-1"
         >
           <div
             class="px-5 py-10 max-sm:px-2.5 max-sm:py-5"
@@ -70,7 +70,7 @@ const animationName = ref('idle')
             <div
               v-for="item in workExperiences"
               :key="item.id"
-              class="grid grid-cols-[auto_1fr] cursor-pointer items-start gap-5 rounded-lg px-5 transition-all duration-500 ease-in-out hover:bg-[#1c1c21] max-sm:px-2.5"
+              class="group grid grid-cols-[auto_1fr] cursor-pointer items-start gap-5 rounded-lg px-5 transition-all duration-500 ease-in-out hover:bg-[#1c1c21] max-sm:px-2.5 hover:text-white"
               @click="animationName = item.animation"
               @pointerover="animationName = item.animation"
               @pointerout="animationName = 'idle'"
@@ -80,7 +80,7 @@ const animationName = ref('idle')
                 class="h-full flex flex-col items-center justify-start py-2"
               >
                 <div
-                  class="h-16 w-16 rounded-3xl bg-[#1a1a1a] p-2"
+                  class="h-16 w-16 rounded-3xl bg-[#333333] p-2"
                 >
                   <SvgIcon
                     :icon="item.icon"
@@ -89,7 +89,7 @@ const animationName = ref('idle')
                 </div>
 
                 <div
-                  class="mt-4 h-full w-0.5 flex-1 bg-[#1c1c21] group-last:hidden group-hover:bg-[#3a3a49]"
+                  class="mt-4 h-full w-0.5 flex-1 bg-[#1c1c21] group-last:hidden group-hover:bg-white"
                 />
               </div>
 
@@ -109,7 +109,7 @@ const animationName = ref('idle')
                 </p>
 
                 <p
-                  class="transition-all duration-500 ease-in-out group-hover:text-white"
+                  class="transition-all duration-500 ease-in-out"
                 >
                   {{ item.title }}
                 </p>

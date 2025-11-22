@@ -140,7 +140,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           v-for="item in pcMenuList"
           :key="item.value"
           :to="item.value"
-          class="flex cursor-pointer items-center text-lg text-white font-bold hover:text-secondary"
+          class="flex cursor-pointer items-center text-xl text-white font-bold hover:text-secondary"
           :class="{ '!text-primary': route.path === item.value }"
         >
           {{ item.label }}
@@ -152,6 +152,8 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
         class="flex flex items-center justify-end gap-5"
       >
         <Github />
+
+        <SwitchTheme />
 
         <!-- 开发环境且非移动端显示额外按钮 -->
         <template
@@ -168,6 +170,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             :size="36"
             :url="appRepoUrl"
           />
+
         </template>
 
         <!-- 移动端菜单 -->

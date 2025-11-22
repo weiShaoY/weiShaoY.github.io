@@ -51,7 +51,7 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
+          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
         >
           <div
             class="h-[266px] w-full cursor-pointer max-sm:h-fit"
@@ -67,7 +67,7 @@ function handleCopy() {
             </p>
 
             <p
-              class="text-info"
+              class=""
             >
               我擅长各种语言、框架和工具，它们让我能够构建强大且可扩展的应用程序
             </p>
@@ -80,7 +80,7 @@ function handleCopy() {
         class="col-span-1 row-span-4 max-sm:col-span-3"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
+          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
         >
           <div
             class="h-[326px] w-full flex items-center justify-center rounded-3xl max-sm:h-fit"
@@ -121,7 +121,7 @@ function handleCopy() {
               </span>
 
               <span
-                class="text-info"
+                class=""
               >
                 联系我
               </span>
@@ -135,7 +135,7 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
+          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
         >
           <div
             class="h-[266px] cursor-pointer max-sm:w-full"
@@ -151,7 +151,7 @@ function handleCopy() {
             </p>
 
             <p
-              class="text-info"
+              class=""
             >
               我喜欢通过代码解决问题和构建事物,喜欢探索新技术并提高自己的技能。
             </p>
@@ -164,7 +164,7 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <div
-          class="h-full w-full flex flex-col gap-5 border border-[#1c1c21] rounded-lg border-solid bg-[#0E0E10] p-7 max-sm:p-4"
+          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
         >
           <div
             class="aspect-square h-[120px] w-full cursor-pointer max-sm:h-fit"

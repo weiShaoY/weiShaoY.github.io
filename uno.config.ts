@@ -2,8 +2,8 @@ import {
   defineConfig,
   presetIcons,
   presetTypography,
-  presetUno,
   presetWebFonts,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 
@@ -82,10 +82,16 @@ export default defineConfig({
 
     // //////////////////  主题  //////////////////
     'switch-animation': 'transition duration-300',
-    'bg-base': 'bg-[#f0f0f0] dark:bg-[#20202a] switch-animation',
-    'card-base': 'bg-[#ffffff] dark:bg-[#10101a] switch-animation',
-    'text-base': 'text-[#20202a] dark:text-[#f0f0f0] switch-animation',
+
+    'bg-base': 'bg-[#9B9996] dark:bg-[#212223] switch-animation',
+
+    'card-base': 'bg-[#D9D5C9] dark:bg-[#0E0E0F] rounded-lg overflow-hidden switch-animation ',
+
+    // ///////////////////
+    'text-base': 'text-[#333333] dark:text-[#D0D2D6] switch-animation',
+
     'switch-label-base': 'bg-gray-200 dark:bg-gray-800 switch-animation',
+
     'switch-span-base': 'bg-white dark:bg-gray-300 switch-animation',
   },
 
@@ -128,7 +134,7 @@ export default defineConfig({
      *  @description UnoCSS 的核心预设
      *  @see https://github.com/unocss/unocss#preset-uno
      */
-    presetUno({
+    presetWind3({
       // dark: 'class',
     }),
 

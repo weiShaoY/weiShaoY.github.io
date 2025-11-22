@@ -55,7 +55,7 @@ function handleOpenSite() {
       >
         <!-- 左侧 -->
         <div
-          class="relative flex flex-col gap-5 bg-[#0E0E0F] p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
+          class="relative flex flex-col gap-5 card-base p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
         >
           <!-- 项目展示图 -->
           <div
@@ -168,7 +168,7 @@ function handleOpenSite() {
 
         <!-- 右侧 -->
         <div
-          class="relative h-full w-full border border-[#1c1c21] rounded-lg border-solid bg-[#0e0e10] max-sm:h-96"
+          class="relative h-full w-full card-base max-sm:h-96"
         >
           <Computer
             :video="selectedProject.video"

@@ -947,7 +947,7 @@ watch(content, () => {
     <!-- 带滚动的消息区域 -->
     <main
       ref="messagesContainer"
-      class="chatbot-messages mb-4 mr-[1px] max-w-full flex-1 overflow-y-auto prose prose-sm"
+      class="chatbot-messages mb-4 mr-[1px] max-w-full flex-1 overflow-y-auto text-base prose-sm"
       @scroll="handleContainerScroll"
     >
       <div

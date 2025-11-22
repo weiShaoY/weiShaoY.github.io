@@ -78,7 +78,7 @@ async function handleSubmit(e: Event) {
         <!-- 左侧 -->
         <div
           v-light
-          class="relative flex flex-col gap-5 rounded-lg bg-[#0E0E0F] p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
+          class="relative flex flex-col gap-5 card-base p-10 shadow-[#0e0e10] shadow-2xl max-sm:px-5 max-sm:py-10"
         >
           <form
             ref="formRef"
