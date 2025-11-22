@@ -527,13 +527,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/emoji/': RouteRecordInfo<
-      '/emoji/',
-      '/emoji',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/error/403/': RouteRecordInfo<
       '/error/403/',
       '/error/403',
@@ -712,6 +705,13 @@ declare module 'vue-router/auto-routes' {
     '/test copy/': RouteRecordInfo<
       '/test copy/',
       '/test copy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/tool/design/emoji/': RouteRecordInfo<
+      '/tool/design/emoji/',
+      '/tool/design/emoji',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -1182,12 +1182,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/emoji/index.vue': {
-      routes:
-        | '/emoji/'
-      views:
-        | never
-    }
     'src/pages/error/403/index.vue': {
       routes:
         | '/error/403/'
@@ -1341,6 +1335,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/test copy/index.vue': {
       routes:
         | '/test copy/'
+      views:
+        | never
+    }
+    'src/pages/tool/design/emoji/index.vue': {
+      routes:
+        | '/tool/design/emoji/'
       views:
         | never
     }

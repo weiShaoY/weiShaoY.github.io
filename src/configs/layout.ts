@@ -33,10 +33,11 @@ export const layoutConfig: {
         value: '/bigScreen',
         label: 'BigScreen',
       },
-      {
-        value: '/emoji',
-        label: 'Emoji',
-      },
+
+      // {
+      //   value: '/emoji',
+      //   label: 'Emoji',
+      // },
       {
         value: '/police',
         label: 'Police',
