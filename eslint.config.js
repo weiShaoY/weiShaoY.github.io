@@ -96,7 +96,7 @@ export default antfu({
       // ],
 
       // 空行最多不能超过 3 行
-      // 'no-multiple-empty-lines': ['error', { max: 3 }],
+      // 'no-multiple-empty-lines': ['error', { max: 2 }],
 
       // 禁止使用禁止 process
       'node/prefer-global/process': 'off',
@@ -185,5 +185,9 @@ export default antfu({
         },
       ],
     },
+  },
+
+  rules: {
+    // '@stylistic/no-multiple-empty-lines': ['error', { max: 2 }],
   },
 })

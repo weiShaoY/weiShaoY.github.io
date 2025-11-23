@@ -5,14 +5,16 @@ import { defineStore } from 'pinia'
 
 import { ref } from 'vue'
 
+import { SETTING_CONFIG } from '@/configs'
+
 /**
  *  Setting模块
  */
 export const useSettingStore = defineStore('setting', () => {
   /**
-   *  index
+   *  是否为暗色模式
    */
-  const index = ref(1)
+  const isDark = ref(SETTING_CONFIG.isDark)
 
   return {
     isDark,

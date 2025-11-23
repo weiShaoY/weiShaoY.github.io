@@ -10,7 +10,12 @@
     "moduleResolution": "Bundler",
 
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/assets/styles/*"],
+
+      "@images/*": ["src/assets/images/*"],
+      "@stores/*": ["src/stores/*"]
     },
     "resolveJsonModule": true,
     "types": [
@@ -29,6 +34,13 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue", "proxy.js", "src/pages/bigScreen/components/mapScene/mini3d/components/index.ts", "blog/.vitepress/theme/index.ts"],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.vue",
+    "proxy.js",
+    "src/pages/bigScreen/components/mapScene/mini3d/components/index.ts",
+    "blog/.vitepress/theme/index.ts"
+  ],
   "exclude": ["dist", "node_modules"]
 }

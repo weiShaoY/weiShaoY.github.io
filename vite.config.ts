@@ -86,7 +86,8 @@ export default defineConfig(({ mode }) => {
         '@utils': path.resolve('src/utils'),
         '@styles': path.resolve('src/assets/styles'),
         '@images': path.resolve('src/assets/images'),
-        '@store': path.resolve('src/stores'),
+        '@svgs': path.resolve('src/assets/svgs'),
+        '@stores': path.resolve('src/stores'),
       },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
@@ -170,7 +171,7 @@ export default defineConfig(({ mode }) => {
       // Vue Router 配置
       VueRouter({
         // 生成 TypeScript 路由声明文件
-        dts: 'src/types/vue-router-vite.d.ts',
+        dts: 'src/types/core/vue-router-vite.d.ts',
       }),
 
       // 支持 Vue 的 JSX 语法
@@ -202,17 +203,17 @@ export default defineConfig(({ mode }) => {
             importStyle: false,
           }),
         ],
-        dts: 'src/types/auto-imports.d.ts',
+        dts: 'src/types/core/auto-imports.d.ts',
         vueTemplate: true,
         eslintrc: {
           enabled: true,
         },
       }),
 
-      // 组件自动导入配置
+      // ===== 组件自动导入插件 =====
       Components({
         // 生成 TypeScript 组件声明文件
-        dts: 'src/types/components.d.ts',
+        dts: 'src/types/core/components.d.ts',
         resolvers: [
           // 使用 Sass 引入 Element Plus 样式
           ElementPlusResolver({

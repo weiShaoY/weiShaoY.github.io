@@ -20,4 +20,6 @@ export * from './openUrlInWindow'
 
 export * from './sendContactEmail'
 
+export * from './setElementThemeColor'
+
 export * from './threeJs'

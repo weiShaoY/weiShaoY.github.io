@@ -7,7 +7,7 @@ import GlobalHeader from './modules/global-header/index.vue'
 
 <template>
   <div
-    class="bg-base h-screen w-full flex flex-col text-base"
+    class="h-screen w-full flex flex-col bg-base text-base"
   >
     <!-- 顶部导航栏 -->
     <GlobalHeader />
