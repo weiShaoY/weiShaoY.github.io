@@ -7,11 +7,13 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const ElMessage: typeof import('element-plus/es').ElMessage
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const addEventListen: typeof import('../../utils/event').addEventListen
   const adminMittBus: typeof import('../../utils/adminMittBus').adminMittBus
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
+  const colourBlend: typeof import('../../utils/setElementThemeColor').colourBlend
   const computed: typeof import('vue').computed
   const computedAsync: typeof import('@vueuse/core').computedAsync
   const computedEager: typeof import('@vueuse/core').computedEager
@@ -47,10 +49,16 @@ declare global {
   const effectScope: typeof import('vue').effectScope
   const extendRef: typeof import('@vueuse/core').extendRef
   const getActivePinia: typeof import('pinia').getActivePinia
+  const getCssVar: typeof import('../../utils/setElementThemeColor').getCssVar
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
+  const getDarkColor: typeof import('../../utils/setElementThemeColor').getDarkColor
+  const getLightColor: typeof import('../../utils/setElementThemeColor').getLightColor
   const h: typeof import('vue').h
+  const handleElementThemeColor: typeof import('../../utils/setElementThemeColor').handleElementThemeColor
+  const hexToRgb: typeof import('../../utils/setElementThemeColor').hexToRgb
+  const hexToRgba: typeof import('../../utils/setElementThemeColor').hexToRgba
   const homeMittBus: typeof import('../../utils/adminMittBus').homeMittBus
   const ignorableWatch: typeof import('@vueuse/core').ignorableWatch
   const imageFileToBase64: typeof import('../../utils/base64').imageFileToBase64
@@ -134,9 +142,11 @@ declare global {
   const removeEventListen: typeof import('../../utils/event').removeEventListen
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
+  const rgbToHex: typeof import('../../utils/setElementThemeColor').rgbToHex
   const sendContactEmail: typeof import('../../utils/sendContactEmail').sendContactEmail
   const setActivePinia: typeof import('pinia').setActivePinia
   const setDirectives: typeof import('../../directives/index').setDirectives
+  const setElementThemeColor: typeof import('../../utils/setElementThemeColor').setElementThemeColor
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
@@ -292,6 +302,7 @@ declare global {
   const useScroll: typeof import('@vueuse/core').useScroll
   const useScrollLock: typeof import('@vueuse/core').useScrollLock
   const useSessionStorage: typeof import('@vueuse/core').useSessionStorage
+  const useSettingStore: typeof import('../../stores/modules/setting/index').useSettingStore
   const useShare: typeof import('@vueuse/core').useShare
   const useSlots: typeof import('vue').useSlots
   const useSorted: typeof import('@vueuse/core').useSorted
@@ -322,6 +333,7 @@ declare global {
   const useToNumber: typeof import('@vueuse/core').useToNumber
   const useToString: typeof import('@vueuse/core').useToString
   const useToggle: typeof import('@vueuse/core').useToggle
+  const useToolStore: typeof import('../../stores/modules/tool/index').useToolStore
   const useTransition: typeof import('@vueuse/core').useTransition
   const useUrlSearchParams: typeof import('@vueuse/core').useUrlSearchParams
   const useUserMedia: typeof import('@vueuse/core').useUserMedia
@@ -370,11 +382,13 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../../utils/event')['addEventListen']>
     readonly adminMittBus: UnwrapRef<typeof import('../../utils/adminMittBus')['adminMittBus']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly colourBlend: UnwrapRef<typeof import('../../utils/setElementThemeColor')['colourBlend']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -410,10 +424,16 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getCssVar: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getCssVar']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
+    readonly getDarkColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getDarkColor']>
+    readonly getLightColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getLightColor']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleElementThemeColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['handleElementThemeColor']>
+    readonly hexToRgb: UnwrapRef<typeof import('../../utils/setElementThemeColor')['hexToRgb']>
+    readonly hexToRgba: UnwrapRef<typeof import('../../utils/setElementThemeColor')['hexToRgba']>
     readonly homeMittBus: UnwrapRef<typeof import('../../utils/adminMittBus')['homeMittBus']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly imageFileToBase64: UnwrapRef<typeof import('../../utils/base64')['imageFileToBase64']>
@@ -497,9 +517,11 @@ declare module 'vue' {
     readonly removeEventListen: UnwrapRef<typeof import('../../utils/event')['removeEventListen']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
+    readonly rgbToHex: UnwrapRef<typeof import('../../utils/setElementThemeColor')['rgbToHex']>
     readonly sendContactEmail: UnwrapRef<typeof import('../../utils/sendContactEmail')['sendContactEmail']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setDirectives: UnwrapRef<typeof import('../../directives/index')['setDirectives']>
+    readonly setElementThemeColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['setElementThemeColor']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
@@ -655,6 +677,7 @@ declare module 'vue' {
     readonly useScroll: UnwrapRef<typeof import('@vueuse/core')['useScroll']>
     readonly useScrollLock: UnwrapRef<typeof import('@vueuse/core')['useScrollLock']>
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
+    readonly useSettingStore: UnwrapRef<typeof import('../../stores/modules/setting/index')['useSettingStore']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSorted: UnwrapRef<typeof import('@vueuse/core')['useSorted']>
@@ -685,6 +708,7 @@ declare module 'vue' {
     readonly useToNumber: UnwrapRef<typeof import('@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('@vueuse/core')['useToString']>
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
+    readonly useToolStore: UnwrapRef<typeof import('../../stores/modules/tool/index')['useToolStore']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>

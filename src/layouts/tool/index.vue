@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import HeaderBar from './modules/HeaderBar/index.vue'
 
-import SidebarMenu from './modules/SidebarMenu/index.vue'
+// import SidebarMenu from './modules/SidebarMenu/index.vue'
 
 defineOptions({
   name: 'AppLayout',
@@ -16,7 +16,7 @@ defineOptions({
     <aside
       id="app-sidebar"
     >
-      <SidebarMenu />
+      <!-- <SidebarMenu /> -->
     </aside>
 
     <main
@@ -31,18 +31,18 @@ defineOptions({
       <div
         id="app-content"
       >
-        <ArtPageContent />
+        <!-- <ArtPageContent /> -->
       </div>
     </main>
 
     <div
       id="app-global"
     >
-      <ArtGlobalComponent />
+      <!-- <ArtGlobalComponent /> -->
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  // @use './style';
+  @use './style';
 </style>

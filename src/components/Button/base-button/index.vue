@@ -50,6 +50,14 @@ type Props = {
 
   /** 是否显示加载中 */
   loading?: boolean
+
+  /**
+   *  是否悬浮旋转
+   */
+  /**
+   *  是否悬浮旋转
+   */
+  rotate?: boolean
 }
 
 /**
@@ -90,9 +98,15 @@ function stringifyClass(input?: string | Record<string, boolean> | Array<string 
 const computedButtonClass = computed(() => twMerge(DEFAULT_CLASS, stringifyClass(props.class)))
 
 /**
- * 计算图标的最终类名
+ * 计算图标的最终类名（包含旋转效果）
  */
-const computedIconClass = computed(() => stringifyClass(props.iconClass))
+const computedIconClass = computed(() => {
+  const baseClass = stringifyClass(props.iconClass)
+
+  const rotateClass = props.rotate ? 'hover:rotate-180 hover:transition-transform hover:duration-1500' : ''
+
+  return twMerge(baseClass, rotateClass)
+})
 
 /**
  * 计算按钮的行内样式

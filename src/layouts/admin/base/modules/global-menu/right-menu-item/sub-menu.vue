@@ -102,7 +102,7 @@ function goPage(item: RouterType.AdminRoute) {
 </template>
 
 <style lang="scss">
-@use '@/themes/variables.scss' as *;
+// @use '@/themes/variables.scss' as *;
 
 .el-sub-menu__title {
   margin: 0 auto !important;

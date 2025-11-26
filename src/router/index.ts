@@ -85,4 +85,4 @@ export async function setupRouter(app: App) {
 /**
  * 延迟检查重复路由
  */
-checkDuplicateRouteList(routeList)
+// checkDuplicateRouteList(routeList)

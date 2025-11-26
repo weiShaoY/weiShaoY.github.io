@@ -22,6 +22,15 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng'
 
 // import vueDevTools from 'vite-plugin-vue-devtools'
 
+/**
+ * 解析路径
+ * @param paths 路径
+ * @returns 解析后的路径
+ */
+function resolvePath(paths: string) {
+  return path.resolve(__dirname, paths)
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd()) as Env.ImportMeta
 
@@ -57,37 +66,16 @@ export default defineConfig(({ mode }) => {
       // },
     },
 
-    // ========== 构建配置 ==========
-    // build: {
-    //   target: 'es2015',
-    //   minify: 'terser',
-    //   terserOptions: {
-    //     compress: {
-    //       drop_console: mode === 'production',
-    //       drop_debugger: mode === 'production',
-    //     },
-    //   },
-    //   rollupOptions: {
-    //     output: {
-    //       manualChunks: {
-    //         'element-plus': ['element-plus'],
-    //         'vue-vendor': ['vue', 'vue-router', 'pinia'],
-    //         echarts: ['echarts'],
-    //       },
-    //     },
-    //   },
-    //   chunkSizeWarningLimit: 1500,
-    // },
-
     // ========== 解析配置 ==========
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        '@utils': path.resolve('src/utils'),
-        '@styles': path.resolve('src/assets/styles'),
-        '@images': path.resolve('src/assets/images'),
-        '@svgs': path.resolve('src/assets/svgs'),
-        '@stores': path.resolve('src/stores'),
+        '@assets': resolvePath('src/assets'),
+        '@utils': resolvePath('src/utils'),
+        '@styles': resolvePath('src/assets/styles'),
+        '@images': resolvePath('src/assets/images'),
+        '@svgs': resolvePath('src/assets/svgs'),
+        '@stores': resolvePath('src/stores'),
       },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
@@ -96,21 +84,6 @@ export default defineConfig(({ mode }) => {
     css: {
       devSourcemap: true,
       preprocessorOptions: {
-        // scss: {
-        //   // 使用现代编译器 API (Sass 新特性支持)
-        //   api: 'modern-compiler',
-
-        //   /**
-        //    * 全局注入的 SCSS 代码
-        //    * @use 指令引入全局样式文件
-        //    * as * 表示将所有 mixin/variables 导入全局命名空间
-        //    */
-        //   additionalData: `
-        //     @use "@/themes/variables.scss" as *;
-        //   `,
-        //   charset: false,
-        // },
-
         scss: {
           additionalData: `
             @use "@styles/core/el-light.scss" as *;

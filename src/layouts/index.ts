@@ -23,7 +23,6 @@ export const ADMIN_IFRAME_LAYOUT = () => import('./admin/iframe/index.vue')
  */
 export const ADMIN_EXTERNAL_LAYOUT = () => import('./admin/external/index.vue')
 
-// ////////////////////////////////////
 /**
  *  工具模块布局组件
  */
