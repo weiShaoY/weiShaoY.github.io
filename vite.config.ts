@@ -108,6 +108,12 @@ export default defineConfig(({ mode }) => {
       },
     },
 
+    // 打包去除 console.log && debugger
+    esbuild: {
+      pure: env.VITE_APP_DELETE_CONSOLE === 'true' ? ['console.log'] : [],
+      drop: env.VITE_APP_DELETE_DEBUGGER === 'true' ? ['debugger'] : [],
+    },
+
     // ========== 依赖优化配置 ==========
     optimizeDeps: {
       include: [

@@ -100,6 +100,16 @@ declare namespace Env {
     readonly VITE_CONTACT_EMAIL: string
 
     /**
+     * 打包过程是否删除 debugger
+     */
+    readonly VITE_APP_DELETE_CONSOLE: 'true' | 'false'
+
+    /**
+     *  打包过程是否删除 debugger
+     */
+    readonly VITE_APP_DELETE_DEBUGGER: 'true' | 'false'
+
+    /**
      * 接口-第三方代理地址 (ThingProxy 最快的免费代理服务，重要，影响接口访问)
      *
      * @description
