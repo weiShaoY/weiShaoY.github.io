@@ -1,244 +1,169 @@
 /**
- * useTool - 工具模块
  *
- * @module useTool
+ * @module useTheme
+ * @description  主题相关的 hooks
  */
 
-import { computed } from 'vue'
+import type { SystemThemeTypes } from '@/types/tool'
 
-import { TOOL_CONFIG } from '@/configs/tool'
+import { usePreferredDark } from '@vueuse/core' //  从 VueUse 引入 usePreferredDark hook，用于检测系统是否偏好暗黑模式
+
+import { watch } from 'vue'
+
+import { TOOL_CONFIG } from '@/configs'
+
+import { SystemThemeEnum } from '@/enums/tool' //  系统主题枚举，包含 light, dark, auto
 
 import { useToolStore } from '@/stores'
 
-// 功能配置项基础接口
-export type FeatureConfigItem = {
+import {
+  getDarkColor,
+  getLightColor,
+  setElementThemeColor,
+} from '@/utils/ui' //  UI 工具函数，用于获取颜色深浅，设置 element-plus 主题色
 
-  /**
-   * 是否启用该功能
-   */
-  enabled: boolean
+export function useTheme() {
+  const toolStore = useToolStore() //  获取 setting store 实例
 
-  /**
-   * 功能描述
-   */
-  description: string
-}
+  // 禁用过渡效果
+  const disableTransitions = () => {
+    const style = document.createElement('style')
 
-// 顶部栏功能配置接口
-export type HeaderBarFeatureConfig = {
-
-  /** 菜单按钮 */
-  menuButton: FeatureConfigItem
-
-  /** 刷新按钮 */
-  refreshButton: FeatureConfigItem
-
-  /** 快速入口 */
-  fastEnter: FeatureConfigItem
-
-  /** 面包屑导航 */
-  breadcrumb: FeatureConfigItem
-
-  /** 全局搜索 */
-  globalSearch: FeatureConfigItem
-
-  /** 全屏功能 */
-  fullscreen: FeatureConfigItem
-
-  /** 通知功能 */
-  notification: FeatureConfigItem
-
-  /** 聊天功能 */
-  chat: FeatureConfigItem
-
-  /** 多语言切换 */
-  language: FeatureConfigItem
-
-  /** 设置面板 */
-  settings: FeatureConfigItem
-
-  /** 主题切换 */
-  themeToggle: FeatureConfigItem
-}
-
-export function useToolCommon() {
-  const toolStore = useToolStore()
-
-  /**
-   * 首页路径
-   * 从菜单 store 中获取配置的首页路径
-   */
-  const homePath = computed(() => toolStore.menuObj.homePath)
-
-  /**
-   * 刷新当前页面
-   * 通过切换 setting store 中的 refresh 状态触发页面重新渲染
-   */
-  const refresh = () => {
-    toolStore.settingObj.reload()
+    style.setAttribute('id', 'disable-transitions')
+    style.textContent = '* { transition: none !important; }' //  禁用所有元素的过渡效果
+    document.head.appendChild(style)
   }
 
-  /**
-   *  获取顶部栏配置
-   */
-  // const headerBarConfigRef = computed(() => TOOL_CONFIG.headerBar)
+  // 启用过渡效果
+  const enableTransitions = () => {
+    const style = document.getElementById('disable-transitions')
 
-  // /**
-  //  * 检查特定功能是否启用
-  //  * @param feature 功能名称
-  //  * @returns 是否启用
-  //  */
-  // const isFeatureEnabled = (feature: keyof HeaderBarFeatureConfig): boolean => {
-  //   return headerBarConfigRef.value[feature]?.enabled ?? false
-  // }
+    if (style) {
+      style.remove() //  移除禁用的过渡效果样式
+    }
+  }
 
-  // /**
-  //  * 获取功能配置信息
-  //  * @param feature 功能名称
-  //  * @returns 功能配置信息
-  //  */
-  // const getFeatureConfig = (feature: keyof HeaderBarFeatureConfig) => {
-  //   return headerBarConfigRef.value[feature]
-  // }
+  // 设置系统主题
+  const setSystemTheme = (theme: SystemThemeEnum, themeMode?: SystemThemeEnum) => {
+    // 临时禁用过渡效果，防止切换主题时出现闪烁
+    disableTransitions()
 
-  // // 检查菜单按钮是否显示
-  // const shouldShowMenuButton = computed(() => {
-  //   return isFeatureEnabled('menuButton') && toolStore.settingObj.showMenuButton
-  // })
+    const el = document.getElementsByTagName('html')[0] //  获取 HTML 元素
 
-  // // 检查刷新按钮是否显示
-  // const shouldShowRefreshButton = computed(() => {
-  //   return isFeatureEnabled('refreshButton') && toolStore.settingObj.showRefreshButton
-  // })
+    const isDark = theme === SystemThemeEnum.DARK //  是否是暗黑主题
 
-  // // 检查快速入口是否显示
-  // const shouldShowFastEnter = computed(() => {
-  //   return isFeatureEnabled('fastEnter') && toolStore.settingObj.showFastEnter
-  // })
+    if (!themeMode) {
+      themeMode = theme //  如果没有指定主题模式，则使用主题类型
+    }
 
-  // // 检查面包屑是否显示
-  // const shouldShowBreadcrumb = computed(() => {
-  //   return isFeatureEnabled('breadcrumb') && toolStore.settingObj.showCrumbs
-  // })
+    const currentTheme = TOOL_CONFIG.systemThemeStyles[theme as keyof SystemThemeTypes] //  获取当前主题样式配置
 
-  // // 检查全局搜索是否显示
-  // const shouldShowGlobalSearch = computed(() => {
-  //   return isFeatureEnabled('globalSearch')
-  // })
+    if (currentTheme) {
+      el.setAttribute('class', currentTheme.className) //  设置 HTML 元素的 class，应用主题样式
+    }
 
-  // // 检查全屏按钮是否显示
-  // const shouldShowFullscreen = computed(() => {
-  //   return isFeatureEnabled('fullscreen')
-  // })
+    // 设置按钮颜色加深或变浅
+    const primary = toolStore.settingObj.systemThemeColor //  获取主题色
 
-  // // 检查通知中心是否显示
-  // const shouldShowNotification = computed(() => {
-  //   return isFeatureEnabled('notification')
-  // })
+    for (let i = 1; i <= 9; i++) {
+      document.documentElement.style.setProperty(
+        `--el-color-primary-light-${i}`,
+        isDark ? `${getDarkColor(primary, i / 10)}` : `${getLightColor(primary, i / 10)}`, //  根据主题色生成浅色/深色颜色，并设置到 CSS 变量
+      )
+    }
 
-  // // 检查聊天功能是否显示
-  // const shouldShowChat = computed(() => {
-  //   return isFeatureEnabled('chat')
-  // })
+    // 更新store中的主题设置
+    toolStore.settingObj.setGlopTheme(theme, themeMode) //  更新 store 中的主题类型和模式
 
-  // // 检查设置面板是否显示
-  // const shouldShowSettings = computed(() => {
-  //   return isFeatureEnabled('settings')
-  // })
+    // 使用 requestAnimationFrame 确保在下一帧恢复过渡效果，减少闪烁
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        enableTransitions()
+      })
+    })
+  }
 
-  // // 检查主题切换是否显示
-  // const shouldShowThemeToggle = computed(() => {
-  //   return isFeatureEnabled('themeToggle')
-  // })
+  // 使用 VueUse 的 usePreferredDark 检测系统主题偏好
+  const prefersDark = usePreferredDark()
 
-  // // 获取快速入口的最小宽度
-  // const fastEnterMinWidth = computed(() => {
-  //   const config = getFeatureConfig('fastEnter')
+  // 自动设置系统主题
+  const setSystemAutoTheme = () => {
+    const theme = prefersDark.value ? SystemThemeEnum.DARK : SystemThemeEnum.LIGHT //  根据系统偏好设置主题
 
-  //   return (config as any)?.minWidth || 1200
-  // })
+    setSystemTheme(theme, SystemThemeEnum.AUTO) //  设置主题为 auto 模式
+  }
 
-  // /**
-  //  * 检查功能是否启用（别名）
-  //  * @param feature 功能名称
-  //  * @returns 是否启用
-  //  */
-  // const isFeatureActive = (feature: keyof HeaderBarFeatureConfig): boolean => {
-  //   return isFeatureEnabled(feature)
-  // }
-
-  // /**
-  //  * 获取功能配置（别名）
-  //  * @param feature 功能名称
-  //  * @returns 功能配置
-  //  */
-  // const getFeatureInfo = (feature: keyof HeaderBarFeatureConfig) => {
-  //   return getFeatureConfig(feature)
-  // }
-
-  // /**
-  //  * 获取所有启用的功能列表
-  //  * @returns 启用的功能名称数组
-  //  */
-  // const getEnabledFeatures = (): (keyof HeaderBarFeatureConfig)[] => {
-  //   return Object.keys(headerBarConfigRef.value).filter(
-  //     key => headerBarConfigRef.value[key as keyof HeaderBarFeatureConfig]?.enabled,
-  //   ) as (keyof HeaderBarFeatureConfig)[]
-  // }
-
-  // /**
-  //  * 获取所有禁用的功能列表
-  //  * @returns 禁用的功能名称数组
-  //  */
-  // const getDisabledFeatures = (): (keyof HeaderBarFeatureConfig)[] => {
-  //   return Object.keys(headerBarConfigRef.value).filter(
-  //     key => !headerBarConfigRef.value[key as keyof HeaderBarFeatureConfig]?.enabled,
-  //   ) as (keyof HeaderBarFeatureConfig)[]
-  // }
-
-  // /**
-  //  * 获取所有启用的功能（别名）
-  //  * @returns 启用的功能列表
-  //  */
-  // const getActiveFeatures = () => {
-  //   return getEnabledFeatures()
-  // }
-
-  // /**
-  //  * 获取所有禁用的功能（别名）
-  //  * @returns 禁用的功能列表
-  //  */
-  // const getInactiveFeatures = () => {
-  //   return getDisabledFeatures()
-  // }
-
-  const headerBar = ref({
-    /**
-     *  获取顶部栏配置
-     */
-    headerBarConfigRef: TOOL_CONFIG.headerBar,
-
-    /**
-     * 检查菜单按钮是否显示
-     */
-    // shouldShowMenuButton: computed(() => {
-    //   return isFeatureEnabled('menuButton') && toolStore.settingObj.showMenuButton
-    // }),
-  })
-
-  /**
-   * 检查特定功能是否启用
-   * @param feature 功能名称
-   * @returns 是否启用
-   */
-  // const isFeatureEnabled = (feature: keyof HeaderBarFeatureConfig): boolean => {
-  //   return headerBar.value.headerBarConfigRef[feature]?.enabled ?? false
-  // }
+  // 切换主题
+  const switchThemeStyles = (theme: SystemThemeEnum) => {
+    if (theme === SystemThemeEnum.AUTO) {
+      setSystemAutoTheme() //  自动模式，根据系统设置
+    }
+    else {
+      setSystemTheme(theme) //  手动切换主题
+    }
+  }
 
   return {
-    homePath,
-    refresh,
+    setSystemTheme, //  设置系统主题
+    setSystemAutoTheme, //  设置自动主题
+    switchThemeStyles, //  切换主题
+    prefersDark, //  系统是否偏好暗黑模式
+  }
+}
 
-    // /////////////////////////////
+/**
+ * 初始化主题系统
+ */
+export function initializeTheme() {
+  const toolStore = useToolStore() //  获取 setting store 实例
+
+  const prefersDark = usePreferredDark() //  检测系统是否偏好暗黑模式
+
+  // 根据系统偏好应用主题
+  const applyThemeByMode = () => {
+    const el = document.getElementsByTagName('html')[0] //  获取 HTML 元素
+
+    let actualTheme = toolStore.settingObj.systemThemeType //  实际应用的主题类型
+
+    // 如果是 AUTO 模式，检测系统偏好
+    if (toolStore.settingObj.systemThemeMode === SystemThemeEnum.AUTO) {
+      //  根据系统偏好设置主题
+      actualTheme = prefersDark.value ? SystemThemeEnum.DARK : SystemThemeEnum.LIGHT
+
+      // 更新实际应用的主题类型
+      toolStore.settingObj.systemThemeType = actualTheme
+    }
+
+    // 设置主题 class
+    const currentTheme = TOOL_CONFIG.systemThemeStyles[actualTheme as keyof SystemThemeTypes] //  获取主题样式
+
+    if (currentTheme) {
+      el.setAttribute('class', currentTheme.className) //  设置 HTML 元素的 class，应用主题样式
+    }
+
+    // 设置主题颜色
+    setElementThemeColor(toolStore.settingObj.systemThemeColor) //  设置 element-plus 组件的主题色
+
+    // 设置圆角
+    document.documentElement.style.setProperty('--custom-radius', `${toolStore.settingObj.customRadius}rem`) //  设置全局圆角大小
+  }
+
+  // 应用主题
+  applyThemeByMode() //  初始化应用主题
+
+  // 如果是 AUTO 模式，监听系统主题变化（使用 VueUse 的响应式特性）
+  if (toolStore.settingObj.systemThemeMode === SystemThemeEnum.AUTO) {
+    watch(
+      prefersDark,
+      () => {
+        // 只有在 AUTO 模式下才响应系统主题变化
+        if (toolStore.settingObj.systemThemeMode === SystemThemeEnum.AUTO) {
+          applyThemeByMode() //  应用主题
+        }
+      },
+      {
+        immediate: false, //  初始不立即执行
+      },
+    )
   }
 }

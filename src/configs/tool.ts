@@ -122,6 +122,7 @@ export const WEB_LINKS = {
  *  工具配置
  */
 export const TOOL_CONFIG = {
+
   /** 系统主题 对象 */
   systemThemeStyles: {
     [SystemThemeEnum.LIGHT]: {

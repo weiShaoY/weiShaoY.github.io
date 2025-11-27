@@ -15,7 +15,7 @@
  * @author Art Design Pro Team
  */
 
-export function useToolCommon() {
+export function useCommon() {
   /**
    * 滚动到页面顶部
    * 查找主内容区域并将其滚动位置重置为顶部

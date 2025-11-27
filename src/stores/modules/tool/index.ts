@@ -5,7 +5,7 @@ import type {
   ContainerWidthEnum,
   MenuThemeEnum,
   MenuTypeEnum,
-  SystemThemeEnum,
+
 } from '@/enums/tool'
 
 import { defineStore } from 'pinia'
@@ -13,6 +13,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 import { TOOL_CONFIG } from '@/configs/tool'
+
+import { SystemThemeEnum } from '@/enums/tool'
 
 import { setElementThemeColor } from '@/utils'
 
@@ -90,6 +92,18 @@ export const useToolStore = defineStore('tool', () => {
 
     /** 系统主题颜色 */
     systemThemeColor: TOOL_CONFIG.setting.systemThemeColor,
+
+    /**
+     * 设置全局主题
+     * @param theme 主题类型
+     * @param themeMode 主题模式
+     */
+    setGlopTheme(theme: SystemThemeEnum, themeMode: SystemThemeEnum) {
+      settingObj.value.systemThemeType = theme
+      settingObj.value.systemThemeMode = themeMode
+
+      // localStorage.setItem(StorageConfig.THEME_KEY, theme)
+    },
 
     /**
      * 设置Element Plus主题颜色

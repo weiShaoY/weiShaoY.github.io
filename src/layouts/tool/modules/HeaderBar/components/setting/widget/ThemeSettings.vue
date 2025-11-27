@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-// import { useTheme } from '@/hooks/core/useTheme'
+import { useTheme } from '@/hooks/useTool'
 
 import { useToolStore } from '@/stores'
 
@@ -12,7 +12,7 @@ const toolStore = useToolStore()
 
 const { configOptions } = useSettingsConfig()
 
-// const { switchThemeStyles } = useTheme()
+const { switchThemeStyles } = useTheme()
 </script>
 
 <template>
