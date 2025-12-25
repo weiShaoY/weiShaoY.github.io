@@ -709,13 +709,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/tool/design/emoji/': RouteRecordInfo<
-      '/tool/design/emoji/',
-      '/tool/design/emoji',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/work/': RouteRecordInfo<
       '/work/',
       '/work',
@@ -1335,12 +1328,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/test copy/index.vue': {
       routes:
         | '/test copy/'
-      views:
-        | never
-    }
-    'src/pages/tool/design/emoji/index.vue': {
-      routes:
-        | '/tool/design/emoji/'
       views:
         | never
     }

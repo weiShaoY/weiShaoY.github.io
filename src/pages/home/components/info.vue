@@ -51,7 +51,7 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
-          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
+          class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
             class="h-[266px] w-full cursor-pointer max-sm:h-fit"
@@ -80,7 +80,7 @@ function handleCopy() {
         class="col-span-1 row-span-4 max-sm:col-span-3"
       >
         <div
-          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
+          class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
             class="h-[326px] w-full flex items-center justify-center rounded-3xl max-sm:h-fit"
@@ -135,7 +135,7 @@ function handleCopy() {
         class="col-span-2 row-span-3 max-sm:col-span-3"
       >
         <div
-          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
+          class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
             class="h-[266px] cursor-pointer max-sm:w-full"
@@ -164,7 +164,7 @@ function handleCopy() {
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <div
-          class="card-base h-full w-full flex flex-col gap-5 p-7 max-sm:p-4"
+          class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
             class="aspect-square h-[120px] w-full cursor-pointer max-sm:h-fit"
@@ -201,7 +201,7 @@ function handleCopy() {
       <!-- Github活动图 -->
 
       <!-- github-readme-stats -->
-      <div
+      <!-- <div
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <img
@@ -209,9 +209,9 @@ function handleCopy() {
           alt=""
           class="h-full w-full overflow-hidden rounded-1"
         >
-      </div>
+      </div> -->
 
-      <div
+      <!-- <div
         class="col-span-1 row-span-2 max-sm:col-span-3"
       >
         <img
@@ -219,29 +219,29 @@ function handleCopy() {
           alt=""
           class="h-60 w-full overflow-hidden rounded-1"
         >
-      </div>
+      </div> -->
 
-      <div
+      <!-- <div
         class="col-span-1 row-span-2 flex items-center justify-center max-sm:col-span-3"
       >
-        <!-- <img
+        <img
           src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=weiShaoY&theme=merko"
           alt=""
           class="h-60 w-full"
-        > -->
+        >
 
-        <!-- <img
+        <img
           src="https://github-readme-activity-graph.vercel.app/graph?username=weiShaoY&theme=merko&hide_border=true&radius=8&bg_color=0E0E10&line=00ff00&point=ffffff&custom_title=Github%20%E8%B4%A1%E7%8C%AE%E5%9B%BE"
           alt=""
           class="h-[212px] w-full"
-        > -->
+        >
 
         <img
           src="https://pixel-profile.vercel.app/api/github-stats?username=weiShaoY&theme=crt&pixelate_avatar=false"
           alt=""
           class="h-[212px] w-full overflow-hidden rounded-1"
         >
-      </div>
+      </div> -->
 
       <div
         class="col-span-3 row-span-3 max-sm:col-span-3"

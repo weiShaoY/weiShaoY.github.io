@@ -345,7 +345,6 @@
     "useToNumber": true,
     "useToString": true,
     "useToggle": true,
-    "useToolStore": true,
     "useTransition": true,
     "useUrlSearchParams": true,
     "useUserMedia": true,

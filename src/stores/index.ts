@@ -12,8 +12,6 @@ export * from './modules/setting'
 
 export * from './modules/table'
 
-export * from './modules/tool'
-
 const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
