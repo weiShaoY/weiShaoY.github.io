@@ -9,7 +9,7 @@ import type {
 
 import type * as THREE from 'three'
 
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import type { GLTF } from 'three/addons/loaders/GLTFLoader.js'
 
 import type CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 

@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type * as THREE from 'three'
 
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import type { GLTF } from 'three/addons/loaders/GLTFLoader.js'
 
 import type { ThreeContainerType } from './types'
 
@@ -10,17 +10,17 @@ import * as Three from 'three'
 
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
-import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js'
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
-import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
+import { BloomPass } from 'three/addons/postprocessing/BloomPass.js'
 
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
 
 import { useGarageStore } from '@/stores'
 
