@@ -59,6 +59,8 @@ declare global {
   const extendRef: typeof import('@vueuse/core').extendRef
   const fetchHttp: typeof import('../../apis/http/fetch/index').fetchHttp
   const findSkillsByName: typeof import('../../configs/skills').findSkillsByName
+  const formatDateTime: typeof import('../../utils/time').formatDateTime
+  const formatTimestampToChineseDate: typeof import('../../utils/time').formatTimestampToChineseDate
   const getActivePinia: typeof import('pinia').getActivePinia
   const getAllSkillsItems: typeof import('../../configs/skills').getAllSkillsItems
   const getCssVar: typeof import('../../utils/setElementThemeColor').getCssVar
@@ -66,6 +68,9 @@ declare global {
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
   const getDarkColor: typeof import('../../utils/setElementThemeColor').getDarkColor
+  const getDateSegment: typeof import('../../utils/time').getDateSegment
+  const getDuration: typeof import('../../utils/time').getDuration
+  const getElapsedTime: typeof import('../../utils/time').getElapsedTime
   const getLightColor: typeof import('../../utils/setElementThemeColor').getLightColor
   const getSkillsItem: typeof import('../../configs/skills').getSkillsItem
   const h: typeof import('vue').h
@@ -448,6 +453,8 @@ declare module 'vue' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly fetchHttp: UnwrapRef<typeof import('../../apis/http/fetch/index')['fetchHttp']>
     readonly findSkillsByName: UnwrapRef<typeof import('../../configs/skills')['findSkillsByName']>
+    readonly formatDateTime: UnwrapRef<typeof import('../../utils/time')['formatDateTime']>
+    readonly formatTimestampToChineseDate: UnwrapRef<typeof import('../../utils/time')['formatTimestampToChineseDate']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getAllSkillsItems: UnwrapRef<typeof import('../../configs/skills')['getAllSkillsItems']>
     readonly getCssVar: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getCssVar']>
@@ -455,6 +462,9 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly getDarkColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getDarkColor']>
+    readonly getDateSegment: UnwrapRef<typeof import('../../utils/time')['getDateSegment']>
+    readonly getDuration: UnwrapRef<typeof import('../../utils/time')['getDuration']>
+    readonly getElapsedTime: UnwrapRef<typeof import('../../utils/time')['getElapsedTime']>
     readonly getLightColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getLightColor']>
     readonly getSkillsItem: UnwrapRef<typeof import('../../configs/skills')['getSkillsItem']>
     readonly h: UnwrapRef<typeof import('vue')['h']>

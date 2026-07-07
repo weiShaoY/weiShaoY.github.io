@@ -1,0 +1,9 @@
+set -e
+
+echo "🔄 正在更新版本时间戳..."
+
+pnpm exec tsx scripts/update-version.ts
+
+git add -- index.html
+
+echo "✅ 版本已更新，文件已加入提交"

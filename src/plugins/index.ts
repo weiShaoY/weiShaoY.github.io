@@ -6,6 +6,8 @@ import { setElementPlus } from './elementPlus'
 
 import { setupNProgress } from './nprogress'
 
+import { setVersionTip } from './version'
+
 import { setWelcome } from './welcome'
 
 import './svgIcons'
@@ -22,4 +24,6 @@ export function setupPlugins(app: VueApp) {
   // setupInitialLoading()
 
   setElementPlus(app)
+
+  setVersionTip()
 }
