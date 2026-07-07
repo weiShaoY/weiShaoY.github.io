@@ -189,5 +189,8 @@ export default antfu({
 
   rules: {
     // '@stylistic/no-multiple-empty-lines': ['error', { max: 2 }],
+
+    'pnpm/json-enforce-catalog': 'off',
+
   },
 })

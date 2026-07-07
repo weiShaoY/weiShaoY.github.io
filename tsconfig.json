@@ -3,44 +3,48 @@
     "target": "ESNext",
     "jsx": "preserve",
     "lib": ["DOM", "ESNext"],
-    "baseUrl": ".",
     "module": "ESNext",
-
-    /* Bundler mode */
     "moduleResolution": "Bundler",
 
     "paths": {
-      "@/*": ["src/*"],
-      "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/assets/styles/*"],
-
-      "@images/*": ["src/assets/images/*"],
-      "@stores/*": ["src/stores/*"]
+      "@/*": ["./src/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@styles/*": ["./src/assets/styles/*"],
+      "@images/*": ["./src/assets/images/*"],
+      "@stores/*": ["./src/stores/*"]
     },
+
     "resolveJsonModule": true,
+
     "types": [
       "vite/client",
-      "unplugin-vue-macros/macros-global",
+      "element-plus/global",
       "vite-plugin-svg-icons-ng/client",
       "vite-plugin-glsl/ext"
     ],
+    "allowImportingTsExtensions": true,
+
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
     "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
+
   "include": [
-    "./**/*.ts",
-    "./**/*.tsx",
-    "./**/*.vue",
-    "proxy.js",
-    "src/pages/bigScreen/components/mapScene/mini3d/components/index.ts",
-    "blog/.vitepress/theme/index.ts"
+    "*.js",
+    "src/**/*.{ts,tsx,vue}",
+    "blog/.vitepress/theme/**/*.ts"
   ],
   "exclude": ["dist", "node_modules"]
 }

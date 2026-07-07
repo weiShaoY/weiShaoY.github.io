@@ -32,16 +32,17 @@ function resolvePath(paths: string) {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd()) as Env.ImportMeta
+  const root = process.cwd()
 
-  return {
+  const env = loadEnv(mode, root)
+
+  return defineConfig({
     // ========== 基础配置 ==========
     base: env.VITE_APP_BASE_URL || '/',
-    envPrefix: 'VITE_',
 
     // ========== 开发服务器配置 ==========
     server: {
-      // 开发服务器端口，默认 3000
+      // 开发服务器端口
       port: Number(env.VITE_APP_PORT) || 3000,
 
       // 自动在浏览器中打开应用
@@ -82,9 +83,11 @@ export default defineConfig(({ mode }) => {
 
     // ========== CSS 预处理器配置 ==========
     css: {
-      devSourcemap: true,
       preprocessorOptions: {
         scss: {
+        // additionalData：所有scss文件编译前自动拼接这段代码，全局注入，无需每个组件手动导入
+        // 全局引入Element Plus自定义主题变量文件，as * 表示变量无需前缀直接使用
+        // 全局引入自定义scss混合工具，页面可直接调用自定义mixin函数
           additionalData: `
             @use "@styles/core/el-light.scss" as *;
             @use "@styles/core/mixin.scss" as *;
@@ -92,13 +95,20 @@ export default defineConfig(({ mode }) => {
         },
       },
 
+      // PostCSS后置处理器配置，SCSS编译完成后再处理原生CSS
       postcss: {
+        // 自定义PostCSS插件列表
         plugins: [
           {
+            // 自定义插件名称，仅用于标识插件用途
             postcssPlugin: 'internal:charset-removal',
+
+            // 捕获所有@charset规则节点
             AtRule: {
+              // 判断当前规则是否为字符集声明
               charset: (atRule) => {
                 if (atRule.name === 'charset') {
+                  // 删除CSS中所有 @charset "UTF-8"; 声明，避免重复字符集警告
                   atRule.remove()
                 }
               },
@@ -108,38 +118,38 @@ export default defineConfig(({ mode }) => {
       },
     },
 
+    // ========== 依赖优化配置 ==========
+    optimizeDeps: {
+      // include：强制指定需要预构建转换的第三方依赖库
+      // Vite启动时将CommonJS包转为浏览器可用ESM并缓存，解决加载报错、页面卡顿
+      include: [
+        // Vue 生态核心库
+        'vue', // Vue3核心源码，强制预构建加速页面加载
+        'vue-router', // Vue路由库，加入预构建防止路由页面加载异常
+        'pinia', // Vue状态管理库，预构建优化store加载速度
+
+        // Element Plus UI组件库相关
+        'element-plus/es', // Element Plus ESModule标准入口文件
+        'element-plus/es/components/*/style/css', // 匹配所有组件按需引入的css样式文件
+        'element-plus/es/components/*/style/index', // 匹配所有组件scss样式入口文件
+
+        // ECharts图表库模块化分包
+        'echarts/core', // ECharts核心底层模块
+        'echarts/charts', // ECharts各类图表模块（折线、柱状、饼图等）
+        'echarts/components', // ECharts配套组件（图例、提示框、坐标轴等）
+        'echarts/renderers', // ECharts渲染器（canvas/svg）
+
+        // 业务工具第三方库
+        'xlsx', // Excel导入导出解析库，CommonJS格式需预构建
+        'xgplayer', // 网页视频播放器组件库
+        'crypto-js', // 前端加解密工具库
+      ],
+    },
+
     // 打包去除 console.log && debugger
     esbuild: {
       pure: env.VITE_APP_DELETE_CONSOLE === 'true' ? ['console.log'] : [],
       drop: env.VITE_APP_DELETE_DEBUGGER === 'true' ? ['debugger'] : [],
-    },
-
-    // ========== 依赖优化配置 ==========
-    optimizeDeps: {
-      include: [
-        // Vue 生态
-        'vue',
-        'vue-router',
-        'pinia',
-
-        // Element Plus
-        'element-plus/es',
-        'element-plus/es/components/*/style/css',
-        'element-plus/es/components/*/style/index',
-
-        // 图表库
-        'echarts/core',
-        'echarts/charts',
-        'echarts/components',
-        'echarts/renderers',
-
-        // 工具库
-        'xlsx',
-        'xgplayer',
-        'crypto-js',
-        'file-saver',
-        'vue-img-cutter',
-      ],
     },
 
     // ========== 插件配置 ==========
@@ -214,5 +224,5 @@ export default defineConfig(({ mode }) => {
         symbolId: `${env.VITE_APP_ICON_PREFIX || 'icon'}-[dir]-[name]`,
       }),
     ],
-  }
+  })
 })
