@@ -23,7 +23,9 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
     "up": "taze major -I",
-    "clean": "rimraf node_modules"
+    "clean": "rimraf node_modules",
+    "prepare": "husky"
+
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -52,8 +54,7 @@
     "typeit": "^8.8.7",
     "vue": "^3.5.39",
     "vue-echarts": "^8.0.1",
-    "vue-router": "^5.1.0",
-    "xgplayer": "^3.0.24"
+    "vue-router": "^5.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.1.0",
@@ -69,6 +70,7 @@
     "@vitejs/plugin-vue-jsx": "^5.1.6",
     "eslint": "^10.6.0",
     "eslint-plugin-format": "^2.0.1",
+    "husky": "^9.1.7",
     "pnpm": "^11.10.0",
     "sass": "1.101.0",
     "shiki": "^4.3.1",
@@ -84,5 +86,6 @@
     "vite-plugin-svg-icons-ng": "^1.9.1",
     "vite-plugin-vue-devtools": "^8.1.5",
     "vue-tsc": "^3.3.6"
+
   }
 }

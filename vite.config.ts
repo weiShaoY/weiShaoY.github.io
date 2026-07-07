@@ -139,7 +139,6 @@ export default defineConfig(({ mode }) => {
 
         // 业务工具第三方库
         'xlsx', // Excel导入导出解析库，CommonJS格式需预构建
-        'xgplayer', // 网页视频播放器组件库
         'crypto-js', // 前端加解密工具库
       ],
     },
