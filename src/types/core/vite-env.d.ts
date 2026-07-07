@@ -68,18 +68,6 @@ declare namespace Env {
     readonly VITE_ROUTER_ROOT_PATH: string
 
     /**
-     * 管理模块路由前缀
-     * @default /admin
-     */
-    readonly VITE_ROUTER_ADMIN_PATH: string
-
-    /**
-     * 管理模块默认首页
-     * @default /admin/workbench
-     */
-    readonly VITE_ROUTER_ADMIN_HOME_PATH: string
-
-    /**
      * 应用的在线演示地址
      */
     readonly VITE_APP_DEMO_URL: string
