@@ -149,7 +149,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="large-screen relative mx-auto h-full w-full bg-[#050F33] text-3.5"
+    class="large-screen relative mx-auto h-full w-full bg-[#050F33] text-sm"
   >
     <!-- 地图 -->
     <MapScene
