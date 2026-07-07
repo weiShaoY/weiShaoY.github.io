@@ -10,7 +10,6 @@ import {
 import { createRouterGuard } from './guard'
 
 import {
-  checkDuplicateRouteList,
   formatModules,
   recursiveNormalizeRoutesPath,
   recursiveSetRoutesRedirect,

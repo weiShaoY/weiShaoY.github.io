@@ -2,8 +2,6 @@ import { createPinia } from 'pinia'
 
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-export * from './modules/admin'
-
 export * from './modules/command'
 
 export * from './modules/garage'

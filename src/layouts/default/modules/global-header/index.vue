@@ -44,11 +44,6 @@ const mobileMenuList = layoutConfig.default.headerRouterList.filter(({ isPCOnly,
 )
 
 /**
- *  移动菜单按钮引用
- */
-const mobileButtonRef = ref(null)
-
-/**
  *  是否打开移动菜单
  */
 const isOpenMobileMenu = ref(false)
@@ -182,7 +177,6 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           >
             <!-- 菜单按钮 -->
             <button
-              ref="mobileButtonRef"
               class="aspect-square h-10 rounded-md hover:bg-[#333639]"
               :class="[
                 isOpenMobileMenu ? 'bg-[#333639]' : '',

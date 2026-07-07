@@ -42,9 +42,20 @@
   },
 
   "include": [
-    "*.js",
-    "src/**/*.{ts,tsx,vue}",
-    "blog/.vitepress/theme/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/**/*.vue"
   ],
-  "exclude": ["dist", "node_modules"]
+  "exclude": [
+    "**/*.js",
+    "dist",
+    "node_modules",
+    "src/**/* copy.ts",
+    "src/**/* copy 2.ts",
+    "src/**/* copy.tsx",
+    "src/**/* copy 2.tsx",
+    "src/**/* copy.vue",
+    "src/**/* copy 2.vue"
+  ]
 }

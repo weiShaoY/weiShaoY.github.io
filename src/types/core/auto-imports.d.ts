@@ -411,7 +411,6 @@ declare module 'vue' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../../utils/event')['addEventListen']>
     readonly admin: UnwrapRef<typeof import('../../apis/modules/admin/index')['default']>
-    readonly adminConfig: UnwrapRef<typeof import('../../configs/admin')['adminConfig']>
     readonly adminMittBus: UnwrapRef<typeof import('../../utils/adminMittBus')['adminMittBus']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -585,7 +584,6 @@ declare module 'vue' {
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
-    readonly useAdminStore: UnwrapRef<typeof import('../../stores/modules/admin/index')['useAdminStore']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>
     readonly useArrayEvery: UnwrapRef<typeof import('@vueuse/core')['useArrayEvery']>

@@ -34,20 +34,12 @@ export const layoutConfig: {
         label: 'BigScreen',
       },
 
-      // {
-      //   value: '/emoji',
-      //   label: 'Emoji',
-      // },
       {
         value: '/police',
         label: 'Police',
         isPCOnly: true,
       },
-      {
-        value: '/admin',
-        label: 'Admin',
-        isPCOnly: true,
-      },
+
       {
         value: '/test',
         label: 'Test',
