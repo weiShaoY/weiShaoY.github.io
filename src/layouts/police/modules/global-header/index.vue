@@ -83,7 +83,7 @@ function logout() {
   >
 
     <div
-      class="mb-2 w-1/4 flex items-center gap-3 text-[18px] color-white"
+      class="mb-2 w-1/4 flex items-center gap-3 text-[18px] text-white"
     >
       <div
         v-for="(item, index) in titleInfo.leftTitle"
@@ -104,7 +104,7 @@ function logout() {
 
     <!-- 中间部分 -->
     <div
-      class="header-midden relative h-full flex flex-1 items-center justify-center gap-3 overflow-x-hidden color-white"
+      class="header-midden relative h-full flex flex-1 items-center justify-center gap-3 overflow-x-hidden text-white"
     >
       <SvgIcon
         icon="command-policeBadge"
@@ -121,7 +121,7 @@ function logout() {
         </div>
 
         <div
-          class="w-full flex items-center justify-between p-l-1 text-4"
+          class="w-full flex items-center justify-between pl-1 text-4"
         >
           <span>网</span>
 
@@ -143,7 +143,7 @@ function logout() {
     </div>
 
     <div
-      class="mb-2 w-1/4 flex items-center gap-3 text-[18px] color-white"
+      class="mb-2 w-1/4 flex items-center gap-3 text-[18px] text-white"
     >
       <div
         v-for="(item, index) in titleInfo.rightTitle"

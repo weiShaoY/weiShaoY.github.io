@@ -121,7 +121,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             icon="weiShaoY"
             :height="80"
             :width="160"
-            class="scale-100 cursor-pointer !text-white !hover:text-[#08FF00]"
+            class="scale-100 cursor-pointer !text-white hover:!text-[#08FF00]"
           />
         </router-link>
       </a>

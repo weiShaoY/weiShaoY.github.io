@@ -117,7 +117,7 @@ function toUpper(text: string) {
         </div>
 
         <div
-          class="unit whitespace-nowrap pt-4 text-3 color-white font-medium opacity-50"
+          class="unit whitespace-nowrap pt-4 text-3 text-white font-medium opacity-50"
         >
           {{ info.unit }}
         </div>

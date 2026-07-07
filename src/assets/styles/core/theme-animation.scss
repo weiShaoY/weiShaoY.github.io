@@ -59,6 +59,10 @@ html {
 
 // body 相关样式
 body {
-  // background-color: var(--bg-animation-color) !important;
-  @apply bg-base;
+  background-color: #9B9996;
+  transition: background-color 300ms;
+}
+
+html.dark body {
+  background-color: #212223;
 }

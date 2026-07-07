@@ -6,6 +6,7 @@
   src: url("@/assets/fonts/shouJinTi.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
   //  仅应用于中文字符
   // unicode-range: U+4E00-9FFF;
 }
@@ -16,10 +17,12 @@
   src: url("@/assets/fonts/firaCode.woff2") format("woff2-variations");
   font-weight: 300 700;
   font-style: normal;
+  font-display: swap;
   // 仅应用于英文字母和符号
   // unicode-range: U+0020-007E;
 }
 
-// body {
-//   @apply font-shouJinTi;
-// }
+body,
+#app {
+  font-family: "shouJinTi", "firaCode", sans-serif;
+}

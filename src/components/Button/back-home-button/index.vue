@@ -9,7 +9,7 @@
     <BaseButton
       tooltip-content="返回首页"
       icon="return"
-      class="color-primary"
+      class="text-primary"
       @click="$router.push('/')"
     />
   </div>

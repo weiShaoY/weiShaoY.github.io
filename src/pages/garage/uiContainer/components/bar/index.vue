@@ -162,7 +162,7 @@ watch(() => garageStore.state.isMute, (isMute) => {
     <div
       v-for="(item, index) in res"
       :key="index"
-      class="h-8 w-8 cursor-pointer rounded-1/2 bg-[100%_100%] bg-cover transition-transform duration-500 hover:scale-110"
+      class="h-8 w-8 cursor-pointer rounded-full bg-[100%_100%] bg-cover transition-transform duration-500 hover:scale-110"
       :class="{ 'color-item': activeIndex === index }"
       :style="{
         backgroundImage: `url(${item.src})`,

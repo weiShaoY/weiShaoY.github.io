@@ -17,13 +17,13 @@ function back() {
       class="flex flex-col items-center justify-center px-2"
     >
       <div
-        class="m-b-3 text-center text-2xl color-[#1F1F1F] font-semibold"
+        class="mb-3 text-center text-2xl text-[#1F1F1F] font-semibold"
       >
         500! 内部服务器错误!
       </div>
 
       <div
-        class="text-center color-[#A4A4A4]"
+        class="text-center text-[#A4A4A4]"
       >
         出现错误,请稍后重试!
       </div>
@@ -39,7 +39,7 @@ function back() {
 
       <button
         key="back"
-        class="rounded-md bg-black p-4 text-xl color-white font-semibold"
+        class="rounded-md bg-black p-4 text-xl text-white font-semibold"
         @click="back"
       >
         转至主页

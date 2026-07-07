@@ -9,9 +9,8 @@ catalog:
   '@types/node': ^24.3.0
   '@types/nprogress': ^0.2.3
   '@types/three': ^0.179.0
-  '@unocss/eslint-config': ^66.4.2
-  '@unocss/eslint-plugin': ^66.4.2
-  '@unocss/reset': ^66.4.2
+  '@tailwindcss/typography': ^0.5.20
+  '@tailwindcss/vite': ^4.3.2
   '@vitejs/plugin-vue': ^6.0.1
   '@vitejs/plugin-vue-jsx': ^5.0.1
   '@vue-macros/volar': ^3.0.0-beta.21
@@ -38,6 +37,7 @@ catalog:
   qrcode.vue: ^3.6.0
   sass: 1.87.0
   shiki: ^3.9.2
+  tailwindcss: ^4.3.2
   tailwind-merge: 3.2.0
   taze: ^19.1.0
   three: ^0.179.1
@@ -46,8 +46,6 @@ catalog:
   three-stdlib: ^2.36.0
   typeit: ^8.8.7
   typescript: ^5.5.4
-  unocss: ^66.4.2
-  unocss-preset-scrollbar-hide: ^1.0.1
   unplugin-auto-import: ^20.0.0
   unplugin-vue-components: ^29.0.0
   unplugin-vue-macros: ^2.14.5

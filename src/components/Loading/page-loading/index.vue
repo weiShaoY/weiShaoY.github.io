@@ -171,7 +171,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div
-      class="loading-progress absolute left-1/2 top-1/2 mt-[-5vw] flex origin-center translate-x--1/2 translate-y--1/2 items-center text-white max-sm:mt-[-20vw]"
+      class="loading-progress absolute left-1/2 top-1/2 mt-[-5vw] flex origin-center -translate-x-1/2 -translate-y-1/2 items-center text-white max-sm:mt-[-20vw]"
     >
       <div
         class="text-[2vw] max-sm:text-9"

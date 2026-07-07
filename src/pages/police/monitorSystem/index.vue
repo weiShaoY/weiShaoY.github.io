@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="h-full flex items-center justify-center text-10 color-white"
+    class="h-full flex items-center justify-center text-10 text-white"
   >
     监控系统
   </div>

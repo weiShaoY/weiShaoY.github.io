@@ -23,7 +23,6 @@ const skillsList = [
   skillsConfig.react,
   skillsConfig.vue,
   skillsConfig.tailwindCss,
-  skillsConfig.unocss,
   skillsConfig.threeJs,
   skillsConfig.git,
   skillsConfig.pinia,

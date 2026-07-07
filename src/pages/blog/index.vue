@@ -82,7 +82,7 @@ function handleFileSelect(file: BlogType.MdFile) {
         v-if="!isMobile"
         min="15%"
         size="25%"
-        class="h-full w-full flex flex-col gap-3 p-3 p-r-6"
+        class="h-full w-full flex flex-col gap-3 p-3 pr-6"
       >
         <Sidebar
           :file-list="fileList"
@@ -94,7 +94,7 @@ function handleFileSelect(file: BlogType.MdFile) {
 
       <el-splitter-panel
         min="50%"
-        class="h-full w-full flex flex-col gap-3 p-3 p-l-6"
+        class="h-full w-full flex flex-col gap-3 p-3 pl-6"
       >
 
         <!-- 移动端 -->

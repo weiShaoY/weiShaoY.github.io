@@ -49,9 +49,9 @@ function handleClick(index: number) {
       <div
         v-for="item in menuList"
         :key="item.index"
-        class="m-menu-item pointer-events-auto relative z-1 mx-3 h-8 w-25 flex cursor-pointer items-center justify-center bg-[length:100%] text-4 !bg-[length:100%] !color-[#A3AEB5]"
+        class="m-menu-item pointer-events-auto relative z-1 mx-3 h-8 w-25 flex cursor-pointer items-center justify-center bg-[length:100%] text-4 !bg-[length:100%] !text-[#A3AEB5]"
         :class="{
-          'is-active !color-white': item.index === activeIndex,
+          'is-active !text-white': item.index === activeIndex,
           '!mr-200': item.index === 3,
         }"
         :style="{

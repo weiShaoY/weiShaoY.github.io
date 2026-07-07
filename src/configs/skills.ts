@@ -18,8 +18,6 @@ import threeJsSvg from '@/assets/svgs/tech/threeJs.svg'
 
 import typeScriptSvg from '@/assets/svgs/tech/typeScript.svg'
 
-import unocssSvg from '@/assets/svgs/tech/unocss.svg'
-
 import vueSvg from '@/assets/svgs/tech/vue.svg'
 
 /**
@@ -52,7 +50,6 @@ export type SkillsConfig = {
   react: SkillsItemType
   vue: SkillsItemType
   tailwindCss: SkillsItemType
-  unocss: SkillsItemType
   threeJs: SkillsItemType
   git: SkillsItemType
   pinia: SkillsItemType
@@ -109,12 +106,6 @@ export const skillsConfig: SkillsConfig = {
     icon: 'tech-tailwindCss',
     image: tailwindCssSvg,
     document: 'https://tailwindcss.com/docs/installation',
-  },
-  unocss: {
-    name: 'UnoCSS',
-    icon: 'tech-unocss',
-    image: unocssSvg,
-    document: 'https://unocss-cn.pages.dev/',
   },
   threeJs: {
     name: 'Three.js',

@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="h-full flex items-center justify-center text-10 color-white"
+    class="h-full flex items-center justify-center text-10 text-white"
   >
     空间管控
   </div>

@@ -145,7 +145,6 @@ export const myProjectList: ProjectType[] = [
       skillsConfig.vue,
       skillsConfig.tailwindCss,
       skillsConfig.typeScript,
-      skillsConfig.unocss,
     ],
   },
   {

@@ -1,10 +1,10 @@
 import path from 'node:path'
 
+import tailwindcss from '@tailwindcss/vite'
+
 import Vue from '@vitejs/plugin-vue'
 
 import VueJsx from '@vitejs/plugin-vue-jsx'
-
-import UnoCSS from 'unocss/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 
@@ -211,7 +211,7 @@ export default defineConfig(({ mode }) => {
       }),
 
       // ===== 样式相关插件 =====
-      UnoCSS(),
+      tailwindcss(),
 
       // ===== 资源处理插件 =====
       Glsl(),

@@ -100,7 +100,7 @@ async function handleSubmit() {
     >
       <!-- 顶部 警徽和标题 -->
       <div
-        class="flex items-center gap-2 color-white"
+        class="flex items-center gap-2 text-white"
       >
         <SvgIcon
           icon="command-policeBadge"
@@ -178,7 +178,7 @@ async function handleSubmit() {
       </div>
 
       <div
-        class="text-5 color-white"
+        class="text-5 text-white"
       >
         京城市公安局 (2025)   版权所有
       </div>
