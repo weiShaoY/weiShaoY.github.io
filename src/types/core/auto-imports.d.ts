@@ -405,6 +405,7 @@ declare module 'vue' {
     readonly BusinessErrorCode: UnwrapRef<typeof import('../../apis/http/axios/index')['BusinessErrorCode']>
     readonly CommandApi: UnwrapRef<typeof import('../../apis/index')['CommandApi']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
     readonly ResultEnum: UnwrapRef<typeof import('../../apis/http/axios/index')['ResultEnum']>
     readonly SETTING_CONFIG: UnwrapRef<typeof import('../../configs/setting')['SETTING_CONFIG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>

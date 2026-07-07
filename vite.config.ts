@@ -12,8 +12,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 import Components from 'unplugin-vue-components/vite'
 
-import VueRouter from 'unplugin-vue-router/vite'
-
 import { defineConfig, loadEnv } from 'vite'
 
 import Glsl from 'vite-plugin-glsl'
@@ -156,12 +154,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       // ===== Vue 生态插件 =====
       Vue(),
-
-      // Vue Router 配置
-      VueRouter({
-        // 生成 TypeScript 路由声明文件
-        dts: 'src/types/core/vue-router-vite.d.ts',
-      }),
 
       // 支持 Vue 的 JSX 语法
       VueJsx(),
