@@ -201,11 +201,6 @@ export default defineConfig(({ mode }) => {
 
       // ===== 组件自动导入插件 =====
       Components({
-        globs: [
-          'src/components/**/*.vue',
-          '!src/components/**/* copy.vue',
-          '!src/components/**/* copy 2.vue',
-        ],
         // 生成 TypeScript 组件声明文件
         dts: 'src/types/core/components.d.ts',
         resolvers: [
