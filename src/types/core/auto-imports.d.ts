@@ -6,14 +6,23 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const AdminApi: typeof import('../../apis/index').AdminApi
+  const BusinessErrorCode: typeof import('../../apis/http/axios/index').BusinessErrorCode
+  const CommandApi: typeof import('../../apis/index').CommandApi
   const EffectScope: typeof import('vue').EffectScope
   const ElMessage: typeof import('element-plus/es').ElMessage
+  const ResultEnum: typeof import('../../apis/http/axios/index').ResultEnum
+  const SETTING_CONFIG: typeof import('../../configs/setting').SETTING_CONFIG
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const addEventListen: typeof import('../../utils/event').addEventListen
+  const admin: typeof import('../../apis/modules/admin/index').default
+  const adminConfig: typeof import('../../configs/admin').adminConfig
   const adminMittBus: typeof import('../../utils/adminMittBus').adminMittBus
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
+  const axios: typeof import('../../apis/http/axios/index').default
   const colourBlend: typeof import('../../utils/setElementThemeColor').colourBlend
+  const command: typeof import('../../apis/modules/command/index').default
   const computed: typeof import('vue').computed
   const computedAsync: typeof import('@vueuse/core').computedAsync
   const computedEager: typeof import('@vueuse/core').computedEager
@@ -49,13 +58,17 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core').eagerComputed
   const effectScope: typeof import('vue').effectScope
   const extendRef: typeof import('@vueuse/core').extendRef
+  const fetchHttp: typeof import('../../apis/http/fetch/index').fetchHttp
+  const findSkillsByName: typeof import('../../configs/skills').findSkillsByName
   const getActivePinia: typeof import('pinia').getActivePinia
+  const getAllSkillsItems: typeof import('../../configs/skills').getAllSkillsItems
   const getCssVar: typeof import('../../utils/setElementThemeColor').getCssVar
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
   const getDarkColor: typeof import('../../utils/setElementThemeColor').getDarkColor
   const getLightColor: typeof import('../../utils/setElementThemeColor').getLightColor
+  const getSkillsItem: typeof import('../../configs/skills').getSkillsItem
   const h: typeof import('vue').h
   const handleElementThemeColor: typeof import('../../utils/setElementThemeColor').handleElementThemeColor
   const hexToRgb: typeof import('../../utils/setElementThemeColor').hexToRgb
@@ -90,6 +103,7 @@ declare global {
   const isString: typeof import('../../utils/is').isString
   const isUnDef: typeof import('../../utils/is').isUnDef
   const isWindow: typeof import('../../utils/is').isWindow
+  const layoutConfig: typeof import('../../configs/layout').layoutConfig
   const loadGLTFModel: typeof import('../../utils/threeJs').loadGLTFModel
   const loadTexture: typeof import('../../utils/threeJs').loadTexture
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
@@ -152,6 +166,7 @@ declare global {
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
+  const skillsConfig: typeof import('../../configs/skills').skillsConfig
   const storeToRefs: typeof import('pinia').storeToRefs
   const stores: typeof import('../../stores/index').default
   const syncRef: typeof import('@vueuse/core').syncRef
@@ -374,8 +389,11 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { RouteLocationRaw } from 'vue-router'
-  import('vue-router')
+  export type { SkillsItemType, SkillsConfig } from '../../configs/skills'
+  import('../../configs/skills')
+  // @ts-ignore
+  export type { ResultEnum, BusinessErrorCode, Result, HttpError, RequestConfig } from '../../apis/http/axios/index'
+  import('../../apis/http/axios/index')
 }
 
 // for vue template auto import
@@ -383,14 +401,22 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
+    readonly AdminApi: UnwrapRef<typeof import('../../apis/index')['AdminApi']>
+    readonly BusinessErrorCode: UnwrapRef<typeof import('../../apis/http/axios/index')['BusinessErrorCode']>
+    readonly CommandApi: UnwrapRef<typeof import('../../apis/index')['CommandApi']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
+    readonly ResultEnum: UnwrapRef<typeof import('../../apis/http/axios/index')['ResultEnum']>
+    readonly SETTING_CONFIG: UnwrapRef<typeof import('../../configs/setting')['SETTING_CONFIG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addEventListen: UnwrapRef<typeof import('../../utils/event')['addEventListen']>
+    readonly admin: UnwrapRef<typeof import('../../apis/modules/admin/index')['default']>
+    readonly adminConfig: UnwrapRef<typeof import('../../configs/admin')['adminConfig']>
     readonly adminMittBus: UnwrapRef<typeof import('../../utils/adminMittBus')['adminMittBus']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly axios: UnwrapRef<typeof import('../../apis/http/axios/index')['default']>
     readonly colourBlend: UnwrapRef<typeof import('../../utils/setElementThemeColor')['colourBlend']>
+    readonly command: UnwrapRef<typeof import('../../apis/modules/command/index')['default']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -426,13 +452,17 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly fetchHttp: UnwrapRef<typeof import('../../apis/http/fetch/index')['fetchHttp']>
+    readonly findSkillsByName: UnwrapRef<typeof import('../../configs/skills')['findSkillsByName']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getAllSkillsItems: UnwrapRef<typeof import('../../configs/skills')['getAllSkillsItems']>
     readonly getCssVar: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getCssVar']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly getDarkColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getDarkColor']>
     readonly getLightColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getLightColor']>
+    readonly getSkillsItem: UnwrapRef<typeof import('../../configs/skills')['getSkillsItem']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleElementThemeColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['handleElementThemeColor']>
     readonly hexToRgb: UnwrapRef<typeof import('../../utils/setElementThemeColor')['hexToRgb']>
@@ -467,6 +497,7 @@ declare module 'vue' {
     readonly isString: UnwrapRef<typeof import('../../utils/is')['isString']>
     readonly isUnDef: UnwrapRef<typeof import('../../utils/is')['isUnDef']>
     readonly isWindow: UnwrapRef<typeof import('../../utils/is')['isWindow']>
+    readonly layoutConfig: UnwrapRef<typeof import('../../configs/layout')['layoutConfig']>
     readonly loadGLTFModel: UnwrapRef<typeof import('../../utils/threeJs')['loadGLTFModel']>
     readonly loadTexture: UnwrapRef<typeof import('../../utils/threeJs')['loadTexture']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
@@ -527,6 +558,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly skillsConfig: UnwrapRef<typeof import('../../configs/skills')['skillsConfig']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly stores: UnwrapRef<typeof import('../../stores/index')['default']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
