@@ -8,8 +8,6 @@ export * from './modules/garage'
 
 export * from './modules/setting'
 
-export * from './modules/table'
-
 const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
