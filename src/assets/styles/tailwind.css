@@ -4,8 +4,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #00ff00;
-  --color-secondary: #bfffbf;
+  --color-primary: #f5deb3;
+  --color-secondary: #8c6d4f;
+
   --color-error: #e43961;
   --color-info: #d0d2d6;
   --color-success: #00d89e;

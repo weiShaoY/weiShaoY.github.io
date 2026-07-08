@@ -57,23 +57,6 @@ function themeAnimation(e: any) {
 </script>
 
 <template>
-  <!-- 切换主题 -->
-  <!-- <label
-    class="relative inline-flex cursor-pointer items-center"
-  >
-    <input
-      class="peer sr-only"
-      type="checkbox"
-      :checked="isDark"
-      @click="themeAnimation"
-    >
-
-    <div
-      class="h-10 w-20 rounded-full from-yellow-300 to-orange-400 bg-gradient-to-r transition-all duration-500 after:absolute after:left-1 after:top-1 after:h-8 after:w-8 after:flex after:items-center after:justify-center after:rounded-full after:bg-white peer-checked:from-blue-400 peer-checked:to-indigo-500 after:text-lg after:shadow-md after:transition-all after:duration-500 after:content-['☀️'] peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']"
-    />
-
-  </label> -->
-
   <BaseButton
     class="z-99"
     :icon="isDark ? 'theme-dark' : 'theme-light'"
