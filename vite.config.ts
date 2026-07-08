@@ -184,7 +184,7 @@ export default defineConfig(({ mode }) => {
         ],
 
         // 👇 生成的类型声明文件路径
-        dts: 'src/types/core/auto-imports.d.ts',
+        dts: 'src/types/generated/auto-imports.d.ts',
 
         // 👇 解析器（此处配置 Element Plus 按需导入）
         resolvers: [
@@ -205,7 +205,7 @@ export default defineConfig(({ mode }) => {
       // ===== 组件自动导入插件 =====
       Components({
         // 生成 TypeScript 组件声明文件
-        dts: 'src/types/core/components.d.ts',
+        dts: 'src/types/generated/components.d.ts',
         resolvers: [
           // 使用 Sass 引入 Element Plus 样式
           ElementPlusResolver({
