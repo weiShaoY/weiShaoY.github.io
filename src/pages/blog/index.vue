@@ -13,7 +13,8 @@ const loading = ref(true)
 
 async function getMarkdownList() {
   const markdownFiles = import.meta.glob('./models/**/*.md', {
-    as: 'raw',
+    query: '?raw',
+    import: 'default',
     eager: true,
   })
 

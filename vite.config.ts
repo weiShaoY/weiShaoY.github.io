@@ -214,7 +214,9 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
 
       // ===== 资源处理插件 =====
-      Glsl(),
+      Glsl({
+        warnDuplicatedImports: false,
+      }),
 
       // SVG 图标插件配置
       createSvgIconsPlugin({
