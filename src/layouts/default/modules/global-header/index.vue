@@ -63,21 +63,15 @@ function closeMobileMenu() {
 }
 
 /**
- *  跳转到首页
- */
-// function handleToHome() {
-//   if (route.path === routerRootPath) {
-//     return
-//   }
-
-//   router.push(routerRootPath)
-// }
-
-/**
  *  选择菜单项
  */
 function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0]) {
   isOpenMobileMenu.value = false
+
+  if (item.isNewTab) {
+    window.open(item.value, '_blank')
+    return
+  }
 
   if (route.path === item.value) {
     return
@@ -131,15 +125,15 @@ function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0])
         v-if="!isMobile"
         class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
       >
-        <router-link
+        <span
           v-for="item in pcMenuList"
           :key="item.value"
-          :to="item.value"
           class="flex cursor-pointer items-center text-xl text-white font-bold hover:text-secondary"
           :class="{ 'text-primary!': route.path === item.value }"
+          @click="handleSelect(item)"
         >
           {{ item.label }}
-        </router-link>
+        </span>
       </div>
 
       <!-- 操作按钮区域 -->

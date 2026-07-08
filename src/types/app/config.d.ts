@@ -45,6 +45,11 @@ declare namespace ConfigType {
          */
         isDevelopmentOnly?: boolean
 
+        /**
+         *  是否在新标签页打开
+         */
+        isNewTab?: boolean
+
       }>[]
     }
 

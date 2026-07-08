@@ -25,16 +25,19 @@ export const layoutConfig: ConfigType.Layout = {
       {
         value: '/garage',
         label: 'Garage',
+        isNewTab: true,
       },
       {
         value: '/bigScreen',
         label: 'BigScreen',
+        isNewTab: true,
       },
 
       {
         value: '/police',
         label: 'Police',
         isPCOnly: true,
+        isNewTab: true,
       },
 
       {
