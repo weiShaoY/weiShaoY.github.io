@@ -1,9 +1,11 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 import { DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  测试页面路由
  */
-const testRouter: RouterType.RouteRecordRaw = {
+const testRouter: RouteRecordRaw = {
   path: '/test',
   component: DEFAULT_LAYOUT,
   children: [

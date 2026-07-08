@@ -1,7 +1,9 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 /**
  *  错误页面路由
  */
-const garageRouter: RouterType.RouteRecordRaw[] = [
+const garageRouter: RouteRecordRaw[] = [
 
   {
     path: '/garage',

@@ -1,7 +1,9 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 /**
  *  大屏路由
  */
-const BigScreenRouter: RouterType.RouteRecordRaw[] = [
+const BigScreenRouter: RouteRecordRaw[] = [
   {
     path: '/bigScreen',
     name: 'BigScreen',

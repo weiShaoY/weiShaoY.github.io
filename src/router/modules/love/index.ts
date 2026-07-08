@@ -1,7 +1,9 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 /**
  *  测试页面路由
  */
-const loveRouter: RouterType.RouteRecordRaw[] = [
+const loveRouter: RouteRecordRaw[] = [
 
   {
     path: '/love',

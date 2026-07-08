@@ -1,9 +1,11 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 import { Police_LAYOUT } from '@/layouts'
 
 /**
  *  指挥台路由
  */
-const policeRouter: RouterType.RouteRecordRaw = {
+const policeRouter: RouteRecordRaw = {
   path: '/police',
   name: 'Police',
   meta: {

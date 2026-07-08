@@ -1,9 +1,11 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 import { DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  博客路由
  */
-const BlogRouter: RouterType.RouteRecordRaw = {
+const BlogRouter: RouteRecordRaw = {
   path: '/blog',
   component: DEFAULT_LAYOUT,
   children: [

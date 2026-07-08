@@ -1,9 +1,11 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 import { DEFAULT_LAYOUT } from '@/layouts'
 
 /**
  *  联系路由
  */
-const ContactRouter: RouterType.RouteRecordRaw = {
+const ContactRouter: RouteRecordRaw = {
   path: '/contact',
   component: DEFAULT_LAYOUT,
   children: [

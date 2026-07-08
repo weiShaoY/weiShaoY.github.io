@@ -1,4 +1,4 @@
-import type { RouteRecordNormalized } from 'vue-router'
+import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
 /**
  *  格式化modules模块(将modules模块转化为数组)
@@ -25,7 +25,7 @@ export function formatModules(_modules: any, result: RouteRecordNormalized[]) {
       ? [...defaultModule]
       : [defaultModule]
 
-    const processedRoutes: RouterType.RouteRecordRaw[] = moduleList
+    const processedRoutes: RouteRecordRaw[] = moduleList
 
     // 将所有模块添加到result数组中
     result.push(...processedRoutes as any)
