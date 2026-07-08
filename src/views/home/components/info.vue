@@ -54,7 +54,7 @@ function handleCopy() {
           class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
-            class="h-[266px] w-full cursor-pointer max-sm:h-fit"
+            class="h-66.5 w-full cursor-pointer max-sm:h-fit"
           >
             <Skills />
           </div>
@@ -83,7 +83,7 @@ function handleCopy() {
           class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
-            class="h-[326px] w-full flex items-center justify-center rounded-3xl max-sm:h-fit"
+            class="h-81.5 w-full flex items-center justify-center rounded-3xl max-sm:h-fit"
           >
             <Earth
               :height="326"
@@ -138,7 +138,7 @@ function handleCopy() {
           class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
-            class="h-[266px] cursor-pointer max-sm:w-full"
+            class="h-66.5 cursor-pointer max-sm:w-full"
           >
             <Keyboard />
           </div>
@@ -167,7 +167,7 @@ function handleCopy() {
           class="h-full w-full flex flex-col gap-5 card-base p-7 max-sm:p-4"
         >
           <div
-            class="aspect-square h-[120px] w-full cursor-pointer max-sm:h-fit"
+            class="aspect-square h-30 w-full cursor-pointer max-sm:h-fit"
           >
             <Mail />
           </div>

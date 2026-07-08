@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="absolute inset-0 top-[120px] mx-auto max-w-7xl flex flex-row items-start gap-5 px-16 max-sm:px-6"
+    class="absolute inset-0 top-30 mx-auto max-w-7xl flex flex-row items-start gap-5 px-16 max-sm:px-6"
   >
     <!-- 左侧装饰条 -->
     <div
@@ -16,14 +16,14 @@
       />
 
       <div
-        class="h-40 w-1 from-primary to-[rgba(60,51,80,0)] bg-gradient-to-b sm:h-80"
+        class="h-40 w-1 from-primary to-[rgba(60,51,80,0)] bg-linear-to-b sm:h-80"
       />
     </div>
 
     <!-- 右侧标题和描述 -->
     <div>
       <h1
-        class="mt-2 select-none text-[80px] text-white font-black leading-[120px] max-sm:text-[30px] max-sm:leading-[50px]"
+        class="mt-2 select-none text-[80px] text-white font-black leading-30 max-sm:text-[30px] max-sm:leading-12.5"
       >
         <span>Hi,I'm</span>
 
@@ -35,7 +35,7 @@
       </h1>
 
       <TypeIt
-        class="mt-2 select-none text-[40px] text-secondary font-medium max-sm:text-[20px]"
+        class="mt-2 select-none text-10 text-secondary font-medium max-sm:text-5"
         :string-list="['一个热爱编程的前端开发', '热爱计算机科学和IT互联网事业', '热爱编程、软路由、硬件、Diy等']"
       />
     </div>
