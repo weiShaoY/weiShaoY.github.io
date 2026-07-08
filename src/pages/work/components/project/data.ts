@@ -1,4 +1,4 @@
-import type { SkillsItemType } from '@/configs'
+import type { SkillItem } from '@/configs'
 
 import logo1 from '@/assets/images/home/work-project-logo-1.png'
 
@@ -30,7 +30,7 @@ import video4 from '@/assets/videos/home/work-project-video-4.mp4'
 
 import video5 from '@/assets/videos/home/work-project-video-5.mp4'
 
-import { skillsConfig } from '@/configs'
+import { skillsMap } from '@/configs'
 
 /**
  * 项目 Logo 样式类型
@@ -101,7 +101,7 @@ type ProjectType = {
   /**
    *  项目相关的技术标签
    */
-  tags: SkillsItemType[]
+  tags: SkillItem[]
 }
 
 /**
@@ -122,10 +122,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight1,
     tags: [
-      skillsConfig.react,
-      skillsConfig.tailwindCss,
-      skillsConfig.typeScript,
-      skillsConfig.threeJs,
+      skillsMap.react,
+      skillsMap.tailwindCss,
+      skillsMap.typeScript,
+      skillsMap.threeJs,
     ],
   },
   {
@@ -142,9 +142,9 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight2,
     tags: [
-      skillsConfig.vue,
-      skillsConfig.tailwindCss,
-      skillsConfig.typeScript,
+      skillsMap.vue,
+      skillsMap.tailwindCss,
+      skillsMap.typeScript,
     ],
   },
   {
@@ -164,10 +164,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight3,
     tags: [
-      skillsConfig.react,
-      skillsConfig.tailwindCss,
-      skillsConfig.javaScript,
-      skillsConfig.threeJs,
+      skillsMap.react,
+      skillsMap.tailwindCss,
+      skillsMap.javaScript,
+      skillsMap.threeJs,
     ],
   },
   {
@@ -184,10 +184,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight4,
     tags: [
-      skillsConfig.react,
-      skillsConfig.tailwindCss,
-      skillsConfig.typeScript,
-      skillsConfig.threeJs,
+      skillsMap.react,
+      skillsMap.tailwindCss,
+      skillsMap.typeScript,
+      skillsMap.threeJs,
     ],
   },
   {
@@ -204,10 +204,10 @@ export const myProjectList: ProjectType[] = [
     },
     spotlight: spotlight5,
     tags: [
-      skillsConfig.react,
-      skillsConfig.tailwindCss,
-      skillsConfig.typeScript,
-      skillsConfig.threeJs,
+      skillsMap.react,
+      skillsMap.tailwindCss,
+      skillsMap.typeScript,
+      skillsMap.threeJs,
     ],
   },
 ]

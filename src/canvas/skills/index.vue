@@ -3,30 +3,13 @@ import * as THREE from 'three'
 
 import { DecalGeometry, OrbitControls } from 'three/addons'
 
-import { skillsConfig } from '@/configs'
+import { skillsList } from '@/configs'
 
 import {
   disposeScene,
   isMobile,
   loadTexture,
 } from '@/utils'
-
-/**
- *  技术栈列表
- */
-const skillsList = [
-  skillsConfig.html,
-  skillsConfig.css,
-  skillsConfig.javaScript,
-  skillsConfig.typeScript,
-  skillsConfig.node,
-  skillsConfig.react,
-  skillsConfig.vue,
-  skillsConfig.tailwindCss,
-  skillsConfig.threeJs,
-  skillsConfig.git,
-  skillsConfig.pinia,
-]
 
 /**
  *  是否显示加载loading

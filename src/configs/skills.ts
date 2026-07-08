@@ -21,9 +21,17 @@ import typeScriptSvg from '@/assets/svgs/tech/typeScript.svg'
 import vueSvg from '@/assets/svgs/tech/vue.svg'
 
 /**
+ * 技术栈键名
+ */
+export type SkillKey = 'html' | 'css' | 'javaScript' | 'typeScript' | 'node' | 'react' | 'vue' | 'tailwindCss' | 'threeJs' | 'git' | 'pinia'
+
+/**
  * 技术栈项目类型定义
  */
-export type SkillsItemType = {
+export type SkillItem = {
+
+  /** 唯一键 */
+  key: SkillKey
 
   /** 技术名称 */
   name: string
@@ -39,109 +47,120 @@ export type SkillsItemType = {
 }
 
 /**
- * 技术栈配置类型
+ * 技术栈映射类型
  */
-export type SkillsConfig = {
-  html: SkillsItemType
-  css: SkillsItemType
-  javaScript: SkillsItemType
-  typeScript: SkillsItemType
-  node: SkillsItemType
-  react: SkillsItemType
-  vue: SkillsItemType
-  tailwindCss: SkillsItemType
-  threeJs: SkillsItemType
-  git: SkillsItemType
-  pinia: SkillsItemType
-}
+export type SkillsMap = Record<SkillKey, SkillItem>
 
 /**
- * 技术栈配置
+ * 技术栈列表
  */
-export const skillsConfig: SkillsConfig = {
-  html: {
+export const skillsList = [
+  {
+    key: 'html',
     name: 'HTML',
     icon: 'tech-html',
     image: htmlSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/HTML',
   },
-  css: {
+  {
+    key: 'css',
     name: 'CSS',
     icon: 'tech-css',
     image: cssSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/CSS',
   },
-  javaScript: {
+  {
+    key: 'javaScript',
     name: 'JavaScript',
     icon: 'tech-javaScript',
     image: javaScriptSvg,
     document: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
   },
-  typeScript: {
+  {
+    key: 'typeScript',
     name: 'TypeScript',
     icon: 'tech-typeScript',
     image: typeScriptSvg,
     document: 'https://www.typescriptlang.org/zh/',
   },
-  node: {
+  {
+    key: 'node',
     name: 'Node.js',
     icon: 'tech-node',
     image: nodeSvg,
     document: 'https://nodejs.org/en/',
   },
-  react: {
+  {
+    key: 'react',
     name: 'React',
     icon: 'tech-react',
     image: reactSvg,
     document: 'https://zh-hans.react.dev/',
   },
-  vue: {
+  {
+    key: 'vue',
     name: 'Vue.js',
     icon: 'tech-vue',
     image: vueSvg,
     document: 'https://cn.vuejs.org/',
   },
-  tailwindCss: {
+  {
+    key: 'tailwindCss',
     name: 'Tailwind CSS',
     icon: 'tech-tailwindCss',
     image: tailwindCssSvg,
     document: 'https://tailwindcss.com/docs/installation',
   },
-  threeJs: {
+  {
+    key: 'threeJs',
     name: 'Three.js',
     icon: 'tech-threeJs',
     image: threeJsSvg,
     document: 'https://threejs.org/',
   },
-  git: {
+  {
+    key: 'git',
     name: 'Git',
     icon: 'tech-git',
     image: gitSvg,
     document: 'https://git-scm.com/',
   },
-  pinia: {
+  {
+    key: 'pinia',
     name: 'Pinia',
     icon: 'tech-pinia',
     image: piniaSvg,
     document: 'https://pinia.vuejs.org/zh/',
   },
-} as const
+] as const satisfies readonly SkillItem[]
+
+/**
+ * 技术栈映射
+ */
+export const skillsMap = Object.fromEntries(
+  skillsList.map(item => [item.key, item]),
+) as SkillsMap
+
+/**
+ * 兼容旧命名
+ */
+export const skillsConfig = skillsMap
 
 /**
  * 获取技术栈项目
  * @param key 技术栈键名
  * @returns 技术栈项目
  */
-export function getSkillsItem<K extends keyof SkillsConfig>(key: K): SkillsConfig[K] {
-  return skillsConfig[key]
+export function getSkillByKey<K extends SkillKey>(key: K): SkillsMap[K] {
+  return skillsMap[key]
 }
 
 /**
  * 获取所有技术栈项目
  * @returns 技术栈项目数组
  */
-export function getAllSkillsItems(): SkillsItemType[] {
-  return Object.values(skillsConfig)
+export function getAllSkillsItems(): SkillItem[] {
+  return [...skillsList]
 }
 
 /**
@@ -149,8 +168,8 @@ export function getAllSkillsItems(): SkillsItemType[] {
  * @param name 技术名称
  * @returns 技术栈项目或 undefined
  */
-export function findSkillsByName(name: string): SkillsItemType | undefined {
-  return getAllSkillsItems().find(item =>
+export function findSkillsByName(name: string): SkillItem | undefined {
+  return skillsList.find(item =>
     item.name.toLowerCase() === name.toLowerCase(),
   )
 }

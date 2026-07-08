@@ -74,6 +74,7 @@ declare global {
   const getDuration: typeof import('../../utils/time').getDuration
   const getElapsedTime: typeof import('../../utils/time').getElapsedTime
   const getLightColor: typeof import('../../utils/setElementThemeColor').getLightColor
+  const getSkillByKey: typeof import('../../configs/skills').getSkillByKey
   const getSkillsItem: typeof import('../../configs/skills').getSkillsItem
   const h: typeof import('vue').h
   const handleElementThemeColor: typeof import('../../utils/setElementThemeColor').handleElementThemeColor
@@ -171,6 +172,8 @@ declare global {
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
   const skillsConfig: typeof import('../../configs/skills').skillsConfig
+  const skillsList: typeof import('../../configs/skills').skillsList
+  const skillsMap: typeof import('../../configs/skills').skillsMap
   const storeToRefs: typeof import('pinia').storeToRefs
   const stores: typeof import('../../stores/index').default
   const syncRef: typeof import('@vueuse/core').syncRef
@@ -390,7 +393,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { SkillsItemType, SkillsConfig } from '../../configs/skills'
+  export type { SkillKey, SkillItem, SkillsMap } from '../../configs/skills'
   import('../../configs/skills')
   // @ts-ignore
   export type { ResultEnum, BusinessErrorCode, Result, HttpError, RequestConfig } from '../../apis/http/axios/index'
@@ -407,7 +410,6 @@ declare module 'vue' {
     readonly CommandApi: UnwrapRef<typeof import('../../apis/index')['CommandApi']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
-    readonly ElNotification: UnwrapRef<typeof import('element-plus/es')['ElNotification']>
     readonly ResultEnum: UnwrapRef<typeof import('../../apis/http/axios/index')['ResultEnum']>
     readonly SETTING_CONFIG: UnwrapRef<typeof import('../../configs/setting')['SETTING_CONFIG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
@@ -470,7 +472,7 @@ declare module 'vue' {
     readonly getDuration: UnwrapRef<typeof import('../../utils/time')['getDuration']>
     readonly getElapsedTime: UnwrapRef<typeof import('../../utils/time')['getElapsedTime']>
     readonly getLightColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['getLightColor']>
-    readonly getSkillsItem: UnwrapRef<typeof import('../../configs/skills')['getSkillsItem']>
+    readonly getSkillByKey: UnwrapRef<typeof import('../../configs/skills')['getSkillByKey']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleElementThemeColor: UnwrapRef<typeof import('../../utils/setElementThemeColor')['handleElementThemeColor']>
     readonly hexToRgb: UnwrapRef<typeof import('../../utils/setElementThemeColor')['hexToRgb']>
@@ -567,6 +569,8 @@ declare module 'vue' {
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly skillsConfig: UnwrapRef<typeof import('../../configs/skills')['skillsConfig']>
+    readonly skillsList: UnwrapRef<typeof import('../../configs/skills')['skillsList']>
+    readonly skillsMap: UnwrapRef<typeof import('../../configs/skills')['skillsMap']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly stores: UnwrapRef<typeof import('../../stores/index')['default']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
