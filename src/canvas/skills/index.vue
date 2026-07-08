@@ -360,6 +360,6 @@ onUnmounted(() => {
       size: 80,
     }"
 
-    class="cursor-pointer !h-full !w-full"
+    class="cursor-pointer h-full! w-full!"
   />
 </template>

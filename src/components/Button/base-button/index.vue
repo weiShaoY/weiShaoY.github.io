@@ -129,7 +129,7 @@ const computedStyle = computed(() => ({
       <ElButton
         text
         quaternary
-        class="!h-auto !rounded-lg !p-0"
+        class="h-auto! rounded-lg! p-0!"
         @click="$emit('click', $event)"
       >
         <div

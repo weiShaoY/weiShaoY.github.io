@@ -77,7 +77,7 @@ function toUpper(text: string) {
         class="count-card-left flex items-center"
       >
         <div
-          class="count-card-icon mr-3 h-15 w-15 bg-center bg-no-repeat !bg-[length:100%]"
+          class="count-card-icon mr-3 h-15 w-15 bg-center bg-no-repeat bg-[length:100%]!"
           :style="{
             backgroundImage: `url(${info.icon})`,
           }"

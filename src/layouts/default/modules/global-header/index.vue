@@ -121,7 +121,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
             icon="weiShaoY"
             :height="80"
             :width="160"
-            class="scale-100 cursor-pointer !text-white hover:!text-[#08FF00]"
+            class="scale-100 cursor-pointer text-white! hover:text-[#08FF00]!"
           />
         </router-link>
       </a>
@@ -136,7 +136,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
           :key="item.value"
           :to="item.value"
           class="flex cursor-pointer items-center text-xl text-white font-bold hover:text-secondary"
-          :class="{ '!text-primary': route.path === item.value }"
+          :class="{ 'text-primary!': route.path === item.value }"
         >
           {{ item.label }}
         </router-link>
@@ -144,7 +144,7 @@ function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
 
       <!-- 操作按钮区域 -->
       <div
-        class="flex flex items-center justify-end gap-5"
+        class="flex items-center justify-end gap-5"
       >
         <Github />
 

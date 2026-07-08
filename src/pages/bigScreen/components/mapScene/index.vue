@@ -72,12 +72,12 @@ defineExpose({
 <template>
   <!-- 地图容器 -->
   <div
-    class="map absolute bottom-0 left-0 right-0 top-0 z-1 bg-black !h-[100vh]"
+    class="map absolute bottom-0 left-0 right-0 top-0 z-1 bg-black h-[100vh]!"
   >
     <!-- 地图画布 -->
     <canvas
       id="canvasMap"
-      class="!h-[100vh]"
+      class="h-[100vh]!"
     />
   </div>
 </template>

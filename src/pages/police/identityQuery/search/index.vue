@@ -30,7 +30,7 @@ function search() {
       placeholder="请输入搜索内容"
       clearable
       size="large"
-      class="!w-100"
+      class="w-100!"
       @keydown.enter.prevent="search"
     >
       <template

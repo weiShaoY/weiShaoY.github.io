@@ -12,7 +12,7 @@ import YearlyEconomyTrend from './YearlyEconomyTrend.vue'
 
 <template>
   <div
-    class="left-wrap absolute bottom-12 left-8 top-31 z-4 w-100 perspective-origin-[50%_50%] !perspective-[500px]"
+    class="left-wrap absolute bottom-12 left-8 top-31 z-4 w-100 perspective-origin-[50%_50%] perspective-[500px]!"
   >
     <div
       class="left-wrap-3d absolute bottom-0 left-0 right-0 top-0 z-4 flex flex-col"

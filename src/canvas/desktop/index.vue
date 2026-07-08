@@ -275,6 +275,6 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="desktopRef"
-    class="overflow-hidden !h-full !w-full"
+    class="overflow-hidden h-full! w-full!"
   />
 </template>

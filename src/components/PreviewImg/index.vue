@@ -127,7 +127,7 @@ const computedImageStyle = computed<CSSProperties>(() => ({
         #error
       >
         <div
-          class="h-full w-full !flex-col !items-center !justify-center"
+          class="h-full w-full flex-col! items-center! justify-center!"
         >
           <SvgIcon
             icon="image-error"

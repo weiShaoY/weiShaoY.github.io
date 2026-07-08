@@ -536,7 +536,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="threeContainerRef"
-    class="h-screen w-full !max-sm:w-full"
+    class="h-screen w-full max-sm:w-full!"
     @pointerdown="garageStore.state.isTouch = true"
     @pointerup="garageStore.state.isTouch = false"
   />

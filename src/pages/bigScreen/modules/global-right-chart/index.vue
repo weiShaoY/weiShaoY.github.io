@@ -12,7 +12,7 @@ import QuarterlyGrowthSituation from './QuarterlyGrowthSituation.vue'
 
 <template>
   <div
-    class="right-wrap absolute bottom-12 right-8 top-31 z-4 w-100 perspective-origin-[50%_50%] !perspective-[500px]"
+    class="right-wrap absolute bottom-12 right-8 top-31 z-4 w-100 perspective-origin-[50%_50%] perspective-[500px]!"
   >
     <div
       class="right-wrap-3d absolute bottom-0 left-0 right-0 top-0 z-4 flex flex-col"

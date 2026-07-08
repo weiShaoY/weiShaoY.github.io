@@ -305,7 +305,7 @@ onUnmounted(() => {
   <canvas
     ref="itemRef"
     v-canvas-loading="isLoading"
-    class="cursor-pointer !h-full !w-full"
+    class="cursor-pointer h-full! w-full!"
     @dblclick="handleDoubleClick"
   />
 </template>

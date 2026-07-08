@@ -46,13 +46,13 @@ onUnmounted(() => {
     class="m-header relative left-0 right-0 top-0 z-2 h-22 w-full"
   >
     <div
-      class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2 !bg-[length:100%]"
+      class="m-header-wrap absolute left-1/2 mx-auto box-border h-[90px] w-[1920px] pt-[10px] text-center -translate-x-1/2 bg-[length:100%]!"
       :style="{
         backgroundImage: `url(${img_headerBg})`,
       }"
     >
       <div
-        class="m-header-title from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text bg-clip-text text-11 text-transparent tracking-[1px]"
+        class="m-header-title from-[rgba(117,232,255,1)] to-[rgba(255,255,255,1)] bg-gradient-to-b bg-clip-text text-11 text-transparent tracking-[1px]"
       >
         湖南省国安厅作战指挥平台
       </div>

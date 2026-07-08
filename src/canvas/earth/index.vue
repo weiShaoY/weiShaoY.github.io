@@ -160,6 +160,6 @@ onUnmounted(() => {
       isLoading,
       size: 60,
     }"
-    class="cursor-pointer overflow-hidden !h-full !w-full"
+    class="cursor-pointer overflow-hidden h-full! w-full!"
   />
 </template>

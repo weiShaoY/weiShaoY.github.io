@@ -143,7 +143,7 @@ async function handleSubmit(e: Event) {
             </label>
 
             <button
-              class="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 text-secondary transition-all active:scale-95 hover:bg-opacity-70 hover:!text-primary"
+              class="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#3a3a49] p-3 text-secondary transition-all active:scale-95 hover:bg-opacity-70 hover:text-primary!"
               type="submit"
               :disabled="loading"
             >
