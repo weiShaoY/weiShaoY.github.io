@@ -144,13 +144,16 @@ export default defineConfig(({ mode }) => {
       ],
     },
 
-    // 打包去除 console.log && debugger
+    // 编译阶段去除 console.log 和 debugger
+    esbuild: {
+      pure: isDeleteConsole ? ['console.log'] : [],
+      drop: isDeleteDebugger ? ['debugger'] : [],
+    },
+
+    // 打包压缩配置
     build: {
-      // 迁移原来 esbuild 压缩配置到 oxc，消除警告
-      oxc: {
-        pure: isDeleteConsole ? ['console.log'] : [],
-        drop: isDeleteDebugger ? ['debugger'] : [],
-      },
+      // 使用 esbuild 压缩配置
+      minify: 'oxc',
     },
 
     // ========== 插件配置 ==========
