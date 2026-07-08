@@ -76,7 +76,7 @@ function closeMobileMenu() {
 /**
  *  选择菜单项
  */
-function handleSelect(item: LayoutConfigType.Default['headerRouterList'][0]) {
+function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0]) {
   isOpenMobileMenu.value = false
 
   if (route.path === item.value) {

@@ -1,9 +1,7 @@
 /**
  *  设置配置
  */
-export const SETTING_CONFIG: {
-  isDark: SettingConfigType.IsDark
-} = {
+export const SETTING_CONFIG: ConfigType.Setting = {
   /**
    *  是否是暗黑模式
    */

@@ -1,10 +1,7 @@
 /**
  *  布局配置
  */
-export const layoutConfig: {
-  default: LayoutConfigType.Default
-  police: LayoutConfigType.Police
-} = {
+export const layoutConfig: ConfigType.Layout = {
   default: {
     headerHeight: 80,
     headerRouterList: [
