@@ -12,7 +12,7 @@ const BlogRouter: RouteRecordRaw = {
     {
       path: '', // 空路径，作为默认子路由
       name: 'Blog', // 移动 name 到子路由
-      component: () => import('@/pages/blog/index.vue'),
+      component: () => import('@/views/blog/index.vue'),
       meta: {
         documentTitle: '我的博客!',
       },

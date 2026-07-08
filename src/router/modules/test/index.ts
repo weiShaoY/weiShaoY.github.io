@@ -12,7 +12,7 @@ const testRouter: RouteRecordRaw = {
     {
       path: '', // 空路径，作为默认子路由
       name: 'Test', // 移动 name 到子路由
-      component: () => import('@/pages/test/index.vue'),
+      component: () => import('@/views/test/index.vue'),
       meta: {
         documentTitle: '测试',
       },

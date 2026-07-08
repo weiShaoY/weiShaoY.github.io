@@ -8,7 +8,7 @@ const garageRouter: RouteRecordRaw[] = [
   {
     path: '/garage',
     name: 'Garage',
-    component: () => import('@/pages/garage/index.vue'),
+    component: () => import('@/views/garage/index.vue'),
     meta: {
       title: '车库',
     },

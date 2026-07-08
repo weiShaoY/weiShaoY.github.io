@@ -16,7 +16,7 @@ const policeRouter: RouteRecordRaw = {
     {
       path: 'login',
       name: 'PoliceLogin',
-      component: () => import('@/pages/police/login/index.vue'),
+      component: () => import('@/views/police/login/index.vue'),
       meta: {
         documentTitle: '登录',
       },
@@ -33,7 +33,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: 'search',
           name: 'PoliceIdentityQuerySearch',
-          component: () => import('@/pages/police/identityQuery/search/index.vue'),
+          component: () => import('@/views/police/identityQuery/search/index.vue'),
           meta: {
             documentTitle: '身份查询-搜索',
           },
@@ -41,7 +41,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: 'result',
           name: 'PoliceIdentityQueryResult',
-          component: () => import('@/pages/police/identityQuery/result/index.vue'),
+          component: () => import('@/views/police/identityQuery/result/index.vue'),
           meta: {
             documentTitle: '身份查询-结果列表',
           },
@@ -49,7 +49,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: 'detail',
           name: 'PoliceIdentityQueryDetail',
-          component: () => import('@/pages/police/identityQuery/detail/index.vue'),
+          component: () => import('@/views/police/identityQuery/detail/index.vue'),
           meta: {
             documentTitle: '身份查询-详情',
           },
@@ -66,7 +66,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: '', // 空路径，作为默认子路由
           name: 'PoliceMonitorSystem', // 移动 name 到子路由
-          component: () => import('@/pages/police/monitorSystem/index.vue'),
+          component: () => import('@/views/police/monitorSystem/index.vue'),
           meta: {
             documentTitle: '监控系统',
           },
@@ -83,7 +83,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: '', // 空路径，作为默认子路由
           name: 'PoliceArchiveSystem', // 移动 name 到子路由
-          component: () => import('@/pages/police/archiveSystem/index.vue'),
+          component: () => import('@/views/police/archiveSystem/index.vue'),
           meta: {
             documentTitle: '档案系统',
           },
@@ -100,7 +100,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: '', // 空路径，作为默认子路由
           name: 'PoliceStatisticalAnalysis', // 移动 name 到子路由
-          component: () => import('@/pages/police/statisticalAnalysis/index.vue'),
+          component: () => import('@/views/police/statisticalAnalysis/index.vue'),
           meta: {
             documentTitle: '统计分析',
           },
@@ -117,7 +117,7 @@ const policeRouter: RouteRecordRaw = {
         {
           path: '', // 空路径，作为默认子路由
           name: 'PoliceSpaceControl', // 移动 name 到子路由
-          component: () => import('@/pages/police/spaceControl/index.vue'),
+          component: () => import('@/views/police/spaceControl/index.vue'),
           meta: {
             documentTitle: '空间管控',
           },

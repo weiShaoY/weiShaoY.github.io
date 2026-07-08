@@ -12,7 +12,7 @@ const ContactRouter: RouteRecordRaw = {
     {
       path: '', // 空路径，作为默认子路由
       name: 'Contact', // 移动 name 到子路由
-      component: () => import('@/pages/contact/index.vue'),
+      component: () => import('@/views/contact/index.vue'),
       meta: {
         documentTitle: '联系我!',
       },

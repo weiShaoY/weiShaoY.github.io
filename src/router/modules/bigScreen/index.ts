@@ -10,7 +10,7 @@ const BigScreenRouter: RouteRecordRaw[] = [
     meta: {
       title: '大屏',
     },
-    component: () => import('@/pages/bigScreen/index.vue'),
+    component: () => import('@/views/bigScreen/index.vue'),
   },
 ]
 

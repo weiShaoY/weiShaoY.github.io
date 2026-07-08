@@ -8,7 +8,7 @@ const loveRouter: RouteRecordRaw[] = [
   {
     path: '/love',
     name: 'Love',
-    component: () => import('@/pages/love/index.vue'),
+    component: () => import('@/views/love/index.vue'),
     meta: {
       documentTitle: 'I Love You!',
     },
