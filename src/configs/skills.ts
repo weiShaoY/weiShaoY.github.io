@@ -10,6 +10,8 @@ import nodeSvg from '@/assets/svgs/tech/node.svg'
 
 import piniaSvg from '@/assets/svgs/tech/pinia.svg'
 
+import pythonSvg from '@/assets/svgs/tech/python.svg'
+
 import reactSvg from '@/assets/svgs/tech/react.svg'
 
 import tailwindCssSvg from '@/assets/svgs/tech/tailwindCss.svg'
@@ -23,7 +25,7 @@ import vueSvg from '@/assets/svgs/tech/vue.svg'
 /**
  * 技术栈键名
  */
-export type SkillKey = 'html' | 'css' | 'javaScript' | 'typeScript' | 'node' | 'react' | 'vue' | 'tailwindCss' | 'threeJs' | 'git' | 'pinia'
+export type SkillKey = 'html' | 'css' | 'javaScript' | 'typeScript' | 'node' | 'react' | 'vue' | 'tailwindCss' | 'threeJs' | 'git' | 'pinia' | 'python'
 
 /**
  * 技术栈项目类型定义
@@ -131,6 +133,13 @@ export const skillsList = [
     icon: 'tech-pinia',
     image: piniaSvg,
     document: 'https://pinia.vuejs.org/zh/',
+  },
+  {
+    key: 'python',
+    name: 'Python',
+    icon: 'tech-python',
+    image: pythonSvg,
+    document: 'https://www.python.org/',
   },
 ] as const satisfies readonly SkillItem[]
 
