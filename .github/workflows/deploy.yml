@@ -28,18 +28,18 @@ jobs:
     steps:
       # 拉取仓库代码
       - name: Checkout source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      # 安装 pnpm（只能用 v2，无v3/v4）
+      # 安装 pnpm（使用新版 action，但保留项目当前稳定的安装行为）
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v6
         with:
           version: 9
           run_install: false
 
       # 配置 Node 22（兼容 GitHub Actions 默认 Node24，无废弃告警）
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: "pnpm"
@@ -58,15 +58,15 @@ jobs:
 
       # Pages 环境配置
       - name: Configure Pages environment
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       # 上传打包产物
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
       # 执行 Pages 部署
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

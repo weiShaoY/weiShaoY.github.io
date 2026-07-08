@@ -39,6 +39,7 @@
     "lodash": "^4.18.1",
     "lunar-typescript": "^1.8.6",
     "lygia": "1.4.1",
+    "mitt": "^3.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",

@@ -34,6 +34,10 @@ export default defineConfig(({ mode }) => {
 
   const env = loadEnv(mode, root)
 
+  const isDeleteConsole = env.VITE_APP_DELETE_CONSOLE === 'true'
+
+  const isDeleteDebugger = env.VITE_APP_DELETE_DEBUGGER === 'true'
+
   return defineConfig({
     // ========== 基础配置 ==========
     base: env.VITE_APP_BASE_URL || '/',
@@ -137,16 +141,16 @@ export default defineConfig(({ mode }) => {
         'echarts/components', // ECharts配套组件（图例、提示框、坐标轴等）
         'echarts/renderers', // ECharts渲染器（canvas/svg）
 
-        // 业务工具第三方库
-        'xlsx', // Excel导入导出解析库，CommonJS格式需预构建
-        'crypto-js', // 前端加解密工具库
       ],
     },
 
     // 打包去除 console.log && debugger
-    esbuild: {
-      pure: env.VITE_APP_DELETE_CONSOLE === 'true' ? ['console.log'] : [],
-      drop: env.VITE_APP_DELETE_DEBUGGER === 'true' ? ['debugger'] : [],
+    build: {
+      // 迁移原来 esbuild 压缩配置到 oxc，消除警告
+      oxc: {
+        pure: isDeleteConsole ? ['console.log'] : [],
+        drop: isDeleteDebugger ? ['debugger'] : [],
+      },
     },
 
     // ========== 插件配置 ==========
