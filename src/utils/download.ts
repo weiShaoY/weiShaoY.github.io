@@ -435,3 +435,45 @@ export function downloadCanvasAsImage(
     })
   }
 }
+
+/**
+ * 文件下载
+ * @param blob 文件内容 Blob 对象
+ * @param fileName 下载后的文件名
+ */
+export async function fileDownload(blob: Blob, fileName: string): Promise<void> {
+  const objectUrl = URL.createObjectURL(blob)
+
+  try {
+    const a = document.createElement('a')
+
+    a.href = objectUrl
+    a.download = fileName
+    a.style.display = 'none'
+
+    document.body.appendChild(a)
+    a.click()
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    window.$notification?.success({
+      title: '文件下载成功',
+      message: `下载文件为: ${fileName}`,
+    })
+  }
+  catch (error) {
+    window.$notification?.error({
+      title: '文件下载失败',
+      message: `下载文件失败：${(error as Error).message}`,
+    })
+
+    throw error
+  }
+  finally {
+    URL.revokeObjectURL(objectUrl)
+
+    const linkElement = document.querySelector(`a[href="${objectUrl}"]`)
+
+    linkElement?.remove()
+  }
+}

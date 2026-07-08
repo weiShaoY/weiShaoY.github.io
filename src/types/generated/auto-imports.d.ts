@@ -11,6 +11,7 @@ declare global {
   const CommandApi: typeof import('../../apis/index').CommandApi
   const EffectScope: typeof import('vue').EffectScope
   const ElMessage: typeof import('element-plus/es').ElMessage
+  const ElNotification: typeof import('element-plus/es').ElNotification
   const ResultEnum: typeof import('../../apis/http/axios/index').ResultEnum
   const SETTING_CONFIG: typeof import('../../configs/setting').SETTING_CONFIG
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
@@ -58,6 +59,7 @@ declare global {
   const effectScope: typeof import('vue').effectScope
   const extendRef: typeof import('@vueuse/core').extendRef
   const fetchHttp: typeof import('../../apis/http/fetch/index').fetchHttp
+  const fileDownload: typeof import('../../utils/download').fileDownload
   const findSkillsByName: typeof import('../../configs/skills').findSkillsByName
   const formatDateTime: typeof import('../../utils/time').formatDateTime
   const formatTimestampToChineseDate: typeof import('../../utils/time').formatTimestampToChineseDate
@@ -405,6 +407,7 @@ declare module 'vue' {
     readonly CommandApi: UnwrapRef<typeof import('../../apis/index')['CommandApi']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
+    readonly ElNotification: UnwrapRef<typeof import('element-plus/es')['ElNotification']>
     readonly ResultEnum: UnwrapRef<typeof import('../../apis/http/axios/index')['ResultEnum']>
     readonly SETTING_CONFIG: UnwrapRef<typeof import('../../configs/setting')['SETTING_CONFIG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
@@ -452,6 +455,7 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly fetchHttp: UnwrapRef<typeof import('../../apis/http/fetch/index')['fetchHttp']>
+    readonly fileDownload: UnwrapRef<typeof import('../../utils/download')['fileDownload']>
     readonly findSkillsByName: UnwrapRef<typeof import('../../configs/skills')['findSkillsByName']>
     readonly formatDateTime: UnwrapRef<typeof import('../../utils/time')['formatDateTime']>
     readonly formatTimestampToChineseDate: UnwrapRef<typeof import('../../utils/time')['formatTimestampToChineseDate']>
