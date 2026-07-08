@@ -126,9 +126,7 @@ const computedStyle = computed(() => ({
       :z-index="zIndex"
       :disabled="!tooltipContent"
     >
-      <ElButton
-        text
-        quaternary
+      <div
         class="h-auto! rounded-lg! p-0!"
         @click="$emit('click', $event)"
       >
@@ -156,7 +154,7 @@ const computedStyle = computed(() => ({
             />
           </template>
         </div>
-      </ElButton>
+      </div>
     </ElTooltip>
   </div>
 </template>

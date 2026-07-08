@@ -1,11 +1,12 @@
 <!------  2025-11-22---03:54---星期六  ------>
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import { useAppDark } from '@/hooks/useAppDark'
 
 /**
  *  主题切换功能
  */
-const isDark = useDark() // 使用暗色主题
+const isDark = useAppDark() // 使用暗色主题
 
 /**
  *  当前选中的主题
@@ -58,13 +59,9 @@ function themeAnimation(e: any) {
 
 <template>
   <BaseButton
-    class="z-99"
+    class="z-99 cursor-pointer rounded-lg text-black transition-colors duration-300 hover:bg-white/90! hover:text-white"
     :icon="isDark ? 'theme-dark' : 'theme-light'"
     :size="34"
     @click="themeAnimation"
   />
 </template>
-
-<style lang="scss" scoped>
-
-</style>

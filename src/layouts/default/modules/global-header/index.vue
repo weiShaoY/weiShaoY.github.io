@@ -95,7 +95,7 @@ function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0])
 
       <!-- Logo区域 -->
       <a
-        class="z-999 flex items-center"
+        class="relative z-10 flex items-center"
       >
 
         <router-link
@@ -115,7 +115,7 @@ function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0])
             icon="weiShaoY"
             :height="80"
             :width="160"
-            class="scale-100 cursor-pointer text-white! hover:text-[#08FF00]!"
+            class="scale-100 cursor-pointer text-white! hover:text-primary!"
           />
         </router-link>
       </a>
@@ -123,12 +123,12 @@ function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0])
       <!-- PC端菜单 -->
       <div
         v-if="!isMobile"
-        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
+        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center gap-5"
       >
         <span
           v-for="item in pcMenuList"
           :key="item.value"
-          class="flex cursor-pointer items-center text-xl text-white font-bold hover:text-secondary"
+          class="pointer-events-auto flex cursor-pointer items-center text-xl text-white font-bold hover:text-secondary"
           :class="{ 'text-primary!': route.path === item.value }"
           @click="handleSelect(item)"
         >
@@ -138,7 +138,7 @@ function handleSelect(item: ConfigType.Layout['default']['headerRouterList'][0])
 
       <!-- 操作按钮区域 -->
       <div
-        class="flex items-center justify-end gap-5"
+        class="relative z-10 flex items-center justify-end gap-5"
       >
         <Github />
 

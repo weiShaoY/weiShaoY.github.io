@@ -7,6 +7,8 @@ import { defaultLanguages, registerHighlight } from 'stream-markdown'
 
 import { getMarkdown } from 'stream-markdown-parser'
 
+import { useAppDark } from '@/hooks/useAppDark'
+
 import { isMobile } from '@/utils'
 
 type PropsType = {
@@ -184,7 +186,7 @@ const html = computed(() => {
 /**
  *  主题切换功能
  */
-const isDark = useDark() // 使用暗色主题
+const isDark = useAppDark() // 使用暗色主题
 
 /**
  *  主题切换函数
